@@ -9,6 +9,10 @@ public class PrimaryStageControlador {
         this.stage = primaryStage;
     }
 
+    public Stage getStage() {
+        return stage;
+    }
+
     public void cambiarNombreStage(String nuevoNombre) {
         if (nuevoNombre == null) {
             stage.setTitle("Nombre Aplicación");

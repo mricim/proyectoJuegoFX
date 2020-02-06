@@ -1,8 +1,10 @@
 package mapas.city;
 
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Cursor;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -34,6 +36,12 @@ public class CiudadController extends PrimaryStageControlador implements Initial
 
         Image image2 = new Image(getClass().getResource("../../resources/icons/example_academy.png").toExternalForm(), 100, 100, false, true);
         ImageView imageView2 = new ImageView(image2);
+        imageView2.setOnMouseEntered(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                imageView2.setCursor(Cursor.HAND);
+            }
+        });
         gridPaneMap.add(imageView2, 12, 7);
 
         Image image3 = new Image(getClass().getResource("../../resources/icons/example_empty.png").toExternalForm(), 100, 100, false, true);

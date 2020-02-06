@@ -30,6 +30,7 @@ public class Main extends Application {
         Parent root = loader.load();
         primaryStage.setTitle("Hello World");
         Scene scene = new Scene(root);
+        //scene.getStylesheets().add("resources/style/styles.css");
         primaryStage.setScene(scene);
         primaryStage.setMaximized(true);//Pone el Stage en maximizado
         primaryStage.show();

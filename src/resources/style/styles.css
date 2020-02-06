@@ -1,0 +1,4 @@
+.img-view:hover{
+    -fx-cursor: hand;
+    -fx-fill: black;
+}
