@@ -11,6 +11,7 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 public class GridPaneExample extends Application {
+    /* todo BUSCO ALGO ASI PERO EN FXML (SOLO PARA QUE TE HAGAS UNA IDEA, TU MISMO)*/
     @Override
     public void start(Stage stage) {
         //creating label email

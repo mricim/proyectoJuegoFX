@@ -5,15 +5,15 @@
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mapas.ciudad.CiudadController">
+<BorderPane xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mapas.city.CiudadController">
     <top>
-        <ToolBar fx:id="toolbar" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" BorderPane.alignment="CENTER">
+        <ToolBar fx:id="toolbar" BorderPane.alignment="CENTER">
             <items>
-                <GridPane>
+                <GridPane alignment="TOP_CENTER">
                     <columnConstraints>
-                        <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" minWidth="30.0" percentWidth="20.0" prefWidth="100" />
-                        <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="100.0" percentWidth="70.0" prefWidth="100" />
-                        <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" minWidth="10.0" percentWidth="10.0" prefWidth="100" />
+                        <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" minWidth="30.0" percentWidth="20.0" prefWidth="100.0" />
+                        <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="100.0" percentWidth="70.0" prefWidth="100.0" />
+                        <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" minWidth="10.0" percentWidth="10.0" prefWidth="100.0" />
                     </columnConstraints>
                     <rowConstraints>
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -51,7 +51,7 @@
                                     <graphic>
                                         <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                                             <image>
-                                                <Image url="@../icons/gold.png" />
+                                                <Image url="@../../res/icons/gold.png" />
                                             </image>
                                         </ImageView>
                                     </graphic>
@@ -60,7 +60,7 @@
                                     <graphic>
                                         <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                                             <image>
-                                                <Image url="@../icons/wood.png" />
+                                                <Image url="@../../res/icons/wood.png" />
                                             </image>
                                         </ImageView>
                                     </graphic>
@@ -69,7 +69,7 @@
                                     <graphic>
                                         <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                                             <image>
-                                                <Image url="@../icons/stone.png" />
+                                                <Image url="@../../res/icons/stone.png" />
                                             </image>
                                         </ImageView>
                                     </graphic>
@@ -78,7 +78,7 @@
                                     <graphic>
                                         <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                                             <image>
-                                                <Image url="@../icons/wheat.png" />
+                                                <Image url="@../../res/icons/wheat.png" />
                                             </image>
                                         </ImageView>
                                     </graphic>
@@ -87,7 +87,7 @@
                                     <graphic>
                                         <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                                             <image>
-                                                <Image url="@../icons/worker.jpg" />
+                                                <Image url="@../../res/icons/worker.jpg" />
                                             </image>
                                         </ImageView>
                                     </graphic>
@@ -96,7 +96,7 @@
                                     <graphic>
                                         <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                                             <image>
-                                                <Image url="@../icons/soldier.png" />
+                                                <Image url="@../../res/icons/soldier.png" />
                                             </image>
                                         </ImageView>
                                     </graphic>
@@ -119,10 +119,10 @@
                     <children>
                         <ImageView>
                             <image>
-                                <Image url="@../icons/NarniaMap.jpg" /><!-- https://gist.github.com/jewelsea/5032398 -->
+                                <Image url="@../../res/mapas/NarniaMap.jpg" /><!-- https://gist.github.com/jewelsea/5032398 -->
                             </image>
                         </ImageView>
-                        <GridPane gridLinesVisible="true" fx:id="gridPaneMap">
+                        <GridPane fx:id="gridPaneMap" gridLinesVisible="true">
                             <columnConstraints>
                                 <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="100.0" />
                                 <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="100.0" />
