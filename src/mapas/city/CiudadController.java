@@ -12,6 +12,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class CiudadController extends PrimaryStageControlador implements Initializable {
@@ -19,10 +20,38 @@ public class CiudadController extends PrimaryStageControlador implements Initial
     ToolBar toolbar;
     @FXML
     GridPane gridPaneMap;
-
+    private static ArrayList<Posiciones> lista=new ArrayList<>();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        lista.add(new Posiciones(8,12,"../../resources/icons/example_empty.png","../../resources/icons/example_academy.png"));
+        lista.add(new Posiciones(8,15,"../../resources/icons/example_empty.png","../../resources/icons/example_academy.png"));
+        for (Posiciones posiciones : lista) {
+            Image image = new Image(getClass().getResource(posiciones.getPathImage()).toExternalForm(), 100, 100, false, true);
+            ImageView imageView = new ImageView(image);
+            imageView.setOnMouseEntered(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent event) {
+                    imageView.setCursor(Cursor.HAND);
+                    imageView.setImage(new Image(getClass().getResource(posiciones.getPathImageOnMouseOver()).toExternalForm(), 100, 100, false, true));
+                }
+            });
+            imageView.setOnMouseExited(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent event) {
+                    imageView.setImage(new Image(getClass().getResource(posiciones.getPathImage()).toExternalForm(), 100, 100, false, true));
+                }
+            });
+            imageView.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+                System.out.println("Imagen empty clicada");
+                System.out.println("Segunda Funcion");
+            });
+            gridPaneMap.add(imageView, posiciones.getX(), posiciones.getY());
+        }
+        //TODO LEER DE LA BASE DE DATOS
+
+        //TODO VOLVER A CARGAR LAS IMAGENES
+
         /*
         final Image image = new Image(getClass().getResource("cross_red.jpg").toExternalForm(), 20, 20, true, true);
         MenuButton menuButton = new MenuButton("Don't touch this");
@@ -30,6 +59,8 @@ public class CiudadController extends PrimaryStageControlador implements Initial
         menuButton.getItems().addAll(new MenuItem("Really"), new MenuItem("Do not"));
         toolbar.getItems().addAll(menuButton);
          */
+
+
         Image image = new Image(getClass().getResource("../../resources/icons/example_casa.png").toExternalForm(), 100, 100, false, true);
         ImageView imageView = new ImageView(image);
         gridPaneMap.add(imageView, 7, 12);
@@ -60,4 +91,49 @@ public class CiudadController extends PrimaryStageControlador implements Initial
     }
 
 
+}
+class Posiciones {
+    private int y;
+    private int x;
+    private String pathImage;
+    private String pathImageOnMouseOver;
+
+    public Posiciones(int y, int x, String pathImage,String pathImageOnMouseOver) {
+        this.y = y;
+        this.x = x;
+        this.pathImage = pathImage;
+        this.pathImageOnMouseOver= pathImageOnMouseOver;
+    }
+
+    public int getY() {
+        return y;
+    }
+
+    public void setY(int y) {
+        this.y = y;
+    }
+
+    public int getX() {
+        return x;
+    }
+
+    public String getPathImageOnMouseOver() {
+        return pathImageOnMouseOver;
+    }
+
+    public void setX(int x) {
+        this.x = x;
+    }
+
+    public String getPathImage() {
+        return pathImage;
+    }
+
+    public void setPathImage(String pathImage) {
+        this.pathImage = pathImage;
+    }
+
+    public void setPathImageOnMouseOver(String pathImageOnMouseOver) {
+        this.pathImageOnMouseOver = pathImageOnMouseOver;
+    }
 }
