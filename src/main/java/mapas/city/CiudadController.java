@@ -9,6 +9,7 @@ import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 
 import java.net.URL;
@@ -18,15 +19,31 @@ import java.util.ResourceBundle;
 public class CiudadController extends PrimaryStageControlador implements Initializable {
     private static String RUTE = "../../../resources/icons/";
     @FXML
-    ToolBar toolbar;
+    BorderPane borderPane;
     @FXML
     GridPane gridPaneMap;
+    @FXML
+    ImageView imagenDeFondo;
     private static ArrayList<Posiciones> lista = new ArrayList<>();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        /*
+        int colum = gridPaneMap.getColumnConstraints().size();
+        int rows = gridPaneMap.getRowConstraints().size();
 
+        for (int i = 0; i <= colum; i++) {
+            for (int j = 0; j < rows; j++) {
+                gridPaneMap.get
 
+            }
+        }
+*/
+/* NO FUNCIONA
+        imagenDeFondo.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+            borderPane.setLeft(null);
+        });
+*/
 
         lista.add(new Posiciones(8, 12, "example_empty.png", "example_academy.png"));
         lista.add(new Posiciones(8, 15, "example_empty.png", "example_academy.png"));
@@ -62,6 +79,9 @@ public class CiudadController extends PrimaryStageControlador implements Initial
         Image image = new Image(getClass().getResource(RUTE + "example_casa.png").toExternalForm(), 100, 100, false, true);
         ImageView imageView = new ImageView(image);
         gridPaneMap.add(imageView, 7, 12);
+        imageView.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+            borderPane.setLeft(null);
+        });
 
         Image image2 = new Image(getClass().getResource(RUTE + "example_academy.png").toExternalForm(), 100, 100, false, true);
         ImageView imageView2 = new ImageView(image2);
