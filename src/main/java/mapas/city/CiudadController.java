@@ -1,11 +1,9 @@
 package main.java.mapas.city;
 
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Cursor;
-import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -14,6 +12,7 @@ import javafx.scene.layout.GridPane;
 
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.ResourceBundle;
 
 public class CiudadController extends PrimaryStageControlador implements Initializable {
@@ -24,30 +23,39 @@ public class CiudadController extends PrimaryStageControlador implements Initial
     GridPane gridPaneMap;
     @FXML
     ImageView imagenDeFondo;
-    private static ArrayList<Posiciones> lista = new ArrayList<>();
+    private static ArrayList<Posiciones> listaPosicionesServer = new ArrayList<>();
+    private static HashMap<Integer[], ImageView> listaPosicionesMapa = new HashMap<>();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        /*
+
         int colum = gridPaneMap.getColumnConstraints().size();
         int rows = gridPaneMap.getRowConstraints().size();
-
+/*
         for (int i = 0; i <= colum; i++) {
-            for (int j = 0; j < rows; j++) {
-                gridPaneMap.get
-
+            for (int j = 0; j <= rows; j++) {
+                Image imageLimpia = new Image(getClass().getResource(RUTE + "limpio4.png").toExternalForm(), 100, 100, false, true);
+                ImageView imageViewLimpia = new ImageView(imageLimpia);
+                imageViewLimpia.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+                    System.out.println("Limpiar borde");
+                    borderPane.setLeft(null);
+                });
+                gridPaneMap.add(imageViewLimpia, i, j);
+                listaPosicionesMapa.put(new Integer[]{i, j}, imageViewLimpia);
+                System.out.println(i + " " + j);
             }
         }
 */
+
 /* NO FUNCIONA
         imagenDeFondo.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
             borderPane.setLeft(null);
         });
 */
 
-        lista.add(new Posiciones(8, 12, "example_empty.png", "example_academy.png"));
-        lista.add(new Posiciones(8, 15, "example_empty.png", "example_academy.png"));
-        for (Posiciones posiciones : lista) {
+        listaPosicionesServer.add(new Posiciones(8, 12, "example_empty.png", "example_academy.png"));
+        listaPosicionesServer.add(new Posiciones(8, 15, "example_empty.png", "example_academy.png"));
+        for (Posiciones posiciones : listaPosicionesServer) {
             Image image = new Image(getClass().getResource(RUTE + posiciones.getPathImage()).toExternalForm(), 100, 100, false, true);
             ImageView imageView = new ImageView(image);
             imageView.addEventHandler(MouseEvent.MOUSE_ENTERED, event -> {
@@ -60,7 +68,14 @@ public class CiudadController extends PrimaryStageControlador implements Initial
             imageView.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
                 System.out.println("Imagen empty clicada");//TODO
             });
+
+            Integer[] remover = new Integer[]{posiciones.getX(), posiciones.getY()};
+            gridPaneMap.getChildren().remove(listaPosicionesMapa.get(remover));
+            listaPosicionesMapa.remove(remover);
+            listaPosicionesMapa.put(remover, imageView);
             gridPaneMap.add(imageView, posiciones.getX(), posiciones.getY());
+
+
         }
 
         //TODO LEER DE LA BASE DE DATOS
