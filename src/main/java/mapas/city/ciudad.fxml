@@ -14,112 +14,109 @@ prefHeight="${screen.visualBounds.height}" prefWidth="${screen.visualBounds.widt
  -->
 
 <BorderPane fx:id="root" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.mapas.city.CiudadController">
-
     <top>
-        <ToolBar fx:id="toolbar" BorderPane.alignment="CENTER">
-            <items>
-                <GridPane alignment="TOP_CENTER">
-                    <children>
-                        <MenuBar GridPane.columnIndex="0" GridPane.rowIndex="0">
-                            <menus>
-                                <Menu mnemonicParsing="false" text="Game">
-                                    <items>
-                                        <MenuItem mnemonicParsing="false" text="New Game                F1" />
-                                        <MenuItem mnemonicParsing="false" text="Exit                            F2" />
-                                    </items>
-                                </Menu>
 
-                                <Menu mnemonicParsing="false" text="File">
-                                    <items>
-                                        <MenuItem mnemonicParsing="false" text="Close" />
-                                    </items>
-                                </Menu>
-                                <Menu mnemonicParsing="false" text="Edit">
-                                    <items>
-                                        <MenuItem mnemonicParsing="false" text="Delete" />
-                                    </items>
-                                </Menu>
-                                <Menu mnemonicParsing="false" text="Help">
-                                    <items>
-                                        <MenuItem mnemonicParsing="false" text="About" />
-                                    </items>
-                                </Menu>
-                            </menus>
-                        </MenuBar>
-                        <HBox alignment="CENTER" spacing="50.0" GridPane.columnIndex="1" GridPane.rowIndex="0">
-                            <children>
-                                <Label text="876543210">
-                                    <graphic>
-                                        <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
-                                            <image>
-                                                <Image url="@../../../resources/icons/gold.png" />
-                                            </image>
-                                        </ImageView>
-                                    </graphic>
-                                </Label>
-                                <Label text="1">
-                                    <graphic>
-                                        <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
-                                            <image>
-                                                <Image url="@../../../resources/icons/wood.png" />
-                                            </image>
-                                        </ImageView>
-                                    </graphic>
-                                </Label>
-                                <Label text="4567">
-                                    <graphic>
-                                        <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
-                                            <image>
-                                                <Image url="@../../../resources/icons/stone.png" />
-                                            </image>
-                                        </ImageView>
-                                    </graphic>
-                                </Label>
-                                <Label text="8520">
-                                    <graphic>
-                                        <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
-                                            <image>
-                                                <Image url="@../../../resources/icons/wheat.png" />
-                                            </image>
-                                        </ImageView>
-                                    </graphic>
-                                </Label>
-                                <Label text="154">
-                                    <graphic>
-                                        <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
-                                            <image>
-                                                <Image url="@../../../resources/icons/worker.jpg" />
-                                            </image>
-                                        </ImageView>
-                                    </graphic>
-                                </Label>
-                                <Label text="8745842322454 Millones">
-                                    <graphic>
-                                        <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
-                                            <image>
-                                                <Image url="@../../../resources/icons/soldier.png" />
-                                            </image>
-                                        </ImageView>
-                                    </graphic>
-                                </Label>
-                            </children>
-                            <opaqueInsets>
-                                <Insets />
-                            </opaqueInsets>
-                        </HBox>
-                        <Button mnemonicParsing="false" text="Chat o lo que sea" GridPane.columnIndex="2" GridPane.rowIndex="0" />
+        <GridPane fx:id="toolbarGridPane" alignment="TOP_CENTER">
+            <children>
+                <MenuBar GridPane.columnIndex="0" GridPane.rowIndex="0">
+                    <menus>
+                        <Menu mnemonicParsing="false" text="Game">
+                            <items>
+                                <MenuItem mnemonicParsing="false" text="New Game                F1" />
+                                <MenuItem mnemonicParsing="false" text="Exit                            F2" />
+                            </items>
+                        </Menu>
+
+                        <Menu mnemonicParsing="false" text="File">
+                            <items>
+                                <MenuItem mnemonicParsing="false" text="Close" />
+                            </items>
+                        </Menu>
+                        <Menu mnemonicParsing="false" text="Edit">
+                            <items>
+                                <MenuItem mnemonicParsing="false" text="Delete" />
+                            </items>
+                        </Menu>
+                        <Menu mnemonicParsing="false" text="Help">
+                            <items>
+                                <MenuItem mnemonicParsing="false" text="About" />
+                            </items>
+                        </Menu>
+                    </menus>
+                </MenuBar>
+
+                <FlowPane alignment="CENTER" hgap="40.0" GridPane.columnIndex="1" GridPane.rowIndex="0">
+                    <children>
+                        <Label text="876543210">
+                            <graphic>
+                                <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@../../../resources/icons/gold.png" />
+                                    </image>
+                                </ImageView>
+                            </graphic>
+                        </Label>
+                        <Label text="1">
+                            <graphic>
+                                <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@../../../resources/icons/wood.png" />
+                                    </image>
+                                </ImageView>
+                            </graphic>
+                        </Label>
+                        <Label text="4567">
+                            <graphic>
+                                <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@../../../resources/icons/stone.png" />
+                                    </image>
+                                </ImageView>
+                            </graphic>
+                        </Label>
+                        <Label text="8520">
+                            <graphic>
+                                <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@../../../resources/icons/wheat.png" />
+                                    </image>
+                                </ImageView>
+                            </graphic>
+                        </Label>
+                        <Label text="154">
+                            <graphic>
+                                <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@../../../resources/icons/worker.jpg" />
+                                    </image>
+                                </ImageView>
+                            </graphic>
+                        </Label>
+                        <Label text="8745842322454 Millones">
+                            <graphic>
+                                <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@../../../resources/icons/soldier.png" />
+                                    </image>
+                                </ImageView>
+                            </graphic>
+                        </Label>
                     </children>
-                    <columnConstraints>
-                        <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" minWidth="30" percentWidth="20" prefWidth="100" />
-                        <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="100" percentWidth="70" prefWidth="100" />
-                        <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" minWidth="10" percentWidth="10" prefWidth="100" />
-                    </columnConstraints>
-                    <rowConstraints>
-                        <RowConstraints minHeight="10" prefHeight="30" vgrow="SOMETIMES" />
-                    </rowConstraints>
-                </GridPane>
-            </items>
-        </ToolBar>
+                    <opaqueInsets>
+                        <Insets />
+                    </opaqueInsets>
+                </FlowPane>
+                    <Button mnemonicParsing="false" text="Chat o lo que sea" GridPane.columnIndex="2" GridPane.rowIndex="0" />
+            </children>
+            <columnConstraints>
+                <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" minWidth="100" percentWidth="20" prefWidth="100" />
+                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="400" percentWidth="70" prefWidth="100" />
+                <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" minWidth="100" percentWidth="10" prefWidth="100" />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints minHeight="10" prefHeight="30" vgrow="SOMETIMES" />
+            </rowConstraints>
+        </GridPane>
     </top>
     <center>
         <ScrollPane hbarPolicy="NEVER" pannable="true" prefHeight="600.0" prefWidth="800.0" vbarPolicy="NEVER" BorderPane.alignment="CENTER">

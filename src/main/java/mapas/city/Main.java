@@ -15,7 +15,6 @@ public class Main extends Application {
         FXMLLoader loader = new FXMLLoader();
         //URL url = getClass().getResource("ciudad.fxml");
         URL url = getClass().getResource("/main/java/mapas/city/ciudad.fxml");
-        System.out.println(url);
         loader.setLocation(url);
         loader.setControllerFactory((Class<?> type) -> {// CREA PrimaryStageAware
             try {
