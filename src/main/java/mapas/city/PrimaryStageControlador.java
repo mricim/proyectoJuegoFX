@@ -1,4 +1,4 @@
-package mapas.city;
+package main.java.mapas.city;
 
 import javafx.stage.Stage;
 

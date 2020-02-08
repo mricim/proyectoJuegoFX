@@ -1,4 +1,4 @@
-package mapas.city;
+package main.java.mapas.city;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -13,7 +13,9 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         FXMLLoader loader = new FXMLLoader();
-        URL url = getClass().getResource("ciudad.fxml");
+        //URL url = getClass().getResource("ciudad.fxml");
+        URL url = getClass().getResource("/main/java/mapas/city/ciudad.fxml");
+        System.out.println(url);
         loader.setLocation(url);
         loader.setControllerFactory((Class<?> type) -> {// CREA PrimaryStageAware
             try {
@@ -30,7 +32,7 @@ public class Main extends Application {
         Parent root = loader.load();
         primaryStage.setTitle("Hello World");
         Scene scene = new Scene(root);
-        //scene.getStylesheets().add("resources/style/styles.css");
+        //scene.getStylesheets().add("main.resources/style/styles.css");
         primaryStage.setScene(scene);
         primaryStage.setMaximized(true);//Pone el Stage en maximizado
         primaryStage.show();

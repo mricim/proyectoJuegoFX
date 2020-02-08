@@ -1,4 +1,4 @@
-package mapas.city;
+package main.java.mapas.city;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -24,8 +24,9 @@ public class CiudadController extends PrimaryStageControlador implements Initial
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        lista.add(new Posiciones(8,12,"../../resources/icons/example_empty.png","../../resources/icons/example_academy.png"));
-        lista.add(new Posiciones(8,15,"../../resources/icons/example_empty.png","../../resources/icons/example_academy.png"));
+        /*
+        lista.add(new Posiciones(8,12,"../../main/resources/icons/example_empty.png","../../main/resources/icons/example_academy.png"));
+        lista.add(new Posiciones(8,15,"../../main/resources/icons/example_empty.png","../../main/resources/icons/example_academy.png"));
         for (Posiciones posiciones : lista) {
             Image image = new Image(getClass().getResource(posiciones.getPathImage()).toExternalForm(), 100, 100, false, true);
             ImageView imageView = new ImageView(image);
@@ -48,6 +49,7 @@ public class CiudadController extends PrimaryStageControlador implements Initial
             });
             gridPaneMap.add(imageView, posiciones.getX(), posiciones.getY());
         }
+         */
         //TODO LEER DE LA BASE DE DATOS
 
         //TODO VOLVER A CARGAR LAS IMAGENES
@@ -59,13 +61,13 @@ public class CiudadController extends PrimaryStageControlador implements Initial
         menuButton.getItems().addAll(new MenuItem("Really"), new MenuItem("Do not"));
         toolbar.getItems().addAll(menuButton);
          */
+/*
 
-
-        Image image = new Image(getClass().getResource("../../resources/icons/example_casa.png").toExternalForm(), 100, 100, false, true);
+        Image image = new Image(getClass().getResource("../../main.resources/icons/example_casa.png").toExternalForm(), 100, 100, false, true);
         ImageView imageView = new ImageView(image);
         gridPaneMap.add(imageView, 7, 12);
 
-        Image image2 = new Image(getClass().getResource("../../resources/icons/example_academy.png").toExternalForm(), 100, 100, false, true);
+        Image image2 = new Image(getClass().getResource("../../main.resources/icons/example_academy.png").toExternalForm(), 100, 100, false, true);
         ImageView imageView2 = new ImageView(image2);
         imageView2.setOnMouseEntered(new EventHandler<MouseEvent>() {
             @Override
@@ -75,13 +77,14 @@ public class CiudadController extends PrimaryStageControlador implements Initial
         });
         gridPaneMap.add(imageView2, 12, 7);
 
-        Image image3 = new Image(getClass().getResource("../../resources/icons/example_empty.png").toExternalForm(), 100, 100, false, true);
+        Image image3 = new Image(getClass().getResource("../../main.resources/icons/example_empty.png").toExternalForm(), 100, 100, false, true);
         ImageView imageView3 = new ImageView(image3);
         imageView3.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
             System.out.println("Imagen empty clicada");
             System.out.println("Segunda Funcion");
         });
         gridPaneMap.add(imageView3, 9, 5);
+        */
     }
 
     @FXML
@@ -91,49 +94,4 @@ public class CiudadController extends PrimaryStageControlador implements Initial
     }
 
 
-}
-class Posiciones {
-    private int y;
-    private int x;
-    private String pathImage;
-    private String pathImageOnMouseOver;
-
-    public Posiciones(int y, int x, String pathImage,String pathImageOnMouseOver) {
-        this.y = y;
-        this.x = x;
-        this.pathImage = pathImage;
-        this.pathImageOnMouseOver= pathImageOnMouseOver;
-    }
-
-    public int getY() {
-        return y;
-    }
-
-    public void setY(int y) {
-        this.y = y;
-    }
-
-    public int getX() {
-        return x;
-    }
-
-    public String getPathImageOnMouseOver() {
-        return pathImageOnMouseOver;
-    }
-
-    public void setX(int x) {
-        this.x = x;
-    }
-
-    public String getPathImage() {
-        return pathImage;
-    }
-
-    public void setPathImage(String pathImage) {
-        this.pathImage = pathImage;
-    }
-
-    public void setPathImageOnMouseOver(String pathImageOnMouseOver) {
-        this.pathImageOnMouseOver = pathImageOnMouseOver;
-    }
 }

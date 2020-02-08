@@ -1,4 +1,4 @@
-package login;
+package main.java.login;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -6,7 +6,7 @@ import javafx.scene.control.TextField;
 
 public class LoginController {
 
-    //TODO tratar datos que recupero de la pantalla de registro/login de usuario
+    //TODO tratar datos que recupero de la pantalla de registro/java.login de usuario
 
     @FXML
     Button btnInicio,btnDelete,btnRegister;
