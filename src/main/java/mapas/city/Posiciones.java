@@ -1,47 +1,51 @@
 package main.java.mapas.city;
 
+import main.java.mapas.city.edificios.Edificios;
+
+import static main.java.mapas.city.Main.listaPosiciones;
+
 class Posiciones {
     private int y;
     private int x;
-    private String pathImage;
-    private String pathImageOnMouseOver;
+    private int edificioId;
 
-    public Posiciones(int y, int x, String pathImage,String pathImageOnMouseOver) {
+
+    public Posiciones(int y, int x, int edificio) {
         this.y = y;
         this.x = x;
-        this.pathImage = pathImage;
-        this.pathImageOnMouseOver= pathImageOnMouseOver;
+        this.edificioId = edificio;
+        listaPosiciones.put(new Integer[]{y,x},this);
     }
 
     public int getY() {
         return y;
     }
 
-    public void setY(int y) {
-        this.y = y;
-    }
-
     public int getX() {
         return x;
     }
 
+    public int getEdificio() {
+        return edificioId;
+    }
+
+    public String getPathImage() {
+        return Edificios.returnEdificio(edificioId).getImage();
+    }
+
     public String getPathImageOnMouseOver() {
-        return pathImageOnMouseOver;
+        return Edificios.returnEdificio(edificioId).getImageClicable();
+    }
+
+    public void setY(int y) {
+        this.y = y;
     }
 
     public void setX(int x) {
         this.x = x;
     }
 
-    public String getPathImage() {
-        return pathImage;
-    }
-
-    public void setPathImage(String pathImage) {
-        this.pathImage = pathImage;
-    }
-
-    public void setPathImageOnMouseOver(String pathImageOnMouseOver) {
-        this.pathImageOnMouseOver = pathImageOnMouseOver;
+    public void setEdificios(int edificios) {
+        this.edificioId = edificios;
     }
 }
