@@ -11,11 +11,10 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.ResourceBundle;
 
-import static main.java.mapas.city.Main.listaPosicionesServer;
+import static main.java.mapas.city.Main.listaPosiciones;
+
 
 public class CiudadController extends PrimaryStageControlador implements Initializable {
     private static String RUTE = "../../../resources/mapas/city/";
@@ -61,26 +60,25 @@ public class CiudadController extends PrimaryStageControlador implements Initial
 */
 
 
-
-        for (Posiciones posiciones : listaPosicionesServer) {
-            Image image = new Image(getClass().getResource(RUTE + posiciones.getPathImage()+".png").toExternalForm(), 100, 100, false, true);
+        for (Posiciones posiciones : listaPosiciones.values()) {
+            Image image = posiciones.getImage();
             ImageView imageView = new ImageView(image);
             imageView.addEventHandler(MouseEvent.MOUSE_ENTERED, event -> {
                 imageView.setCursor(Cursor.HAND);
                 try {
-                    Thread.sleep(200);
+                    Thread.sleep(100);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-                imageView.setImage(new Image(getClass().getResource(RUTE + posiciones.getPathImageOnMouseOver()+".png").toExternalForm(), 100, 100, false, true));
+                imageView.setImage(posiciones.getImageOnMouseOver());
             });
             imageView.addEventHandler(MouseEvent.MOUSE_EXITED, event -> {
                 try {
-                    Thread.sleep(200);
+                    Thread.sleep(100);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-                imageView.setImage(new Image(getClass().getResource(RUTE + posiciones.getPathImage()+".png").toExternalForm(), 100, 100, false, true));
+                imageView.setImage(posiciones.getImage());
             });
             imageView.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
                 (new Thread() {

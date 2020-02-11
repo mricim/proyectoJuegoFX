@@ -1,20 +1,23 @@
 package main.java.mapas.city;
 
-import main.java.mapas.city.edificios.Edificios;
+import javafx.scene.image.Image;
+import main.java.mapas.city.edificios.Edificio;
+import main.java.mapas.city.edificios.quiza.BuscadorEdificios;
+import main.java.mapas.city.edificios.quiza.Edificios;
 
 import static main.java.mapas.city.Main.listaPosiciones;
 
 class Posiciones {
     private int y;
     private int x;
-    private int edificioId;
+    private Edificio edificio;
 
 
-    public Posiciones(int y, int x, int edificio) {
+    public Posiciones(int y, int x, Edificio edificioId) {
         this.y = y;
         this.x = x;
-        this.edificioId = edificio;
-        listaPosiciones.put(new Integer[]{y,x},this);
+        this.edificio = edificioId;
+        listaPosiciones.put(new Integer[]{y, x}, this);
     }
 
     public int getY() {
@@ -25,16 +28,16 @@ class Posiciones {
         return x;
     }
 
-    public int getEdificio() {
-        return edificioId;
+    public Edificio getEdificio() {
+        return edificio;
     }
 
-    public String getPathImage() {
-        return Edificios.returnEdificio(edificioId).getImage();
+    public Image getImage() {
+        return edificio.getImage();
     }
 
-    public String getPathImageOnMouseOver() {
-        return Edificios.returnEdificio(edificioId).getImageClicable();
+    public Image getImageOnMouseOver() {
+        return edificio.getImageClicable();
     }
 
     public void setY(int y) {
@@ -45,7 +48,7 @@ class Posiciones {
         this.x = x;
     }
 
-    public void setEdificios(int edificios) {
-        this.edificioId = edificios;
+    public void setEdificios(Edificio edificios) {
+        this.edificio = edificios;
     }
 }
