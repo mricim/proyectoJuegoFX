@@ -1,21 +1,25 @@
-package main.java.mapas.city.edificios;
+package main.java.mapas.city;
 
 import javafx.scene.image.Image;
 import main.java.mapas.CallImages;
+import main.java.mapas.ImageGetter;
 
 import java.util.Objects;
 
-import static main.java.mapas.city.Main.listaEdificios;
 
-public class Edificio implements ImageGetter {
+public class Edificio implements ImageGetter, Cloneable {
     static String RUTEIMAGES = "mapas/city/";
+    static int nivelMaximo=5;
+
     private int id;//GUARDAR
     private String nombre;
     private boolean destruible;
+    private boolean construible;
     private String image;
     private String imageClicable;
     //Mejorables
     private int nivel;//GUARDAR
+    private int nivelCastilloNecesario;
     private int costeOro;
     private int costeMadera;
     private int costePiedra;
@@ -35,26 +39,23 @@ public class Edificio implements ImageGetter {
     private int hierroAlmacen;
     private int comidaAlmacen;
 
-
-    private Edificio(int id) {
-        //SOLO PARA BUSCAR
-        this.id = id;
+    public Object clone() throws CloneNotSupportedException {//https://stackoverflow.com/questions/869033/how-do-i-copy-an-object-in-java
+        return super.clone();
     }
-
-    static public Edificio returnEdificio(int edificioID) {
-        return (Edificio) listaEdificios.get(listaEdificios.indexOf(new Edificio(edificioID)));
+    /*
+    public Edificio(Edificio otroEdificio) {
+        this(otroEdificio.id, String nombre, otroEdificio.destruible, otroEdificio.nivel, otroEdificio.costeOro, otroEdificio.costeMadera, otroEdificio.costePiedra, otroEdificio.costehierro, otroEdificio.necesitaTrabajadoresXmin, otroEdificio.produceMaderaXmin, otroEdificio.producePiedraXmin, otroEdificio.produceHierroXmin, otroEdificio.produceComidaXmin, otroEdificio.costeOroXmin, otroEdificio.produceFelicidadXmin, otroEdificio.produceInvestigacionXmin, otroEdificio.maderaAlmacen, otroEdificio.piedraAlmacen, otroEdificio.hierroAlmacen, otroEdificio.comidaAlmacen);
     }
-
-
+     */
     //CONSTRUCTORES
     public Edificio(int id, String nombre) {
         //NO MEJORABLES
         this(id, nombre, false, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
     }
 
-    public Edificio(int id, String nombre, boolean destruible, int nivel, int costeOro, int costeMadera, int costePiedra, int costehierro, int necesitaTrabajadoresXmin) {
+    public Edificio(int id, String nombre, int nivel, int costeOro, int costeMadera, int costePiedra, int costehierro, int necesitaTrabajadoresXmin) {
         //MEJORABLES
-        this(id, nombre, destruible, nivel, costeOro, costeMadera, costePiedra, costehierro, necesitaTrabajadoresXmin, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+        this(id, nombre, false, nivel, costeOro, costeMadera, costePiedra, costehierro, necesitaTrabajadoresXmin, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
     }
 
     public Edificio(int id, String nombre, int nivel, int costeOro, int costeMadera, int costePiedra, int costehierro, int necesitaTrabajadoresXmin, int produceMaderaXmin, int producePiedraXmin, int produceHierroXmin, int produceComidaXmin, int costeOroXmin, int produceFelicidadXmin, int produceInvestigacionXmin) {
@@ -62,9 +63,9 @@ public class Edificio implements ImageGetter {
         this(id, nombre, true, nivel, costeOro, costeMadera, costePiedra, costehierro, necesitaTrabajadoresXmin, produceMaderaXmin, producePiedraXmin, produceHierroXmin, produceComidaXmin, costeOroXmin, produceFelicidadXmin, produceInvestigacionXmin, 0, 0, 0, 0);
     }
 
-    public Edificio(int id, String nombre, int nivel, int costeOro, int costeMadera, int costePiedra, int costehierro, int necesitaTrabajadoresXminint, int maderaAlmacen, int piedraAlmacen, int hierroAlmacen, int comidaAlmacen) {
+    public Edificio(int id, String nombre, boolean destruible, int nivel, int costeOro, int costeMadera, int costePiedra, int costehierro, int necesitaTrabajadoresXminint, int maderaAlmacen, int piedraAlmacen, int hierroAlmacen, int comidaAlmacen) {
         //MEJORABLES //ALMACEN
-        this(id, nombre, true, nivel, costeOro, costeMadera, costePiedra, costehierro, necesitaTrabajadoresXminint, 0, 0, 0, 0, 0, 0, 0, maderaAlmacen, piedraAlmacen, hierroAlmacen, comidaAlmacen);
+        this(id, nombre, destruible, nivel, costeOro, costeMadera, costePiedra, costehierro, necesitaTrabajadoresXminint, 0, 0, 0, 0, 0, 0, 0, maderaAlmacen, piedraAlmacen, hierroAlmacen, comidaAlmacen);
     }
 
     public Edificio(int id, String nombre, boolean destruible, int nivel, int costeOro, int costeMadera, int costePiedra, int costehierro, int necesitaTrabajadoresXmin, int produceMaderaXmin, int producePiedraXmin, int produceHierroXmin, int produceComidaXmin, int costeOroXmin, int produceFelicidadXmin, int produceInvestigacionXmin, int maderaAlmacen, int piedraAlmacen, int hierroAlmacen, int comidaAlmacen) {
@@ -94,9 +95,11 @@ public class Edificio implements ImageGetter {
 
         this.image = getPathNameImage();
         this.imageClicable = getPathNameImageClicable();
+
+
+        //TODO //POSIBLEMENTE ESTO LLENE LA RAM
         new CallImages(RUTEIMAGES, image);
         new CallImages(RUTEIMAGES, imageClicable);
-        listaEdificios.add(this);
     }
 
     public int getId() {
@@ -112,14 +115,16 @@ public class Edificio implements ImageGetter {
     }
 
     @Override
-    public Image getImage() {
-        return CallImages.getImage(RUTEIMAGES, image);
-
-    }
-
+    public Image getImage() { return CallImages.getImage(RUTEIMAGES, image); }
     @Override
     public Image getImageClicable() {
         return CallImages.getImage(RUTEIMAGES, imageClicable);
+    }
+    private String getPathNameImage() {
+        return getId() + "_" + nivel;
+    }
+    private String getPathNameImageClicable() {
+        return getId() + "_" + nivel + "@clic";
     }
 
     @Override
@@ -136,18 +141,5 @@ public class Edificio implements ImageGetter {
     }
 
 
-    private String getPathNameImage() {
-        return getId() + "_" + nivel;
-    }
 
-    private String getPathNameImageClicable() {
-        return getId() + "_" + nivel + "@clic";
-    }
-}
-
-
-interface ImageGetter {
-    abstract public Image getImage();
-
-    abstract public Image getImageClicable();
 }

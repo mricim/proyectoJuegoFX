@@ -1,11 +1,8 @@
 package main.java.mapas.city;
 
 import javafx.scene.image.Image;
-import main.java.mapas.city.edificios.Edificio;
-import main.java.mapas.city.edificios.quiza.BuscadorEdificios;
-import main.java.mapas.city.edificios.quiza.Edificios;
 
-import static main.java.mapas.city.Main.listaPosiciones;
+import static main.java.mapas.city.Ciudad.listaPosiciones;
 
 class Posiciones {
     private int y;

@@ -13,7 +13,7 @@ import javafx.scene.layout.GridPane;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import static main.java.mapas.city.Main.listaPosiciones;
+import static main.java.mapas.city.Ciudad.listaPosiciones;
 
 
 public class CiudadController extends PrimaryStageControlador implements Initializable {

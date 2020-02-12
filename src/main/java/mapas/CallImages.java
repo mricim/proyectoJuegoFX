@@ -4,7 +4,7 @@ import javafx.scene.image.Image;
 
 import java.util.HashMap;
 
-import static main.java.mapas.city.Main.ERRORIMAGE;
+import static main.java.mapas.city.Ciudad.ERRORIMAGE;
 
 public class CallImages {
     public static String RUTEIMAGES = "../../resources/images/";
@@ -17,7 +17,7 @@ public class CallImages {
             listImage.put(name, image);
         } catch (Exception e) {
             listImage.put(name,ERRORIMAGE);
-            System.err.println("Error: CallImages (Image not found)");
+            System.err.println("Error: CallImages (Image not found) = "+name);
         }
     }
 
