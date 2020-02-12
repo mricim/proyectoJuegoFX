@@ -1,12 +1,12 @@
-package main.java.mapas.city;
+package main.java.juego.mapas.city;
 
 import javafx.scene.image.Image;
-import main.java.mapas.CallImages;
+import main.java.juego.mapas.CallImages;
 
 import java.util.HashMap;
 
-import static main.java.mapas.Jugador.listaCiudades;
-import static main.java.mapas.Jugador.listaEdificiosPreCargada;
+import static main.java.juego.Jugador.listaCiudades;
+import static main.java.juego.Jugador.listaEdificiosPreCargada;
 
 public class Ciudad{
     public static final Image ERRORIMAGE= CallImages.getImage("icons/","error");

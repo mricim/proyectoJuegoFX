@@ -1,7 +1,7 @@
-package main.java.mapas;
+package main.java.juego;
 
-import main.java.mapas.city.Ciudad;
-import main.java.mapas.city.Edificio;
+import main.java.juego.mapas.city.Ciudad;
+import main.java.juego.mapas.city.Edificio;
 
 import java.util.ArrayList;
 import java.util.HashMap;

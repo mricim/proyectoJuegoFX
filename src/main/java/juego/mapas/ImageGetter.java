@@ -1,4 +1,4 @@
-package main.java.mapas;
+package main.java.juego.mapas;
 
 import javafx.scene.image.Image;
 

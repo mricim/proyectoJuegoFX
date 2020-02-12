@@ -1,8 +1,8 @@
-package main.java.mapas.city;
+package main.java.juego.mapas.city;
 
 import javafx.scene.image.Image;
 
-import static main.java.mapas.city.Ciudad.listaPosiciones;
+import static main.java.juego.mapas.city.Ciudad.listaPosiciones;
 
 class Posiciones {
     private int y;

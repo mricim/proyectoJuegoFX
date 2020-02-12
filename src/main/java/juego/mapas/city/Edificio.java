@@ -1,8 +1,8 @@
-package main.java.mapas.city;
+package main.java.juego.mapas.city;
 
 import javafx.scene.image.Image;
-import main.java.mapas.CallImages;
-import main.java.mapas.ImageGetter;
+import main.java.juego.mapas.CallImages;
+import main.java.juego.mapas.ImageGetter;
 
 import java.util.Objects;
 

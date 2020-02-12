@@ -1,13 +1,13 @@
-package main.java.mapas;
+package main.java.juego.mapas;
 
 import javafx.scene.image.Image;
 
 import java.util.HashMap;
 
-import static main.java.mapas.city.Ciudad.ERRORIMAGE;
+import static main.java.juego.mapas.city.Ciudad.ERRORIMAGE;
 
 public class CallImages {
-    public static String RUTEIMAGES = "../../resources/images/";
+    public static String RUTEIMAGES = "../../../resources/images/";
     private static HashMap<String, Image> listImage = new HashMap<>();
 
     public CallImages(String rute, String name) {

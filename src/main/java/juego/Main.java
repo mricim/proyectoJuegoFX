@@ -1,11 +1,11 @@
-package main.java.mapas;
+package main.java.juego;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import main.java.mapas.city.PrimaryStageControlador;
+import main.java.juego.mapas.city.PrimaryStageControlador;
 
 import java.net.URL;
 
@@ -14,7 +14,7 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception {
         FXMLLoader loader = new FXMLLoader();
         //URL url = getClass().getResource("ciudad.fxml");
-        URL url = getClass().getResource("/main/java/mapas/city/ciudad.fxml");
+        URL url = getClass().getResource("/main/java/juego/mapas/city/ciudad.fxml");
         loader.setLocation(url);
         loader.setControllerFactory((Class<?> type) -> {// CREA PrimaryStageAware
             try {

@@ -1,6 +1,4 @@
-package main.java.mapas;
-
-import javafx.scene.image.Image;
+package main.java.juego.mapas;
 
 public class EdificiosPreCargados{
     private int id;
