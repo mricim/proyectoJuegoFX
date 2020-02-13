@@ -1,20 +1,22 @@
 package main.java.juego.mapas;
 
+import static main.java.juego.Jugador.listaEdificiosPreCargada;
+
+//https://github.com/k33ptoo/JavaFX-MySQL-Login
 public class EdificiosPreCargados{
     private int id;
     private String nombre;
     private boolean destruible;
     private boolean construible;
-    private String image;
-    private String imageClicable;
+    private int maximoEdificiosDelMismoTipo;
     //Mejorables
-    private int nivel;
+    private int nivelMaximo;
     private int nivelCastilloNecesario;
     private int costeOro;
     private int costeMadera;
     private int costePiedra;
     private int costehierro;
-    private int necesitaTrabajadoresXmin;
+    private int TrabajadoresXminMaximos;
     //Productores
     private int produceMaderaXmin;
     private int producePiedraXmin;
@@ -29,36 +31,21 @@ public class EdificiosPreCargados{
     private int hierroAlmacen;
     private int comidaAlmacen;
 
-    public EdificiosPreCargados(int id, String nombre) {
-        //NO MEJORABLES
-        this(id, nombre, false, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
-    }
 
-    public EdificiosPreCargados(int id, String nombre, int nivel, int costeOro, int costeMadera, int costePiedra, int costehierro, int necesitaTrabajadoresXmin) {
-        //MEJORABLES
-        this(id, nombre, false, nivel, costeOro, costeMadera, costePiedra, costehierro, necesitaTrabajadoresXmin, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
-    }
-
-    public EdificiosPreCargados(int id, String nombre, int nivel, int costeOro, int costeMadera, int costePiedra, int costehierro, int necesitaTrabajadoresXmin, int produceMaderaXmin, int producePiedraXmin, int produceHierroXmin, int produceComidaXmin, int costeOroXmin, int produceFelicidadXmin, int produceInvestigacionXmin) {
-        //MEJORABLES //PRODUCTORES
-        this(id, nombre, true, nivel, costeOro, costeMadera, costePiedra, costehierro, necesitaTrabajadoresXmin, produceMaderaXmin, producePiedraXmin, produceHierroXmin, produceComidaXmin, costeOroXmin, produceFelicidadXmin, produceInvestigacionXmin, 0, 0, 0, 0);
-    }
-
-    public EdificiosPreCargados(int id, String nombre, boolean destruible, int nivel, int costeOro, int costeMadera, int costePiedra, int costehierro, int necesitaTrabajadoresXminint, int maderaAlmacen, int piedraAlmacen, int hierroAlmacen, int comidaAlmacen) {
-        //MEJORABLES //ALMACEN
-        this(id, nombre, destruible, nivel, costeOro, costeMadera, costePiedra, costehierro, necesitaTrabajadoresXminint, 0, 0, 0, 0, 0, 0, 0, maderaAlmacen, piedraAlmacen, hierroAlmacen, comidaAlmacen);
-    }
-    public EdificiosPreCargados(int id, String nombre, boolean destruible, int nivel, int costeOro, int costeMadera, int costePiedra, int costehierro, int necesitaTrabajadoresXmin, int produceMaderaXmin, int producePiedraXmin, int produceHierroXmin, int produceComidaXmin, int costeOroXmin, int produceFelicidadXmin, int produceInvestigacionXmin, int maderaAlmacen, int piedraAlmacen, int hierroAlmacen, int comidaAlmacen) {
+    public EdificiosPreCargados(int id, String nombre, boolean destruible, boolean construible, int maximoEdificiosDelMismoTipo, int nivelMaximo, int nivelCastilloNecesario, int costeOro, int costeMadera, int costePiedra, int costehierro, int TrabajadoresXminMaximos, int produceMaderaXmin, int producePiedraXmin, int produceHierroXmin, int produceComidaXmin, int costeOroXmin, int produceFelicidadXmin, int produceInvestigacionXmin, int maderaAlmacen, int piedraAlmacen, int hierroAlmacen, int comidaAlmacen) {
         this.id = id;
         this.nombre = nombre;
         this.destruible = destruible;
+        this.construible = construible;
+        this.maximoEdificiosDelMismoTipo=maximoEdificiosDelMismoTipo;
         //MEJORABLES
-        this.nivel = nivel;
+        this.nivelMaximo = nivelMaximo;
+        this.nivelCastilloNecesario=nivelCastilloNecesario;
         this.costeOro = costeOro;
         this.costeMadera = costeMadera;
         this.costePiedra = costePiedra;
         this.costehierro = costehierro;
-        this.necesitaTrabajadoresXmin = necesitaTrabajadoresXmin;
+        this.TrabajadoresXminMaximos = TrabajadoresXminMaximos;
         //PRODUCTORES
         this.produceMaderaXmin = produceMaderaXmin;
         this.producePiedraXmin = producePiedraXmin;
@@ -73,13 +60,97 @@ public class EdificiosPreCargados{
         this.hierroAlmacen = hierroAlmacen;
         this.comidaAlmacen = comidaAlmacen;
 
-        this.image = getPathNameImage();
-        this.imageClicable = getPathNameImageClicable();
+        listaEdificiosPreCargada.put(id,this);
     }
-    private String getPathNameImage() {
-        return id + "_" + nivel;
+
+    public int getId() {
+        return id;
     }
-    private String getPathNameImageClicable() {
-        return id + "_" + nivel + "@clic";
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public boolean isDestruible() {
+        return destruible;
+    }
+
+    public boolean isConstruible() {
+        return construible;
+    }
+
+    public int getMaximoEdificiosDelMismoTipo() {
+        return maximoEdificiosDelMismoTipo;
+    }
+
+    public int getNivelMaximo() {
+        return nivelMaximo;
+    }
+    public int getNivelCastilloNecesario() {
+        return nivelCastilloNecesario;
+    }
+
+    public int getCosteOro() {
+        return costeOro;
+    }
+
+    public int getCosteMadera() {
+        return costeMadera;
+    }
+
+    public int getCostePiedra() {
+        return costePiedra;
+    }
+
+    public int getCostehierro() {
+        return costehierro;
+    }
+
+    public int getTrabajadoresXminMaximos() {
+        return TrabajadoresXminMaximos;
+    }
+
+    public int getProduceMaderaXmin() {
+        return produceMaderaXmin;
+    }
+
+    public int getProducePiedraXmin() {
+        return producePiedraXmin;
+    }
+
+    public int getProduceHierroXmin() {
+        return produceHierroXmin;
+    }
+
+    public int getProduceComidaXmin() {
+        return produceComidaXmin;
+    }
+
+    public int getCosteOroXmin() {
+        return costeOroXmin;
+    }
+
+    public int getProduceFelicidadXmin() {
+        return produceFelicidadXmin;
+    }
+
+    public int getProduceInvestigacionXmin() {
+        return produceInvestigacionXmin;
+    }
+
+    public int getMaderaAlmacen() {
+        return maderaAlmacen;
+    }
+
+    public int getPiedraAlmacen() {
+        return piedraAlmacen;
+    }
+
+    public int getHierroAlmacen() {
+        return hierroAlmacen;
+    }
+
+    public int getComidaAlmacen() {
+        return comidaAlmacen;
     }
 }

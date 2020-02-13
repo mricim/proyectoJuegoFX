@@ -4,20 +4,27 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Cursor;
+import javafx.scene.control.MenuItem;
+import javafx.scene.control.SplitMenuButton;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
+import main.java.juego.Main;
+import main.java.juego.PrimaryStageControler;
 
+import java.io.IOException;
 import java.net.URL;
+import java.util.Collection;
 import java.util.ResourceBundle;
 
-import static main.java.juego.mapas.city.Ciudad.listaPosiciones;
+import static main.java.juego.Jugador.listaCiudades;
 
 
-public class CiudadController extends PrimaryStageControlador implements Initializable {
+public class CiudadController extends PrimaryStageControler implements Initializable {
     private static String RUTE = "../../../resources/mapas/city/";
+    String nameThisCity;
     @FXML
     BorderPane borderPane;
     @FXML
@@ -26,24 +33,40 @@ public class CiudadController extends PrimaryStageControlador implements Initial
     @FXML
     ImageView imagenDeFondo;
      */
-
-
+    @FXML
+    SplitMenuButton selectorCiudad;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-//        Integer[] posicion1= new Integer[]{8,12};
-//        listaPosicionesMapa.put(posicion1,new Posiciones(posicion1,"0.png","0.png"));
+        nameThisCity = getCiudad().getNameCity();
 
-
-
-
-        gridPaneMap.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+        gridPaneMap.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {//Cerrar el menu
             System.out.println("Limpiar menu izquierda");
             borderPane.setLeft(null);
         });
+
+        selectorCiudad.setText(nameThisCity);//Seleccionar otra ciudad
+        for (Ciudad ciudad : listaCiudades.values()) {
+            String nameCity=ciudad.getNameCity();
+            if (nameThisCity != nameCity) {
+                MenuItem menuItem = new MenuItem();
+                menuItem.setText(nameCity);
+                menuItem.setOnAction((e) -> {
+                    System.out.println("clicado " + nameCity);//TODO CAMBIAR ESTO POR LA NUEVA CIUDAD
+                    setCiudad(ciudad);
+                    try {
+                        new PrimaryStageControler().reload(getStage());;
+                    } catch (IOException ex) {
+                        ex.printStackTrace();
+                    }
+                });
+                selectorCiudad.getItems().add(menuItem);
+            }
+        }
+
+/*
         int colum = gridPaneMap.getColumnConstraints().size();
         int rows = gridPaneMap.getRowConstraints().size();
-/*
         for (int i = 0; i <= colum; i++) {
             for (int j = 0; j <= rows; j++) {
                 Image imageLimpia = new Image(getClass().getResource(RUTE + "limpio4.png").toExternalForm(), 100, 100, false, true);
@@ -59,9 +82,9 @@ public class CiudadController extends PrimaryStageControlador implements Initial
         }
 */
 
-
-        for (Posiciones posiciones : listaPosiciones.values()) {
-            Image image = posiciones.getImage();
+        Collection<PosicionEdificio> edificioArrayList = getCiudad().listaPosicionesEdificios.values();
+        for (PosicionEdificio posicionEdificio : edificioArrayList) {
+            Image image = posicionEdificio.getImage();
             ImageView imageView = new ImageView(image);
             imageView.addEventHandler(MouseEvent.MOUSE_ENTERED, event -> {
                 imageView.setCursor(Cursor.HAND);
@@ -70,7 +93,7 @@ public class CiudadController extends PrimaryStageControlador implements Initial
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-                imageView.setImage(posiciones.getImageOnMouseOver());
+                imageView.setImage(posicionEdificio.getImageOnMouseOver());
             });
             imageView.addEventHandler(MouseEvent.MOUSE_EXITED, event -> {
                 try {
@@ -78,7 +101,7 @@ public class CiudadController extends PrimaryStageControlador implements Initial
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-                imageView.setImage(posiciones.getImage());
+                imageView.setImage(posicionEdificio.getImage());
             });
             imageView.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
                 (new Thread() {
@@ -99,7 +122,7 @@ public class CiudadController extends PrimaryStageControlador implements Initial
             listaPosicionesMapa.put(remover, imageView);
 
  */
-            gridPaneMap.add(imageView, posiciones.getX(), posiciones.getY());
+            gridPaneMap.add(imageView, posicionEdificio.getX(), posicionEdificio.getY());
 
 
         }

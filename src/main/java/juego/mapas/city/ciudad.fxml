@@ -15,7 +15,6 @@ prefHeight="${screen.visualBounds.height}" prefWidth="${screen.visualBounds.widt
 
 <BorderPane fx:id="borderPane" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.juego.mapas.city.CiudadController">
     <top>
-
         <GridPane fx:id="toolbarGridPane" alignment="TOP_CENTER">
             <children>
                 <MenuBar GridPane.columnIndex="0" GridPane.rowIndex="0">
@@ -106,7 +105,10 @@ prefHeight="${screen.visualBounds.height}" prefWidth="${screen.visualBounds.widt
                         <Insets />
                     </opaqueInsets>
                 </FlowPane>
-                <Button mnemonicParsing="false" text="Chat o lo que sea" GridPane.columnIndex="2" GridPane.rowIndex="0" />
+            <SplitMenuButton fx:id="selectorCiudad" mnemonicParsing="false" text="SplitMenuButton" GridPane.columnIndex="2" GridPane.rowIndex="0">
+              <items>
+              </items>
+            </SplitMenuButton>
             </children>
             <columnConstraints>
                 <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" minWidth="100" percentWidth="20" prefWidth="100" />

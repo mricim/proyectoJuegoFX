@@ -5,13 +5,39 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import main.java.juego.mapas.city.Ciudad;
 
 import java.io.IOException;
 import java.net.URL;
 
-public class Main extends Application {
-    @Override
-    public void start(Stage primaryStage) throws Exception {
+public class PrimaryStageControler {
+    private static Ciudad ciudad;
+    public static Ciudad getCiudad() {
+        return ciudad;
+    }
+    public static void setCiudad(Ciudad ciudad) {
+        PrimaryStageControler.ciudad = ciudad;
+    }
+
+
+    protected Stage stage;
+    public void setPrimaryStage(Stage primaryStage) {
+        this.stage = primaryStage;
+    }
+    public Stage getStage() {
+        return stage;
+    }
+    public void cambiarNombreStage(String nuevoNombre) {
+        if (nuevoNombre == null) {
+            stage.setTitle("Nombre Aplicación");
+        } else {
+            stage.setTitle(nuevoNombre);
+        }
+
+    }
+
+
+    public void reload(Stage primaryStage) throws IOException {
         FXMLLoader loader = new FXMLLoader();
         //URL url = getClass().getResource("ciudad.fxml");
         URL url = getClass().getResource("/main/java/juego/mapas/city/ciudad.fxml");
@@ -28,23 +54,6 @@ public class Main extends Application {
             }
         });
         Parent root = loader.load();
-        primaryStage.setTitle("Hello World");
-        Scene scene = new Scene(root);
-        //scene.getStylesheets().add("main.resources/style/styles.css");
-        primaryStage.setScene(scene);
-        primaryStage.setMaximized(true);//Pone el Stage en maximizado
-        primaryStage.show();
+        primaryStage.getScene().setRoot(root);
     }
-
-    public static void main(String[] args) {
-        new Jugador();
-        //
-        /*
-            FiN PRECARGA
-        */
-        //
-        launch(args);
-    }
-
-
 }
