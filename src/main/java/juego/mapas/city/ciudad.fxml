@@ -46,7 +46,7 @@ prefHeight="${screen.visualBounds.height}" prefWidth="${screen.visualBounds.widt
 
                 <FlowPane alignment="CENTER" hgap="40.0" GridPane.columnIndex="1" GridPane.rowIndex="0">
                     <children>
-                        <Label text="876543210">
+                        <Label text="876543210" fx:id="oro">
                             <graphic>
                                 <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                                     <image>
@@ -55,7 +55,7 @@ prefHeight="${screen.visualBounds.height}" prefWidth="${screen.visualBounds.widt
                                 </ImageView>
                             </graphic>
                         </Label>
-                        <Label text="1">
+                        <Label text="1" fx:id="madera">
                             <graphic>
                                 <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                                     <image>
@@ -64,7 +64,7 @@ prefHeight="${screen.visualBounds.height}" prefWidth="${screen.visualBounds.widt
                                 </ImageView>
                             </graphic>
                         </Label>
-                        <Label text="4567">
+                        <Label text="4567" fx:id="piedra">
                             <graphic>
                                 <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                                     <image>
@@ -73,7 +73,7 @@ prefHeight="${screen.visualBounds.height}" prefWidth="${screen.visualBounds.widt
                                 </ImageView>
                             </graphic>
                         </Label>
-                        <Label text="8520">
+                        <Label text="8520" fx:id="hierro">
                             <graphic>
                                 <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                                     <image>
@@ -82,7 +82,16 @@ prefHeight="${screen.visualBounds.height}" prefWidth="${screen.visualBounds.widt
                                 </ImageView>
                             </graphic>
                         </Label>
-                        <Label text="154">
+                        <Label text="8520" fx:id="comida">
+                            <graphic>
+                                <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@../../../../resources/images/icons/wheat.png" />
+                                    </image>
+                                </ImageView>
+                            </graphic>
+                        </Label>
+                        <Label text="154" fx:id="poblacion">
                             <graphic>
                                 <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                                     <image>
@@ -91,7 +100,7 @@ prefHeight="${screen.visualBounds.height}" prefWidth="${screen.visualBounds.widt
                                 </ImageView>
                             </graphic>
                         </Label>
-                        <Label text="8745842322454 Millones">
+                        <Label text="8745842322454 Millones" fx:id="felicidad">
                             <graphic>
                                 <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                                     <image>

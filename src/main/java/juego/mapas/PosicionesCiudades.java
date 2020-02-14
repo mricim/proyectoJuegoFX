@@ -10,7 +10,7 @@ public class PosicionesCiudades extends Posiciones {
     public PosicionesCiudades(int y, int x,Ciudad ciudad) {
         super(y, x);
         this.ciudad = ciudad;
-        listaCiudades.put(new Integer[]{y, x}, ciudad);
+        listaCiudades.put(y+"_"+x, ciudad);
     }
 
     public Ciudad getCiudad() {

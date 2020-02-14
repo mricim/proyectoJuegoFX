@@ -1,16 +1,19 @@
 package main.java.juego.mapas;
 
+import java.util.Objects;
+
 import static main.java.juego.Jugador.listaEdificiosPreCargada;
 
 //https://github.com/k33ptoo/JavaFX-MySQL-Login
 public class EdificiosPreCargados{
     private int id;
     private String nombre;
+    private String descripcion;
     private boolean destruible;
     private boolean construible;
     private int maximoEdificiosDelMismoTipo;
     //Mejorables
-    private int nivelMaximo;
+    private int nivel;
     private int nivelCastilloNecesario;
     private int costeOro;
     private int costeMadera;
@@ -32,14 +35,15 @@ public class EdificiosPreCargados{
     private int comidaAlmacen;
 
 
-    public EdificiosPreCargados(int id, String nombre, boolean destruible, boolean construible, int maximoEdificiosDelMismoTipo, int nivelMaximo, int nivelCastilloNecesario, int costeOro, int costeMadera, int costePiedra, int costehierro, int TrabajadoresXminMaximos, int produceMaderaXmin, int producePiedraXmin, int produceHierroXmin, int produceComidaXmin, int costeOroXmin, int produceFelicidadXmin, int produceInvestigacionXmin, int maderaAlmacen, int piedraAlmacen, int hierroAlmacen, int comidaAlmacen) {
+    public EdificiosPreCargados(int id, String nombre, String descripcion, boolean destruible, boolean construible, int maximoEdificiosDelMismoTipo, int nivel, int nivelCastilloNecesario, int costeOro, int costeMadera, int costePiedra, int costehierro, int TrabajadoresXminMaximos, int produceMaderaXmin, int producePiedraXmin, int produceHierroXmin, int produceComidaXmin, int costeOroXmin, int produceFelicidadXmin, int produceInvestigacionXmin, int maderaAlmacen, int piedraAlmacen, int hierroAlmacen, int comidaAlmacen) {
         this.id = id;
         this.nombre = nombre;
+        this.descripcion = descripcion;
         this.destruible = destruible;
         this.construible = construible;
         this.maximoEdificiosDelMismoTipo=maximoEdificiosDelMismoTipo;
         //MEJORABLES
-        this.nivelMaximo = nivelMaximo;
+        this.nivel = nivel;
         this.nivelCastilloNecesario=nivelCastilloNecesario;
         this.costeOro = costeOro;
         this.costeMadera = costeMadera;
@@ -60,7 +64,7 @@ public class EdificiosPreCargados{
         this.hierroAlmacen = hierroAlmacen;
         this.comidaAlmacen = comidaAlmacen;
 
-        listaEdificiosPreCargada.put(id,this);
+        listaEdificiosPreCargada.put(id+"_"+nivel,this);
     }
 
     public int getId() {
@@ -69,6 +73,10 @@ public class EdificiosPreCargados{
 
     public String getNombre() {
         return nombre;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
     }
 
     public boolean isDestruible() {
@@ -83,8 +91,8 @@ public class EdificiosPreCargados{
         return maximoEdificiosDelMismoTipo;
     }
 
-    public int getNivelMaximo() {
-        return nivelMaximo;
+    public int getNivel() {
+        return nivel;
     }
     public int getNivelCastilloNecesario() {
         return nivelCastilloNecesario;
@@ -152,5 +160,28 @@ public class EdificiosPreCargados{
 
     public int getComidaAlmacen() {
         return comidaAlmacen;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof EdificiosPreCargados)) return false;
+        EdificiosPreCargados that = (EdificiosPreCargados) o;
+        return getId() == that.getId() &&
+                getNivel() == that.getNivel();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId(), getNivel());
+    }
+
+    @Override
+    public String toString() {
+        return "EdificiosPreCargados{" +
+                "id=" + id +
+                ", nombre='" + nombre + '\'' +
+                ", nivel=" + nivel +
+                '}';
     }
 }

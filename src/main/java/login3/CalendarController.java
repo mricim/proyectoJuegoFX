@@ -1,4 +1,4 @@
-package main.java.java3;
+package main.java.login3;
 
 import javafx.application.Application;
 import javafx.scene.Scene;

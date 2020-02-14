@@ -10,7 +10,7 @@ class PosicionEdificio extends Posiciones {
     public PosicionEdificio(int y, int x,Ciudad ciudad, Edificio edificioId) {
         super(y, x);
             this.edificio = edificioId;
-            ciudad.listaPosicionesEdificios.put(new Integer[]{y, x}, this);
+            ciudad.listaPosicionesEdificios.put(y+"_"+x, this);
     }
 
 
