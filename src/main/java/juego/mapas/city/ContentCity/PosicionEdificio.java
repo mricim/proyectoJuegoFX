@@ -1,16 +1,17 @@
-package main.java.juego.mapas.city;
+package main.java.juego.mapas.city.ContentCity;
 
 import javafx.scene.image.Image;
 import main.java.juego.Posiciones;
+import main.java.juego.mapas.city.Ciudad;
 
 
-class PosicionEdificio extends Posiciones {
+public class PosicionEdificio extends Posiciones {
     private Edificio edificio;
 
-    public PosicionEdificio(int y, int x,Ciudad ciudad, Edificio edificioId) {
+    public PosicionEdificio(int y, int x, Ciudad ciudad, Edificio edificioId) {
         super(y, x);
             this.edificio = edificioId;
-            ciudad.listaPosicionesEdificios.put(y+"_"+x, this);
+            ciudad.addListaPosicionesEdificios(y+"_"+x, this);
     }
 
 

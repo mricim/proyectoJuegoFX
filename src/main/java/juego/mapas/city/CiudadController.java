@@ -1,37 +1,41 @@
 package main.java.juego.mapas.city;
 
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.Cursor;
-import javafx.scene.control.Label;
-import javafx.scene.control.MenuItem;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.SplitMenuButton;
+import javafx.scene.Node;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import main.java.juego.PrimaryStageControler;
 import main.java.juego.mapas.EdificiosPreCargados;
+import main.java.juego.mapas.city.ContentCity.Edificio;
+import main.java.juego.mapas.city.ContentCity.PosicionEdificio;
+import main.java.juego.mapas.city.ContentCity.Recursos;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.Collection;
-import java.util.ResourceBundle;
+import java.util.*;
 
 import static javafx.geometry.Pos.TOP_CENTER;
 import static javafx.scene.text.TextAlignment.CENTER;
 import static jdk.nashorn.internal.objects.Global.Infinity;
 import static main.java.juego.Jugador.listaCiudades;
-import static main.java.juego.Jugador.listaEdificiosPreCargada;
 
 
 public class CiudadController extends PrimaryStageControler implements Initializable {
     private static String RUTE = "../../../resources/mapas/city/";
     static boolean basura = true;
+    static Ciudad ciudad;
 
     String nameThisCity;
     @FXML
@@ -45,11 +49,11 @@ public class CiudadController extends PrimaryStageControler implements Initializ
     @FXML
     SplitMenuButton selectorCiudad;
     @FXML
-    Label oro, madera, piedra, hierro, comida, poblacion, felicidad;
+    Label oro, madera, piedra, hierro, comida, poblacion, felicidad,investigacion;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        Ciudad ciudad = getCiudad();
+        ciudad = getCiudad();
         nameThisCity = ciudad.getNameCity();
 
         int oroDisponible = ciudad.getOro();
@@ -120,8 +124,8 @@ public class CiudadController extends PrimaryStageControler implements Initializ
         }
 */
 
-        Collection<PosicionEdificio> edificioArrayList = getCiudad().listaPosicionesEdificios.values();
-        for (PosicionEdificio posicionEdificio : edificioArrayList) {
+        Collection<PosicionEdificio> posicionEdificios = getCiudad().getListaPosicionesEdificios().values();
+        for (PosicionEdificio posicionEdificio : posicionEdificios) {
 //            Edificio edificio = posicionEdificio.getEdificio();
 //            int idEdificio = edificio.getId();
 //            int nivelEdificio = edificio.getNivel();
@@ -162,73 +166,173 @@ public class CiudadController extends PrimaryStageControler implements Initializ
 
     private void queClicas(PosicionEdificio posicionEdificio) {
         if (basura) {
-            if (posicionEdificio==null) {
+            if (posicionEdificio == null) {
                 borderPane.setLeft(null);//System.out.println("Limpiar menu izquierda");
             } else {
-                basura=false;
+                basura = false;
                 (new Thread() {
                     public void run() {
                         try {
                             Thread.sleep(200);
-                            basura=true;
+                            basura = true;
                         } catch (InterruptedException e) {
                             e.printStackTrace();
                         }
                     }
                 }).start();
-                createMenuLeft(borderPane,posicionEdificio);
+                createMenuLeft(borderPane, posicionEdificio);
             }
         }
     }
 
-    private static void createMenuLeft(BorderPane borderPane,PosicionEdificio posicionEdificio) {
-        System.out.println(posicionEdificio.getEdificio());
+    private static void createMenuLeft(BorderPane borderPane, PosicionEdificio posicionEdificio) {
         Edificio edificio = posicionEdificio.getEdificio();
-        EdificiosPreCargados edificiosPreCargados=listaEdificiosPreCargada.get(edificio.getId() + "_" + edificio.getNivel());
+        //EdificiosPreCargados edificiosPreCargados = listaEdificiosPreCargada.get(edificio.getId() + "_" + edificio.getNivel());
+        EdificiosPreCargados edificiosPreCargado = edificio.getEdificiosPreCargados();
+
+        List<VBox> vBoxList = new ArrayList<>();
+
 
         //BLOQUE
-        Label nombreEdificio = new Label(edificiosPreCargados.getNombre());
+        VBox vBoxBloquePropio = new VBox();
+        vBoxBloquePropio.setMaxWidth(200.0);
+        vBoxBloquePropio.setAlignment(TOP_CENTER);
+        ObservableList<Node> childrenVBox = vBoxBloquePropio.getChildren();
+
+        Label nombreEdificioPropio = new Label(edificiosPreCargado.getNombre());
+        nombreEdificioPropio.setTextAlignment(CENTER);
+        nombreEdificioPropio.setAlignment(Pos.CENTER);
+        nombreEdificioPropio.setWrapText(true);
+        childrenVBox.add(nombreEdificioPropio);
+
+        ImageView imageViewPropio = new ImageView(edificio.getImage());
+        imageViewPropio.setPickOnBounds(true);
+        imageViewPropio.setPreserveRatio(true);
+        childrenVBox.add(imageViewPropio);
+
+        Label nivelEdificioPropio = new Label("Nivel: " + edificio.getNivel());
+        nivelEdificioPropio.setTextAlignment(CENTER);
+        nivelEdificioPropio.setAlignment(Pos.CENTER);
+        nivelEdificioPropio.setWrapText(true);
+        childrenVBox.add(nivelEdificioPropio);
+
+        Label descripcionEdificioPropio = new Label(edificiosPreCargado.getDescripcion());
+        descripcionEdificioPropio.setTextAlignment(CENTER);
+        descripcionEdificioPropio.setAlignment(Pos.CENTER);
+        descripcionEdificioPropio.setWrapText(true);
+        childrenVBox.add(descripcionEdificioPropio);
+
+        if (edificiosPreCargado.getId() != 0) {
+            FlowPane flowPane = new FlowPane();
+            flowPane.setHgap(10);
+            flowPane.setVgap(10);
+            ObservableList<Node> childrenFlowPane = flowPane.getChildren();
+
+            for (Map.Entry<Integer, Recursos> recurso : edificiosPreCargado.getRecursosProductores().entrySet()) {
+                Recursos recursoValor = recurso.getValue();
+                int produce = recursoValor.getCantidad();
+                if (produce != 0) {
+                    ImageView imageView = new ImageView(recursoValor.getImage());
+                    imageView.setFitWidth(25);
+                    imageView.setFitHeight(25);
+                    Label label = new Label();
+                    if (produce > 0) {
+                        label.setText("+" + produce);
+                        label.setTextFill(Color.GREEN);
+                    } else if (produce < 0) {
+                        label.setText(String.valueOf(produce));
+                        label.setTextFill(Color.RED);
+                    }
+                    label.setGraphic(imageView);
+                    label.setTextAlignment(CENTER);
+                    label.setAlignment(Pos.CENTER);
+                    label.setWrapText(true);
+                    childrenFlowPane.add(label);
+                }
+            }
+            for (Map.Entry<Integer, Recursos> recurso : edificiosPreCargado.getRecursosAlmacen().entrySet()) {
+                Recursos recursoValor = recurso.getValue();
+                int almacena = recursoValor.getCantidad();
+                if (almacena != 0) {
+                    ImageView imageView = new ImageView(recursoValor.getImage());
+                    imageView.setFitWidth(25);
+                    imageView.setFitHeight(25);
+                    Label label = new Label();
+                    label.setText("+"+almacena);
+                    label.setGraphic(imageView);
+                    label.setTextAlignment(CENTER);
+                    label.setAlignment(Pos.CENTER);
+                    label.setWrapText(true);
+                    childrenFlowPane.add(label);
+                }
+            }
+            /*
+            int oroXMin = ciudad.getOro();
+            if (oroXMin > 0) {
+                ImageView imageOro = new ImageView(ciudad.getOroImage());
+                imageOro.setFitWidth(50);
+                imageOro.setFitHeight(50);
+                Label oroXMinLabel = new Label(String.valueOf(oroXMin));
+                oroXMinLabel.setGraphic(imageOro);
+                oroXMinLabel.setTextAlignment(CENTER);
+                oroXMinLabel.setAlignment(Pos.CENTER);
+                oroXMinLabel.setWrapText(true);
+                childrenVBox.add(oroXMinLabel);
+            }
+            */
+            /*
+            for (Map.Entry<Integer, Recursos> recursos : ciudad.getRecursosTreeMap().entrySet()) {
+                int maderaXMin = ciudad.getMadera();
+                if (maderaXMin > 0) {
+                    ImageView image = new ImageView(ciudad.getMaderaImage());
+                    image.setFitWidth(50);
+                    image.setFitHeight(50);
+                    Label oroXMinLabel = new Label(String.valueOf(maderaXMin));
+                    oroXMinLabel.setGraphic(image);
+                    oroXMinLabel.setTextAlignment(CENTER);
+                    oroXMinLabel.setAlignment(Pos.CENTER);
+                    oroXMinLabel.setWrapText(true);
+                    childrenVBox.add(oroXMinLabel);
+                }
+            }
+*/
+            childrenVBox.add(flowPane);
+        }
+        vBoxList.add(vBoxBloquePropio);
+        //FIN BLOQUE
+/*
+        //BLOQUE
+        Label nombreEdificio = new Label(edificiosPreCargado.getNombre());
         nombreEdificio.setTextAlignment(CENTER);
+        nombreEdificio.setAlignment(Pos.CENTER);
         nombreEdificio.setWrapText(true);
 
-        //Image image = new Image(edificio.getImage());
         ImageView imageView = new ImageView(edificio.getImage());
-        imageView.setFitWidth(150.0);
-        imageView.setFitHeight(200.0);
         imageView.setPickOnBounds(true);
         imageView.setPreserveRatio(true);
 
-        Label descripcionEdificio = new Label(edificiosPreCargados.getDescripcion());
+        Label descripcionEdificio = new Label(edificiosPreCargado.getDescripcion());
         descripcionEdificio.setTextAlignment(CENTER);
+        descripcionEdificio.setAlignment(Pos.CENTER);
         descripcionEdificio.setWrapText(true);
 
         VBox vBoxBloque = new VBox(nombreEdificio, imageView, descripcionEdificio);
+        vBoxBloque.setMaxWidth(200.0);
         vBoxBloque.setAlignment(TOP_CENTER);
+        vBoxList.add(vBoxBloque);
         //FIN BLOQUE
+*/
 
-        //BLOQUE
-        Label nombreEdificio2 = new Label("nombre");
-        nombreEdificio2.setTextAlignment(CENTER);
-        nombreEdificio2.setWrapText(true);
+        VBox vBox = new VBox();
+        for (VBox box : vBoxList) {
+            vBox.getChildren().add(box);
+            Separator separator = new Separator();
+            separator.setPrefWidth(200);
+            vBox.getChildren().add(separator);
+        }
 
-        //Image image = new Image();
-        ImageView imageView2 = new ImageView();
-        imageView2.setFitWidth(150.0);
-        imageView2.setFitHeight(200.0);
-        imageView2.setPickOnBounds(true);
-        imageView2.setPreserveRatio(true);
-
-        Label descripcionEdificio2 = new Label("Descripción");
-        descripcionEdificio2.setTextAlignment(CENTER);
-        descripcionEdificio2.setWrapText(true);
-
-        VBox vBoxBloque2 = new VBox(nombreEdificio2, imageView2, descripcionEdificio2);
-        vBoxBloque2.setAlignment(TOP_CENTER);
-        //FIN BLOQUE
-
-        VBox vBox = new VBox(vBoxBloque,vBoxBloque2);
         vBox.setSpacing(10);
-        vBox.maxWidth(200.0);
+        vBox.setMaxWidth(200.0);
         vBox.setAlignment(TOP_CENTER);
 
         ScrollPane scrollPane = new ScrollPane(vBox);
@@ -238,15 +342,6 @@ public class CiudadController extends PrimaryStageControler implements Initializ
 
         borderPane.setLeft(scrollPane);
         /*
-
-
-                        <children>
-                            <Label text="Nombre del edificio" textAlignment="CENTER" wrapText="true" />
-                            <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
-                            <Label text="Descripcion del edificio que sera mas larga que el nombre del edificio" textAlignment="CENTER" wrapText="true" />
-                        </children>
-
-                    </VBox>
                     <Separator prefWidth="200.0" />
                     <VBox alignment="TOP_CENTER">
                         <children>

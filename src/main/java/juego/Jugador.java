@@ -12,13 +12,13 @@ public class Jugador {
 
     Jugador() {
         //todo Se le desde la BD
-        new EdificiosPreCargados(0, "parcela Construible","XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX", false, true, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);//NO MEJORABLE
-        new EdificiosPreCargados(1, "Castillo",">", false, false, 1, 0, 0, 99, 99, 99, 99, 10, 1000, 1000, 1000, 1000, 0, 0, 0, 0, 0, 0, 0);
-        new EdificiosPreCargados(2, "Muralla","XXXXXXXXXXX", false, false, 2, 0, 0, 99, 99, 99, 20, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+        new EdificiosPreCargados(0, "parcela Construible","Descripcion del edificio que sera mas larga que el nombre del edificio", false, true, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,0);//NO MEJORABLE
+        new EdificiosPreCargados(1, "Castillo",">", false, false, 1, 0, 0, 99, 99, 99, 99, 10, 1000, 1000, 1000, 1000, 0, 0, 0, 0, 0, 0, 0,100);
+        new EdificiosPreCargados(2, "Muralla","XXXXXXXXXXX", false, false, 2, 0, 0, 99, 99, 99, 20, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,0);
 
-        new EdificiosPreCargados(10, "Almacen","XXXXXXXXXXX", true, true, 2, 0, 0, 99, 99, 99, 99, 10, 1000, 1000, 1000, 1000, 0, 0, 0, 0, 0, 0, 0);
-        new EdificiosPreCargados(11, "Centro cientifico", "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",true, true, 1, 0, 0, 99, 99, 99, 20, 10, 10, 10, 10, 10, 10, 10, 0, 0, 0, 0, 0);
-        new EdificiosPreCargados(12, "Lupas","XXXXXXXXXXX", true, true, 3, 0, 0, 99, 99, 99, 20, 10, 10, 10, 10, 10, 10, 10, 0, 0, 0, 0, 0);
+        new EdificiosPreCargados(10, "Almacen","XXXXXXXXXXX", true, true, 2, 0, 0, 99, 99, 99, 99, 10, 0, 0, 0, 0, 0, 0, 0, 1000, 1000, 1000, 1000,1000);
+        new EdificiosPreCargados(11, "Centro cientifico", "NONE",true, true, 1, 0, 0, 99, 99, 99, 20, 10, 10, 10, 10, 10, 10, 10, 50, 0, 0, 0, 0,0);
+        new EdificiosPreCargados(12, "Lupas","XXXXXXXXXXX", true, true, 3, 0, 0, 99, 99, 99, 20, 10, 10, 10, 10, 10, 10, 10, -50, 0, 0, 0, 0,0);
 
         //todo Se le desde la BD
         new PosicionesCiudades(0, 1, new Ciudad(1, "ciudad 1",300,20,50,70,90,40,50));

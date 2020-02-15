@@ -1,7 +1,6 @@
-package main.java.juego.mapas.city;
+package main.java.juego.mapas.city.ContentCity;
 
 import javafx.scene.image.Image;
-import main.java.juego.mapas.CallImages;
 import main.java.juego.mapas.EdificiosPreCargados;
 import main.java.juego.mapas.ImageGetter;
 
@@ -10,20 +9,25 @@ import java.util.Objects;
 
 public class Edificio implements ImageGetter, Cloneable {
     static String RUTEIMAGES = "mapas/city/";
+    private String imagePath;
+    private String imageClicablePath;
 
     private int id;//GUARDAR
     private int nivel;//GUARDAR
     private int necesitaTrabajadoresXmin;//GUARDAR
+    private EdificiosPreCargados edificiosPreCargados;
 
-    private String image;
-    private String imageClicable;
 
     public Edificio(EdificiosPreCargados edificioPreCargado) {
         this.id = edificioPreCargado.getId();
+        this.nivel = edificioPreCargado.getNivel();
+        this.edificiosPreCargados = edificioPreCargado;
 
-
-        this.image = getPathNameImage();
-        this.imageClicable = getPathNameImageClicable();
+        int id = edificiosPreCargados.getId();
+        int nivel = edificiosPreCargados.getNivel();
+        String resultado = id + "_" + nivel;
+        this.imagePath = resultado;
+        this.imageClicablePath = resultado + "@clic";
         //TODO //POSIBLEMENTE ESTO LLENE LA RAM
         /*
         new CallImages(RUTEIMAGES, image);
@@ -48,23 +52,26 @@ public class Edificio implements ImageGetter, Cloneable {
         return necesitaTrabajadoresXmin;
     }
 
+    public void setNecesitaTrabajadoresXmin(int necesitaTrabajadoresXmin) {
+        this.necesitaTrabajadoresXmin = necesitaTrabajadoresXmin;
+    }
+
+    public EdificiosPreCargados getEdificiosPreCargados() {
+        return edificiosPreCargados;
+    }
+
     @Override
     public Image getImage() {
-        return CallImages.getImage(RUTEIMAGES, image);
+        return getImage(RUTEIMAGES, imagePath);
+        //return CallImages.getImage(RUTEIMAGES, imagePath);
     }
 
     @Override
     public Image getImageClicable() {
-        return CallImages.getImage(RUTEIMAGES, imageClicable);
+        return getImageClicable(RUTEIMAGES, imageClicablePath);
+        //return CallImages.getImage(RUTEIMAGES, imageClicablePath);
     }
 
-    private String getPathNameImage() {
-        return getId() + "_" + nivel;
-    }
-
-    private String getPathNameImageClicable() {
-        return getId() + "_" + nivel + "@clic";
-    }
 
     @Override
     public boolean equals(Object o) {
@@ -78,6 +85,4 @@ public class Edificio implements ImageGetter, Cloneable {
     public int hashCode() {
         return Objects.hash(getId());
     }
-
-
 }
