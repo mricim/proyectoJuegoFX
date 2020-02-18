@@ -1,6 +1,6 @@
 package main.java.testLucha;
 
-import static main.java.testLucha.MainLucha.tipoSoldadosTreeMap;
+import static main.java.testLucha.MainLucha1.tipoSoldadosTreeMap;
 
 public class TipoSoldados {
     private int id;

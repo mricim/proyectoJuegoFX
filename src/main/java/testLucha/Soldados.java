@@ -1,8 +1,6 @@
 package main.java.testLucha;
 
-import java.util.Objects;
-
-import static main.java.testLucha.MainLucha.tipoSoldadosTreeMap;
+import static main.java.testLucha.MainLucha1.tipoSoldadosTreeMap;
 
 public class Soldados {
     private static int lastId=0;
@@ -30,6 +28,6 @@ public class Soldados {
 
     @Override
     public String toString() {
-        return tipoSoldadosTreeMap.get(TipoSoldado).getNombre()+"=" + cantidad;
+        return id+"_"+tipoSoldadosTreeMap.get(TipoSoldado).getNombre()+"=" + cantidad;
     }
 }

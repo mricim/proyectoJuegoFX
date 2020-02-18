@@ -29,4 +29,11 @@ public abstract class Posiciones {
         this.x = x;
     }
 
+    @Override
+    public String toString() {
+        return "Posiciones{" +
+                "y=" + y +
+                ", x=" + x +
+                '}';
+    }
 }
