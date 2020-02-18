@@ -1,9 +1,8 @@
-package main.java.juego.mapas;
+package main.java.Utils;
 
 import javafx.scene.image.Image;
 
 import java.io.File;
-import java.util.Arrays;
 import java.util.HashMap;
 
 import static main.java.juego.mapas.city.Ciudad.ERRORIMAGE;
@@ -12,7 +11,7 @@ public class CallImages {
     public static final String RUTE=System.getProperty("user.dir");
     public static final String RUTEIMAGES=RUTE+"/src/main/resources/images/";
 
-    public static String RUTEIMAGE = "../../../resources/images/";
+    public static String RUTEIMAGE = "../../resources/images/";
     private static HashMap<String, Image> listImage = new HashMap<>();
 
     public CallImages(String rute, String name) {

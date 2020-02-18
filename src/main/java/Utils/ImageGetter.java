@@ -1,4 +1,4 @@
-package main.java.juego.mapas;
+package main.java.Utils;
 
 import com.sun.istack.internal.Nullable;
 import javafx.scene.image.Image;

@@ -37,7 +37,8 @@ public class Main extends Application {
     }
 
     public static void main(String[] args) {
-        new Jugador();
+        //todo Leer desde la BD
+        new Jugador(1,500);
         //
         /*
             FiN PRECARGA

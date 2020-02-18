@@ -2,19 +2,29 @@ package main.java.juego;
 
 import main.java.juego.mapas.EdificiosPreCargados;
 import main.java.juego.mapas.PosicionesCiudades;
+import main.java.juego.mapas.Recursos;
 import main.java.juego.mapas.city.Ciudad;
 
-import java.util.HashMap;
+import java.util.*;
 
 public class Jugador {
-    public static HashMap<String, EdificiosPreCargados> listaEdificiosPreCargada = new HashMap<>();
+    public static NavigableMap<String, EdificiosPreCargados> listaEdificiosPreCargada = new TreeMap<>();
+    public static List<Integer> listaEdificiosKeys = new ArrayList<>();
     public static HashMap<String, Ciudad> listaCiudades = new HashMap<>();
 
-    Jugador() {
+    int idJugador;
+    private Recursos investigacion;
+
+    Jugador(int idJugador,int investigacion) {
+        this.idJugador=idJugador;
+        this.investigacion=new Recursos(7,investigacion);
         //todo Se le desde la BD
-        new EdificiosPreCargados(0, "parcela Construible","Descripcion del edificio que sera mas larga que el nombre del edificio", false, true, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,0);//NO MEJORABLE
-        new EdificiosPreCargados(1, "Castillo",">", false, false, 1, 0, 0, 99, 99, 99, 99, 10, 1000, 1000, 1000, 1000, 0, 0, 0, 0, 0, 0, 0,100);
+        new EdificiosPreCargados(0, "parcela Construible","Descripción del edificio que sera mas larga que el nombre del edificio", false, true, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,0);//NO MEJORABLE
+        new EdificiosPreCargados(1, "Castillo","Descripción del edificio que sera mas larga que el nombre del edificio", false, false, 1, 0, -1, 99, 99, 99, 99, 10, 1000, 1000, 1000, 1000, 0, 10, 1, 1000, 1000, 1000, 1000,100);
+        new EdificiosPreCargados(1, "Castillo","Descripción 1_1", false, false, 1, 1, 0, 99, 99, 99, 99, 10, 1000, 1000, 1000, 1000, 0, 10, 1, 1000, 1000, 1000, 1000,200);
+        new EdificiosPreCargados(1, "Castillo","X", false, false, 1, 2, 1, 99, 99, 99, 99, 10, 1000, 1000, 1000, 1000, 0, 10, 1, 1000, 1000, 1000, 1000,300);
         new EdificiosPreCargados(2, "Muralla","XXXXXXXXXXX", false, false, 2, 0, 0, 99, 99, 99, 20, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,0);
+        new EdificiosPreCargados(2, "Muralla","XXXXXXXXXXX", false, false, 2, 1, 0, 99, 99, 99, 20, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,0);
 
         new EdificiosPreCargados(10, "Almacen","XXXXXXXXXXX", true, true, 2, 0, 0, 99, 99, 99, 99, 10, 0, 0, 0, 0, 0, 0, 0, 1000, 1000, 1000, 1000,1000);
         new EdificiosPreCargados(11, "Centro cientifico", "NONE",true, true, 1, 0, 0, 99, 99, 99, 20, 10, 10, 10, 10, 10, 10, 10, 50, 0, 0, 0, 0,0);
@@ -35,7 +45,14 @@ public class Jugador {
                 cargarCiudad=ciudad;
             }
         }
+        PrimaryStageControler.setJugador(this);//CON ESTO CONTROLAS QUE CIUDAD ESTAS VIENDO!
         PrimaryStageControler.setCiudad(cargarCiudad);//CON ESTO CONTROLAS QUE CIUDAD ESTAS VIENDO!
 
+
+        Collections.sort(listaEdificiosKeys);
+    }
+
+    public int getInvestigacion() {
+        return investigacion.getCantidad();
     }
 }

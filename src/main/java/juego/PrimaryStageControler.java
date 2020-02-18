@@ -11,6 +11,14 @@ import java.io.IOException;
 import java.net.URL;
 
 public class PrimaryStageControler {
+    private static Jugador jugador;
+    public static Jugador getJugador() {
+        return jugador;
+    }
+    public static void setJugador(Jugador jugador) {
+        PrimaryStageControler.jugador = jugador;
+    }
+
     private static Ciudad ciudad;
     public static Ciudad getCiudad() {
         return ciudad;

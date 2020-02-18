@@ -1,14 +1,16 @@
 package main.java.juego.mapas;
 
-import main.java.juego.mapas.city.ContentCity.Recursos;
+import javafx.scene.image.Image;
+import main.java.Utils.ImageGetter;
 
 import java.util.Objects;
 import java.util.TreeMap;
 
+import static main.java.juego.Jugador.listaEdificiosKeys;
 import static main.java.juego.Jugador.listaEdificiosPreCargada;
 
 //https://github.com/k33ptoo/JavaFX-MySQL-Login
-public class EdificiosPreCargados{
+public class EdificiosPreCargados implements ImageGetter {
     private int id;
     private String nombre;
     private String descripcion;
@@ -23,6 +25,10 @@ public class EdificiosPreCargados{
     public TreeMap<Integer, Recursos> recursosProductores = new TreeMap<>();
     //ALMACEN
     public TreeMap<Integer, Recursos> recursosAlmacen = new TreeMap<>();
+
+    static String RUTEIMAGES = "mapas/city/";
+    private String imagePath;
+    private String imageClicablePath;
 
 
     public EdificiosPreCargados(int id, String nombre, String descripcion, boolean destruible, boolean construible, int maximoEdificiosDelMismoTipo, int nivel, int nivelCastilloNecesario, int costeOro, int costeMadera, int costePiedra, int costehierro, int TrabajadoresXminMaximos, int produceMaderaXmin, int producePiedraXmin, int produceHierroXmin, int produceComidaXmin, int costeOroXmin, int produceFelicidadXmin, int produceInvestigacionXmin, int maderaAlmacen, int piedraAlmacen, int hierroAlmacen, int comidaAlmacen, int poblacionAlmacen) {
@@ -55,7 +61,13 @@ public class EdificiosPreCargados{
         recursosAlmacen.put(4, new Recursos(4, comidaAlmacen));
         recursosAlmacen.put(7, new Recursos(7, poblacionAlmacen));
 
+
+        String resultado = id + "_" + nivel;
+        this.imagePath = resultado;
+        this.imageClicablePath = resultado + "@clic";
+
         listaEdificiosPreCargada.put(id+"_"+nivel,this);
+        listaEdificiosKeys.add(id);
     }
 
     public int getId() {
@@ -190,5 +202,17 @@ public class EdificiosPreCargados{
                 ", nombre='" + nombre + '\'' +
                 ", nivel=" + nivel +
                 '}';
+    }
+
+    @Override
+    public Image getImage() {
+        return getImage(RUTEIMAGES, imagePath);
+        //return CallImages.getImage(RUTEIMAGES, imagePath);
+    }
+
+    @Override
+    public Image getImageClicable() {
+        return getImageClicable(RUTEIMAGES, imageClicablePath);
+        //return CallImages.getImage(RUTEIMAGES, imageClicablePath);
     }
 }

@@ -1,10 +1,10 @@
 package main.java.juego.mapas.city;
 
 import javafx.scene.image.Image;
-import main.java.juego.mapas.CallImages;
+import main.java.Utils.CallImages;
+import main.java.juego.mapas.Recursos;
 import main.java.juego.mapas.city.ContentCity.Edificio;
 import main.java.juego.mapas.city.ContentCity.PosicionEdificio;
-import main.java.juego.mapas.city.ContentCity.Recursos;
 
 
 import java.util.HashMap;
@@ -25,19 +25,19 @@ public class Ciudad {
         this.idCiudad = idCiudad;
         this.nameCity = nameCity;
 
-        recursosTreeMap.put(0, new Recursos(0, 300));
+        recursosTreeMap.put(0, new Recursos(0, oro));
 //        this.oro = oro;
-        recursosTreeMap.put(1, new Recursos(1, 20));
+        recursosTreeMap.put(1, new Recursos(1, madera));
 //        this.madera = madera;
-        recursosTreeMap.put(2, new Recursos(2, 50));
+        recursosTreeMap.put(2, new Recursos(2, piedra));
 //        this.piedra = piedra;
-        recursosTreeMap.put(3, new Recursos(3, 90));
+        recursosTreeMap.put(3, new Recursos(3, comida));
 //        this.comida = comida;
-        recursosTreeMap.put(4, new Recursos(4, 70));
+        recursosTreeMap.put(4, new Recursos(4, hierro));
 //        this.hierro = hierro;
-        recursosTreeMap.put(5, new Recursos(5, 40));
+        recursosTreeMap.put(5, new Recursos(5, poblacion));
 //        this.poblacion = poblacion;
-        recursosTreeMap.put(6, new Recursos(6, 50));
+        recursosTreeMap.put(6, new Recursos(6, felicidad));
 //        this.felicidad = felicidad;
 
         //todo Solicitar a la bd la tabla de posiciones y edificios que tiene el usuario
@@ -47,9 +47,9 @@ public class Ciudad {
                 new PosicionEdificio(7, 8, this, new Edificio(listaEdificiosPreCargada.get(2 + "_" + 0)));//no tocar
                 new PosicionEdificio(6, 8, this, new Edificio(listaEdificiosPreCargada.get(0 + "_" + 0)));//no tocar
             }
-            new PosicionEdificio(8, 15, this, new Edificio(listaEdificiosPreCargada.get(1 + "_" + 0)));//no tocar
-            new PosicionEdificio(8, 14, this, new Edificio(listaEdificiosPreCargada.get(2 + "_" + 0)));//no tocar
-            new PosicionEdificio(8, 13, this, new Edificio(listaEdificiosPreCargada.get(2 + "_" + 0)));//no tocar
+            new PosicionEdificio(8, 15, this, new Edificio(listaEdificiosPreCargada.get(1 + "_" + 1)));
+            new PosicionEdificio(8, 14, this, new Edificio(listaEdificiosPreCargada.get(2 + "_" + 1)));
+            new PosicionEdificio(8, 13, this, new Edificio(listaEdificiosPreCargada.get(2 + "_" + 0)));
             new PosicionEdificio(8, 12, this, new Edificio(listaEdificiosPreCargada.get(2 + "_" + 0)));
             new PosicionEdificio(8, 11, this, new Edificio(listaEdificiosPreCargada.get(0 + "_" + 0)));
             new PosicionEdificio(7, 12, this, new Edificio(listaEdificiosPreCargada.get(10 + "_" + 0)));//todos tendrian "parcela"

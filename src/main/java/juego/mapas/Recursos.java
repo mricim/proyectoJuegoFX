@@ -1,8 +1,7 @@
-package main.java.juego.mapas.city.ContentCity;
+package main.java.juego.mapas;
 
 import javafx.scene.image.Image;
-import main.java.juego.mapas.ImageGetter;
-import main.java.juego.mapas.city.Ciudad;
+import main.java.Utils.ImageGetter;
 
 public class Recursos implements ImageGetter {
     static String RUTEIMAGES = "icons/recursos/";
