@@ -7,10 +7,10 @@ import static main.java.juego.Jugador.listaCiudades;
 
 public class PosicionesCiudades extends Posiciones {
     private Ciudad ciudad;
-    public PosicionesCiudades(int y, int x,Ciudad ciudad) {
-        super(y, x);
+    public PosicionesCiudades(int fila, int columna,Ciudad ciudad) {
+        super(fila, columna);
         this.ciudad = ciudad;
-        listaCiudades.put(y+"_"+x, ciudad);
+        listaCiudades.put(fila+"_"+columna, ciudad);
     }
 
     public Ciudad getCiudad() {

@@ -30,8 +30,8 @@ public class Posiciones extends main.java.juego.Posiciones {
     public String toString() {
         return "Posiciones{" +
                 "soldados=" + soldados +
-                ", y=" + super.getY() +
-                ", x=" + super.getX() +
+                ", y=" + super.getFilas() +
+                ", x=" + super.getColumnas() +
                 '}';
     }
 }

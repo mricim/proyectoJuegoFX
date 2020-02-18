@@ -2,6 +2,7 @@ package main.java.juego.mapas.city;
 
 import javafx.scene.image.Image;
 import main.java.Utils.CallImages;
+import main.java.juego.mapas.PosicionesCiudades;
 import main.java.juego.mapas.Recursos;
 import main.java.juego.mapas.city.ContentCity.Edificio;
 import main.java.juego.mapas.city.ContentCity.PosicionEdificio;
@@ -21,7 +22,8 @@ public class Ciudad {
     public TreeMap<Integer, Recursos> recursosTreeMap = new TreeMap<>();
 
 
-    public Ciudad(int idCiudad, String nameCity, int oro, int madera, int piedra, int comida, int hierro, int poblacion, int felicidad) {
+    public Ciudad(int idCiudad, String nameCity,int fila,int columna, int oro, int madera, int piedra, int comida, int hierro, int poblacion, int felicidad) {
+        new PosicionesCiudades(fila,columna,this);
         this.idCiudad = idCiudad;
         this.nameCity = nameCity;
 

@@ -8,9 +8,11 @@ import main.java.juego.mapas.city.Ciudad;
 import java.util.*;
 
 public class Jugador {
+    public static HashMap<String, Ciudad> listaCiudades = new HashMap<>();
+
     public static NavigableMap<String, EdificiosPreCargados> listaEdificiosPreCargada = new TreeMap<>();
     public static List<Integer> listaEdificiosKeys = new ArrayList<>();
-    public static HashMap<String, Ciudad> listaCiudades = new HashMap<>();
+
 
     int idJugador;
     private Recursos investigacion;
@@ -31,8 +33,8 @@ public class Jugador {
         new EdificiosPreCargados(12, "Lupas","XXXXXXXXXXX", true, true, 3, 0, 0, 99, 99, 99, 20, 10, 10, 10, 10, 10, 10, 10, -50, 0, 0, 0, 0,0);
 
         //todo Se le desde la BD
-        new PosicionesCiudades(0, 1, new Ciudad(1, "ciudad 1",300,20,50,70,90,40,50));
-        new PosicionesCiudades(1, 1, new Ciudad(2, "ciudad 2",Integer.MAX_VALUE,5,4,6,7,8,9));
+        new Ciudad(1, "ciudad 1",1,1,300,20,50,70,90,40,50);
+        new Ciudad(2, "ciudad 2",2,2,Integer.MAX_VALUE,5,4,6,7,8,9);
 
 
         //Carga la ciudad con el id mas bajo (la mas antigua)

@@ -2,38 +2,38 @@ package main.java.juego;
 
 
 public abstract class Posiciones {
-    private int y;
-    private int x;
+    private int filas;
+    private int columnas;
 //Create objects contain
 
-    public Posiciones(int y, int x) {
-        this.y = y;
-        this.x = x;
+    public Posiciones(int filas, int columnas) {
+        this.filas = filas;
+        this.columnas = columnas;
         //this.object=object
         //add list objects *
     }
 
-    public int getY() {
-        return y;
+    public int getFilas() {
+        return filas;
     }
 
-    public int getX() {
-        return x;
+    public int getColumnas() {
+        return columnas;
     }
 
-    public void setY(int y) {
-        this.y = y;
+    public void setFilas(int filas) {
+        this.filas = filas;
     }
 
-    public void setX(int x) {
-        this.x = x;
+    public void setColumnas(int columnas) {
+        this.columnas = columnas;
     }
 
     @Override
     public String toString() {
         return "Posiciones{" +
-                "y=" + y +
-                ", x=" + x +
+                "y=" + filas +
+                ", x=" + columnas +
                 '}';
     }
 }

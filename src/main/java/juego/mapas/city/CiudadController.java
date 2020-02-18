@@ -27,7 +27,6 @@ import java.util.*;
 
 import static javafx.geometry.Pos.TOP_CENTER;
 import static javafx.scene.control.ScrollPane.ScrollBarPolicy.NEVER;
-import static javafx.scene.paint.Color.PINK;
 import static javafx.scene.text.TextAlignment.CENTER;
 import static jdk.nashorn.internal.objects.Global.Infinity;
 import static main.java.juego.Jugador.*;
@@ -95,7 +94,6 @@ public class CiudadController extends PrimaryStageControler implements Initializ
                     setCiudad(ciudadTemp);
                     try {
                         new PrimaryStageControler().reload(getStage());
-                        ;
                     } catch (IOException ex) {
                         ex.printStackTrace();
                     }
@@ -151,7 +149,7 @@ public class CiudadController extends PrimaryStageControler implements Initializ
                 queClicas(posicionEdificio);//System.out.println("Imagen Edificio clicada: " + listaEdificios.get(idEdificio + "_" + nivelEdificio));
             });
 
-            gridPaneMap.add(imageView, posicionEdificio.getX(), posicionEdificio.getY());
+            gridPaneMap.add(imageView, posicionEdificio.getColumnas(), posicionEdificio.getFilas());
         }
     }
 
