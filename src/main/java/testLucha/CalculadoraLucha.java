@@ -53,7 +53,7 @@ public class CalculadoraLucha {
         double grupo1Salida;
         double grupo2Salida;
         if (grupo1tipo == grupo2tipo) {
-            double tableDañoBase = (double) table.get(grupo1tipo).get(1);
+            double tableDañoBase = (double) table.get(grupo1tipo).get(0);
             double resta1 = (grupo2Cantidad * 100.0) / grupo1Cantidad / 100;
             double resta2 = (grupo1Cantidad * 100.0) / grupo2Cantidad / 100;
             grupo1Salida = grupo1Cantidad - (resta1 * randomx(tableDañoBase));

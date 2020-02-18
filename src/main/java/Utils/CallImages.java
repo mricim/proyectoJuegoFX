@@ -20,7 +20,7 @@ public class CallImages {
 
             Image image = new Image(getClass().getResource(RUTEIMAGE + rute + name +"."+ searchFiles(RUTEIMAGES+rute,name)).toExternalForm(), 100, 100, false, true);
             //Image image = new Image(getClass().getResource(RUTEIMAGES + rute + name + ".png").toExternalForm(), 100, 100, false, true);
-            listImage.put(name, image);
+            listImage.put(rute+name, image);
         } catch (Exception e) {
             listImage.put(name,ERRORIMAGE);
             System.err.println("Error: CallImages (Image not found) = "+rute+" "+name);
