@@ -148,7 +148,6 @@ public class CiudadController extends PrimaryStageControler implements Initializ
             imageView.setOnMouseClicked(e -> {
                 queClicas(posicionEdificio);//System.out.println("Imagen Edificio clicada: " + listaEdificios.get(idEdificio + "_" + nivelEdificio));
             });
-
             gridPaneMap.add(imageView, posicionEdificio.getColumnas(), posicionEdificio.getFilas());
         }
     }
@@ -190,11 +189,12 @@ public class CiudadController extends PrimaryStageControler implements Initializ
         Edificio edificio = posicionEdificio.getEdificio();
         int id = edificio.getId();
         boolean listarTodosLosEdificios = false;
-        int maximos=0;
-        boolean whilex=true;
+        int maximos = 0;
+        int counterMaximos = 9;
+        boolean whilex = true;
         if (id == 0) {
             listarTodosLosEdificios = true;
-            maximos=listaEdificiosKeys.get(listaEdificiosKeys.size()-1);
+            maximos = listaEdificiosKeys.get(listaEdificiosKeys.size() - 1);
         }
         int nivel = edificio.getNivel();
         int sumator = 0;
@@ -206,7 +206,8 @@ public class CiudadController extends PrimaryStageControler implements Initializ
             if (edificiosPreCargado != null) {
                 //BLOQUE
                 VBox vBoxBloquePropio = new VBox();
-                vBoxBloquePropio.setMaxWidth(250.0);
+                vBoxBloquePropio.setMinWidth(200);
+                vBoxBloquePropio.setMaxWidth(200);
                 vBoxBloquePropio.setAlignment(TOP_CENTER);
                 vBoxBloquePropio.setBackground(new Background(new BackgroundFill(Color.ANTIQUEWHITE, CornerRadii.EMPTY, Insets.EMPTY)));
                 ObservableList<Node> childrenVBox = vBoxBloquePropio.getChildren();
@@ -222,7 +223,7 @@ public class CiudadController extends PrimaryStageControler implements Initializ
                 imageViewPropio.setPreserveRatio(true);
                 childrenVBox.add(imageViewPropio);
 
-                Label nivelEdificioPropio = new Label("Nivel: " + edificiosPreCargado.getNivel());
+                Label nivelEdificioPropio = new Label("Nivel: " + nivel);
                 nivelEdificioPropio.setTextAlignment(CENTER);
                 nivelEdificioPropio.setAlignment(Pos.CENTER);
                 nivelEdificioPropio.setWrapText(true);
@@ -233,7 +234,7 @@ public class CiudadController extends PrimaryStageControler implements Initializ
                 descripcionEdificioPropio.setAlignment(Pos.CENTER);
                 descripcionEdificioPropio.setWrapText(true);
                 childrenVBox.add(descripcionEdificioPropio);
-
+                vBoxBloquePropio.setMargin(descripcionEdificioPropio,new Insets(0,15,0,15));
                 if (edificiosPreCargado.getId() != 0) {
                     FlowPane flowPane = new FlowPane();
                     flowPane.setHgap(10);
@@ -267,7 +268,7 @@ public class CiudadController extends PrimaryStageControler implements Initializ
                     }
                     if (paso1) {
                         Separator separator = new Separator();
-                        separator.setPrefWidth(250);
+                        separator.setPrefWidth(200);
                         childrenFlowPane.add(separator);
                     }
                     boolean paso2 = false;
@@ -290,9 +291,10 @@ public class CiudadController extends PrimaryStageControler implements Initializ
                     }
                     if (paso2) {
                         Separator separator = new Separator();
-                        separator.setPrefWidth(250);
+                        separator.setPrefWidth(200);
                         childrenFlowPane.add(separator);
                     }
+                    vBoxBloquePropio.setMargin(flowPane,new Insets(0,15,0,15));
                     childrenVBox.add(flowPane);
                     boolean active = false;
                     if (sumator == 1) {
@@ -306,11 +308,12 @@ public class CiudadController extends PrimaryStageControler implements Initializ
                     }
                     if (active) {
                         Separator separator = new Separator();
-                        separator.setPrefWidth(250);
+                        separator.setPrefWidth(200);
                         childrenVBox.add(separator);
                     }
                     vBoxList.add(vBoxBloquePropio);
                 } else {
+
                     vBoxList.add(vBoxBloquePropio);
                 }
 
@@ -329,14 +332,11 @@ public class CiudadController extends PrimaryStageControler implements Initializ
                 } else {
                     break;
                 }
-            }else{
-                for (int x : listaEdificiosKeys) {
-                    if (id<x&&x>2){
-                        id=x;
-                        break;
-                    }else if(maximos==x){
-                        whilex=false;
-                    }
+            } else {
+                if (listaEdificiosKeys.contains(++counterMaximos)) {
+                    id = counterMaximos;
+                } else {
+                    whilex = false;
                 }
             }
         } while (whilex);
@@ -347,63 +347,18 @@ public class CiudadController extends PrimaryStageControler implements Initializ
         for (VBox box : vBoxList) {
             vBox.getChildren().add(box);
             Separator separator = new Separator();
-            separator.setPrefWidth(250);
             separator.setVisible(false);
             vBox.getChildren().add(separator);
         }
-
-        vBox.setSpacing(10);
-        vBox.setMaxWidth(300.0);
+        vBox.setSpacing(5);
         vBox.setAlignment(TOP_CENTER);
 
         ScrollPane scrollPane = new ScrollPane(vBox);
         scrollPane.maxWidth(-Infinity);
-        scrollPane.prefWidth(300.0);
+        scrollPane.prefWidth(200);
         scrollPane.setHbarPolicy(NEVER);
         //scrollPane.()BorderPane.alignment="CENTER"
 
         borderPane.setLeft(scrollPane);
-        /*
-                    <Separator prefWidth="200.0" />
-                    <VBox alignment="TOP_CENTER">
-                        <children>
-                            <Label text="Nombre del edificios" textAlignment="CENTER" wrapText="true" />
-                            <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
-                            <Label text="Descripcion del edificio que sera mas larga que el nombre del edificio" textAlignment="CENTER" wrapText="true" />
-                        </children>
-                    </VBox> <Separator prefWidth="200.0" />
-                    <VBox alignment="TOP_CENTER">
-                        <children>
-                            <Label text="Nombre del edificios" textAlignment="CENTER" wrapText="true" />
-                            <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
-                            <Label text="Descripcion del edificio que sera mas larga que el nombre del edificio" textAlignment="CENTER" wrapText="true" />
-                        </children>
-                    </VBox>
-                    <Separator prefWidth="200.0" />
-                    <VBox alignment="TOP_CENTER">
-                        <children>
-                            <Label text="Nombre del edificios" textAlignment="CENTER" wrapText="true" />
-                            <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
-                            <Label text="Descripcion del edificio que sera mas larga que el nombre del edificio" textAlignment="CENTER" wrapText="true" />
-                        </children>
-                    </VBox><Separator prefWidth="200.0" />
-                    <VBox alignment="TOP_CENTER">
-                        <children>
-                            <Label text="Nombre del edificios" textAlignment="CENTER" wrapText="true" />
-                            <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
-                            <Label text="Descripcion del edificio que sera mas larga que el nombre del edificio" textAlignment="CENTER" wrapText="true" />
-                        </children>
-                    </VBox><Separator prefWidth="200.0" />
-                    <VBox alignment="TOP_CENTER">
-                        <children>
-                            <Label text="Nombre del edificios" textAlignment="CENTER" wrapText="true" />
-                            <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
-                            <Label text="Descripcion del edificio que sera mas larga que el nombre del edificio" textAlignment="CENTER" wrapText="true" />
-                        </children>
-                    </VBox>
-                </VBox>
-            </content>
-        </ScrollPane>
-        */
     }
 }

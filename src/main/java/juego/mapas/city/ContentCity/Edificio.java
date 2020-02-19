@@ -20,8 +20,8 @@ public class Edificio implements Cloneable {
         this.edificiosPreCargados = edificioPreCargado;
 
         //TODO //POSIBLEMENTE ESTO LLENE LA RAM
-//        getImage();
-//        getImageClicable();
+        getImage();
+        getImageClicable();
     }
 
     public Object clone() throws CloneNotSupportedException {//https://stackoverflow.com/questions/869033/how-do-i-copy-an-object-in-java

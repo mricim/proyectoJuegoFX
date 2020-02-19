@@ -5,53 +5,59 @@ import javafx.scene.image.Image;
 import java.io.File;
 import java.util.HashMap;
 
-import static main.java.juego.mapas.city.Ciudad.ERRORIMAGE;
+import static main.java.juego.Jugador.ERRORIMAGE;
 
 public class CallImages {
-    public static final String RUTE=System.getProperty("user.dir");
-    public static final String RUTEIMAGES=RUTE+"/src/main/resources/images/";
+    private static final String RUTE = System.getProperty("user.dir");
+    public static final String RUTEIMAGES = RUTE + "/src/main/resources/images/";
 
     public static String RUTEIMAGE = "../../resources/images/";
     private static HashMap<String, Image> listImage = new HashMap<>();
 
-    public CallImages(String rute, String name) {
-        System.out.println(RUTEIMAGE + rute + name + ".png");
-        try {
+    private CallImages(String rute, String name) {
+        this(rute,name,100,100);
+    }
 
-            Image image = new Image(getClass().getResource(RUTEIMAGE + rute + name +"."+ searchFiles(RUTEIMAGES+rute,name)).toExternalForm(), 100, 100, false, true);
-            //Image image = new Image(getClass().getResource(RUTEIMAGES + rute + name + ".png").toExternalForm(), 100, 100, false, true);
-            listImage.put(rute+name, image);
+    private CallImages(String rute, String name, int width, int height) {
+        String ruteName=rute+name;
+        Image image;
+        try {
+            try {
+                System.out.println(RUTEIMAGE + ruteName + ".png");
+                image = new Image(getClass().getResource(RUTEIMAGE + ruteName + ".png").toExternalForm(),  width, height, true, true);
+            } catch (Exception e) {
+                image = new Image(getClass().getResource(RUTEIMAGE + ruteName + "." + searchFiles(RUTEIMAGES + rute, name)).toExternalForm(),  width, height, true, true);
+            }
+            listImage.put(ruteName, image);
         } catch (Exception e) {
-            listImage.put(name,ERRORIMAGE);
-            System.err.println("Error: CallImages (Image not found) = "+rute+" "+name);
+            listImage.put(ruteName, ERRORIMAGE);
+            System.err.println("Error: CallImages (Image not found) = " + rute + " " + name);
         }
     }
 
-    private String searchFiles(String posibleRute,String name) {
+    private String searchFiles(String posibleRute, String name) {
         File filex = new File(posibleRute);
-        File[] list=filex.listFiles();
+        File[] list = filex.listFiles();
         for (File file : list) {
-            String nameFile=file.getName();
-            if (name.equalsIgnoreCase(nameFile.replaceFirst("[.][^.]+$", ""))){
+            String nameFile = file.getName();
+            if (name.equalsIgnoreCase(nameFile.replaceFirst("[.][^.]+$", ""))) {
                 return nameFile.split("\\.", 2)[1];
             }
         }
-        System.err.println("Error: CallImages (Extension not found) = "+posibleRute+" "+name);
+        System.err.println("Error: CallImages (Extension not found) = " + posibleRute + " " + name);
         return "";
     }
 
-    public CallImages(String rute, String name, int width, int height) {
-        new Image(getClass().getResource(rute + name + ".png").toExternalForm(), width, height, false, true);
-    }
-
     public static Image getImage(String rute, String name) {
-        if (listImage.containsKey(name)) {
-            return listImage.get(name);
+        String ruteName=rute+name;
+        if (listImage.containsKey(ruteName)) {
+            return listImage.get(ruteName);
         } else {
             new CallImages(rute, name);
             try {
-                return listImage.get(name);
-            }catch (Exception e){}
+                return listImage.get(ruteName);
+            } catch (Exception e) {
+            }
         }
         return ERRORIMAGE;
     }

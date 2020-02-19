@@ -19,6 +19,7 @@ public class Recursos implements ImageGetter {
     public Recursos(int id, int cantidad) {
         this.id = id;
         this.cantidad = cantidad;
+        getImage();
     }
 
 

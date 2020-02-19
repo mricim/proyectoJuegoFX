@@ -14,7 +14,7 @@ import java.util.TreeMap;
 import static main.java.juego.Jugador.listaEdificiosPreCargada;
 
 public class Ciudad {
-    public static final Image ERRORIMAGE = CallImages.getImage("", "error");
+
     private HashMap<String, PosicionEdificio> listaPosicionesEdificios = new HashMap<>();
 
     private int idCiudad;
