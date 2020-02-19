@@ -1,16 +1,16 @@
 package main.java.juego.mapas;
 
 import main.java.juego.Posiciones;
-import main.java.juego.mapas.city.Ciudad;
+import main.java.juego.mapas.Ciudad.Ciudad;
 
-import static main.java.juego.Jugador.listaCiudades;
+import static main.java.juego.Jugador.listaCiudadesPropias;
 
 public class PosicionesCiudades extends Posiciones {
     private Ciudad ciudad;
     public PosicionesCiudades(int fila, int columna,Ciudad ciudad) {
         super(fila, columna);
         this.ciudad = ciudad;
-        listaCiudades.put(fila+"_"+columna, ciudad);
+        listaCiudadesPropias.put(fila+"_"+columna, ciudad);
     }
 
     public Ciudad getCiudad() {

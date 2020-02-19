@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+
+<!--
+prefHeight="${screen.visualBounds.height}" prefWidth="${screen.visualBounds.width}"
+
+     <fx:define>
+        <Screen fx:factory="getPrimary" fx:id="screen"/>
+    </fx:define>
+ -->
+
+<BorderPane fx:id="borderPane" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.juego.mapas.Ciudad.CiudadController">
+    <top>
+        <GridPane fx:id="toolbarGridPane" alignment="TOP_CENTER">
+            <children>
+                <MenuBar GridPane.columnIndex="0" GridPane.rowIndex="0">
+                    <menus>
+                        <Menu mnemonicParsing="false" text="Game">
+                            <items>
+                                <MenuItem mnemonicParsing="false" text="New Game                F1" />
+                                <MenuItem mnemonicParsing="false" text="Exit                            F2" />
+                            </items>
+                        </Menu>
+
+                        <Menu mnemonicParsing="false" text="File">
+                            <items>
+                                <MenuItem mnemonicParsing="false" text="Close" />
+                            </items>
+                        </Menu>
+                        <Menu mnemonicParsing="false" text="Edit">
+                            <items>
+                                <MenuItem mnemonicParsing="false" text="Delete" />
+                            </items>
+                        </Menu>
+                        <Menu mnemonicParsing="false" text="Help">
+                            <items>
+                                <MenuItem mnemonicParsing="false" text="About" />
+                            </items>
+                        </Menu>
+                    </menus>
+                </MenuBar>
+
+                <FlowPane alignment="CENTER" hgap="40.0" GridPane.columnIndex="1" GridPane.rowIndex="0">
+                    <children>
+                        <Label text="load" fx:id="oro">
+                            <graphic>
+                                <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@../../../../resources/images/icons/recursos/0.png" />
+                                    </image>
+                                </ImageView>
+                            </graphic>
+                        </Label>
+                        <Label text="load" fx:id="madera">
+                            <graphic>
+                                <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@../../../../resources/images/icons/recursos/1.png" />
+                                    </image>
+                                </ImageView>
+                            </graphic>
+                        </Label>
+                        <Label text="load" fx:id="piedra">
+                            <graphic>
+                                <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@../../../../resources/images/icons/recursos/2.png" />
+                                    </image>
+                                </ImageView>
+                            </graphic>
+                        </Label>
+                        <Label text="load" fx:id="hierro">
+                            <graphic>
+                                <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@../../../../resources/images/icons/recursos/3.png" />
+                                    </image>
+                                </ImageView>
+                            </graphic>
+                        </Label>
+                        <Label text="load" fx:id="comida">
+                            <graphic>
+                                <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@../../../../resources/images/icons/recursos/4.png" />
+                                    </image>
+                                </ImageView>
+                            </graphic>
+                        </Label>
+                        <Label text="load" fx:id="poblacion">
+                            <graphic>
+                                <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@../../../../resources/images/icons/recursos/5.jpg" />
+                                    </image>
+                                </ImageView>
+                            </graphic>
+                        </Label>
+                        <Label text="load" fx:id="felicidad">
+                            <graphic>
+                                <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@../../../../resources/images/icons/recursos/6.gif" />
+                                    </image>
+                                </ImageView>
+                            </graphic>
+                        </Label><Label text="load" fx:id="investigacion">
+                            <graphic>
+                                <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@../../../../resources/images/icons/recursos/7.gif" />
+                                    </image>
+                                </ImageView>
+                            </graphic>
+                        </Label>
+                    </children>
+                    <opaqueInsets>
+                        <Insets />
+                    </opaqueInsets>
+                </FlowPane>
+            <SplitMenuButton fx:id="selectorCiudad" mnemonicParsing="false" text="SplitMenuButton" GridPane.columnIndex="2" GridPane.rowIndex="0">
+              <items>
+              </items>
+            </SplitMenuButton>
+            </children>
+            <columnConstraints>
+                <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" minWidth="100" percentWidth="20" prefWidth="100" />
+                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="400" percentWidth="70" prefWidth="100" />
+                <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" minWidth="100" percentWidth="10" prefWidth="100" />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints minHeight="10" prefHeight="30" vgrow="SOMETIMES" />
+            </rowConstraints>
+        </GridPane>
+    </top>
+    <center>
+        <ScrollPane hbarPolicy="NEVER" pannable="true" prefHeight="600.0" prefWidth="800.0" vbarPolicy="NEVER" BorderPane.alignment="CENTER">
+            <content>
+                <StackPane>
+                    <children>
+                        <ImageView fx:id="imagenDeFondo">
+                            <image>
+                                <Image url="@../../../../resources/images/mapas/NarniaMap.jpg" /><!-- https://gist.github.com/jewelsea/5032398 -->
+                            </image>
+                        </ImageView>
+                        <GridPane fx:id="gridPaneMap" gridLinesVisible="true">
+                            <columnConstraints>
+                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="100.0" />
+                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="100.0" />
+                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="100.0" />
+                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="100.0" />
+                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="100.0" />
+                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="100.0" />
+                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="100.0" />
+                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="100.0" />
+                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="100.0" />
+                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="100.0" />
+                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="100.0" />
+                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="100.0" />
+                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="100.0" />
+                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="100.0" />
+                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="100.0" />
+                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="100.0" />
+                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="100.0" />
+                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="100.0" />
+                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="100.0" />
+                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="100.0" />
+                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="100.0" />
+                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="100.0" />
+                            </columnConstraints>
+                            <rowConstraints>
+                                <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="100.0" vgrow="SOMETIMES" />
+                                <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="100.0" vgrow="SOMETIMES" />
+                                <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="100.0" vgrow="SOMETIMES" />
+                                <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="100.0" vgrow="SOMETIMES" />
+                                <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="100.0" vgrow="SOMETIMES" />
+                                <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="100.0" vgrow="SOMETIMES" />
+                                <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="100.0" vgrow="SOMETIMES" />
+                                <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="100.0" vgrow="SOMETIMES" />
+                                <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="100.0" vgrow="SOMETIMES" />
+                                <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="100.0" vgrow="SOMETIMES" />
+                                <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="100.0" vgrow="SOMETIMES" />
+                                <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="100.0" vgrow="SOMETIMES" />
+                                <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="100.0" vgrow="SOMETIMES" />
+                                <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="100.0" vgrow="SOMETIMES" />
+                                <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="100.0" vgrow="SOMETIMES" />
+                                <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="100.0" vgrow="SOMETIMES" />
+                                <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="100.0" vgrow="SOMETIMES" />
+                            </rowConstraints>
+                        </GridPane>
+                    </children>
+                </StackPane>
+            </content>
+        </ScrollPane>
+    </center>
+</BorderPane>

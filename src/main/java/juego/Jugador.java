@@ -2,30 +2,34 @@ package main.java.juego;
 
 import javafx.scene.image.Image;
 import main.java.Utils.CallImages;
-import main.java.juego.mapas.EdificiosPreCargados;
+import main.java.juego.mapas.Ciudad.EdificiosPreCargados;
+import main.java.juego.mapas.Pelea.Soldados;
+import main.java.juego.mapas.Pelea.SoldadosPreCargados;
+import main.java.juego.mapas.PosicionesBatallones;
 import main.java.juego.mapas.Recursos;
-import main.java.juego.mapas.city.Ciudad;
+import main.java.juego.mapas.Ciudad.Ciudad;
 
 import java.util.*;
 
 public class Jugador {
-    public static final Image ERRORIMAGE = CallImages.getImage("", "error");
+    public static final Image ERRORIMAGE = CallImages.getImage("", "error");//TODO LLEVAR ESTO LO MAS ALTO POSIBLE
 
-    //TODO LLEVAR ESTO LO MAS ALTO POSIBLE
+    public static TreeMap<Integer, SoldadosPreCargados> SoldadosPreCargada = new TreeMap();
+    public static TreeMap<String, EdificiosPreCargados> EdificiosPreCargada = new TreeMap<>();
 
+    public static HashMap<String, PosicionesBatallones> listaBatallones = new HashMap<>();
+    public static HashMap<String, Ciudad> listaCiudadesPropias = new HashMap<>();
 
-
-    public static HashMap<String, Ciudad> listaCiudades = new HashMap<>();
-
-    public static TreeMap<String, EdificiosPreCargados> listaEdificiosPreCargada = new TreeMap<>();
     public static List<Integer> listaEdificiosKeys = new ArrayList<>();
 
 
     int idJugador;
+    String nombre;
     private Recursos investigacion;
 
-    Jugador(int idJugador, int investigacion) {
+    Jugador(int idJugador,String nombre, int investigacion) {
         this.idJugador = idJugador;
+        this.nombre=nombre;
         this.investigacion = new Recursos(7, investigacion);
 
 //todo Se le desde la BD
@@ -48,13 +52,26 @@ public class Jugador {
         //Carga la ciudad con el id mas bajo (la mas antigua)
         Ciudad cargarCiudad = null;
         int numCiudad = Integer.MAX_VALUE;
-        for (Ciudad ciudad : listaCiudades.values()) {
+        for (Ciudad ciudad : listaCiudadesPropias.values()) {
             int idCiudad = ciudad.getIdCiudad();
             if (numCiudad > idCiudad) {
                 numCiudad = idCiudad;
                 cargarCiudad = ciudad;
             }
         }
+
+        //TODO DESDE LA BD
+        new SoldadosPreCargados(0, "Espadachines",0);//se podria poner comida
+        new SoldadosPreCargados(1, "Lanceros",0);
+        new SoldadosPreCargados(2, "Arqueros",100);
+        new SoldadosPreCargados(3, "Caballeros",50);
+        //TODO DESDE LA BD
+        new Soldados(1,SoldadosPreCargada.get(0), 100,5);
+        new Soldados(2,SoldadosPreCargada.get(0), 100,0);
+        new Soldados(3,SoldadosPreCargada.get(3), 100,100);
+        new Soldados(4,SoldadosPreCargada.get(0), 100,5);
+
+
         PrimaryStageControler.setJugador(this);//CON ESTO CONTROLAS QUE CIUDAD ESTAS VIENDO!
         PrimaryStageControler.setCiudad(cargarCiudad);//CON ESTO CONTROLAS QUE CIUDAD ESTAS VIENDO!
         Collections.sort(listaEdificiosKeys);

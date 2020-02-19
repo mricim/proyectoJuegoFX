@@ -1,8 +1,5 @@
 package main.java.testLucha;
 
-import main.java.juego.mapas.city.Ciudad;
-
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.TreeMap;

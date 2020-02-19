@@ -1,8 +1,7 @@
-package main.java.juego.mapas.city.ContentCity;
+package main.java.juego.mapas.Ciudad.ContentCity;
 
 import javafx.scene.image.Image;
-import main.java.juego.mapas.EdificiosPreCargados;
-import main.java.Utils.ImageGetter;
+import main.java.juego.mapas.Ciudad.EdificiosPreCargados;
 
 import java.util.Objects;
 

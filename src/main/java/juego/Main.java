@@ -6,15 +6,14 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-import java.io.IOException;
 import java.net.URL;
 
 public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         FXMLLoader loader = new FXMLLoader();
-        //URL url = getClass().getResource("ciudad.fxml");
-        URL url = getClass().getResource("/main/java/juego/mapas/city/ciudad.fxml");
+        //URL url = getClass().getResource("pelea.fxml");
+        URL url = getClass().getResource("/main/java/juego/mapas/Ciudad/ciudad.fxml");
         loader.setLocation(url);
         loader.setControllerFactory((Class<?> type) -> {// CREA PrimaryStageAware
             try {
@@ -38,7 +37,7 @@ public class Main extends Application {
 
     public static void main(String[] args) {
         //todo Leer desde la BD
-        new Jugador(1,500);
+        new Jugador(1,"pepito",500);
         //
         /*
             FiN PRECARGA

@@ -1,8 +1,8 @@
-package main.java.juego.mapas.city.ContentCity;
+package main.java.juego.mapas.Ciudad.ContentCity;
 
 import javafx.scene.image.Image;
 import main.java.juego.Posiciones;
-import main.java.juego.mapas.city.Ciudad;
+import main.java.juego.mapas.Ciudad.Ciudad;
 
 
 public class PosicionEdificio extends Posiciones {

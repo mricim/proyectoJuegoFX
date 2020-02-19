@@ -1,11 +1,9 @@
 package main.java.juego;
 
-import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.stage.Stage;
-import main.java.juego.mapas.city.Ciudad;
+import main.java.juego.mapas.Ciudad.Ciudad;
 
 import java.io.IOException;
 import java.net.URL;
@@ -47,8 +45,8 @@ public class PrimaryStageControler {
 
     public void reload(Stage primaryStage) throws IOException {
         FXMLLoader loader = new FXMLLoader();
-        //URL url = getClass().getResource("ciudad.fxml");
-        URL url = getClass().getResource("/main/java/juego/mapas/city/ciudad.fxml");
+        //URL url = getClass().getResource("pelea.fxml");
+        URL url = getClass().getResource("/main/java/juego/mapas/Ciudad/ciudad.fxml");
         loader.setLocation(url);
         loader.setControllerFactory((Class<?> type) -> {// CREA PrimaryStageAware
             try {

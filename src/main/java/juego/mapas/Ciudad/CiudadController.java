@@ -1,4 +1,4 @@
-package main.java.juego.mapas.city;
+package main.java.juego.mapas.Ciudad;
 
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -16,10 +16,9 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import main.java.juego.Jugador;
 import main.java.juego.PrimaryStageControler;
-import main.java.juego.mapas.EdificiosPreCargados;
 import main.java.juego.mapas.Recursos;
-import main.java.juego.mapas.city.ContentCity.Edificio;
-import main.java.juego.mapas.city.ContentCity.PosicionEdificio;
+import main.java.juego.mapas.Ciudad.ContentCity.Edificio;
+import main.java.juego.mapas.Ciudad.ContentCity.PosicionEdificio;
 
 import java.io.IOException;
 import java.net.URL;
@@ -84,7 +83,7 @@ public class CiudadController extends PrimaryStageControler implements Initializ
 
 
         selectorCiudad.setText(nameThisCity);//Seleccionar otra ciudad
-        for (Ciudad ciudadTemp : listaCiudades.values()) {
+        for (Ciudad ciudadTemp : listaCiudadesPropias.values()) {
             String nameCity = ciudadTemp.getNameCity();
             if (nameThisCity != nameCity) {
                 MenuItem menuItem = new MenuItem();
@@ -202,7 +201,7 @@ public class CiudadController extends PrimaryStageControler implements Initializ
         boolean nocargo = false;
         do {
             String nameBuild = id + "_" + (nivel + sumator);
-            EdificiosPreCargados edificiosPreCargado = listaEdificiosPreCargada.get(nameBuild);
+            EdificiosPreCargados edificiosPreCargado = EdificiosPreCargada.get(nameBuild);
             if (edificiosPreCargado != null) {
                 //BLOQUE
                 VBox vBoxBloquePropio = new VBox();

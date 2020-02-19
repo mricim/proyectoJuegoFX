@@ -1,17 +1,16 @@
-package main.java.juego.mapas.city;
+package main.java.juego.mapas.Ciudad;
 
 import javafx.scene.image.Image;
-import main.java.Utils.CallImages;
 import main.java.juego.mapas.PosicionesCiudades;
 import main.java.juego.mapas.Recursos;
-import main.java.juego.mapas.city.ContentCity.Edificio;
-import main.java.juego.mapas.city.ContentCity.PosicionEdificio;
+import main.java.juego.mapas.Ciudad.ContentCity.Edificio;
+import main.java.juego.mapas.Ciudad.ContentCity.PosicionEdificio;
 
 
 import java.util.HashMap;
 import java.util.TreeMap;
 
-import static main.java.juego.Jugador.listaEdificiosPreCargada;
+import static main.java.juego.Jugador.EdificiosPreCargada;
 
 public class Ciudad {
 
@@ -45,18 +44,18 @@ public class Ciudad {
         //todo Solicitar a la bd la tabla de posiciones y edificios que tiene el usuario
         try {
             if (idCiudad == 2) {
-                new PosicionEdificio(8, 8, this, new Edificio(listaEdificiosPreCargada.get(0 + "_" + 0)));//no tocar
-                new PosicionEdificio(7, 8, this, new Edificio(listaEdificiosPreCargada.get(2 + "_" + 0)));//no tocar
-                new PosicionEdificio(6, 8, this, new Edificio(listaEdificiosPreCargada.get(0 + "_" + 0)));//no tocar
+                new PosicionEdificio(8, 8, this, new Edificio(EdificiosPreCargada.get(0 + "_" + 0)));//no tocar
+                new PosicionEdificio(7, 8, this, new Edificio(EdificiosPreCargada.get(2 + "_" + 0)));//no tocar
+                new PosicionEdificio(6, 8, this, new Edificio(EdificiosPreCargada.get(0 + "_" + 0)));//no tocar
             }
-            new PosicionEdificio(8, 15, this, new Edificio(listaEdificiosPreCargada.get(1 + "_" + 1)));
-            new PosicionEdificio(8, 14, this, new Edificio(listaEdificiosPreCargada.get(2 + "_" + 1)));
-            new PosicionEdificio(8, 13, this, new Edificio(listaEdificiosPreCargada.get(2 + "_" + 0)));
-            new PosicionEdificio(8, 12, this, new Edificio(listaEdificiosPreCargada.get(2 + "_" + 0)));
-            new PosicionEdificio(8, 11, this, new Edificio(listaEdificiosPreCargada.get(0 + "_" + 0)));
-            new PosicionEdificio(7, 12, this, new Edificio(listaEdificiosPreCargada.get(10 + "_" + 0)));//todos tendrian "parcela"
-            new PosicionEdificio(6, 12, this, new Edificio(listaEdificiosPreCargada.get(11 + "_" + 0)));//todos tendrian "parcela"
-            new PosicionEdificio(5, 12, this, new Edificio(listaEdificiosPreCargada.get(12 + "_" + 0)));//todos tendrian "parcela"
+            new PosicionEdificio(8, 15, this, new Edificio(EdificiosPreCargada.get(1 + "_" + 1)));
+            new PosicionEdificio(8, 14, this, new Edificio(EdificiosPreCargada.get(2 + "_" + 1)));
+            new PosicionEdificio(8, 13, this, new Edificio(EdificiosPreCargada.get(2 + "_" + 0)));
+            new PosicionEdificio(8, 12, this, new Edificio(EdificiosPreCargada.get(2 + "_" + 0)));
+            new PosicionEdificio(8, 11, this, new Edificio(EdificiosPreCargada.get(0 + "_" + 0)));
+            new PosicionEdificio(7, 12, this, new Edificio(EdificiosPreCargada.get(10 + "_" + 0)));//todos tendrian "parcela"
+            new PosicionEdificio(6, 12, this, new Edificio(EdificiosPreCargada.get(11 + "_" + 0)));//todos tendrian "parcela"
+            new PosicionEdificio(5, 12, this, new Edificio(EdificiosPreCargada.get(12 + "_" + 0)));//todos tendrian "parcela"
         } catch (Exception e) {
             System.err.println("Error: Ciudad (Edificio no creado)");
         }
