@@ -8,6 +8,8 @@ import javafx.geometry.VPos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
@@ -32,10 +34,27 @@ public class GridPaneRegrowTest extends Application {
         root.setAlignment(Pos.CENTER);
         root.setGridLinesVisible(true);
 
-        for (int col = 0; col < 20; col++) {
+        int numCiudades = 127;
+        int tamaño = 15;
+        int capacidadCiudades = 0;
+        double casillasTotales = 0;
+        do {
+
+            System.out.println("XXXXXXXXXXX");
+            casillasTotales = (tamaño * tamaño);
+            capacidadCiudades  = (int)(casillasTotales * 8) / 25;
+            tamaño += 5;
+
+        }while (numCiudades > capacidadCiudades-1);
+
+
+
+
+
+        for (int col = 0; col < tamaño; col++) {
             root.getColumnConstraints()
                     .add(new ColumnConstraints(-1, -1, -1, Priority.ALWAYS, HPos.CENTER, false));
-            for (int row = 0; row < 20; row++) {
+            for (int row = 0; row < tamaño; row++) {
                 if (col == 0) {
                     root.getRowConstraints()
                             .add(new RowConstraints(-1, -1, -1, Priority.ALWAYS, VPos.CENTER, false));
@@ -43,6 +62,17 @@ public class GridPaneRegrowTest extends Application {
                 root.add(new Label(String.format("(%d,%d)", row, col)), col, row);
             }
         }
+        //TODO PARA SABER SI TENGO QUE PONER TIERRA O AGUA EN EL GRID, BUSCAR EN LA LISTA DE BATALLON O LA LISTA DE CIUDADES, PARA TENER LA POSICION (X,Y) DE DICHA CIUDAD
+        //TODO O BATALLON.
+
+
+        for (int i = 0; i <= tamaño; i++) {
+            for (int j = 0; j <= tamaño; j++) {
+                root.add(new Label("XX");
+                System.out.println(i + " " + j);
+            }
+        }
+
 
         primaryStage.setScene(new Scene(root, 1920, 1080));
         primaryStage.show();
