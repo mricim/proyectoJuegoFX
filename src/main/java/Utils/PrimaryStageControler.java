@@ -1,14 +1,20 @@
-package main.java.juego;
+package main.java.Utils;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.stage.Stage;
+import main.java.Jugadores.Jugador;
 import main.java.juego.mapas.Ciudad.Ciudad;
 
 import java.io.IOException;
 import java.net.URL;
+import java.nio.file.Paths;
+
+import static main.java.Jugadores.Jugador.listaJugadores;
 
 public class PrimaryStageControler {
+    private static final String RUTE = System.getProperty("user.dir")+"/src/main/java/";
+
     private static Jugador jugador;
     public static Jugador getJugador() {
         return jugador;
@@ -24,6 +30,7 @@ public class PrimaryStageControler {
     public static void setCiudad(Ciudad ciudad) {
         PrimaryStageControler.ciudad = ciudad;
     }
+
 
 
     protected Stage stage;
@@ -43,11 +50,10 @@ public class PrimaryStageControler {
     }
 
 
-    public void reload(Stage primaryStage) throws IOException {
+    public void reload(Stage primaryStage,String rute,boolean setMaximized) throws IOException {
         FXMLLoader loader = new FXMLLoader();
-        //URL url = getClass().getResource("pelea.fxml");
-        URL url = getClass().getResource("/main/java/juego/mapas/Ciudad/ciudad.fxml");
-        loader.setLocation(url);
+        //URL url = getClass().getResource("/main/java/juego/mapas/Ciudad/ciudad.fxml");
+        loader.setLocation(Paths.get(RUTE+rute).toUri().toURL());
         loader.setControllerFactory((Class<?> type) -> {// CREA PrimaryStageAware
             try {
                 Object controller = type.newInstance();
@@ -61,5 +67,9 @@ public class PrimaryStageControler {
         });
         Parent root = loader.load();
         primaryStage.getScene().setRoot(root);
+        if (primaryStage.isMaximized()){
+            setMaximized=true;
+        }
+        primaryStage.setMaximized(setMaximized);//Pone el Stage en maximizado
     }
 }

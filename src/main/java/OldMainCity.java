@@ -1,14 +1,16 @@
-package main.java.juego;
+package main.java;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import main.java.Jugadores.Jugador;
+import main.java.Utils.PrimaryStageControler;
 
 import java.net.URL;
 
-public class Main extends Application {
+public class OldMainCity extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         FXMLLoader loader = new FXMLLoader();
@@ -31,13 +33,12 @@ public class Main extends Application {
         Scene scene = new Scene(root);
         //scene.getStylesheets().add("main.resources/style/styles.css");
         primaryStage.setScene(scene);
-        primaryStage.setMaximized(true);//Pone el Stage en maximizado
         primaryStage.show();
     }
 
     public static void main(String[] args) {
         //todo Leer desde la BD
-        new Jugador(1,"pepito",500);
+
         //
         /*
             FiN PRECARGA

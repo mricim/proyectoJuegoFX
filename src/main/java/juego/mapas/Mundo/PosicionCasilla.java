@@ -1,7 +1,7 @@
 package main.java.juego.mapas.Mundo;
 
 import javafx.scene.image.Image;
-import main.java.juego.Posiciones;
+import main.java.Utils.Posiciones;
 
 
 public class PosicionCasilla extends Posiciones {

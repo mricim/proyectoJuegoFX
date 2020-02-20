@@ -1,23 +1,16 @@
 package main.java.juego.mapas.Mundo;
 
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
 import javafx.geometry.HPos;
 import javafx.geometry.Pos;
 import javafx.geometry.VPos;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.RowConstraints;
 import javafx.stage.Stage;
-import main.java.juego.PrimaryStageControler;
-
-import java.net.URL;
 
 public class GridPaneRegrowTest extends Application {
 
@@ -65,14 +58,14 @@ public class GridPaneRegrowTest extends Application {
         //TODO PARA SABER SI TENGO QUE PONER TIERRA O AGUA EN EL GRID, BUSCAR EN LA LISTA DE BATALLON O LA LISTA DE CIUDADES, PARA TENER LA POSICION (X,Y) DE DICHA CIUDAD
         //TODO O BATALLON.
 
-
+/*
         for (int i = 0; i <= tamaño; i++) {
             for (int j = 0; j <= tamaño; j++) {
-                root.add(new Label("XX");
+                root.add(new Label("XX"));
                 System.out.println(i + " " + j);
             }
         }
-
+*/
 
         primaryStage.setScene(new Scene(root, 1920, 1080));
         primaryStage.show();

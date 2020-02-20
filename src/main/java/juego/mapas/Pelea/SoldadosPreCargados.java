@@ -4,7 +4,7 @@ package main.java.juego.mapas.Pelea;
 import javafx.scene.image.Image;
 import main.java.Utils.ImageGetter;
 
-import static main.java.juego.Jugador.SoldadosPreCargada;
+import static main.java.Jugadores.Jugador.SoldadosPreCargada;
 
 public class SoldadosPreCargados implements ImageGetter {
     private int id;

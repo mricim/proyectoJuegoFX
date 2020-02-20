@@ -5,7 +5,7 @@ import javafx.scene.image.Image;
 import java.io.File;
 import java.util.HashMap;
 
-import static main.java.juego.Jugador.ERRORIMAGE;
+import static main.java.Jugadores.Jugador.ERRORIMAGE;
 
 public class CallImages {
     private static final String RUTE = System.getProperty("user.dir");

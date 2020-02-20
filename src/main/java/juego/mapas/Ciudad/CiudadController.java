@@ -14,8 +14,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
-import main.java.juego.Jugador;
-import main.java.juego.PrimaryStageControler;
+import main.java.Jugadores.Jugador;
+import main.java.Utils.PrimaryStageControler;
 import main.java.juego.mapas.Recursos;
 import main.java.juego.mapas.Ciudad.ContentCity.Edificio;
 import main.java.juego.mapas.Ciudad.ContentCity.PosicionEdificio;
@@ -28,7 +28,7 @@ import static javafx.geometry.Pos.TOP_CENTER;
 import static javafx.scene.control.ScrollPane.ScrollBarPolicy.NEVER;
 import static javafx.scene.text.TextAlignment.CENTER;
 import static jdk.nashorn.internal.objects.Global.Infinity;
-import static main.java.juego.Jugador.*;
+import static main.java.Jugadores.Jugador.*;
 
 
 public class CiudadController extends PrimaryStageControler implements Initializable {
@@ -36,7 +36,7 @@ public class CiudadController extends PrimaryStageControler implements Initializ
     static Jugador jugador;
     static boolean basura = true;
     static Ciudad ciudad;
-
+    
     String nameThisCity;
     @FXML
     BorderPane borderPane;
@@ -83,7 +83,7 @@ public class CiudadController extends PrimaryStageControler implements Initializ
 
 
         selectorCiudad.setText(nameThisCity);//Seleccionar otra ciudad
-        for (Ciudad ciudadTemp : listaCiudadesPropias.values()) {
+        for (Ciudad ciudadTemp : jugador.listaCiudadesPropias.values()) {
             String nameCity = ciudadTemp.getNameCity();
             if (nameThisCity != nameCity) {
                 MenuItem menuItem = new MenuItem();
@@ -92,7 +92,7 @@ public class CiudadController extends PrimaryStageControler implements Initializ
                     System.out.println("clicado " + nameCity);//TODO CAMBIAR ESTO POR LA NUEVA CIUDAD
                     setCiudad(ciudadTemp);
                     try {
-                        new PrimaryStageControler().reload(getStage());
+                        new PrimaryStageControler().reload(getStage(),"juego/mapas/Ciudad/ciudad.fxml",false);
                     } catch (IOException ex) {
                         ex.printStackTrace();
                     }
@@ -359,5 +359,13 @@ public class CiudadController extends PrimaryStageControler implements Initializ
         //scrollPane.()BorderPane.alignment="CENTER"
 
         borderPane.setLeft(scrollPane);
+    }
+
+    public void toMundo(MouseEvent mouseEvent) {
+        try {
+            new PrimaryStageControler().reload(getStage(),"juego/mapas/Mundo/mundo.fxml",false);
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
     }
 }

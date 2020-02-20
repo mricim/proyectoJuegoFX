@@ -1,20 +1,22 @@
 package main.java.juego.mapas.Pelea;
 
 import javafx.scene.image.Image;
+import main.java.Utils.Posiciones;
 
 import static main.java.testLucha.MainLucha1.tipoSoldadosTreeMap;
 
-public class Soldados {
+public class Soldados extends Posiciones {
     private int id;
     private SoldadosPreCargados soldadosPreCargados;
     private int cantidad;
     int municion;
 
-    public Soldados(int id,SoldadosPreCargados soldadosPreCargados, int cantidad,int municion) {
-        this.id=id;
+    public Soldados(int id, SoldadosPreCargados soldadosPreCargados, int cantidad, int municion, int filas, int columnas) {
+        super(filas, columnas);
+        this.id = id;
         this.soldadosPreCargados = soldadosPreCargados;
         this.cantidad = cantidad;
-        this.municion=municion;
+        this.municion = municion;
     }
 
     public int getId() {

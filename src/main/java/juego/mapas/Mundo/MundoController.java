@@ -6,8 +6,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
-import main.java.juego.Jugador;
-import main.java.juego.PrimaryStageControler;
+import main.java.Jugadores.Jugador;
+import main.java.Utils.PrimaryStageControler;
 
 import java.net.URL;
 import java.util.*;
@@ -77,13 +77,6 @@ public class MundoController extends PrimaryStageControler implements Initializa
         }
 
  */
-    }
-
-
-    @FXML
-    public void botton2(ActionEvent actionEvent) {
-        cambiarNombreStage("El nombre que queramos");
-        System.out.println("COSASA");
     }
 
     private void queClicas(PosicionCasilla posicionCasilla) {

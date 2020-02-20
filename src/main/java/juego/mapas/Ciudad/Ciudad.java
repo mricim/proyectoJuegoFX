@@ -1,7 +1,7 @@
 package main.java.juego.mapas.Ciudad;
 
 import javafx.scene.image.Image;
-import main.java.juego.mapas.PosicionesCiudades;
+import main.java.Utils.Posiciones;
 import main.java.juego.mapas.Recursos;
 import main.java.juego.mapas.Ciudad.ContentCity.Edificio;
 import main.java.juego.mapas.Ciudad.ContentCity.PosicionEdificio;
@@ -10,9 +10,10 @@ import main.java.juego.mapas.Ciudad.ContentCity.PosicionEdificio;
 import java.util.HashMap;
 import java.util.TreeMap;
 
-import static main.java.juego.Jugador.EdificiosPreCargada;
+import static main.java.Jugadores.Jugador.EdificiosPreCargada;
+import static main.java.Jugadores.Jugador.listaCiudades;
 
-public class Ciudad {
+public class Ciudad extends Posiciones {
 
     private HashMap<String, PosicionEdificio> listaPosicionesEdificios = new HashMap<>();
 
@@ -22,7 +23,7 @@ public class Ciudad {
 
 
     public Ciudad(int idCiudad, String nameCity,int fila,int columna, int oro, int madera, int piedra, int comida, int hierro, int poblacion, int felicidad) {
-        new PosicionesCiudades(fila,columna,this);
+        super(fila,columna);
         this.idCiudad = idCiudad;
         this.nameCity = nameCity;
 
@@ -59,6 +60,7 @@ public class Ciudad {
         } catch (Exception e) {
             System.err.println("Error: Ciudad (Edificio no creado)");
         }
+        listaCiudades.put(getPosition(),this);
     }
 
     public int getIdCiudad() {

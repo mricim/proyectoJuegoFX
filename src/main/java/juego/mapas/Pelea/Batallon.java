@@ -1,25 +1,20 @@
 package main.java.juego.mapas.Pelea;
 
+import main.java.Utils.Posiciones;
+
 import java.util.HashMap;
 
-public class Batallon {
-    private HashMap<String, PosicionSoldado> posicionSoldadoHashMap = new HashMap<>();
+public class Batallon extends Posiciones {
+    private HashMap<String, Soldados> SoldadoHashMap = new HashMap<>();
     private int idBatallon;
     private String nombre;
     private double poderMilitar;
 
 
-    public Batallon(int idBatallon, String nombre) {
+    public Batallon(int idBatallon, String nombre, int filas, int columnas) {
+        super(filas, columnas);
         this.idBatallon = idBatallon;
         this.nombre = nombre;
-    }
-
-    public void addListaPosicionesSoldados(String col_row, PosicionSoldado posicionSoldado) {
-        this.posicionSoldadoHashMap.put(col_row,posicionSoldado);
-    }
-
-    public HashMap<String, PosicionSoldado> getPosicionSoldadoHashMap() {
-        return posicionSoldadoHashMap;
     }
 
     public int getIdBatallon() {
@@ -37,13 +32,22 @@ public class Batallon {
     public double getPoderMilitar() {
         return poderMilitar;
     }
-
+/*
     public void setPoderMilitar() {
         double poderMilitar = 0;
-        for (PosicionSoldado p:posicionSoldadoHashMap.values()) {
+        for (PosicionSoldado p : posicionSoldadoHashMap.values()) {
             //TODO iterar sobre el map de posicion de soldados y calcular el podermilitar del batallon
-           poderMilitar += p.getSoldado().getCantidad()*p.getSoldado().getSoldadosPreCargados().getId();
+            poderMilitar += p.getSoldado().getCantidad() * p.getSoldado().getSoldadosPreCargados().getId();
         }
         this.poderMilitar = poderMilitar;
+    }
+ */
+
+    public HashMap<String, Soldados> getSoldadoHashMap() {
+        return SoldadoHashMap;
+    }
+
+    public void setSoldadoHashMap(Soldados soldado) {
+        SoldadoHashMap.put(soldado.getPosition(),soldado);
     }
 }

@@ -4,8 +4,6 @@ package main.java.juego.mapas.Mundo;
 import javafx.scene.image.Image;
 import main.java.Utils.ImageGetter;
 
-import static main.java.juego.Jugador.SoldadosPreCargada;
-
 public class TiposDeCasillas implements ImageGetter {
     private int id;
     private String nombre;
