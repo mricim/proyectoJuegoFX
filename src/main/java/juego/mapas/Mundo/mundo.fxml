@@ -149,14 +149,7 @@ prefHeight="${screen.visualBounds.height}" prefWidth="${screen.visualBounds.widt
                                 <Image url="@../../../../resources/images/mapas/NarniaMap.jpg" /><!-- https://gist.github.com/jewelsea/5032398 -->
                             </image>
                         </ImageView>
-                  <GridPane fx:id="gridPaneMap">
-                    <columnConstraints>
-                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                    </columnConstraints>
-                    <rowConstraints>
-                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                    </rowConstraints>
-                  </GridPane>
+                  <!--AQUI GRIDPANE-->
                     </children>
                 </StackPane>
             </content>

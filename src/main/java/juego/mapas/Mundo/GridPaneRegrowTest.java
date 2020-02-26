@@ -23,9 +23,7 @@ public class GridPaneRegrowTest extends Application {
     public void start(Stage primaryStage) throws Exception {
 
         //https://stackoverflow.com/questions/54187886/dynamically-sizing-the-contents-of-a-gridpane-to-the-properties-of-their-parent
-        GridPane root = new GridPane();
-        root.setAlignment(Pos.CENTER);
-        root.setGridLinesVisible(true);
+
 
         int numCiudades = 127;
         int tamaño = 15;
@@ -40,19 +38,26 @@ public class GridPaneRegrowTest extends Application {
 
         }while (numCiudades > capacidadCiudades-1);
 
+        GridPane root = new GridPane();
+        root.setAlignment(Pos.CENTER);
+        root.setGridLinesVisible(true);
 
 
 
 
-        for (int col = 0; col < tamaño; col++) {
+        for (int fila = 0; fila < tamaño; fila++) {
             root.getColumnConstraints()
                     .add(new ColumnConstraints(-1, -1, -1, Priority.ALWAYS, HPos.CENTER, false));
-            for (int row = 0; row < tamaño; row++) {
-                if (col == 0) {
+            for (int columna = 0; columna < tamaño; columna++) {
+                if (fila == 0) {
                     root.getRowConstraints()
                             .add(new RowConstraints(-1, -1, -1, Priority.ALWAYS, VPos.CENTER, false));
                 }
-                root.add(new Label(String.format("(%d,%d)", row, col)), col, row);
+                root.add(new Label(String.format("(%d,%d) %d", columna, fila,((1+columna)*(1+fila)))), fila, columna);
+                //IF (fila==0,4,5,9,10...){
+                //  if( columna==X){
+                //  }
+                //}
             }
         }
         //TODO PARA SABER SI TENGO QUE PONER TIERRA O AGUA EN EL GRID, BUSCAR EN LA LISTA DE BATALLON O LA LISTA DE CIUDADES, PARA TENER LA POSICION (X,Y) DE DICHA CIUDAD
