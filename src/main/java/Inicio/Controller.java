@@ -29,15 +29,28 @@ public class Controller extends PrimaryStageControler implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
 
     }
-    public void iniciarSession(){
-        idJugador = LoginHiperFalso.devuelveElIdDeLaCuenta();
 
+    public void iniciarSession() {
+        loadSesion.setDisable(true);
+        idJugador = LoginHiperFalso.devuelveElIdDeLaCuenta();
         iniciarJuego.setDisable(false);
+
+        progresBar.setDisable(false);
     }
 
-    public void iniciarJuego(MouseEvent mouseEvent) throws InterruptedException {
+    public void iniciarJuego() {
         iniciarJuego.setDisable(true);
-        progresBar.setProgress(10);
+        progresBar.setProgress(10);//TODO NO FUNCIONA // https://stackoverflow.com/questions/44398611/running-a-process-in-a-separate-thread-so-rest-of-java-fx-application-is-usable
+        callbd();
+        progresBar.setProgress(100);
+        try {
+            new PrimaryStageControler().reload(getStage(), "juego/mapas/Ciudad/ciudad.fxml", true);
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    private void callbd() {
         //TODO LEER DESDE LA BD
         new EdificiosPreCargados(0, "parcela Construible", "Descripción del edificio que sera mas larga que el nombre del edificio", false, true, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);//NO MEJORABLE
         new EdificiosPreCargados(1, "Castillo", "Descripción del edificio que sera mas larga que el nombre del edificio", false, false, 1, 0, -1, 99, 99, 99, 99, 10, 1000, 1000, 1000, 1000, 0, 10, 1, 1000, 1000, 1000, 1000, 100);
@@ -59,17 +72,9 @@ public class Controller extends PrimaryStageControler implements Initializable {
         new SoldadosPreCargados(3, "Caballeros", 50);
         progresBar.setProgress(50);
         //TODO DESDE LA BD
-        setJugador(new Jugador(idJugador,"pepito",500));
-        new Jugador(2,"juan",300);
+        setJugador(new Jugador(idJugador, "pepito", 500));
+        new Jugador(2, "juan", 300);
         progresBar.setProgress(70);
-        TimeUnit.SECONDS.sleep(1);
         progresBar.setProgress(80);
-        TimeUnit.SECONDS.sleep(1);
-        progresBar.setProgress(100);
-        try {
-            new PrimaryStageControler().reload(getStage(),"juego/mapas/Ciudad/ciudad.fxml",true);
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
     }
 }

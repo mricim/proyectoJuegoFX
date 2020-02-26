@@ -4,7 +4,6 @@ import javafx.scene.image.Image;
 import main.java.Utils.Posiciones;
 import main.java.juego.mapas.Recursos;
 import main.java.juego.mapas.Ciudad.ContentCity.Edificio;
-import main.java.juego.mapas.Ciudad.ContentCity.PosicionEdificio;
 
 
 import java.util.HashMap;
@@ -15,18 +14,19 @@ import static main.java.Jugadores.Jugador.listaCiudades;
 
 public class Ciudad extends Posiciones {
 
-    private HashMap<String, PosicionEdificio> listaPosicionesEdificios = new HashMap<>();
+    private HashMap<String, Edificio> listaPosicionesEdificios = new HashMap<>();
 
     private int idCiudad;
     private String nameCity;
     public TreeMap<Integer, Recursos> recursosTreeMap = new TreeMap<>();
+    private int nivelCiudad;
 
 
-    public Ciudad(int idCiudad, String nameCity,int fila,int columna, int oro, int madera, int piedra, int comida, int hierro, int poblacion, int felicidad) {
+    public Ciudad(int idCiudad, String nameCity,int fila,int columna,int nivelCiudad, int oro, int madera, int piedra, int comida, int hierro, int poblacion, int felicidad) {
         super(fila,columna);
         this.idCiudad = idCiudad;
         this.nameCity = nameCity;
-
+this.nivelCiudad=nivelCiudad;
         recursosTreeMap.put(0, new Recursos(0, oro));
 //        this.oro = oro;
         recursosTreeMap.put(1, new Recursos(1, madera));
@@ -45,20 +45,20 @@ public class Ciudad extends Posiciones {
         //todo Solicitar a la bd la tabla de posiciones y edificios que tiene el usuario
         try {
             if (idCiudad == 2) {
-                new PosicionEdificio(8, 8, this, new Edificio(EdificiosPreCargada.get(0 + "_" + 0)));//no tocar
-                new PosicionEdificio(7, 8, this, new Edificio(EdificiosPreCargada.get(2 + "_" + 0)));//no tocar
-                new PosicionEdificio(6, 8, this, new Edificio(EdificiosPreCargada.get(0 + "_" + 0)));//no tocar
+                new Edificio(EdificiosPreCargada.get(0+"_"+0),8, 8, this);//no tocar
+                new Edificio(EdificiosPreCargada.get(2+"_"+0),7, 8, this);//no tocar
+                new Edificio(EdificiosPreCargada.get(0+"_"+0),6, 8, this);//no tocar
             }
-            new PosicionEdificio(8, 15, this, new Edificio(EdificiosPreCargada.get(1 + "_" + 1)));
-            new PosicionEdificio(8, 14, this, new Edificio(EdificiosPreCargada.get(2 + "_" + 1)));
-            new PosicionEdificio(8, 13, this, new Edificio(EdificiosPreCargada.get(2 + "_" + 0)));
-            new PosicionEdificio(8, 12, this, new Edificio(EdificiosPreCargada.get(2 + "_" + 0)));
-            new PosicionEdificio(8, 11, this, new Edificio(EdificiosPreCargada.get(0 + "_" + 0)));
-            new PosicionEdificio(7, 12, this, new Edificio(EdificiosPreCargada.get(10 + "_" + 0)));//todos tendrian "parcela"
-            new PosicionEdificio(6, 12, this, new Edificio(EdificiosPreCargada.get(11 + "_" + 0)));//todos tendrian "parcela"
-            new PosicionEdificio(5, 12, this, new Edificio(EdificiosPreCargada.get(12 + "_" + 0)));//todos tendrian "parcela"
+            new Edificio(EdificiosPreCargada.get(1+"_"+1),8, 15, this);
+            new Edificio(EdificiosPreCargada.get(2+"_"+1),8, 14, this);
+            new Edificio(EdificiosPreCargada.get(2+"_"+0),8, 13, this);
+            new Edificio(EdificiosPreCargada.get(2+"_"+0),8, 12, this);
+            new Edificio(EdificiosPreCargada.get(0+"_"+0),8, 11, this);
+            new Edificio(EdificiosPreCargada.get(10+"_"+0),7, 12, this);//todos tendrian "parcela"
+            new Edificio(EdificiosPreCargada.get(11+"_"+0),6, 12, this);//todos tendrian "parcela"
+            new Edificio(EdificiosPreCargada.get(12+"_"+0),5, 12, this);//todos tendrian "parcela"
         } catch (Exception e) {
-            System.err.println("Error: Ciudad (Edificio no creado)");
+            System.err.println("Error: Ciudad (Edificio no creado)\n"+e);
         }
         listaCiudades.put(getPosition(),this);
     }
@@ -71,20 +71,28 @@ public class Ciudad extends Posiciones {
         return nameCity;
     }
 
-    public HashMap<String, PosicionEdificio> getListaPosicionesEdificios() {
+    public HashMap<String, Edificio> getListaPosicionesEdificios() {
         return listaPosicionesEdificios;
     }
 
-    public void addListaPosicionesEdificios(int colum, int row, PosicionEdificio posicionEdificio) {
+    public void addListaPosicionesEdificios(int colum, int row, Edificio posicionEdificio) {
         this.listaPosicionesEdificios.put(colum + "_" + row, posicionEdificio);
     }
 
-    public void addListaPosicionesEdificios(String colum_row, PosicionEdificio posicionEdificio) {
+    public void addListaPosicionesEdificios(String colum_row, Edificio posicionEdificio) {
         this.listaPosicionesEdificios.put(colum_row, posicionEdificio);
     }
 
     public TreeMap<Integer, Recursos> getRecursosTreeMap() {
         return recursosTreeMap;
+    }
+
+    public int getNivelCiudad() {
+        return nivelCiudad;
+    }
+
+    public void setNivelCiudad(int nivelCiudad) {
+        this.nivelCiudad = nivelCiudad;
     }
 
     //ORO

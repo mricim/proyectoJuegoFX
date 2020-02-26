@@ -40,8 +40,8 @@ public class Jugador {
         Ciudad cargarCiudad = null;
         if (idJugador == 1) {
             //todo Se le desde la BD
-            Ciudad ciudad1 = new Ciudad(1, "ciudad 1", 1, 1, 300, 20, 50, 70, 90, 40, 50);
-            Ciudad ciudad2 = new Ciudad(2, "ciudad 2", 2, 2, Integer.MAX_VALUE, 5, 4, 6, 7, 8, 9);
+            Ciudad ciudad1 = new Ciudad(1, "ciudad 1", 1,1, 1, 300, 20, 50, 70, 90, 40, 50);
+            Ciudad ciudad2 = new Ciudad(2, "ciudad 2", 2, 2,1, Integer.MAX_VALUE, 5, 4, 6, 7, 8, 9);
             listaCiudadesPropias.put(ciudad1.getPosition(), ciudad1);
             listaCiudadesPropias.put(ciudad2.getPosition(), ciudad2);
             //Carga la ciudad con el id mas bajo (la mas antigua)

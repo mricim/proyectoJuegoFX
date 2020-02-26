@@ -18,7 +18,6 @@ import main.java.Jugadores.Jugador;
 import main.java.Utils.PrimaryStageControler;
 import main.java.juego.mapas.Recursos;
 import main.java.juego.mapas.Ciudad.ContentCity.Edificio;
-import main.java.juego.mapas.Ciudad.ContentCity.PosicionEdificio;
 
 import java.io.IOException;
 import java.net.URL;
@@ -119,8 +118,8 @@ public class CiudadController extends PrimaryStageControler implements Initializ
         }
 */
 
-        Collection<PosicionEdificio> posicionEdificios = getCiudad().getListaPosicionesEdificios().values();
-        for (PosicionEdificio posicionEdificio : posicionEdificios) {
+        Collection<Edificio> posicionEdificios = getCiudad().getListaPosicionesEdificios().values();
+        for (Edificio posicionEdificio : posicionEdificios) {
 //            Edificio edificio = posicionEdificio.getEdificio();
 //            int idEdificio = edificio.getId();
 //            int nivelEdificio = edificio.getNivel();
@@ -134,7 +133,7 @@ public class CiudadController extends PrimaryStageControler implements Initializ
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-                imageView.setImage(posicionEdificio.getImageOnMouseOver());
+                imageView.setImage(posicionEdificio.getImageClicable());
             });
             imageView.addEventHandler(MouseEvent.MOUSE_EXITED, event -> {
                 try {
@@ -158,7 +157,7 @@ public class CiudadController extends PrimaryStageControler implements Initializ
         System.out.println("COSASA");
     }
 
-    private void queClicas(PosicionEdificio posicionEdificio) {
+    private void queClicas(Edificio posicionEdificio) {
         if (basura) {
             if (posicionEdificio == null) {
                 borderPane.setLeft(null);//System.out.println("Limpiar menu izquierda");
@@ -179,28 +178,51 @@ public class CiudadController extends PrimaryStageControler implements Initializ
         }
     }
 
-    private static void createMenuLeft(BorderPane borderPane, PosicionEdificio posicionEdificio) {
+    private static void createMenuLeft(BorderPane borderPane, Edificio posicionEdificio) {
         //EdificiosPreCargados edificiosPreCargados = listaEdificiosPreCargada.get(edificio.getId() + "_" + edificio.getNivel());
 //        EdificiosPreCargados edificiosPreCargado = edificio.getEdificiosPreCargados();
 
+        List<VBox> vBoxList = returnBoxes(posicionEdificio);
+
+
+        VBox vBox = new VBox();
+        for (VBox box : vBoxList) {
+            vBox.getChildren().add(box);
+            Separator separator = new Separator();
+            separator.setVisible(false);
+            vBox.getChildren().add(separator);
+        }
+        vBox.setSpacing(5);
+        vBox.setAlignment(TOP_CENTER);
+
+        ScrollPane scrollPane = new ScrollPane(vBox);
+        scrollPane.maxWidth(-Infinity);
+        scrollPane.prefWidth(200);
+        scrollPane.setHbarPolicy(NEVER);
+        //scrollPane.()BorderPane.alignment="CENTER"
+
+        borderPane.setLeft(scrollPane);
+    }
+
+    private static List<VBox> returnBoxes(Edificio edificio) {
         List<VBox> vBoxList = new ArrayList<>();
 
-        Edificio edificio = posicionEdificio.getEdificio();
+
         int id = edificio.getId();
         boolean listarTodosLosEdificios = false;
         int maximos = 0;
         int counterMaximos = 9;
-        boolean whilex = true;
+        boolean noEsUnaParcela = true;
         if (id == 0) {
             listarTodosLosEdificios = true;
             maximos = listaEdificiosKeys.get(listaEdificiosKeys.size() - 1);
         }
         int nivel = edificio.getNivel();
-        int sumator = 0;
+        int sumadorEnNivel = 0;
 
-        boolean nocargo = false;
+        boolean nocargoNingunEdificio = false;
         do {
-            String nameBuild = id + "_" + (nivel + sumator);
+            String nameBuild = id + "_" + (nivel + sumadorEnNivel);
             EdificiosPreCargados edificiosPreCargado = EdificiosPreCargada.get(nameBuild);
             if (edificiosPreCargado != null) {
                 //BLOQUE
@@ -296,11 +318,11 @@ public class CiudadController extends PrimaryStageControler implements Initializ
                     vBoxBloquePropio.setMargin(flowPane,new Insets(0,15,0,15));
                     childrenVBox.add(flowPane);
                     boolean active = false;
-                    if (sumator == 1) {
+                    if (sumadorEnNivel == 1) {
                         Button button = new Button("Update");
                         childrenVBox.add(button);
                         active = true;
-                    } else if (sumator == -1) {
+                    } else if (sumadorEnNivel == -1) {
                         Button button = new Button("Downgrade");
                         childrenVBox.add(button);
                         active = true;
@@ -317,16 +339,16 @@ public class CiudadController extends PrimaryStageControler implements Initializ
                 }
 
             } else {
-                nocargo = true;
+                nocargoNingunEdificio = true;
             }
             if (!listarTodosLosEdificios) {
-                if (sumator == 0) {
-                    sumator = 1;
-                } else if (sumator == 1 && nivel > 0 || nocargo && sumator != -1) {
-                    sumator = -1;
-                } else if (nocargo && sumator == -1 && id > 2) {
+                if (sumadorEnNivel == 0) {
+                    sumadorEnNivel = 1;
+                } else if (sumadorEnNivel == 1 && nivel > 0 || nocargoNingunEdificio && sumadorEnNivel != -1) {
+                    sumadorEnNivel = -1;
+                } else if (nocargoNingunEdificio && sumadorEnNivel == -1 && id > 2) {
                     id = 0;
-                    sumator = 0;
+                    sumadorEnNivel = 0;
                     nivel = 0;
                 } else {
                     break;
@@ -335,30 +357,12 @@ public class CiudadController extends PrimaryStageControler implements Initializ
                 if (listaEdificiosKeys.contains(++counterMaximos)) {
                     id = counterMaximos;
                 } else {
-                    whilex = false;
+                    noEsUnaParcela = false;
                 }
             }
-        } while (whilex);
+        } while (noEsUnaParcela);
         //FIN BLOQUE
-
-
-        VBox vBox = new VBox();
-        for (VBox box : vBoxList) {
-            vBox.getChildren().add(box);
-            Separator separator = new Separator();
-            separator.setVisible(false);
-            vBox.getChildren().add(separator);
-        }
-        vBox.setSpacing(5);
-        vBox.setAlignment(TOP_CENTER);
-
-        ScrollPane scrollPane = new ScrollPane(vBox);
-        scrollPane.maxWidth(-Infinity);
-        scrollPane.prefWidth(200);
-        scrollPane.setHbarPolicy(NEVER);
-        //scrollPane.()BorderPane.alignment="CENTER"
-
-        borderPane.setLeft(scrollPane);
+        return vBoxList;
     }
 
     public void toMundo(MouseEvent mouseEvent) {

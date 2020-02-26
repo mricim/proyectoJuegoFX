@@ -1,26 +1,35 @@
 package main.java.juego.mapas.Ciudad.ContentCity;
 
 import javafx.scene.image.Image;
+import main.java.Utils.Posiciones;
+import main.java.juego.mapas.Ciudad.Ciudad;
 import main.java.juego.mapas.Ciudad.EdificiosPreCargados;
 
 import java.util.Objects;
 
 
-public class Edificio implements Cloneable {
+public class Edificio extends Posiciones implements Cloneable {
     private int id;//GUARDAR
     private int nivel;//GUARDAR
     private int necesitaTrabajadoresXmin;//GUARDAR
-    private EdificiosPreCargados edificiosPreCargados;
+    private EdificiosPreCargados edificiosPreCargado;
 
 
-    public Edificio(EdificiosPreCargados edificioPreCargado) {
+    public Edificio(EdificiosPreCargados edificioPreCargado, int filas, int columnas, Ciudad ciudad) {
+        super(filas,columnas);
+        System.out.println("2222222222222 "+edificioPreCargado);
         this.id = edificioPreCargado.getId();
         this.nivel = edificioPreCargado.getNivel();
-        this.edificiosPreCargados = edificioPreCargado;
+        this.edificiosPreCargado = edificioPreCargado;
+
 
         //TODO //POSIBLEMENTE ESTO LLENE LA RAM
         getImage();
         getImageClicable();
+
+
+
+        ciudad.addListaPosicionesEdificios(filas+"_"+columnas, this);
     }
 
     public Object clone() throws CloneNotSupportedException {//https://stackoverflow.com/questions/869033/how-do-i-copy-an-object-in-java
@@ -44,28 +53,14 @@ public class Edificio implements Cloneable {
         this.necesitaTrabajadoresXmin = necesitaTrabajadoresXmin;
     }
 
-    public EdificiosPreCargados getEdificiosPreCargados() {
-        return edificiosPreCargados;
+    public EdificiosPreCargados getEdificiosPreCargado() {
+        return edificiosPreCargado;
     }
 
     public Image getImage() {
-        return edificiosPreCargados.getImage();
+        return edificiosPreCargado.getImage();
     }
     public Image getImageClicable() {
-        return edificiosPreCargados.getImageClicable();
-    }
-
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Edificio)) return false;
-        Edificio edificio = (Edificio) o;
-        return getId() == edificio.getId();
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(getId());
+        return edificiosPreCargado.getImageClicable();
     }
 }
