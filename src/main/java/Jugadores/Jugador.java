@@ -18,7 +18,7 @@ public class Jugador {
 
 
     public static TreeMap<Integer, SoldadosPreCargados> SoldadosPreCargada = new TreeMap();
-    public static TreeMap<String, EdificiosPreCargados> EdificiosPreCargada = new TreeMap<>();
+    public static TreeMap<String, EdificiosPreCargados> listaEdificiosPreCargados = new TreeMap<>();
 
     public static TreeMap<String, Batallon> listaBatallones = new TreeMap<>();
     public static TreeMap<String, Ciudad> listaCiudades = new TreeMap<>();

@@ -35,7 +35,7 @@ public class CiudadController extends PrimaryStageControler implements Initializ
     static Jugador jugador;
     static boolean basura = true;
     static Ciudad ciudad;
-    
+
     String nameThisCity;
     @FXML
     BorderPane borderPane;
@@ -91,7 +91,7 @@ public class CiudadController extends PrimaryStageControler implements Initializ
                     System.out.println("clicado " + nameCity);//TODO CAMBIAR ESTO POR LA NUEVA CIUDAD
                     setCiudad(ciudadTemp);
                     try {
-                        new PrimaryStageControler().reload(getStage(),"juego/mapas/Ciudad/ciudad.fxml",false);
+                        new PrimaryStageControler().reload(getStage(), "juego/mapas/Ciudad/ciudad.fxml", false);
                     } catch (IOException ex) {
                         ex.printStackTrace();
                     }
@@ -178,11 +178,54 @@ public class CiudadController extends PrimaryStageControler implements Initializ
         }
     }
 
-    private static void createMenuLeft(BorderPane borderPane, Edificio posicionEdificio) {
+    private static void createMenuLeft(BorderPane borderPane, Edificio edificio) {
         //EdificiosPreCargados edificiosPreCargados = listaEdificiosPreCargada.get(edificio.getId() + "_" + edificio.getNivel());
 //        EdificiosPreCargados edificiosPreCargado = edificio.getEdificiosPreCargados();
+        List<VBox> vBoxList = new ArrayList<>();
 
-        List<VBox> vBoxList = returnBoxes(posicionEdificio);
+        int edificioId = edificio.getId();
+        int edificioNivel = edificio.getNivel();
+        if (edificioId != 0) {// NO PARCELA
+            vBoxList.add(cajaEdificio(false, edificio, 0));
+            if (edificioNivel > 0) {
+                try {
+                    vBoxList.add(cajaEdificio(false, listaEdificiosPreCargados.get(edificioId + "_" + (edificioNivel + 1)), 2));
+                } catch (Exception e) {
+                }
+                vBoxList.add(cajaEdificio(false, listaEdificiosPreCargados.get(edificioId + "_" + (edificioNivel - 1)), 3));
+            } else {
+                try {
+                    vBoxList.add(cajaEdificio(false, listaEdificiosPreCargados.get(edificioId + "_" + (edificioNivel + 1)), 2));
+                } catch (Exception e) {
+                }
+                if (edificio.getEdificiosPreCargado().isDestruible()){
+                vBoxList.add(cajaEdificio(false, listaEdificiosPreCargados.get(0 + "_" + 0), 4));
+            }}
+
+
+        } else {//PARCELAS
+            Collection<Edificio> posicionEdificios = getCiudad().getListaPosicionesEdificios().values();
+            TreeMap<Integer, Integer> counterTiposDeEdificioEnLaCiudad = new TreeMap<>();
+            for (Edificio edificio1 : posicionEdificios) {
+                int id = edificio1.getId();
+                if (counterTiposDeEdificioEnLaCiudad.containsKey(id)) {
+                    counterTiposDeEdificioEnLaCiudad.put(id, counterTiposDeEdificioEnLaCiudad.get(id) + 1);
+                } else {
+                    counterTiposDeEdificioEnLaCiudad.put(id, 1);
+                }
+            }
+            vBoxList.add(cajaEdificio(true, edificio, 0));
+            for (Map.Entry<String, EdificiosPreCargados> preCargadosEntry : listaEdificiosPreCargados.entrySet()) {
+                EdificiosPreCargados temp = preCargadosEntry.getValue();
+                if (temp.getNivel() == 0 && temp.isConstruible() && ciudad.getNivelCiudad() >= temp.getNivelCastilloNecesario()) {
+                    System.out.println(temp.getNombre()+" "+temp.getNivel()+" "+temp.isConstruible() +" "+ ciudad.getNivelCiudad() +" "+ temp.getNivelCastilloNecesario());
+                    System.out.println(temp.getNombre()+" "+counterTiposDeEdificioEnLaCiudad.get(temp.getId())+" "+counterTiposDeEdificioEnLaCiudad.get(temp.getId())+">"+temp.getMaximoEdificiosDelMismoTipo());
+                    if (counterTiposDeEdificioEnLaCiudad.get(temp.getId()) == null || counterTiposDeEdificioEnLaCiudad.get(temp.getId()) < temp.getMaximoEdificiosDelMismoTipo()) {
+                        vBoxList.add(cajaEdificio(false, temp, 1));
+                    }
+                }
+            }
+        }
 
 
         VBox vBox = new VBox();
@@ -204,170 +247,137 @@ public class CiudadController extends PrimaryStageControler implements Initializ
         borderPane.setLeft(scrollPane);
     }
 
-    private static List<VBox> returnBoxes(Edificio edificio) {
-        List<VBox> vBoxList = new ArrayList<>();
-
-
-        int id = edificio.getId();
-        boolean listarTodosLosEdificios = false;
-        int maximos = 0;
-        int counterMaximos = 9;
-        boolean noEsUnaParcela = true;
-        if (id == 0) {
-            listarTodosLosEdificios = true;
-            maximos = listaEdificiosKeys.get(listaEdificiosKeys.size() - 1);
-        }
-        int nivel = edificio.getNivel();
-        int sumadorEnNivel = 0;
-
-        boolean nocargoNingunEdificio = false;
-        do {
-            String nameBuild = id + "_" + (nivel + sumadorEnNivel);
-            EdificiosPreCargados edificiosPreCargado = EdificiosPreCargada.get(nameBuild);
-            if (edificiosPreCargado != null) {
-                //BLOQUE
-                VBox vBoxBloquePropio = new VBox();
-                vBoxBloquePropio.setMinWidth(200);
-                vBoxBloquePropio.setMaxWidth(200);
-                vBoxBloquePropio.setAlignment(TOP_CENTER);
-                vBoxBloquePropio.setBackground(new Background(new BackgroundFill(Color.ANTIQUEWHITE, CornerRadii.EMPTY, Insets.EMPTY)));
-                ObservableList<Node> childrenVBox = vBoxBloquePropio.getChildren();
-
-                Label nombreEdificioPropio = new Label(edificiosPreCargado.getNombre());
-                nombreEdificioPropio.setTextAlignment(CENTER);
-                nombreEdificioPropio.setAlignment(Pos.CENTER);
-                nombreEdificioPropio.setWrapText(true);
-                childrenVBox.add(nombreEdificioPropio);
-
-                ImageView imageViewPropio = new ImageView(edificiosPreCargado.getImage());
-                imageViewPropio.setPickOnBounds(true);
-                imageViewPropio.setPreserveRatio(true);
-                childrenVBox.add(imageViewPropio);
-
-                Label nivelEdificioPropio = new Label("Nivel: " + nivel);
-                nivelEdificioPropio.setTextAlignment(CENTER);
-                nivelEdificioPropio.setAlignment(Pos.CENTER);
-                nivelEdificioPropio.setWrapText(true);
-                childrenVBox.add(nivelEdificioPropio);
-
-                Label descripcionEdificioPropio = new Label(edificiosPreCargado.getDescripcion());
-                descripcionEdificioPropio.setTextAlignment(CENTER);
-                descripcionEdificioPropio.setAlignment(Pos.CENTER);
-                descripcionEdificioPropio.setWrapText(true);
-                childrenVBox.add(descripcionEdificioPropio);
-                vBoxBloquePropio.setMargin(descripcionEdificioPropio,new Insets(0,15,0,15));
-                if (edificiosPreCargado.getId() != 0) {
-                    FlowPane flowPane = new FlowPane();
-                    flowPane.setHgap(10);
-                    flowPane.setVgap(10);
-                    flowPane.setAlignment(Pos.CENTER);
-                    ObservableList<Node> childrenFlowPane = flowPane.getChildren();
-
-                    boolean paso1 = false;
-                    for (Map.Entry<Integer, Recursos> recurso : edificiosPreCargado.getRecursosProductores().entrySet()) {
-                        Recursos recursoValor = recurso.getValue();
-                        int produce = recursoValor.getCantidad();
-                        if (produce != 0) {
-                            ImageView imageView = new ImageView(recursoValor.getImage());
-                            imageView.setFitWidth(25);
-                            imageView.setFitHeight(25);
-                            Label label = new Label();
-                            if (produce > 0) {
-                                label.setText("+" + produce);
-                                label.setTextFill(Color.GREEN);
-                            } else if (produce < 0) {
-                                label.setText(String.valueOf(produce));
-                                label.setTextFill(Color.RED);
-                            }
-                            label.setGraphic(imageView);
-                            label.setTextAlignment(CENTER);
-                            label.setAlignment(Pos.CENTER);
-                            label.setWrapText(true);
-                            childrenFlowPane.add(label);
-                            paso1 = true;
-                        }
-                    }
-                    if (paso1) {
-                        Separator separator = new Separator();
-                        separator.setPrefWidth(200);
-                        childrenFlowPane.add(separator);
-                    }
-                    boolean paso2 = false;
-                    for (Map.Entry<Integer, Recursos> recurso : edificiosPreCargado.getRecursosAlmacen().entrySet()) {
-                        Recursos recursoValor = recurso.getValue();
-                        int almacena = recursoValor.getCantidad();
-                        if (almacena != 0) {
-                            ImageView imageView = new ImageView(recursoValor.getImage());
-                            imageView.setFitWidth(25);
-                            imageView.setFitHeight(25);
-                            Label label = new Label();
-                            label.setText(String.valueOf(almacena));
-                            label.setGraphic(imageView);
-                            label.setTextAlignment(CENTER);
-                            label.setAlignment(Pos.CENTER);
-                            label.setWrapText(true);
-                            childrenFlowPane.add(label);
-                            paso2 = true;
-                        }
-                    }
-                    if (paso2) {
-                        Separator separator = new Separator();
-                        separator.setPrefWidth(200);
-                        childrenFlowPane.add(separator);
-                    }
-                    vBoxBloquePropio.setMargin(flowPane,new Insets(0,15,0,15));
-                    childrenVBox.add(flowPane);
-                    boolean active = false;
-                    if (sumadorEnNivel == 1) {
-                        Button button = new Button("Update");
-                        childrenVBox.add(button);
-                        active = true;
-                    } else if (sumadorEnNivel == -1) {
-                        Button button = new Button("Downgrade");
-                        childrenVBox.add(button);
-                        active = true;
-                    }
-                    if (active) {
-                        Separator separator = new Separator();
-                        separator.setPrefWidth(200);
-                        childrenVBox.add(separator);
-                    }
-                    vBoxList.add(vBoxBloquePropio);
-                } else {
-
-                    vBoxList.add(vBoxBloquePropio);
-                }
-
-            } else {
-                nocargoNingunEdificio = true;
-            }
-            if (!listarTodosLosEdificios) {
-                if (sumadorEnNivel == 0) {
-                    sumadorEnNivel = 1;
-                } else if (sumadorEnNivel == 1 && nivel > 0 || nocargoNingunEdificio && sumadorEnNivel != -1) {
-                    sumadorEnNivel = -1;
-                } else if (nocargoNingunEdificio && sumadorEnNivel == -1 && id > 2) {
-                    id = 0;
-                    sumadorEnNivel = 0;
-                    nivel = 0;
-                } else {
-                    break;
-                }
-            } else {
-                if (listaEdificiosKeys.contains(++counterMaximos)) {
-                    id = counterMaximos;
-                } else {
-                    noEsUnaParcela = false;
-                }
-            }
-        } while (noEsUnaParcela);
-        //FIN BLOQUE
-        return vBoxList;
+    private static VBox cajaEdificio(boolean parcela, Edificio edificio, int tipoDeBoton) {
+        return cajaEdificio(parcela, edificio.getEdificiosPreCargado(), tipoDeBoton);
     }
+
+    private static VBox cajaEdificio(boolean parcela, EdificiosPreCargados edificio, int tipoDeBoton) {
+
+        //BLOQUE
+        VBox vBoxBloquePropio = new VBox();
+        vBoxBloquePropio.setMinWidth(200);
+        vBoxBloquePropio.setMaxWidth(200);
+        vBoxBloquePropio.setAlignment(TOP_CENTER);
+        vBoxBloquePropio.setBackground(new Background(new BackgroundFill(Color.ANTIQUEWHITE, CornerRadii.EMPTY, Insets.EMPTY)));
+        ObservableList<Node> childrenVBox = vBoxBloquePropio.getChildren();
+
+        Label nombreEdificioPropio = new Label(edificio.getNombre());
+        nombreEdificioPropio.setTextAlignment(CENTER);
+        nombreEdificioPropio.setAlignment(Pos.CENTER);
+        nombreEdificioPropio.setWrapText(true);
+        childrenVBox.add(nombreEdificioPropio);
+
+        ImageView imageViewPropio = new ImageView(edificio.getImage());
+        imageViewPropio.setPickOnBounds(true);
+        imageViewPropio.setPreserveRatio(true);
+        childrenVBox.add(imageViewPropio);
+
+        Label nivelEdificioPropio = new Label("Nivel: " + edificio.getNivel());
+        nivelEdificioPropio.setTextAlignment(CENTER);
+        nivelEdificioPropio.setAlignment(Pos.CENTER);
+        nivelEdificioPropio.setWrapText(true);
+        childrenVBox.add(nivelEdificioPropio);
+
+        Label descripcionEdificioPropio = new Label(edificio.getDescripcion());
+        descripcionEdificioPropio.setTextAlignment(CENTER);
+        descripcionEdificioPropio.setAlignment(Pos.CENTER);
+        descripcionEdificioPropio.setWrapText(true);
+        childrenVBox.add(descripcionEdificioPropio);
+        vBoxBloquePropio.setMargin(descripcionEdificioPropio, new Insets(0, 15, 0, 15));
+        if (!parcela) {
+            FlowPane flowPane = new FlowPane();
+            flowPane.setHgap(10);
+            flowPane.setVgap(10);
+            flowPane.setAlignment(Pos.CENTER);
+            ObservableList<Node> childrenFlowPane = flowPane.getChildren();
+
+
+            boolean paso1 = false;
+            for (Map.Entry<Integer, Recursos> recurso : edificio.getRecursosProductores().entrySet()) {
+                Recursos recursoValor = recurso.getValue();
+                int produce = recursoValor.getCantidad();
+                if (produce != 0) {
+                    ImageView imageView = new ImageView(recursoValor.getImage());
+                    imageView.setFitWidth(25);
+                    imageView.setFitHeight(25);
+                    Label label = new Label();
+                    if (produce > 0) {
+                        label.setText("+" + produce+"/h");
+                        label.setTextFill(Color.GREEN);
+                    } else if (produce < 0) {
+                        label.setText(String.valueOf(produce));
+                        label.setTextFill(Color.RED);
+                    }
+                    label.setGraphic(imageView);
+                    label.setTextAlignment(CENTER);
+                    label.setAlignment(Pos.CENTER);
+                    label.setWrapText(true);
+                    childrenFlowPane.add(label);
+                    paso1 = true;
+                }
+            }
+            if (paso1) {
+                Separator separator = new Separator();
+                separator.setPrefWidth(200);
+                childrenFlowPane.add(separator);
+            }
+            boolean paso2 = false;
+            for (Map.Entry<Integer, Recursos> recurso : edificio.getRecursosAlmacen().entrySet()) {
+                Recursos recursoValor = recurso.getValue();
+                int almacena = recursoValor.getCantidad();
+                if (almacena != 0) {
+                    ImageView imageView = new ImageView(recursoValor.getImage());
+                    imageView.setFitWidth(25);
+                    imageView.setFitHeight(25);
+                    Label label = new Label();
+                    label.setText(String.valueOf(almacena));
+                    label.setGraphic(imageView);
+                    label.setTextAlignment(CENTER);
+                    label.setAlignment(Pos.CENTER);
+                    label.setWrapText(true);
+                    childrenFlowPane.add(label);
+                    paso2 = true;
+                }
+            }
+            if (paso2) {
+                Separator separator = new Separator();
+                separator.setPrefWidth(200);
+                childrenFlowPane.add(separator);
+            }
+            vBoxBloquePropio.setMargin(flowPane, new Insets(0, 15, 0, 15));
+            childrenVBox.add(flowPane);
+            String text = null;
+            switch (tipoDeBoton) {
+                case 1:
+                    text = "Construir";
+                    break;
+                case 2:
+                    text = "Update";
+                    break;
+                case 3:
+                    text = "Downgrade";
+                    break;
+                case 4:
+                    text = "Destruir";
+                    break;
+            }
+            if (tipoDeBoton != 0) {
+                Button button = new Button(text);
+                childrenVBox.add(button);
+                Separator separator = new Separator();
+                separator.setPrefWidth(200);
+                childrenVBox.add(separator);
+            }
+
+        }
+        //FIN BLOQUE
+        return vBoxBloquePropio;
+    }
+
 
     public void toMundo(MouseEvent mouseEvent) {
         try {
-            new PrimaryStageControler().reload(getStage(),"juego/mapas/Mundo/mundo.fxml",false);
+            new PrimaryStageControler().reload(getStage(), "juego/mapas/Mundo/mundo.fxml", false);
         } catch (IOException ex) {
             ex.printStackTrace();
         }

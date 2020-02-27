@@ -8,7 +8,7 @@ import java.util.Objects;
 import java.util.TreeMap;
 
 import static main.java.Jugadores.Jugador.listaEdificiosKeys;
-import static main.java.Jugadores.Jugador.EdificiosPreCargada;
+import static main.java.Jugadores.Jugador.listaEdificiosPreCargados;
 
 //https://github.com/k33ptoo/JavaFX-MySQL-Login
 public class EdificiosPreCargados implements ImageGetter {
@@ -67,7 +67,7 @@ public class EdificiosPreCargados implements ImageGetter {
         this.imagePath = resultado;
         this.imageClicablePath = resultado + "@clic";
 
-        EdificiosPreCargada.put(id+"_"+nivel,this);
+        listaEdificiosPreCargados.put(id+"_"+nivel,this);
         listaEdificiosKeys.add(id);
     }
 

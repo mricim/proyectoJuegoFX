@@ -17,7 +17,6 @@ public class Edificio extends Posiciones implements Cloneable {
 
     public Edificio(EdificiosPreCargados edificioPreCargado, int filas, int columnas, Ciudad ciudad) {
         super(filas,columnas);
-        System.out.println("2222222222222 "+edificioPreCargado);
         this.id = edificioPreCargado.getId();
         this.nivel = edificioPreCargado.getNivel();
         this.edificiosPreCargado = edificioPreCargado;
