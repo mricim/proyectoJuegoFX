@@ -198,9 +198,10 @@ public class CiudadController extends PrimaryStageControler implements Initializ
                     vBoxList.add(cajaEdificio(false, listaEdificiosPreCargados.get(edificioId + "_" + (edificioNivel + 1)), 2));
                 } catch (Exception e) {
                 }
-                if (edificio.getEdificiosPreCargado().isDestruible()){
-                vBoxList.add(cajaEdificio(false, listaEdificiosPreCargados.get(0 + "_" + 0), 4));
-            }}
+                if (edificio.getEdificiosPreCargado().isDestruible()) {
+                    vBoxList.add(cajaEdificio(false, listaEdificiosPreCargados.get(0 + "_" + 0), 4));
+                }
+            }
 
 
         } else {//PARCELAS
@@ -218,8 +219,8 @@ public class CiudadController extends PrimaryStageControler implements Initializ
             for (Map.Entry<String, EdificiosPreCargados> preCargadosEntry : listaEdificiosPreCargados.entrySet()) {
                 EdificiosPreCargados temp = preCargadosEntry.getValue();
                 if (temp.getNivel() == 0 && temp.isConstruible() && ciudad.getNivelCiudad() >= temp.getNivelCastilloNecesario()) {
-                    System.out.println(temp.getNombre()+" "+temp.getNivel()+" "+temp.isConstruible() +" "+ ciudad.getNivelCiudad() +" "+ temp.getNivelCastilloNecesario());
-                    System.out.println(temp.getNombre()+" "+counterTiposDeEdificioEnLaCiudad.get(temp.getId())+" "+counterTiposDeEdificioEnLaCiudad.get(temp.getId())+">"+temp.getMaximoEdificiosDelMismoTipo());
+                    System.out.println(temp.getNombre() + " " + temp.getNivel() + " " + temp.isConstruible() + " " + ciudad.getNivelCiudad() + " " + temp.getNivelCastilloNecesario());
+                    System.out.println(temp.getNombre() + " " + counterTiposDeEdificioEnLaCiudad.get(temp.getId()) + " " + counterTiposDeEdificioEnLaCiudad.get(temp.getId()) + ">" + temp.getMaximoEdificiosDelMismoTipo());
                     if (counterTiposDeEdificioEnLaCiudad.get(temp.getId()) == null || counterTiposDeEdificioEnLaCiudad.get(temp.getId()) < temp.getMaximoEdificiosDelMismoTipo()) {
                         vBoxList.add(cajaEdificio(false, temp, 1));
                     }
@@ -292,58 +293,12 @@ public class CiudadController extends PrimaryStageControler implements Initializ
             ObservableList<Node> childrenFlowPane = flowPane.getChildren();
 
 
-            boolean paso1 = false;
-            for (Map.Entry<Integer, Recursos> recurso : edificio.getRecursosProductores().entrySet()) {
-                Recursos recursoValor = recurso.getValue();
-                int produce = recursoValor.getCantidad();
-                if (produce != 0) {
-                    ImageView imageView = new ImageView(recursoValor.getImage());
-                    imageView.setFitWidth(25);
-                    imageView.setFitHeight(25);
-                    Label label = new Label();
-                    if (produce > 0) {
-                        label.setText("+" + produce+"/h");
-                        label.setTextFill(Color.GREEN);
-                    } else if (produce < 0) {
-                        label.setText(String.valueOf(produce));
-                        label.setTextFill(Color.RED);
-                    }
-                    label.setGraphic(imageView);
-                    label.setTextAlignment(CENTER);
-                    label.setAlignment(Pos.CENTER);
-                    label.setWrapText(true);
-                    childrenFlowPane.add(label);
-                    paso1 = true;
-                }
+            printRecursos(childrenFlowPane, edificio.getRecursosProductores().entrySet(), 1);
+            printRecursos(childrenFlowPane, edificio.getRecursosAlmacen().entrySet(), 2);
+            if (tipoDeBoton == 1 || tipoDeBoton == 2) {
+                printRecursos(childrenFlowPane, edificio.getRecursosCostes().entrySet(), 3);
             }
-            if (paso1) {
-                Separator separator = new Separator();
-                separator.setPrefWidth(200);
-                childrenFlowPane.add(separator);
-            }
-            boolean paso2 = false;
-            for (Map.Entry<Integer, Recursos> recurso : edificio.getRecursosAlmacen().entrySet()) {
-                Recursos recursoValor = recurso.getValue();
-                int almacena = recursoValor.getCantidad();
-                if (almacena != 0) {
-                    ImageView imageView = new ImageView(recursoValor.getImage());
-                    imageView.setFitWidth(25);
-                    imageView.setFitHeight(25);
-                    Label label = new Label();
-                    label.setText(String.valueOf(almacena));
-                    label.setGraphic(imageView);
-                    label.setTextAlignment(CENTER);
-                    label.setAlignment(Pos.CENTER);
-                    label.setWrapText(true);
-                    childrenFlowPane.add(label);
-                    paso2 = true;
-                }
-            }
-            if (paso2) {
-                Separator separator = new Separator();
-                separator.setPrefWidth(200);
-                childrenFlowPane.add(separator);
-            }
+
             vBoxBloquePropio.setMargin(flowPane, new Insets(0, 15, 0, 15));
             childrenVBox.add(flowPane);
             String text = null;
@@ -372,6 +327,49 @@ public class CiudadController extends PrimaryStageControler implements Initializ
         }
         //FIN BLOQUE
         return vBoxBloquePropio;
+    }
+
+    private static void printRecursos(ObservableList<Node> childrenFlowPane, Set<Map.Entry<Integer, Recursos>> a, int produceAlmacenaCuesta) {
+        boolean paso1 = false;
+        for (Map.Entry<Integer, Recursos> recurso : a) {
+            Recursos recursoValor = recurso.getValue();
+            int numero = recursoValor.getCantidad();
+            if (numero != 0) {
+                ImageView imageView = new ImageView(recursoValor.getImage());
+                imageView.setFitWidth(25);
+                imageView.setFitHeight(25);
+                Label label = new Label();
+                switch (produceAlmacenaCuesta) {
+                    case 1:
+                        if (numero > 0) {
+                            label.setText("+" + numero + "/h");
+                            label.setTextFill(Color.GREEN);
+                        } else if (numero < 0) {
+                            label.setText(numero + "/h");
+                            label.setTextFill(Color.RED);
+                        }
+                        break;
+                    case 2:
+                        label.setText(String.valueOf(numero));
+                        break;
+                    case 3:
+                        label.setText("-" + numero);
+                        label.setTextFill(Color.RED);
+                        break;
+                }
+                label.setGraphic(imageView);
+                label.setTextAlignment(CENTER);
+                label.setAlignment(Pos.CENTER);
+                label.setWrapText(true);
+                childrenFlowPane.add(label);
+                paso1 = true;
+            }
+        }
+        if (paso1) {
+            Separator separator = new Separator();
+            separator.setPrefWidth(200);
+            childrenFlowPane.add(separator);
+        }
     }
 
 

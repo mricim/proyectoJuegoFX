@@ -52,7 +52,7 @@ public class Main extends Application {
             }
         });
         Parent root = loader.load();
-        primaryStage.setTitle("Hello World");
+        primaryStage.setTitle("Nombre del juego");
         Scene scene = new Scene(root);
         //scene.getStylesheets().add("main.resources/style/styles.css");
         primaryStage.setScene(scene);
