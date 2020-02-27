@@ -8,13 +8,15 @@ public class Batallon extends Posiciones {
     private HashMap<String, Soldados> SoldadoHashMap = new HashMap<>();
     private int idBatallon;
     private String nombre;
+    private int proyectiles;//TODO MAS QUE PROYECTILES SERIA COMO RACIONES O MUNICIONES O ALGO ASI
     private double poderMilitar;
 
 
-    public Batallon(int idBatallon, String nombre, int filas, int columnas) {
+    public Batallon(int idBatallon, String nombre, int filas, int columnas,int proyectiles) {
         super(filas, columnas);
         this.idBatallon = idBatallon;
         this.nombre = nombre;
+        this.proyectiles=proyectiles;
     }
 
     public int getIdBatallon() {

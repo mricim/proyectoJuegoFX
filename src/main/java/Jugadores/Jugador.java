@@ -58,11 +58,11 @@ public class Jugador {
             //TODO DESDE LA BD
             Soldados soldados1=new Soldados(1, SoldadosPreCargada.get(0), 100, 5, 0, 0);
             Soldados soldados2=new Soldados(2, SoldadosPreCargada.get(0), 100, 0, 0, 0);
-            Batallon batallon1=new Batallon(1,"nope",1,1);
+            Batallon batallon1=new Batallon(1,"nope",1,1,400);
             batallon1.setSoldadoHashMap(soldados1);
             batallon1.setSoldadoHashMap(soldados2);
 
-            Batallon batallon2=new Batallon(2,"nope",5,5);
+            Batallon batallon2=new Batallon(2,"nope",5,5,20);
             Soldados soldados3=new Soldados(3, SoldadosPreCargada.get(3), 100, 100, 0, 0);
             Soldados soldados4=new Soldados(4, SoldadosPreCargada.get(0), 100, 5, 0, 0);
             batallon2.setSoldadoHashMap(soldados3);
