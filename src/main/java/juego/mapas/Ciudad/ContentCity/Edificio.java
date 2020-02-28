@@ -56,6 +56,12 @@ public class Edificio extends Posiciones implements Cloneable {
         return edificiosPreCargado;
     }
 
+    public void setEdificiosPreCargado(EdificiosPreCargados edificiosPreCargado) {
+        this.id = edificiosPreCargado.getId();
+        this.nivel = edificiosPreCargado.getNivel();
+        this.edificiosPreCargado = edificiosPreCargado;
+    }
+
     public Image getImage() {
         return edificiosPreCargado.getImage();
     }

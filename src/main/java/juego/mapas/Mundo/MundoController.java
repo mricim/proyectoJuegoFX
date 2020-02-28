@@ -15,6 +15,7 @@ import java.util.*;
 
 public class MundoController extends PrimaryStageControler implements Initializable {
     private static String RUTE = "../../../resources/mapas/city/";
+    public static final String THIS_RUTE ="juego/mapas/Mundo/mundo.fxml";
     static Jugador jugador;
     static boolean basura = true;
 

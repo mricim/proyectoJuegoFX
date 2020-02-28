@@ -40,13 +40,13 @@ public class PrimaryStageControler {
     }
 
 
-    protected Stage stage;
+    protected static Stage stage;
 
-    public void setPrimaryStage(Stage primaryStage) {
-        this.stage = primaryStage;
+    public static void setPrimaryStage(Stage primaryStage) {
+       stage = primaryStage;
     }
 
-    public Stage getStage() {
+    public static Stage getStage() {
         return stage;
     }
 
@@ -64,8 +64,10 @@ public class PrimaryStageControler {
         FXMLLoader loader;
 
         if (fxmlLoaderHashMap.containsKey(rute)) {
+            System.out.println("TENEMOS");
             loader = fxmlLoaderHashMap.get(rute);
         } else {
+            System.out.println("NO TENEMOS");
             loader = new FXMLLoader();
             //URL url = getClass().getResource("/main/java/juego/mapas/Ciudad/ciudad.fxml");
             loader.setLocation(Paths.get(RUTE + rute).toUri().toURL());
@@ -80,12 +82,14 @@ public class PrimaryStageControler {
                     throw new RuntimeException(e);
                 }
             });
+            //TODO fxmlLoaderHashMap.put(rute,loader);
         }
         Parent root = loader.load();
         primaryStage.getScene().setRoot(root);
         if (primaryStage.isMaximized()) {
             setMaximized = true;
         }
+
         primaryStage.setMaximized(setMaximized);//Pone el Stage en maximizado
     }
 }

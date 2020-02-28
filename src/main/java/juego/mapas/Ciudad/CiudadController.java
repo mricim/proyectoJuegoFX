@@ -16,6 +16,7 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import main.java.Jugadores.Jugador;
 import main.java.Utils.PrimaryStageControler;
+import main.java.juego.mapas.Mundo.MundoController;
 import main.java.juego.mapas.Recursos;
 import main.java.juego.mapas.Ciudad.ContentCity.Edificio;
 
@@ -32,6 +33,7 @@ import static main.java.Jugadores.Jugador.*;
 
 public class CiudadController extends PrimaryStageControler implements Initializable {
     private static String RUTE = "../../../resources/mapas/city/";
+    public static final String THIS_RUTE = "juego/mapas/Ciudad/ciudad.fxml";
     static Jugador jugador;
     static boolean basura = true;
     static Ciudad ciudad;
@@ -77,7 +79,7 @@ public class CiudadController extends PrimaryStageControler implements Initializ
         gridPaneMap.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {//Cerrar el menu
 //            System.out.println("Limpiar menu izquierda");
 //            borderPane.setLeft(null);
-            queClicas(null);
+            queClicas(null, null);
         });
 
 
@@ -88,10 +90,9 @@ public class CiudadController extends PrimaryStageControler implements Initializ
                 MenuItem menuItem = new MenuItem();
                 menuItem.setText(nameCity);
                 menuItem.setOnAction((e) -> {
-                    System.out.println("clicado " + nameCity);//TODO CAMBIAR ESTO POR LA NUEVA CIUDAD
                     setCiudad(ciudadTemp);
                     try {
-                        new PrimaryStageControler().reload(getStage(), "juego/mapas/Ciudad/ciudad.fxml", false);
+                        new PrimaryStageControler().reload(getStage(), THIS_RUTE, false);
                     } catch (IOException ex) {
                         ex.printStackTrace();
                     }
@@ -119,12 +120,8 @@ public class CiudadController extends PrimaryStageControler implements Initializ
 */
 
         Collection<Edificio> posicionEdificios = getCiudad().getListaPosicionesEdificios().values();
-        for (Edificio posicionEdificio : posicionEdificios) {
-//            Edificio edificio = posicionEdificio.getEdificio();
-//            int idEdificio = edificio.getId();
-//            int nivelEdificio = edificio.getNivel();
-
-            Image image = posicionEdificio.getImage();
+        for (Edificio edificio : posicionEdificios) {
+            Image image = edificio.getImage();
             ImageView imageView = new ImageView(image);
             imageView.addEventHandler(MouseEvent.MOUSE_ENTERED, event -> {
                 imageView.setCursor(Cursor.HAND);
@@ -133,7 +130,7 @@ public class CiudadController extends PrimaryStageControler implements Initializ
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-                imageView.setImage(posicionEdificio.getImageClicable());
+                imageView.setImage(edificio.getImageClicable());
             });
             imageView.addEventHandler(MouseEvent.MOUSE_EXITED, event -> {
                 try {
@@ -141,12 +138,12 @@ public class CiudadController extends PrimaryStageControler implements Initializ
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-                imageView.setImage(posicionEdificio.getImage());
+                imageView.setImage(edificio.getImage());
             });
             imageView.setOnMouseClicked(e -> {
-                queClicas(posicionEdificio);//System.out.println("Imagen Edificio clicada: " + listaEdificios.get(idEdificio + "_" + nivelEdificio));
+                queClicas(edificio, imageView);//System.out.println("Imagen Edificio clicada: " + listaEdificios.get(idEdificio + "_" + nivelEdificio));
             });
-            gridPaneMap.add(imageView, posicionEdificio.getColumnas(), posicionEdificio.getFilas());
+            gridPaneMap.add(imageView, edificio.getColumnas(), edificio.getFilas());
         }
     }
 
@@ -157,8 +154,8 @@ public class CiudadController extends PrimaryStageControler implements Initializ
         System.out.println("COSASA");
     }
 
-    private void queClicas(Edificio posicionEdificio) {
-        if (basura) {
+    private void queClicas(Edificio posicionEdificio, ImageView imageView) {
+        if (basura) {//BLOQUEA UN MOMENTO EL SISTEMA DE CLIC PARA QUE CARGE EL MENU Y NO LO BORRE
             if (posicionEdificio == null) {
                 borderPane.setLeft(null);//System.out.println("Limpiar menu izquierda");
             } else {
@@ -173,12 +170,12 @@ public class CiudadController extends PrimaryStageControler implements Initializ
                         }
                     }
                 }).start();
-                createMenuLeft(borderPane, posicionEdificio);
+                createMenuLeft(borderPane, posicionEdificio, imageView);
             }
         }
     }
 
-    private static void createMenuLeft(BorderPane borderPane, Edificio edificio) {
+    private void createMenuLeft(BorderPane borderPane, Edificio edificio, ImageView imageView) {
         //EdificiosPreCargados edificiosPreCargados = listaEdificiosPreCargada.get(edificio.getId() + "_" + edificio.getNivel());
 //        EdificiosPreCargados edificiosPreCargado = edificio.getEdificiosPreCargados();
         List<VBox> vBoxList = new ArrayList<>();
@@ -186,20 +183,20 @@ public class CiudadController extends PrimaryStageControler implements Initializ
         int edificioId = edificio.getId();
         int edificioNivel = edificio.getNivel();
         if (edificioId != 0) {// NO PARCELA
-            vBoxList.add(cajaEdificio(false, edificio, 0));
+            vBoxList.add(cajaEdificio(edificio, imageView, false, edificio.getEdificiosPreCargado(), 0));
             if (edificioNivel > 0) {
                 try {
-                    vBoxList.add(cajaEdificio(false, listaEdificiosPreCargados.get(edificioId + "_" + (edificioNivel + 1)), 2));
+                    vBoxList.add(cajaEdificio(edificio, imageView, false, listaEdificiosPreCargados.get(edificioId + "_" + (edificioNivel + 1)), 2));
                 } catch (Exception e) {
                 }
-                vBoxList.add(cajaEdificio(false, listaEdificiosPreCargados.get(edificioId + "_" + (edificioNivel - 1)), 3));
+                vBoxList.add(cajaEdificio(edificio, imageView, false, listaEdificiosPreCargados.get(edificioId + "_" + (edificioNivel - 1)), 3));
             } else {
                 try {
-                    vBoxList.add(cajaEdificio(false, listaEdificiosPreCargados.get(edificioId + "_" + (edificioNivel + 1)), 2));
+                    vBoxList.add(cajaEdificio(edificio, imageView, false, listaEdificiosPreCargados.get(edificioId + "_" + (edificioNivel + 1)), 2));
                 } catch (Exception e) {
                 }
                 if (edificio.getEdificiosPreCargado().isDestruible()) {
-                    vBoxList.add(cajaEdificio(false, listaEdificiosPreCargados.get(0 + "_" + 0), 4));
+                    vBoxList.add(cajaEdificio(edificio, imageView, false, listaEdificiosPreCargados.get(0 + "_" + 0), 4));
                 }
             }
 
@@ -215,14 +212,14 @@ public class CiudadController extends PrimaryStageControler implements Initializ
                     counterTiposDeEdificioEnLaCiudad.put(id, 1);
                 }
             }
-            vBoxList.add(cajaEdificio(true, edificio, 0));
+            vBoxList.add(cajaEdificio(edificio, imageView, true, edificio.getEdificiosPreCargado(), 0));
             for (Map.Entry<String, EdificiosPreCargados> preCargadosEntry : listaEdificiosPreCargados.entrySet()) {
                 EdificiosPreCargados temp = preCargadosEntry.getValue();
                 if (temp.getNivel() == 0 && temp.isConstruible() && ciudad.getNivelCiudad() >= temp.getNivelCastilloNecesario()) {
-                    System.out.println(temp.getNombre() + " " + temp.getNivel() + " " + temp.isConstruible() + " " + ciudad.getNivelCiudad() + " " + temp.getNivelCastilloNecesario());
-                    System.out.println(temp.getNombre() + " " + counterTiposDeEdificioEnLaCiudad.get(temp.getId()) + " " + counterTiposDeEdificioEnLaCiudad.get(temp.getId()) + ">" + temp.getMaximoEdificiosDelMismoTipo());
+//                    System.out.println(temp.getNombre() + " " + temp.getNivel() + " " + temp.isConstruible() + " " + ciudad.getNivelCiudad() + " " + temp.getNivelCastilloNecesario());
+//                    System.out.println(temp.getNombre() + " " + counterTiposDeEdificioEnLaCiudad.get(temp.getId()) + " " + counterTiposDeEdificioEnLaCiudad.get(temp.getId()) + ">" + temp.getMaximoEdificiosDelMismoTipo());
                     if (counterTiposDeEdificioEnLaCiudad.get(temp.getId()) == null || counterTiposDeEdificioEnLaCiudad.get(temp.getId()) < temp.getMaximoEdificiosDelMismoTipo()) {
-                        vBoxList.add(cajaEdificio(false, temp, 1));
+                        vBoxList.add(cajaEdificio(edificio, imageView, false, temp, 1));
                     }
                 }
             }
@@ -248,11 +245,7 @@ public class CiudadController extends PrimaryStageControler implements Initializ
         borderPane.setLeft(scrollPane);
     }
 
-    private static VBox cajaEdificio(boolean parcela, Edificio edificio, int tipoDeBoton) {
-        return cajaEdificio(parcela, edificio.getEdificiosPreCargado(), tipoDeBoton);
-    }
-
-    private static VBox cajaEdificio(boolean parcela, EdificiosPreCargados edificio, int tipoDeBoton) {
+    private VBox cajaEdificio(Edificio edificioQueEstaEnElMapa, ImageView imageView, boolean parcela, EdificiosPreCargados edificioQueSaleEnMenu, int tipoDeBoton) {
 
         //BLOQUE
         VBox vBoxBloquePropio = new VBox();
@@ -262,24 +255,24 @@ public class CiudadController extends PrimaryStageControler implements Initializ
         vBoxBloquePropio.setBackground(new Background(new BackgroundFill(Color.ANTIQUEWHITE, CornerRadii.EMPTY, Insets.EMPTY)));
         ObservableList<Node> childrenVBox = vBoxBloquePropio.getChildren();
 
-        Label nombreEdificioPropio = new Label(edificio.getNombre());
+        Label nombreEdificioPropio = new Label(edificioQueSaleEnMenu.getNombre());
         nombreEdificioPropio.setTextAlignment(CENTER);
         nombreEdificioPropio.setAlignment(Pos.CENTER);
         nombreEdificioPropio.setWrapText(true);
         childrenVBox.add(nombreEdificioPropio);
 
-        ImageView imageViewPropio = new ImageView(edificio.getImage());
+        ImageView imageViewPropio = new ImageView(edificioQueSaleEnMenu.getImage());
         imageViewPropio.setPickOnBounds(true);
         imageViewPropio.setPreserveRatio(true);
         childrenVBox.add(imageViewPropio);
 
-        Label nivelEdificioPropio = new Label("Nivel: " + edificio.getNivel());
+        Label nivelEdificioPropio = new Label("Nivel: " + edificioQueSaleEnMenu.getNivel());
         nivelEdificioPropio.setTextAlignment(CENTER);
         nivelEdificioPropio.setAlignment(Pos.CENTER);
         nivelEdificioPropio.setWrapText(true);
         childrenVBox.add(nivelEdificioPropio);
 
-        Label descripcionEdificioPropio = new Label(edificio.getDescripcion());
+        Label descripcionEdificioPropio = new Label(edificioQueSaleEnMenu.getDescripcion());
         descripcionEdificioPropio.setTextAlignment(CENTER);
         descripcionEdificioPropio.setAlignment(Pos.CENTER);
         descripcionEdificioPropio.setWrapText(true);
@@ -293,35 +286,59 @@ public class CiudadController extends PrimaryStageControler implements Initializ
             ObservableList<Node> childrenFlowPane = flowPane.getChildren();
 
 
-            printRecursos(childrenFlowPane, edificio.getRecursosProductores().entrySet(), 1);
-            printRecursos(childrenFlowPane, edificio.getRecursosAlmacen().entrySet(), 2);
+            printRecursos(childrenFlowPane, edificioQueSaleEnMenu.getRecursosProductores().entrySet(), 1);
+            printRecursos(childrenFlowPane, edificioQueSaleEnMenu.getRecursosAlmacen().entrySet(), 2);
             if (tipoDeBoton == 1 || tipoDeBoton == 2) {
-                printRecursos(childrenFlowPane, edificio.getRecursosCostes().entrySet(), 3);
+                printRecursos(childrenFlowPane, edificioQueSaleEnMenu.getRecursosCostes().entrySet(), 3);
             }
 
             vBoxBloquePropio.setMargin(flowPane, new Insets(0, 15, 0, 15));
             childrenVBox.add(flowPane);
-            String text = null;
-            switch (tipoDeBoton) {
-                case 1:
-                    text = "Construir";
-                    break;
-                case 2:
-                    text = "Update";
-                    break;
-                case 3:
-                    text = "Downgrade";
-                    break;
-                case 4:
-                    text = "Destruir";
-                    break;
-            }
             if (tipoDeBoton != 0) {
+                String text = null;
+                switch (tipoDeBoton) {
+                    case 1:
+                        text = "Construir";
+                        break;
+                    case 2:
+                        text = "Update";
+                        break;
+                    case 3:
+                        text = "Downgrade";
+                        break;
+                    case 4:
+                        text = "Destruir";
+                        break;
+                }
+
                 Button button = new Button(text);
+                if (tipoDeBoton == 1 || tipoDeBoton == 2) {//CALCULAR RECURSOS
+                    for (Recursos edificioCostes : edificioQueSaleEnMenu.getRecursosCostes().values()) {
+                        int id = edificioCostes.getId();
+                        if ((!(id == 5)) && edificioCostes.getCantidad() > ciudad.getRecursosTreeMap().get(edificioCostes.getId()).getCantidad()) {
+                            button.setDisable(true);
+                            break;
+                        }
+                    }
+
+                }//FIN CALCULAR RECURSOS
+                button.setCursor(Cursor.HAND);
+                button.setOnMouseClicked(e -> {
+                    edificioQueEstaEnElMapa.setEdificiosPreCargado(edificioQueSaleEnMenu);
+                    imageView.setImage(edificioQueEstaEnElMapa.getImage());
+                    borderPane.setLeft(null);
+//                    try {
+//                        new PrimaryStageControler().reload(getStage(), THIS_RUTE, false);
+//                    } catch (IOException ex) {
+//                        ex.printStackTrace();
+//                    }
+                });
+
                 childrenVBox.add(button);
                 Separator separator = new Separator();
                 separator.setPrefWidth(200);
                 childrenVBox.add(separator);
+
             }
 
         }
@@ -329,7 +346,7 @@ public class CiudadController extends PrimaryStageControler implements Initializ
         return vBoxBloquePropio;
     }
 
-    private static void printRecursos(ObservableList<Node> childrenFlowPane, Set<Map.Entry<Integer, Recursos>> a, int produceAlmacenaCuesta) {
+    private void printRecursos(ObservableList<Node> childrenFlowPane, Set<Map.Entry<Integer, Recursos>> a, int produceAlmacenaCuesta) {
         boolean paso1 = false;
         for (Map.Entry<Integer, Recursos> recurso : a) {
             Recursos recursoValor = recurso.getValue();
@@ -375,7 +392,7 @@ public class CiudadController extends PrimaryStageControler implements Initializ
 
     public void toMundo(MouseEvent mouseEvent) {
         try {
-            new PrimaryStageControler().reload(getStage(), "juego/mapas/Mundo/mundo.fxml", false);
+            new PrimaryStageControler().reload(getStage(), MundoController.THIS_RUTE, false);
         } catch (IOException ex) {
             ex.printStackTrace();
         }

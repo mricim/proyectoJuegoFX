@@ -22,6 +22,9 @@ public class Recursos implements ImageGetter {
         getImage();
     }
 
+    public int getId() {
+        return id;
+    }
 
     public int getCantidad() {
         return cantidad;

@@ -5,6 +5,7 @@ import javafx.scene.control.ProgressBar;
 import javafx.scene.input.MouseEvent;
 import main.java.Jugadores.Jugador;
 import main.java.Utils.PrimaryStageControler;
+import main.java.juego.mapas.Ciudad.CiudadController;
 import main.java.juego.mapas.Ciudad.EdificiosPreCargados;
 import main.java.juego.mapas.Pelea.SoldadosPreCargados;
 import main.java.login.LoginHiperFalso;
@@ -44,7 +45,7 @@ public class Controller extends PrimaryStageControler implements Initializable {
         callbd();
         progresBar.setProgress(100);
         try {
-            new PrimaryStageControler().reload(getStage(), "juego/mapas/Ciudad/ciudad.fxml", true);
+            new PrimaryStageControler().reload(getStage(), CiudadController.THIS_RUTE, true);
         } catch (IOException ex) {
             ex.printStackTrace();
         }
@@ -59,10 +60,10 @@ public class Controller extends PrimaryStageControler implements Initializable {
         new EdificiosPreCargados(2, "Muralla", "XXXXXXXXXXX", false, false, 2, 0, 0, 99, 99, 99, 20, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
         new EdificiosPreCargados(2, "Muralla", "XXXXXXXXXXX", false, false, 2, 1, 0, 99, 99, 99, 20, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
         progresBar.setProgress(20);
-        new EdificiosPreCargados(10, "Almacen", "XXXXXXXXXXX", true, true, 2, 0, -1, 99, 99, 99, 99, 10, 0, 0, 0, 0, 0, 0, 0, 1000, 1000, 1000, 1000, 1000);
+        new EdificiosPreCargados(10, "Almacen", "XXXXXXXXXXX", true, true, 2, 0, -1, 99, 19, 25, 30, 10, 0, 0, 0, 0, 0, 0, 0, 1000, 1000, 1000, 1000, 1000);
         new EdificiosPreCargados(11, "Centro cientifico", "NONE", true, true, 1, 0, 0, 99, 99, 99, 20, 10, 10, 10, 10, 10, 10, 10, 50, 0, 0, 0, 0, 0);
-        new EdificiosPreCargados(12, "Lupas", "XXXXXXXXXXX", true, true, 3, 0, 0, 99, 99, 99, 20, 10, 10, 10, 10, 10, 10, 10, -50, 0, 0, 0, 0, 0);
-        new EdificiosPreCargados(12, "Lupas", "XXXXXXXXXXX", true, true, 3, 1, 0, 99, 99, 99, 20, 10, 10, 10, 10, 10, 10, 10, -50, 0, 0, 0, 0, 0);
+        new EdificiosPreCargados(12, "Lupas", "XXXXXXXXXXX", true, true, 2, 0, 0, 99, 99, 99, 20, 10, 10, 10, 10, 10, 10, 10, -50, 0, 0, 0, 0, 0);
+        new EdificiosPreCargados(12, "Lupas", "XXXXXXXXXXX", true, true, 2, 1, 0, 99, 99, 99, 20, 10, 10, 10, 10, 10, 10, 10, -50, 0, 0, 0, 0, 0);
         new EdificiosPreCargados(13, "Palacio", "NONE", true, true, 1, 0, 0, 99, 99, 99, 20, 10, 10, 10, 10, 10, 10, 10, 50, 0, 0, 0, 0, 0);
         new EdificiosPreCargados(14, "Maquinas de guerra", "NONE", true, true, 1, 0, 0, 99, 99, 99, 20, 10, 10, 10, 10, 10, 10, 10, 50, 0, 0, 0, 0, 0);
         progresBar.setProgress(30);

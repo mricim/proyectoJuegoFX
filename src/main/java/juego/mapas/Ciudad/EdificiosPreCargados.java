@@ -46,7 +46,7 @@ public class EdificiosPreCargados implements ImageGetter {
         recursosCostes.put(1, new Recursos(1, costeMadera));
         recursosCostes.put(2, new Recursos(2, costePiedra));
         recursosCostes.put(3, new Recursos(3, costehierro));
-        recursosCostes.put(5, new Recursos(7, TrabajadoresXminMaximos));
+        recursosCostes.put(5, new Recursos(5, TrabajadoresXminMaximos));
         //PRODUCTORES
         recursosProductores.put(0, new Recursos(0, costeOroXmin));
         recursosProductores.put(1, new Recursos(1, produceMaderaXmin));
