@@ -142,16 +142,10 @@ prefHeight="${screen.visualBounds.height}" prefWidth="${screen.visualBounds.widt
     <center>
         <ScrollPane hbarPolicy="NEVER" pannable="true" prefHeight="600.0" prefWidth="800.0" vbarPolicy="NEVER" BorderPane.alignment="CENTER">
             <content>
-                <StackPane>
-                    <children>
-                        <ImageView fx:id="imagenDeFondo">
-                            <image>
-                                <Image url="@../../../../resources/images/mapas/NarniaMap.jpg" /><!-- https://gist.github.com/jewelsea/5032398 -->
-                            </image>
-                        </ImageView>
+
                   <!--AQUI GRIDPANE-->
-                    </children>
-                </StackPane>
+                <GridPane fx:id="gridPaneMap" gridLinesVisible="true">
+                </GridPane>
             </content>
         </ScrollPane>
     </center>

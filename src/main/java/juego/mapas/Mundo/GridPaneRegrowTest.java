@@ -5,22 +5,30 @@ import javafx.application.Application;
 import javafx.geometry.HPos;
 import javafx.geometry.Pos;
 import javafx.geometry.VPos;
+import javafx.scene.Cursor;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.RowConstraints;
 import javafx.stage.Stage;
+import main.java.Utils.CallImages;
+import main.java.Utils.ImageGetter;
+import main.java.juego.mapas.Ciudad.Ciudad;
 
 import java.io.FileInputStream;
+import java.util.Random;
+
+import static main.java.Jugadores.Jugador.listaCiudades;
 
 public class GridPaneRegrowTest extends Application {
 
-    private static String RUTE = "src/main/resources/images/mapas/mundo/";
+    private static String RUTE = "mapas/mundo/";
 
     public static void main(String[] args) {
         launch(args);
@@ -31,9 +39,10 @@ public class GridPaneRegrowTest extends Application {
     public void start(Stage primaryStage) throws Exception {
 
         //https://stackoverflow.com/questions/54187886/dynamically-sizing-the-contents-of-a-gridpane-to-the-properties-of-their-parent
+        Ciudad ciudad1 = new Ciudad(1, "ciudad 1", 1,1, 1, 300, 20, 50, 70, 90, 40, 50);
+        Ciudad ciudad2 = new Ciudad(2, "ciudad 2", 2, 2,1, Integer.MAX_VALUE, 5000, 60000, 3000, 756123, 6584110, 53);
 
-
-        int numCiudades = 8;
+        int numCiudades = 12000;
         int tamaño = 15;
         int capacidadCiudades = 0;
         double casillasTotales = 0;
@@ -53,64 +62,83 @@ public class GridPaneRegrowTest extends Application {
         scrollPane.setContent(root);
         scrollPane.setPannable(true);
 
-        Image agua = new Image(new FileInputStream(RUTE + "agua.png"));
-        Image aguaBarco = new Image(new FileInputStream(RUTE + "aguabarquito.png"));
-        Image isla1 = new Image(new FileInputStream(RUTE + "isla1.png"));
-        Image isla2 = new Image(new FileInputStream(RUTE + "isla2.png"));
-        Image isla3 = new Image(new FileInputStream(RUTE + "isla3.png"));
-        Image isla4 = new Image(new FileInputStream(RUTE + "isla4.png"));
-        Image isla5 = new Image(new FileInputStream(RUTE + "isla5.png"));
-        Image isla6 = new Image(new FileInputStream(RUTE + "isla6.png"));
-        Image isla7 = new Image(new FileInputStream(RUTE + "isla7.png"));
-        Image isla8 = new Image(new FileInputStream(RUTE + "isla8.png"));
-        Image isla9 = new Image(new FileInputStream(RUTE + "isla9.png"));
+        Image agua = CallImages.getImage(RUTE, "agua");
+        Image aguaBarco = CallImages.getImage(RUTE, "aguabarquito");
+        Image ciudad = CallImages.getImage(RUTE, "ciudad");
+        Image isla1 = CallImages.getImage(RUTE, "isla1");
+        Image isla2 = CallImages.getImage(RUTE, "isla2");
+        Image isla3 = CallImages.getImage(RUTE, "isla3");
+        Image isla4 = CallImages.getImage(RUTE, "isla4");
+        Image isla5 = CallImages.getImage(RUTE, "isla5");
+        Image isla6 = CallImages.getImage(RUTE, "isla6");
+        Image isla7 = CallImages.getImage(RUTE, "isla7");
+        Image isla8 = CallImages.getImage(RUTE, "isla8");
+        Image isla9 = CallImages.getImage(RUTE, "isla9");
 
-        ImageView aguaImg = new ImageView(agua);
 
 
-//        for (int celdaFila = 0; celdaFila < tamaño; celdaFila++) {
-//            for (int celdaColumna = 0; celdaColumna < tamaño; celdaColumna++) {
-//                for (int fila = 0; fila < 5; fila++) {
-//                    ColumnConstraints col = new ColumnConstraints(agua.getWidth());
-//                    root.getColumnConstraints().add(col);
-//                    for (int columna = 0; columna < 5; columna++) {
-//                        if (fila == 0) {
-//                            RowConstraints row = new RowConstraints(agua.getHeight());
-//                            root.getRowConstraints().add(row);
-//                        }
-//
-//                        if ((fila == 0 || root.getRowConstraints().size() == tamaño)||(columna == 0 || root.getColumnConstraints().size() == tamaño)){
-//
-//                            root.add(new ImageView(new Image(new FileInputStream(RUTE+"agua.png")) ),columna,fila);
-//                        }else{
-//                            root.add(new ImageView(new Image(new FileInputStream(RUTE+"isla1.png")) ),columna,fila);
-//
-//                        }
-//
-//
-//
-//                    }
-//                }
-//            }
-//        }
         for (int fila = 0; fila < tamaño; fila++) {
-            ColumnConstraints col = new ColumnConstraints(agua.getWidth());
+            ColumnConstraints col = new ColumnConstraints(100);
             root.getColumnConstraints().add(col);
             for (int columna = 0; columna < tamaño; columna++) {
+                ImageView imageView = new ImageView();
                 if (fila == 0) {
-                    RowConstraints row = new RowConstraints(agua.getHeight());
+                    RowConstraints row = new RowConstraints(100);
                     root.getRowConstraints().add(row);
                 }
 
-                if ((fila == 0 || fila == 4) || (columna == 0 || columna == 4)) {
+                if (fila % 5 == 0 || fila % 5 == 4 || columna % 5 == 0 || columna % 5 == 4) {
+                    imageView.setImage(agua);
+//                    root.add(new ImageView(CallImages.getImage(RUTE, "agua"))), columna, fila);
 
-                    root.add(new ImageView(new Image(new FileInputStream(RUTE + "agua.png"))), columna, fila);
                 } else {
-                    root.add(new ImageView(new Image(new FileInputStream(RUTE + "isla1.png"))), columna, fila);
+                    boolean containsCity = false;
+                    if (listaCiudades.containsKey(fila+"_"+columna)){
+                        containsCity = true;
+                    }
+                    if(fila%5 == 1 && columna % 5 == 1){
 
+                        if (containsCity){
+                            imageView.setImage(ciudad);
+//                            root.add(new ImageView(CallImages.getImage(RUTE, "ciudad"))), columna, fila);
+
+                        }else{
+                            imageView.setImage(isla1);
+//                            root.add(new ImageView(CallImages.getImage(RUTE, "isla1"))), columna, fila);
+
+                        }
+                    }else{
+                        if (containsCity){
+                            imageView.setImage(ciudad);
+
+//                            root.add(new ImageView(CallImages.getImage(RUTE, "ciudad"))), columna, fila);
+
+                        }else{
+                            imageView.setImage(isla2);
+//                            root.add(new ImageView(CallImages.getImage(RUTE, "isla2"))), columna, fila);
+                        }
+
+                    }
+
+                    imageView.addEventHandler(MouseEvent.MOUSE_ENTERED, event -> {
+                        imageView.setCursor(Cursor.HAND);
+                        try {
+                            Thread.sleep(100);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                    });
+                    imageView.addEventHandler(MouseEvent.MOUSE_EXITED, event -> {
+                        try {
+                            Thread.sleep(100);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                    });
                 }
 
 
+                root.add(imageView, columna, fila);
             }
         }
 
