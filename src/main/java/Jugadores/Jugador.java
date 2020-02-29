@@ -40,11 +40,11 @@ public class Jugador {
         Ciudad cargarCiudad = null;
         if (idJugador == 1) {
             //todo Se le desde la BD
-            Ciudad ciudad1 = new Ciudad(1, "ciudad 1", 1,1, 1, 300, 20, 50, 70, 90, 40, 50);
-            Ciudad ciudad2 = new Ciudad(2, "ciudad 2", 2, 2,1, Integer.MAX_VALUE, 5000, 60000, 3000, 756123, 6584110, 53);
+            Ciudad ciudad1 = new Ciudad(1, "ciudad 1", 1, 1, 1, 300, 20, 50, 70, 90, 40, 50);
+            Ciudad ciudad2 = new Ciudad(2, "ciudad 2", 2, 2, 1, Integer.MAX_VALUE, 5000, 60000, 3000, 756123, 6584110, 53);
             listaCiudadesPropias.put(ciudad1.getPosition(), ciudad1);
-            listaCiudadesPropias.put(ciudad2.getPosition(), ciudad2);
-            //Carga la ciudad con el id mas bajo (la mas antigua)
+            listaCiudadesPropias.put(ciudad2.getPosition(), ciudad2);//Carga la ciudad con el id mas bajo (la mas antigua)
+
 
             int numCiudad = Integer.MAX_VALUE;
             for (Ciudad ciudad : listaCiudadesPropias.values()) {
@@ -56,24 +56,30 @@ public class Jugador {
             }
 
             //TODO DESDE LA BD
-            Soldados soldados1=new Soldados(1, SoldadosPreCargada.get(0), 100, 5, 0, 0);
-            Soldados soldados2=new Soldados(2, SoldadosPreCargada.get(0), 100, 0, 0, 0);
-            Batallon batallon1=new Batallon(1,"nope",1,1,400);
+            Soldados soldados1 = new Soldados(1, SoldadosPreCargada.get(0), 100, 5, 0, 0);
+            Soldados soldados2 = new Soldados(2, SoldadosPreCargada.get(0), 100, 0, 0, 0);
+            Batallon batallon1 = new Batallon(1, "nope", 5, 5, 400, this);
             batallon1.setSoldadoHashMap(soldados1);
             batallon1.setSoldadoHashMap(soldados2);
 
-            Batallon batallon2=new Batallon(2,"nope",5,5,20);
-            Soldados soldados3=new Soldados(3, SoldadosPreCargada.get(3), 100, 100, 0, 0);
-            Soldados soldados4=new Soldados(4, SoldadosPreCargada.get(0), 100, 5, 0, 0);
+            Batallon batallon2 = new Batallon(2, "nope", 4, 6, 20, this);
+            Soldados soldados3 = new Soldados(3, SoldadosPreCargada.get(3), 100, 100, 0, 0);
+            Soldados soldados4 = new Soldados(4, SoldadosPreCargada.get(0), 100, 5, 0, 0);
             batallon2.setSoldadoHashMap(soldados3);
             batallon2.setSoldadoHashMap(soldados4);
-
-            listaBatallonesPropios.put(batallon1.getPosition(),batallon1);
-            listaBatallonesPropios.put(batallon2.getPosition(),batallon2);
 
 
             PrimaryStageControler.setCiudad(cargarCiudad);//CON ESTO CONTROLAS QUE CIUDAD ESTAS VIENDO!
             PrimaryStageControler.setJugador(this);//CON ESTO CONTROLAS QUE CIUDAD ESTAS VIENDO!
+        } else {
+            new Ciudad(3, "ciudad 1-2", 1, 6, 1, 300, 20, 50, 70, 90, 40, 50);
+            new Ciudad(4, "ciudad 2-2", 3, 8, 1, Integer.MAX_VALUE, 5000, 60000, 3000, 756123, 6584110, 53);
+            new Ciudad(5, "ciudad 3-2", 8, 3, 1, Integer.MAX_VALUE, 5000, 60000, 3000, 756123, 6584110, 53);
+            Batallon batallon1 = new Batallon(3, "nope", 5, 8, 400, this);
+            Soldados soldados1 = new Soldados(5, SoldadosPreCargada.get(0), 100, 5, 0, 0);
+            Soldados soldados2 = new Soldados(6, SoldadosPreCargada.get(0), 100, 0, 0, 0);
+            batallon1.setSoldadoHashMap(soldados1);
+            batallon1.setSoldadoHashMap(soldados2);
         }
 
         Collections.sort(listaEdificiosKeys);

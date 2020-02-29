@@ -1,5 +1,6 @@
 package main.java.juego.mapas.Pelea;
 
+import main.java.Jugadores.Jugador;
 import main.java.Utils.Posiciones;
 
 import java.util.HashMap;
@@ -12,11 +13,14 @@ public class Batallon extends Posiciones {
     private double poderMilitar;
 
 
-    public Batallon(int idBatallon, String nombre, int filas, int columnas,int proyectiles) {
+    public Batallon(int idBatallon, String nombre, int filas, int columnas, int proyectiles, Jugador jugador) {
         super(filas, columnas);
         this.idBatallon = idBatallon;
         this.nombre = nombre;
-        this.proyectiles=proyectiles;
+        this.proyectiles = proyectiles;
+
+        jugador.listaBatallonesPropios.put(this.getPosition(), this);
+        jugador.listaBatallones.put(this.getPosition(), this);
     }
 
     public int getIdBatallon() {
@@ -50,6 +54,6 @@ public class Batallon extends Posiciones {
     }
 
     public void setSoldadoHashMap(Soldados soldado) {
-        SoldadoHashMap.put(soldado.getPosition(),soldado);
+        SoldadoHashMap.put(soldado.getPosition(), soldado);
     }
 }
