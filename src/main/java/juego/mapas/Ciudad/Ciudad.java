@@ -49,15 +49,15 @@ this.nivelCiudad=nivelCiudad;
                 new Edificio(listaEdificiosPreCargados.get(0+"_"+0),6, 8, this);//parcela
                 new Edificio(listaEdificiosPreCargados.get(1+"_"+0),8, 15, this);
             }else if(idCiudad==1){
-                new Edificio(listaEdificiosPreCargados.get(1+"_"+1),8, 15, this);
+                new Edificio(listaEdificiosPreCargados.get(1+"_"+1),8, 7, this);
             }
-            new Edificio(listaEdificiosPreCargados.get(2+"_"+1),8, 14, this);
-            new Edificio(listaEdificiosPreCargados.get(2+"_"+0),8, 13, this);
-            new Edificio(listaEdificiosPreCargados.get(2+"_"+0),8, 12, this);
-            new Edificio(listaEdificiosPreCargados.get(0+"_"+0),8, 11, this);
-            new Edificio(listaEdificiosPreCargados.get(10+"_"+0),7, 12, this);//todos tendrian "parcela"
-            new Edificio(listaEdificiosPreCargados.get(11+"_"+0),6, 12, this);//todos tendrian "parcela"
-            new Edificio(listaEdificiosPreCargados.get(12+"_"+1),5, 12, this);//todos tendrian "parcela"
+            new Edificio(listaEdificiosPreCargados.get(2+"_"+0),3, 13, this);
+            new Edificio(listaEdificiosPreCargados.get(10+"_"+0),10, 4, this);
+            new Edificio(listaEdificiosPreCargados.get(11+"_"+0),8, 12, this);
+            new Edificio(listaEdificiosPreCargados.get(0+"_"+0),5, 7, this);
+            new Edificio(listaEdificiosPreCargados.get(10+"_"+0),7, 13, this);//todos tendrian "parcela"
+            new Edificio(listaEdificiosPreCargados.get(11+"_"+0),12, 2, this);//todos tendrian "parcela"
+            new Edificio(listaEdificiosPreCargados.get(12+"_"+1),5, 18, this);//todos tendrian "parcela"
         } catch (Exception e) {
             System.err.println("Error: Ciudad (Edificio no creado)\n"+e);
         }

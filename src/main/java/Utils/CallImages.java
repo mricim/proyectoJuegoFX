@@ -34,7 +34,7 @@ public class CallImages {
 
                 } catch (Exception e) {
                     String format = searchFiles(RUTEEXTERNAL + rute, name);
-                    File file = new File(RUTEEXTERNAL + ruteName + "." + format);
+                    File file = new File(RUTEEXTERNAL + ruteName + "."+format);
                     if (!file.exists()) {
                         throw new Exception("nove");
                     }
@@ -44,8 +44,11 @@ public class CallImages {
                 listImage.put(ruteName, image);
             } catch (Exception e) {
                 listImage.put(ruteName, ERRORIMAGE);
+                //Main.class.getResource(rute).toURI();
+                System.out.println(RUTEEXTERNAL + ruteName);
                 System.err.println("Error: CallImages (Image not found) = " + rute + " " + name);
             }
+
         } else {
             try {
                 try {
