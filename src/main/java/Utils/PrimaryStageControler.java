@@ -4,10 +4,13 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.stage.Stage;
 import main.java.Jugadores.Jugador;
+import main.java.Main;
 import main.java.juego.mapas.Ciudad.Ciudad;
 
 import java.io.IOException;
+import java.net.URI;
 import java.net.URL;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -70,7 +73,14 @@ public class PrimaryStageControler {
             System.out.println("NO TENEMOS");
             loader = new FXMLLoader();
             //URL url = getClass().getResource("/main/java/juego/mapas/Ciudad/ciudad.fxml");
-            loader.setLocation(Paths.get(RUTE + rute).toUri().toURL());
+            //loader.setLocation(Paths.get(RUTE + rute).toUri().toURL());
+            URI nada = null;
+            try {
+                nada= Main.class.getResource(rute).toURI();
+            }catch (Exception e){}
+//            System.out.println(nada.toString());
+            loader.setLocation(nada.toURL());
+            //Path path=Paths.get(RUTE + rute);
             loader.setControllerFactory((Class<?> type) -> {// CREA PrimaryStageAware
                 try {
                     Object controller = type.newInstance();

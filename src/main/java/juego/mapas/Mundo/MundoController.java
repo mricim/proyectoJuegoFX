@@ -1,10 +1,12 @@
 package main.java.juego.mapas.Mundo;
 
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
 import javafx.scene.Cursor;
+import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -14,7 +16,9 @@ import main.java.Jugadores.Jugador;
 import main.java.Utils.CallImages;
 import main.java.Utils.PrimaryStageControler;
 import main.java.juego.mapas.Ciudad.Ciudad;
+import main.java.juego.mapas.Ciudad.CiudadController;
 import main.java.juego.mapas.Ciudad.ContentCity.Edificio;
+import main.java.juego.mapas.Recursos;
 
 import java.io.IOException;
 import java.net.URL;
@@ -29,6 +33,8 @@ public class MundoController extends PrimaryStageControler implements Initializa
     public static final String THIS_RUTE = "juego/mapas/Mundo/mundo.fxml";
     static Jugador jugador;
     static boolean basura = true;
+    public FlowPane recuros;
+    static Ciudad ciudad;
 
     String nameThisCity;
     @FXML
@@ -47,11 +53,27 @@ public class MundoController extends PrimaryStageControler implements Initializa
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         jugador = getJugador();
+        ciudad = getCiudad();
+        nameThisCity = ciudad.getNameCity();
 /*
         int oroDisponible = mundo.getOro();
         oro.setText(String.valueOf(oroDisponible));
 */
+        ObservableList<Node> observableList= recuros.getChildren();
+        for (Recursos recursos : ciudad.getRecursosTreeMap().values()) {
+            Label label = new Label(String.valueOf(recursos.getCantidad()));
+            ImageView imageView= new ImageView(recursos.getImage());
+            imageView.setFitWidth(30.0);
+            imageView.setFitHeight(30.0);
+            HBox hBox = new HBox(imageView,label);
+            hBox.setId(String.valueOf(recursos.getId()));
+            hBox.setAlignment(Pos.CENTER);
+            hBox.setPrefHeight(20.0);
+            hBox.setPrefWidth(70.0);
+            hBox.setSpacing(5.0);
 
+            observableList.add(hBox);
+        }
         gridPaneMap.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {//Cerrar el menu
             queClicas(null,null);
         });
@@ -306,7 +328,7 @@ public class MundoController extends PrimaryStageControler implements Initializa
 
     public void toMundo(MouseEvent mouseEvent) {//TODO ES POSIBLE QUE EN ESTE MAPA NO INTERESE TENER ESTO
         try {
-            new PrimaryStageControler().reload(getStage(), MundoController.THIS_RUTE, false);
+            new PrimaryStageControler().reload(getStage(), CiudadController.THIS_RUTE, false);
         } catch (IOException ex) {
             ex.printStackTrace();
         }

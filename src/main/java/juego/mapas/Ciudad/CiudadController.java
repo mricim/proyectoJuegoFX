@@ -21,6 +21,7 @@ import main.java.juego.mapas.Recursos;
 import main.java.juego.mapas.Ciudad.ContentCity.Edificio;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URL;
 import java.util.*;
 
@@ -35,8 +36,9 @@ public class CiudadController extends PrimaryStageControler implements Initializ
     private static String RUTE = "../../../resources/mapas/city/";
     public static final String THIS_RUTE = "juego/mapas/Ciudad/ciudad.fxml";
     static Jugador jugador;
-    static boolean basura = true;
+    static boolean controladorDeClic = true;
     static Ciudad ciudad;
+
 
     String nameThisCity;
     @FXML
@@ -47,10 +49,12 @@ public class CiudadController extends PrimaryStageControler implements Initializ
     @FXML
     ImageView imagenDeFondo;
      */
+    public FlowPane recuros;
     @FXML
     SplitMenuButton selectorCiudad;
-    @FXML
-    Label oro, madera, piedra, hierro, comida, poblacion, felicidad, investigacion;
+   // @FXML
+    //Label oro, madera, piedra, hierro, comida, poblacion, felicidad, investigacion;
+
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -58,6 +62,35 @@ public class CiudadController extends PrimaryStageControler implements Initializ
         ciudad = getCiudad();
         nameThisCity = ciudad.getNameCity();
 
+       ObservableList<Node> observableList= recuros.getChildren();
+        for (Recursos recursos : ciudad.getRecursosTreeMap().values()) {
+            Label label = new Label(String.valueOf(recursos.getCantidad()));
+            ImageView imageView= new ImageView(recursos.getImage());
+            imageView.setFitWidth(30.0);
+            imageView.setFitHeight(30.0);
+            HBox hBox = new HBox(imageView,label);
+            hBox.setId(String.valueOf(recursos.getId()));
+            hBox.setAlignment(Pos.CENTER);
+            hBox.setPrefHeight(20.0);
+            hBox.setPrefWidth(70.0);
+            hBox.setSpacing(5.0);
+
+            observableList.add(hBox);
+        }
+
+        /*
+                       <HBox alignment="CENTER" prefHeight="20.0" prefWidth="70.0" spacing="5.0">
+                     <children>
+                              <Label fx:id="oro" text="load" />
+                                <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@../../../../resources/images/icons/recursos/0.png" />
+                                    </image>
+                                </ImageView>
+                     </children>
+                  </HBox>
+         */
+/*
         int oroDisponible = ciudad.getOro();
         oro.setText(String.valueOf(oroDisponible));
         int maderaDisponible = ciudad.getMadera();
@@ -74,7 +107,7 @@ public class CiudadController extends PrimaryStageControler implements Initializ
         felicidad.setText(String.valueOf(felicidadDisponible));
         int investigacionDisponible = jugador.getInvestigacion();
         investigacion.setText(String.valueOf(investigacionDisponible));
-
+*/
 
         gridPaneMap.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {//Cerrar el menu
 //            System.out.println("Limpiar menu izquierda");
@@ -155,16 +188,16 @@ public class CiudadController extends PrimaryStageControler implements Initializ
     }
 
     private void queClicas(Edificio posicionEdificio, ImageView imageView) {
-        if (basura) {//BLOQUEA UN MOMENTO EL SISTEMA DE CLIC PARA QUE CARGE EL MENU Y NO LO BORRE
+        if (controladorDeClic) {//BLOQUEA UN MOMENTO EL SISTEMA DE CLIC PARA QUE CARGE EL MENU Y NO LO BORRE
             if (posicionEdificio == null) {
                 borderPane.setLeft(null);//System.out.println("Limpiar menu izquierda");
             } else {
-                basura = false;
+                controladorDeClic = false;
                 (new Thread() {
                     public void run() {
                         try {
                             Thread.sleep(200);
-                            basura = true;
+                            controladorDeClic = true;
                         } catch (InterruptedException e) {
                             e.printStackTrace();
                         }

@@ -37,7 +37,6 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         FXMLLoader loader = new FXMLLoader();
-        //URL url = getClass().getResource("pelea.fxml");
         URL url = getClass().getResource("/main/java/Inicio/pantallaInicial.fxml");
         loader.setLocation(url);
         loader.setControllerFactory((Class<?> type) -> {// CREA PrimaryStageAware

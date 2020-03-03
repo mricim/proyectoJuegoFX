@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+prefHeight="${screen.visualBounds.height}" prefWidth="${screen.visualBounds.width}"
+
+     <fx:define>
+        <Screen fx:factory="getPrimary" fx:id="screen"/>
+    </fx:define>
+ -->
+
+<?import java.lang.*?>
+<?import javafx.collections.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.Inicio.Controller">
+   <center>
+      <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+         <children>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="5.0">
+               <children>
+                  <TextField promptText="Usuario" />
+                  <PasswordField promptText="Password" />
+                  <Button fx:id="loadSesion" mnemonicParsing="false" onMouseClicked="#iniciarSession" text="Iniciar Sesión" />
+                  <Separator orientation="VERTICAL" prefHeight="200.0">
+                     <HBox.margin>
+                        <Insets left="5.0" right="5.0" />
+                     </HBox.margin>
+                  </Separator>
+                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="5.0">
+                     <children>
+                        <ComboBox prefWidth="150.0" promptText="Selecciona Mundo">
+                           <items>
+                              <FXCollections fx:factory="observableArrayList">
+                                 <String fx:value="Alpha" />
+                                 <String fx:value="Beta" />
+                                 <String fx:value="Gamma" />
+                              </FXCollections>
+                           </items>
+                        </ComboBox>
+                        <Button fx:id="iniciarJuego" disable="true" mnemonicParsing="false" onMouseClicked="#iniciarJuego" text="Iniciar" />
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+            <ProgressBar fx:id="progresBar" disable="true" prefWidth="200.0" progress="0.0" />
+         </children>
+      </VBox>
+   </center>
+</BorderPane>
