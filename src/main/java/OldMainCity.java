@@ -5,7 +5,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import main.java.Jugadores.Jugador;
 import main.java.Utils.PrimaryStageControler;
 
 import java.net.URL;
@@ -15,7 +14,7 @@ public class OldMainCity extends Application {
     public void start(Stage primaryStage) throws Exception {
         FXMLLoader loader = new FXMLLoader();
         //URL url = getClass().getResource("pelea.fxml");
-        URL url = getClass().getResource("/main/java/juego/mapas/Ciudad/ciudad.fxml");
+        URL url = getClass().getResource("/main/java/juego/mapas/ciudad/ciudad.fxml");
         loader.setLocation(url);
         loader.setControllerFactory((Class<?> type) -> {// CREA PrimaryStageAware
             try {

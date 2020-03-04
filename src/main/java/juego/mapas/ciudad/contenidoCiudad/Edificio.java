@@ -1,9 +1,9 @@
-package main.java.juego.mapas.Ciudad.ContentCity;
+package main.java.juego.mapas.ciudad.contenidoCiudad;
 
 import javafx.scene.image.Image;
 import main.java.Utils.Posicion;
-import main.java.juego.mapas.Ciudad.Ciudad;
-import main.java.juego.mapas.Ciudad.EdificiosPreCargados;
+import main.java.juego.mapas.ciudad.Ciudad;
+import main.java.juego.mapas.ciudad.EdificiosPreCargados;
 
 
 public class Edificio extends Posicion implements Cloneable {

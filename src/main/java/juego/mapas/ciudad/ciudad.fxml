@@ -13,7 +13,7 @@ prefHeight="${screen.visualBounds.height}" prefWidth="${screen.visualBounds.widt
     </fx:define>
  -->
 
-<BorderPane fx:id="borderPane" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.juego.mapas.Ciudad.CiudadController">
+<BorderPane fx:id="borderPane" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.juego.mapas.ciudad.CiudadController">
     <top>
         <GridPane fx:id="toolbarGridPane" alignment="TOP_CENTER">
             <children>

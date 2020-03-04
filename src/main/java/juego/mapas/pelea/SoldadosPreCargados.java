@@ -1,22 +1,26 @@
-package main.java.juego.mapas.Mundo;
+package main.java.juego.mapas.pelea;
 
 
 import javafx.scene.image.Image;
 import main.java.Utils.ImageGetter;
 
-public class TiposDeCasillas implements ImageGetter {
+import static main.java.jugadores.Jugador.SoldadosPreCargada;
+
+public class SoldadosPreCargados implements ImageGetter {
     private int id;
     private String nombre;
+    private int maxMunicion;
 
     static String RUTEIMAGES = "mapas/city/";
     private String imagePath;
     private String imageClicablePath;
 
-    public TiposDeCasillas(int id, String nombre) {
+    public SoldadosPreCargados(int id, String nombre,int maxMunicion) {
         this.id = id;
         this.nombre = nombre;
+        this.maxMunicion=maxMunicion;
 
-//        treemap.put(id,this);
+        SoldadosPreCargada.put(id,this);
         this.imagePath = String.valueOf(id);
         this.imageClicablePath = id + "@clic";
     }

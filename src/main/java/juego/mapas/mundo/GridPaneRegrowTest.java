@@ -1,30 +1,21 @@
-package main.java.juego.mapas.Mundo;
+package main.java.juego.mapas.mundo;
 
-import com.sun.rowset.internal.Row;
 import javafx.application.Application;
-import javafx.geometry.HPos;
 import javafx.geometry.Pos;
-import javafx.geometry.VPos;
 import javafx.scene.Cursor;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.Priority;
 import javafx.scene.layout.RowConstraints;
 import javafx.stage.Stage;
 import main.java.Utils.CallImages;
-import main.java.Utils.ImageGetter;
-import main.java.juego.mapas.Ciudad.Ciudad;
+import main.java.juego.mapas.ciudad.Ciudad;
 
-import java.io.FileInputStream;
-import java.util.Random;
-
-import static main.java.Jugadores.Jugador.listaCiudades;
+import static main.java.jugadores.Jugador.listaCiudades;
 
 public class GridPaneRegrowTest extends Application {
 

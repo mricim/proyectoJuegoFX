@@ -6,15 +6,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import main.java.Utils.PrimaryStageControler;
-import org.hibernate.HibernateException;
-import org.hibernate.Query;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.cfg.Configuration;
-import org.hibernate.metadata.ClassMetadata;
 
 import java.net.URL;
-import java.util.Map;
 
 public class Main extends Application {
     /*

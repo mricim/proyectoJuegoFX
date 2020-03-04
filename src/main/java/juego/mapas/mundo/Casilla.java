@@ -1,8 +1,6 @@
-package main.java.juego.mapas.Mundo;
+package main.java.juego.mapas.mundo;
 
 import javafx.scene.image.Image;
-
-import java.util.Objects;
 
 
 public class Casilla {

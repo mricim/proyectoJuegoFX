@@ -1,6 +1,6 @@
-package main.java.juego.mapas.Pelea;
+package main.java.juego.mapas.pelea;
 
-import main.java.Jugadores.Jugador;
+import main.java.jugadores.Jugador;
 import main.java.Utils.Posicion;
 
 import java.util.HashMap;

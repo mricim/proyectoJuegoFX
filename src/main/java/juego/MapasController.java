@@ -9,9 +9,9 @@ import javafx.scene.control.SplitMenuButton;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
-import main.java.Jugadores.Jugador;
+import main.java.jugadores.Jugador;
 import main.java.Utils.PrimaryStageControler;
-import main.java.juego.mapas.Ciudad.Ciudad;
+import main.java.juego.mapas.ciudad.Ciudad;
 import main.java.juego.mapas.Recursos;
 
 import java.io.IOException;

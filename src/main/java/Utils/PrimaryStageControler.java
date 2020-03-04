@@ -3,19 +3,13 @@ package main.java.Utils;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.stage.Stage;
-import main.java.Jugadores.Jugador;
+import main.java.jugadores.Jugador;
 import main.java.Main;
-import main.java.juego.mapas.Ciudad.Ciudad;
+import main.java.juego.mapas.ciudad.Ciudad;
 
 import java.io.IOException;
 import java.net.URI;
-import java.net.URL;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.HashMap;
-import java.util.HashSet;
-
-import static main.java.Jugadores.Jugador.listaJugadores;
 
 public class PrimaryStageControler {
     private static HashMap<String, FXMLLoader> fxmlLoaderHashMap = new HashMap<>();

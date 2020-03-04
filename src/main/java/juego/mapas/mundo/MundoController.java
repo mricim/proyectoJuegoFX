@@ -1,4 +1,4 @@
-package main.java.juego.mapas.Mundo;
+package main.java.juego.mapas.mundo;
 
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -12,16 +12,12 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
-import main.java.Jugadores.Jugador;
 import main.java.Utils.CallImages;
 import main.java.Utils.PrimaryStageControler;
 import main.java.juego.MapasController;
-import main.java.juego.mapas.Ciudad.Ciudad;
-import main.java.juego.mapas.Ciudad.CiudadController;
-import main.java.juego.mapas.Ciudad.ContentCity.Edificio;
-import main.java.juego.mapas.Ciudad.EdificiosPreCargados;
-import main.java.juego.mapas.Pelea.Batallon;
-import main.java.juego.mapas.Recursos;
+import main.java.juego.mapas.ciudad.Ciudad;
+import main.java.juego.mapas.ciudad.CiudadController;
+import main.java.juego.mapas.pelea.Batallon;
 
 import java.io.IOException;
 import java.net.URL;
@@ -31,13 +27,13 @@ import static javafx.geometry.Pos.TOP_CENTER;
 import static javafx.scene.control.ScrollPane.ScrollBarPolicy.NEVER;
 import static javafx.scene.text.TextAlignment.CENTER;
 import static jdk.nashorn.internal.objects.Global.Infinity;
-import static main.java.Jugadores.Jugador.listaBatallones;
-import static main.java.Jugadores.Jugador.listaCiudades;
+import static main.java.jugadores.Jugador.listaBatallones;
+import static main.java.jugadores.Jugador.listaCiudades;
 
 
 public class MundoController extends MapasController implements Initializable {
     final private static String RUTE = "mapas/mundo/";
-    public static final String THIS_RUTE = "juego/mapas/Mundo/mundo.fxml";
+    public static final String THIS_RUTE = "juego/mapas/mundo/mundo.fxml";
     static boolean basura = true;
     public FlowPane recuros;
 

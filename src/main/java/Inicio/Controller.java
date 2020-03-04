@@ -2,19 +2,16 @@ package main.java.Inicio;
 
 import javafx.fxml.Initializable;
 import javafx.scene.control.ProgressBar;
-import javafx.scene.input.MouseEvent;
-import main.java.Jugadores.Jugador;
+import main.java.jugadores.Jugador;
 import main.java.Utils.PrimaryStageControler;
-import main.java.juego.mapas.Ciudad.CiudadController;
-import main.java.juego.mapas.Ciudad.EdificiosPreCargados;
-import main.java.juego.mapas.Pelea.SoldadosPreCargados;
+import main.java.juego.mapas.ciudad.CiudadController;
+import main.java.juego.mapas.ciudad.EdificiosPreCargados;
+import main.java.juego.mapas.pelea.SoldadosPreCargados;
 import main.java.login.LoginHiperFalso;
 
-import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.*;
-import java.util.concurrent.TimeUnit;
 
 
 public class Controller extends PrimaryStageControler implements Initializable {

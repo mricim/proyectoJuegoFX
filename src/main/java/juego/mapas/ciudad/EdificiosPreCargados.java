@@ -1,4 +1,4 @@
-package main.java.juego.mapas.Ciudad;
+package main.java.juego.mapas.ciudad;
 
 import javafx.scene.image.Image;
 import main.java.Utils.ImageGetter;
@@ -7,8 +7,8 @@ import main.java.juego.mapas.Recursos;
 import java.util.Objects;
 import java.util.TreeMap;
 
-import static main.java.Jugadores.Jugador.listaEdificiosKeys;
-import static main.java.Jugadores.Jugador.listaEdificiosPreCargados;
+import static main.java.jugadores.Jugador.listaEdificiosKeys;
+import static main.java.jugadores.Jugador.listaEdificiosPreCargados;
 
 //https://github.com/k33ptoo/JavaFX-MySQL-Login
 public class EdificiosPreCargados implements ImageGetter {

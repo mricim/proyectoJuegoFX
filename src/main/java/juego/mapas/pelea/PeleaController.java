@@ -1,4 +1,4 @@
-package main.java.juego.mapas.Pelea;
+package main.java.juego.mapas.pelea;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -8,7 +8,7 @@ import javafx.scene.control.SplitMenuButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
-import main.java.Jugadores.Jugador;
+import main.java.jugadores.Jugador;
 import main.java.Utils.PrimaryStageControler;
 
 import java.net.URL;

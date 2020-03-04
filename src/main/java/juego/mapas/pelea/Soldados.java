@@ -1,4 +1,4 @@
-package main.java.juego.mapas.Pelea;
+package main.java.juego.mapas.pelea;
 
 import javafx.scene.image.Image;
 import main.java.Utils.Posicion;

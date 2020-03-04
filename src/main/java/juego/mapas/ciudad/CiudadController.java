@@ -1,4 +1,4 @@
-package main.java.juego.mapas.Ciudad;
+package main.java.juego.mapas.ciudad;
 
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -16,9 +16,9 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import main.java.Utils.PrimaryStageControler;
 import main.java.juego.MapasController;
-import main.java.juego.mapas.Mundo.MundoController;
+import main.java.juego.mapas.mundo.MundoController;
 import main.java.juego.mapas.Recursos;
-import main.java.juego.mapas.Ciudad.ContentCity.Edificio;
+import main.java.juego.mapas.ciudad.contenidoCiudad.Edificio;
 
 import java.io.IOException;
 import java.net.URL;
@@ -28,12 +28,12 @@ import static javafx.geometry.Pos.TOP_CENTER;
 import static javafx.scene.control.ScrollPane.ScrollBarPolicy.NEVER;
 import static javafx.scene.text.TextAlignment.CENTER;
 import static jdk.nashorn.internal.objects.Global.Infinity;
-import static main.java.Jugadores.Jugador.*;
+import static main.java.jugadores.Jugador.*;
 
 
 public class CiudadController extends MapasController implements Initializable {
     private static String RUTE = "../../../resources/mapas/city/";
-    public static final String THIS_RUTE = "juego/mapas/Ciudad/ciudad.fxml";
+    public static final String THIS_RUTE = "juego/mapas/ciudad/ciudad.fxml";
     static boolean controladorDeClic = true;
 /*
     static Jugador jugador;

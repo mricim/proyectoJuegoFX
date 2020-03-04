@@ -1,15 +1,15 @@
-package main.java.juego.mapas.Ciudad;
+package main.java.juego.mapas.ciudad;
 
 import javafx.scene.image.Image;
 import main.java.Utils.Posicion;
 import main.java.juego.mapas.Recursos;
-import main.java.juego.mapas.Ciudad.ContentCity.Edificio;
+import main.java.juego.mapas.ciudad.contenidoCiudad.Edificio;
 
 
 import java.util.TreeMap;
 
-import static main.java.Jugadores.Jugador.listaEdificiosPreCargados;
-import static main.java.Jugadores.Jugador.listaCiudades;
+import static main.java.jugadores.Jugador.listaEdificiosPreCargados;
+import static main.java.jugadores.Jugador.listaCiudades;
 
 public class Ciudad extends Posicion {
 

@@ -8,11 +8,59 @@
   <component name="ChangeListManager">
     <list default="true" id="cd2649df-3744-49b8-a682-1421cd64a89f" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/proyectoJuegoFX/main/java/juego/mapas/Mundo/GridPaneRegrowTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/proyectoJuegoFX/main/java/juego/mapas/Mundo/GridPaneRegrowTest.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/proyectoJuegoFX/main/java/juego/mapas/Mundo/MundoController$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/proyectoJuegoFX/main/java/juego/mapas/Mundo/MundoController$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/proyectoJuegoFX/main/java/juego/mapas/Mundo/MundoController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/proyectoJuegoFX/main/java/juego/mapas/Mundo/MundoController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/juego/mapas/Mundo/GridPaneRegrowTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/juego/mapas/Mundo/GridPaneRegrowTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/juego/mapas/Mundo/MundoController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/juego/mapas/Mundo/MundoController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/proyectoJuegoFX/main/java/Inicio/Controller.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/proyectoJuegoFX/main/java/Inicio/Controller.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/proyectoJuegoFX/main/java/Jugadores/Jugador.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/proyectoJuegoFX/main/java/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/proyectoJuegoFX/main/java/Main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/proyectoJuegoFX/main/java/OldMainCity.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/proyectoJuegoFX/main/java/OldMainCity.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/proyectoJuegoFX/main/java/Utils/CallImages.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/proyectoJuegoFX/main/java/Utils/ImageGetter.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/proyectoJuegoFX/main/java/Utils/PrimaryStageControler.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/proyectoJuegoFX/main/java/juego/mapas/Ciudad/Ciudad.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/proyectoJuegoFX/main/java/juego/mapas/Ciudad/CiudadController$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/proyectoJuegoFX/main/java/juego/mapas/Ciudad/CiudadController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/proyectoJuegoFX/main/java/juego/mapas/Ciudad/ContentCity/Edificio.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/proyectoJuegoFX/main/java/juego/mapas/Ciudad/EdificiosPreCargados.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/proyectoJuegoFX/main/java/juego/mapas/Ciudad/ciudad.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/proyectoJuegoFX/main/java/juego/mapas/Mundo/Casilla.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/proyectoJuegoFX/main/java/juego/mapas/Mundo/GridPaneRegrowTest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/proyectoJuegoFX/main/java/juego/mapas/Mundo/MundoController$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/proyectoJuegoFX/main/java/juego/mapas/Mundo/MundoController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/proyectoJuegoFX/main/java/juego/mapas/Mundo/TiposDeCasillas.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/proyectoJuegoFX/main/java/juego/mapas/Mundo/mundo.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/proyectoJuegoFX/main/java/juego/mapas/Pelea/Batallon.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/proyectoJuegoFX/main/java/juego/mapas/Pelea/PeleaController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/proyectoJuegoFX/main/java/juego/mapas/Pelea/Soldados.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/proyectoJuegoFX/main/java/juego/mapas/Pelea/SoldadosPreCargados.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/proyectoJuegoFX/main/java/juego/mapas/Pelea/pelea.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/proyectoJuegoFX/main/java/login/LoginHiperFalso.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/proyectoJuegoFX/main/java/login/LoginHiperFalso.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Inicio/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Inicio/Controller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Jugadores/Jugador.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/jugadores/Jugador.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/OldMainCity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/OldMainCity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Utils/CallImages.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Utils/CallImages.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Utils/ImageGetter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Utils/ImageGetter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Utils/Posicion.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Utils/Posicion.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Utils/PrimaryStageControler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Utils/PrimaryStageControler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/juego/MapasController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/juego/MapasController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/juego/mapas/Ciudad/Ciudad.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/juego/mapas/ciudad/Ciudad.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/juego/mapas/Ciudad/CiudadController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/juego/mapas/ciudad/CiudadController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/juego/mapas/Ciudad/ContentCity/Edificio.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/juego/mapas/ciudad/contenidoCiudad/Edificio.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/juego/mapas/Ciudad/EdificiosPreCargados.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/juego/mapas/ciudad/EdificiosPreCargados.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/juego/mapas/Ciudad/ciudad.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/juego/mapas/ciudad/ciudad.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/juego/mapas/Mundo/Casilla.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/juego/mapas/mundo/Casilla.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/juego/mapas/Mundo/GridPaneRegrowTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/juego/mapas/mundo/GridPaneRegrowTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/juego/mapas/Mundo/MundoController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/juego/mapas/mundo/MundoController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/juego/mapas/Mundo/TiposDeCasillas.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/juego/mapas/mundo/TiposDeCasillas.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/juego/mapas/Mundo/mundo.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/juego/mapas/mundo/mundo.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/juego/mapas/Pelea/Batallon.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/juego/mapas/pelea/Batallon.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/juego/mapas/Pelea/PeleaController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/juego/mapas/pelea/PeleaController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/juego/mapas/Pelea/Soldados.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/juego/mapas/pelea/Soldados.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/juego/mapas/Pelea/SoldadosPreCargados.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/juego/mapas/pelea/SoldadosPreCargados.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/juego/mapas/Pelea/pelea.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/juego/mapas/pelea/pelea.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/juego/mapas/PosicionGrid.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/juego/mapas/PosicionGrid.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/juego/mapas/Recursos.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/juego/mapas/Recursos.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/login/LoginHiperFalso.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/login/LoginHiperFalso.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/testLucha/Posicion.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/testLucha/Posicion.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -97,6 +145,7 @@
       <workItem from="1582995502731" duration="108000" />
       <workItem from="1583196974343" duration="9572000" />
       <workItem from="1583275066082" duration="12055000" />
+      <workItem from="1583339336155" duration="2296000" />
     </task>
     <task id="LOCAL-00001" summary="CallImages external Files">
       <created>1582995597708</created>
@@ -119,7 +168,14 @@
       <option name="project" value="LOCAL" />
       <updated>1583214039056</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="+ add menu left Mundo working para ciudad">
+      <created>1583323912952</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1583323912952</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -140,7 +196,8 @@
     <MESSAGE value="CallImages external Files" />
     <MESSAGE value="CallImages external Files add" />
     <MESSAGE value=":(" />
-    <option name="LAST_COMMIT_MESSAGE" value=":(" />
+    <MESSAGE value="+ add menu left Mundo working para ciudad" />
+    <option name="LAST_COMMIT_MESSAGE" value="+ add menu left Mundo working para ciudad" />
   </component>
   <component name="WindowStateProjectService">
     <state x="690" y="304" key="#com.intellij.ide.util.TreeClassChooserDialog" timestamp="1583200965957">
@@ -155,9 +212,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="690" y="268" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1583286465080" />
-    <state x="483" y="10" key="CommitChangelistDialog2" timestamp="1583214037508">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state x="483" y="41" width="824" height="996" key="CommitChangelistDialog2" timestamp="1583323912577">
+      <screen x="0" y="31" width="1920" height="1050" />
     </state>
+    <state x="483" y="41" width="824" height="996" key="CommitChangelistDialog2/0.31.1920.1050/1920.0.1920.1080@0.31.1920.1050" timestamp="1583323912577" />
     <state x="483" y="10" key="CommitChangelistDialog2/1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1583214037508" />
     <state x="2306" y="8" key="CommitChangelistDialog2/1920.0.1536.832/0.0.1920.1040@1920.0.1536.832" timestamp="1582995596209" />
     <state x="100" y="131" width="1720" height="850" key="DiffContextDialog" timestamp="1583323552418">
@@ -168,25 +226,29 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="740" y="275" key="FileChooserDialogImpl/1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1583200999934" />
-    <state width="1874" height="253" key="GridCell.Tab.0.bottom" timestamp="1583323783170">
-      <screen x="0" y="31" width="1920" height="1050" />
+    <state width="1874" height="253" key="GridCell.Tab.0.bottom" timestamp="1583341818189">
+      <screen x="0" y="30" width="1920" height="1050" />
     </state>
-    <state width="1874" height="253" key="GridCell.Tab.0.bottom/0.31.1920.1050/1920.0.1920.1080@0.31.1920.1050" timestamp="1583323783170" />
+    <state width="1874" height="253" key="GridCell.Tab.0.bottom/0.30.1920.1050@0.30.1920.1050" timestamp="1583341818189" />
+    <state width="1874" height="253" key="GridCell.Tab.0.bottom/0.31.1920.1050/1920.0.1920.1080@0.31.1920.1050" timestamp="1583323931544" />
     <state width="1877" height="282" key="GridCell.Tab.0.bottom/1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1583297257029" />
-    <state width="1874" height="253" key="GridCell.Tab.0.center" timestamp="1583323783170">
-      <screen x="0" y="31" width="1920" height="1050" />
+    <state width="1874" height="253" key="GridCell.Tab.0.center" timestamp="1583341818188">
+      <screen x="0" y="30" width="1920" height="1050" />
     </state>
-    <state width="1874" height="253" key="GridCell.Tab.0.center/0.31.1920.1050/1920.0.1920.1080@0.31.1920.1050" timestamp="1583323783170" />
+    <state width="1874" height="253" key="GridCell.Tab.0.center/0.30.1920.1050@0.30.1920.1050" timestamp="1583341818188" />
+    <state width="1874" height="253" key="GridCell.Tab.0.center/0.31.1920.1050/1920.0.1920.1080@0.31.1920.1050" timestamp="1583323931544" />
     <state width="1877" height="282" key="GridCell.Tab.0.center/1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1583297257029" />
-    <state width="1874" height="253" key="GridCell.Tab.0.left" timestamp="1583323783170">
-      <screen x="0" y="31" width="1920" height="1050" />
+    <state width="1874" height="253" key="GridCell.Tab.0.left" timestamp="1583341818188">
+      <screen x="0" y="30" width="1920" height="1050" />
     </state>
-    <state width="1874" height="253" key="GridCell.Tab.0.left/0.31.1920.1050/1920.0.1920.1080@0.31.1920.1050" timestamp="1583323783170" />
+    <state width="1874" height="253" key="GridCell.Tab.0.left/0.30.1920.1050@0.30.1920.1050" timestamp="1583341818188" />
+    <state width="1874" height="253" key="GridCell.Tab.0.left/0.31.1920.1050/1920.0.1920.1080@0.31.1920.1050" timestamp="1583323931544" />
     <state width="1877" height="282" key="GridCell.Tab.0.left/1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1583297257028" />
-    <state width="1874" height="253" key="GridCell.Tab.0.right" timestamp="1583323783170">
-      <screen x="0" y="31" width="1920" height="1050" />
+    <state width="1874" height="253" key="GridCell.Tab.0.right" timestamp="1583341818189">
+      <screen x="0" y="30" width="1920" height="1050" />
     </state>
-    <state width="1874" height="253" key="GridCell.Tab.0.right/0.31.1920.1050/1920.0.1920.1080@0.31.1920.1050" timestamp="1583323783170" />
+    <state width="1874" height="253" key="GridCell.Tab.0.right/0.30.1920.1050@0.30.1920.1050" timestamp="1583341818189" />
+    <state width="1874" height="253" key="GridCell.Tab.0.right/0.31.1920.1050/1920.0.1920.1080@0.31.1920.1050" timestamp="1583323931544" />
     <state width="1877" height="282" key="GridCell.Tab.0.right/1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1583297257029" />
     <state x="440" y="95" key="SettingsEditor" timestamp="1583201135609">
       <screen x="0" y="0" width="1920" height="1040" />
@@ -196,9 +258,10 @@
       <screen x="0" y="31" width="1920" height="1050" />
     </state>
     <state x="522" y="180" width="866" height="754" key="VCS.ChangeListViewerDialog/0.31.1920.1050/1920.0.1920.1080@0.31.1920.1050" timestamp="1583323540165" />
-    <state x="451" y="183" key="Vcs.Push.Dialog.v2" timestamp="1583214041758">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state x="451" y="216" width="800" height="539" key="Vcs.Push.Dialog.v2" timestamp="1583323916398">
+      <screen x="0" y="31" width="1920" height="1050" />
     </state>
+    <state x="451" y="216" width="800" height="539" key="Vcs.Push.Dialog.v2/0.31.1920.1050/1920.0.1920.1080@0.31.1920.1050" timestamp="1583323916398" />
     <state x="451" y="183" key="Vcs.Push.Dialog.v2/1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1583214041758" />
     <state x="2281" y="146" key="Vcs.Push.Dialog.v2/1920.0.1536.832/0.0.1920.1040@1920.0.1536.832" timestamp="1582995600276" />
     <state x="100" y="131" width="1720" height="850" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1583323447092">
@@ -217,6 +280,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="690" y="276" key="extract.method.dialog/1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1583281907744" />
+    <state x="344" y="136" width="1222" height="841" key="new project wizard" timestamp="1583341088588">
+      <screen x="0" y="30" width="1920" height="1050" />
+    </state>
+    <state x="344" y="136" width="1222" height="841" key="new project wizard/0.30.1920.1050@0.30.1920.1050" timestamp="1583341088588" />
     <state x="666" y="149" key="refactoring.ChangeSignatureDialog" timestamp="1583282224947">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
