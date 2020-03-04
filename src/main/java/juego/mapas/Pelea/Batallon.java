@@ -1,11 +1,11 @@
 package main.java.juego.mapas.Pelea;
 
 import main.java.Jugadores.Jugador;
-import main.java.Utils.Posiciones;
+import main.java.Utils.Posicion;
 
 import java.util.HashMap;
 
-public class Batallon extends Posiciones {
+public class Batallon extends Posicion {
     private HashMap<String, Soldados> SoldadoHashMap = new HashMap<>();
     private int idBatallon;
     private String nombre;

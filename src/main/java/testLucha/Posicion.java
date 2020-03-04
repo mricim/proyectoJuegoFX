@@ -3,11 +3,11 @@ package main.java.testLucha;
 
 import static main.java.testLucha.MainLucha2.*;
 
-public class Posiciones extends main.java.Utils.Posiciones {
+public class Posicion extends main.java.Utils.Posicion {
     private Soldados soldados;
     private int ejercito;
 
-    public Posiciones(int y, int x, int ejercito,int cantidad, Soldados soldados) {
+    public Posicion(int y, int x, int ejercito, int cantidad, Soldados soldados) {
         super(y, x);
         int total=soldados.getCantidad();
         soldados.setCantidad(total-cantidad);
@@ -30,8 +30,8 @@ public class Posiciones extends main.java.Utils.Posiciones {
     public String toString() {
         return "Posiciones{" +
                 "soldados=" + soldados +
-                ", y=" + super.getFilas() +
-                ", x=" + super.getColumnas() +
+                ", y=" + super.getFila() +
+                ", x=" + super.getColumna() +
                 '}';
     }
 }

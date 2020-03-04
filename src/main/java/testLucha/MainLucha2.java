@@ -9,8 +9,8 @@ public class MainLucha2 {
 
     protected static TreeMap<Integer, Soldados> ejercito1 = new TreeMap<>(Collections.reverseOrder());
     protected static TreeMap<Integer, Soldados> ejercito2 = new TreeMap<>(Collections.reverseOrder());
-    protected static HashMap<String, Posiciones> listaPosicionesSoldados1 = new HashMap<>();
-    protected static HashMap<String, Posiciones> listaPosicionesSoldados2 = new HashMap<>();
+    protected static HashMap<String, Posicion> listaPosicionesSoldados1 = new HashMap<>();
+    protected static HashMap<String, Posicion> listaPosicionesSoldados2 = new HashMap<>();
 
     public static void main(String[] args) {
         new TipoSoldados(0, "Espadachines");
@@ -50,7 +50,7 @@ public class MainLucha2 {
         for (Soldados soldados : ejercito1.values()) {
             for (int i = listaPosicionesSoldados1.size(); i < 7; i++) {
                 if (soldados.getCantidad() >= 1000) {
-                    new Posiciones(1, i, 1, 1000, soldados);
+                    new Posicion(1, i, 1, 1000, soldados);
                 }else {
                     break;
                 }
@@ -59,18 +59,18 @@ public class MainLucha2 {
         for (Soldados soldados : ejercito2.values()) {
             for (int i = listaPosicionesSoldados2.size(); i < 7; i++) {
                 if (soldados.getCantidad() >= 1000) {
-                    new Posiciones(2, i, 2, 1000, soldados);
+                    new Posicion(2, i, 2, 1000, soldados);
                 }else {
                     break;
                 }
             }
         }
 
-        for (Posiciones posiciones : listaPosicionesSoldados1.values()) {
+        for (Posicion posiciones : listaPosicionesSoldados1.values()) {
             System.out.println(posiciones);
         }
         System.out.println();
-        for (Posiciones posiciones : listaPosicionesSoldados2.values()) {
+        for (Posicion posiciones : listaPosicionesSoldados2.values()) {
             System.out.println(posiciones);
         }
         System.out.println();

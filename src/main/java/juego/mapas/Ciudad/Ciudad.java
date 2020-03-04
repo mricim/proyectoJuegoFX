@@ -1,18 +1,17 @@
 package main.java.juego.mapas.Ciudad;
 
 import javafx.scene.image.Image;
-import main.java.Utils.Posiciones;
+import main.java.Utils.Posicion;
 import main.java.juego.mapas.Recursos;
 import main.java.juego.mapas.Ciudad.ContentCity.Edificio;
 
 
-import java.util.HashMap;
 import java.util.TreeMap;
 
 import static main.java.Jugadores.Jugador.listaEdificiosPreCargados;
 import static main.java.Jugadores.Jugador.listaCiudades;
 
-public class Ciudad extends Posiciones {
+public class Ciudad extends Posicion {
 
     private TreeMap<String, Edificio> listaPosicionesEdificios = new TreeMap<>();
 

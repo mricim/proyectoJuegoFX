@@ -10,7 +10,6 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import main.java.Jugadores.Jugador;
 import main.java.Utils.PrimaryStageControler;
-import main.java.juego.mapas.Mundo.PosicionCasilla;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -44,7 +43,7 @@ public class PeleaController extends PrimaryStageControler implements Initializa
 */
 
         gridPaneMap.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {//Cerrar el menu
-            queClicas(null);
+            //queClicas(null);
         });
 
 /*
@@ -89,28 +88,4 @@ public class PeleaController extends PrimaryStageControler implements Initializa
         System.out.println("COSASA");
     }
 
-    private void queClicas(PosicionCasilla posicionCasilla) {
-        if (basura) {
-            if (posicionCasilla == null) {
-                borderPane.setLeft(null);//System.out.println("Limpiar menu izquierda");
-            } else {
-                basura = false;
-                (new Thread() {
-                    public void run() {
-                        try {
-                            Thread.sleep(200);
-                            basura = true;
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                }).start();
-                createMenuLeft(borderPane, posicionCasilla);
-            }
-        }
-    }
-
-    private static void createMenuLeft(BorderPane borderPane, PosicionCasilla posicionCasilla) {
-
-    }
 }

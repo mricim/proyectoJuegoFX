@@ -14,14 +14,13 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
-import main.java.Jugadores.Jugador;
 import main.java.Utils.PrimaryStageControler;
+import main.java.juego.MapasController;
 import main.java.juego.mapas.Mundo.MundoController;
 import main.java.juego.mapas.Recursos;
 import main.java.juego.mapas.Ciudad.ContentCity.Edificio;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.net.URL;
 import java.util.*;
 
@@ -32,15 +31,16 @@ import static jdk.nashorn.internal.objects.Global.Infinity;
 import static main.java.Jugadores.Jugador.*;
 
 
-public class CiudadController extends PrimaryStageControler implements Initializable {
+public class CiudadController extends MapasController implements Initializable {
     private static String RUTE = "../../../resources/mapas/city/";
     public static final String THIS_RUTE = "juego/mapas/Ciudad/ciudad.fxml";
-    static Jugador jugador;
     static boolean controladorDeClic = true;
+/*
+    static Jugador jugador;
     static Ciudad ciudad;
-
-
     String nameThisCity;
+*/
+
     @FXML
     BorderPane borderPane;
     @FXML
@@ -52,44 +52,21 @@ public class CiudadController extends PrimaryStageControler implements Initializ
     public FlowPane recuros;
     @FXML
     SplitMenuButton selectorCiudad;
-   // @FXML
+    // @FXML
     //Label oro, madera, piedra, hierro, comida, poblacion, felicidad, investigacion;
 
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        jugador = getJugador();
-        ciudad = getCiudad();
-        nameThisCity = ciudad.getNameCity();
+        inicialiceController();
+        recursosMenu(recuros, ciudadController.getRecursosTreeMap().values());
+        selectorDeCiudad(THIS_RUTE, selectorCiudad);
+        gridPaneMap.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {//Cerrar el menu
+            queClicas(null, null);
+        });
+        //<-- Controlado por MapasController
 
-       ObservableList<Node> observableList= recuros.getChildren();
-        for (Recursos recursos : ciudad.getRecursosTreeMap().values()) {
-            Label label = new Label(String.valueOf(recursos.getCantidad()));
-            ImageView imageView= new ImageView(recursos.getImage());
-            imageView.setFitWidth(30.0);
-            imageView.setFitHeight(30.0);
-            HBox hBox = new HBox(imageView,label);
-            hBox.setId(String.valueOf(recursos.getId()));
-            hBox.setAlignment(Pos.CENTER);
-            hBox.setPrefHeight(20.0);
-            hBox.setPrefWidth(70.0);
-            hBox.setSpacing(5.0);
 
-            observableList.add(hBox);
-        }
-
-        /*
-                       <HBox alignment="CENTER" prefHeight="20.0" prefWidth="70.0" spacing="5.0">
-                     <children>
-                              <Label fx:id="oro" text="load" />
-                                <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
-                                    <image>
-                                        <Image url="@../../../../resources/images/icons/recursos/0.png" />
-                                    </image>
-                                </ImageView>
-                     </children>
-                  </HBox>
-         */
 /*
         int oroDisponible = ciudad.getOro();
         oro.setText(String.valueOf(oroDisponible));
@@ -109,30 +86,6 @@ public class CiudadController extends PrimaryStageControler implements Initializ
         investigacion.setText(String.valueOf(investigacionDisponible));
 */
 
-        gridPaneMap.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {//Cerrar el menu
-//            System.out.println("Limpiar menu izquierda");
-//            borderPane.setLeft(null);
-            queClicas(null, null);
-        });
-
-
-        selectorCiudad.setText(nameThisCity);//Seleccionar otra ciudad
-        for (Ciudad ciudadTemp : jugador.listaCiudadesPropias.values()) {
-            String nameCity = ciudadTemp.getNameCity();
-            if (nameThisCity != nameCity) {
-                MenuItem menuItem = new MenuItem();
-                menuItem.setText(nameCity);
-                menuItem.setOnAction((e) -> {
-                    setCiudad(ciudadTemp);
-                    try {
-                        new PrimaryStageControler().reload(getStage(), THIS_RUTE, false);
-                    } catch (IOException ex) {
-                        ex.printStackTrace();
-                    }
-                });
-                selectorCiudad.getItems().add(menuItem);
-            }
-        }
 
 /*
         int colum = gridPaneMap.getColumnConstraints().size();
@@ -176,7 +129,7 @@ public class CiudadController extends PrimaryStageControler implements Initializ
             imageView.setOnMouseClicked(e -> {
                 queClicas(edificio, imageView);//System.out.println("Imagen Edificio clicada: " + listaEdificios.get(idEdificio + "_" + nivelEdificio));
             });
-            gridPaneMap.add(imageView, edificio.getColumnas(), edificio.getFilas());
+            gridPaneMap.add(imageView, edificio.getColumna(), edificio.getFila());
         }
     }
 
@@ -203,12 +156,12 @@ public class CiudadController extends PrimaryStageControler implements Initializ
                         }
                     }
                 }).start();
-                createMenuLeft(borderPane, posicionEdificio, imageView);
+                createMenuLeft(borderPane, imageView, posicionEdificio);
             }
         }
     }
 
-    private void createMenuLeft(BorderPane borderPane, Edificio edificio, ImageView imageView) {
+    private void createMenuLeft(BorderPane borderPane, ImageView imageView, Edificio edificio) {
         //EdificiosPreCargados edificiosPreCargados = listaEdificiosPreCargada.get(edificio.getId() + "_" + edificio.getNivel());
 //        EdificiosPreCargados edificiosPreCargado = edificio.getEdificiosPreCargados();
         List<VBox> vBoxList = new ArrayList<>();
@@ -248,7 +201,7 @@ public class CiudadController extends PrimaryStageControler implements Initializ
             vBoxList.add(cajaEdificio(edificio, imageView, true, edificio.getEdificiosPreCargado(), 0));
             for (Map.Entry<String, EdificiosPreCargados> preCargadosEntry : listaEdificiosPreCargados.entrySet()) {
                 EdificiosPreCargados temp = preCargadosEntry.getValue();
-                if (temp.getNivel() == 0 && temp.isConstruible() && ciudad.getNivelCiudad() >= temp.getNivelCastilloNecesario()) {
+                if (temp.getNivel() == 0 && temp.isConstruible() && ciudadController.getNivelCiudad() >= temp.getNivelCastilloNecesario()) {
 //                    System.out.println(temp.getNombre() + " " + temp.getNivel() + " " + temp.isConstruible() + " " + ciudad.getNivelCiudad() + " " + temp.getNivelCastilloNecesario());
 //                    System.out.println(temp.getNombre() + " " + counterTiposDeEdificioEnLaCiudad.get(temp.getId()) + " " + counterTiposDeEdificioEnLaCiudad.get(temp.getId()) + ">" + temp.getMaximoEdificiosDelMismoTipo());
                     if (counterTiposDeEdificioEnLaCiudad.get(temp.getId()) == null || counterTiposDeEdificioEnLaCiudad.get(temp.getId()) < temp.getMaximoEdificiosDelMismoTipo()) {
@@ -348,7 +301,7 @@ public class CiudadController extends PrimaryStageControler implements Initializ
                 if (tipoDeBoton == 1 || tipoDeBoton == 2) {//CALCULAR RECURSOS
                     for (Recursos edificioCostes : edificioQueSaleEnMenu.getRecursosCostes().values()) {
                         int id = edificioCostes.getId();
-                        if ((!(id == 5)) && edificioCostes.getCantidad() > ciudad.getRecursosTreeMap().get(edificioCostes.getId()).getCantidad()) {
+                        if ((!(id == 5)) && edificioCostes.getCantidad() > ciudadController.getRecursosTreeMap().get(edificioCostes.getId()).getCantidad()) {
                             button.setDisable(true);
                             break;
                         }

@@ -1,11 +1,11 @@
 package main.java.juego.mapas.Pelea;
 
 import javafx.scene.image.Image;
-import main.java.Utils.Posiciones;
+import main.java.Utils.Posicion;
 
 import static main.java.testLucha.MainLucha1.tipoSoldadosTreeMap;
 
-public class Soldados extends Posiciones {
+public class Soldados extends Posicion {
     private int id;
     private SoldadosPreCargados soldadosPreCargados;
     private int cantidad;
