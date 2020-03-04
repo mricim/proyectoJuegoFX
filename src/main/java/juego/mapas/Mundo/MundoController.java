@@ -1,19 +1,27 @@
 package main.java.juego.mapas.Mundo;
 
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Cursor;
+import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
+import main.java.Jugadores.Jugador;
 import main.java.Utils.CallImages;
 import main.java.Utils.PrimaryStageControler;
 import main.java.juego.MapasController;
 import main.java.juego.mapas.Ciudad.Ciudad;
 import main.java.juego.mapas.Ciudad.CiudadController;
+import main.java.juego.mapas.Ciudad.ContentCity.Edificio;
+import main.java.juego.mapas.Ciudad.EdificiosPreCargados;
 import main.java.juego.mapas.Pelea.Batallon;
+import main.java.juego.mapas.Recursos;
 
 import java.io.IOException;
 import java.net.URL;
@@ -21,6 +29,7 @@ import java.util.*;
 
 import static javafx.geometry.Pos.TOP_CENTER;
 import static javafx.scene.control.ScrollPane.ScrollBarPolicy.NEVER;
+import static javafx.scene.text.TextAlignment.CENTER;
 import static jdk.nashorn.internal.objects.Global.Infinity;
 import static main.java.Jugadores.Jugador.listaBatallones;
 import static main.java.Jugadores.Jugador.listaCiudades;
@@ -209,17 +218,87 @@ public class MundoController extends MapasController implements Initializable {
     }
 
 
+    private static VBox cajaCiudad(Ciudad ciudadMapa, ImageView imageView, int tipoDeBoton) {
+
+
+        //Objetos de ciudad
+        Label nombreCiudad = null;
+        Label nivelCiudadPropia = null;
+        ImageView imgViewCiudad = null;
+        Label descripcionCiudad = null;
+
+
+        //BLOQUE
+        VBox vBoxBloquePropio = new VBox();
+        vBoxBloquePropio.setMinWidth(200);
+        vBoxBloquePropio.setMaxWidth(200);
+        vBoxBloquePropio.setAlignment(TOP_CENTER);
+        vBoxBloquePropio.setBackground(new Background(new BackgroundFill(Color.ANTIQUEWHITE, CornerRadii.EMPTY, Insets.EMPTY)));
+        ObservableList<Node> childrenVBox = vBoxBloquePropio.getChildren();
+
+        //TODO como comprobar que una ciudad pertenece a un jugador, por que el if de abajo no funciona!!
+        //Si la ciudad pertenece al jugador puede ver mas cosas , sino solo podrá ver el nombre de la ciudad
+//        if (jugadorController.listaCiudadesPropias.containsKey(ciudadMapa.getNameCity())) {
+            //nombre
+            nombreCiudad = new Label(ciudadMapa.getNameCity());
+            nombreCiudad.setTextAlignment(CENTER);
+            nombreCiudad.setAlignment(Pos.CENTER);
+            nombreCiudad.setWrapText(true);
+            childrenVBox.add(nombreCiudad);
+            //Imagen ciudad
+            imgViewCiudad = new ImageView(imageView.getImage());
+            imgViewCiudad.setPickOnBounds(true);
+            imgViewCiudad.setPreserveRatio(true);
+            childrenVBox.add(imgViewCiudad);
+            //Nivel ciudad
+            nivelCiudadPropia = new Label("Nivel: " + ciudadMapa.getNivelCiudad());
+            nivelCiudadPropia.setTextAlignment(CENTER);
+            nivelCiudadPropia.setAlignment(Pos.CENTER);
+            nivelCiudadPropia.setWrapText(true);
+            childrenVBox.add(nivelCiudadPropia);
+            //Descripción ciudad
+            descripcionCiudad = new Label("Descripción ciudad");
+            descripcionCiudad.setTextAlignment(CENTER);
+            descripcionCiudad.setAlignment(Pos.CENTER);
+            descripcionCiudad.setWrapText(true);
+            childrenVBox.add(descripcionCiudad);
+
+            vBoxBloquePropio.setMargin(descripcionCiudad, new Insets(0, 15, 0, 15));
+
+//            } else {
+//                nombreCiudad = new Label(ciudadMapa.getNameCity());
+//                nombreCiudad.setTextAlignment(CENTER);
+//                nombreCiudad.setAlignment(Pos.CENTER);
+//                nombreCiudad.setWrapText(true);
+//                childrenVBox.add(nombreCiudad);
+//            }
+
+//            childrenVBox.add(button);
+//            Separator separator = new Separator();
+//            separator.setPrefWidth(200);
+//            childrenVBox.add(separator);
+
+
+
+        //FIN BLOQUE
+        return vBoxBloquePropio;
+    }
+
+
     private static void createMenuLeft(BorderPane borderPane, ImageView imageView, Ciudad ciudad, Batallon batallon) {
         List<VBox> vBoxList = new ArrayList<>();
 
+//        int  ciudadId = ciudad.getIdCiudad();
         String text = "";
         if (ciudad != null) {
             text = ciudad.getNameCity();
+            vBoxList.add(cajaCiudad(ciudad,imageView,1));
         }
         if (batallon != null) {
+            //TODO hacer metodo de cajaBatallon
             text = text + " " + batallon.getNombre();
+            vBoxList.add(new VBox(new Label(text)));
         }
-        vBoxList.add(new VBox(new Label(text)));
 
         VBox vBox = new VBox();
         for (VBox box : vBoxList) {

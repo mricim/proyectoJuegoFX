@@ -137,7 +137,6 @@ public class GridPaneRegrowTest extends Application {
                     });
                 }
 
-
                 root.add(imageView, columna, fila);
             }
         }
@@ -145,8 +144,6 @@ public class GridPaneRegrowTest extends Application {
 
         //TODO PARA SABER SI TENGO QUE PONER TIERRA O AGUA EN EL GRID, BUSCAR EN LA LISTA DE BATALLON O LA LISTA DE CIUDADES, PARA TENER LA POSICION (X,Y) DE DICHA CIUDAD
         //TODO O BATALLON.
-
-
         primaryStage.setScene(new Scene(scrollPane, 1920, 1080));
         primaryStage.show();
 

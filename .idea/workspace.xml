@@ -7,155 +7,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="cd2649df-3744-49b8-a682-1421cd64a89f" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/juego/MapasController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/juego/mapas/PosicionGrid.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/images/mapas/mundo/a_b.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/images/mapas/mundo/a_b@H.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/images/mapas/mundo/a_bP.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/images/mapas/mundo/a_bP@H.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/images/mapas/mundo/i_1-1.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/images/mapas/mundo/i_1-1_c.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/images/mapas/mundo/i_1-1_c@H.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/images/mapas/mundo/i_1-1_cP.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/images/mapas/mundo/i_1-1_cP@H.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/images/mapas/mundo/i_1-2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/images/mapas/mundo/i_1-2_c.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/images/mapas/mundo/i_1-2_c@H.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/images/mapas/mundo/i_1-3.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/images/mapas/mundo/i_1-3_c.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/images/mapas/mundo/i_1-3_c@H.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/images/mapas/mundo/i_2-1.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/images/mapas/mundo/i_2-1_c.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/images/mapas/mundo/i_2-1_c@H.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/images/mapas/mundo/i_2-2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/images/mapas/mundo/i_2-2_c.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/images/mapas/mundo/i_2-2_c@H.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/images/mapas/mundo/i_2-2_cP.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/images/mapas/mundo/i_2-2_cP@H.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/images/mapas/mundo/i_2-3.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/images/mapas/mundo/i_2-3_c.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/images/mapas/mundo/i_3-1.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/images/mapas/mundo/i_3-1_c.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/images/mapas/mundo/i_3-2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/images/mapas/mundo/i_3-2_c.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/images/mapas/mundo/i_3-3_c.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/images/mapas/mundo/i_3-3_c_r0.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/images/mapas/mundo/i_3-3_c_r0@H.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/images/mapas/mundo/i_3-3_c_r1.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/images/mapas/mundo/i_3-3_c_r1@H.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/images/mapas/mundo/i_3-3_c_r2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/images/mapas/mundo/i_3-3_c_r2@H.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/images/mapas/mundo/i_3-3_r0.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/images/mapas/mundo/i_3-3_r1.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/images/mapas/mundo/i_3-3_r2.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/proyectoJuegoFX/main/java/Jugadores/Jugador.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/proyectoJuegoFX/main/java/Jugadores/Jugador.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/proyectoJuegoFX/main/java/Utils/CallImages.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/proyectoJuegoFX/main/java/Utils/CallImages.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/proyectoJuegoFX/main/java/Utils/Posiciones.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/proyectoJuegoFX/main/java/juego/mapas/Ciudad/Ciudad.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/proyectoJuegoFX/main/java/juego/mapas/Ciudad/Ciudad.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/proyectoJuegoFX/main/java/juego/mapas/Ciudad/CiudadController$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/proyectoJuegoFX/main/java/juego/mapas/Ciudad/CiudadController$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/proyectoJuegoFX/main/java/juego/mapas/Ciudad/CiudadController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/proyectoJuegoFX/main/java/juego/mapas/Ciudad/CiudadController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/proyectoJuegoFX/main/java/juego/mapas/Ciudad/ContentCity/Edificio.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/proyectoJuegoFX/main/java/juego/mapas/Ciudad/ContentCity/Edificio.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/proyectoJuegoFX/main/java/juego/mapas/Mundo/GridPaneRegrowTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/proyectoJuegoFX/main/java/juego/mapas/Mundo/GridPaneRegrowTest.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/proyectoJuegoFX/main/java/juego/mapas/Mundo/MundoController$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/proyectoJuegoFX/main/java/juego/mapas/Mundo/MundoController$1.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/proyectoJuegoFX/main/java/juego/mapas/Mundo/MundoController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/proyectoJuegoFX/main/java/juego/mapas/Mundo/MundoController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/proyectoJuegoFX/main/java/juego/mapas/Mundo/PosicionCasilla.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/proyectoJuegoFX/main/java/juego/mapas/Pelea/Batallon.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/proyectoJuegoFX/main/java/juego/mapas/Pelea/Batallon.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/proyectoJuegoFX/main/java/juego/mapas/Pelea/PeleaController$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/proyectoJuegoFX/main/java/juego/mapas/Pelea/PeleaController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/proyectoJuegoFX/main/java/juego/mapas/Pelea/PeleaController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/proyectoJuegoFX/main/java/juego/mapas/Pelea/Soldados.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/proyectoJuegoFX/main/java/juego/mapas/Pelea/Soldados.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/proyectoJuegoFX/main/java/testLucha/MainLucha2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/proyectoJuegoFX/main/java/testLucha/MainLucha2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/proyectoJuegoFX/main/java/testLucha/Posiciones.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/proyectoJuegoFX/main/resources/images/mapas/mundo/ab.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/proyectoJuegoFX/main/resources/images/mapas/mundo/ab_H.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/proyectoJuegoFX/main/resources/images/mapas/mundo/ab_P.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/proyectoJuegoFX/main/resources/images/mapas/mundo/ab_P_H.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/proyectoJuegoFX/main/resources/images/mapas/mundo/i1-1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/proyectoJuegoFX/main/resources/images/mapas/mundo/i1-1_c.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/proyectoJuegoFX/main/resources/images/mapas/mundo/i1-1_cP.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/proyectoJuegoFX/main/resources/images/mapas/mundo/i1-1_cP_H.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/proyectoJuegoFX/main/resources/images/mapas/mundo/i1-1_c_H.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/proyectoJuegoFX/main/resources/images/mapas/mundo/i1-2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/proyectoJuegoFX/main/resources/images/mapas/mundo/i1-2_c.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/proyectoJuegoFX/main/resources/images/mapas/mundo/i1-2_c_H.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/proyectoJuegoFX/main/resources/images/mapas/mundo/i1-3.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/proyectoJuegoFX/main/resources/images/mapas/mundo/i1-3_c.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/proyectoJuegoFX/main/resources/images/mapas/mundo/i1-3c_H.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/proyectoJuegoFX/main/resources/images/mapas/mundo/i2-1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/proyectoJuegoFX/main/resources/images/mapas/mundo/i2-1c.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/proyectoJuegoFX/main/resources/images/mapas/mundo/i2-1c_H.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/proyectoJuegoFX/main/resources/images/mapas/mundo/i2-2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/proyectoJuegoFX/main/resources/images/mapas/mundo/i2-2_cP.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/proyectoJuegoFX/main/resources/images/mapas/mundo/i2-2_cP_H.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/proyectoJuegoFX/main/resources/images/mapas/mundo/i2-2c.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/proyectoJuegoFX/main/resources/images/mapas/mundo/i2-2c_H.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/proyectoJuegoFX/main/resources/images/mapas/mundo/i2-3.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/proyectoJuegoFX/main/resources/images/mapas/mundo/i2-3c.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/proyectoJuegoFX/main/resources/images/mapas/mundo/i3-1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/proyectoJuegoFX/main/resources/images/mapas/mundo/i3-1c.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/proyectoJuegoFX/main/resources/images/mapas/mundo/i3-2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/proyectoJuegoFX/main/resources/images/mapas/mundo/i3-2c.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/proyectoJuegoFX/main/resources/images/mapas/mundo/i3-3_c.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/proyectoJuegoFX/main/resources/images/mapas/mundo/i3-3_c_r0.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/proyectoJuegoFX/main/resources/images/mapas/mundo/i3-3_c_r0_H.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/proyectoJuegoFX/main/resources/images/mapas/mundo/i3-3_c_r1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/proyectoJuegoFX/main/resources/images/mapas/mundo/i3-3_c_r1_H.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/proyectoJuegoFX/main/resources/images/mapas/mundo/i3-3_c_r2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/proyectoJuegoFX/main/resources/images/mapas/mundo/i3-3_c_r2_H.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/proyectoJuegoFX/main/resources/images/mapas/mundo/i3-3_r0.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/proyectoJuegoFX/main/resources/images/mapas/mundo/i3-3_r1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/proyectoJuegoFX/main/resources/images/mapas/mundo/i3-3_r2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Jugadores/Jugador.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Jugadores/Jugador.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Utils/CallImages.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Utils/CallImages.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Utils/Posiciones.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Utils/Posicion.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/juego/mapas/Ciudad/Ciudad.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/juego/mapas/Ciudad/Ciudad.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/juego/mapas/Ciudad/CiudadController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/juego/mapas/Ciudad/CiudadController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/juego/mapas/Ciudad/ContentCity/Edificio.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/juego/mapas/Ciudad/ContentCity/Edificio.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/juego/mapas/Mundo/GridPaneRegrowTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/juego/mapas/Mundo/GridPaneRegrowTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/juego/mapas/Mundo/MundoController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/juego/mapas/Mundo/MundoController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/juego/mapas/Mundo/PosicionCasilla.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/juego/mapas/Pelea/Batallon.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/juego/mapas/Pelea/Batallon.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/juego/mapas/Pelea/PeleaController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/juego/mapas/Pelea/PeleaController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/juego/mapas/Pelea/Soldados.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/juego/mapas/Pelea/Soldados.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/testLucha/MainLucha2.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/testLucha/MainLucha2.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/testLucha/Posiciones.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/testLucha/Posicion.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/images/mapas/mundo/ab.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/images/mapas/mundo/ab_H.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/images/mapas/mundo/ab_P.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/images/mapas/mundo/ab_P_H.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/images/mapas/mundo/i1-1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/images/mapas/mundo/i1-1_c.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/images/mapas/mundo/i1-1_cP.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/images/mapas/mundo/i1-1_cP_H.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/images/mapas/mundo/i1-1_c_H.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/images/mapas/mundo/i1-2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/images/mapas/mundo/i1-2_c.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/images/mapas/mundo/i1-2_c_H.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/images/mapas/mundo/i1-3.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/images/mapas/mundo/i1-3_c.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/images/mapas/mundo/i1-3c_H.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/images/mapas/mundo/i2-1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/images/mapas/mundo/i2-1c.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/images/mapas/mundo/i2-1c_H.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/images/mapas/mundo/i2-2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/images/mapas/mundo/i2-2_cP.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/images/mapas/mundo/i2-2_cP_H.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/images/mapas/mundo/i2-2c.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/images/mapas/mundo/i2-2c_H.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/images/mapas/mundo/i2-3.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/images/mapas/mundo/i2-3c.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/images/mapas/mundo/i3-1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/images/mapas/mundo/i3-1c.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/images/mapas/mundo/i3-2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/images/mapas/mundo/i3-2c.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/images/mapas/mundo/i3-3_c.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/images/mapas/mundo/i3-3_c_r0.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/images/mapas/mundo/i3-3_c_r0_H.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/images/mapas/mundo/i3-3_c_r1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/images/mapas/mundo/i3-3_c_r1_H.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/images/mapas/mundo/i3-3_c_r2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/images/mapas/mundo/i3-3_c_r2_H.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/images/mapas/mundo/i3-3_r0.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/images/mapas/mundo/i3-3_r1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/images/mapas/mundo/i3-3_r2.png" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -187,7 +44,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../Desktop/videoJuegoCreator/video_Juego/bin" />
+    <property name="last_opened_file_path" value="$USER_HOME$/Desktop/videoJuegoCreator/video_Juego/bin" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -223,6 +80,9 @@
         <item itemvalue="Application.Main" />
       </list>
     </recent_temporary>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -265,6 +125,16 @@
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
   </component>
+  <component name="Vcs.Log.History.Properties">
+    <option name="COLUMN_ORDER">
+      <list>
+        <option value="0" />
+        <option value="2" />
+        <option value="3" />
+        <option value="1" />
+      </list>
+    </option>
+  </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="CallImages external Files" />
@@ -290,35 +160,51 @@
     </state>
     <state x="483" y="10" key="CommitChangelistDialog2/1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1583214037508" />
     <state x="2306" y="8" key="CommitChangelistDialog2/1920.0.1536.832/0.0.1920.1040@1920.0.1536.832" timestamp="1582995596209" />
+    <state x="100" y="131" width="1720" height="850" key="DiffContextDialog" timestamp="1583323552418">
+      <screen x="0" y="31" width="1920" height="1050" />
+    </state>
+    <state x="100" y="131" width="1720" height="850" key="DiffContextDialog/0.31.1920.1050/1920.0.1920.1080@0.31.1920.1050" timestamp="1583323552418" />
     <state x="740" y="275" key="FileChooserDialogImpl" timestamp="1583200999934">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="740" y="275" key="FileChooserDialogImpl/1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1583200999934" />
-    <state width="1877" height="282" key="GridCell.Tab.0.bottom" timestamp="1583297257029">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state width="1874" height="253" key="GridCell.Tab.0.bottom" timestamp="1583323783170">
+      <screen x="0" y="31" width="1920" height="1050" />
     </state>
+    <state width="1874" height="253" key="GridCell.Tab.0.bottom/0.31.1920.1050/1920.0.1920.1080@0.31.1920.1050" timestamp="1583323783170" />
     <state width="1877" height="282" key="GridCell.Tab.0.bottom/1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1583297257029" />
-    <state width="1877" height="282" key="GridCell.Tab.0.center" timestamp="1583297257029">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state width="1874" height="253" key="GridCell.Tab.0.center" timestamp="1583323783170">
+      <screen x="0" y="31" width="1920" height="1050" />
     </state>
+    <state width="1874" height="253" key="GridCell.Tab.0.center/0.31.1920.1050/1920.0.1920.1080@0.31.1920.1050" timestamp="1583323783170" />
     <state width="1877" height="282" key="GridCell.Tab.0.center/1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1583297257029" />
-    <state width="1877" height="282" key="GridCell.Tab.0.left" timestamp="1583297257028">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state width="1874" height="253" key="GridCell.Tab.0.left" timestamp="1583323783170">
+      <screen x="0" y="31" width="1920" height="1050" />
     </state>
+    <state width="1874" height="253" key="GridCell.Tab.0.left/0.31.1920.1050/1920.0.1920.1080@0.31.1920.1050" timestamp="1583323783170" />
     <state width="1877" height="282" key="GridCell.Tab.0.left/1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1583297257028" />
-    <state width="1877" height="282" key="GridCell.Tab.0.right" timestamp="1583297257029">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state width="1874" height="253" key="GridCell.Tab.0.right" timestamp="1583323783170">
+      <screen x="0" y="31" width="1920" height="1050" />
     </state>
+    <state width="1874" height="253" key="GridCell.Tab.0.right/0.31.1920.1050/1920.0.1920.1080@0.31.1920.1050" timestamp="1583323783170" />
     <state width="1877" height="282" key="GridCell.Tab.0.right/1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1583297257029" />
     <state x="440" y="95" key="SettingsEditor" timestamp="1583201135609">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="440" y="95" key="SettingsEditor/1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1583201135609" />
+    <state x="522" y="180" width="866" height="754" key="VCS.ChangeListViewerDialog" timestamp="1583323540165">
+      <screen x="0" y="31" width="1920" height="1050" />
+    </state>
+    <state x="522" y="180" width="866" height="754" key="VCS.ChangeListViewerDialog/0.31.1920.1050/1920.0.1920.1080@0.31.1920.1050" timestamp="1583323540165" />
     <state x="451" y="183" key="Vcs.Push.Dialog.v2" timestamp="1583214041758">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="451" y="183" key="Vcs.Push.Dialog.v2/1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1583214041758" />
     <state x="2281" y="146" key="Vcs.Push.Dialog.v2/1920.0.1536.832/0.0.1920.1040@1920.0.1536.832" timestamp="1582995600276" />
+    <state x="100" y="131" width="1720" height="850" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1583323447092">
+      <screen x="0" y="31" width="1920" height="1050" />
+    </state>
+    <state x="100" y="131" width="1720" height="850" key="com.intellij.history.integration.ui.views.FileHistoryDialog/0.31.1920.1050/1920.0.1920.1080@0.31.1920.1050" timestamp="1583323447092" />
     <state x="656" y="345" key="com.intellij.ide.util.TipDialog" timestamp="1583277913424">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
