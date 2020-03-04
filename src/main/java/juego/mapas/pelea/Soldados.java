@@ -3,7 +3,6 @@ package main.java.juego.mapas.pelea;
 import javafx.scene.image.Image;
 import main.java.Utils.Posicion;
 
-import static main.java.testLucha.MainLucha1.tipoSoldadosTreeMap;
 
 public class Soldados extends Posicion {
     private int id;
@@ -45,6 +44,6 @@ public class Soldados extends Posicion {
 
     @Override
     public String toString() {
-        return id + "_" + tipoSoldadosTreeMap.get(soldadosPreCargados).getNombre() + "=" + cantidad;
+        return id + "_" + soldadosPreCargados.getNombre() + "=" + cantidad;
     }
 }

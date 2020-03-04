@@ -2,13 +2,13 @@ package main.java.testLucha;
 
 import static main.java.testLucha.MainLucha1.tipoSoldadosTreeMap;
 
-public class Soldados {
+public class SoldadosXX {
     private static int lastId=0;
     private int id;
     private int TipoSoldado;
     private int cantidad;
 
-    public Soldados(int TipoSoldado, int cantidad) {
+    public SoldadosXX(int TipoSoldado, int cantidad) {
         id=lastId++;
         this.TipoSoldado = TipoSoldado;
         this.cantidad = cantidad;

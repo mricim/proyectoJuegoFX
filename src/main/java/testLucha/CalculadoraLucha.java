@@ -2,7 +2,6 @@ package main.java.testLucha;
 
 import java.util.ArrayList;
 import java.util.Random;
-import java.util.TreeMap;
 
 public class CalculadoraLucha {
     private static ArrayList<ArrayList> table = new ArrayList<>();
@@ -45,7 +44,7 @@ public class CalculadoraLucha {
         table.add(colum5);
     }
 
-    Integer[] metodoChungo(Soldados grupo1, Soldados grupo2) {
+    Integer[] metodoChungo(SoldadosXX grupo1, SoldadosXX grupo2) {
         int grupo1tipo = grupo1.getTipoSoldado();
         int grupo2tipo = grupo2.getTipoSoldado();
         int grupo1Cantidad = grupo1.getCantidad();

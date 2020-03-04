@@ -7,8 +7,8 @@ import java.util.TreeMap;
 public class MainLucha2 {
     protected static TreeMap<Integer, TipoSoldados> tipoSoldadosTreeMap = new TreeMap();
 
-    protected static TreeMap<Integer, Soldados> ejercito1 = new TreeMap<>(Collections.reverseOrder());
-    protected static TreeMap<Integer, Soldados> ejercito2 = new TreeMap<>(Collections.reverseOrder());
+    protected static TreeMap<Integer, SoldadosXX> ejercito1 = new TreeMap<>(Collections.reverseOrder());
+    protected static TreeMap<Integer, SoldadosXX> ejercito2 = new TreeMap<>(Collections.reverseOrder());
     protected static HashMap<String, Posicion> listaPosicionesSoldados1 = new HashMap<>();
     protected static HashMap<String, Posicion> listaPosicionesSoldados2 = new HashMap<>();
 
@@ -19,25 +19,25 @@ public class MainLucha2 {
         new TipoSoldados(3, "Caballeros");
 
 
-        ejercito1.put(0, new Soldados(0, 10000));
-        ejercito2.put(0, new Soldados(0, 10000));
+        ejercito1.put(0, new SoldadosXX(0, 10000));
+        ejercito2.put(0, new SoldadosXX(0, 10000));
 
-        ejercito1.put(1, new Soldados(1, 10000));
-        ejercito2.put(1, new Soldados(1, 10000));
+        ejercito1.put(1, new SoldadosXX(1, 10000));
+        ejercito2.put(1, new SoldadosXX(1, 10000));
 
-        ejercito1.put(2, new Soldados(2, 10000));
-        ejercito2.put(2, new Soldados(2, 10000));
+        ejercito1.put(2, new SoldadosXX(2, 10000));
+        ejercito2.put(2, new SoldadosXX(2, 10000));
 
-        ejercito1.put(3, new Soldados(3, 10000));
-        ejercito2.put(3, new Soldados(3, 10000));
+        ejercito1.put(3, new SoldadosXX(3, 10000));
+        ejercito2.put(3, new SoldadosXX(3, 10000));
 
         int ejecito1count = 0;
-        for (Soldados soldados : ejercito1.values()) {
-            ejecito1count += soldados.getCantidad();
+        for (SoldadosXX soldadosXX : ejercito1.values()) {
+            ejecito1count += soldadosXX.getCantidad();
         }
         int ejecito2count = 0;
-        for (Soldados soldados : ejercito2.values()) {
-            ejecito2count += soldados.getCantidad();
+        for (SoldadosXX soldadosXX : ejercito2.values()) {
+            ejecito2count += soldadosXX.getCantidad();
         }
         boolean ejecito1puede = false;
         if (ejecito1count > 7000) {
@@ -47,19 +47,19 @@ public class MainLucha2 {
         if (ejecito2count > 7000) {
             ejecito2puede = true;
         }
-        for (Soldados soldados : ejercito1.values()) {
+        for (SoldadosXX soldadosXX : ejercito1.values()) {
             for (int i = listaPosicionesSoldados1.size(); i < 7; i++) {
-                if (soldados.getCantidad() >= 1000) {
-                    new Posicion(1, i, 1, 1000, soldados);
+                if (soldadosXX.getCantidad() >= 1000) {
+                    new Posicion(1, i, 1, 1000, soldadosXX);
                 }else {
                     break;
                 }
             }
         }
-        for (Soldados soldados : ejercito2.values()) {
+        for (SoldadosXX soldadosXX : ejercito2.values()) {
             for (int i = listaPosicionesSoldados2.size(); i < 7; i++) {
-                if (soldados.getCantidad() >= 1000) {
-                    new Posicion(2, i, 2, 1000, soldados);
+                if (soldadosXX.getCantidad() >= 1000) {
+                    new Posicion(2, i, 2, 1000, soldadosXX);
                 }else {
                     break;
                 }
@@ -83,8 +83,8 @@ public class MainLucha2 {
 
         //while (listaSoldados.size() > 0 && listaSoldados2.size() > 0) {
             for (int i = 0; i < count; i++) {
-                Soldados grupo1 = ejercito1.get(i);
-                Soldados grupo2;
+                SoldadosXX grupo1 = ejercito1.get(i);
+                SoldadosXX grupo2;
                 try {
                     grupo2 = ejercito2.get(i);
                 } catch (Exception e) {

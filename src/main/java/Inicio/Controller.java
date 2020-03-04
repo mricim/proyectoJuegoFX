@@ -64,7 +64,6 @@ public class Controller extends PrimaryStageControler implements Initializable {
         new EdificiosPreCargados(13, "Palacio", "NONE", true, true, 1, 0, 0, 99, 99, 99, 20, 10, 10, 10, 10, 10, 10, 10, 50, 0, 0, 0, 0, 0);
         new EdificiosPreCargados(14, "Maquinas de guerra", "NONE", true, true, 1, 0, 0, 99, 99, 99, 20, 10, 10, 10, 10, 10, 10, 10, 50, 0, 0, 0, 0, 0);
         progresBar.setProgress(30);
-
         new SoldadosPreCargados(0, "Espadachines", 0);//se podria poner comida
         new SoldadosPreCargados(1, "Lanceros", 0);
         new SoldadosPreCargados(2, "Arqueros", 100);

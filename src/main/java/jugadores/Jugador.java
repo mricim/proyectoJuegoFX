@@ -3,11 +3,11 @@ package main.java.jugadores;
 import javafx.scene.image.Image;
 import main.java.Utils.CallImages;
 import main.java.Utils.PrimaryStageControler;
-import main.java.juego.mapas.ciudad.EdificiosPreCargados;
+import main.java.juego.mapas.Recursos;
 import main.java.juego.mapas.pelea.Batallon;
 import main.java.juego.mapas.pelea.Soldados;
 import main.java.juego.mapas.pelea.SoldadosPreCargados;
-import main.java.juego.mapas.Recursos;
+import main.java.juego.mapas.ciudad.EdificiosPreCargados;
 import main.java.juego.mapas.ciudad.Ciudad;
 
 import java.util.*;

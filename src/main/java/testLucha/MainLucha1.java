@@ -6,8 +6,8 @@ import java.util.TreeMap;
 public class MainLucha1 {
     public static TreeMap<Integer, TipoSoldados> tipoSoldadosTreeMap = new TreeMap();
 
-    private static ArrayList<Soldados> listaSoldados = new ArrayList<>();
-    private static ArrayList<Soldados> listaSoldados2 = new ArrayList<>();
+    private static ArrayList<SoldadosXX> listaSoldados = new ArrayList<>();
+    private static ArrayList<SoldadosXX> listaSoldadosXX2 = new ArrayList<>();
 
 
     public static void main(String[] args) {
@@ -20,35 +20,35 @@ public class MainLucha1 {
         new TipoSoldados(3, "Caballeros");
 
 
-        listaSoldados.add(new Soldados(0, 100));
-        listaSoldados2.add(new Soldados(0, 100));
+        listaSoldados.add(new SoldadosXX(0, 100));
+        listaSoldadosXX2.add(new SoldadosXX(0, 100));
 
-        listaSoldados.add(new Soldados(0, 100));
-        listaSoldados2.add(new Soldados(0, 50));
+        listaSoldados.add(new SoldadosXX(0, 100));
+        listaSoldadosXX2.add(new SoldadosXX(0, 50));
 
-        listaSoldados.add(new Soldados(2, 100));
-        listaSoldados2.add(new Soldados(1, 100));
+        listaSoldados.add(new SoldadosXX(2, 100));
+        listaSoldadosXX2.add(new SoldadosXX(1, 100));
 
-        listaSoldados.add(new Soldados(2, 100));
-        listaSoldados2.add(new Soldados(1, 50));
+        listaSoldados.add(new SoldadosXX(2, 100));
+        listaSoldadosXX2.add(new SoldadosXX(1, 50));
 
-        listaSoldados.add(new Soldados(2, 1000));
-        listaSoldados2.add(new Soldados(1, 1000));
+        listaSoldados.add(new SoldadosXX(2, 1000));
+        listaSoldadosXX2.add(new SoldadosXX(1, 1000));
 
-        listaSoldados.add(new Soldados(2, 1000));
-        listaSoldados2.add(new Soldados(1, 500));
+        listaSoldados.add(new SoldadosXX(2, 1000));
+        listaSoldadosXX2.add(new SoldadosXX(1, 500));
 
-        listaSoldados.add(new Soldados(2, 500));
-        listaSoldados2.add(new Soldados(1, 1000));
+        listaSoldados.add(new SoldadosXX(2, 500));
+        listaSoldadosXX2.add(new SoldadosXX(1, 1000));
 
-        listaSoldados.add(new Soldados(3, 100));
-        listaSoldados2.add(new Soldados(0, 100));
+        listaSoldados.add(new SoldadosXX(3, 100));
+        listaSoldadosXX2.add(new SoldadosXX(0, 100));
 
-        listaSoldados.add(new Soldados(3, 50));
-        listaSoldados2.add(new Soldados(0, 100));
+        listaSoldados.add(new SoldadosXX(3, 50));
+        listaSoldadosXX2.add(new SoldadosXX(0, 100));
 
-        listaSoldados.add(new Soldados(0, 1000));
-        listaSoldados2.add(new Soldados(3, 50));
+        listaSoldados.add(new SoldadosXX(0, 1000));
+        listaSoldadosXX2.add(new SoldadosXX(3, 50));
 
        CalculadoraLucha calculadoraLucha = new CalculadoraLucha();
 
@@ -56,10 +56,10 @@ public class MainLucha1 {
 
         //while (listaSoldados.size() > 0 && listaSoldados2.size() > 0) {
             for (int i = 0; i < count; i++) {
-                Soldados grupo1 = listaSoldados.get(i);
-                Soldados grupo2;
+                SoldadosXX grupo1 = listaSoldados.get(i);
+                SoldadosXX grupo2;
                 try {
-                    grupo2 = listaSoldados2.get(i);
+                    grupo2 = listaSoldadosXX2.get(i);
                 } catch (Exception e) {
                         break;
                 }
@@ -73,12 +73,12 @@ public class MainLucha1 {
                     listaSoldados.remove(grupo1);
                 }
                 if (grupo2.getCantidad() <= 0) {
-                    listaSoldados2.remove(grupo2);
+                    listaSoldadosXX2.remove(grupo2);
                 }
             }
       //  }
         System.out.println(listaSoldados);
-        System.out.println(listaSoldados2);
+        System.out.println(listaSoldadosXX2);
 
     }
 

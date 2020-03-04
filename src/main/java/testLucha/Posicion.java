@@ -4,15 +4,15 @@ package main.java.testLucha;
 import static main.java.testLucha.MainLucha2.*;
 
 public class Posicion extends main.java.Utils.Posicion {
-    private Soldados soldados;
+    private SoldadosXX soldadosXX;
     private int ejercito;
 
-    public Posicion(int y, int x, int ejercito, int cantidad, Soldados soldados) {
+    public Posicion(int y, int x, int ejercito, int cantidad, SoldadosXX soldadosXX) {
         super(y, x);
-        int total=soldados.getCantidad();
-        soldados.setCantidad(total-cantidad);
+        int total= soldadosXX.getCantidad();
+        soldadosXX.setCantidad(total-cantidad);
 
-        this.soldados = new Soldados(soldados.getTipoSoldado(),cantidad);
+        this.soldadosXX = new SoldadosXX(soldadosXX.getTipoSoldado(),cantidad);
         this.ejercito=ejercito;
 
         if (ejercito == 1) {
@@ -22,14 +22,14 @@ public class Posicion extends main.java.Utils.Posicion {
         }
     }
 
-    public Soldados getSoldados() {
-        return soldados;
+    public SoldadosXX getSoldadosXX() {
+        return soldadosXX;
     }
 
     @Override
     public String toString() {
         return "Posiciones{" +
-                "soldados=" + soldados +
+                "soldados=" + soldadosXX +
                 ", y=" + super.getFila() +
                 ", x=" + super.getColumna() +
                 '}';

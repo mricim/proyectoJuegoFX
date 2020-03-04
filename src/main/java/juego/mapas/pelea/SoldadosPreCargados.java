@@ -4,9 +4,13 @@ package main.java.juego.mapas.pelea;
 import javafx.scene.image.Image;
 import main.java.Utils.ImageGetter;
 
+import java.util.TreeMap;
+
 import static main.java.jugadores.Jugador.SoldadosPreCargada;
 
+
 public class SoldadosPreCargados implements ImageGetter {
+
     private int id;
     private String nombre;
     private int maxMunicion;
