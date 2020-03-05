@@ -36,7 +36,7 @@ public class PeleaController extends PrimaryStageControler implements Initializa
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        jugador = getJugador();
+        jugador = getJugadorPrimaryStageController();
 /*
         int oroDisponible = mundo.getOro();
         oro.setText(String.valueOf(oroDisponible));

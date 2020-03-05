@@ -2,6 +2,7 @@ package main.java.Inicio;
 
 import javafx.fxml.Initializable;
 import javafx.scene.control.ProgressBar;
+import main.java.jugadores.Clan;
 import main.java.jugadores.Jugador;
 import main.java.Utils.PrimaryStageControler;
 import main.java.juego.mapas.ciudad.CiudadController;
@@ -42,7 +43,7 @@ public class Controller extends PrimaryStageControler implements Initializable {
         callbd();
         progresBar.setProgress(100);
         try {
-            new PrimaryStageControler().reload(getStage(), CiudadController.THIS_RUTE, true);
+            new PrimaryStageControler().reload(getStagePrimaryStageController(), CiudadController.THIS_RUTE, true);
         } catch (IOException ex) {
             ex.printStackTrace();
         }
@@ -70,9 +71,16 @@ public class Controller extends PrimaryStageControler implements Initializable {
         new SoldadosPreCargados(3, "Caballeros", 50);
         progresBar.setProgress(50);
         //TODO DESDE LA BD
-        setJugador(new Jugador(idJugador, "pepito", 500));
+        Clan clan = new Clan(1, "Los mejores");
+        Jugador jugador = new Jugador(idJugador, "pepito", 500);
+        setJugadorPrimaryStageController(jugador);
+        setClanPrimaryStageController(clan);
+        progresBar.setProgress(60);
         new Jugador(2, "juan", 300);
+        new Jugador(3, "pedro", 8000);
         progresBar.setProgress(70);
+        clan.addJugadorClan(jugador);
+        clan.addJugadorClan(3);
         progresBar.setProgress(80);
     }
 }

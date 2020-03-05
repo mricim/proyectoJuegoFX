@@ -3,6 +3,7 @@ package main.java.Utils;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.stage.Stage;
+import main.java.jugadores.Clan;
 import main.java.jugadores.Jugador;
 import main.java.Main;
 import main.java.juego.mapas.ciudad.Ciudad;
@@ -16,42 +17,56 @@ public class PrimaryStageControler {
 
     private static final String RUTE = System.getProperty("user.dir") + "/src/main/java/";
 
-    private static Jugador jugador;
+    //VARIABLES PREDEFINIDAS
 
-    public static Jugador getJugador() {
-        return jugador;
+    private static Clan clanPrimaryStageController;
+
+    public static Clan getClanPrimaryStageController() {
+        return clanPrimaryStageController;
     }
 
-    public static void setJugador(Jugador jugador) {
-        PrimaryStageControler.jugador = jugador;
+    public static void setClanPrimaryStageController(Clan clanPrimaryStageController) {
+        PrimaryStageControler.clanPrimaryStageController = clanPrimaryStageController;
     }
 
-    private static Ciudad ciudad;
+    private static Jugador jugadorPrimaryStageController;
 
-    public static Ciudad getCiudad() {
-        return ciudad;
+    public static Jugador getJugadorPrimaryStageController() {
+        return jugadorPrimaryStageController;
     }
 
-    public static void setCiudad(Ciudad ciudad) {
-        PrimaryStageControler.ciudad = ciudad;
+    public static void setJugadorPrimaryStageController(Jugador jugadorPrimaryStageController) {
+        PrimaryStageControler.jugadorPrimaryStageController = jugadorPrimaryStageController;
     }
 
+    private static Ciudad ciudadPrimaryStageController;
 
-    protected static Stage stage;
+    public static Ciudad getCiudadPrimaryStageController() {
+        return ciudadPrimaryStageController;
+    }
+
+    public static void setCiudadPrimaryStageController(Ciudad ciudadPrimaryStageController) {
+        PrimaryStageControler.ciudadPrimaryStageController = ciudadPrimaryStageController;
+    }
+
+    //FIN VARIALBES PREDEFINIDAS
+
+    protected static Stage stagePrimaryStageController;
 
     public static void setPrimaryStage(Stage primaryStage) {
-       stage = primaryStage;
+        stagePrimaryStageController = primaryStage;
     }
 
-    public static Stage getStage() {
-        return stage;
+    public static Stage getStagePrimaryStageController() {
+        return stagePrimaryStageController;
     }
+
 
     public void cambiarNombreStage(String nuevoNombre) {
         if (nuevoNombre == null) {
-            stage.setTitle("Nombre Aplicación");
+            stagePrimaryStageController.setTitle("Nombre Aplicación");
         } else {
-            stage.setTitle(nuevoNombre);
+            stagePrimaryStageController.setTitle(nuevoNombre);
         }
 
     }
@@ -70,8 +85,9 @@ public class PrimaryStageControler {
             //loader.setLocation(Paths.get(RUTE + rute).toUri().toURL());
             URI nada = null;
             try {
-                nada= Main.class.getResource(rute).toURI();
-            }catch (Exception e){}
+                nada = Main.class.getResource(rute).toURI();
+            } catch (Exception e) {
+            }
 //            System.out.println(nada.toString());
             loader.setLocation(nada.toURL());
             //Path path=Paths.get(RUTE + rute);

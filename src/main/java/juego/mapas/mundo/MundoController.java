@@ -18,6 +18,7 @@ import main.java.juego.MapasController;
 import main.java.juego.mapas.ciudad.Ciudad;
 import main.java.juego.mapas.ciudad.CiudadController;
 import main.java.juego.mapas.pelea.Batallon;
+import main.java.jugadores.Jugador;
 
 import java.io.IOException;
 import java.net.URL;
@@ -27,8 +28,8 @@ import static javafx.geometry.Pos.TOP_CENTER;
 import static javafx.scene.control.ScrollPane.ScrollBarPolicy.NEVER;
 import static javafx.scene.text.TextAlignment.CENTER;
 import static jdk.nashorn.internal.objects.Global.Infinity;
-import static main.java.jugadores.Jugador.listaBatallones;
 import static main.java.jugadores.Jugador.listaCiudades;
+import static main.java.jugadores.Jugador.listaPosicionesBatallones;
 
 
 public class MundoController extends MapasController implements Initializable {
@@ -53,7 +54,7 @@ public class MundoController extends MapasController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         inicialiceController();
-        recursosMenu(recuros, ciudadController.getRecursosTreeMap().values());
+        recursosMenu(recuros, getCiudadPrimaryStageController().getRecursosTreeMap().values());
         selectorDeCiudad(THIS_RUTE, selectorCiudad);
         gridPaneMap.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {//Cerrar el menu
             queClicas(null, true, null, null);
@@ -80,21 +81,21 @@ public class MundoController extends MapasController implements Initializable {
         String letter_hover = "@H";
 
         Character letter_agua = 'a';
-        String letter_barco = "_b";
+        String letter_batallon = "_b";
 
         String letter_isla = "i_";
         String letter_city = "_c";
+        Character letter_Clan = 'Z';
         String letter_random = "_r";
 
-        Character letter_propio = 'P';
+        Character letter_propio_esNuestro = 'P';
 
         for (int fila = 0; fila < tamaño; fila++) {
             ColumnConstraints col = new ColumnConstraints(100);
             gridPaneMap.getColumnConstraints().add(col);
             for (int columna = 0; columna < tamaño; columna++) {
                 Ciudad ciudadToGrid = null;
-                Batallon batallonToGrid = null;//creamos las variables por si nos hacen falta
-                //TODO XXXXXXXXXXXXXX
+                ArrayList<Batallon> batallonesToGrid = null;//creamos las variables por si nos hacen falta
                 ImageView imageView = new ImageView();
                 if (fila == 0) {
                     RowConstraints row = new RowConstraints(100);
@@ -109,21 +110,21 @@ public class MundoController extends MapasController implements Initializable {
                 int columnaModule = columna % 5;
                 if (filaModule == 0 || filaModule == 4 || columnaModule == 0 || columnaModule == 4) {
                     stringBuilder.append(letter_agua);
-
-                    batallonToGrid = listaBatallones.get(position);
-                    if (batallonToGrid != null) {
-                        stringBuilder.append(letter_barco);
-                        if (jugadorController.listaBatallonesPropios.containsKey(position)) {
-                            stringBuilder.append(letter_propio);
-                        }
-                    }
                 } else {
                     stringBuilder.append(letter_isla + filaModule + letter_guion + columnaModule);
                     ciudadToGrid = listaCiudades.get(position);
                     if (ciudadToGrid != null) {
                         stringBuilder.append(letter_city);
-                        if (jugadorController.listaCiudadesPropias.containsKey(position)) {
-                            stringBuilder.append(letter_propio);
+                        if (getJugadorPrimaryStageController().listaCiudadesPropias.containsKey(position)) {
+                            stringBuilder.append(letter_propio_esNuestro);
+                        }else{
+                            for (Jugador jugador : getClanPrimaryStageController().getJugadoresDelClan().values()) {
+                                if (jugador.listaCiudadesPropias.containsKey(position)){
+                                    stringBuilder.append(letter_Clan);
+                                    break;
+                                }
+                            }
+
                         }
                     }
                     if (filaModule == 3 && columnaModule == 3) {//TODO RANDOMIZADOR PARA LA POSICION 3-3
@@ -145,12 +146,26 @@ public class MundoController extends MapasController implements Initializable {
                     }
 
                 }
-
+                batallonesToGrid = listaPosicionesBatallones.get(position);
+                if (batallonesToGrid != null) {
+                    stringBuilder.append(letter_batallon);
+                    //TODO ESTO HAY QUE SOLUCIONARLO
+                    /*
+                    for (Batallon batallon : batallonesToGrid) {
+                        batallon.
+                        if (Clan.clanArrayList.contains()){
+                        stringBuilder.append(letter_Clan)}
+                    }
+*/
+                    if (getJugadorPrimaryStageController().listaBatallonesPropios.containsKey(position)) {
+                        stringBuilder.append(letter_propio_esNuestro);
+                    }
+                }
                 String nameImage = stringBuilder.toString();
 
                 imageView.setImage(CallImages.getImage(RUTE, nameImage));
 
-                if (stringBuilder.indexOf(letter_barco) != -1 || stringBuilder.indexOf(letter_city) != -1) {//he pensado que el maus solo se ponga* en las ciudades y los barcos
+                if (stringBuilder.indexOf(letter_batallon) != -1 || stringBuilder.indexOf(letter_city) != -1) {//he pensado que el maus solo se ponga* en las ciudades y los barcos
                     imageView.addEventHandler(MouseEvent.MOUSE_ENTERED, event -> {
                         imageView.setCursor(Cursor.HAND);
                         try {
@@ -169,9 +184,9 @@ public class MundoController extends MapasController implements Initializable {
                         imageView.setImage(CallImages.getImage(RUTE, nameImage));
                     });
                     Ciudad finalCiudadToGrid = ciudadToGrid;
-                    Batallon finalBatallonToGrid = batallonToGrid;
+                    ArrayList<Batallon> finalBatallonesToGrid = batallonesToGrid;
                     imageView.setOnMouseClicked(e -> {
-                        queClicas(imageView, false, finalCiudadToGrid, finalBatallonToGrid);
+                        queClicas(imageView, false, finalCiudadToGrid, finalBatallonesToGrid);
                     });
                 } else {
                     if (nameImage.indexOf(letter_isla) != -1) {
@@ -192,7 +207,7 @@ public class MundoController extends MapasController implements Initializable {
 
     }
 
-    private void queClicas(ImageView imageView, boolean agua, Ciudad ciudad, Batallon batallon) {
+    private void queClicas(ImageView imageView, boolean agua, Ciudad ciudad, ArrayList<Batallon> batallones) {
         if (basura) {//BLOQUEA UN MOMENTO EL SISTEMA DE CLIC PARA QUE CARGE EL MENU Y NO LO BORRE
             if (agua) {
                 borderPane.setLeft(null);//System.out.println("Limpiar menu izquierda");
@@ -208,7 +223,7 @@ public class MundoController extends MapasController implements Initializable {
                         }
                     }
                 }).start();
-                createMenuLeft(borderPane, imageView, ciudad, batallon);
+                createMenuLeft(borderPane, imageView, ciudad, batallones);
             }
         }
     }
@@ -235,31 +250,31 @@ public class MundoController extends MapasController implements Initializable {
         //TODO como comprobar que una ciudad pertenece a un jugador, por que el if de abajo no funciona!!
         //Si la ciudad pertenece al jugador puede ver mas cosas , sino solo podrá ver el nombre de la ciudad
 //        if (jugadorController.listaCiudadesPropias.containsKey(ciudadMapa.getNameCity())) {
-            //nombre
-            nombreCiudad = new Label(ciudadMapa.getNameCity());
-            nombreCiudad.setTextAlignment(CENTER);
-            nombreCiudad.setAlignment(Pos.CENTER);
-            nombreCiudad.setWrapText(true);
-            childrenVBox.add(nombreCiudad);
-            //Imagen ciudad
-            imgViewCiudad = new ImageView(imageView.getImage());
-            imgViewCiudad.setPickOnBounds(true);
-            imgViewCiudad.setPreserveRatio(true);
-            childrenVBox.add(imgViewCiudad);
-            //Nivel ciudad
-            nivelCiudadPropia = new Label("Nivel: " + ciudadMapa.getNivelCiudad());
-            nivelCiudadPropia.setTextAlignment(CENTER);
-            nivelCiudadPropia.setAlignment(Pos.CENTER);
-            nivelCiudadPropia.setWrapText(true);
-            childrenVBox.add(nivelCiudadPropia);
-            //Descripción ciudad
-            descripcionCiudad = new Label("Descripción ciudad");
-            descripcionCiudad.setTextAlignment(CENTER);
-            descripcionCiudad.setAlignment(Pos.CENTER);
-            descripcionCiudad.setWrapText(true);
-            childrenVBox.add(descripcionCiudad);
+        //nombre
+        nombreCiudad = new Label(ciudadMapa.getNameCity());
+        nombreCiudad.setTextAlignment(CENTER);
+        nombreCiudad.setAlignment(Pos.CENTER);
+        nombreCiudad.setWrapText(true);
+        childrenVBox.add(nombreCiudad);
+        //Imagen ciudad
+        imgViewCiudad = new ImageView(imageView.getImage());
+        imgViewCiudad.setPickOnBounds(true);
+        imgViewCiudad.setPreserveRatio(true);
+        childrenVBox.add(imgViewCiudad);
+        //Nivel ciudad
+        nivelCiudadPropia = new Label("Nivel: " + ciudadMapa.getNivelCiudad());
+        nivelCiudadPropia.setTextAlignment(CENTER);
+        nivelCiudadPropia.setAlignment(Pos.CENTER);
+        nivelCiudadPropia.setWrapText(true);
+        childrenVBox.add(nivelCiudadPropia);
+        //Descripción ciudad
+        descripcionCiudad = new Label("Descripción ciudad");
+        descripcionCiudad.setTextAlignment(CENTER);
+        descripcionCiudad.setAlignment(Pos.CENTER);
+        descripcionCiudad.setWrapText(true);
+        childrenVBox.add(descripcionCiudad);
 
-            vBoxBloquePropio.setMargin(descripcionCiudad, new Insets(0, 15, 0, 15));
+        vBoxBloquePropio.setMargin(descripcionCiudad, new Insets(0, 15, 0, 15));
 
 //            } else {
 //                nombreCiudad = new Label(ciudadMapa.getNameCity());
@@ -275,25 +290,26 @@ public class MundoController extends MapasController implements Initializable {
 //            childrenVBox.add(separator);
 
 
-
         //FIN BLOQUE
         return vBoxBloquePropio;
     }
 
 
-    private static void createMenuLeft(BorderPane borderPane, ImageView imageView, Ciudad ciudad, Batallon batallon) {
+    private static void createMenuLeft(BorderPane borderPane, ImageView imageView, Ciudad ciudad, ArrayList<Batallon> batallones) {
         List<VBox> vBoxList = new ArrayList<>();
 
-//        int  ciudadId = ciudad.getIdCiudad();
         String text = "";
         if (ciudad != null) {
             text = ciudad.getNameCity();
-            vBoxList.add(cajaCiudad(ciudad,imageView,1));
+            vBoxList.add(cajaCiudad(ciudad, imageView, 1));
         }
-        if (batallon != null) {
+        if (batallones != null) {
             //TODO hacer metodo de cajaBatallon
-            text = text + " " + batallon.getNombre();
-            vBoxList.add(new VBox(new Label(text)));
+            for (Batallon batallon : batallones) {
+                text = text + " " + batallon.getNombre();
+                vBoxList.add(new VBox(new Label(text)));
+            }
+
         }
 
         VBox vBox = new VBox();
@@ -317,7 +333,7 @@ public class MundoController extends MapasController implements Initializable {
 
     public void toMundo(MouseEvent mouseEvent) {//TODO ES POSIBLE QUE EN ESTE MAPA NO INTERESE TENER ESTO
         try {
-            new PrimaryStageControler().reload(getStage(), CiudadController.THIS_RUTE, false);
+            new PrimaryStageControler().reload(getStagePrimaryStageController(), CiudadController.THIS_RUTE, false);
         } catch (IOException ex) {
             ex.printStackTrace();
         }

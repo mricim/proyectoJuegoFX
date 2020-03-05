@@ -59,7 +59,7 @@ public class CiudadController extends MapasController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         inicialiceController();
-        recursosMenu(recuros, ciudadController.getRecursosTreeMap().values());
+        recursosMenu(recuros, getCiudadPrimaryStageController().getRecursosTreeMap().values());
         selectorDeCiudad(THIS_RUTE, selectorCiudad);
         gridPaneMap.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {//Cerrar el menu
             queClicas(null, null);
@@ -105,7 +105,7 @@ public class CiudadController extends MapasController implements Initializable {
         }
 */
 
-        Collection<Edificio> posicionEdificios = getCiudad().getListaPosicionesEdificios().values();
+        Collection<Edificio> posicionEdificios = getCiudadPrimaryStageController().getListaPosicionesEdificios().values();
         for (Edificio edificio : posicionEdificios) {
             Image image = edificio.getImage();
             ImageView imageView = new ImageView(image);
@@ -188,7 +188,7 @@ public class CiudadController extends MapasController implements Initializable {
 
 
         } else {//PARCELAS
-            Collection<Edificio> posicionEdificios = getCiudad().getListaPosicionesEdificios().values();
+            Collection<Edificio> posicionEdificios = getCiudadPrimaryStageController().getListaPosicionesEdificios().values();
             TreeMap<Integer, Integer> counterTiposDeEdificioEnLaCiudad = new TreeMap<>();
             for (Edificio edificio1 : posicionEdificios) {
                 int id = edificio1.getId();
@@ -201,7 +201,7 @@ public class CiudadController extends MapasController implements Initializable {
             vBoxList.add(cajaEdificio(edificio, imageView, true, edificio.getEdificiosPreCargado(), 0));
             for (Map.Entry<String, EdificiosPreCargados> preCargadosEntry : listaEdificiosPreCargados.entrySet()) {
                 EdificiosPreCargados temp = preCargadosEntry.getValue();
-                if (temp.getNivel() == 0 && temp.isConstruible() && ciudadController.getNivelCiudad() >= temp.getNivelCastilloNecesario()) {
+                if (temp.getNivel() == 0 && temp.isConstruible() && getCiudadPrimaryStageController().getNivelCiudad() >= temp.getNivelCastilloNecesario()) {
 //                    System.out.println(temp.getNombre() + " " + temp.getNivel() + " " + temp.isConstruible() + " " + ciudad.getNivelCiudad() + " " + temp.getNivelCastilloNecesario());
 //                    System.out.println(temp.getNombre() + " " + counterTiposDeEdificioEnLaCiudad.get(temp.getId()) + " " + counterTiposDeEdificioEnLaCiudad.get(temp.getId()) + ">" + temp.getMaximoEdificiosDelMismoTipo());
                     if (counterTiposDeEdificioEnLaCiudad.get(temp.getId()) == null || counterTiposDeEdificioEnLaCiudad.get(temp.getId()) < temp.getMaximoEdificiosDelMismoTipo()) {
@@ -301,7 +301,7 @@ public class CiudadController extends MapasController implements Initializable {
                 if (tipoDeBoton == 1 || tipoDeBoton == 2) {//CALCULAR RECURSOS
                     for (Recursos edificioCostes : edificioQueSaleEnMenu.getRecursosCostes().values()) {
                         int id = edificioCostes.getId();
-                        if ((!(id == 5)) && edificioCostes.getCantidad() > ciudadController.getRecursosTreeMap().get(edificioCostes.getId()).getCantidad()) {
+                        if ((!(id == 5)) && edificioCostes.getCantidad() > getCiudadPrimaryStageController().getRecursosTreeMap().get(edificioCostes.getId()).getCantidad()) {
                             button.setDisable(true);
                             break;
                         }
@@ -378,7 +378,7 @@ public class CiudadController extends MapasController implements Initializable {
 
     public void toMundo(MouseEvent mouseEvent) {
         try {
-            new PrimaryStageControler().reload(getStage(), MundoController.THIS_RUTE, false);
+            new PrimaryStageControler().reload(getStagePrimaryStageController(), MundoController.THIS_RUTE, false);
         } catch (IOException ex) {
             ex.printStackTrace();
         }

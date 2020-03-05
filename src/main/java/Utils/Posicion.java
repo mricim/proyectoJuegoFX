@@ -8,9 +8,7 @@ public abstract class Posicion {
 //Create objects contain
 
     public Posicion(int fila, int columna) {
-        this.fila = fila;
-        this.columna = columna;
-        position= fila +"_"+ columna;
+        setFilaColumna(fila, columna);
         //this.object=object
         //add list objects *
     }
@@ -27,12 +25,10 @@ public abstract class Posicion {
         return position;
     }
 
-    public void setFila(int fila) {
+    public void setFilaColumna(int fila, int columna) {
         this.fila = fila;
-    }
-
-    public void setColumna(int columna) {
         this.columna = columna;
+        this.position = fila + "_" + columna;
     }
 
     @Override

@@ -4,6 +4,7 @@ package main.java.juego.mapas.pelea;
 import main.java.jugadores.Jugador;
 import main.java.Utils.Posicion;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Batallon extends Posicion {
@@ -20,8 +21,16 @@ public class Batallon extends Posicion {
         this.nombre = nombre;
         this.proyectiles = proyectiles;
 
-        jugador.listaBatallonesPropios.put(this.getPosition(), this);
-        jugador.listaBatallones.put(this.getPosition(), this);
+        String posicion = this.getPosition();
+        jugador.listaBatallonesPropios.put(posicion, this);
+        //Jugador.listaBatallones.put(posicion, this);
+        if (Jugador.listaPosicionesBatallones.containsKey(this.getPosition())) {
+            Jugador.listaPosicionesBatallones.get(posicion).add(this);
+        } else {
+            ArrayList<Batallon> batallonArrayList = new ArrayList<>();
+            batallonArrayList.add(this);
+            Jugador.listaPosicionesBatallones.put(posicion, batallonArrayList);
+        }
     }
 
     public int getIdBatallon() {

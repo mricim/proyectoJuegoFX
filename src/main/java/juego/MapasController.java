@@ -18,15 +18,11 @@ import java.io.IOException;
 import java.util.Collection;
 
 public class MapasController extends PrimaryStageControler {
-    public static Jugador jugadorController;
-    public static Ciudad ciudadController;
     public static String nameThisCityController;
 
 
     public void inicialiceController() {
-        jugadorController = getJugador();
-        ciudadController = getCiudad();
-        nameThisCityController = ciudadController.getNameCity();
+        nameThisCityController = getCiudadPrimaryStageController().getNameCity();
 
     }
 
@@ -50,15 +46,15 @@ public class MapasController extends PrimaryStageControler {
 
     public void selectorDeCiudad(String ruteController, SplitMenuButton selectorCiudad) {
         selectorCiudad.setText(nameThisCityController);//Seleccionar otra ciudad
-        for (Ciudad ciudadTemp : jugadorController.listaCiudadesPropias.values()) {
+        for (Ciudad ciudadTemp : getJugadorPrimaryStageController().listaCiudadesPropias.values()) {
             String nameCity = ciudadTemp.getNameCity();
             if (nameThisCityController != nameCity) {
                 MenuItem menuItem = new MenuItem();
                 menuItem.setText(nameCity);
                 menuItem.setOnAction((e) -> {
-                    setCiudad(ciudadTemp);
+                    setCiudadPrimaryStageController(ciudadTemp);
                     try {
-                        new PrimaryStageControler().reload(getStage(), ruteController, false);
+                        new PrimaryStageControler().reload(getStagePrimaryStageController(), ruteController, false);
                     } catch (IOException ex) {
                         ex.printStackTrace();
                     }
