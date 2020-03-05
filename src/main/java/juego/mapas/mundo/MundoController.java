@@ -117,9 +117,9 @@ public class MundoController extends MapasController implements Initializable {
                         stringBuilder.append(letter_city);
                         if (getJugadorPrimaryStageController().listaCiudadesPropias.containsKey(position)) {
                             stringBuilder.append(letter_propio_esNuestro);
-                        }else{
+                        } else {
                             for (Jugador jugador : getClanPrimaryStageController().getJugadoresDelClan().values()) {
-                                if (jugador.listaCiudadesPropias.containsKey(position)){
+                                if (jugador.listaCiudadesPropias.containsKey(position)) {
                                     stringBuilder.append(letter_Clan);
                                     break;
                                 }
@@ -229,7 +229,7 @@ public class MundoController extends MapasController implements Initializable {
     }
 
 
-    private static VBox cajaCiudad(Ciudad ciudadMapa, ImageView imageView, int tipoDeBoton) {
+    private static VBox cajaCiudad(Ciudad ciudadMapa, ImageView imageView) {
 
 
         //Objetos de ciudad
@@ -247,47 +247,115 @@ public class MundoController extends MapasController implements Initializable {
         vBoxBloquePropio.setBackground(new Background(new BackgroundFill(Color.ANTIQUEWHITE, CornerRadii.EMPTY, Insets.EMPTY)));
         ObservableList<Node> childrenVBox = vBoxBloquePropio.getChildren();
 
-        //TODO como comprobar que una ciudad pertenece a un jugador, por que el if de abajo no funciona!!
-        //Si la ciudad pertenece al jugador puede ver mas cosas , sino solo podrá ver el nombre de la ciudad
-//        if (jugadorController.listaCiudadesPropias.containsKey(ciudadMapa.getNameCity())) {
-        //nombre
-        nombreCiudad = new Label(ciudadMapa.getNameCity());
-        nombreCiudad.setTextAlignment(CENTER);
-        nombreCiudad.setAlignment(Pos.CENTER);
-        nombreCiudad.setWrapText(true);
-        childrenVBox.add(nombreCiudad);
-        //Imagen ciudad
-        imgViewCiudad = new ImageView(imageView.getImage());
-        imgViewCiudad.setPickOnBounds(true);
-        imgViewCiudad.setPreserveRatio(true);
-        childrenVBox.add(imgViewCiudad);
-        //Nivel ciudad
-        nivelCiudadPropia = new Label("Nivel: " + ciudadMapa.getNivelCiudad());
-        nivelCiudadPropia.setTextAlignment(CENTER);
-        nivelCiudadPropia.setAlignment(Pos.CENTER);
-        nivelCiudadPropia.setWrapText(true);
-        childrenVBox.add(nivelCiudadPropia);
-        //Descripción ciudad
-        descripcionCiudad = new Label("Descripción ciudad");
-        descripcionCiudad.setTextAlignment(CENTER);
-        descripcionCiudad.setAlignment(Pos.CENTER);
-        descripcionCiudad.setWrapText(true);
-        childrenVBox.add(descripcionCiudad);
+        /*TODO crear metodo para crear la cajaBatallon , reutilizar código de aquí para no repetir código, ver si se puede reutilizar el printRecursos()
+           para printear recursos donde haga falta      
+         */
+        if (getJugadorPrimaryStageController().listaCiudadesPropias.containsKey(ciudadMapa.getPosition())) {
+            //nombre
+            nombreCiudad = new Label(ciudadMapa.getNameCity());
+            nombreCiudad.setTextAlignment(CENTER);
+            nombreCiudad.setAlignment(Pos.CENTER);
+            nombreCiudad.setWrapText(true);
+            childrenVBox.add(nombreCiudad);
+            //Imagen ciudad
+            imgViewCiudad = new ImageView(imageView.getImage());
+            imgViewCiudad.setPickOnBounds(true);
+            imgViewCiudad.setPreserveRatio(true);
+            childrenVBox.add(imgViewCiudad);
+            //Nivel ciudad
+            nivelCiudadPropia = new Label("Nivel: " + ciudadMapa.getNivelCiudad());
+            nivelCiudadPropia.setTextAlignment(CENTER);
+            nivelCiudadPropia.setAlignment(Pos.CENTER);
+            nivelCiudadPropia.setWrapText(true);
+            childrenVBox.add(nivelCiudadPropia);
+            //Descripción ciudad
+            descripcionCiudad = new Label("Descripción ciudad");
+            descripcionCiudad.setTextAlignment(CENTER);
+            descripcionCiudad.setAlignment(Pos.CENTER);
+            descripcionCiudad.setWrapText(true);
+            childrenVBox.add(descripcionCiudad);
 
-        vBoxBloquePropio.setMargin(descripcionCiudad, new Insets(0, 15, 0, 15));
+            vBoxBloquePropio.setMargin(descripcionCiudad, new Insets(0, 15, 0, 15));
 
-//            } else {
-//                nombreCiudad = new Label(ciudadMapa.getNameCity());
-//                nombreCiudad.setTextAlignment(CENTER);
-//                nombreCiudad.setAlignment(Pos.CENTER);
-//                nombreCiudad.setWrapText(true);
-//                childrenVBox.add(nombreCiudad);
-//            }
+        } else {
+            nombreCiudad = new Label(ciudadMapa.getNameCity());
+            nombreCiudad.setTextAlignment(CENTER);
+            nombreCiudad.setAlignment(Pos.CENTER);
+            nombreCiudad.setWrapText(true);
+            childrenVBox.add(nombreCiudad);
+        }
 
-//            childrenVBox.add(button);
-//            Separator separator = new Separator();
-//            separator.setPrefWidth(200);
-//            childrenVBox.add(separator);
+        Separator separator = new Separator();
+        separator.setPrefWidth(200);
+        childrenVBox.add(separator);
+
+
+        //FIN BLOQUE
+        return vBoxBloquePropio;
+    }
+
+    private static VBox cajaBatallon(ArrayList<Batallon> listaBatallones, ImageView imageView) {
+
+
+        //Objetos de ciudad
+        Label nombreBatallon = null;
+        ImageView imgViewBatallon = null;
+
+
+        //BLOQUE
+        VBox vBoxBloquePropio = new VBox();
+        vBoxBloquePropio.setMinWidth(200);
+        vBoxBloquePropio.setMaxWidth(200);
+        vBoxBloquePropio.setAlignment(TOP_CENTER);
+
+        ObservableList<Node> childrenVBox = vBoxBloquePropio.getChildren();
+
+        /*TODO crear metodo para crear la cajaBatallon , reutilizar código de aquí para no repetir código, ver si se puede reutilizar el printRecursos()
+           para printear recursos donde haga falta      
+         */
+
+
+
+        BackgroundFill backgroundFill = null;
+
+        for (Batallon batallon :
+                listaBatallones) {
+            nombreBatallon = new Label(batallon.getNombre());
+            nombreBatallon.setTextAlignment(CENTER);
+            nombreBatallon.setAlignment(Pos.CENTER);
+            nombreBatallon.setWrapText(true);
+            childrenVBox.add(nombreBatallon);
+            //Imagen ciudad
+            imgViewBatallon = new ImageView(imageView.getImage());
+            imgViewBatallon.setPickOnBounds(true);
+            imgViewBatallon.setPreserveRatio(true);
+            childrenVBox.add(imgViewBatallon);
+
+            vBoxBloquePropio.setMargin(imgViewBatallon, new Insets(0, 15, 0, 15));
+            if (getJugadorPrimaryStageController().listaBatallonesPropios.containsKey(batallon.getPosition())) {
+                backgroundFill = new BackgroundFill(Color.ANTIQUEWHITE, CornerRadii.EMPTY, Insets.EMPTY);
+
+            } else {
+                boolean xi = false;
+                for (Jugador jugador : getClanPrimaryStageController().getJugadoresDelClan().values()) {
+                    if (jugador.listaBatallonesPropios.containsKey(batallon.getPosition())){
+                        xi = true;
+                        break;
+                    }
+                }
+                if (xi){
+                    backgroundFill = new BackgroundFill(Color.GREEN, CornerRadii.EMPTY, Insets.EMPTY);
+                }else {
+                    backgroundFill = new BackgroundFill(Color.DARKRED, CornerRadii.EMPTY, Insets.EMPTY);
+                }
+            }
+
+        }
+        vBoxBloquePropio.setBackground(new Background(backgroundFill));
+
+        Separator separator = new Separator();
+        separator.setPrefWidth(200);
+        childrenVBox.add(separator);
 
 
         //FIN BLOQUE
@@ -301,13 +369,13 @@ public class MundoController extends MapasController implements Initializable {
         String text = "";
         if (ciudad != null) {
             text = ciudad.getNameCity();
-            vBoxList.add(cajaCiudad(ciudad, imageView, 1));
+            vBoxList.add(cajaCiudad(ciudad, imageView));
         }
         if (batallones != null) {
             //TODO hacer metodo de cajaBatallon
             for (Batallon batallon : batallones) {
                 text = text + " " + batallon.getNombre();
-                vBoxList.add(new VBox(new Label(text)));
+                vBoxList.add(cajaBatallon(batallones, imageView));
             }
 
         }
