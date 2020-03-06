@@ -312,10 +312,18 @@ public class CiudadController extends MapasController implements Initializable {
                 }//FIN CALCULAR RECURSOS
                 button.setCursor(Cursor.HAND);
                 button.setOnMouseClicked(e -> {
-                    for (Recursos value : edificioQueSaleEnMenu.getRecursosCostes().values()) {
-                        Recursos recursos = getCiudadPrimaryStageController().getRecursosTreeMap().get(value.getId());
-                        int cantidad = recursos.getCantidad();
-                        recursos.setCantidad(cantidad - value.getCantidad());
+                    if (tipoDeBoton == 1 || tipoDeBoton == 2) {
+                        for (Recursos value : edificioQueSaleEnMenu.getRecursosCostes().values()) {
+                            Recursos recursos = getCiudadPrimaryStageController().getRecursosTreeMap().get(value.getId());
+                            int cantidad = recursos.getCantidad();
+                            recursos.setCantidad(cantidad - value.getCantidad());
+                        }
+                    } else {
+                        for (Recursos value : edificioQueSaleEnMenu.getRecursosCostes().values()) {
+                            Recursos recursos = getCiudadPrimaryStageController().getRecursosTreeMap().get(value.getId());
+                            int cantidad = recursos.getCantidad();
+                            recursos.setCantidad(cantidad + ((value.getCantidad()*(new Random().nextInt(90 + 1 - 20) + 20))/100));
+                        }
                     }
                     reloadMenuRecursos();
                     borderPane.setLeft(null);

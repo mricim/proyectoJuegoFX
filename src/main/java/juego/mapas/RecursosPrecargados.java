@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Objects;
 
 public class RecursosPrecargados implements ImageGetter {
-    static String RUTEIMAGES = "icons/recursos/";
+    static String RUTEIMAGES = "temas/demo/icons/recursos/";
     static HashMap<Integer,RecursosPrecargados> recursosPrecargadosList=new HashMap<>();
     //oro=0;
     //madera=1;

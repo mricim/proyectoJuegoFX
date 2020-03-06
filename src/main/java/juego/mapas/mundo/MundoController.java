@@ -33,7 +33,7 @@ import static main.java.jugadores.Jugador.listaPosicionesBatallones;
 
 
 public class MundoController extends MapasController implements Initializable {
-    final private static String RUTE = "mapas/mundo/";
+    final private static String RUTE = "temas/demo/mapas/mundo/";
     public static final String THIS_RUTE = "juego/mapas/mundo/mundo.fxml";
     static boolean basura = true;
     public FlowPane recuros;

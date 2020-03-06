@@ -75,7 +75,7 @@ prefHeight="${screen.visualBounds.height}" prefWidth="${screen.visualBounds.widt
                     <children>
                         <ImageView fx:id="imagenDeFondo">
                             <image>
-                                <Image url="@../../../../resources/images/mapas/NarniaMap.jpg" /><!-- https://gist.github.com/jewelsea/5032398 -->
+                                <Image url="@../../../../resources/images/temas/demo/mapas/NarniaMap.jpg" /><!-- https://gist.github.com/jewelsea/5032398 -->
                             </image>
                         </ImageView>
                         <GridPane fx:id="gridPaneMap" gridLinesVisible="true">
