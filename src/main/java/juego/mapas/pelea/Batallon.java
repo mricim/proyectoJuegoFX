@@ -33,6 +33,10 @@ public class Batallon extends Posicion {
         }
     }
 
+    public Batallon(String position) {
+        super(position);
+    }
+
     public int getIdBatallon() {
         return idBatallon;
     }

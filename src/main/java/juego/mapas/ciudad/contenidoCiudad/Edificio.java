@@ -26,7 +26,7 @@ public class Edificio extends Posicion implements Cloneable {
 
 
 
-        ciudad.addListaPosicionesEdificios(filas+"_"+columnas, this);
+        ciudad.addListaPosicionesEdificios(getPosition(), this);
     }
 
     public Object clone() throws CloneNotSupportedException {//https://stackoverflow.com/questions/869033/how-do-i-copy-an-object-in-java

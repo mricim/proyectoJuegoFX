@@ -2,6 +2,7 @@ package main.java.Inicio;
 
 import javafx.fxml.Initializable;
 import javafx.scene.control.ProgressBar;
+import main.java.juego.mapas.RecursosPrecargados;
 import main.java.jugadores.Clan;
 import main.java.jugadores.Jugador;
 import main.java.Utils.PrimaryStageControler;
@@ -51,6 +52,15 @@ public class Controller extends PrimaryStageControler implements Initializable {
 
     private void callbd() {
         //TODO LEER DESDE LA BD
+        new RecursosPrecargados(0,"Oro");
+        new RecursosPrecargados(1,"Madera");
+        new RecursosPrecargados(2,"Piedra");
+        new RecursosPrecargados(3,"Comida");
+        new RecursosPrecargados(4,"Hierro");
+        new RecursosPrecargados(5,"Poblacion");
+        new RecursosPrecargados(6,"Felicidad");
+        new RecursosPrecargados(7,"investigacion");
+        progresBar.setProgress(15);
         new EdificiosPreCargados(0, "parcela-Construible", "Descripción del edificio que sera mas larga que el nombre del edificio", false, false, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);//NO MEJORABLE
         new EdificiosPreCargados(1, "Castillo", "Descripción del edificio que sera mas larga que el nombre del edificio", false, false, 1, 0, -1, 99, 99, 99, 99, 10, 1000, 1000, 1000, 1000, 0, 10, 1, 1000, 1000, 1000, 1000, 100);
         new EdificiosPreCargados(1, "Castillo", "Descripción 1_1", false, false, 1, 1, 0, 99, 99, 99, 99, 10, 1000, 1000, 1000, 1000, 0, 10, 1, 1000, 1000, 1000, 1000, 200);

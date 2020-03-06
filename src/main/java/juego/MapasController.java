@@ -17,7 +17,7 @@ import main.java.juego.mapas.Recursos;
 import java.io.IOException;
 import java.util.Collection;
 
-public class MapasController extends PrimaryStageControler {
+abstract public class MapasController extends PrimaryStageControler {
     public static String nameThisCityController;
 
 
@@ -28,6 +28,7 @@ public class MapasController extends PrimaryStageControler {
 
     public void recursosMenu(FlowPane flowPane, Collection<Recursos> recursos2) {
         ObservableList<Node> observableList = flowPane.getChildren();
+        observableList.clear();
         for (Recursos recursos : recursos2) {
             Label label = new Label(String.valueOf(recursos.getCantidad()));
             ImageView imageView = new ImageView(recursos.getImage());
@@ -37,7 +38,7 @@ public class MapasController extends PrimaryStageControler {
             hBox.setId(String.valueOf(recursos.getId()));
             hBox.setAlignment(Pos.CENTER);
             hBox.setPrefHeight(20.0);
-            hBox.setPrefWidth(70.0);
+            hBox.setMinWidth(70.0);
             hBox.setSpacing(5.0);
 
             observableList.add(hBox);

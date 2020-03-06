@@ -44,7 +44,7 @@ prefHeight="${screen.visualBounds.height}" prefWidth="${screen.visualBounds.widt
                     </menus>
                 </MenuBar>
 
-                <FlowPane fx:id="recuros" alignment="CENTER" hgap="40.0" GridPane.columnIndex="1" GridPane.rowIndex="0">
+                <FlowPane fx:id="flowPaneRecuros" alignment="CENTER" hgap="40.0" GridPane.columnIndex="1" GridPane.rowIndex="0">
 
                     <opaqueInsets>
                         <Insets />

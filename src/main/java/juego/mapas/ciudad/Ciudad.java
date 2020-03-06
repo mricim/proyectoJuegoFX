@@ -4,6 +4,7 @@ import javafx.scene.image.Image;
 import main.java.Utils.Posicion;
 import main.java.juego.mapas.Recursos;
 import main.java.juego.mapas.ciudad.contenidoCiudad.Edificio;
+import main.java.jugadores.Jugador;
 
 
 import java.util.TreeMap;
@@ -20,11 +21,11 @@ public class Ciudad extends Posicion {
     public TreeMap<Integer, Recursos> recursosTreeMap = new TreeMap<>();
     private int nivelCiudad;
 
-    public Ciudad(int idCiudad, String nameCity,int fila,int columna,int nivelCiudad, int oro, int madera, int piedra, int comida, int hierro, int poblacion, int felicidad) {
-        super(fila,columna);
+    public Ciudad(Jugador jugador, int idCiudad, String nameCity, int fila, int columna, int nivelCiudad, int oro, int madera, int piedra, int comida, int hierro, int poblacion, int felicidad) {
+        super(fila, columna);
         this.idCiudad = idCiudad;
         this.nameCity = nameCity;
-this.nivelCiudad=nivelCiudad;
+        this.nivelCiudad = nivelCiudad;
         recursosTreeMap.put(0, new Recursos(0, oro));
 //        this.oro = oro;
         recursosTreeMap.put(1, new Recursos(1, madera));
@@ -43,24 +44,29 @@ this.nivelCiudad=nivelCiudad;
         //todo Solicitar a la bd la tabla de posiciones y edificios que tiene el usuario
         try {
             if (idCiudad == 2) {
-                new Edificio(listaEdificiosPreCargados.get(0+"_"+0),8, 8, this);//parcela
-                new Edificio(listaEdificiosPreCargados.get(2+"_"+0),7, 8, this);
-                new Edificio(listaEdificiosPreCargados.get(0+"_"+0),6, 8, this);//parcela
-                new Edificio(listaEdificiosPreCargados.get(1+"_"+0),8, 15, this);
-            }else if(idCiudad==1){
-                new Edificio(listaEdificiosPreCargados.get(1+"_"+1),8, 7, this);
+                new Edificio(listaEdificiosPreCargados.get(0 + "-" + 0), 8, 8, this);//parcela
+                new Edificio(listaEdificiosPreCargados.get(2 + "-" + 0), 7, 8, this);
+                new Edificio(listaEdificiosPreCargados.get(0 + "-" + 0), 6, 8, this);//parcela
+                new Edificio(listaEdificiosPreCargados.get(1 + "-" + 0), 8, 15, this);
+            } else if (idCiudad == 1) {
+                new Edificio(listaEdificiosPreCargados.get(1 + "-" + 1), 8, 7, this);
             }
-            new Edificio(listaEdificiosPreCargados.get(2+"_"+0),3, 13, this);
-            new Edificio(listaEdificiosPreCargados.get(10+"_"+0),10, 4, this);
-            new Edificio(listaEdificiosPreCargados.get(11+"_"+0),8, 12, this);
-            new Edificio(listaEdificiosPreCargados.get(0+"_"+0),5, 7, this);
-            new Edificio(listaEdificiosPreCargados.get(10+"_"+0),7, 13, this);//todos tendrian "parcela"
-            new Edificio(listaEdificiosPreCargados.get(11+"_"+0),12, 2, this);//todos tendrian "parcela"
-            new Edificio(listaEdificiosPreCargados.get(12+"_"+1),5, 18, this);//todos tendrian "parcela"
+            new Edificio(listaEdificiosPreCargados.get(2 + "-" + 0), 3, 13, this);
+            new Edificio(listaEdificiosPreCargados.get(10 + "-" + 0), 10, 4, this);
+            new Edificio(listaEdificiosPreCargados.get(11 + "-" + 0), 8, 12, this);
+            new Edificio(listaEdificiosPreCargados.get(0 + "-" + 0), 5, 7, this);
+            new Edificio(listaEdificiosPreCargados.get(10 + "-" + 0), 7, 13, this);//todos tendrian "parcela"
+            new Edificio(listaEdificiosPreCargados.get(11 + "-" + 0), 12, 2, this);//todos tendrian "parcela"
+            new Edificio(listaEdificiosPreCargados.get(12 + "-" + 1), 5, 18, this);//todos tendrian "parcela"
         } catch (Exception e) {
-            System.err.println("Error: Ciudad (Edificio no creado)\n"+e);
+            System.err.println("Error: Ciudad (Edificio no creado)\n" + e);
         }
-        listaCiudades.put(getPosition(),this);
+        jugador.listaCiudadesPropias.put(getPosition(), this);
+        listaCiudades.put(getPosition(), this);
+    }
+
+    public Ciudad(String position) {
+        super(position);
     }
 
     public int getIdCiudad() {
@@ -76,7 +82,7 @@ this.nivelCiudad=nivelCiudad;
     }
 
     public void addListaPosicionesEdificios(int colum, int row, Edificio posicionEdificio) {
-        this.listaPosicionesEdificios.put(colum + "_" + row, posicionEdificio);
+        this.listaPosicionesEdificios.put(colum + "-" + row, posicionEdificio);
     }
 
     public void addListaPosicionesEdificios(String colum_row, Edificio posicionEdificio) {
@@ -185,4 +191,7 @@ this.nivelCiudad=nivelCiudad;
     public Image getFelicidadImage() {
         return recursosTreeMap.get(6).getImage();
     }
+
+
+
 }

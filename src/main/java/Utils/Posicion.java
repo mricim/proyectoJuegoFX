@@ -1,16 +1,22 @@
 package main.java.Utils;
 
 
-public abstract class Posicion {
+import java.util.Objects;
+
+abstract public class Posicion {
     private int fila;
     private int columna;
     private String position;
-//Create objects contain
 
     public Posicion(int fila, int columna) {
         setFilaColumna(fila, columna);
-        //this.object=object
-        //add list objects *
+    }
+
+    public Posicion(String posicion) {
+        this.position = posicion;
+        String[] a = posicion.split("-");
+        this.fila = Integer.parseInt(a[0]);
+        this.columna = Integer.parseInt(a[1]);
     }
 
     public int getFila() {
@@ -28,14 +34,27 @@ public abstract class Posicion {
     public void setFilaColumna(int fila, int columna) {
         this.fila = fila;
         this.columna = columna;
-        this.position = fila + "_" + columna;
+        this.position = fila + "-" + columna;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Posicion)) return false;
+        Posicion posicion = (Posicion) o;
+        return getPosition().equals(posicion.getPosition());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getPosition());
     }
 
     @Override
     public String toString() {
         return "Posiciones{" +
-                "y=" + fila +
-                ", x=" + columna +
+                "fila=" + fila +
+                ", columna=" + columna +
                 '}';
     }
 }

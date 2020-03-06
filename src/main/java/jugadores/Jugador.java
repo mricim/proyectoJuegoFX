@@ -41,10 +41,8 @@ public class Jugador {
         Ciudad cargarCiudad = null;
         if (id == 1) {
             //todo Se le desde la BD
-            Ciudad ciudad1 = new Ciudad(1, "ciudad 1 1-1", 1, 1, 1, 300, 20, 50, 70, 90, 40, 50);
-            Ciudad ciudad2 = new Ciudad(2, "ciudad 2 2-2", 2, 2, 1, Integer.MAX_VALUE, 5000, 60000, 3000, 756123, 6584110, 53);
-            listaCiudadesPropias.put(ciudad1.getPosition(), ciudad1);
-            listaCiudadesPropias.put(ciudad2.getPosition(), ciudad2);//Carga la ciudad con el id mas bajo (la mas antigua)
+            Ciudad ciudad1 = new Ciudad(this,1, "ciudad 1 1-1", 1, 1, 1, 300, 20, 50, 70, 90, 40, 50);
+            Ciudad ciudad2 = new Ciudad(this,2, "ciudad 2 2-2", 2, 2, 1, Integer.MAX_VALUE, 5000, 60000, 3000, 756123, 6584110, 53);
 
 
             int numCiudad = Integer.MAX_VALUE;
@@ -72,15 +70,12 @@ public class Jugador {
 
             PrimaryStageControler.setCiudadPrimaryStageController(cargarCiudad);//CON ESTO CONTROLAS QUE CIUDAD ESTAS VIENDO!
             PrimaryStageControler.setJugadorPrimaryStageController(this);//CON ESTO CONTROLAS QUE CIUDAD ESTAS VIENDO!
-        } else if(id==2) {
-            Ciudad ciudad1=new Ciudad(3, "ciudad 3 1-6", 1, 6, 1, 300, 20, 50, 70, 90, 40, 50);
-            Ciudad ciudad2=new Ciudad(4, "ciudad 4 2-7", 2, 7, 1, Integer.MAX_VALUE, 5000, 60000, 3000, 756123, 6584110, 53);
-            Ciudad ciudad3=new Ciudad(5, "ciudad 5 3-8", 3, 8, 1, Integer.MAX_VALUE, 5000, 60000, 3000, 756123, 6584110, 53);
-            Ciudad ciudad4=new Ciudad(6, "ciudad 6 8-3", 8, 3, 1, Integer.MAX_VALUE, 5000, 60000, 3000, 756123, 6584110, 53);
-            listaCiudadesPropias.put(ciudad1.getPosition(), ciudad1);
-            listaCiudadesPropias.put(ciudad2.getPosition(), ciudad2);
-            listaCiudadesPropias.put(ciudad3.getPosition(), ciudad3);
-            listaCiudadesPropias.put(ciudad4.getPosition(), ciudad4);
+        } else if (id == 2) {
+            Ciudad ciudad1 = new Ciudad(this,3, "ciudad 3 1-6", 1, 6, 1, 300, 20, 50, 70, 90, 40, 50);
+            Ciudad ciudad2 = new Ciudad(this,4, "ciudad 4 2-7", 2, 7, 1, Integer.MAX_VALUE, 5000, 60000, 3000, 756123, 6584110, 53);
+            Ciudad ciudad3 = new Ciudad(this,5, "ciudad 5 3-8", 3, 8, 1, Integer.MAX_VALUE, 5000, 60000, 3000, 756123, 6584110, 53);
+            Ciudad ciudad4 = new Ciudad(this,6, "ciudad 6 8-3", 8, 3, 1, Integer.MAX_VALUE, 5000, 60000, 3000, 756123, 6584110, 53);
+
             Batallon batallon1 = new Batallon(3, "Batallon 3 5-8", 5, 8, 400, this);
             Soldados soldados1 = new Soldados(5, SoldadosPreCargada.get(0), 100, 5, 0, 0);
             Soldados soldados2 = new Soldados(6, SoldadosPreCargada.get(0), 100, 0, 0, 0);
@@ -98,15 +93,12 @@ public class Jugador {
             Soldados soldados6 = new Soldados(10, SoldadosPreCargada.get(0), 100, 0, 0, 0);
             batallon3.setSoldadoHashMap(soldados5);
             batallon3.setSoldadoHashMap(soldados6);
-        }else {
-            Ciudad ciudad1=new Ciudad(7, "ciudad 7 6-6", 6, 6, 1, 300, 20, 50, 70, 90, 40, 50);
-            Ciudad ciudad2=new Ciudad(8, "ciudad 8 6-11", 6, 11, 1, Integer.MAX_VALUE, 5000, 60000, 3000, 756123, 6584110, 53);
-            Ciudad ciudad3= new Ciudad(9, "ciudad 9 8-7", 8, 7, 1, Integer.MAX_VALUE, 5000, 60000, 3000, 756123, 6584110, 53);
-            Ciudad ciudad4= new Ciudad(10, "ciudad 10 7-5", 7, 5, 1, Integer.MAX_VALUE, 5000, 60000, 3000, 756123, 6584110, 53);
-            listaCiudadesPropias.put(ciudad1.getPosition(), ciudad1);
-            listaCiudadesPropias.put(ciudad2.getPosition(), ciudad2);
-            listaCiudadesPropias.put(ciudad3.getPosition(), ciudad3);
-            listaCiudadesPropias.put(ciudad4.getPosition(), ciudad4);
+        } else {
+            Ciudad ciudad1 = new Ciudad(this,7, "ciudad 7 6-6", 6, 6, 1, 300, 20, 50, 70, 90, 40, 50);
+            Ciudad ciudad2 = new Ciudad(this,8, "ciudad 8 6-11", 6, 11, 1, Integer.MAX_VALUE, 5000, 60000, 3000, 756123, 6584110, 53);
+            Ciudad ciudad3 = new Ciudad(this,9, "ciudad 9 8-7", 8, 7, 1, Integer.MAX_VALUE, 5000, 60000, 3000, 756123, 6584110, 53);
+            Ciudad ciudad4 = new Ciudad(this,10, "ciudad 10 7-5", 7, 5, 1, Integer.MAX_VALUE, 5000, 60000, 3000, 756123, 6584110, 53);
+
             Batallon batallon1 = new Batallon(6, "Batallon 6 5-8", 7, 7, 400, this);
             Soldados soldados1 = new Soldados(11, SoldadosPreCargada.get(0), 100, 5, 0, 0);
             Soldados soldados2 = new Soldados(12, SoldadosPreCargada.get(0), 100, 0, 0, 0);
@@ -143,7 +135,8 @@ public class Jugador {
     public int getInvestigacion() {
         return investigacion.getCantidad();
     }
-    public static Jugador returnJugador(int jugadorId){
+
+    public static Jugador returnJugador(int jugadorId) {
         return Jugador.listaTodosLosJugadores.get(jugadorId);
     }
 }

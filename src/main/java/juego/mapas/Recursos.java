@@ -3,8 +3,7 @@ package main.java.juego.mapas;
 import javafx.scene.image.Image;
 import main.java.Utils.ImageGetter;
 
-public class Recursos implements ImageGetter {
-    static String RUTEIMAGES = "icons/recursos/";
+public class Recursos {
     //oro=0;
     //madera=1;
     //piedra=2;
@@ -13,17 +12,20 @@ public class Recursos implements ImageGetter {
     //poblacion=5;
     //felicidad=6;
     //investigacion=7
-    private int id;
+    private RecursosPrecargados recursosPrecargados;
     private int cantidad;
 
-    public Recursos(int id, int cantidad) {
-        this.id = id;
-        this.cantidad = cantidad;
-        getImage();
+    public Recursos(int idRecursosPrecargados, int cantidad) {
+        this(RecursosPrecargados.recursosPrecargadosList.get(idRecursosPrecargados), cantidad);
     }
 
-    public int getId() {
-        return id;
+    public Recursos(RecursosPrecargados recursosPrecargados, int cantidad) {
+        this.recursosPrecargados = recursosPrecargados;
+        this.cantidad = cantidad;
+    }
+
+    public RecursosPrecargados getRecursosPrecargados() {
+        return recursosPrecargados;
     }
 
     public int getCantidad() {
@@ -34,50 +36,15 @@ public class Recursos implements ImageGetter {
         this.cantidad = cantidad;
     }
 
-    public static String getName(int id) {
-        String text;
-        switch (id) {
-            case 0:
-                text = "oro";
-                break;
-            case 1:
-                text = "madera";
-                break;
-            case 2:
-                text = "piedra";
-                break;
-            case 3:
-                text = "comida";
-                break;
-            case 4:
-                text = "hierro";
-                break;
-            case 5:
-                text = "poblacion";
-                break;
-            case 6:
-                text = "felicidad";
-                break;
-            case 7:
-                text = "investigacion";
-                break;
-
-            default:
-                text = "error";
-                break;
-        }
-        return text;
-
+    public String getName() {
+        return recursosPrecargados.getName();
     }
 
-    @Override
     public Image getImage() {
-        return getImage(RUTEIMAGES, String.valueOf(id));
+        return recursosPrecargados.getImage();
     }
 
-    @Override
-    public Image getImageClicable() {
-        System.err.println("getImageClicable() en Recursos no funciona!");
-        return null;
+    public int getId() {
+        return recursosPrecargados.getId();
     }
 }

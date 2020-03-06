@@ -78,10 +78,12 @@ public class MundoController extends MapasController implements Initializable {
 
 
         String letter_guion = "-";
-        String letter_hover = "@H";
+        String letter_hover = "@h";
 
         Character letter_agua = 'a';
         String letter_batallon = "_b";
+        String letter_batallonPersonal = "_bP";
+        String letter_batallonClan = "_bZ";
 
         String letter_isla = "i_";
         String letter_city = "_c";
@@ -105,26 +107,22 @@ public class MundoController extends MapasController implements Initializable {
                 StringBuilder stringBuilder = new StringBuilder(32);
 
 
-                String position = fila + "_" + columna;
+                String position = fila + letter_guion + columna;
                 int filaModule = fila % 5;
                 int columnaModule = columna % 5;
                 if (filaModule == 0 || filaModule == 4 || columnaModule == 0 || columnaModule == 4) {
                     stringBuilder.append(letter_agua);
                 } else {
-                    stringBuilder.append(letter_isla + filaModule + letter_guion + columnaModule);
+                    stringBuilder.append(letter_isla).append(filaModule).append(letter_guion).append(columnaModule);
                     ciudadToGrid = listaCiudades.get(position);
                     if (ciudadToGrid != null) {
                         stringBuilder.append(letter_city);
                         if (getJugadorPrimaryStageController().listaCiudadesPropias.containsKey(position)) {
                             stringBuilder.append(letter_propio_esNuestro);
                         } else {
-                            for (Jugador jugador : getClanPrimaryStageController().getJugadoresDelClan().values()) {
-                                if (jugador.listaCiudadesPropias.containsKey(position)) {
-                                    stringBuilder.append(letter_Clan);
-                                    break;
-                                }
+                            if (getClanPrimaryStageController().getCiudadesDelClan().contains(new Ciudad(position))) {
+                                stringBuilder.append(letter_Clan);
                             }
-
                         }
                     }
                     if (filaModule == 3 && columnaModule == 3) {//TODO RANDOMIZADOR PARA LA POSICION 3-3
@@ -148,17 +146,29 @@ public class MundoController extends MapasController implements Initializable {
                 }
                 batallonesToGrid = listaPosicionesBatallones.get(position);
                 if (batallonesToGrid != null) {
-                    stringBuilder.append(letter_batallon);
-                    //TODO ESTO HAY QUE SOLUCIONARLO
-                    /*
+                    boolean batallonEnemigo = false;
+                    boolean batallonNuestro = false;
+                    boolean batallonAliado = false;
                     for (Batallon batallon : batallonesToGrid) {
-                        batallon.
-                        if (Clan.clanArrayList.contains()){
-                        stringBuilder.append(letter_Clan)}
+                        if (getJugadorPrimaryStageController().listaBatallonesPropios.containsValue(batallon)) {
+                            batallonNuestro = true;
+                        } else if (getClanPrimaryStageController().getBatallonesDelClan().contains(new Batallon(position))) {
+                            batallonAliado = true;
+                        } else {
+                            batallonEnemigo = true;
+                        }
+                        if (batallonNuestro && batallonAliado && batallonEnemigo) {//acorta la busqueda a cambio de un if mas (pueden darse casos de 100 batallones en la misma posicion)
+                            break;
+                        }
                     }
-*/
-                    if (getJugadorPrimaryStageController().listaBatallonesPropios.containsKey(position)) {
-                        stringBuilder.append(letter_propio_esNuestro);
+                    if (batallonNuestro) {
+                        stringBuilder.append(letter_batallonPersonal);
+                    }
+                    if (batallonAliado) {
+                        stringBuilder.append(letter_batallonClan);
+                    }
+                    if (batallonEnemigo) {
+                        stringBuilder.append(letter_batallon);
                     }
                 }
                 String nameImage = stringBuilder.toString();
@@ -315,7 +325,6 @@ public class MundoController extends MapasController implements Initializable {
          */
 
 
-
         BackgroundFill backgroundFill = null;
 
         for (Batallon batallon :
@@ -338,14 +347,14 @@ public class MundoController extends MapasController implements Initializable {
             } else {
                 boolean xi = false;
                 for (Jugador jugador : getClanPrimaryStageController().getJugadoresDelClan().values()) {
-                    if (jugador.listaBatallonesPropios.containsKey(batallon.getPosition())){
+                    if (jugador.listaBatallonesPropios.containsKey(batallon.getPosition())) {
                         xi = true;
                         break;
                     }
                 }
-                if (xi){
+                if (xi) {
                     backgroundFill = new BackgroundFill(Color.GREEN, CornerRadii.EMPTY, Insets.EMPTY);
-                }else {
+                } else {
                     backgroundFill = new BackgroundFill(Color.DARKRED, CornerRadii.EMPTY, Insets.EMPTY);
                 }
             }

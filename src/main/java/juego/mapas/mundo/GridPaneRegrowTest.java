@@ -30,8 +30,8 @@ public class GridPaneRegrowTest extends Application {
     public void start(Stage primaryStage) throws Exception {
 
         //https://stackoverflow.com/questions/54187886/dynamically-sizing-the-contents-of-a-gridpane-to-the-properties-of-their-parent
-        Ciudad ciudad1 = new Ciudad(1, "ciudad 1", 1,1, 1, 300, 20, 50, 70, 90, 40, 50);
-        Ciudad ciudad2 = new Ciudad(2, "ciudad 2", 2, 2,1, Integer.MAX_VALUE, 5000, 60000, 3000, 756123, 6584110, 53);
+//        Ciudad ciudad1 = new Ciudad(1, "ciudad 1", 1,1, 1, 300, 20, 50, 70, 90, 40, 50);
+//        Ciudad ciudad2 = new Ciudad(2, "ciudad 2", 2, 2,1, Integer.MAX_VALUE, 5000, 60000, 3000, 756123, 6584110, 53);
 
         int numCiudades = 12000;
         int tamaño = 15;
@@ -84,7 +84,7 @@ public class GridPaneRegrowTest extends Application {
 
                 } else {
                     boolean containsCity = false;
-                    if (listaCiudades.containsKey(fila+"_"+columna)){
+                    if (listaCiudades.containsKey(fila+"-"+columna)){
                         containsCity = true;
                     }
                     if(fila%5 == 1 && columna % 5 == 1){

@@ -44,6 +44,6 @@ public class Soldados extends Posicion {
 
     @Override
     public String toString() {
-        return id + "_" + soldadosPreCargados.getNombre() + "=" + cantidad;
+        return id + "_ " + soldadosPreCargados.getNombre() + "=" + cantidad;
     }
 }

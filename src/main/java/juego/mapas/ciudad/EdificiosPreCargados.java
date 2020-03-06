@@ -63,11 +63,11 @@ public class EdificiosPreCargados implements ImageGetter {
         recursosAlmacen.put(7, new Recursos(7, poblacionAlmacen));
 
 
-        String resultado = id + "_" + nivel;
+        String resultado = id + "-" + nivel;
         this.imagePath = resultado;
-        this.imageClicablePath = resultado + "@clic";
+        this.imageClicablePath = resultado + "@h";
 
-        listaEdificiosPreCargados.put(id+"_"+nivel,this);
+        listaEdificiosPreCargados.put(resultado,this);
         listaEdificiosKeys.add(id);
     }
 
