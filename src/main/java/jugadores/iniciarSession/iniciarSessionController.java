@@ -1,24 +1,24 @@
-package main.java.Inicio;
+package main.java.jugadores.iniciarSession;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.ProgressBar;
-import main.java.juego.mapas.RecursosPrecargados;
-import main.java.jugadores.Clan;
-import main.java.jugadores.Jugador;
 import main.java.Utils.PrimaryStageControler;
+import main.java.juego.mapas.RecursosPrecargados;
 import main.java.juego.mapas.ciudad.CiudadController;
 import main.java.juego.mapas.ciudad.EdificiosPreCargados;
 import main.java.juego.mapas.pelea.SoldadosPreCargados;
+import main.java.jugadores.Clan;
+import main.java.jugadores.Jugador;
 import main.java.login.LoginHiperFalso;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.*;
+import java.util.ResourceBundle;
 
 
-public class Controller extends PrimaryStageControler implements Initializable {
+public class iniciarSessionController extends PrimaryStageControler implements Initializable {
     private static String RUTE = "../../../resources/Inicio/";
     public ProgressBar progresBar;
     public ComboBox<String> seleccionarMundo;

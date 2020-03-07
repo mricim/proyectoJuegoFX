@@ -1,4 +1,4 @@
-package main.java.juego.mapas.mundo;
+package main.java.login;
 
 import javafx.application.Application;
 import javafx.geometry.Pos;
