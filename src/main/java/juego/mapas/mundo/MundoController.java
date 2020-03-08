@@ -15,6 +15,7 @@ import javafx.scene.paint.Color;
 import main.java.Utils.CallImages;
 import main.java.Utils.PrimaryStageControler;
 import main.java.juego.MapasController;
+import main.java.juego.mapas.Recursos;
 import main.java.juego.mapas.ciudad.Ciudad;
 import main.java.juego.mapas.ciudad.CiudadController;
 import main.java.juego.mapas.pelea.Batallon;
@@ -254,13 +255,19 @@ public class MundoController extends MapasController implements Initializable {
         vBoxBloquePropio.setMinWidth(200);
         vBoxBloquePropio.setMaxWidth(200);
         vBoxBloquePropio.setAlignment(TOP_CENTER);
-        vBoxBloquePropio.setBackground(new Background(new BackgroundFill(Color.ANTIQUEWHITE, CornerRadii.EMPTY, Insets.EMPTY)));
+
+
+        BackgroundFill backgroundFill = null;
+
         ObservableList<Node> childrenVBox = vBoxBloquePropio.getChildren();
 
         /*TODO crear metodo para crear la cajaBatallon , reutilizar código de aquí para no repetir código, ver si se puede reutilizar el printRecursos()
            para printear recursos donde haga falta      
          */
+        //Ciudad propia
         if (getJugadorPrimaryStageController().listaCiudadesPropias.containsKey(ciudadMapa.getPosition())) {
+
+
             //nombre
             nombreCiudad = new Label(ciudadMapa.getNameCity());
             nombreCiudad.setTextAlignment(CENTER);
@@ -285,16 +292,39 @@ public class MundoController extends MapasController implements Initializable {
             descripcionCiudad.setWrapText(true);
             childrenVBox.add(descripcionCiudad);
 
+            boolean esAliado = false;
+            for (Jugador jugador : getClanPrimaryStageController().getJugadoresDelClan().values()) {
+                //TODO esta condición hace que también se pinten mis ciudades con background GREEN en vez del ANTIQUEWHITE, hay que revisarlo
+                if (jugador.listaCiudadesPropias.containsKey(ciudadMapa.getPosition())) {
+                    esAliado = true;
+                    break;
+                }
+            }
+            if (esAliado) {
+                backgroundFill = new BackgroundFill(Color.GREEN, CornerRadii.EMPTY, Insets.EMPTY);
+            } else {
+                backgroundFill = new BackgroundFill(Color.ANTIQUEWHITE, CornerRadii.EMPTY, Insets.EMPTY);
+            }
+
+            printRecursos(childrenVBox, ciudadMapa.getRecursosTreeMap().entrySet(), 2);
+
             vBoxBloquePropio.setMargin(descripcionCiudad, new Insets(0, 15, 0, 15));
 
-        } else {
+        }
+        //Ciudad enemiga o aliada
+        else {
+
+            backgroundFill = new BackgroundFill(Color.DARKRED, CornerRadii.EMPTY, Insets.EMPTY);
             nombreCiudad = new Label(ciudadMapa.getNameCity());
             nombreCiudad.setTextAlignment(CENTER);
             nombreCiudad.setAlignment(Pos.CENTER);
             nombreCiudad.setWrapText(true);
             childrenVBox.add(nombreCiudad);
+
+
         }
 
+        vBoxBloquePropio.setBackground(new Background(backgroundFill));
         Separator separator = new Separator();
         separator.setPrefWidth(200);
         childrenVBox.add(separator);
@@ -321,7 +351,8 @@ public class MundoController extends MapasController implements Initializable {
         ObservableList<Node> childrenVBox = vBoxBloquePropio.getChildren();
 
         /*TODO crear metodo para crear la cajaBatallon , reutilizar código de aquí para no repetir código, ver si se puede reutilizar el printRecursos()
-           para printear recursos donde haga falta      
+           para printear recursos donde haga falta,
+           problema!! --> como puedo printear los distintos tipos de soldados, si ahora la clase Soldados no tiene tipo de soldado(tienen id tipo int)
          */
 
 
@@ -369,6 +400,84 @@ public class MundoController extends MapasController implements Initializable {
 
         //FIN BLOQUE
         return vBoxBloquePropio;
+    }
+
+    private static void printRecursos(ObservableList<Node> childrenFlowPane, Set<Map.Entry<Integer, Recursos>> recursos, int produceAlmacenaCuesta) {
+        boolean paso0 = false;
+        for (Map.Entry<Integer, Recursos> recurso : recursos) {
+            Recursos recursoValor = recurso.getValue();
+            if (recursoValor.getCantidad() > 0) {
+                paso0 = true;
+            }
+        }
+        if (paso0) {
+            if (produceAlmacenaCuesta == 1) {
+                Separator separator = new Separator();
+                separator.setPrefWidth(200);
+                childrenFlowPane.add(separator);
+            }
+            Label label = new Label();
+            label.setBackground(new Background(new BackgroundFill(Color.rgb(238, 174, 160), CornerRadii.EMPTY, Insets.EMPTY)));
+            switch (produceAlmacenaCuesta) {
+                case 1:
+                    label.setText("Produce:");
+                    break;
+                case 2:
+                    label.setText("Almacena:");
+                    break;
+                case 3:
+                    label.setText("Cuesta:");
+                    break;
+                default:
+                    label.setText("Error");
+                    break;
+            }
+            childrenFlowPane.add(label);
+            Separator separator2 = new Separator();
+            separator2.setPrefWidth(200);
+            separator2.setVisible(false);
+            childrenFlowPane.add(separator2);
+        }
+        boolean paso1 = false;
+        for (Map.Entry<Integer, Recursos> recurso : recursos) {
+            Recursos recursoValor = recurso.getValue();
+            int numero = recursoValor.getCantidad();
+            if (numero != 0) {
+                ImageView imageView = new ImageView(recursoValor.getImage());
+                imageView.setFitWidth(25);
+                imageView.setFitHeight(25);
+                Label label = new Label();
+                switch (produceAlmacenaCuesta) {
+                    case 1:
+                        if (numero > 0) {
+                            label.setText("+" + numero + "/h");
+                            label.setTextFill(Color.GREEN);
+                        } else if (numero < 0) {
+                            label.setText(numero + "/h");
+                            label.setTextFill(Color.RED);
+                        }
+                        break;
+                    case 2:
+                        label.setText(String.valueOf(numero));
+                        break;
+                    case 3:
+                        label.setText("-" + numero);
+                        label.setTextFill(Color.RED);
+                        break;
+                }
+                label.setGraphic(imageView);
+                label.setTextAlignment(CENTER);
+                label.setAlignment(Pos.CENTER);
+                label.setWrapText(true);
+                childrenFlowPane.add(label);
+                paso1 = true;
+            }
+        }
+        if (paso1) {
+            Separator separator = new Separator();
+            separator.setPrefWidth(200);
+            childrenFlowPane.add(separator);
+        }
     }
 
 
