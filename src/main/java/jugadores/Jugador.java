@@ -61,7 +61,7 @@ public class Jugador {
             batallon1.setSoldadoHashMap(soldados1);
             batallon1.setSoldadoHashMap(soldados2);
 
-            Batallon batallon2 = new Batallon(2, "Batallon 2-6", 4, 6, 20, this);
+            Batallon batallon2 = new Batallon(2, "Batallon 2 8-7", 8, 7, 20, this);
             Soldados soldados3 = new Soldados(3, SoldadosPreCargada.get(3), 100, 100, 0, 0);
             Soldados soldados4 = new Soldados(4, SoldadosPreCargada.get(0), 100, 5, 0, 0);
             batallon2.setSoldadoHashMap(soldados3);
@@ -93,6 +93,12 @@ public class Jugador {
             Soldados soldados6 = new Soldados(10, SoldadosPreCargada.get(0), 100, 0, 0, 0);
             batallon3.setSoldadoHashMap(soldados5);
             batallon3.setSoldadoHashMap(soldados6);
+
+            Batallon batallon4 = new Batallon(9, "Batallon 9 8-7", 8, 7, 400, this);
+            Soldados soldados7 = new Soldados(11, SoldadosPreCargada.get(0), 100, 5, 0, 0);
+            Soldados soldados8 = new Soldados(12, SoldadosPreCargada.get(0), 100, 0, 0, 0);
+            batallon4.setSoldadoHashMap(soldados7);
+            batallon4.setSoldadoHashMap(soldados8);
         } else {
             Ciudad ciudad1 = new Ciudad(this,7, "ciudad 7 6-6", 6, 6, 1, 300, 20, 50, 70, 90, 40, 50);
             Ciudad ciudad2 = new Ciudad(this,8, "ciudad 8 6-11", 6, 11, 1, Integer.MAX_VALUE, 5000, 60000, 3000, 756123, 6584110, 53);
@@ -116,6 +122,12 @@ public class Jugador {
             Soldados soldados6 = new Soldados(16, SoldadosPreCargada.get(0), 100, 0, 0, 0);
             batallon3.setSoldadoHashMap(soldados5);
             batallon3.setSoldadoHashMap(soldados6);
+
+            Batallon batallon4 = new Batallon(10, "Batallon 10 8-7", 8, 7, 400, this);
+            Soldados soldados7 = new Soldados(17, SoldadosPreCargada.get(0), 100, 5, 0, 0);
+            Soldados soldados8 = new Soldados(18, SoldadosPreCargada.get(0), 100, 0, 0, 0);
+            batallon4.setSoldadoHashMap(soldados7);
+            batallon4.setSoldadoHashMap(soldados8);
         }
 
         Collections.sort(listaEdificiosKeys);
