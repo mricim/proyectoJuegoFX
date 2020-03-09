@@ -169,7 +169,7 @@ public class CiudadController extends MapasController implements Initializable {
         int edificioId = edificio.getId();
         int edificioNivel = edificio.getNivel();
         if (edificioId != 0) {// NO PARCELA
-            vBoxList.add(cajaEdificio(edificio, imageView, false, edificio.getEdificiosPreCargado(), 0));
+            vBoxList.add(cajaEdificio(edificio, imageView, false, edificio.getEdificiosPreCargado(), 0));//El que tenemos puesto
             if (edificioNivel > 0) {
                 try {
                     vBoxList.add(cajaEdificio(edificio, imageView, false, listaEdificiosPreCargados.get(edificioId + "-" + (edificioNivel + 1)), 2));
@@ -264,7 +264,7 @@ public class CiudadController extends MapasController implements Initializable {
         descripcionEdificioPropio.setAlignment(Pos.CENTER);
         descripcionEdificioPropio.setWrapText(true);
         childrenVBox.add(descripcionEdificioPropio);
-        vBoxBloquePropio.setMargin(descripcionEdificioPropio, new Insets(0, 15, 0, 15));
+        VBox.setMargin(descripcionEdificioPropio, new Insets(0, 15, 0, 15));
         if (!parcela) {
             FlowPane flowPane = new FlowPane();
             flowPane.setHgap(10);
@@ -272,15 +272,18 @@ public class CiudadController extends MapasController implements Initializable {
             flowPane.setAlignment(Pos.CENTER);
             ObservableList<Node> childrenFlowPane = flowPane.getChildren();
 
-
-            printRecursos(childrenFlowPane, edificioQueSaleEnMenu.getRecursosProductores().entrySet(), 1);
-            printRecursos(childrenFlowPane, edificioQueSaleEnMenu.getRecursosAlmacen().entrySet(), 2);
+            if (tipoDeBoton == 0) {//Si es el edificio que tenemos en el mapa
+                printRecursos(childrenFlowPane, edificioQueSaleEnMenu.getRecursosProductores().entrySet(), 1,true);//Ponemos las barras de los selectores
+            } else {
+                printRecursos(childrenFlowPane, edificioQueSaleEnMenu.getRecursosProductores().entrySet(), 1,false);
+            }
+            printRecursos(childrenFlowPane, edificioQueSaleEnMenu.getRecursosAlmacen().entrySet(), 2,false);
             if (tipoDeBoton == 1 || tipoDeBoton == 2) {
-                printRecursos(childrenFlowPane, edificioQueSaleEnMenu.getRecursosCostes().entrySet(), 3);
+                printRecursos(childrenFlowPane, edificioQueSaleEnMenu.getRecursosCostes().entrySet(), 3,false);
             }
 
 
-            vBoxBloquePropio.setMargin(flowPane, new Insets(0, 15, 0, 15));
+            VBox.setMargin(flowPane, new Insets(0, 15, 0, 15));
             childrenVBox.add(flowPane);
             if (tipoDeBoton != 0) {
                 String text = null;
@@ -322,7 +325,7 @@ public class CiudadController extends MapasController implements Initializable {
                         for (Recursos value : edificioQueSaleEnMenu.getRecursosCostes().values()) {
                             Recursos recursos = getCiudadPrimaryStageController().getRecursosTreeMap().get(value.getId());
                             int cantidad = recursos.getCantidad();
-                            recursos.setCantidad(cantidad + ((value.getCantidad()*(new Random().nextInt(90 + 1 - 20) + 20))/100));
+                            recursos.setCantidad(cantidad + ((value.getCantidad() * (new Random().nextInt(90 + 1 - 20) + 20)) / 100));
                         }
                     }
                     reloadMenuRecursos();
@@ -347,7 +350,7 @@ public class CiudadController extends MapasController implements Initializable {
         recursosMenu(flowPaneRecuros, getCiudadPrimaryStageController().getRecursosTreeMap().values());
     }
 
-    private void printRecursos(ObservableList<Node> childrenFlowPane, Set<Map.Entry<Integer, Recursos>> recursos, int produceAlmacenaCuesta) {
+    private void printRecursos(ObservableList<Node> childrenFlowPane, Set<Map.Entry<Integer, Recursos>> recursos, int produceAlmacenaCuesta,boolean ponerBarras) {
         boolean paso0 = false;
         for (Map.Entry<Integer, Recursos> recurso : recursos) {
             Recursos recursoValor = recurso.getValue();
@@ -391,7 +394,7 @@ public class CiudadController extends MapasController implements Initializable {
                 ImageView imageView = new ImageView(recursoValor.getImage());
                 imageView.setFitWidth(25);
                 imageView.setFitHeight(25);
-                Label label = new Label();
+                Label label = new Label();//TODO PONER AQUI LA PUTA BARRA :(
                 switch (produceAlmacenaCuesta) {
                     case 1:
                         if (numero > 0) {

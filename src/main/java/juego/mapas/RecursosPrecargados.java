@@ -21,10 +21,12 @@ public class RecursosPrecargados implements ImageGetter {
     //investigacion=7
     private int id;
     private String name;
+    private boolean selector;
 
-    public RecursosPrecargados(int id, String name) {
+    public RecursosPrecargados(int id, String name,boolean selector) {
         this.id = id;
         this.name = name;
+        this.selector=selector;
         getImage();
         recursosPrecargadosList.put(id,this);
     }
@@ -35,6 +37,10 @@ public class RecursosPrecargados implements ImageGetter {
 
     public String getName() {
         return name;
+    }
+
+    public boolean isSelector() {
+        return selector;
     }
 
     @Override

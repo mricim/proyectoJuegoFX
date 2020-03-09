@@ -108,14 +108,14 @@ public class Controller extends PrimaryStageControler implements Initializable {
 
     private void callbd() {
         //TODO LEER DESDE LA BD
-        new RecursosPrecargados(0, "Oro");
-        new RecursosPrecargados(1, "Madera");
-        new RecursosPrecargados(2, "Piedra");
-        new RecursosPrecargados(3, "Comida");
-        new RecursosPrecargados(4, "Hierro");
-        new RecursosPrecargados(5, "Poblacion");
-        new RecursosPrecargados(6, "Felicidad");
-        new RecursosPrecargados(7, "investigacion");
+        new RecursosPrecargados(0, "Oro",false);
+        new RecursosPrecargados(1, "Madera",false);
+        new RecursosPrecargados(2, "Piedra",false);
+        new RecursosPrecargados(3, "Comida",false);
+        new RecursosPrecargados(4, "Hierro",false);
+        new RecursosPrecargados(5, "Poblacion",true);
+        new RecursosPrecargados(6, "Felicidad",false);
+        new RecursosPrecargados(7, "investigacion",false);
         progresBar.setProgress(15);
         new EdificiosPreCargados(0, "parcela-Construible", "Descripción del edificio que sera mas larga que el nombre del edificio", false, false, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);//NO MEJORABLE
         new EdificiosPreCargados(1, "Castillo", "Descripción del edificio que sera mas larga que el nombre del edificio", false, false, 1, 0, -1, 99, 99, 99, 99, 10, 1000, 1000, 1000, 1000, 0, 10, 1, 1000, 1000, 1000, 1000, 100);
