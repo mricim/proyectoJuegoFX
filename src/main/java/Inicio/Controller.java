@@ -1,9 +1,22 @@
 package main.java.Inicio;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
+import javafx.scene.layout.VBox;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+import javafx.stage.Window;
+import main.java.Main;
 import main.java.juego.mapas.RecursosPrecargados;
 import main.java.jugadores.Clan;
 import main.java.jugadores.Jugador;
@@ -13,6 +26,8 @@ import main.java.juego.mapas.ciudad.EdificiosPreCargados;
 import main.java.juego.mapas.pelea.SoldadosPreCargados;
 import main.java.login.LoginHiperFalso;
 
+import javax.swing.*;
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.*;
@@ -28,6 +43,18 @@ public class Controller extends PrimaryStageControler implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        List<String> a = new ArrayList<>();
+        File rutes = new File(Main.RUTEINTERNAL + "resources/images/temas/");
+
+
+        File[] f = rutes.listFiles();
+        int x = Objects.requireNonNull(f).length;
+        for (int i = 0; i < x; i++) {
+            String str = f[i].getName().replaceAll("[0-9]", "").replaceAll("(.)([A-Z])", "$1 $2");
+            a.add((str.substring(0, 1).toUpperCase() + str.substring(1)));
+        }
+        seleccionarMundo.getItems().addAll(a);
+
 
     }
 
@@ -37,17 +64,24 @@ public class Controller extends PrimaryStageControler implements Initializable {
     String mundoSeleccionadoName = null;
 
     public void iniciarSession() {
+        try {
+            showDialog(stagePrimaryStageController, Modality.APPLICATION_MODAL);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
         loadSesion.setDisable(true);
         idJugador = LoginHiperFalso.devuelveElIdDeLaCuenta();
 
-        sesioniniciada=true;
+        sesioniniciada = true;
         iniciarJuegoEnable();
     }
 
     public void selecotorMundo(ActionEvent actionEvent) {
         mundoSeleccionadoName = seleccionarMundo.getValue();
 
-        mundoSeleccionado=true;
+        mundoSeleccionado = true;
         iniciarJuegoEnable();
     }
 
@@ -58,22 +92,14 @@ public class Controller extends PrimaryStageControler implements Initializable {
         }
     }
 
-    /*
-    seleccionarMundo
-    private void seleccionarMundo(ActionEvent event) {
-
-        //System.out.println(comboBox_DbTables.getValue());
-
-    }
-
-     */
     public void iniciarJuego() {
         iniciarJuego.setDisable(true);
+        NAME_TEMA = mundoSeleccionadoName;
         progresBar.setProgress(10);//TODO NO FUNCIONA // https://stackoverflow.com/questions/44398611/running-a-process-in-a-separate-thread-so-rest-of-java-fx-application-is-usable
         callbd();
         progresBar.setProgress(100);
         try {
-            new PrimaryStageControler().reload(getStagePrimaryStageController(), CiudadController.THIS_RUTE, true);
+            reload(getStagePrimaryStageController(), CiudadController.THIS_RUTE, true);
         } catch (IOException ex) {
             ex.printStackTrace();
         }
@@ -124,5 +150,54 @@ public class Controller extends PrimaryStageControler implements Initializable {
         progresBar.setProgress(80);
     }
 
+    private void showDialog(Window owner, Modality modality) throws IOException {
+        // Create a Stage with specified owner and modality
+        final Stage stage = new Stage();
+        stage.initOwner(owner);
+        stage.initModality(modality);
+        //TODO
+        FXMLLoader loader = new FXMLLoader();
+        URL url = getClass().getResource("/main/java/jugadores/iniciarSession/iniciarSession.fxml");
+        loader.setLocation(url);
+        Parent root = loader.load();
+        stage.setTitle("Nombre del juego");
+        Scene scene = new Scene(root);
+        //scene.getStylesheets().add("main.resources/style/styles.css");
+        stage.setScene(scene);
+        //primaryStage.setMaximized(true);//Pone el Stage en maximizado
+        stage.show();
 
+
+        //TODO
+
+/*
+        // Create the Label
+        Label modalityLabel = new Label(modality.toString());
+        // Create the Button
+        Button closeButton = new Button("Close");
+        // Add the EventHandler to the Button
+        closeButton.setOnAction(new EventHandler <ActionEvent>()
+        {
+            public void handle(ActionEvent event)
+            {
+                stage.close();
+            }
+        });
+
+        // Create the VBox
+        VBox root1 = new VBox();
+        // Add the Children to the VBox
+        root1.getChildren().addAll(modalityLabel, closeButton);
+
+        // Create the Scene
+        Scene scene5 = new Scene(root1, 200, 100);
+        // Add the Scene to the Stage
+        stage.setScene(scene5);
+        // Set the Title of the Stage
+        stage.setTitle("A Dialog Box");
+        // Display the Stage
+
+ */
+        stage.show();
+    }
 }

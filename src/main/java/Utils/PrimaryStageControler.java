@@ -18,7 +18,7 @@ public class PrimaryStageControler {
     private static final String RUTE = System.getProperty("user.dir") + "/src/main/java/";
 
     //VARIABLES PREDEFINIDAS
-
+    public static String NAME_TEMA;
     private static Clan clanPrimaryStageController;
 
     public static Clan getClanPrimaryStageController() {
@@ -95,7 +95,7 @@ public class PrimaryStageControler {
                 try {
                     Object controller = type.newInstance();
                     if (controller instanceof PrimaryStageControler) {
-                        ((PrimaryStageControler) controller).setPrimaryStage(primaryStage);
+                        setPrimaryStage(primaryStage);
                     }
                     return controller;
                 } catch (Exception e) {

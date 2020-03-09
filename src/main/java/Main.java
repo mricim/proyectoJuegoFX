@@ -10,6 +10,7 @@ import main.java.Utils.PrimaryStageControler;
 import java.net.URL;
 
 public class Main extends Application {
+    public static final String RUTEINTERNAL = System.getProperty("user.dir")+"/src/main/";
     /*
     private static final SessionFactory ourSessionFactory;
 

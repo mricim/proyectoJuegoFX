@@ -63,7 +63,7 @@ public class MundoController extends MapasController implements Initializable {
         //<-- Controlado por MapasController
 
 
-        int numCiudades = 1200;
+        int numCiudades = listaCiudades.size(); //12000
         int tamaño = 15;
         int capacidadCiudades = 0;
         double casillasTotales = 0;

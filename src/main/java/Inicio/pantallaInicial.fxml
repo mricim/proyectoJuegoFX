@@ -8,37 +8,29 @@ prefHeight="${screen.visualBounds.height}" prefWidth="${screen.visualBounds.widt
     </fx:define>
  -->
 
-<?import java.lang.*?>
-<?import javafx.collections.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.Inicio.Controller">
    <center>
-      <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+      <VBox alignment="CENTER" spacing="50.0" BorderPane.alignment="CENTER">
          <children>
-            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="5.0">
+            <HBox alignment="CENTER" prefHeight="100.0" spacing="40.0">
                <children>
-                  <TextField promptText="Usuario" />
-                  <PasswordField promptText="Password" />
-                  <Button fx:id="loadSesion" mnemonicParsing="false" onMouseClicked="#iniciarSession" text="Iniciar Sesión" />
+                  <VBox alignment="CENTER" minHeight="200.0" minWidth="200.0">
+                     <children>
+                        <Button fx:id="loadSesion" mnemonicParsing="false" onMouseClicked="#iniciarSession" text="Iniciar Sesión" />
+                     </children>
+                  </VBox>
                   <Separator orientation="VERTICAL" prefHeight="200.0">
                      <HBox.margin>
                         <Insets left="5.0" right="5.0" />
                      </HBox.margin>
                   </Separator>
-                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="5.0">
+                  <VBox alignment="CENTER" minWidth="200.0" prefHeight="200.0" prefWidth="100.0" spacing="20.0">
                      <children>
-                        <ComboBox fx:id="seleccionarMundo" prefWidth="150.0" promptText="Selecciona Mundo" onAction="#selecotorMundo">
-                           <items>
-                              <FXCollections fx:factory="observableArrayList">
-                                 <String fx:value="Alpha" />
-                                 <String fx:value="Beta" />
-                                 <String fx:value="Gamma" />
-                              </FXCollections>
-                           </items>
-                        </ComboBox>
+                        <ComboBox fx:id="seleccionarMundo" minWidth="150.0" onAction="#selecotorMundo" prefHeight="25.0" promptText="Selecciona Mundo" />
                         <Button fx:id="iniciarJuego" disable="true" mnemonicParsing="false" onMouseClicked="#iniciarJuego" text="Iniciar" />
                      </children>
                   </VBox>
