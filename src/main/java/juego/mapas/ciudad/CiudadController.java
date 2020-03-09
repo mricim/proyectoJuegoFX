@@ -324,8 +324,13 @@ public class CiudadController extends MapasController implements Initializable {
                     } else {
                         for (Recursos value : edificioQueSaleEnMenu.getRecursosCostes().values()) {
                             Recursos recursos = getCiudadPrimaryStageController().getRecursosTreeMap().get(value.getId());
+                            //TODO posible error aquí cuando se hace Downgrade o Destruir edificio, no cambia el valor de los recursos
                             int cantidad = recursos.getCantidad();
+                            System.out.println("Cantidad antigua recursos: "+cantidad);
+                            //TODO aquí el problema, value.getCantidad() siempre vale 0, por lo que cualquier numero multiplicado por 0, es 0.
+                            System.out.println("Valor edificio: "+value.getCantidad());
                             recursos.setCantidad(cantidad + ((value.getCantidad() * (new Random().nextInt(90 + 1 - 20) + 20)) / 100));
+                            System.out.println("Nueva Cantidad recursos: "+recursos.getCantidad());
                         }
                     }
                     reloadMenuRecursos();
