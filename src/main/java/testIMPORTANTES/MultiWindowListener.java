@@ -27,7 +27,7 @@ public class MultiWindowListener extends Application
         // Create the VBox
         VBox root = new VBox();
         // Create the Button
-        Button openButton = new Button("Open");
+        Button openButton = new Button("Open1");
         // Add the EventHandler to the button
         openButton.setOnAction(new EventHandler <ActionEvent>()
         {

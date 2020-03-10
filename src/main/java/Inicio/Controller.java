@@ -1,14 +1,10 @@
 package main.java.Inicio;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
@@ -24,9 +20,7 @@ import main.java.Utils.PrimaryStageControler;
 import main.java.juego.mapas.ciudad.CiudadController;
 import main.java.juego.mapas.ciudad.EdificiosPreCargados;
 import main.java.juego.mapas.pelea.SoldadosPreCargados;
-import main.java.login.LoginHiperFalso;
 
-import javax.swing.*;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -34,12 +28,13 @@ import java.util.*;
 
 
 public class Controller extends PrimaryStageControler implements Initializable {
-    private static String RUTE = "../../../resources/Inicio/";
     public ProgressBar progresBar;
     public ComboBox<String> seleccionarMundo;
 
     public javafx.scene.control.Button iniciarJuego;
     public javafx.scene.control.Button loadSesion;
+    public VBox aCambiar;
+
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -55,26 +50,32 @@ public class Controller extends PrimaryStageControler implements Initializable {
         }
         seleccionarMundo.getItems().addAll(a);
 
-
+        sesioniniciada = true;//TODO BORRAR
+        idJugadorTemp=1;
     }
 
     boolean sesioniniciada = false;
     boolean mundoSeleccionado = false;
-    int idJugador;
     String mundoSeleccionadoName = null;
 
     public void iniciarSession() {
         try {
-            showDialog(stagePrimaryStageController, Modality.APPLICATION_MODAL);
+            showDialog(stagePrimaryStageController);
+            System.out.println(idJugadorTemp+" "+nameJugadorTemp+" "+emailJugadorTemp);
+            if (idJugadorTemp != 0 && nameJugadorTemp.length() > 5 && emailJugadorTemp.length() > 5) {
+                loadSesion.setDisable(true);
+                sesioniniciada = true;
+                //CAMBIAR POR EL LOAD TEXTO
+                System.out.println("PASO");
+                aCambiar.getChildren().clear();
+                aCambiar.getChildren().addAll(new Label(nameJugadorTemp),new Label(emailJugadorTemp));
+
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
 
 
-        loadSesion.setDisable(true);
-        idJugador = LoginHiperFalso.devuelveElIdDeLaCuenta();
-
-        sesioniniciada = true;
         iniciarJuegoEnable();
     }
 
@@ -108,14 +109,14 @@ public class Controller extends PrimaryStageControler implements Initializable {
 
     private void callbd() {
         //TODO LEER DESDE LA BD
-        new RecursosPrecargados(0, "Oro",false, null);
-        new RecursosPrecargados(1, "Madera",true, 5);
-        new RecursosPrecargados(2, "Piedra",true, 5);
-        new RecursosPrecargados(3, "Comida",true, 5);
-        new RecursosPrecargados(4, "Hierro",true, 5);
-        new RecursosPrecargados(5, "Poblacion",false,null);
-        new RecursosPrecargados(6, "Felicidad",false, null);
-        new RecursosPrecargados(7, "investigacion",false, null);
+        new RecursosPrecargados(0, "Oro", false, null);
+        new RecursosPrecargados(1, "Madera", true, 5);
+        new RecursosPrecargados(2, "Piedra", true, 5);
+        new RecursosPrecargados(3, "Comida", true, 5);
+        new RecursosPrecargados(4, "Hierro", true, 5);
+        new RecursosPrecargados(5, "Poblacion", false, null);
+        new RecursosPrecargados(6, "Felicidad", false, null);
+        new RecursosPrecargados(7, "investigacion", false, null);
         progresBar.setProgress(15);
         new EdificiosPreCargados(0, "parcela-Construible", "Descripción del edificio que sera mas larga que el nombre del edificio", false, false, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);//NO MEJORABLE
         new EdificiosPreCargados(1, "Castillo", "Descripción del edificio que sera mas larga que el nombre del edificio", false, false, 1, 0, -1, 99, 99, 99, 99, 10, 1000, 1000, 1000, 1000, 0, 10, 1, 1000, 1000, 1000, 1000, 100);
@@ -138,7 +139,7 @@ public class Controller extends PrimaryStageControler implements Initializable {
         progresBar.setProgress(50);
         //TODO DESDE LA BD
         Clan clan = new Clan(1, "Los mejores");
-        Jugador jugador = new Jugador(idJugador, "pepito", 500);
+        Jugador jugador = new Jugador(idJugadorTemp, "pepito", 500);
         setJugadorPrimaryStageController(jugador);
         setClanPrimaryStageController(clan);
         progresBar.setProgress(60);
@@ -150,11 +151,11 @@ public class Controller extends PrimaryStageControler implements Initializable {
         progresBar.setProgress(80);
     }
 
-    private void showDialog(Window owner, Modality modality) throws IOException {
+    private void showDialog(Window owner) throws IOException {
         // Create a Stage with specified owner and modality
         final Stage stage = new Stage();
         stage.initOwner(owner);
-        stage.initModality(modality);
+        stage.initModality(Modality.APPLICATION_MODAL);
         //TODO
         FXMLLoader loader = new FXMLLoader();
         URL url = getClass().getResource("/main/java/jugadores/iniciarSession/iniciarSession.fxml");
@@ -165,7 +166,8 @@ public class Controller extends PrimaryStageControler implements Initializable {
         //scene.getStylesheets().add("main.resources/style/styles.css");
         stage.setScene(scene);
         //primaryStage.setMaximized(true);//Pone el Stage en maximizado
-        stage.show();
+        stage.showAndWait();
+        //stage.show();
 
 
         //TODO
@@ -198,6 +200,5 @@ public class Controller extends PrimaryStageControler implements Initializable {
         // Display the Stage
 
  */
-        stage.show();
     }
 }

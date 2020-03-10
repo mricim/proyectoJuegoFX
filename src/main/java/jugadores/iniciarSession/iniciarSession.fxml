@@ -19,7 +19,7 @@ prefHeight="${screen.visualBounds.height}" prefWidth="${screen.visualBounds.widt
                <children>
                   <TextField promptText="Usuario" />
                   <PasswordField promptText="Password" />
-                  <Button fx:id="loadSesion" mnemonicParsing="false" onMouseClicked="#iniciarSession" text="Iniciar Sesión" />
+                  <Button mnemonicParsing="false" onMouseClicked="#iniciarSession" text="Iniciar Sesión" />
                </children>
             </HBox>
          </children>

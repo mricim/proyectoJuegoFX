@@ -18,7 +18,7 @@ prefHeight="${screen.visualBounds.height}" prefWidth="${screen.visualBounds.widt
          <children>
             <HBox alignment="CENTER" prefHeight="100.0" spacing="40.0">
                <children>
-                  <VBox alignment="CENTER" minHeight="200.0" minWidth="200.0">
+                  <VBox fx:id="aCambiar" alignment="CENTER" minHeight="200.0" minWidth="200.0">
                      <children>
                         <Button fx:id="loadSesion" mnemonicParsing="false" onMouseClicked="#iniciarSession" text="Iniciar Sesión" />
                      </children>

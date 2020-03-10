@@ -17,6 +17,11 @@ public class PrimaryStageControler {
 
     private static final String RUTE = System.getProperty("user.dir") + "/src/main/java/";
 
+    //TEMPORAL
+    public int idJugadorTemp;
+    public String nameJugadorTemp;
+    public String emailJugadorTemp;
+    //FIN TEMPORAL
     //VARIABLES PREDEFINIDAS
     public static String NAME_TEMA;
     private static Clan clanPrimaryStageController;
