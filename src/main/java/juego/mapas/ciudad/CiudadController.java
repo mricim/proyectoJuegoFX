@@ -325,15 +325,11 @@ public class CiudadController extends MapasController implements Initializable {
                             recursos.setCantidad(cantidad - value.getCantidad());
                         }
                     } else {
-                        for (Recursos value : edificioQueSaleEnMenu.getRecursosCostes().values()) {
-                            Recursos recursos = getCiudadPrimaryStageController().getRecursosTreeMap().get(value.getId());
-                            //TODO posible error aquí cuando se hace Downgrade o Destruir edificio, no cambia el valor de los recursos
-                            int cantidad = recursos.getCantidad();
-                            System.out.println("Cantidad antigua recursos: " + cantidad);
-                            //TODO aquí el problema, value.getCantidad() siempre vale 0, por lo que cualquier numero multiplicado por 0, es 0.
-                            System.out.println("Valor edificio: " + value.getCantidad());
-                            recursos.setCantidad(cantidad + ((value.getCantidad() * (new Random().nextInt(90 + 1 - 20) + 20)) / 100));
-                            System.out.println("Nueva Cantidad recursos: " + recursos.getCantidad());
+                        EdificiosPreCargados edificiosPreCargadoEnElMapa = edificioQueEstaEnElMapa.getEdificiosPreCargado();
+                        for (Recursos value : edificiosPreCargadoEnElMapa.getRecursosCostes().values()) {
+                            Recursos recursosCity = getCiudadPrimaryStageController().getRecursosTreeMap().get(value.getId());
+                            int cantidad = recursosCity.getCantidad();
+                            recursosCity.setCantidad(cantidad + ((value.getCantidad() * 80) / 100));
                         }
                     }
                     reloadMenuRecursos();
@@ -411,8 +407,8 @@ public class CiudadController extends MapasController implements Initializable {
                     int poblacionPuesta = edificioSlider.getTrabajadoresPuestos();
                     HBox hBox = new HBox();
                     Label label = new Label(String.valueOf(poblacionPuesta));
-                    Label labelMax = new Label(" /"+poblacionMaximaQueSePuedePoner);
-                    Slider slider = new Slider(0, Math.min(poblacionMaximaQueSePuedePoner, pobacionCiudad+poblacionPuesta), poblacionPuesta);
+                    Label labelMax = new Label(" /" + poblacionMaximaQueSePuedePoner);
+                    Slider slider = new Slider(0, Math.min(poblacionMaximaQueSePuedePoner, pobacionCiudad + poblacionPuesta), poblacionPuesta);
                     slider.setShowTickMarks(true);
                     slider.setMajorTickUnit(4);
                     slider.setSnapToTicks(true);
@@ -429,7 +425,7 @@ public class CiudadController extends MapasController implements Initializable {
                             }
                         }
                     });
-                    hBox.getChildren().addAll(imageView, slider, label,labelMax);
+                    hBox.getChildren().addAll(imageView, slider, label, labelMax);
                     childrenFlowPane.add(hBox);
                 } else {
                     Label label = new Label();
@@ -438,7 +434,7 @@ public class CiudadController extends MapasController implements Initializable {
                             if (numero > 0) {
                                 label.setText("+" + numero + "/h");
                                 label.setTextFill(Color.GREEN);
-                            } else  {//if (numero != 0)
+                            } else {//if (numero != 0)
                                 label.setText(numero + "/h");
                                 label.setTextFill(Color.RED);
                             }
@@ -470,7 +466,7 @@ public class CiudadController extends MapasController implements Initializable {
 
     public void toMundo(MouseEvent mouseEvent) {
         try {
-            new PrimaryStageControler().reload(getStagePrimaryStageController(), MundoController.THIS_RUTE, false);
+            reload(getStagePrimaryStageController(), MundoController.THIS_RUTE, false);
         } catch (IOException ex) {
             ex.printStackTrace();
         }
