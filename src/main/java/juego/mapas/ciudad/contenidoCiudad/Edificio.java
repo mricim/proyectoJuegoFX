@@ -9,7 +9,7 @@ import main.java.juego.mapas.ciudad.EdificiosPreCargados;
 public class Edificio extends Posicion implements Cloneable {
     private int id;//GUARDAR
     private int nivel;//GUARDAR
-    private int necesitaTrabajadoresXmin;//GUARDAR
+    private int trabajadoresPuestos;//GUARDAR
     private EdificiosPreCargados edificiosPreCargado;
 
 
@@ -42,12 +42,12 @@ public class Edificio extends Posicion implements Cloneable {
         return nivel;
     }
 
-    public int getNecesitaTrabajadoresXmin() {
-        return necesitaTrabajadoresXmin;
+    public int getTrabajadoresPuestos() {
+        return trabajadoresPuestos;
     }
 
-    public void setNecesitaTrabajadoresXmin(int necesitaTrabajadoresXmin) {
-        this.necesitaTrabajadoresXmin = necesitaTrabajadoresXmin;
+    public void setTrabajadoresPuestos(int trabajadoresPuestos) {
+        this.trabajadoresPuestos = trabajadoresPuestos;
     }
 
     public EdificiosPreCargados getEdificiosPreCargado() {

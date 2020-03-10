@@ -2,6 +2,7 @@ package main.java.juego.mapas;
 
 import javafx.scene.image.Image;
 import main.java.Utils.ImageGetter;
+import main.java.juego.mapas.ciudad.CiudadController;
 
 public class Recursos {
     //oro=0;

@@ -4,8 +4,6 @@ import javafx.scene.image.Image;
 import main.java.Utils.ImageGetter;
 
 import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
 import java.util.Objects;
 
 public class RecursosPrecargados implements ImageGetter {
@@ -21,12 +19,14 @@ public class RecursosPrecargados implements ImageGetter {
     //investigacion=7
     private int id;
     private String name;
-    private boolean selector;
+    private boolean esSelectable;
+    private Integer elSeletableSera;//apuntan a poblacion
 
-    public RecursosPrecargados(int id, String name,boolean selector) {
+    public RecursosPrecargados(int id, String name, boolean esSelectable, Integer elSeletableSera) {
         this.id = id;
         this.name = name;
-        this.selector=selector;
+        this.esSelectable = esSelectable;
+        this.elSeletableSera = elSeletableSera;
         getImage();
         recursosPrecargadosList.put(id,this);
     }
@@ -39,8 +39,12 @@ public class RecursosPrecargados implements ImageGetter {
         return name;
     }
 
-    public boolean isSelector() {
-        return selector;
+    public boolean isEsSelectable() {
+        return esSelectable;
+    }
+
+    public Integer getElSeletableSera() {
+        return elSeletableSera;
     }
 
     @Override

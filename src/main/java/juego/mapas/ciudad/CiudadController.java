@@ -1,5 +1,7 @@
 package main.java.juego.mapas.ciudad;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -16,6 +18,7 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import main.java.Utils.PrimaryStageControler;
 import main.java.juego.MapasController;
+import main.java.juego.mapas.RecursosPrecargados;
 import main.java.juego.mapas.mundo.MundoController;
 import main.java.juego.mapas.Recursos;
 import main.java.juego.mapas.ciudad.contenidoCiudad.Edificio;
@@ -273,13 +276,13 @@ public class CiudadController extends MapasController implements Initializable {
             ObservableList<Node> childrenFlowPane = flowPane.getChildren();
 
             if (tipoDeBoton == 0) {//Si es el edificio que tenemos en el mapa
-                printRecursos(childrenFlowPane, edificioQueSaleEnMenu.getRecursosProductores().entrySet(), 1,true);//Ponemos las barras de los selectores
+                printRecursos(childrenFlowPane, edificioQueSaleEnMenu.getRecursosProductores().entrySet(), 1, edificioQueEstaEnElMapa);//Ponemos las barras de los selectores
             } else {
-                printRecursos(childrenFlowPane, edificioQueSaleEnMenu.getRecursosProductores().entrySet(), 1,false);
+                printRecursos(childrenFlowPane, edificioQueSaleEnMenu.getRecursosProductores().entrySet(), 1, null);
             }
-            printRecursos(childrenFlowPane, edificioQueSaleEnMenu.getRecursosAlmacen().entrySet(), 2,false);
+            printRecursos(childrenFlowPane, edificioQueSaleEnMenu.getRecursosAlmacen().entrySet(), 2, null);
             if (tipoDeBoton == 1 || tipoDeBoton == 2) {
-                printRecursos(childrenFlowPane, edificioQueSaleEnMenu.getRecursosCostes().entrySet(), 3,false);
+                printRecursos(childrenFlowPane, edificioQueSaleEnMenu.getRecursosCostes().entrySet(), 3, null);
             }
 
 
@@ -326,11 +329,11 @@ public class CiudadController extends MapasController implements Initializable {
                             Recursos recursos = getCiudadPrimaryStageController().getRecursosTreeMap().get(value.getId());
                             //TODO posible error aquí cuando se hace Downgrade o Destruir edificio, no cambia el valor de los recursos
                             int cantidad = recursos.getCantidad();
-                            System.out.println("Cantidad antigua recursos: "+cantidad);
+                            System.out.println("Cantidad antigua recursos: " + cantidad);
                             //TODO aquí el problema, value.getCantidad() siempre vale 0, por lo que cualquier numero multiplicado por 0, es 0.
-                            System.out.println("Valor edificio: "+value.getCantidad());
+                            System.out.println("Valor edificio: " + value.getCantidad());
                             recursos.setCantidad(cantidad + ((value.getCantidad() * (new Random().nextInt(90 + 1 - 20) + 20)) / 100));
-                            System.out.println("Nueva Cantidad recursos: "+recursos.getCantidad());
+                            System.out.println("Nueva Cantidad recursos: " + recursos.getCantidad());
                         }
                     }
                     reloadMenuRecursos();
@@ -355,9 +358,9 @@ public class CiudadController extends MapasController implements Initializable {
         recursosMenu(flowPaneRecuros, getCiudadPrimaryStageController().getRecursosTreeMap().values());
     }
 
-    private void printRecursos(ObservableList<Node> childrenFlowPane, Set<Map.Entry<Integer, Recursos>> recursos, int produceAlmacenaCuesta,boolean ponerBarras) {
+    private void printRecursos(ObservableList<Node> childrenFlowPane, Set<Map.Entry<Integer, Recursos>> recursosEdificio, int produceAlmacenaCuesta, Edificio edificioSlider) {
         boolean paso0 = false;
-        for (Map.Entry<Integer, Recursos> recurso : recursos) {
+        for (Map.Entry<Integer, Recursos> recurso : recursosEdificio) {
             Recursos recursoValor = recurso.getValue();
             if (recursoValor.getCantidad() > 0) {
                 paso0 = true;
@@ -373,7 +376,7 @@ public class CiudadController extends MapasController implements Initializable {
             label.setBackground(new Background(new BackgroundFill(Color.rgb(238, 174, 160), CornerRadii.EMPTY, Insets.EMPTY)));
             switch (produceAlmacenaCuesta) {
                 case 1:
-                    label.setText("Produce:");
+                    label.setText("Produce (max):");
                     break;
                 case 2:
                     label.setText("Almacena:");
@@ -392,37 +395,68 @@ public class CiudadController extends MapasController implements Initializable {
             childrenFlowPane.add(separator2);
         }
         boolean paso1 = false;
-        for (Map.Entry<Integer, Recursos> recurso : recursos) {
-            Recursos recursoValor = recurso.getValue();
+        for (Map.Entry<Integer, Recursos> recursoEdificio : recursosEdificio) {
+
+            Recursos recursoValor = recursoEdificio.getValue();
             int numero = recursoValor.getCantidad();
             if (numero != 0) {
                 ImageView imageView = new ImageView(recursoValor.getImage());
                 imageView.setFitWidth(25);
                 imageView.setFitHeight(25);
-                Label label = new Label();//TODO PONER AQUI LA PUTA BARRA :(
-                switch (produceAlmacenaCuesta) {
-                    case 1:
-                        if (numero > 0) {
-                            label.setText("+" + numero + "/h");
-                            label.setTextFill(Color.GREEN);
-                        } else if (numero < 0) {
-                            label.setText(numero + "/h");
-                            label.setTextFill(Color.RED);
+                RecursosPrecargados recursosPrecargados = recursoValor.getRecursosPrecargados();
+                if (edificioSlider != null && recursosPrecargados.isEsSelectable()) {//SLIDER
+                    Recursos recursoAQuitar = getCiudadPrimaryStageController().getRecursosTreeMap().get(recursosPrecargados.getElSeletableSera());
+                    int pobacionCiudad = recursoAQuitar.getCantidad();
+                    int poblacionMaximaQueSePuedePoner = recursoValor.getCantidad();
+                    int poblacionPuesta = edificioSlider.getTrabajadoresPuestos();
+                    HBox hBox = new HBox();
+                    Label label = new Label(String.valueOf(poblacionPuesta));
+                    Label labelMax = new Label(" /"+poblacionMaximaQueSePuedePoner);
+                    Slider slider = new Slider(0, Math.min(poblacionMaximaQueSePuedePoner, pobacionCiudad+poblacionPuesta), poblacionPuesta);
+                    slider.setShowTickMarks(true);
+                    slider.setMajorTickUnit(4);
+                    slider.setSnapToTicks(true);
+                    slider.valueProperty().addListener(new ChangeListener<Number>() {
+                        @Override
+                        public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+                            int a = newValue.intValue();
+                            int number = oldValue.intValue() - a;
+                            if (number != 0) {
+                                label.textProperty().setValue(String.valueOf(a));
+                                edificioSlider.setTrabajadoresPuestos(a);
+                                recursoAQuitar.setCantidad(recursoAQuitar.getCantidad() + number);
+                                reloadMenuRecursos();
+                            }
                         }
-                        break;
-                    case 2:
-                        label.setText(String.valueOf(numero));
-                        break;
-                    case 3:
-                        label.setText("-" + numero);
-                        label.setTextFill(Color.RED);
-                        break;
+                    });
+                    hBox.getChildren().addAll(imageView, slider, label,labelMax);
+                    childrenFlowPane.add(hBox);
+                } else {
+                    Label label = new Label();
+                    switch (produceAlmacenaCuesta) {
+                        case 1:
+                            if (numero > 0) {
+                                label.setText("+" + numero + "/h");
+                                label.setTextFill(Color.GREEN);
+                            } else  {//if (numero != 0)
+                                label.setText(numero + "/h");
+                                label.setTextFill(Color.RED);
+                            }
+                            break;
+                        case 2:
+                            label.setText(String.valueOf(numero));
+                            break;
+                        case 3:
+                            label.setText("-" + numero);
+                            label.setTextFill(Color.RED);
+                            break;
+                    }
+                    label.setGraphic(imageView);
+                    label.setTextAlignment(CENTER);
+                    label.setAlignment(Pos.CENTER);
+                    label.setWrapText(true);
+                    childrenFlowPane.add(label);
                 }
-                label.setGraphic(imageView);
-                label.setTextAlignment(CENTER);
-                label.setAlignment(Pos.CENTER);
-                label.setWrapText(true);
-                childrenFlowPane.add(label);
                 paso1 = true;
             }
         }

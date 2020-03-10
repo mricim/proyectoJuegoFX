@@ -41,7 +41,7 @@ public class Jugador {
         Ciudad cargarCiudad = null;
         if (id == 1) {
             //todo Se le desde la BD
-            Ciudad ciudad1 = new Ciudad(this,1, "ciudad 1 1-1", 1, 1, 1, 300, 20, 50, 70, 90, 40, 50);
+            Ciudad ciudad1 = new Ciudad(this,1, "ciudad 1 1-1", 1, 1, 1, 300, 20, 50, 70, 90, 3, 50);
             Ciudad ciudad2 = new Ciudad(this,2, "ciudad 2 2-2", 2, 2, 1, Integer.MAX_VALUE, 5000, 60000, 3000, 756123, 6584110, 53);
 
 
