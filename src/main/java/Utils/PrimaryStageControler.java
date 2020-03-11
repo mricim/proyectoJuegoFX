@@ -2,20 +2,15 @@ package main.java.Utils;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import main.java.jugadores.Clan;
 import main.java.jugadores.Jugador;
 import main.java.Main;
 import main.java.juego.mapas.ciudad.Ciudad;
-import main.java.jugadores.iniciarSession.IniciarSessionController;
 
-import java.io.File;
 import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.net.URL;
 import java.util.HashMap;
 
 public class PrimaryStageControler {
@@ -80,11 +75,20 @@ public class PrimaryStageControler {
     public static void newStage(String rute, boolean setMaximized) throws IOException {
         final Stage stage = new Stage();
         stage.initModality(Modality.APPLICATION_MODAL);
-        reload(stage, rute, setMaximized);
+        reloadNewStage(null, stage, rute, setMaximized);
     }
 
+    public static void newStageby(Stage oldStage, String rute, boolean setMaximized) throws IOException {
+        final Stage stage = new Stage();
+        stage.initModality(Modality.APPLICATION_MODAL);
+        reloadNewStage(oldStage, stage, rute, setMaximized);
+    }
 
     public static void reload(Stage primaryStage, String rute, boolean setMaximized) throws IOException {
+        reloadNewStage(null, primaryStage, rute, setMaximized);
+    }
+
+    public static void reloadNewStage(Stage oldStageOwner, Stage primaryStage, String rute, boolean setMaximized) throws IOException {
         FXMLLoader loader;
         if (fxmlLoaderHashMap.containsKey(rute)) {
             System.out.println("TENEMOS");
@@ -92,48 +96,44 @@ public class PrimaryStageControler {
         } else {
             System.out.println("NO TENEMOS");
             loader = new FXMLLoader();
-            //URL url = getClass().getResource("/main/java/juego/mapas/Ciudad/ciudad.fxml");
-            //loader.setLocation(Paths.get(RUTE + rute).toUri().toURL());
-            URI nada = null;
-            try {
-                nada = Main.class.getResource(rute).toURI();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            loader.setLocation(nada.toURL());
+
+            loader.setLocation(Main.class.getResource(rute));
             //TODO fxmlLoaderHashMap.put(rute,loader);
         }
         Parent root = loader.load();
-        primaryStage.getScene().setRoot(root);
+        if (oldStageOwner != null) {
+            primaryStage.initOwner(oldStageOwner);
+            Scene scene = new Scene(root);
+            primaryStage.setScene(scene);
+        } else {
+            primaryStage.getScene().setRoot(root);
+        }
         if (primaryStage.isMaximized()) {
             setMaximized = true;
         }
 
         primaryStage.setMaximized(setMaximized);//Pone el Stage en maximizado
+        if (oldStageOwner != null) {
+            primaryStage.showAndWait();
+        }
     }
 
-/*
     //PARA EL RESTO
-    public static String getRuteToFXML() throws URISyntaxException {
-        String name = IniciarSessionController.class.getName().replace("Controller", "");
+    public static String getPathToFXML(Class ese) {
+        String name = ese.getName().replace("Controller", "");
         char c[] = name.substring(name.lastIndexOf(".") + 1).toCharArray();
         c[0] = Character.toLowerCase(c[0]);
-        return IniciarSessionController.class.getResource("").getPath() + new String(c) + ".fxml";
+        String x = ese.getResource("").getPath() + new String(c) + ".fxml";
+        String main = Main.class.getResource("").getPath();
+        return x.replace(main, "");
     }
 
-    public static URI getRute() throws URISyntaxException {
-        String name = IniciarSessionController.class.getName().replace("Controller", "");
-        return new URI(IniciarSessionController.class.getResource("").toURI().toString() + name.substring(name.lastIndexOf(".") + 1));
-    }
-    public static URL getURLF() throws MalformedURLException {
-        String name = IniciarSessionController.class.getName().replace("Controller", "");
-        File DD=new File(String.valueOf(IniciarSessionController.class.getResource(name.substring(name.lastIndexOf(".") + 1)+".fxml")));
-        if (DD.exists()){
-            System.out.println("si");
-        }
-        System.out.println(DD.getAbsolutePath());
-        return new URL(DD.getAbsolutePath());
+    public static String getPath(Class ese) {
+        String name = ese.getName();
+        name = ese.getResource("").getPath() + name.substring(name.lastIndexOf(".") + 1);
+        String main = Main.class.getResource("").getPath();
+        return name.replace(main, "");
     }
 
- */
+
 }

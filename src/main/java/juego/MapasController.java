@@ -9,7 +9,6 @@ import javafx.scene.control.SplitMenuButton;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
-import main.java.jugadores.Jugador;
 import main.java.Utils.PrimaryStageControler;
 import main.java.juego.mapas.ciudad.Ciudad;
 import main.java.juego.mapas.Recursos;
@@ -55,7 +54,7 @@ abstract public class MapasController extends PrimaryStageControler {
                 menuItem.setOnAction((e) -> {
                     setCiudadPrimaryStageController(ciudadTemp);
                     try {
-                        new PrimaryStageControler().reload(getStagePrimaryStageController(), ruteController, false);
+                        reload(getStagePrimaryStageController(), ruteController,false);
                     } catch (IOException ex) {
                         ex.printStackTrace();
                     }

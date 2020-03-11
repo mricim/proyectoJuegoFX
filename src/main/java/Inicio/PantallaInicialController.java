@@ -19,9 +19,8 @@ import main.java.Utils.PrimaryStageControler;
 import main.java.juego.mapas.ciudad.CiudadController;
 import main.java.juego.mapas.ciudad.EdificiosPreCargados;
 import main.java.juego.mapas.pelea.SoldadosPreCargados;
-import main.java.temas.Temas;
+import main.java.jugadores.iniciarSession.IniciarSessionController;
 
-import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.*;
@@ -48,7 +47,7 @@ public class PantallaInicialController extends PrimaryStageControler implements 
         seleccionarMundo.getItems().addAll(arrayListTemas);
 
         sesioniniciada = true;//TODO BORRAR
-        idJugadorTemp=1;//TODO BORRAR
+        idJugadorTemp = 1;//TODO BORRAR
     }
 
     boolean sesioniniciada = false;
@@ -57,17 +56,18 @@ public class PantallaInicialController extends PrimaryStageControler implements 
 
     public void iniciarSession() {
         try {
-            showDialog(stagePrimaryStageController);
-            //newStage(IniciarSessionController.RUTE_FXML,false); TODO QUE LE PASA?
+            newStageby(getStagePrimaryStageController(), PrimaryStageControler.getPathToFXML(IniciarSessionController.class), false);
             if (idJugadorTemp != 0 && nameJugadorTemp.length() > 5 && emailJugadorTemp.length() > 5) {
                 loadSesion.setDisable(true);
                 sesioniniciada = true;
                 //CAMBIAR POR EL LOAD TEXTO
                 System.out.println("PASO");
                 aCambiar.getChildren().clear();
-                aCambiar.getChildren().addAll(new Label(nameJugadorTemp),new Label(emailJugadorTemp));
+                aCambiar.getChildren().addAll(new Label(nameJugadorTemp), new Label(emailJugadorTemp));
 
-            }else {throw new Exception("No se puede iniciar session");}
+            } else {
+                throw new Exception("No se puede iniciar session");
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -146,25 +146,5 @@ public class PantallaInicialController extends PrimaryStageControler implements 
         clan.addJugadorClan(jugador);
         clan.addJugadorClan(3);
         progresBar.setProgress(80);
-    }
-
-    private static void showDialog(Window owner) throws IOException {
-        // Create a Stage with specified owner and modality
-        final Stage stage = new Stage();
-        //stage.initOwner(owner);
-        stage.initModality(Modality.APPLICATION_MODAL);
-        //TODO
-        FXMLLoader loader = new FXMLLoader();
-        URL url = PantallaInicialController.class.getResource("/main/java/jugadores/iniciarSession/iniciarSession.fxml");
-        loader.setLocation(url);
-        Parent root = loader.load();
-        stage.setTitle("Nombre del juego");
-        Scene scene = new Scene(root);
-        //scene.getStylesheets().add("main.resources/style/styles.css");
-        stage.setScene(scene);
-        //primaryStage.setMaximized(true);//Pone el Stage en maximizado
-        stage.showAndWait();
-        //stage.show();
-
     }
 }
