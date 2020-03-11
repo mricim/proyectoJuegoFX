@@ -11,12 +11,12 @@ import java.util.Objects;
 import static main.java.Utils.PrimaryStageControler.NAME_TEMA;
 
 public class Temas {
-    public static List<String> arrayListTemas = obtainListaTemas();
     private static String pathImagesTema = Main.RUTEINTERNAL + "resources/images/temas/";
     private static String pathImagesTemaExternal = CallImages.RUTEEXTERNAL + "temas/";
     public static File temasDirectoryInternalFile = new File(pathImagesTema);
     public static File temasDirectoryExternalFile = new File(pathImagesTemaExternal);
-    private static List<String> obtainListaTemas() {
+    public static List<String> arrayListTemas = obtainListaTemas();//LO MAS ABAJO POSIBLE
+    public static List<String> obtainListaTemas() {
         List<String> listaTemas = new ArrayList<>();
         File[] f;
         if (temasDirectoryInternalFile.exists()) {
