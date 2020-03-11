@@ -12,7 +12,6 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.Window;
-import main.java.Main;
 import main.java.juego.mapas.RecursosPrecargados;
 import main.java.jugadores.Clan;
 import main.java.jugadores.Jugador;
@@ -20,12 +19,14 @@ import main.java.Utils.PrimaryStageControler;
 import main.java.juego.mapas.ciudad.CiudadController;
 import main.java.juego.mapas.ciudad.EdificiosPreCargados;
 import main.java.juego.mapas.pelea.SoldadosPreCargados;
-import main.java.jugadores.iniciarSession.IniciarSessionController;
+import main.java.temas.Temas;
 
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.*;
+
+import static main.java.temas.Temas.arrayListTemas;
 
 
 public class PantallaInicialController extends PrimaryStageControler implements Initializable {
@@ -44,18 +45,7 @@ public class PantallaInicialController extends PrimaryStageControler implements 
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        List<String> a = new ArrayList<>();
-        File temasDirectory = new File(Main.RUTEINTERNAL + "resources/images/temas/");
-
-
-        File[] f = temasDirectory.listFiles();
-        int x = Objects.requireNonNull(f).length;
-        for (int i = 0; i < x; i++) {
-            String str = f[i].getName().replaceAll("[0-9]", "").replaceAll("(.)([A-Z])", "$1 $2");
-            a.add((str.substring(0, 1).toUpperCase() + str.substring(1)));
-        }
-        seleccionarMundo.getItems().addAll(a);
-
+        seleccionarMundo.getItems().addAll(arrayListTemas);
 
         sesioniniciada = true;//TODO BORRAR
         idJugadorTemp=1;//TODO BORRAR

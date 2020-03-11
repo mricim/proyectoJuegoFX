@@ -9,7 +9,7 @@ import static main.java.jugadores.Jugador.ERRORIMAGE;
 
 public class CallImages {
     private static final String RUTE = System.getProperty("user.dir");
-    private static final String RUTEEXTERNAL = System.getProperty("user.dir").replace("proyectoJuegoFX", "") + "/videoJuegoresources/images/";
+    public static final String RUTEEXTERNAL = System.getProperty("user.dir").replace("proyectoJuegoFX", "") + "/videoJuegoresources/images/";
     public static final String RUTEIMAGES = RUTE + "/src/main/resources/images/";
 
     public static String RUTEIMAGE = "../../resources/images/";
