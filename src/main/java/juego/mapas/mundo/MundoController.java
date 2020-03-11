@@ -510,7 +510,7 @@ public class MundoController extends MapasController implements Initializable {
 
     public void toMundo(MouseEvent mouseEvent) {//TODO ES POSIBLE QUE EN ESTE MAPA NO INTERESE TENER ESTO
         try {
-            new PrimaryStageControler().reload(getStagePrimaryStageController(), CiudadController.THIS_RUTE, false);
+            reload(getStagePrimaryStageController(), PrimaryStageControler.getPathToFXML(CiudadController.class), false);
         } catch (IOException ex) {
             ex.printStackTrace();
         }

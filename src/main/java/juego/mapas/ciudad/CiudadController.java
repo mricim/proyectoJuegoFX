@@ -16,6 +16,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
+import main.java.Utils.PrimaryStageControler;
 import main.java.juego.MapasController;
 import main.java.juego.mapas.RecursosPrecargados;
 import main.java.juego.mapas.mundo.MundoController;
@@ -465,7 +466,7 @@ public class CiudadController extends MapasController implements Initializable {
 
     public void toMundo(MouseEvent mouseEvent) {
         try {
-            reload(getStagePrimaryStageController(), MundoController.THIS_RUTE,false);
+            reload(getStagePrimaryStageController(), PrimaryStageControler.getPathToFXML(MundoController.class),false);
         } catch (IOException ex) {
             ex.printStackTrace();
         }
