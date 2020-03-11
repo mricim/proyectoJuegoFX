@@ -69,7 +69,8 @@ public class PantallaInicialController extends PrimaryStageControler implements 
                 throw new Exception("No se puede iniciar session");
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            //e.printStackTrace();
+            System.err.println("No se ha iniciado sessión");
         }
 
 

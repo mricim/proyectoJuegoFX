@@ -78,10 +78,16 @@ public class PrimaryStageControler {
         reloadNewStage(null, stage, rute, setMaximized);
     }
 
-    public static void newStageby(Stage oldStage, String rute, boolean setMaximized) throws IOException {
-        final Stage stage = new Stage();
-        stage.initModality(Modality.APPLICATION_MODAL);
-        reloadNewStage(oldStage, stage, rute, setMaximized);
+    public static void newStageby(Stage oldStage, String rute, boolean setMaximized) {
+        try {
+
+
+            final Stage stage = new Stage();
+            stage.initModality(Modality.APPLICATION_MODAL);
+            reloadNewStage(oldStage, stage, rute, setMaximized);
+        }catch (Exception e){
+            System.err.println("Error al cargar la hoja de iniciar sessión");
+        }
     }
 
     public static void reload(Stage primaryStage, String rute, boolean setMaximized) throws IOException {
