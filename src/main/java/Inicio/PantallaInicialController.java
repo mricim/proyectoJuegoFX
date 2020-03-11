@@ -20,6 +20,7 @@ import main.java.Utils.PrimaryStageControler;
 import main.java.juego.mapas.ciudad.CiudadController;
 import main.java.juego.mapas.ciudad.EdificiosPreCargados;
 import main.java.juego.mapas.pelea.SoldadosPreCargados;
+import main.java.jugadores.iniciarSession.IniciarSessionController;
 
 import java.io.File;
 import java.io.IOException;
@@ -27,7 +28,12 @@ import java.net.URL;
 import java.util.*;
 
 
-public class Controller extends PrimaryStageControler implements Initializable {
+public class PantallaInicialController extends PrimaryStageControler implements Initializable {
+    public static int idJugadorTemp;
+    public static String nameJugadorTemp;
+    public static String emailJugadorTemp;
+
+
     public ProgressBar progresBar;
     public ComboBox<String> seleccionarMundo;
 
@@ -39,10 +45,10 @@ public class Controller extends PrimaryStageControler implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         List<String> a = new ArrayList<>();
-        File rutes = new File(Main.RUTEINTERNAL + "resources/images/temas/");
+        File temasDirectory = new File(Main.RUTEINTERNAL + "resources/images/temas/");
 
 
-        File[] f = rutes.listFiles();
+        File[] f = temasDirectory.listFiles();
         int x = Objects.requireNonNull(f).length;
         for (int i = 0; i < x; i++) {
             String str = f[i].getName().replaceAll("[0-9]", "").replaceAll("(.)([A-Z])", "$1 $2");
@@ -50,8 +56,9 @@ public class Controller extends PrimaryStageControler implements Initializable {
         }
         seleccionarMundo.getItems().addAll(a);
 
+
         sesioniniciada = true;//TODO BORRAR
-        idJugadorTemp=1;
+        idJugadorTemp=1;//TODO BORRAR
     }
 
     boolean sesioniniciada = false;
@@ -61,7 +68,7 @@ public class Controller extends PrimaryStageControler implements Initializable {
     public void iniciarSession() {
         try {
             showDialog(stagePrimaryStageController);
-            System.out.println(idJugadorTemp+" "+nameJugadorTemp+" "+emailJugadorTemp);
+            //newStage(IniciarSessionController.RUTE_FXML,false); TODO QUE LE PASA?
             if (idJugadorTemp != 0 && nameJugadorTemp.length() > 5 && emailJugadorTemp.length() > 5) {
                 loadSesion.setDisable(true);
                 sesioniniciada = true;
@@ -70,8 +77,8 @@ public class Controller extends PrimaryStageControler implements Initializable {
                 aCambiar.getChildren().clear();
                 aCambiar.getChildren().addAll(new Label(nameJugadorTemp),new Label(emailJugadorTemp));
 
-            }
-        } catch (IOException e) {
+            }else {throw new Exception("No se puede iniciar session");}
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -151,14 +158,14 @@ public class Controller extends PrimaryStageControler implements Initializable {
         progresBar.setProgress(80);
     }
 
-    private void showDialog(Window owner) throws IOException {
+    private static void showDialog(Window owner) throws IOException {
         // Create a Stage with specified owner and modality
         final Stage stage = new Stage();
-        stage.initOwner(owner);
+        //stage.initOwner(owner);
         stage.initModality(Modality.APPLICATION_MODAL);
         //TODO
         FXMLLoader loader = new FXMLLoader();
-        URL url = getClass().getResource("/main/java/jugadores/iniciarSession/iniciarSession.fxml");
+        URL url = PantallaInicialController.class.getResource("/main/java/jugadores/iniciarSession/iniciarSession.fxml");
         loader.setLocation(url);
         Parent root = loader.load();
         stage.setTitle("Nombre del juego");
@@ -169,36 +176,5 @@ public class Controller extends PrimaryStageControler implements Initializable {
         stage.showAndWait();
         //stage.show();
 
-
-        //TODO
-
-/*
-        // Create the Label
-        Label modalityLabel = new Label(modality.toString());
-        // Create the Button
-        Button closeButton = new Button("Close");
-        // Add the EventHandler to the Button
-        closeButton.setOnAction(new EventHandler <ActionEvent>()
-        {
-            public void handle(ActionEvent event)
-            {
-                stage.close();
-            }
-        });
-
-        // Create the VBox
-        VBox root1 = new VBox();
-        // Add the Children to the VBox
-        root1.getChildren().addAll(modalityLabel, closeButton);
-
-        // Create the Scene
-        Scene scene5 = new Scene(root1, 200, 100);
-        // Add the Scene to the Stage
-        stage.setScene(scene5);
-        // Set the Title of the Stage
-        stage.setTitle("A Dialog Box");
-        // Display the Stage
-
- */
     }
 }

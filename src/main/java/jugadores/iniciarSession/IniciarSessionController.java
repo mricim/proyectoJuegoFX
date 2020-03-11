@@ -4,13 +4,17 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import main.java.Inicio.PantallaInicialController;
 import main.java.Utils.PrimaryStageControler;
 
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 
-public class iniciarSessionController extends PrimaryStageControler implements Initializable {
+public class IniciarSessionController extends PrimaryStageControler implements Initializable {
+
+    public static final String RUTE_FXML = "jugadores/iniciarSession/iniciarSession.fxml";
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -21,9 +25,11 @@ public class iniciarSessionController extends PrimaryStageControler implements I
     public void iniciarSession(MouseEvent mouseEvent) {
         Node source = (Node) mouseEvent.getSource();
         Stage stage = (Stage) source.getScene().getWindow();
-        idJugadorTemp = 1;
-        nameJugadorTemp = "tu nombre";
-        emailJugadorTemp = "unemail@gmail.com";
+        PantallaInicialController.idJugadorTemp = 1;
+        PantallaInicialController.nameJugadorTemp = "tu nombre";
+        PantallaInicialController.emailJugadorTemp = "unemail@gmail.com";
         stage.close();
     }
+
+
 }
