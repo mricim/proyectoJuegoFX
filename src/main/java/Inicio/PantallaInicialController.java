@@ -1,17 +1,11 @@
 package main.java.Inicio;
 
 import javafx.event.ActionEvent;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.layout.VBox;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
-import javafx.stage.Window;
 import main.java.juego.mapas.RecursosPrecargados;
 import main.java.jugadores.Clan;
 import main.java.jugadores.Jugador;
@@ -20,6 +14,7 @@ import main.java.juego.mapas.ciudad.CiudadController;
 import main.java.juego.mapas.ciudad.EdificiosPreCargados;
 import main.java.juego.mapas.pelea.SoldadosPreCargados;
 import main.java.jugadores.iniciarSession.IniciarSessionController;
+import main.java.temas.Temas;
 
 import java.io.IOException;
 import java.net.URL;
@@ -94,6 +89,10 @@ public class PantallaInicialController extends PrimaryStageControler implements 
     public void iniciarJuego() {
         iniciarJuego.setDisable(true);
         NAME_TEMA = mundoSeleccionadoName;
+        char[] a = NAME_TEMA.replaceAll(" ", "").toCharArray();
+        a[0] = Character.toLowerCase(a[0]);
+        Temas.ruteUse(String.valueOf(a) + "/");
+
         progresBar.setProgress(10);//TODO NO FUNCIONA // https://stackoverflow.com/questions/44398611/running-a-process-in-a-separate-thread-so-rest-of-java-fx-application-is-usable
         callbd();
         progresBar.setProgress(100);

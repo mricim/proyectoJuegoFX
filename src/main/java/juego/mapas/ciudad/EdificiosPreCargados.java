@@ -27,7 +27,7 @@ public class EdificiosPreCargados implements ImageGetter {
     //ALMACEN
     public TreeMap<Integer, Recursos> recursosAlmacen = new TreeMap<>();
 
-    static String RUTEIMAGES = "temas/demo/mapas/city/";
+    static String RUTEIMAGES = "mapas/city/";
     private String imagePath;
     private String imageClicablePath;
 

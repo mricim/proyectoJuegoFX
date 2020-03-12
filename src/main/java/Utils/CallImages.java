@@ -1,67 +1,52 @@
 package main.java.Utils;
 
 import javafx.scene.image.Image;
+import main.java.temas.Temas;
 
 import java.io.File;
 import java.util.HashMap;
 
 import static main.java.jugadores.Jugador.ERRORIMAGE;
+import static main.java.temas.Temas.*;
 
 public class CallImages {
-    private static final String RUTE = System.getProperty("user.dir");
-    public static final String RUTEEXTERNAL = System.getProperty("user.dir").replace("proyectoJuegoFX", "") + "/videoJuegoresources/images/";
-    public static final String RUTEIMAGES = RUTE + "/src/main/resources/images/";
-
-    public static String RUTEIMAGE = "../../resources/images/";
     private static HashMap<String, Image> listImage = new HashMap<>();
 
-    private CallImages(String rute, String name) {
-        this(rute, name, 100, 100);
+    private CallImages(boolean genericOrTemaF, String rute, String name) {
+        this(genericOrTemaF, rute, name, 100, 100);
     }
 
-    private CallImages(String rute, String name, int width, int height) {
+    private CallImages(boolean genericOrTemaF, String rute, String name, int width, int height) {
         String ruteName = rute + name;
         Image image;
-        if (new File(RUTEEXTERNAL).exists()) {
-            try {
-                try {
-                    File file = new File(RUTEEXTERNAL + ruteName + ".png");
-                    if (!file.exists()) {
-                        throw new Exception("nove");
-                    }
-                    image = new Image(file.toURI().toString(), width, height, true, true);
-                    System.out.println(RUTEEXTERNAL + ruteName + ".png");
-
-                } catch (Exception e) {
-                    String format = searchFiles(RUTEEXTERNAL + rute, name);
-                    File file = new File(RUTEEXTERNAL + ruteName + "."+format);
-                    if (!file.exists()) {
-                        throw new Exception("nove");
-                    }
-                    image = new Image(file.toURI().toString(), width, height, true, true);
-                    System.out.println("catch - " + file.toURI().toString());
-                }
-                listImage.put(ruteName, image);
-            } catch (Exception e) {
-                listImage.put(ruteName, ERRORIMAGE);
-                //Main.class.getResource(rute).toURI();
-                System.out.println(RUTEEXTERNAL + ruteName);
-                System.err.println("Error: CallImages (Image not found) = " + rute + " " + name);
-            }
-
+        String ruteUse;
+        if (!genericOrTemaF) {
+            ruteUse = PATH_TEMA_USE + rute + name;
         } else {
+            ruteUse = PATH_USE + rute + name;
+        }
+        try {
             try {
-                try {
-                    System.out.println(RUTEIMAGE + ruteName + ".png");
-                    image = new Image(getClass().getResource(RUTEIMAGE + ruteName + ".png").toExternalForm(), width, height, true, true);
-                } catch (Exception e) {
-                    image = new Image(getClass().getResource(RUTEIMAGE + ruteName + "." + searchFiles(RUTEIMAGES + rute, name)).toExternalForm(), width, height, true, true);
+                File file = new File(ruteUse + ".png");
+                if (!file.exists()) {
+                    throw new Exception("nove");
                 }
-                listImage.put(ruteName, image);
+                image = new Image(file.toURI().toString(), width, height, true, true);
+                //System.out.println(ruteUse + ".png");
+
             } catch (Exception e) {
-                listImage.put(ruteName, ERRORIMAGE);
-                System.err.println("Error: CallImages (Image not found) = " + rute + " " + name);
+                String format = searchFiles(PATH_TEMA_USE + rute, name);
+                File file = new File(ruteUse + "." + format);
+                if (!file.exists()) {
+                    throw new Exception("nove");
+                }
+                image = new Image(file.toURI().toString(), width, height, true, true);
+                System.out.println("catch - " + file.toURI().toString());
             }
+            listImage.put(ruteName, image);
+        } catch (Exception e) {
+            listImage.put(ruteName, ERRORIMAGE);
+            System.err.println("Error: CallImages (Image not found External) = " + ruteUse + " " + name);
         }
     }
 
@@ -78,13 +63,21 @@ public class CallImages {
         return "";
     }
 
+    public static Image getImageNoTema(String rute, String name) {
+        return getImage(true, rute, name);
+    }
+
     public static Image getImage(String rute, String name) {
+        return getImage(false, rute, name);
+    }
+
+    private static Image getImage(boolean genericOrTemaF, String rute, String name) {
         String ruteName = rute + name;
         if (listImage.containsKey(ruteName)) {
             return listImage.get(ruteName);
         } else {
-            new CallImages(rute, name);
             try {
+                new CallImages(genericOrTemaF, rute, name);
                 return listImage.get(ruteName);
             } catch (Exception e) {
             }

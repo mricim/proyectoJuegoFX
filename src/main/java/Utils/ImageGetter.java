@@ -5,14 +5,17 @@ import javafx.scene.image.Image;
 
 public interface ImageGetter {
 
-    abstract Image getImage( /* call "getImage(RUTEIMAGES, image)" */ );
+    abstract Image getImage( /* call "getImage(RUTEIMAGES, image)" */);
+
     default Image getImage(String RUTEIMAGES, String image) {
-        return CallImages.getImage(RUTEIMAGES, image);
+        return CallImages.getImage( RUTEIMAGES, image);
     }
+
     @Nullable
-    abstract Image getImageClicable( /* call "getImageClicable(RUTEIMAGES, image)" */ );
+    abstract Image getImageClicable( /* call "getImageClicable(RUTEIMAGES, image)" */);
+
     @Nullable
     default Image getImageClicable(String RUTEIMAGES, String imageClicable) {
-        return CallImages.getImage(RUTEIMAGES, imageClicable);
+        return CallImages.getImage( RUTEIMAGES, imageClicable);
     }
 }

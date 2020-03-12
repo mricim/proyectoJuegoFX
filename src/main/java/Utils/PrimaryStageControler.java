@@ -16,7 +16,7 @@ import java.util.HashMap;
 public class PrimaryStageControler {
     private static HashMap<String, FXMLLoader> fxmlLoaderHashMap = new HashMap<>();
 
-    private static final String RUTE = System.getProperty("user.dir") + "/src/main/java/";
+    private static final String RUTE_IMAGES = System.getProperty("user.dir") + "/src/main/java/";
 
     //VARIABLES PREDEFINIDAS
     public static String NAME_TEMA;

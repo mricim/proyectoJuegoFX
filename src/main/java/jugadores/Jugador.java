@@ -13,7 +13,7 @@ import main.java.juego.mapas.ciudad.Ciudad;
 import java.util.*;
 
 public class Jugador {
-    public static final Image ERRORIMAGE = CallImages.getImage("", "error");//TODO LLEVAR ESTO LO MAS ALTO POSIBLE
+    public static final Image ERRORIMAGE = CallImages.getImageNoTema("", "error");//TODO LLEVAR ESTO LO MAS ALTO POSIBLE
     public static TreeMap<Integer, Jugador> listaTodosLosJugadores = new TreeMap<>();
 
 

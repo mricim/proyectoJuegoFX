@@ -34,7 +34,7 @@ import static main.java.jugadores.Jugador.listaPosicionesBatallones;
 
 
 public class MundoController extends MapasController implements Initializable {
-    final private static String RUTE = "temas/demo/mapas/mundo/";
+    final private static String RUTE_IMAGES = "mapas/mundo/";
     public static final String THIS_RUTE = "juego/mapas/mundo/mundo.fxml";
     private static final String REGEX_SPLIT_PATTERN = "c";
     static boolean basura = true;
@@ -175,7 +175,7 @@ public class MundoController extends MapasController implements Initializable {
                 }
                 String nameImage = stringBuilder.toString();
 
-                imageView.setImage(CallImages.getImage(RUTE, nameImage));
+                imageView.setImage(CallImages.getImage(RUTE_IMAGES, nameImage));
 
                 if (stringBuilder.indexOf(letter_batallon) != -1 || stringBuilder.indexOf(letter_city) != -1) {//he pensado que el maus solo se ponga* en las ciudades y los barcos
                     imageView.addEventHandler(MouseEvent.MOUSE_ENTERED, event -> {
@@ -185,7 +185,7 @@ public class MundoController extends MapasController implements Initializable {
                         } catch (InterruptedException e) {
                             e.printStackTrace();
                         }
-                        imageView.setImage(CallImages.getImage(RUTE, nameImage + letter_hover));
+                        imageView.setImage(CallImages.getImage(RUTE_IMAGES, nameImage + letter_hover));
                     });
                     imageView.addEventHandler(MouseEvent.MOUSE_EXITED, event -> {
                         try {
@@ -193,7 +193,7 @@ public class MundoController extends MapasController implements Initializable {
                         } catch (InterruptedException e) {
                             e.printStackTrace();
                         }
-                        imageView.setImage(CallImages.getImage(RUTE, nameImage));
+                        imageView.setImage(CallImages.getImage(RUTE_IMAGES, nameImage));
                     });
                     Ciudad finalCiudadToGrid = ciudadToGrid;
                     ArrayList<Batallon> finalBatallonesToGrid = batallonesToGrid;
@@ -274,7 +274,7 @@ public class MundoController extends MapasController implements Initializable {
         String image2 = image[0]+'c'+image[1].split("_")[0];
         System.out.println("Image1 index1 : "+image[1]);
         System.out.println("Image 2 : "+image2);
-        imgViewCiudad = new ImageView(CallImages.getImage("temas/demo/mapas/mundo/",image2));
+        imgViewCiudad = new ImageView(CallImages.getImage(RUTE_IMAGES,image2));
         imgViewCiudad.setPickOnBounds(true);
         imgViewCiudad.setPreserveRatio(true);
         childrenVBox.add(imgViewCiudad);
