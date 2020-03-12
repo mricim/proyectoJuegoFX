@@ -12,6 +12,7 @@ import javafx.scene.layout.HBox;
 import main.java.Utils.PrimaryStageControler;
 import main.java.juego.mapas.ciudad.Ciudad;
 import main.java.juego.mapas.Recursos;
+import main.java.juego.mapas.ciudad.CiudadController;
 
 import java.io.IOException;
 import java.util.Collection;
@@ -44,7 +45,7 @@ abstract public class MapasController extends PrimaryStageControler {
         }
     }
 
-    public void selectorDeCiudad(String ruteController, SplitMenuButton selectorCiudad) {
+    public void selectorDeCiudad( SplitMenuButton selectorCiudad) {
         selectorCiudad.setText(nameThisCityController);//Seleccionar otra ciudad
         for (Ciudad ciudadTemp : getJugadorPrimaryStageController().listaCiudadesPropias.values()) {
             String nameCity = ciudadTemp.getNameCity();
@@ -54,7 +55,7 @@ abstract public class MapasController extends PrimaryStageControler {
                 menuItem.setOnAction((e) -> {
                     setCiudadPrimaryStageController(ciudadTemp);
                     try {
-                        reload(getStagePrimaryStageController(), ruteController,false);
+                        reload(getStagePrimaryStageController(), PrimaryStageControler.getPathToFXML(CiudadController.class),false);
                     } catch (IOException ex) {
                         ex.printStackTrace();
                     }

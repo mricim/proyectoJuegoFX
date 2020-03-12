@@ -17,7 +17,7 @@ public class PannableView extends Application {
     private Image backgroundImage;
 
     @Override public void init() {
-        backgroundImage = new Image("file:///"+System.getProperty("user.dir")+"/src/main/resources/images/temas/demo/mapas/NarniaMap.jpg");
+        backgroundImage = new Image("file:///"+System.getProperty("user.dir")+"/src/main/resources/images/temas/demo/mapas/fondoCiudad.jpg");
     }
 
     @Override public void start(Stage stage) {

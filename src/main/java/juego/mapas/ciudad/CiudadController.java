@@ -16,6 +16,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
+import main.java.Utils.CallImages;
 import main.java.Utils.PrimaryStageControler;
 import main.java.juego.MapasController;
 import main.java.juego.mapas.RecursosPrecargados;
@@ -35,9 +36,10 @@ import static main.java.jugadores.Jugador.*;
 
 
 public class CiudadController extends MapasController implements Initializable {
-    private static String RUTE = "../../../resources/mapas/city/";
-    public static final String THIS_RUTE = "juego/mapas/ciudad/ciudad.fxml";
+    public static final String THIS_RUTE_IMAGES = "mapas/city/";
     static boolean controladorDeClic = true;
+    public ImageView imagenDeFondo;
+    public StackPane dondeVaLaImagen;
 /*
     static Jugador jugador;
     static Ciudad ciudad;
@@ -48,10 +50,6 @@ public class CiudadController extends MapasController implements Initializable {
     BorderPane borderPane;
     @FXML
     GridPane gridPaneMap;
-    /*
-    @FXML
-    ImageView imagenDeFondo;
-     */
     public FlowPane flowPaneRecuros;
     @FXML
     SplitMenuButton selectorCiudad;
@@ -63,11 +61,20 @@ public class CiudadController extends MapasController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         inicialiceController();
         recursosMenu(flowPaneRecuros, getCiudadPrimaryStageController().getRecursosTreeMap().values());
-        selectorDeCiudad(THIS_RUTE, selectorCiudad);
+        selectorDeCiudad(selectorCiudad);
         gridPaneMap.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {//Cerrar el menu
             queClicas(null, null);
         });
         //<-- Controlado por MapasController
+        ObservableList<Node> x = dondeVaLaImagen.getChildren();
+        List<Node> asd=new ArrayList<>();
+        ImageView imageViewBase = new ImageView();
+        imageViewBase.setImage(CallImages.getImage(THIS_RUTE_IMAGES, "fondoCiudad", 2244, 1692));
+        asd.add(imageViewBase);
+        asd.addAll(x);
+        ObservableList<Node> f = dondeVaLaImagen.getChildren();
+        f.clear();
+        f.addAll(asd);
 
 
 /*
@@ -466,7 +473,7 @@ public class CiudadController extends MapasController implements Initializable {
 
     public void toMundo(MouseEvent mouseEvent) {
         try {
-            reload(getStagePrimaryStageController(), PrimaryStageControler.getPathToFXML(MundoController.class),false);
+            reload(getStagePrimaryStageController(), PrimaryStageControler.getPathToFXML(MundoController.class), false);
         } catch (IOException ex) {
             ex.printStackTrace();
         }

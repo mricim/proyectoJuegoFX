@@ -1,5 +1,6 @@
 package main.java.Utils;
 
+import com.google.api.client.util.ArrayMap;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -12,14 +13,11 @@ import main.java.juego.mapas.ciudad.Ciudad;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.Map;
 
 public class PrimaryStageControler {
-    private static HashMap<String, FXMLLoader> fxmlLoaderHashMap = new HashMap<>();
-
-    private static final String RUTE_IMAGES = System.getProperty("user.dir") + "/src/main/java/";
-
-    //VARIABLES PREDEFINIDAS
     public static String NAME_TEMA;
+    //VARIABLES PREDEFINIDAS
     private static Clan clanPrimaryStageController;
 
     public static Clan getClanPrimaryStageController() {
@@ -85,7 +83,7 @@ public class PrimaryStageControler {
             final Stage stage = new Stage();
             stage.initModality(Modality.APPLICATION_MODAL);
             reloadNewStage(oldStage, stage, rute, setMaximized);
-        }catch (Exception e){
+        } catch (Exception e) {
             System.err.println("Error al cargar la hoja de iniciar sessión");
         }
     }
@@ -95,17 +93,9 @@ public class PrimaryStageControler {
     }
 
     public static void reloadNewStage(Stage oldStageOwner, Stage primaryStage, String rute, boolean setMaximized) throws IOException {
-        FXMLLoader loader;
-        if (fxmlLoaderHashMap.containsKey(rute)) {
-            System.out.println("TENEMOS");
-            loader = fxmlLoaderHashMap.get(rute);
-        } else {
-            System.out.println("NO TENEMOS");
-            loader = new FXMLLoader();
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(Main.class.getResource(rute));
 
-            loader.setLocation(Main.class.getResource(rute));
-            //TODO fxmlLoaderHashMap.put(rute,loader);
-        }
         Parent root = loader.load();
         if (oldStageOwner != null) {
             primaryStage.initOwner(oldStageOwner);
@@ -124,22 +114,41 @@ public class PrimaryStageControler {
         }
     }
 
+    private static Map<String, String> listControllersFXML = new ArrayMap<>();
+    private static Map<String, String> listControllersa = new ArrayMap<>();
+
     //PARA EL RESTO
+    //RETURN RUTES
     public static String getPathToFXML(Class ese) {
-        String name = ese.getName().replace("Controller", "");
-        char c[] = name.substring(name.lastIndexOf(".") + 1).toCharArray();
-        c[0] = Character.toLowerCase(c[0]);
-        String x = ese.getResource("").getPath() + new String(c) + ".fxml";
-        String main = Main.class.getResource("").getPath();
-        return x.replace(main, "");
+        String eseName = ese.getName();
+        if (listControllersFXML.containsKey(eseName)) {
+            return listControllersFXML.get(eseName);
+        } else {
+            String nameTemp = eseName.replace("Controller", "");
+            char c[] = nameTemp.substring(nameTemp.lastIndexOf(".") + 1).toCharArray();
+            c[0] = Character.toLowerCase(c[0]);
+            String name = ese.getResource("").getPath() + new String(c) + ".fxml";
+            String main = Main.class.getResource("").getPath();
+            String salida = name.replace(main, "");
+            listControllersFXML.put(eseName, salida);
+            return salida;
+        }
     }
 
     public static String getPath(Class ese) {
-        String name = ese.getName();
-        name = ese.getResource("").getPath() + name.substring(name.lastIndexOf(".") + 1);
-        String main = Main.class.getResource("").getPath();
-        return name.replace(main, "");
+        String eseName = ese.getName();
+        if (listControllersa.containsKey(eseName)) {
+            return listControllersa.get(eseName);
+        } else {
+            String name = ese.getName();
+            name = ese.getResource("").getPath() + name.substring(name.lastIndexOf(".") + 1);
+            String main = Main.class.getResource("").getPath();
+            String salida = name.replace(main, "");
+            listControllersFXML.put(eseName, salida);
+            return salida;
+        }
     }
+    //FIN RETURN RUTES
 
 
 }

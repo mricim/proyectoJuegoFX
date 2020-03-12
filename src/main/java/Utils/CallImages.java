@@ -12,10 +12,6 @@ import static main.java.temas.Temas.*;
 public class CallImages {
     private static HashMap<String, Image> listImage = new HashMap<>();
 
-    private CallImages(boolean genericOrTemaF, String rute, String name) {
-        this(genericOrTemaF, rute, name, 100, 100);
-    }
-
     private CallImages(boolean genericOrTemaF, String rute, String name, int width, int height) {
         String ruteName = rute + name;
         Image image;
@@ -46,7 +42,7 @@ public class CallImages {
             listImage.put(ruteName, image);
         } catch (Exception e) {
             listImage.put(ruteName, ERRORIMAGE);
-            System.err.println("Error: CallImages (Image not found External) = " + ruteUse + " " + name);
+            System.err.println("Error: CallImages (Image not found) = " + ruteUse);
         }
     }
 
@@ -59,25 +55,33 @@ public class CallImages {
                 return nameFile.split("\\.", 2)[1];
             }
         }
-        System.err.println("Error: CallImages (Extension not found) = " + posibleRute + " " + name);
+        System.err.println("Error: CallImages (Extension not found) = " + posibleRute);
         return "";
     }
 
     public static Image getImageNoTema(String rute, String name) {
-        return getImage(true, rute, name);
+        return getImage(true, rute, name, 100, 100);
     }
 
     public static Image getImage(String rute, String name) {
-        return getImage(false, rute, name);
+        return getImage(false, rute, name, 100, 100);
     }
 
-    private static Image getImage(boolean genericOrTemaF, String rute, String name) {
+    public static Image getImageNoTema(String rute, String name, int width, int height) {
+        return getImage(true, rute, name, width, height);
+    }
+
+    public static Image getImage(String rute, String name, int width, int height) {
+        return getImage(false, rute, name, width, height);
+    }
+
+    private static Image getImage(boolean genericOrTemaF, String rute, String name, int width, int height) {
         String ruteName = rute + name;
         if (listImage.containsKey(ruteName)) {
             return listImage.get(ruteName);
         } else {
             try {
-                new CallImages(genericOrTemaF, rute, name);
+                new CallImages(genericOrTemaF, rute, name, width, height);
                 return listImage.get(ruteName);
             } catch (Exception e) {
             }

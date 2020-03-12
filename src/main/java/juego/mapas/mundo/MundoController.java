@@ -57,7 +57,7 @@ public class MundoController extends MapasController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         inicialiceController();
         recursosMenu(recuros, getCiudadPrimaryStageController().getRecursosTreeMap().values());
-        selectorDeCiudad(THIS_RUTE, selectorCiudad);
+        selectorDeCiudad(selectorCiudad);
         gridPaneMap.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {//Cerrar el menu
             queClicas(null, true, null, null,null);
         });

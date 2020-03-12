@@ -5,12 +5,15 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import main.java.Inicio.PantallaInicialController;
 import main.java.Utils.PrimaryStageControler;
+import main.java.jugadores.iniciarSession.IniciarSessionController;
 
 import java.net.URL;
 
 public class Main extends Application {
-    public static final String RUTEINTERNAL = System.getProperty("user.dir")+"/src/main/";
+    public static final String RUTEINTERNAL = System.getProperty("user.dir") + "/src/main/";
+
     /*
     private static final SessionFactory ourSessionFactory;
 
@@ -28,22 +31,34 @@ public class Main extends Application {
         return ourSessionFactory.openSession();
     }
     */
+
     @Override
     public void start(Stage primaryStage) throws Exception {
         FXMLLoader loader = new FXMLLoader();
-        URL url = getClass().getResource("/main/java/Inicio/pantallaInicial.fxml");
+        URL url = getClass().getResource(PrimaryStageControler.getPathToFXML(PantallaInicialController.class));
         loader.setLocation(url);
-        loader.setControllerFactory((Class<?> type) -> {// CREA PrimaryStageAware
+        loader.setControllerFactory((Class<?> type) -> {
             try {
                 Object controller = type.newInstance();
-                if (controller instanceof PrimaryStageControler) {
-                    PrimaryStageControler.setPrimaryStage(primaryStage);
-                }
+                PantallaInicialController.setPrimaryStage(primaryStage);
                 return controller;
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }
         });
+        /*loader.setControllerFactory((Class<?> type) ->{
+            try {
+                Object controller = type.newInstance();
+                System.out.println(controller.getClass());
+                if (controller instanceof PrimaryStageControler) {
+                    PrimaryStageControler.setPrimaryStage(primaryStage);
+                } else if (controller instanceof IniciarSessionController) {
+                }
+                return controller;
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        });*/
         Parent root = loader.load();
         primaryStage.setTitle("Nombre del juego");
         Scene scene = new Scene(root);
