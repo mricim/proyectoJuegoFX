@@ -75,45 +75,7 @@ public class CiudadController extends MapasController implements Initializable {
         ObservableList<Node> f = dondeVaLaImagen.getChildren();
         f.clear();
         f.addAll(asd);
-
-
-/*
-        int oroDisponible = ciudad.getOro();
-        oro.setText(String.valueOf(oroDisponible));
-        int maderaDisponible = ciudad.getMadera();
-        madera.setText(String.valueOf(maderaDisponible));
-        int piedraDisponible = ciudad.getPiedra();
-        piedra.setText(String.valueOf(piedraDisponible));
-        int hierroDisponible = ciudad.getHierro();
-        hierro.setText(String.valueOf(hierroDisponible));
-        int comidaDisponible = ciudad.getComida();
-        comida.setText(String.valueOf(comidaDisponible));
-        int poblacionDisponible = ciudad.getPoblacion();
-        poblacion.setText(String.valueOf(poblacionDisponible));
-        int felicidadDisponible = ciudad.getFelicidad();
-        felicidad.setText(String.valueOf(felicidadDisponible));
-        int investigacionDisponible = jugador.getInvestigacion();
-        investigacion.setText(String.valueOf(investigacionDisponible));
-*/
-
-
-/*
-        int colum = gridPaneMap.getColumnConstraints().size();
-        int rows = gridPaneMap.getRowConstraints().size();
-        for (int i = 0; i <= colum; i++) {
-            for (int j = 0; j <= rows; j++) {
-                Image imageLimpia = new Image(getClass().getResource(RUTE + "limpio4.png").toExternalForm(), 100, 100, false, true);
-                ImageView imageViewLimpia = new ImageView(imageLimpia);
-                imageViewLimpia.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
-                    System.out.println("Limpiar borde");
-                    borderPane.setLeft(null);
-                });
-                gridPaneMap.add(imageViewLimpia, i, j);
-                listaPosicionesMapa.put(new Integer[]{i, j}, imageViewLimpia);
-                System.out.println(i + " " + j);
-            }
-        }
-*/
+        //<--CARGAR IMAGEN DE FONDO
 
         Collection<Edificio> posicionEdificios = getCiudadPrimaryStageController().getListaPosicionesEdificios().values();
         for (Edificio edificio : posicionEdificios) {

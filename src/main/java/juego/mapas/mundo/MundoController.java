@@ -59,12 +59,13 @@ public class MundoController extends MapasController implements Initializable {
         recursosMenu(recuros, getCiudadPrimaryStageController().getRecursosTreeMap().values());
         selectorDeCiudad(selectorCiudad);
         gridPaneMap.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {//Cerrar el menu
-            queClicas(null, true, null, null,null);
+            queClicas(null, true, null, null, null);
         });
         //<-- Controlado por MapasController
 
 
-        int numCiudades = listaCiudades.size(); //12000
+        //int numCiudades = listaCiudades.size();
+        int numCiudades = 12000;
         int tamaño = 15;
         int capacidadCiudades = 0;
         double casillasTotales = 0;
@@ -129,19 +130,14 @@ public class MundoController extends MapasController implements Initializable {
                     }
                     if (filaModule == 3 && columnaModule == 3) {//TODO RANDOMIZADOR PARA LA POSICION 3-3
                         stringBuilder.append(letter_random);
-                        switch (new Random().nextInt(2)) {
-                            case 0:
-                                stringBuilder.append(0);
-                                break;
-                            case 1:
-                                stringBuilder.append(1);
-                                break;
-                            case 2:
-                                stringBuilder.append(2);
-                                break;
-                            default:
-                                stringBuilder.append(3);
-                                break;
+                        if (stringBuilder.toString().contains("c")) {
+                            stringBuilder.append(ciudadToGrid.getIdCiudad() % 9);
+                        } else if (columna % 2 == 0) {
+                            stringBuilder.append((fila+columna+2) % 9);
+                            //System.out.println((fila+columna+3) % 9);
+                        } else {
+                            stringBuilder.append((fila + columna) % 9);
+                            //System.out.println(((fila + columna) % 9));
                         }
                     }
 
@@ -198,28 +194,29 @@ public class MundoController extends MapasController implements Initializable {
                     Ciudad finalCiudadToGrid = ciudadToGrid;
                     ArrayList<Batallon> finalBatallonesToGrid = batallonesToGrid;
                     imageView.setOnMouseClicked(e -> {
-                        queClicas(imageView, false, finalCiudadToGrid, finalBatallonesToGrid,nameImage);
+                        queClicas(imageView, false, finalCiudadToGrid, finalBatallonesToGrid, nameImage);
                     });
                 } else {
                     if (nameImage.indexOf(letter_isla) != -1) {
                         imageView.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
-                            queClicas(imageView, false, null, null,null);
+                            queClicas(imageView, false, null, null, null);
                         });
                     } else {
                         imageView.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {//Cerrar el menu
-                            queClicas(imageView, true, null, null,null);
+                            queClicas(imageView, true, null, null, null);
                         });
                     }
                 }
 
 
                 gridPaneMap.add(imageView, columna, fila);
+
             }
         }
 
     }
 
-    private void queClicas(ImageView imageView, boolean agua, Ciudad ciudad, ArrayList<Batallon> batallones,String imageName) {
+    private void queClicas(ImageView imageView, boolean agua, Ciudad ciudad, ArrayList<Batallon> batallones, String imageName) {
         if (basura) {//BLOQUEA UN MOMENTO EL SISTEMA DE CLIC PARA QUE CARGE EL MENU Y NO LO BORRE
             if (agua) {
                 borderPane.setLeft(null);//System.out.println("Limpiar menu izquierda");
@@ -235,13 +232,13 @@ public class MundoController extends MapasController implements Initializable {
                         }
                     }
                 }).start();
-                createMenuLeft(borderPane, imageView, ciudad, batallones,imageName);
+                createMenuLeft(borderPane, imageView, ciudad, batallones, imageName);
             }
         }
     }
 
 
-    private static VBox cajaCiudad(Ciudad ciudadMapa, ImageView imageView,String imageName) {
+    private static VBox cajaCiudad(Ciudad ciudadMapa, ImageView imageView, String imageName) {
 
 
         //Objetos de ciudad
@@ -257,7 +254,7 @@ public class MundoController extends MapasController implements Initializable {
         vBoxBloquePropio.setMaxWidth(200);
         vBoxBloquePropio.setAlignment(TOP_CENTER);
 
-        System.out.println("Imagename = "+imageName);
+        System.out.println("Imagename = " + imageName);
         BackgroundFill backgroundFill = null;
 
         ObservableList<Node> childrenVBox = vBoxBloquePropio.getChildren();
@@ -269,12 +266,12 @@ public class MundoController extends MapasController implements Initializable {
 //        nombreCiudad.setWrapText(true);
 //        childrenVBox.add(nombreCiudad);
         //Imagen ciudad
-        String [] image = imageName.split(REGEX_SPLIT_PATTERN);
-        System.out.println("Image1 index 0: "+image[0]);
-        String image2 = image[0]+'c'+image[1].split("_")[0];
-        System.out.println("Image1 index1 : "+image[1]);
-        System.out.println("Image 2 : "+image2);
-        imgViewCiudad = new ImageView(CallImages.getImage(RUTE_IMAGES,image2));
+        String[] image = imageName.split(REGEX_SPLIT_PATTERN);
+        System.out.println("Image1 index 0: " + image[0]);
+        String image2 = image[0] + 'c' + image[1].split("_")[0];
+        System.out.println("Image1 index1 : " + image[1]);
+        System.out.println("Image 2 : " + image2);
+        imgViewCiudad = new ImageView(CallImages.getImage(RUTE_IMAGES, image2));
         imgViewCiudad.setPickOnBounds(true);
         imgViewCiudad.setPreserveRatio(true);
         childrenVBox.add(imgViewCiudad);
@@ -305,7 +302,7 @@ public class MundoController extends MapasController implements Initializable {
 
             if (getClanPrimaryStageController().getCiudadesDelClan().contains(ciudadMapa)) {
                 backgroundFill = new BackgroundFill(Color.GREEN, CornerRadii.EMPTY, Insets.EMPTY);
-            }else{
+            } else {
                 backgroundFill = new BackgroundFill(Color.DARKRED, CornerRadii.EMPTY, Insets.EMPTY);
             }
 
@@ -328,7 +325,7 @@ public class MundoController extends MapasController implements Initializable {
         return vBoxBloquePropio;
     }
 
-    private static VBox cajaBatallon(ArrayList<Batallon> listaBatallones, ImageView imageView,String imageName) {
+    private static VBox cajaBatallon(ArrayList<Batallon> listaBatallones, ImageView imageView, String imageName) {
 
 
         //Objetos de ciudad
@@ -351,7 +348,6 @@ public class MundoController extends MapasController implements Initializable {
 
 
         BackgroundFill backgroundFill = null;
-
 
 
         for (Batallon batallon : listaBatallones) {
@@ -476,16 +472,16 @@ public class MundoController extends MapasController implements Initializable {
     }
 
 
-    private static void createMenuLeft(BorderPane borderPane, ImageView imageView, Ciudad ciudad, ArrayList<Batallon> batallones,String imageName) {
+    private static void createMenuLeft(BorderPane borderPane, ImageView imageView, Ciudad ciudad, ArrayList<Batallon> batallones, String imageName) {
         List<VBox> vBoxList = new ArrayList<>();
 
         String text = "";
         if (ciudad != null) {
             text = ciudad.getNameCity();
-            vBoxList.add(cajaCiudad(ciudad, imageView,imageName));
+            vBoxList.add(cajaCiudad(ciudad, imageView, imageName));
         }
         if (batallones != null) {
-                vBoxList.add(cajaBatallon(batallones, imageView,imageName));
+            vBoxList.add(cajaBatallon(batallones, imageView, imageName));
 
         }
 
