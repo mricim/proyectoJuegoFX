@@ -78,8 +78,6 @@ public class PrimaryStageControler {
 
     public static void newStageby(Stage oldStage, String rute, boolean setMaximized) {
         try {
-
-
             final Stage stage = new Stage();
             stage.initModality(Modality.APPLICATION_MODAL);
             reloadNewStage(oldStage, stage, rute, setMaximized);
@@ -88,7 +86,19 @@ public class PrimaryStageControler {
         }
     }
 
-    public static void reload(Stage primaryStage, String rute, boolean setMaximized) throws IOException {
+    public static void reload(Class aClass) {
+        reload(aClass, false);
+    }
+
+    public static void reload(Class aClass, boolean setMaximized) {//TODO ES POSIBLE QUE EN ESTE MAPA NO INTERESE TENER ESTO
+        try {
+            reload(stagePrimaryStageController, PrimaryStageControler.getPathToFXML(aClass), setMaximized);
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    private static void reload(Stage primaryStage, String rute, boolean setMaximized) throws IOException {
         reloadNewStage(null, primaryStage, rute, setMaximized);
     }
 

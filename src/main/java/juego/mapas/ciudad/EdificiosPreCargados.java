@@ -13,6 +13,7 @@ import static main.java.jugadores.Jugador.listaEdificiosPreCargados;
 //https://github.com/k33ptoo/JavaFX-MySQL-Login
 public class EdificiosPreCargados implements ImageGetter {
     private int id;
+    private int tipo;
     private String nombre;
     private String descripcion;
     private boolean destruible;
@@ -32,16 +33,17 @@ public class EdificiosPreCargados implements ImageGetter {
     private String imageClicablePath;
 
 
-    public EdificiosPreCargados(int id, String nombre, String descripcion, boolean destruible, boolean construible, int maximoEdificiosDelMismoTipo, int nivel, int nivelCastilloNecesario, int costeOro, int costeMadera, int costePiedra, int costehierro, int TrabajadoresXminMaximos, int produceMaderaXmin, int producePiedraXmin, int produceHierroXmin, int produceComidaXmin, int costeOroXmin, int produceFelicidadXmin, int produceInvestigacionXmin, int maderaAlmacen, int piedraAlmacen, int hierroAlmacen, int comidaAlmacen, int poblacionAlmacen) {
+    public EdificiosPreCargados(int id, boolean destruible, boolean construible, int maximoEdificiosDelMismoTipo, int nivel, int nivelCastilloNecesario, int tipo, String nombre, String descripcion, int costeOro, int costeMadera, int costePiedra, int costehierro, int TrabajadoresXminMaximos, int produceMaderaXmin, int producePiedraXmin, int produceHierroXmin, int produceComidaXmin, int costeOroXmin, int produceFelicidadXmin, int produceInvestigacionXmin, int maderaAlmacen, int piedraAlmacen, int hierroAlmacen, int comidaAlmacen, int poblacionAlmacen) {
         this.id = id;
+        this.tipo = tipo;
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.destruible = destruible;
         this.construible = construible;
-        this.maximoEdificiosDelMismoTipo=maximoEdificiosDelMismoTipo;
+        this.maximoEdificiosDelMismoTipo = maximoEdificiosDelMismoTipo;
         //MEJORABLES
         this.nivel = nivel;
-        this.nivelCastilloNecesario=nivelCastilloNecesario;
+        this.nivelCastilloNecesario = nivelCastilloNecesario;
         recursosCostes.put(0, new Recursos(0, costeOro));
         recursosCostes.put(1, new Recursos(1, costeMadera));
         recursosCostes.put(2, new Recursos(2, costePiedra));
@@ -67,12 +69,16 @@ public class EdificiosPreCargados implements ImageGetter {
         this.imagePath = resultado;
         this.imageClicablePath = resultado + "@h";
 
-        listaEdificiosPreCargados.put(resultado,this);
+        listaEdificiosPreCargados.put(resultado, this);
         listaEdificiosKeys.add(id);
     }
 
     public int getId() {
         return id;
+    }
+
+    public int getTipo() {
+        return tipo;
     }
 
     public String getNombre() {
@@ -98,6 +104,7 @@ public class EdificiosPreCargados implements ImageGetter {
     public int getNivel() {
         return nivel;
     }
+
     public int getNivelCastilloNecesario() {
         return nivelCastilloNecesario;
     }

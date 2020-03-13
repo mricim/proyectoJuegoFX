@@ -55,7 +55,7 @@ public class CallImages {
                 return nameFile.split("\\.", 2)[1];
             }
         }
-        System.err.println("Error: CallImages (Extension not found) = " + posibleRute);
+        System.err.println("Error: CallImages (Extension not found) = " + posibleRute+" "+name);
         return "";
     }
 

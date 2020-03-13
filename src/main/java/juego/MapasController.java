@@ -7,6 +7,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.SplitMenuButton;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import main.java.Utils.PrimaryStageControler;
@@ -25,8 +26,10 @@ abstract public class MapasController extends PrimaryStageControler {
         nameThisCityController = getCiudadPrimaryStageController().getNameCity();
 
     }
-
-    public void recursosMenu(FlowPane flowPane, Collection<Recursos> recursos2) {
+    public void recursosMenu(FlowPane flowPaneRecuros) {
+        recursosMenu(flowPaneRecuros, getCiudadPrimaryStageController().getRecursosTreeMap().values());
+    }
+    public static void recursosMenu(FlowPane flowPane, Collection<Recursos> recursos2) {
         ObservableList<Node> observableList = flowPane.getChildren();
         observableList.clear();
         for (Recursos recursos : recursos2) {
@@ -45,7 +48,7 @@ abstract public class MapasController extends PrimaryStageControler {
         }
     }
 
-    public void selectorDeCiudad( SplitMenuButton selectorCiudad) {
+    public static void selectorDeCiudad(SplitMenuButton selectorCiudad, boolean toCity) {
         selectorCiudad.setText(nameThisCityController);//Seleccionar otra ciudad
         for (Ciudad ciudadTemp : getJugadorPrimaryStageController().listaCiudadesPropias.values()) {
             String nameCity = ciudadTemp.getNameCity();
@@ -54,10 +57,8 @@ abstract public class MapasController extends PrimaryStageControler {
                 menuItem.setText(nameCity);
                 menuItem.setOnAction((e) -> {
                     setCiudadPrimaryStageController(ciudadTemp);
-                    try {
-                        reload(getStagePrimaryStageController(), PrimaryStageControler.getPathToFXML(CiudadController.class),false);
-                    } catch (IOException ex) {
-                        ex.printStackTrace();
+                    if (toCity) {
+                        reload(CiudadController.class);
                     }
                 });
                 selectorCiudad.getItems().add(menuItem);

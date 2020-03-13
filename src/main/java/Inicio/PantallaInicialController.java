@@ -97,11 +97,7 @@ public class PantallaInicialController extends PrimaryStageControler implements 
         progresBar.setProgress(10);//TODO NO FUNCIONA // https://stackoverflow.com/questions/44398611/running-a-process-in-a-separate-thread-so-rest-of-java-fx-application-is-usable
         callbd();
         progresBar.setProgress(100);
-        try {
-            reload(getStagePrimaryStageController(), PrimaryStageControler.getPathToFXML(CiudadController.class), true);
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
+        reload(CiudadController.class, true);
     }
 
 
@@ -116,19 +112,25 @@ public class PantallaInicialController extends PrimaryStageControler implements 
         new RecursosPrecargados(6, "Felicidad", false, null);
         new RecursosPrecargados(7, "investigacion", false, null);
         progresBar.setProgress(15);
-        new EdificiosPreCargados(0, "parcela-Construible", "Descripción del edificio que sera mas larga que el nombre del edificio", false, false, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);//NO MEJORABLE
-        new EdificiosPreCargados(1, "Castillo", "Descripción del edificio que sera mas larga que el nombre del edificio", false, false, 1, 0, -1, 99, 99, 99, 99, 0, 0, 0, 0, 0, 0, 10, 1, 1000, 1000, 1000, 1000, 100);
-        new EdificiosPreCargados(1, "Castillo", "Descripción 1_1", false, false, 1, 1, 0, 99, 99, 99, 99, 10, 1000, 1000, 1000, 1000, 0, 10, 1, 1000, 1000, 1000, 1000, 200);
-        new EdificiosPreCargados(1, "Castillo", "X", false, false, 1, 2, 1, 99, 99, 99, 99, 10, 1000, 1000, 1000, 1000, 0, 10, 1, 1000, 1000, 1000, 1000, 300);
-        new EdificiosPreCargados(2, "Muralla", "XXXXXXXXXXX", false, false, 2, 0, 0, 99, 99, 99, 20, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
-        new EdificiosPreCargados(2, "Muralla", "XXXXXXXXXXX", false, false, 2, 1, 0, 99, 99, 99, 20, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+        //-1=noDanNiGeneranNada
+        //0=EdificioNormal
+        //1=NewCiudad
+        //2=CreaSoldados
+        //3=CreaMaquinas
+        new EdificiosPreCargados(0, false, false, 1, 0,0,-1,"parcela-Construible", "Descripción del edificio que sera mas larga que el nombre del edificio",   0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);//NO MEJORABLE
+        new EdificiosPreCargados(1, false, false, 1, 0, -1,0,"Castillo", "Descripción del edificio que sera mas larga que el nombre del edificio",  99, 99, 99, 99, 0, 0, 0, 0, 0, 0, 10, 1, 1000, 1000, 1000, 1000, 100);
+        new EdificiosPreCargados(1, false, false, 1, 1, 0,0,"Castillo", "Descripción 1_1",  99, 99, 99, 99, 10, 1000, 1000, 1000, 1000, 0, 10, 1, 1000, 1000, 1000, 1000, 200);
+        new EdificiosPreCargados(1, false, false, 1, 2, 1,0,"Castillo", "X",  99, 99, 99, 99, 10, 1000, 1000, 1000, 1000, 0, 10, 1, 1000, 1000, 1000, 1000, 300);
+        new EdificiosPreCargados(2, false, false, 2, 0, 0,-1,"Muralla", "XXXXXXXXXXX",  99, 99, 99, 20, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+        new EdificiosPreCargados(2, false, false, 2, 1, 0,-1,"Muralla", "XXXXXXXXXXX",  99, 99, 99, 20, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
         progresBar.setProgress(20);
-        new EdificiosPreCargados(10, "Almacen", "XXXXXXXXXXX", true, true, 2, 0, -1, 99, 19, 25, 30, 10, 0, 0, 0, 0, 0, 0, 0, 1000, 1000, 1000, 1000, 1000);
-        new EdificiosPreCargados(11, "Centro cientifico", "NONE", true, true, 1, 0, 0, 99, 99, 99, 20, 10, 0, 10, 0, 0, 0, 0, 50, 0, 0, 0, 0, 0);
-        new EdificiosPreCargados(12, "Lupas", "XXXXXXXXXXX", true, true, 2, 0, 0, 99, 99, 99, 20, 10, 0, 0, 10, 0, 0, 0, -50, 0, 0, 0, 0, 0);
-        new EdificiosPreCargados(12, "Lupas", "XXXXXXXXXXX", true, true, 2, 1, 0, 99, 99, 99, 20, 10, 10, 10, 10, 10, 10, 10, -50, 0, 0, 0, 0, 0);
-        new EdificiosPreCargados(13, "Palacio", "NONE", true, true, 1, 0, 0, 99, 99, 99, 20, 10, 10, 10, 10, 10, 10, 10, 50, 0, 0, 0, 0, 0);
-        new EdificiosPreCargados(14, "Maquinas de guerra", "NONE", true, true, 1, 0, 0, 99, 99, 99, 20, 10, 10, 10, 10, 10, 10, 10, 50, 0, 0, 0, 0, 0);
+        new EdificiosPreCargados(10, true, true, 2, 0, -1,0,"Almacen", "XXXXXXXXXXX",  99, 19, 25, 30, 10, 0, 0, 0, 0, 0, 0, 0, 1000, 1000, 1000, 1000, 1000);
+        new EdificiosPreCargados(11, true, true, 1, 0, 0,0,"Centro cientifico", "NONE",  99, 99, 99, 20, 10, 0, 10, 0, 0, 0, 0, 50, 0, 0, 0, 0, 0);
+        new EdificiosPreCargados(12, true, true, 2, 0, 0,0,"Lupas", "XXXXXXXXXXX", 99, 99, 99, 20, 10, 0, 0, 10, 0, 0, 0, -50, 0, 0, 0, 0, 0);
+        new EdificiosPreCargados(12, true, true, 2, 1, 0,0,"Lupas", "XXXXXXXXXXX", 99, 99, 99, 20, 10, 10, 10, 10, 10, 10, 10, -50, 0, 0, 0, 0, 0);
+        new EdificiosPreCargados(13, true, true, 1, 0, 0,1,"Palacio", "NONE",  99, 99, 99, 20, 10, 10, 10, 10, 10, 10, 10, 50, 0, 0, 0, 0, 0);
+        new EdificiosPreCargados(14, true, true, 1, 0, 1,2,"Cuartel", "Crea soldados", 99, 99, 99, 20, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+        new EdificiosPreCargados(15, true, true, 1, 0, 2,3,"Maquinas de guerra", "Crear maquinas de guerra",  99, 99, 99, 20, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
         progresBar.setProgress(30);
         new SoldadosPreCargados(0, "Espadachines", 0);//se podria poner comida
         new SoldadosPreCargados(1, "Lanceros", 0);
@@ -138,7 +140,7 @@ public class PantallaInicialController extends PrimaryStageControler implements 
         //TODO DESDE LA BD
         Clan clan = new Clan(1, "Los mejores");
         Jugador jugador = new Jugador(idJugadorTemp, "pepito", 500);
-        setJugadorPrimaryStageController(jugador);
+        //setJugadorPrimaryStageController(jugador);
         setClanPrimaryStageController(clan);
         progresBar.setProgress(60);
         new Jugador(2, "juan", 300);

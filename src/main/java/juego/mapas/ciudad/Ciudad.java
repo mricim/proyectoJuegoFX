@@ -58,6 +58,10 @@ public class Ciudad extends Posicion {
             new Edificio(listaEdificiosPreCargados.get(10 + "-" + 0), 7, 13, this);//todos tendrian "parcela"
             new Edificio(listaEdificiosPreCargados.get(11 + "-" + 0), 12, 2, this);//todos tendrian "parcela"
             new Edificio(listaEdificiosPreCargados.get(12 + "-" + 1), 5, 18, this);//todos tendrian "parcela"
+
+            new Edificio(listaEdificiosPreCargados.get(13 + "-" + 0), 7, 15, this);//todos tendrian "parcela"
+            new Edificio(listaEdificiosPreCargados.get(14 + "-" + 0), 7, 16, this);//todos tendrian "parcela"
+            new Edificio(listaEdificiosPreCargados.get(15 + "-" + 0), 7, 17, this);//todos tendrian "parcela"
         } catch (Exception e) {
             System.err.println("Error: Ciudad (Edificio no creado)\n" + e);
         }
