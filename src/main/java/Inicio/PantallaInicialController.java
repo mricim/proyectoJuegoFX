@@ -100,7 +100,7 @@ public class PantallaInicialController extends PrimaryStageControler implements 
         //setJugadorPrimaryStageController(borrar);       //TODO BORRAR
         if (getJugadorPrimaryStageController().listaCiudadesPropias.size() == 0) {//NUEVO EN EL JUEGO
             MapasController.newCiudad = true;
-            MapasController.primeraCiudad =true;
+            MapasController.primeraCiudad = true;
             reload(MundoController.class, true);
         } else {
             PrimaryStageControler.setCiudadPrimaryStageController(getJugadorPrimaryStageController().cargarCiudadPrincipal);//CON ESTO CONTROLAS QUE CIUDAD ESTAS VIENDO!
@@ -147,12 +147,12 @@ public class PantallaInicialController extends PrimaryStageControler implements 
         progresBar.setProgress(50);
         //TODO DESDE LA BD
         Clan clan = new Clan(1, "Los mejores");
-        Jugador jugador = new Jugador(idJugadorTemp, "pepito", 500);
+        Jugador jugador = new Jugador("pepito", 500);
         setJugadorPrimaryStageController(jugador);
         setClanPrimaryStageController(clan);
         progresBar.setProgress(60);
-        new Jugador(2, "juan", 300);
-        new Jugador(3, "pedro", 8000);
+        new Jugador("juan", 300);
+        new Jugador("pedro", 8000);
         progresBar.setProgress(70);
         clan.addJugadorClan(jugador);
         clan.addJugadorClan(3);

@@ -1,5 +1,6 @@
 package main.java.juego.mapas.ciudad;
 
+import com.sun.istack.NotNull;
 import javafx.scene.image.Image;
 import main.java.Utils.Posicion;
 import main.java.juego.mapas.Recursos;
@@ -14,17 +15,17 @@ import static main.java.jugadores.Jugador.listaEdificiosPreCargados;
 import static main.java.jugadores.Jugador.listaCiudades;
 
 public class Ciudad extends Posicion {
-
+    private static int lastId = 1;
     private TreeMap<String, Edificio> listaPosicionesEdificios = new TreeMap<>();
-
+    @NotNull
     private int idCiudad;
     private String nameCity;
     public TreeMap<Integer, Recursos> recursosTreeMap = new TreeMap<>();
     private int nivelCiudad;
 
-    public Ciudad(Jugador jugador, int idCiudad, String nameCity, int fila, int columna, int nivelCiudad, int oro, int madera, int piedra, int comida, int hierro, int poblacion, int felicidad) {
+    public Ciudad(Jugador jugador, String nameCity, int fila, int columna, int nivelCiudad, int oro, int madera, int piedra, int comida, int hierro, int poblacion, int felicidad) {
         super(fila, columna);
-        this.idCiudad = idCiudad;
+        this.idCiudad = lastId++;
         this.nameCity = nameCity;
         this.nivelCiudad = nivelCiudad;
         recursosTreeMap.put(0, new Recursos(0, oro));
@@ -67,7 +68,7 @@ public class Ciudad extends Posicion {
             System.err.println("Error: Ciudad (Edificio no creado)\n" + e);
         }
         jugador.listaCiudadesPropias.put(getPosition(), this);
-        if (Clan.jugadoresQueEstanEnUnClan.containsKey(jugador)){
+        if (Clan.jugadoresQueEstanEnUnClan.containsKey(jugador)) {
             Clan.jugadoresQueEstanEnUnClan.get(jugador).addCiudades(this);
         }
         listaCiudades.put(getPosition(), this);
@@ -76,6 +77,7 @@ public class Ciudad extends Posicion {
     public Ciudad(String position) {
         super(position);
     }
+
 
     public int getIdCiudad() {
         return idCiudad;

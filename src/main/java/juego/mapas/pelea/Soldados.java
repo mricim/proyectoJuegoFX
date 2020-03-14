@@ -5,14 +5,15 @@ import main.java.Utils.Posicion;
 
 
 public class Soldados extends Posicion {
+    private static int lastId=1;
     private int id;
     private SoldadosPreCargados soldadosPreCargados;
     private int cantidad;
     int municion;
 
-    public Soldados(int id, SoldadosPreCargados soldadosPreCargados, int cantidad, int municion, int filas, int columnas) {
+    public Soldados( SoldadosPreCargados soldadosPreCargados, int cantidad, int municion, int filas, int columnas) {
         super(filas, columnas);
-        this.id = id;
+        this.id = lastId++;
         this.soldadosPreCargados = soldadosPreCargados;
         this.cantidad = cantidad;
         this.municion = municion;

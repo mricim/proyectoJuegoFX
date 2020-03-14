@@ -49,8 +49,21 @@ public class MundoController extends MapasController implements Initializable {
      */
     @FXML
     SplitMenuButton selectorCiudad;
-    @FXML
-    Label oro, madera;
+
+    final static Character letter_guion = '-';
+    final static Character letter_guionBajo = '_';
+
+    final static Character letter_agua = 'a';
+    final static Character letter_isla = 'i';
+    final static Character letter_city = 'c';
+    final static Character letter_batallon = 'b';
+
+    static Character letter_esNuestro = 'P';
+    final static Character letter_Clan = 'Z';
+
+    final static String letter_random = "$r";
+    final static String letter_hover = "@h";
+
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -83,21 +96,6 @@ public class MundoController extends MapasController implements Initializable {
         gridPaneMap.setGridLinesVisible(true);
 
 
-        String letter_guion = "-";
-        String letter_hover = "@h";
-
-        Character letter_agua = 'a';
-        String letter_batallon = "_b";
-        String letter_batallonPersonal = "_bP";
-        String letter_batallonClan = "_bZ";
-
-        String letter_isla = "i_";
-        String letter_city = "_c";
-        Character letter_Clan = 'Z';
-        String letter_random = "$r";
-
-        Character letter_propio_esNuestro = 'P';
-
         for (int fila = 0; fila < tamaño; fila++) {
             ColumnConstraints col = new ColumnConstraints(100);
             gridPaneMap.getColumnConstraints().add(col);
@@ -112,21 +110,20 @@ public class MundoController extends MapasController implements Initializable {
 
                 StringBuilder stringBuilder = new StringBuilder(32);
 
-
-                String position = fila + letter_guion + columna;
+                String position = String.valueOf(fila) + letter_guion + columna;
                 int filaModule = fila % 5;
                 int columnaModule = columna % 5;
                 if (filaModule == 0 || filaModule == 4 || columnaModule == 0 || columnaModule == 4) {
                     stringBuilder.append(letter_agua);
                 } else {
-                    stringBuilder.append(letter_isla).append(filaModule).append(letter_guion).append(columnaModule);
+                    stringBuilder.append(letter_isla).append(letter_guionBajo).append(filaModule).append(letter_guion).append(columnaModule);
                     ciudadToGrid = listaCiudades.get(position);
                     if (ciudadToGrid != null) {
-                        stringBuilder.append(letter_city);
+                        stringBuilder.append(letter_guionBajo).append(letter_city);
 
                         if (getClanPrimaryStageController().getCiudadesDelClan().contains(new Ciudad(position))) {
                             if (getJugadorPrimaryStageController().listaCiudadesPropias.containsKey(position)) {
-                                stringBuilder.append(letter_propio_esNuestro);
+                                stringBuilder.append(letter_esNuestro);
                             } else {
                                 stringBuilder.append(letter_Clan);
                             }
@@ -135,14 +132,12 @@ public class MundoController extends MapasController implements Initializable {
                     }
                     if (filaModule == 3 && columnaModule == 3) {//TODO RANDOMIZADOR PARA LA POSICION 3-3
                         stringBuilder.append(letter_random);
-                        if (stringBuilder.toString().contains("c")) {
+                        if (ciudadToGrid != null) {
                             stringBuilder.append(ciudadToGrid.getIdCiudad() % 9);
                         } else if (columna % 2 == 0) {
                             stringBuilder.append((fila + columna + 2) % 9);
-                            //System.out.println((fila+columna+3) % 9);
                         } else {
                             stringBuilder.append((fila + columna) % 9);
-                            //System.out.println(((fila + columna) % 9));
                         }
                     }
 
@@ -167,13 +162,13 @@ public class MundoController extends MapasController implements Initializable {
                         }
                     }
                     if (batallonNuestro) {
-                        stringBuilder.append(letter_batallonPersonal);
+                        stringBuilder.append(letter_guionBajo).append(letter_batallon).append(letter_esNuestro);
                     }
                     if (batallonAliado) {
-                        stringBuilder.append(letter_batallonClan);
+                        stringBuilder.append(letter_guionBajo).append(letter_batallon).append(letter_Clan);
                     }
                     if (batallonEnemigo) {
-                        stringBuilder.append(letter_batallon);
+                        stringBuilder.append(letter_guionBajo).append(letter_batallon);
                     }
                 }
                 String nameImage = stringBuilder.toString();
@@ -181,7 +176,7 @@ public class MundoController extends MapasController implements Initializable {
                 imageView.setImage(CallImages.getImage(RUTE_IMAGES, nameImage));
                 imageView.setId(position);
 
-                if (stringBuilder.indexOf(letter_batallon) != -1 || stringBuilder.indexOf(letter_city) != -1) {//he pensado que el maus solo se ponga* en las ciudades y los barcos
+                if (stringBuilder.indexOf(String.valueOf(letter_batallon)) != -1 || stringBuilder.indexOf(String.valueOf(letter_city)) != -1) {//he pensado que el maus solo se ponga* en las ciudades y los barcos
                     imageView.addEventHandler(MouseEvent.MOUSE_ENTERED, event -> {
                         imageView.setCursor(Cursor.HAND);
                         try {
@@ -205,9 +200,10 @@ public class MundoController extends MapasController implements Initializable {
                         queClicas(imageView, false, finalCiudadToGrid, finalBatallonesToGrid, nameImage);
                     });
                 } else {
-                    if (nameImage.indexOf(letter_isla) != -1) {
+                    if (nameImage.indexOf(letter_isla) != -1) {//es agua?
+                        //no es agua
                         imageView.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
-                            queClicas(imageView, false, null, null, null);
+                            queClicas(imageView, true, null, null, null);
                         });
                     } else {
                         imageView.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {//Cerrar el menu
@@ -423,8 +419,8 @@ public class MundoController extends MapasController implements Initializable {
         botonNuevaCity.setOnMouseClicked(e -> {
             //System.out.println();
             System.out.println(getJugadorPrimaryStageController().getId());
-            System.out.println(fila+" "+columna);
-            new Ciudad(getJugadorPrimaryStageController(), 75, "New city " + imageView.getId(), fila, columna, 0, 100, 100, 100, 100, 10, 20, 50);
+            System.out.println(fila + " " + columna);
+            new Ciudad(getJugadorPrimaryStageController(), "New city " + imageView.getId(), fila, columna, 0, 100, 100, 100, 100, 10, 20, 50);
             newCiudad = false;
             if (primeraCiudad) {
                 PrimaryStageControler.setCiudadPrimaryStageController(getJugadorPrimaryStageController().listaCiudadesPropias.values().iterator().next());
@@ -525,39 +521,43 @@ public class MundoController extends MapasController implements Initializable {
 
     private static void createMenuLeft(BorderPane borderPane, ImageView imageView, Ciudad ciudad, ArrayList<Batallon> batallones, String imageName, boolean pasoPorClicas) {
         List<VBox> vBoxList = new ArrayList<>();
-
+        boolean controllerParaVerSiestaVacio = false;
         if (ciudad != null) {
             vBoxList.add(cajaCiudadMundo(ciudad, imageView, imageName));
+            controllerParaVerSiestaVacio = true;
         } else if (newCiudad && pasoPorClicas) {
             vBoxList.add(cajaNewCity(imageView, imageName));
+            controllerParaVerSiestaVacio = true;
         } else if (primeraCiudad) {
             VBox vBox = new VBox();
             Label label = new Label("HOLAS");
             vBox.getChildren().add(label);
             vBoxList.add(vBox);
+            controllerParaVerSiestaVacio = true;
         }
         if (batallones != null) {
             vBoxList.add(cajaBatallon(batallones, imageView, imageName));
-
+            controllerParaVerSiestaVacio = true;
         }
+        if (controllerParaVerSiestaVacio) {
+            VBox vBox = new VBox();
+            for (VBox box : vBoxList) {
+                vBox.getChildren().add(box);
+                Separator separator = new Separator();
+                separator.setVisible(false);
+                vBox.getChildren().add(separator);
+            }
+            vBox.setSpacing(5);
+            vBox.setAlignment(TOP_CENTER);
 
-        VBox vBox = new VBox();
-        for (VBox box : vBoxList) {
-            vBox.getChildren().add(box);
-            Separator separator = new Separator();
-            separator.setVisible(false);
-            vBox.getChildren().add(separator);
+            ScrollPane scrollPane = new ScrollPane(vBox);
+            scrollPane.maxWidth(-Infinity);
+            scrollPane.prefWidth(200);
+            scrollPane.setHbarPolicy(NEVER);
+            //scrollPane.()BorderPane.alignment="CENTER"
+
+            borderPane.setLeft(scrollPane);
         }
-        vBox.setSpacing(5);
-        vBox.setAlignment(TOP_CENTER);
-
-        ScrollPane scrollPane = new ScrollPane(vBox);
-        scrollPane.maxWidth(-Infinity);
-        scrollPane.prefWidth(200);
-        scrollPane.setHbarPolicy(NEVER);
-        //scrollPane.()BorderPane.alignment="CENTER"
-
-        borderPane.setLeft(scrollPane);
     }
 
 

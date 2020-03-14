@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Batallon extends Posicion {
+    private static int lastIdBatallon=1;
     private HashMap<String, Soldados> SoldadoHashMap = new HashMap<>();
     private int idBatallon;
     private String nombre;
@@ -15,9 +16,9 @@ public class Batallon extends Posicion {
     private double poderMilitar;
 
 
-    public Batallon(int idBatallon, String nombre, int filas, int columnas, int proyectiles, Jugador jugador) {
+    public Batallon(String nombre, int filas, int columnas, int proyectiles, Jugador jugador) {
         super(filas, columnas);
-        this.idBatallon = idBatallon;
+        this.idBatallon = lastIdBatallon++;
         this.nombre = nombre;
         this.proyectiles = proyectiles;
 
