@@ -3,7 +3,6 @@ package main.java.juego.mapas.ciudad;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
@@ -17,14 +16,12 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import main.java.Utils.CallImages;
-import main.java.Utils.PrimaryStageControler;
 import main.java.juego.MapasController;
 import main.java.juego.mapas.RecursosPrecargados;
 import main.java.juego.mapas.mundo.MundoController;
 import main.java.juego.mapas.Recursos;
 import main.java.juego.mapas.ciudad.contenidoCiudad.Edificio;
 
-import java.beans.EventHandler;
 import java.net.URL;
 import java.util.*;
 
@@ -59,12 +56,12 @@ public class CiudadController extends MapasController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        inicialiceController();
-        recursosMenu(flowPaneRecuros);
-        selectorDeCiudad(selectorCiudad, true);
-        gridPaneMap.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {//Cerrar el menu
-            queClicas(null, null);
-        });
+            inicialiceController();
+            recursosMenu(flowPaneRecuros);
+            selectorDeCiudad(selectorCiudad, true);
+            gridPaneMap.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {//Cerrar el menu
+                queClicas(null, null);
+            });
         //<-- Controlado por MapasController
         ObservableList<Node> x = dondeVaLaImagen.getChildren();
         List<Node> asd = new ArrayList<>();
@@ -239,7 +236,7 @@ public class CiudadController extends MapasController implements Initializable {
             ObservableList<Node> childrenFlowPane = flowPane.getChildren();
 
             if (tipoDeBoton == 0) {//Si es el edificio que tenemos en el mapa
-                int tipo=edificioQueEstaEnElMapa.getEdificiosPreCargado().getTipo();
+                int tipo = edificioQueEstaEnElMapa.getEdificiosPreCargado().getTipo();
                 if (tipo != 0) {// System.out.println("NO GENERADOR: " + edificioQueEstaEnElMapa.getId());
                     printBoton(childrenFlowPane, tipo);// NO GENERA RECURSOS
                 } else {//System.out.println("GENERADOR: " + edificioQueEstaEnElMapa.getId());
@@ -320,11 +317,11 @@ public class CiudadController extends MapasController implements Initializable {
 
     private void printBoton(ObservableList<Node> childrenFlowPane, int tipoEdificio) {
         Button button = new Button();
-        switch (tipoEdificio){
+        switch (tipoEdificio) {
             case 1:
                 button.setText("New Ciudad");
                 button.setOnMouseClicked(e -> {
-                    MundoController.newCiudad=true;
+                    MapasController.newCiudad = true;
                     reload(MundoController.class);
                 });
                 break;

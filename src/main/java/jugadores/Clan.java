@@ -74,16 +74,16 @@ public class Clan {
         this.jugadoresDelClan.remove(jugador.getId());
     }
 
-    private void addCiudades(Ciudad ciudad) {
+    public void addCiudades(Ciudad ciudad) {
         ciudadesDelClan.add(ciudad);
     }
-    private void addBatallon(Batallon batallon) {
+    public void addBatallon(Batallon batallon) {
         batallonesDelClan.add(batallon);
     }
-    private void removeCiudad(Ciudad ciudad) {
+    public void removeCiudad(Ciudad ciudad) {
         ciudadesDelClan.add(ciudad);
     }
-    private void removeBatallon(Batallon batallon) {
+    public void removeBatallon(Batallon batallon) {
         batallonesDelClan.add(batallon);
     }
 

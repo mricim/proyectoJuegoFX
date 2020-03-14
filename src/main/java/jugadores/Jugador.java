@@ -2,7 +2,6 @@ package main.java.jugadores;
 
 import javafx.scene.image.Image;
 import main.java.Utils.CallImages;
-import main.java.Utils.PrimaryStageControler;
 import main.java.juego.mapas.Recursos;
 import main.java.juego.mapas.pelea.Batallon;
 import main.java.juego.mapas.pelea.Soldados;
@@ -32,17 +31,18 @@ public class Jugador {
     private int id;
     private String nombre;
     private Recursos investigacion;
+    public Ciudad cargarCiudadPrincipal = null;
 
     public Jugador(int id, String nombre, int investigacion) {
         this.id = id;
         this.nombre = nombre;
         this.investigacion = new Recursos(7, investigacion);
 
-        Ciudad cargarCiudad = null;
+
         if (id == 1) {
             //todo Se le desde la BD
-            Ciudad ciudad1 = new Ciudad(this,1, "ciudad P 1 1-1", 1, 1, 1, 300, 20, 50, 70, 90, 3, 50);
-            Ciudad ciudad2 = new Ciudad(this,2, "ciudad P 2 2-2", 2, 2, 1, Integer.MAX_VALUE, 5000, 60000, 3000, 756123, 6584110, 53);
+            new Ciudad(this, 1, "ciudad P 1 1-1", 1, 1, 1, 300, 20, 50, 70, 90, 3, 50);
+            new Ciudad(this, 2, "ciudad P 2 2-2", 2, 2, 1, Integer.MAX_VALUE, 5000, 60000, 3000, 756123, 6584110, 53);
 
 
             int numCiudad = Integer.MAX_VALUE;
@@ -50,7 +50,7 @@ public class Jugador {
                 int idCiudad = ciudad.getIdCiudad();
                 if (numCiudad > idCiudad) {
                     numCiudad = idCiudad;
-                    cargarCiudad = ciudad;
+                    cargarCiudadPrincipal = ciudad;
                 }
             }
 
@@ -66,15 +66,11 @@ public class Jugador {
             Soldados soldados4 = new Soldados(4, SoldadosPreCargada.get(0), 100, 5, 0, 0);
             batallon2.setSoldadoHashMap(soldados3);
             batallon2.setSoldadoHashMap(soldados4);
-
-
-            PrimaryStageControler.setCiudadPrimaryStageController(cargarCiudad);//CON ESTO CONTROLAS QUE CIUDAD ESTAS VIENDO!
-            PrimaryStageControler.setJugadorPrimaryStageController(this);//CON ESTO CONTROLAS QUE CIUDAD ESTAS VIENDO!
         } else if (id == 2) {
-            Ciudad ciudad1 = new Ciudad(this,3, "ciudad E 3 1-6", 1, 6, 1, 300, 20, 50, 70, 90, 40, 50);
-            Ciudad ciudad2 = new Ciudad(this,4, "ciudad E 4 2-7", 2, 7, 1, Integer.MAX_VALUE, 5000, 60000, 3000, 756123, 6584110, 53);
-            Ciudad ciudad3 = new Ciudad(this,5, "ciudad E 5 3-8", 3, 8, 1, Integer.MAX_VALUE, 5000, 60000, 3000, 756123, 6584110, 53);
-            Ciudad ciudad4 = new Ciudad(this,6, "ciudad E 6 8-3", 8, 3, 1, Integer.MAX_VALUE, 5000, 60000, 3000, 756123, 6584110, 53);
+            new Ciudad(this, 3, "ciudad E 3 1-6", 1, 6, 1, 300, 20, 50, 70, 90, 40, 50);
+            new Ciudad(this, 4, "ciudad E 4 2-7", 2, 7, 1, Integer.MAX_VALUE, 5000, 60000, 3000, 756123, 6584110, 53);
+            new Ciudad(this, 5, "ciudad E 5 3-8", 3, 8, 1, Integer.MAX_VALUE, 5000, 60000, 3000, 756123, 6584110, 53);
+            new Ciudad(this, 6, "ciudad E 6 8-3", 8, 3, 1, Integer.MAX_VALUE, 5000, 60000, 3000, 756123, 6584110, 53);
 
             Batallon batallon1 = new Batallon(3, "Batallon E 3 5-8", 5, 8, 400, this);
             Soldados soldados1 = new Soldados(5, SoldadosPreCargada.get(0), 100, 5, 0, 0);
@@ -99,11 +95,11 @@ public class Jugador {
             Soldados soldados8 = new Soldados(12, SoldadosPreCargada.get(0), 100, 0, 0, 0);
             batallon4.setSoldadoHashMap(soldados7);
             batallon4.setSoldadoHashMap(soldados8);
-        } else {
-            Ciudad ciudad1 = new Ciudad(this,7, "ciudad Z 7 6-6", 6, 6, 1, 300, 20, 50, 70, 90, 40, 50);
-            Ciudad ciudad2 = new Ciudad(this,8, "ciudad Z 8 6-11", 6, 11, 1, Integer.MAX_VALUE, 5000, 60000, 3000, 756123, 6584110, 53);
-            Ciudad ciudad3 = new Ciudad(this,9, "ciudad Z 9 8-7", 8, 7, 1, Integer.MAX_VALUE, 5000, 60000, 3000, 756123, 6584110, 53);
-            Ciudad ciudad4 = new Ciudad(this,10, "ciudad Z 10 7-5", 7, 5, 1, Integer.MAX_VALUE, 5000, 60000, 3000, 756123, 6584110, 53);
+        } else if (id == 3) {
+            new Ciudad(this, 7, "ciudad Z 7 6-6", 6, 6, 1, 300, 20, 50, 70, 90, 40, 50);
+            new Ciudad(this, 8, "ciudad Z 8 6-11", 6, 11, 1, Integer.MAX_VALUE, 5000, 60000, 3000, 756123, 6584110, 53);
+            new Ciudad(this, 9, "ciudad Z 9 8-7", 8, 7, 1, Integer.MAX_VALUE, 5000, 60000, 3000, 756123, 6584110, 53);
+            new Ciudad(this, 10, "ciudad Z 10 7-5", 7, 5, 1, Integer.MAX_VALUE, 5000, 60000, 3000, 756123, 6584110, 53);
 
             Batallon batallon1 = new Batallon(6, "Batallon Z 6 5-8", 7, 7, 400, this);
             Soldados soldados1 = new Soldados(11, SoldadosPreCargada.get(0), 100, 5, 0, 0);
@@ -151,10 +147,17 @@ public class Jugador {
     public static Jugador returnJugador(int jugadorId) {
         return Jugador.listaTodosLosJugadores.get(jugadorId);
     }
-    public static void addCiudad(Ciudad ciudad) {
-        //return //Jugador.listaTodosLosJugadores.get(jugadorId);
+/*
+    public void addCiudad(Ciudad ciudad) {
+        listaCiudades.get(ciudad);
+        listaCiudadesPropias.get(ciudad);
+        Clan.jugadoresQueEstanEnUnClan.get(this).addCiudades(ciudad);
+        Clan..get(ciudad);
     }
+
     public static void addBatallon(Batallon batallon) {//TODO
         //return //Jugador.listaTodosLosJugadores.get(jugadorId);
     }
+
+ */
 }

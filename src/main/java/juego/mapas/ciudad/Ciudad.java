@@ -4,6 +4,7 @@ import javafx.scene.image.Image;
 import main.java.Utils.Posicion;
 import main.java.juego.mapas.Recursos;
 import main.java.juego.mapas.ciudad.contenidoCiudad.Edificio;
+import main.java.jugadores.Clan;
 import main.java.jugadores.Jugador;
 
 
@@ -66,6 +67,9 @@ public class Ciudad extends Posicion {
             System.err.println("Error: Ciudad (Edificio no creado)\n" + e);
         }
         jugador.listaCiudadesPropias.put(getPosition(), this);
+        if (Clan.jugadoresQueEstanEnUnClan.containsKey(jugador)){
+            Clan.jugadoresQueEstanEnUnClan.get(jugador).addCiudades(this);
+        }
         listaCiudades.put(getPosition(), this);
     }
 

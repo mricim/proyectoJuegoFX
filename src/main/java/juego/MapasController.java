@@ -19,16 +19,19 @@ import java.io.IOException;
 import java.util.Collection;
 
 abstract public class MapasController extends PrimaryStageControler {
+    public static boolean newCiudad;
+    public static boolean primeraCiudad;
     public static String nameThisCityController;
 
 
     public void inicialiceController() {
-        nameThisCityController = getCiudadPrimaryStageController().getNameCity();
-
+            nameThisCityController = getCiudadPrimaryStageController().getNameCity();
     }
+
     public void recursosMenu(FlowPane flowPaneRecuros) {
         recursosMenu(flowPaneRecuros, getCiudadPrimaryStageController().getRecursosTreeMap().values());
     }
+
     public static void recursosMenu(FlowPane flowPane, Collection<Recursos> recursos2) {
         ObservableList<Node> observableList = flowPane.getChildren();
         observableList.clear();
