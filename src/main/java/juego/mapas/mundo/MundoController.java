@@ -561,7 +561,7 @@ public class MundoController extends MapasController implements Initializable {
     }
 
 
-    public void toMundo(MouseEvent mouseEvent) {//TODO ES POSIBLE QUE EN ESTE MAPA NO INTERESE TENER ESTO
+    public void toMundo(MouseEvent mouseEvent) {
         reload(CiudadController.class);
     }
 }

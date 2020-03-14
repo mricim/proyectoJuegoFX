@@ -96,8 +96,8 @@ public class PantallaInicialController extends PrimaryStageControler implements 
         progresBar.setProgress(10);//TODO NO FUNCIONA // https://stackoverflow.com/questions/44398611/running-a-process-in-a-separate-thread-so-rest-of-java-fx-application-is-usable
         callbd();
         progresBar.setProgress(100);
-        //Jugador borrar=new Jugador(78,"nombre",0);//TODO BORRAR
-        //setJugadorPrimaryStageController(borrar);       //TODO BORRAR
+        //Jugador borrar=new Jugador(78,"nombre",0);//TODO DESCOMENTAR PARA INICIAR COMO UN NUEVO JUGADOR
+        //setJugadorPrimaryStageController(borrar);//TODO DESCOMENTAR PARA INICIAR COMO UN NUEVO JUGADOR
         if (getJugadorPrimaryStageController().listaCiudadesPropias.size() == 0) {//NUEVO EN EL JUEGO
             MapasController.newCiudad = true;
             MapasController.primeraCiudad = true;
@@ -145,7 +145,7 @@ public class PantallaInicialController extends PrimaryStageControler implements 
         new SoldadosPreCargados(2, "Arqueros", 100);
         new SoldadosPreCargados(3, "Caballeros", 50);
         progresBar.setProgress(50);
-        //TODO DESDE LA BD
+        //TODO FIN LEER DESDE LA BD
         Clan clan = new Clan(1, "Los mejores");
         Jugador jugador = new Jugador("pepito", 500);
         setJugadorPrimaryStageController(jugador);

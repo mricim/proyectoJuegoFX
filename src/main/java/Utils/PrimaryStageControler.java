@@ -90,7 +90,7 @@ public class PrimaryStageControler {
         reload(aClass, false);
     }
 
-    public static void reload(Class aClass, boolean setMaximized) {//TODO ES POSIBLE QUE EN ESTE MAPA NO INTERESE TENER ESTO
+    public static void reload(Class aClass, boolean setMaximized) {
         try {
             reload(stagePrimaryStageController, PrimaryStageControler.getPathToFXML(aClass), setMaximized);
         } catch (IOException ex) {

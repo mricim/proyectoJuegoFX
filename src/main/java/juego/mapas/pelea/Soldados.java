@@ -10,8 +10,8 @@ public class Soldados extends Posicion {
     private SoldadosPreCargados soldadosPreCargados;
     private int cantidad;
     int municion;
-
-    public Soldados( SoldadosPreCargados soldadosPreCargados, int cantidad, int municion, int filas, int columnas) {
+    
+    public Soldados(SoldadosPreCargados soldadosPreCargados, int cantidad, int municion, int filas, int columnas) {
         super(filas, columnas);
         this.id = lastId++;
         this.soldadosPreCargados = soldadosPreCargados;
@@ -27,7 +27,7 @@ public class Soldados extends Posicion {
         return cantidad;
     }
 
-    public SoldadosPreCargados getSoldadosPreCargados() {
+    public SoldadosPreCargados getsoldadosPreCargados() {
         return soldadosPreCargados;
     }
 
