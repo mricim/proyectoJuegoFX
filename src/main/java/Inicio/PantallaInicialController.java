@@ -7,8 +7,10 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.layout.VBox;
 import main.java.juego.MapasController;
+import main.java.juego.mapas.Recursos;
 import main.java.juego.mapas.RecursosPrecargados;
 import main.java.juego.mapas.mundo.MundoController;
+import main.java.juego.mapas.pelea.MaquinasAsedioPreCargadas;
 import main.java.jugadores.Clan;
 import main.java.jugadores.Jugador;
 import main.java.Utils.PrimaryStageControler;
@@ -140,10 +142,27 @@ public class PantallaInicialController extends PrimaryStageControler implements 
         new EdificiosPreCargados(14, true, true, 1, 0, 1, 2, "Cuartel", "Crea soldados", 99, 99, 99, 20, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
         new EdificiosPreCargados(15, true, true, 1, 0, 2, 3, "Maquinas de guerra", "Crear maquinas de guerra", 99, 99, 99, 20, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
         progresBar.setProgress(30);
-        new SoldadosPreCargados(0, "Espadachines", 0);//se podria poner comida
-        new SoldadosPreCargados(1, "Lanceros", 0);
-        new SoldadosPreCargados(2, "Arqueros", 100);
-        new SoldadosPreCargados(3, "Caballeros", 50);
+        List<Recursos> recursosList = new ArrayList<>();
+        recursosList.add(new Recursos(0, 0));
+        recursosList.add(new Recursos(1, 5));
+        recursosList.add(new Recursos(2, 15));
+        recursosList.add(new Recursos(3, 0));
+        recursosList.add(new Recursos(4, 3));
+        recursosList.add(new Recursos(5, 1));
+        recursosList.add(new Recursos(6, 0));
+        List<Recursos> recursosList2 = new ArrayList<>();
+        recursosList2.add(new Recursos(0, 0));
+        recursosList2.add(new Recursos(1, 5));
+        recursosList2.add(new Recursos(2, 15));
+        recursosList2.add(new Recursos(3, 60));
+        recursosList2.add(new Recursos(4, 3));
+        recursosList2.add(new Recursos(5, 1));
+        recursosList2.add(new Recursos(6, 0));
+        new SoldadosPreCargados(0, "Espadachines", 0, recursosList);//se podria poner comida
+        new SoldadosPreCargados(1, "Lanceros", 0, recursosList);
+        new SoldadosPreCargados(2, "Arqueros", 100, recursosList);
+        new SoldadosPreCargados(3, "Caballeros", 50, recursosList2);
+        new MaquinasAsedioPreCargadas(4, "Catapultas", 50, recursosList2);
         progresBar.setProgress(50);
         //TODO FIN LEER DESDE LA BD
         Clan clan = new Clan(1, "Los mejores");

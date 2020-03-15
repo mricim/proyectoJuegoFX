@@ -28,7 +28,7 @@ abstract public class MapasController extends PrimaryStageControler {
             nameThisCityController = getCiudadPrimaryStageController().getNameCity();
     }
 
-    public void recursosMenu(FlowPane flowPaneRecuros) {
+    public static void recursosMenu(FlowPane flowPaneRecuros) {
         recursosMenu(flowPaneRecuros, getCiudadPrimaryStageController().getRecursosTreeMap().values());
     }
 

@@ -70,4 +70,9 @@ public class RecursosPrecargados implements ImageGetter {
         System.err.println("getImageClicable() en Recursos no funciona!");
         return null;
     }
+
+    @Override
+    public Image getImageIcon() {
+        return null;
+    }
 }

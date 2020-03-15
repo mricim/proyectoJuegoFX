@@ -223,4 +223,9 @@ public class EdificiosPreCargados implements ImageGetter {
         return getImageClicable(RUTEIMAGES, imageClicablePath);
         //return CallImages.getImage(RUTEIMAGES, imageClicablePath);
     }
+
+    @Override
+    public Image getImageIcon() {
+        return null;
+    }
 }

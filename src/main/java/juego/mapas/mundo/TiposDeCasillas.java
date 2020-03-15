@@ -39,4 +39,9 @@ public class TiposDeCasillas implements ImageGetter {
         return getImageClicable(RUTEIMAGES, imageClicablePath);
         //return CallImages.getImage(RUTEIMAGES, imageClicablePath);
     }
+
+    @Override
+    public Image getImageIcon() {
+        return null;
+    }
 }
