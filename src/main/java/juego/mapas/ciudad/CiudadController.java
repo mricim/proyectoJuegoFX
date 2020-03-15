@@ -1,7 +1,5 @@
 package main.java.juego.mapas.ciudad;
 
-import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
@@ -23,7 +21,7 @@ import main.java.juego.mapas.RecursosPrecargados;
 import main.java.juego.mapas.mundo.MundoController;
 import main.java.juego.mapas.Recursos;
 import main.java.juego.mapas.ciudad.contenidoCiudad.Edificio;
-import main.java.juego.mapas.pelea.UnidadesPreCargadas;
+import main.java.juego.mapas.pelea.*;
 
 import java.net.URL;
 import java.util.*;
@@ -348,13 +346,13 @@ public class CiudadController extends MapasController implements Initializable {
             case 2:
                 button.setText("Entrenar nuevos Soldados");
                 button.setOnMouseClicked(e -> {
-                    createMenuLeftSpecial(borderPane, 0);
+                    createMenuLeftSpecial(borderPane,flowPaneRecuros, 0);
                 });
                 break;
             case 3:
                 button.setText("Construir maquinaria de asedio");
                 button.setOnMouseClicked(e -> {
-                    createMenuLeftSpecial(borderPane, 1);
+                    createMenuLeftSpecial(borderPane,flowPaneRecuros, 1);
                 });
                 break;
         }
@@ -365,20 +363,20 @@ public class CiudadController extends MapasController implements Initializable {
         childrenFlowPane.add(separator);
     }
 
-    private static void createMenuLeftSpecial(BorderPane borderPane, int i) {
+    private static void createMenuLeftSpecial(BorderPane borderPane,FlowPane flowPaneRecuros, int i) {
         List<VBox> vBoxList = new ArrayList<>();
         switch (i) {
             case 0:
-                vBoxList.add(cajaCrearUnidades(listaSoldadosPreCargada));//El que tenemos puesto
+                vBoxList.add(cajaCrearUnidades(listaSoldadosPreCargada,borderPane,flowPaneRecuros));//El que tenemos puesto
                 break;
             case 1:
-                vBoxList.add(cajaCrearUnidades(listaAsedioPreCargada));//El que tenemos puesto
+                vBoxList.add(cajaCrearUnidades(listaAsedioPreCargada, borderPane,flowPaneRecuros));//El que tenemos puesto
                 break;
         }
         rellenador(borderPane, vBoxList);
     }
 
-    private static VBox cajaCrearUnidades(TreeMap<Integer, ? extends UnidadesPreCargadas> listaUnidades) {
+    private static VBox cajaCrearUnidades(TreeMap<Integer, ? extends UnidadesPreCargadas> listaUnidades,BorderPane borderPane,FlowPane flowPaneRecuros) {
         //BLOQUE
         VBox vBoxBloquePropio = new VBox();
         vBoxBloquePropio.setMinWidth(250);
@@ -421,7 +419,16 @@ public class CiudadController extends MapasController implements Initializable {
 
         TreeMap<Integer, Recursos> recursosCiudad = getCiudadPrimaryStageController().getRecursosTreeMap();
         TreeMap<Integer, Recursos> resta = new TreeMap<>();
-        TreeMap<Integer, Recursos> comoQuedariaCiudad = recursosCiudad;
+        TreeMap<Integer, Soldados> soldadesca = new TreeMap<>(getCiudadPrimaryStageController().getListSoldadosCity());
+//        for (Soldados value : soldadesca.values()) {
+//            System.out.println("FF"+value.getsoldadosPreCargados().getTipe()+" "+value.getCantidad());
+//        }
+//        for (MaquinasAsedio asedio : getCiudadPrimaryStageController().getListMaquinascity().values()) {
+//            System.out.println("GG "+asedio.getsoldadosPreCargados().getTipe()+" "+asedio.getCantidad());
+//        }
+        TreeMap<Integer, MaquinasAsedio> maquinasAsedio = new TreeMap<>(getCiudadPrimaryStageController().getListMaquinascity());
+
+
         for (Integer integer : recursosCiudad.keySet()) {
             resta.put(integer, new Recursos(integer, 0));
         }
@@ -435,9 +442,18 @@ public class CiudadController extends MapasController implements Initializable {
         flowPane3.setHgap(15);
         flowPane3.setVgap(10);
         flowPane3.setAlignment(Pos.CENTER);
+
         printAllRecursos(flowPane2.getChildren(), resta.entrySet(), 3, 3);
-        printAllRecursos(flowPane3.getChildren(), comoQuedariaCiudad.entrySet(), 4, 2);
+        printAllRecursos(flowPane3.getChildren(), recursosCiudad.entrySet(), 4, 2);
+
         Button button = new Button("Entrenar");
+        button.setOnMouseClicked(e -> {
+            getCiudadPrimaryStageController().addSoldados(soldadesca);
+            getCiudadPrimaryStageController().addMaquinas(maquinasAsedio);
+            getCiudadPrimaryStageController().setRecursosTreeMap(recursosCiudad);
+            borderPane.setLeft(null);
+            recursosMenu(flowPaneRecuros);
+        });
         //TODO
         //FIN ESTO ES PARA QUE ENTRE EN EL SISTEMA
         for (UnidadesPreCargadas unidadesPreCargadas : listaUnidades.values()) {
@@ -476,38 +492,45 @@ public class CiudadController extends MapasController implements Initializable {
                     int a = newValue.intValue();
                     int number = oldValue.intValue() - a;
                     if (number != 0) {
-                        boolean controladora=false;
+                        System.out.println(a+" "+number);//TODO PUTOS ERRORES :(
+                        boolean controladora = false;
                         label.textProperty().setValue(String.valueOf(a));
+                        int idQueEs = unidadesPreCargadas.getTipe();
+                        if (maquinasAsedio.containsKey(idQueEs)) {
+                            maquinasAsedio.get(idQueEs).setCantidad(a);
+                        } else {
+                            soldadesca.get(idQueEs).setCantidad(a);
+                        }
                         for (Recursos recursos : costesRecursos) {
                             Recursos recursoARestar = resta.get(recursos.getId());
-                            Recursos recursosCityTemp = comoQuedariaCiudad.get(recursos.getId());
+                            Recursos recursosCityTemp = recursosCiudad.get(recursos.getId());
                             if (number < 0) {
                                 recursoARestar.setCantidad(recursoARestar.getCantidad() + recursos.getCantidad());
-                                int numerico=recursosCityTemp.getCantidad() - recursos.getCantidad();
+                                int numerico = recursosCityTemp.getCantidad() - recursos.getCantidad();
                                 recursosCityTemp.setCantidad(numerico);
-                                if (numerico<0){
-                                    controladora=true;
+                                if (numerico < 0) {
+                                    controladora = true;
                                 }
                             } else {
                                 recursoARestar.setCantidad(recursoARestar.getCantidad() - recursos.getCantidad());
-                                int numerico=recursosCityTemp.getCantidad() + recursos.getCantidad();
+                                int numerico = recursosCityTemp.getCantidad() + recursos.getCantidad();
                                 recursosCityTemp.setCantidad(numerico);
-                                if (numerico<0){
-                                    controladora=true;
+                                if (numerico < 0) {
+                                    controladora = true;
                                 }
                             }
 
                         }
-                        if (controladora){
+                        if (controladora) {
                             button.setDisable(true);
-                        }else {
+                        } else {
                             button.setDisable(false);
                         }
 
                         flowPane2.getChildren().clear();
                         flowPane3.getChildren().clear();
                         printAllRecursos(flowPane2.getChildren(), resta.entrySet(), 3, 3);
-                        printAllRecursos(flowPane3.getChildren(), comoQuedariaCiudad.entrySet(), 4, 2);
+                        printAllRecursos(flowPane3.getChildren(), recursosCiudad.entrySet(), 4, 2);
                     }
                 }
             });
@@ -670,9 +693,9 @@ public class CiudadController extends MapasController implements Initializable {
                     break;
                 case 2:
                     label2.setText(String.valueOf(numero));
-                    if (numero<0){
+                    if (numero < 0) {
                         label2.setTextFill(Color.RED);
-                    }else {
+                    } else {
                         label2.setTextFill(Color.BLACK);
                     }
                     break;

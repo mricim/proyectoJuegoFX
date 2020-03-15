@@ -7,12 +7,10 @@ import main.java.juego.mapas.Recursos;
 
 import java.util.List;
 
-import static main.java.jugadores.Jugador.listaSoldadosPreCargada;
-
 
 abstract public class UnidadesPreCargadas implements ImageGetter {
 
-    private int id;
+    private int tipe;
     private String nombre;
     private int maxMunicion;
 
@@ -23,18 +21,18 @@ abstract public class UnidadesPreCargadas implements ImageGetter {
     private String imageClicablePath;
     private String imageIconPath;
 
-    public UnidadesPreCargadas(int id, String nombre, int maxMunicion,List<Recursos>costes) {
-        this.id = id;
+    public UnidadesPreCargadas(int tipe, String nombre, int maxMunicion, List<Recursos>costes) {
+        this.tipe = tipe;
         this.nombre = nombre;
         this.maxMunicion=maxMunicion;
         this.costes=costes;
-        this.imagePath = String.valueOf(id);
-        this.imageClicablePath = id + "@H";
-        this.imageIconPath = String.valueOf(id);
+        this.imagePath = String.valueOf(tipe);
+        this.imageClicablePath = tipe + "@H";
+        this.imageIconPath = String.valueOf(tipe);
     }
 
-    public int getId() {
-        return id;
+    public int getTipe() {
+        return tipe;
     }
 
     public String getNombre() {

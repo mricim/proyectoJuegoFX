@@ -203,7 +203,7 @@ public class MundoController extends MapasController implements Initializable {
                     if (nameImage.indexOf(letter_isla) != -1) {//es agua?
                         //no es agua
                         imageView.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
-                            queClicas(imageView, true, null, null, null);
+                            queClicas(imageView, false, null, null, null);
                         });
                     } else {
                         imageView.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {//Cerrar el menu
@@ -236,6 +236,7 @@ public class MundoController extends MapasController implements Initializable {
                         }
                     }
                 }).start();
+
                 createMenuLeft(borderPane, imageView, ciudad, batallones, imageName, true);
             }
         }
@@ -530,7 +531,7 @@ public class MundoController extends MapasController implements Initializable {
             controllerParaVerSiestaVacio = true;
         } else if (primeraCiudad) {
             VBox vBox = new VBox();
-            Label label = new Label("HOLAS");
+            Label label = new Label("Selecciona una isla y funda una ciudad");
             vBox.getChildren().add(label);
             vBoxList.add(vBox);
             controllerParaVerSiestaVacio = true;

@@ -1,18 +1,17 @@
 package main.java.juego.mapas.ciudad;
 
 import com.sun.istack.NotNull;
-import javafx.scene.image.Image;
 import main.java.Utils.Posicion;
 import main.java.juego.mapas.Recursos;
 import main.java.juego.mapas.ciudad.contenidoCiudad.Edificio;
+import main.java.juego.mapas.pelea.*;
 import main.java.jugadores.Clan;
 import main.java.jugadores.Jugador;
 
 
 import java.util.TreeMap;
 
-import static main.java.jugadores.Jugador.listaEdificiosPreCargados;
-import static main.java.jugadores.Jugador.listaCiudades;
+import static main.java.jugadores.Jugador.*;
 
 public class Ciudad extends Posicion {
     private static int lastId = 1;
@@ -20,8 +19,10 @@ public class Ciudad extends Posicion {
     @NotNull
     private int idCiudad;
     private String nameCity;
-    public TreeMap<Integer, Recursos> recursosTreeMap = new TreeMap<>();
+    private TreeMap<Integer, Recursos> recursosTreeMap = new TreeMap<>();
     private int nivelCiudad;
+    private TreeMap<Integer, Soldados> listSoldadosCity = new TreeMap<>();
+    private TreeMap<Integer, MaquinasAsedio> listMaquinascity = new TreeMap<>();
 
     public Ciudad(Jugador jugador, String nameCity, int fila, int columna, int nivelCiudad, int oro, int madera, int piedra, int comida, int hierro, int poblacion, int felicidad) {
         super(fila, columna);
@@ -42,6 +43,15 @@ public class Ciudad extends Posicion {
 //        this.poblacion = poblacion;
         recursosTreeMap.put(6, new Recursos(6, felicidad));
 //        this.felicidad = felicidad;
+
+        for (SoldadosPreCargados soldaditos : listaSoldadosPreCargada.values()) {
+            this.listSoldadosCity.put(soldaditos.getTipe(),new Soldados(soldaditos,0,0,0,0));
+        }
+        for (MaquinasAsedioPreCargadas maquinitas : listaAsedioPreCargada.values()) {
+            this.listMaquinascity.put(maquinitas.getTipe(),new MaquinasAsedio(maquinitas,0,0,0,0));
+
+        }
+
 
         //todo Solicitar a la bd la tabla de posiciones y edificios que tiene el usuario
         try {
@@ -103,6 +113,10 @@ public class Ciudad extends Posicion {
         return recursosTreeMap;
     }
 
+    public void setRecursosTreeMap(TreeMap<Integer, Recursos> recursosTreeMap) {
+        this.recursosTreeMap = recursosTreeMap;
+    }
+
     public int getNivelCiudad() {
         return nivelCiudad;
     }
@@ -111,5 +125,25 @@ public class Ciudad extends Posicion {
         this.nivelCiudad = nivelCiudad;
     }
 
+    public TreeMap<Integer, Soldados> getListSoldadosCity() {
+        return listSoldadosCity;
+    }
 
+    public void addSoldados(TreeMap<Integer, Soldados> soldados) {
+        for (Soldados soldado : soldados.values()) {
+            Soldados soldados2=this.listSoldadosCity.get(soldado.getsoldadosPreCargados().getTipe());
+            soldados2.setCantidad(soldados2.getCantidad()+soldado.getCantidad());
+        }
+    }
+
+    public TreeMap<Integer, MaquinasAsedio> getListMaquinascity() {
+        return listMaquinascity;
+    }
+
+    public void addMaquinas(TreeMap<Integer, MaquinasAsedio> maquinas) {
+        for (MaquinasAsedio maquinasAsedio : maquinas.values()) {
+            MaquinasAsedio maquinasAsedio1=this.listMaquinascity.get(maquinasAsedio.getsoldadosPreCargados().getTipe());
+            maquinasAsedio1.setCantidad(maquinasAsedio1.getCantidad()+maquinasAsedio.getCantidad());
+        }
+    }
 }
