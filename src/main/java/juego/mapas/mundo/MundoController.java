@@ -120,7 +120,7 @@ public class MundoController extends MapasController implements Initializable {
                     ciudadToGrid = listaCiudades.get(position);
                     if (ciudadToGrid != null) {
                         stringBuilder.append(letter_guionBajo).append(letter_city);
-
+                        //System.out.println(getClanPrimaryStageController().getId()); //TODO FALLA LO DEL CLAN
                         if (getClanPrimaryStageController().getCiudadesDelClan().contains(new Ciudad(position))) {
                             if (getJugadorPrimaryStageController().listaCiudadesPropias.containsKey(position)) {
                                 stringBuilder.append(letter_esNuestro);

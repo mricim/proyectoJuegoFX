@@ -98,8 +98,8 @@ public class PantallaInicialController extends PrimaryStageControler implements 
         progresBar.setProgress(10);//TODO NO FUNCIONA // https://stackoverflow.com/questions/44398611/running-a-process-in-a-separate-thread-so-rest-of-java-fx-application-is-usable
         callbd();
         progresBar.setProgress(100);
-        Jugador borrar=new Jugador("nombre",0);//TODO DESCOMENTAR PARA INICIAR COMO UN NUEVO JUGADOR
-        setJugadorPrimaryStageController(borrar);//TODO DESCOMENTAR PARA INICIAR COMO UN NUEVO JUGADOR
+        //Jugador borrar=new Jugador("nombre",0);//TODO DESCOMENTAR PARA INICIAR COMO UN NUEVO JUGADOR
+        //setJugadorPrimaryStageController(borrar);//TODO DESCOMENTAR PARA INICIAR COMO UN NUEVO JUGADOR
         if (getJugadorPrimaryStageController().listaCiudadesPropias.size() == 0) {//NUEVO EN EL JUEGO
             MapasController.newCiudad = true;
             MapasController.primeraCiudad = true;
