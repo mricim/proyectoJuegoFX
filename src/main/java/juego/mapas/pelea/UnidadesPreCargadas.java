@@ -7,10 +7,12 @@ import main.java.juego.mapas.Recursos;
 
 import java.util.List;
 
+import static main.java.jugadores.Jugador.listaSoldadosPreCargada;
 
-abstract public class UnidadesPreCargadas implements ImageGetter {
 
-    private int tipe;
+public class UnidadesPreCargadas implements ImageGetter {
+
+    private int idType;
     private String nombre;
     private int maxMunicion;
 
@@ -20,19 +22,23 @@ abstract public class UnidadesPreCargadas implements ImageGetter {
     private List<Recursos> costes;
     private String imageClicablePath;
     private String imageIconPath;
+    private int tipoLucha;
 
-    public UnidadesPreCargadas(int tipe, String nombre, int maxMunicion, List<Recursos>costes) {
-        this.tipe = tipe;
+    public UnidadesPreCargadas(int idType, String nombre, int maxMunicion, List<Recursos>costes, int tipoLucha) {
+        this.idType = idType;
         this.nombre = nombre;
         this.maxMunicion=maxMunicion;
         this.costes=costes;
-        this.imagePath = String.valueOf(tipe);
-        this.imageClicablePath = tipe + "@H";
-        this.imageIconPath = String.valueOf(tipe);
+        String imagePath= String.valueOf(idType);
+        this.imagePath =imagePath;
+        this.imageClicablePath = imagePath + "@H";
+        this.imageIconPath = imagePath;
+        this.tipoLucha = tipoLucha;
+        listaSoldadosPreCargada.put(idType,this);
     }
 
-    public int getTipe() {
-        return tipe;
+    public int getIdType() {
+        return idType;
     }
 
     public String getNombre() {
@@ -41,6 +47,10 @@ abstract public class UnidadesPreCargadas implements ImageGetter {
 
     public List<Recursos> getCostes() {
         return costes;
+    }
+
+    public int getTipoLucha() {
+        return tipoLucha;
     }
 
     @Override

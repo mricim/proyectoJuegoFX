@@ -9,7 +9,7 @@ import java.util.HashMap;
 
 public class Batallon extends Posicion {
     private static int lastIdBatallon=1;
-    private HashMap<String, Soldados> SoldadoHashMap = new HashMap<>();
+    private HashMap<String, Unidades> SoldadoHashMap = new HashMap<>();
     private int idBatallon;
     private String nombre;
     private int proyectiles;//TODO MAS QUE PROYECTILES SERIA COMO RACIONES O MUNICIONES O ALGO ASI
@@ -64,11 +64,11 @@ public class Batallon extends Posicion {
     }
  */
 
-    public HashMap<String, Soldados> getSoldadoHashMap() {
+    public HashMap<String, Unidades> getSoldadoHashMap() {
         return SoldadoHashMap;
     }
 
-    public void setSoldadoHashMap(Soldados soldado) {
+    public void setSoldadoHashMap(Unidades soldado) {
         SoldadoHashMap.put(soldado.getPosition(), soldado);
     }
 }

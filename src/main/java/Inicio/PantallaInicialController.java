@@ -10,13 +10,12 @@ import main.java.juego.MapasController;
 import main.java.juego.mapas.Recursos;
 import main.java.juego.mapas.RecursosPrecargados;
 import main.java.juego.mapas.mundo.MundoController;
-import main.java.juego.mapas.pelea.MaquinasAsedioPreCargadas;
+import main.java.juego.mapas.pelea.UnidadesPreCargadas;
 import main.java.jugadores.Clan;
 import main.java.jugadores.Jugador;
 import main.java.Utils.PrimaryStageControler;
 import main.java.juego.mapas.ciudad.CiudadController;
 import main.java.juego.mapas.ciudad.EdificiosPreCargados;
-import main.java.juego.mapas.pelea.SoldadosPreCargados;
 import main.java.jugadores.iniciarSession.IniciarSessionController;
 import main.java.temas.Temas;
 
@@ -136,7 +135,7 @@ public class PantallaInicialController extends PrimaryStageControler implements 
         progresBar.setProgress(20);
         new EdificiosPreCargados(10, true, true, 2, 0, -1, 0, "Almacen", "XXXXXXXXXXX", 99, 19, 25, 30, 10, 0, 0, 0, 0, 0, 0, 0, 1000, 1000, 1000, 1000, 1000);
         new EdificiosPreCargados(11, true, true, 1, 0, 0, 0, "Centro cientifico", "NONE", 99, 99, 99, 20, 10, 0, 10, 0, 0, 0, 0, 50, 0, 0, 0, 0, 0);
-        new EdificiosPreCargados(12, true, true, 2, 0, 0, 0, "Lupas", "XXXXXXXXXXX", 99, 99, 99, 20, 10, 0, 0, 10, 0, 0, 0, -50, 0, 0, 0, 0, 0);
+        new EdificiosPreCargados(12, true, true, 2, 0, 0, 0, "Lupas", "XXXXXXXXXXX", 99, 99, 99, 20, 3000, 0, 0, 10, 0, 0, 0, -50, 0, 0, 0, 0, 0);
         new EdificiosPreCargados(12, true, true, 2, 1, 0, 0, "Lupas", "XXXXXXXXXXX", 99, 99, 99, 20, 10, 10, 10, 10, 10, 10, 10, -50, 0, 0, 0, 0, 0);
         new EdificiosPreCargados(13, true, true, 1, 0, 0, 1, "Palacio", "NONE", 99, 99, 99, 20, 10, 10, 10, 10, 10, 10, 10, 50, 0, 0, 0, 0, 0);
         new EdificiosPreCargados(14, true, true, 1, 0, 1, 2, "Cuartel", "Crea soldados", 99, 99, 99, 20, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
@@ -158,11 +157,11 @@ public class PantallaInicialController extends PrimaryStageControler implements 
         recursosList2.add(new Recursos(4, 3));
         recursosList2.add(new Recursos(5, 1));
         recursosList2.add(new Recursos(6, 0));
-        new SoldadosPreCargados(0, "Espadachines", 0, recursosList);//se podria poner comida
-        new SoldadosPreCargados(1, "Lanceros", 0, recursosList);
-        new SoldadosPreCargados(2, "Arqueros", 100, recursosList);
-        new SoldadosPreCargados(3, "Caballeros", 50, recursosList2);
-        new MaquinasAsedioPreCargadas(4, "Catapultas", 50, recursosList2);
+        new UnidadesPreCargadas(0, "Espadachines", 0, recursosList,0);//se podria poner comida
+        new UnidadesPreCargadas(1, "Lanceros", 0, recursosList,0);
+        new UnidadesPreCargadas(2, "Arqueros", 100, recursosList,0);
+        new UnidadesPreCargadas(3, "Caballeros", 50, recursosList2,0);
+        new UnidadesPreCargadas(4, "Catapultas", 50, recursosList2,5);
         progresBar.setProgress(50);
         //TODO FIN LEER DESDE LA BD
         Clan clan = new Clan(1, "Los mejores");

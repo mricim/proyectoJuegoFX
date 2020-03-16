@@ -19,10 +19,9 @@ public class Ciudad extends Posicion {
     @NotNull
     private int idCiudad;
     private String nameCity;
-    private TreeMap<Integer, Recursos> recursosTreeMap = new TreeMap<>();
+    private TreeMap<Integer, Recursos> recursosTreeMap = new TreeMap<>();//TODO COMPROBAR QUE NO PUEDE PASAR DEL LIMITE DE CAPACIDAD DE LA CIUDAD
     private int nivelCiudad;
-    private TreeMap<Integer, Soldados> listSoldadosCity = new TreeMap<>();
-    private TreeMap<Integer, MaquinasAsedio> listMaquinascity = new TreeMap<>();
+    private TreeMap<Integer, Unidades> listSoldadosCity = new TreeMap<>();
 
     public Ciudad(Jugador jugador, String nameCity, int fila, int columna, int nivelCiudad, int oro, int madera, int piedra, int comida, int hierro, int poblacion, int felicidad) {
         super(fila, columna);
@@ -44,12 +43,8 @@ public class Ciudad extends Posicion {
         recursosTreeMap.put(6, new Recursos(6, felicidad));
 //        this.felicidad = felicidad;
 
-        for (SoldadosPreCargados soldaditos : listaSoldadosPreCargada.values()) {
-            this.listSoldadosCity.put(soldaditos.getTipe(),new Soldados(soldaditos,0,0,0,0));
-        }
-        for (MaquinasAsedioPreCargadas maquinitas : listaAsedioPreCargada.values()) {
-            this.listMaquinascity.put(maquinitas.getTipe(),new MaquinasAsedio(maquinitas,0,0,0,0));
-
+        for (UnidadesPreCargadas soldaditos : listaSoldadosPreCargada.values()) {
+            this.listSoldadosCity.put(soldaditos.getIdType(),new Unidades(soldaditos,0,0,0,0));
         }
 
 
@@ -125,25 +120,14 @@ public class Ciudad extends Posicion {
         this.nivelCiudad = nivelCiudad;
     }
 
-    public TreeMap<Integer, Soldados> getListSoldadosCity() {
+    public TreeMap<Integer, Unidades> getListSoldadosCity() {
         return listSoldadosCity;
     }
 
-    public void addSoldados(TreeMap<Integer, Soldados> soldados) {
-        for (Soldados soldado : soldados.values()) {
-            Soldados soldados2=this.listSoldadosCity.get(soldado.getsoldadosPreCargados().getTipe());
+    public void addSoldados(TreeMap<Integer, Unidades> soldados) {
+        for (Unidades soldado : soldados.values()) {
+            Unidades soldados2=this.listSoldadosCity.get(soldado.getUnidadesPreCargadas().getIdType());
             soldados2.setCantidad(soldados2.getCantidad()+soldado.getCantidad());
-        }
-    }
-
-    public TreeMap<Integer, MaquinasAsedio> getListMaquinascity() {
-        return listMaquinascity;
-    }
-
-    public void addMaquinas(TreeMap<Integer, MaquinasAsedio> maquinas) {
-        for (MaquinasAsedio maquinasAsedio : maquinas.values()) {
-            MaquinasAsedio maquinasAsedio1=this.listMaquinascity.get(maquinasAsedio.getsoldadosPreCargados().getTipe());
-            maquinasAsedio1.setCantidad(maquinasAsedio1.getCantidad()+maquinasAsedio.getCantidad());
         }
     }
 }

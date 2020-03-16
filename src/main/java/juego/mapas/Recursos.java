@@ -33,8 +33,12 @@ public class Recursos {
         return cantidad;
     }
 
-    public void setCantidad(int cantidad) {
-        this.cantidad = cantidad;
+    public void addCantidad(int cantidad) {
+        this.cantidad += cantidad;
+    }
+
+    public void removeCantidad(int cantidad) {
+        this.cantidad -= cantidad;
     }
 
     public String getName() {
