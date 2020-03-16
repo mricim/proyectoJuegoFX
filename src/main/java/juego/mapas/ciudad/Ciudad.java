@@ -1,6 +1,5 @@
 package main.java.juego.mapas.ciudad;
 
-import com.sun.istack.NotNull;
 import main.java.Utils.Posicion;
 import main.java.juego.mapas.Recursos;
 import main.java.juego.mapas.ciudad.contenidoCiudad.Edificio;
@@ -16,7 +15,6 @@ import static main.java.jugadores.Jugador.*;
 public class Ciudad extends Posicion {
     private static int lastId = 1;
     private TreeMap<String, Edificio> listaPosicionesEdificios = new TreeMap<>();
-    @NotNull
     private int idCiudad;
     private String nameCity;
     private TreeMap<Integer, Recursos> recursosTreeMap = new TreeMap<>();//TODO COMPROBAR QUE NO PUEDE PASAR DEL LIMITE DE CAPACIDAD DE LA CIUDAD
