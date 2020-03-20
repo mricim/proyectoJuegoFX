@@ -7,15 +7,13 @@ import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.SplitMenuButton;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
-import main.java.Utils.PrimaryStageControler;
+import main.java.utils.PrimaryStageControler;
 import main.java.juego.mapas.ciudad.Ciudad;
 import main.java.juego.mapas.Recursos;
 import main.java.juego.mapas.ciudad.CiudadController;
 
-import java.io.IOException;
 import java.util.Collection;
 
 abstract public class MapasController extends PrimaryStageControler {

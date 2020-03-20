@@ -1,6 +1,6 @@
 package main.java.juego.mapas.ciudad;
 
-import main.java.Utils.Posicion;
+import main.java.utils.Posicion;
 import main.java.juego.mapas.Recursos;
 import main.java.juego.mapas.ciudad.contenidoCiudad.Edificio;
 import main.java.juego.mapas.pelea.*;
@@ -125,6 +125,7 @@ public class Ciudad extends Posicion {
     public void addSoldados(TreeMap<Integer, Unidades> soldados) {
         for (Unidades soldado : soldados.values()) {
             Unidades soldados2=this.listSoldadosCity.get(soldado.getUnidadesPreCargadas().getIdType());
+            System.out.println(soldados2.getCantidad()+soldado.getCantidad());
             soldados2.setCantidad(soldados2.getCantidad()+soldado.getCantidad());
         }
     }

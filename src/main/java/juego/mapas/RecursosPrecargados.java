@@ -1,7 +1,7 @@
 package main.java.juego.mapas;
 
 import javafx.scene.image.Image;
-import main.java.Utils.ImageGetter;
+import main.java.utils.ImageGetter;
 
 import java.util.HashMap;
 import java.util.Objects;

@@ -5,9 +5,8 @@ import javafx.scene.Node;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import main.java.Inicio.PantallaInicialController;
-import main.java.Utils.PrimaryStageControler;
+import main.java.utils.PrimaryStageControler;
 
-import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ResourceBundle;
 

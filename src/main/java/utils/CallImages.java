@@ -1,7 +1,6 @@
-package main.java.Utils;
+package main.java.utils;
 
 import javafx.scene.image.Image;
-import main.java.temas.Temas;
 
 import java.io.File;
 import java.util.HashMap;

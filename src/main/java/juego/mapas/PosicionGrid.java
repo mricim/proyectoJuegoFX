@@ -1,6 +1,6 @@
 package main.java.juego.mapas;
 
-import main.java.Utils.Posicion;
+import main.java.utils.Posicion;
 
 public class PosicionGrid extends Posicion {
     Object object;

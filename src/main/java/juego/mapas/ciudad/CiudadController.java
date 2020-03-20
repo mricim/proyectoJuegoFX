@@ -16,13 +16,15 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
-import main.java.Utils.CallImages;
+import main.java.utils.CallImages;
 import main.java.juego.MapasController;
 import main.java.juego.mapas.RecursosPrecargados;
 import main.java.juego.mapas.mundo.MundoController;
 import main.java.juego.mapas.Recursos;
 import main.java.juego.mapas.ciudad.contenidoCiudad.Edificio;
 import main.java.juego.mapas.pelea.*;
+import main.java.utils.tagsFXML.CustomTextField;
+import main.java.utils.tagsFXML.SliderCustom;
 
 import java.net.URL;
 import java.util.*;
@@ -378,8 +380,8 @@ public class CiudadController extends MapasController implements Initializable {
     private static VBox cajaCrearUnidades(TreeMap<Integer, UnidadesPreCargadas> listaUnidades, int tipoDeUnidades, BorderPane borderPane, FlowPane flowPaneRecuros) {
         //BLOQUE
         VBox vBoxBloquePropio = new VBox();
-        vBoxBloquePropio.setMinWidth(250);
-        vBoxBloquePropio.setMaxWidth(250);
+        vBoxBloquePropio.setMinWidth(300);
+        vBoxBloquePropio.setMaxWidth(300);
         vBoxBloquePropio.setAlignment(TOP_CENTER);
         vBoxBloquePropio.setBackground(new Background(new BackgroundFill(Color.ANTIQUEWHITE, CornerRadii.EMPTY, Insets.EMPTY)));
         vBoxBloquePropio.setSpacing(10);
@@ -454,7 +456,7 @@ public class CiudadController extends MapasController implements Initializable {
             if (unidadesPreCargadas.getTipoLucha() == tipoDeUnidades) {
                 HBox hBox = new HBox();
                 hBox.setAlignment(Pos.CENTER);
-                hBox.setSpacing(5);
+                hBox.setSpacing(10);
                 ImageView imageView = new ImageView(unidadesPreCargadas.getImageIcon());
                 imageView.setFitWidth(50);
                 imageView.setFitHeight(50);
@@ -473,46 +475,29 @@ public class CiudadController extends MapasController implements Initializable {
                         }
                     }
                 }
-                int counterX;
-                if (maxSoldados < 1) {
-                    counterX = 1;
-                } else if (maxSoldados < 11) {
-                    counterX = maxSoldados;
-                } else if (maxSoldados < 26) {
-                    counterX = 10;
-                } else if (maxSoldados < 151) {
-                    counterX = 25;
-                } else if (maxSoldados < 501) {
-                    counterX = 100;
-                } else {
-                    counterX = 250;
+                CustomTextField textField = new CustomTextField("0", true, maxSoldados);
+                //textField.textProperty().bind(slider.valueProperty().asString("%.0f"));
+
+                int conters = getCiudadPrimaryStageController().getListSoldadosCity().get(unidadesPreCargadas.getIdType()).getCantidad();
+                Label label2 = new Label("+ " + conters);
+                if (conters > 0) {
+                    label2.setTextFill(Color.GREEN);
                 }
-                Label label = new Label("0");
-                label.setTextFill(Color.GREEN);
-                Label label2 = new Label("+ " + getCiudadPrimaryStageController().getListSoldadosCity().get(unidadesPreCargadas.getIdType()).getCantidad());
-                Slider slider = new Slider(0, maxSoldados, 0);
-                slider.setPadding(new Insets(25, 5, 0, 0));
-                slider.setShowTickMarks(true);
-                slider.setMajorTickUnit(counterX);
-                slider.setSnapToTicks(false);
-                slider.setMinorTickCount(counterX);
-                slider.setShowTickLabels(true);
-                slider.setBlockIncrement(1);
-                slider.setMinHeight(Slider.USE_COMPUTED_SIZE);
+                SliderCustom slider = new SliderCustom(0, maxSoldados, 0);
+                slider.setmargin(25, 0, 0, 0);
                 slider.valueProperty().addListener(new ChangeListener<Number>() {
                     @Override
                     public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
                         int seleccionado = newValue.intValue();
                         int number = oldValue.intValue() - seleccionado;
                         if (number != 0) {
-                            label.textProperty().setValue(String.valueOf(seleccionado));
+                            textField.textProperty().setValue(String.valueOf(seleccionado));
                             Platform.runLater(() -> controllerSlider(number, unidadesPreCargadas, soldadesca, costesRecursos, resta, recursosCiudadTemp, button, vBox, vBox1));
-
-                            //(new Thread(() -> cosaChunga(a, number, label, unidadesPreCargadas, maquinasAsedio, soldadesca, costesRecursos, resta, recursosCiudad, button, flowPane2, flowPane3))).start();
                         }
                     }
                 });
-                hBox.getChildren().addAll(imageView, slider, label, label2);
+                textField.setBindSlider(slider);
+                hBox.getChildren().addAll(imageView, slider, textField, label2);
                 childrenFlowPane.add(hBox);
 
 
@@ -542,20 +527,20 @@ public class CiudadController extends MapasController implements Initializable {
     private static synchronized void controllerSlider(int seleccionadoNumber, UnidadesPreCargadas unidadesPreCargadas, TreeMap<Integer, Unidades> soldadesca, List<Recursos> costesRecursosUnidades, TreeMap<Integer, Recursos> resta, TreeMap<Integer, Recursos> recursosCiudadTemp, Button button, VBox flowPane2, VBox flowPane3) {
         boolean controladora = false;
         boolean controladoraToFor = false;
+        int conversorAPositivo = (seleccionadoNumber < 0 ? -seleccionadoNumber : seleccionadoNumber);
         if (unidadesPreCargadas != null) {
             int idQueEs = unidadesPreCargadas.getIdType();
             Unidades unidades = soldadesca.get(idQueEs);
             if (seleccionadoNumber < 0) {
-                unidades.setCantidad(unidades.getCantidad() + 1);
+                unidades.setCantidad(unidades.getCantidad() + conversorAPositivo);
                 controladoraToFor = true;
             } else {
-                unidades.setCantidad(unidades.getCantidad() - 1);
-
+                unidades.setCantidad(unidades.getCantidad() - conversorAPositivo);
             }
         }
+
         for (Recursos recursosUnits : costesRecursosUnidades) {
             int idUnits = recursosUnits.getId();
-            int conversorAPositivo = (seleccionadoNumber < 0 ? -seleccionadoNumber : seleccionadoNumber);
             int costeUnidades = recursosUnits.getCantidad() * conversorAPositivo;
             if (controladoraToFor) {
                 resta.get(idUnits).addCantidad(costeUnidades);
@@ -600,6 +585,7 @@ public class CiudadController extends MapasController implements Initializable {
 
         for (Recursos recursoValor : recursosEnLaCIty.values()) {
             HBox hBox = new HBox();
+            hBox.setMaxWidth(250);//TODO
             hBox.setAlignment(Pos.CENTER);
             int id = recursoValor.getId();
 
@@ -628,7 +614,10 @@ public class CiudadController extends MapasController implements Initializable {
                 label3.setTextFill(Color.RED);
 
             }
-            hBox.getChildren().addAll(pane, enCity, new Label("-"), label2, new Label("="), label3);
+            Region region=new Region();
+            region.setMinWidth(5);
+            HBox.setHgrow(region, Priority.ALWAYS);
+            hBox.getChildren().addAll(pane,region, enCity, new Label("-"), label2, new Label("="), label3);
             childrenFlowPane.add(hBox);
         }
         Separator separator3 = new Separator();
@@ -676,31 +665,11 @@ public class CiudadController extends MapasController implements Initializable {
                     int poblacionMaximaQueSePuedePoner = recursoValor.getCantidad();
                     int poblacionPuesta = edificioSlider.getTrabajadoresPuestos();
                     HBox hBox = new HBox();
-                    Label label = new Label(String.valueOf(poblacionPuesta));
+                    int maxPoblacion = Math.min(poblacionMaximaQueSePuedePoner, pobacionCiudad + poblacionPuesta);
+                    CustomTextField label = new CustomTextField(String.valueOf(poblacionPuesta), true, maxPoblacion);
                     Label labelMax = new Label(" /" + poblacionMaximaQueSePuedePoner);
-                    int counterX;
-                    if (poblacionPuesta < 1) {
-                        counterX = 1;
-                    } else if (poblacionPuesta < 11) {
-                        counterX = poblacionPuesta;
-                    } else if (poblacionPuesta < 26) {
-                        counterX = 10;
-                    } else if (poblacionPuesta < 151) {
-                        counterX = 25;
-                    } else if (poblacionPuesta < 501) {
-                        counterX = 100;
-                    } else {
-                        counterX = 250;
-                    }
-                    Slider slider = new Slider(0, Math.min(poblacionMaximaQueSePuedePoner, pobacionCiudad + poblacionPuesta), poblacionPuesta);
+                    SliderCustom slider = new SliderCustom(0, maxPoblacion, poblacionPuesta);
                     slider.setPadding(new Insets(25, 5, 0, 0));
-                    slider.setShowTickMarks(true);
-                    slider.setMajorTickUnit(counterX);
-                    slider.setSnapToTicks(false);
-                    slider.setMinorTickCount(counterX);
-                    slider.setShowTickLabels(true);
-                    slider.setBlockIncrement(1);
-                    slider.setMinHeight(Slider.USE_COMPUTED_SIZE);
                     slider.valueProperty().addListener(new ChangeListener<Number>() {
                         @Override
                         public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
@@ -714,6 +683,7 @@ public class CiudadController extends MapasController implements Initializable {
                             }
                         }
                     });
+                    label.setBindSlider(slider);
                     hBox.getChildren().addAll(imageView, slider, label, labelMax);
                     childrenFlowPane.add(hBox);
                 } else {

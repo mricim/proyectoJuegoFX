@@ -13,7 +13,7 @@ import main.java.juego.mapas.mundo.MundoController;
 import main.java.juego.mapas.pelea.UnidadesPreCargadas;
 import main.java.jugadores.Clan;
 import main.java.jugadores.Jugador;
-import main.java.Utils.PrimaryStageControler;
+import main.java.utils.PrimaryStageControler;
 import main.java.juego.mapas.ciudad.CiudadController;
 import main.java.juego.mapas.ciudad.EdificiosPreCargados;
 import main.java.jugadores.iniciarSession.IniciarSessionController;
@@ -136,7 +136,7 @@ public class PantallaInicialController extends PrimaryStageControler implements 
         new EdificiosPreCargados(10, true, true, 2, 0, -1, 0, "Almacen", "XXXXXXXXXXX", 99, 19, 25, 30, 10, 0, 0, 0, 0, 0, 0, 0, 1000, 1000, 1000, 1000, 1000);
         new EdificiosPreCargados(11, true, true, 1, 0, 0, 0, "Centro cientifico", "NONE", 99, 99, 99, 20, 10, 0, 10, 0, 0, 0, 0, 50, 0, 0, 0, 0, 0);
         new EdificiosPreCargados(12, true, true, 2, 0, 0, 0, "Lupas", "XXXXXXXXXXX", 99, 99, 99, 20, 3000, 0, 0, 10, 0, 0, 0, -50, 0, 0, 0, 0, 0);
-        new EdificiosPreCargados(12, true, true, 2, 1, 0, 0, "Lupas", "XXXXXXXXXXX", 99, 99, 99, 20, 10, 10, 10, 10, 10, 10, 10, -50, 0, 0, 0, 0, 0);
+        new EdificiosPreCargados(12, true, true, 2, 1, 0, 0, "Lupas", "XXXXXXXXXXX 1", 99, 99, 99, 20, 2000, 200, 10, 10, 10, 10, 10, -50, 0, 0, 0, 0, 0);
         new EdificiosPreCargados(13, true, true, 1, 0, 0, 1, "Palacio", "NONE", 99, 99, 99, 20, 10, 10, 10, 10, 10, 10, 10, 50, 0, 0, 0, 0, 0);
         new EdificiosPreCargados(14, true, true, 1, 0, 1, 2, "Cuartel", "Crea soldados", 99, 99, 99, 20, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
         new EdificiosPreCargados(15, true, true, 1, 0, 2, 3, "Maquinas de guerra", "Crear maquinas de guerra", 99, 99, 99, 20, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);

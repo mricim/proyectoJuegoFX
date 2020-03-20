@@ -6,8 +6,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import main.java.Inicio.PantallaInicialController;
-import main.java.Utils.PrimaryStageControler;
-import main.java.jugadores.iniciarSession.IniciarSessionController;
+import main.java.utils.PrimaryStageControler;
 
 import java.net.URL;
 

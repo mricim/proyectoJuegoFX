@@ -1,4 +1,4 @@
-package main.java.Utils;
+package main.java.utils;
 
 import com.sun.istack.internal.Nullable;
 import javafx.scene.image.Image;

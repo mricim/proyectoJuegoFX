@@ -1,8 +1,7 @@
 package main.java.juego.mapas.pelea;
 
 import javafx.scene.image.Image;
-import main.java.Utils.ImageGetter;
-import main.java.Utils.Posicion;
+import main.java.utils.Posicion;
 
 
 public class Unidades extends Posicion {

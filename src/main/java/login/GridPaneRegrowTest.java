@@ -12,8 +12,7 @@ import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
 import javafx.stage.Stage;
-import main.java.Utils.CallImages;
-import main.java.juego.mapas.ciudad.Ciudad;
+import main.java.utils.CallImages;
 
 import static main.java.jugadores.Jugador.listaCiudades;
 

@@ -9,7 +9,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import main.java.jugadores.Jugador;
-import main.java.Utils.PrimaryStageControler;
+import main.java.utils.PrimaryStageControler;
 
 import java.net.URL;
 import java.util.ResourceBundle;

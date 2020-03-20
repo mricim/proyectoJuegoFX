@@ -3,7 +3,7 @@ package main.java.testLucha;
 
 import static main.java.testLucha.MainLucha2.*;
 
-public class Posicion extends main.java.Utils.Posicion {
+public class Posicion extends main.java.utils.Posicion {
     private SoldadosXX soldadosXX;
     private int ejercito;
 

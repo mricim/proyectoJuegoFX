@@ -1,7 +1,7 @@
 package main.java.jugadores;
 
 import javafx.scene.image.Image;
-import main.java.Utils.CallImages;
+import main.java.utils.CallImages;
 import main.java.juego.mapas.Recursos;
 import main.java.juego.mapas.pelea.*;
 import main.java.juego.mapas.ciudad.EdificiosPreCargados;

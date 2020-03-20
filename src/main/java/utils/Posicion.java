@@ -1,4 +1,4 @@
-package main.java.Utils;
+package main.java.utils;
 
 
 import java.util.Objects;
@@ -48,13 +48,5 @@ abstract public class Posicion {
     @Override
     public int hashCode() {
         return Objects.hash(getPosition());
-    }
-
-    @Override
-    public String toString() {
-        return "Posiciones{" +
-                "fila=" + fila +
-                ", columna=" + columna +
-                '}';
     }
 }

@@ -1,7 +1,7 @@
 package main.java.juego.mapas.ciudad;
 
 import javafx.scene.image.Image;
-import main.java.Utils.ImageGetter;
+import main.java.utils.ImageGetter;
 import main.java.juego.mapas.Recursos;
 
 import java.util.Objects;

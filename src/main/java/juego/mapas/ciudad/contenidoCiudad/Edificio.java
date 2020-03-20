@@ -1,7 +1,7 @@
 package main.java.juego.mapas.ciudad.contenidoCiudad;
 
 import javafx.scene.image.Image;
-import main.java.Utils.Posicion;
+import main.java.utils.Posicion;
 import main.java.juego.mapas.ciudad.Ciudad;
 import main.java.juego.mapas.ciudad.EdificiosPreCargados;
 

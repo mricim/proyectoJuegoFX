@@ -1,4 +1,4 @@
-package main.java.Utils;
+package main.java.utils;
 
 import com.google.api.client.util.ArrayMap;
 import javafx.fxml.FXMLLoader;
@@ -12,7 +12,6 @@ import main.java.Main;
 import main.java.juego.mapas.ciudad.Ciudad;
 
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.Map;
 
 public class PrimaryStageControler {

@@ -2,7 +2,7 @@ package main.java.juego.mapas.pelea;
 
 
 import main.java.jugadores.Jugador;
-import main.java.Utils.Posicion;
+import main.java.utils.Posicion;
 
 import java.util.ArrayList;
 import java.util.HashMap;
