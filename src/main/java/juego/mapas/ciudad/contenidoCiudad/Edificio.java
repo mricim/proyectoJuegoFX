@@ -1,29 +1,35 @@
 package main.java.juego.mapas.ciudad.contenidoCiudad;
 
 import javafx.scene.image.Image;
+import main.java.juego.mapas.Recursos;
 import main.java.utils.Posicion;
 import main.java.juego.mapas.ciudad.Ciudad;
 import main.java.juego.mapas.ciudad.EdificiosPreCargados;
+
+import java.util.TreeMap;
 
 
 public class Edificio extends Posicion implements Cloneable {
     private int id;//GUARDAR
     private int nivel;//GUARDAR
-    private int trabajadoresPuestos;//GUARDAR
+    TreeMap<Integer, Recursos> trabajadoresNecesarios = new TreeMap<>();//GUARDAR
     private EdificiosPreCargados edificiosPreCargado;
 
 
     public Edificio(EdificiosPreCargados edificioPreCargado, int filas, int columnas, Ciudad ciudad) {
-        super(filas,columnas);
+        super(filas, columnas);
         this.id = edificioPreCargado.getId();
         this.nivel = edificioPreCargado.getNivel();
         this.edificiosPreCargado = edificioPreCargado;
+        for (Recursos recursos : edificioPreCargado.getRecursosProductores().values()) {
+            int recursoId = recursos.getId();
+            trabajadoresNecesarios.put(recursoId, new Recursos(recursoId, recursos.getCantidad()));
+        }
 
 
         //TODO //POSIBLEMENTE ESTO LLENE LA RAM
         getImage();
         getImageClicable();
-
 
 
         ciudad.addListaPosicionesEdificios(getPosition(), this);
@@ -42,13 +48,11 @@ public class Edificio extends Posicion implements Cloneable {
         return nivel;
     }
 
-    public int getTrabajadoresPuestos() {
-        return trabajadoresPuestos;
+
+    public TreeMap<Integer, Recursos> getTrabajadoresNecesarios() {
+        return trabajadoresNecesarios;
     }
 
-    public void setTrabajadoresPuestos(int trabajadoresPuestos) {
-        this.trabajadoresPuestos = trabajadoresPuestos;
-    }
 
     public EdificiosPreCargados getEdificiosPreCargado() {
         return edificiosPreCargado;
@@ -63,6 +67,7 @@ public class Edificio extends Posicion implements Cloneable {
     public Image getImage() {
         return edificiosPreCargado.getImage();
     }
+
     public Image getImageClicable() {
         return edificiosPreCargado.getImageClicable();
     }

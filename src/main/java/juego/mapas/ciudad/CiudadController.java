@@ -248,14 +248,14 @@ public class CiudadController extends MapasController implements Initializable {
                 if (tipo != 0) {// System.out.println("NO GENERADOR: " + edificioQueEstaEnElMapa.getId());
                     printBoton(childrenFlowPane, tipo);// NO GENERA RECURSOS
                 } else {//System.out.println("GENERADOR: " + edificioQueEstaEnElMapa.getId());
-                    printRecursosEdificios(childrenFlowPane, edificioQueSaleEnMenu.getRecursosProductores().entrySet(), 1, edificioQueEstaEnElMapa, flowPaneRecuros);//Ponemos las barras de los selectores
+                    printRecursosEdificios(borderPane,childrenFlowPane, edificioQueSaleEnMenu.getRecursosProductores().entrySet(), 1, edificioQueEstaEnElMapa, flowPaneRecuros);//Ponemos las barras de los selectores
                 }
             } else {
-                printRecursosEdificios(childrenFlowPane, edificioQueSaleEnMenu.getRecursosProductores().entrySet(), 1, null, flowPaneRecuros);
+                printRecursosEdificios(borderPane,childrenFlowPane, edificioQueSaleEnMenu.getRecursosProductores().entrySet(), 1, null, flowPaneRecuros);
             }
-            printRecursosEdificios(childrenFlowPane, edificioQueSaleEnMenu.getRecursosAlmacen().entrySet(), 2, null, flowPaneRecuros);
+            printRecursosEdificios(borderPane,childrenFlowPane, edificioQueSaleEnMenu.getRecursosAlmacen().entrySet(), 2, null, flowPaneRecuros);
             if (tipoDeBoton == 1 || tipoDeBoton == 2) {
-                printRecursosEdificios(childrenFlowPane, edificioQueSaleEnMenu.getRecursosCostes().entrySet(), 3, null, flowPaneRecuros);
+                printRecursosEdificios(borderPane,childrenFlowPane, edificioQueSaleEnMenu.getRecursosBuild().entrySet(), 3, null, flowPaneRecuros);
             }
 
 
@@ -280,7 +280,7 @@ public class CiudadController extends MapasController implements Initializable {
 
                 Button button = new Button(text);
                 if (tipoDeBoton == 1 || tipoDeBoton == 2) {//CALCULAR RECURSOS
-                    for (Recursos edificioCostes : edificioQueSaleEnMenu.getRecursosCostes().values()) {
+                    for (Recursos edificioCostes : edificioQueSaleEnMenu.getRecursosBuild().values()) {
                         int id = edificioCostes.getId();
                         if ((!(id == 5)) && edificioCostes.getCantidad() > getCiudadPrimaryStageController().getRecursosTreeMap().get(edificioCostes.getId()).getCantidad()) {
                             button.setDisable(true);
@@ -292,13 +292,13 @@ public class CiudadController extends MapasController implements Initializable {
                 button.setCursor(Cursor.HAND);
                 button.setOnMouseClicked(e -> {
                     if (tipoDeBoton == 1 || tipoDeBoton == 2) {
-                        for (Recursos value : edificioQueSaleEnMenu.getRecursosCostes().values()) {
+                        for (Recursos value : edificioQueSaleEnMenu.getRecursosBuild().values()) {
                             Recursos recursos = getCiudadPrimaryStageController().getRecursosTreeMap().get(value.getId());
                             recursos.removeCantidad(value.getCantidad());
                         }
                     } else {
                         EdificiosPreCargados edificiosPreCargadoEnElMapa = edificioQueEstaEnElMapa.getEdificiosPreCargado();
-                        for (Recursos value : edificiosPreCargadoEnElMapa.getRecursosCostes().values()) {
+                        for (Recursos value : edificiosPreCargadoEnElMapa.getRecursosBuild().values()) {
                             Recursos recursosCity = getCiudadPrimaryStageController().getRecursosTreeMap().get(value.getId());
                             recursosCity.addCantidad(((value.getCantidad() * 80) / 100));
                         }
@@ -614,10 +614,10 @@ public class CiudadController extends MapasController implements Initializable {
                 label3.setTextFill(Color.RED);
 
             }
-            Region region=new Region();
+            Region region = new Region();
             region.setMinWidth(5);
             HBox.setHgrow(region, Priority.ALWAYS);
-            hBox.getChildren().addAll(pane,region, enCity, new Label("-"), label2, new Label("="), label3);
+            hBox.getChildren().addAll(pane, region, enCity, new Label("-"), label2, new Label("="), label3);
             childrenFlowPane.add(hBox);
         }
         Separator separator3 = new Separator();
@@ -626,7 +626,7 @@ public class CiudadController extends MapasController implements Initializable {
         childrenFlowPane.add(separator3);
     }
 
-    private static void printRecursosEdificios(ObservableList<Node> childrenFlowPane, Set<Map.Entry<Integer, Recursos>> recursosEdificio, int produce_Almacena_Cuesta_Resto, Edificio edificioSlider, FlowPane flowPaneRecuros) {
+    private static void printRecursosEdificios(BorderPane borderPane,ObservableList<Node> childrenFlowPane, Set<Map.Entry<Integer, Recursos>> recursosEdificio, int produce_Almacena_Cuesta_Resto, Edificio edificioSlider, FlowPane flowPaneRecuros) {
         boolean paso0 = false;
         for (Map.Entry<Integer, Recursos> recurso : recursosEdificio) {
             Recursos recursoValor = recurso.getValue();
@@ -663,10 +663,11 @@ public class CiudadController extends MapasController implements Initializable {
                     Recursos recursoAQuitar = getCiudadPrimaryStageController().getRecursosTreeMap().get(recursosPrecargados.getElSeletableSera());
                     int pobacionCiudad = recursoAQuitar.getCantidad();
                     int poblacionMaximaQueSePuedePoner = recursoValor.getCantidad();
-                    int poblacionPuesta = edificioSlider.getTrabajadoresPuestos();
+                    int poblacionPuesta =
+                            poblacionMaximaQueSePuedePoner - edificioSlider.getTrabajadoresNecesarios().get(recursoValor.getId()).getCantidad();
                     HBox hBox = new HBox();
                     int maxPoblacion = Math.min(poblacionMaximaQueSePuedePoner, pobacionCiudad + poblacionPuesta);
-                    CustomTextField label = new CustomTextField(String.valueOf(poblacionPuesta), true, maxPoblacion);
+                    CustomTextField customTextField = new CustomTextField(String.valueOf(poblacionPuesta), true, maxPoblacion);
                     Label labelMax = new Label(" /" + poblacionMaximaQueSePuedePoner);
                     SliderCustom slider = new SliderCustom(0, maxPoblacion, poblacionPuesta);
                     slider.setPadding(new Insets(25, 5, 0, 0));
@@ -676,15 +677,20 @@ public class CiudadController extends MapasController implements Initializable {
                             int a = newValue.intValue();
                             int number = oldValue.intValue() - a;
                             if (number != 0) {
-                                label.textProperty().setValue(String.valueOf(a));
-                                edificioSlider.setTrabajadoresPuestos(a);
-                                recursoAQuitar.addCantidad(number);
-                                recursosMenu(flowPaneRecuros);
+                                System.out.println(recursoAQuitar.getCantidad()+" "+(recursoAQuitar.getCantidad() + number)+" "+number);
+                                if (recursoAQuitar.getCantidad() + number >= 0) {
+                                    customTextField.textProperty().setValue(String.valueOf(a));
+                                    recursoAQuitar.addCantidad(number);
+                                    edificioSlider.getTrabajadoresNecesarios().get(recursoValor.getId()).addCantidad(number);
+                                    recursosMenu(flowPaneRecuros);
+                                }else {
+                                    borderPane.setLeft(null);
+                                }
                             }
                         }
                     });
-                    label.setBindSlider(slider);
-                    hBox.getChildren().addAll(imageView, slider, label, labelMax);
+                    customTextField.setBindSlider(slider);
+                    hBox.getChildren().addAll(imageView, slider, customTextField, labelMax);
                     childrenFlowPane.add(hBox);
                 } else {
                     Label label = new Label();

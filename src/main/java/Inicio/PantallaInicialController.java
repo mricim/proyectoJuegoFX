@@ -128,7 +128,7 @@ public class PantallaInicialController extends PrimaryStageControler implements 
         //3=CreaMaquinas
         new EdificiosPreCargados(0, false, false, 1, 0, 0, -1, "parcela-Construible", "Descripción del edificio que sera mas larga que el nombre del edificio", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);//NO MEJORABLE
         new EdificiosPreCargados(1, false, false, 1, 0, -1, 0, "Castillo", "Descripción del edificio que sera mas larga que el nombre del edificio", 99, 99, 99, 99, 0, 0, 0, 0, 0, 0, 10, 1, 1000, 1000, 1000, 1000, 100);
-        new EdificiosPreCargados(1, false, false, 1, 1, 0, 0, "Castillo", "Descripción 1_1", 99, 99, 99, 99, 10, 1000, 1000, 1000, 1000, 0, 10, 1, 1000, 1000, 1000, 1000, 200);
+        new EdificiosPreCargados(1, false, false, 1, 1, 0, 0, "Castillo", "Descripción 1_1", 99, 99, 99, 99, 10, 0, 1000, 500, 0, 0, 10, 1, 1000, 1000, 1000, 1000, 200);
         new EdificiosPreCargados(1, false, false, 1, 2, 1, 0, "Castillo", "X", 99, 99, 99, 99, 10, 1000, 1000, 1000, 1000, 0, 10, 1, 1000, 1000, 1000, 1000, 300);
         new EdificiosPreCargados(2, false, false, 2, 0, 0, -1, "Muralla", "XXXXXXXXXXX", 99, 99, 99, 20, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
         new EdificiosPreCargados(2, false, false, 2, 1, 0, -1, "Muralla", "XXXXXXXXXXX", 99, 99, 99, 20, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
