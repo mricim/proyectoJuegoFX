@@ -677,7 +677,6 @@ public class CiudadController extends MapasController implements Initializable {
                             int a = newValue.intValue();
                             int number = oldValue.intValue() - a;
                             if (number != 0) {
-                                System.out.println(recursoAQuitar.getCantidad()+" "+(recursoAQuitar.getCantidad() + number)+" "+number);
                                 if (recursoAQuitar.getCantidad() + number >= 0) {
                                     customTextField.textProperty().setValue(String.valueOf(a));
                                     recursoAQuitar.addCantidad(number);

@@ -9,9 +9,16 @@ import main.java.Inicio.PantallaInicialController;
 import main.java.utils.PrimaryStageControler;
 
 import java.net.URL;
+import java.util.Locale;
+import java.util.ResourceBundle;
+
 
 public class Main extends Application {
     public static final String RUTEINTERNAL = System.getProperty("user.dir") + "/src/main/";
+
+
+    private static Locale locale = new Locale("en");
+    public static ResourceBundle TRADUCCIONES = ResourceBundle.getBundle("main.resources.traductions.UIResources", locale);
 
     /*
     private static final SessionFactory ourSessionFactory;
@@ -58,6 +65,7 @@ public class Main extends Application {
                 throw new RuntimeException(e);
             }
         });*/
+        loader.setResources(TRADUCCIONES);
         Parent root = loader.load();
         primaryStage.setTitle("Nombre del juego");
         Scene scene = new Scene(root);

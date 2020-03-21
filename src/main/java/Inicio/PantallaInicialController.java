@@ -2,9 +2,8 @@ package main.java.Inicio;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.ProgressBar;
+import javafx.scene.control.*;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import main.java.juego.MapasController;
 import main.java.juego.mapas.Recursos;
@@ -32,6 +31,7 @@ public class PantallaInicialController extends PrimaryStageControler implements 
 
 
     public ProgressBar progresBar;
+    public HBox seleccionarIdioma;
     public ComboBox<String> seleccionarMundo;
     public javafx.scene.control.Button iniciarJuego;
     public javafx.scene.control.Button loadSesion;
@@ -40,6 +40,21 @@ public class PantallaInicialController extends PrimaryStageControler implements 
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+//https://stackoverflow.com/questions/32362802/javafx-combobox-cells-disappear-when-clicked
+        ComboBox<String> comboBox2 = new ComboBox<>();
+        comboBox2.getItems().addAll("Castellano", "Català", "English");
+        //Set the cellFactory property
+        comboBox2.setCellFactory(listview -> new CustomComboBoxImager());
+        // Set the buttonCell property
+        comboBox2.setButtonCell(new CustomComboBoxImager());
+        comboBox2.getSelectionModel().selectedItemProperty().addListener((options, oldValue, newValue) -> {
+            seleccionarIdioma(newValue);
+                }
+        );
+        seleccionarIdioma.getChildren().add(comboBox2);
+
+//
+
         seleccionarMundo.getItems().addAll(arrayListTemas);
 
         sesioniniciada = true;//TODO BORRAR
@@ -72,7 +87,23 @@ public class PantallaInicialController extends PrimaryStageControler implements 
 
         iniciarJuegoEnable();
     }
-
+    private void seleccionarIdioma(String imageName) {
+        switch (imageName) {
+            case "Castellano":
+                imageName ="es";
+                break;
+            case "English":
+                imageName ="en";
+                break;
+            case "Català":
+                imageName ="cat";
+                break;
+            default:
+                imageName = "es";
+                break;
+        }
+        System.out.println(imageName);
+    }
     public void selecotorMundo(ActionEvent actionEvent) {
         mundoSeleccionadoName = seleccionarMundo.getValue();
 
@@ -157,11 +188,11 @@ public class PantallaInicialController extends PrimaryStageControler implements 
         recursosList2.add(new Recursos(4, 3));
         recursosList2.add(new Recursos(5, 1));
         recursosList2.add(new Recursos(6, 0));
-        new UnidadesPreCargadas(0, "Espadachines", 0, recursosList,0);//se podria poner comida
-        new UnidadesPreCargadas(1, "Lanceros", 0, recursosList,0);
-        new UnidadesPreCargadas(2, "Arqueros", 100, recursosList,0);
-        new UnidadesPreCargadas(3, "Caballeros", 50, recursosList2,0);
-        new UnidadesPreCargadas(4, "Catapultas", 50, recursosList2,5);
+        new UnidadesPreCargadas(0, "Espadachines", 0, recursosList, 0);//se podria poner comida
+        new UnidadesPreCargadas(1, "Lanceros", 0, recursosList, 0);
+        new UnidadesPreCargadas(2, "Arqueros", 100, recursosList, 0);
+        new UnidadesPreCargadas(3, "Caballeros", 50, recursosList2, 0);
+        new UnidadesPreCargadas(4, "Catapultas", 50, recursosList2, 5);
         progresBar.setProgress(50);
         //TODO FIN LEER DESDE LA BD
         Clan clan = new Clan(1, "Los mejores");

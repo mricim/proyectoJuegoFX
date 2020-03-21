@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.*?>
+
+<BorderPane fx:controller="main.resources.MyController" xmlns:fx="http://javafx.com/fxml">
+    <top>
+        <!-- This label's text will be set by the controller -->
+        <Label fx:id="lblTextByController"/>
+    </top>
+    <center>
+        <!-- This label's text will be taken from the bundle automatically -->
+        <Label text="%key2"/>
+        <Label text="%key1"/>
+    </center>
+</BorderPane>

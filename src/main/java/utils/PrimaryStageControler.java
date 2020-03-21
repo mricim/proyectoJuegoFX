@@ -12,9 +12,14 @@ import main.java.Main;
 import main.java.juego.mapas.ciudad.Ciudad;
 
 import java.io.IOException;
+import java.util.Locale;
 import java.util.Map;
+import java.util.ResourceBundle;
 
 public class PrimaryStageControler {
+
+    //
+
     public static String NAME_TEMA;
     //VARIABLES PREDEFINIDAS
     private static Clan clanPrimaryStageController;
