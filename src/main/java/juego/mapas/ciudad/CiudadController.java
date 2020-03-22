@@ -191,6 +191,10 @@ public class CiudadController extends MapasController implements Initializable {
         ScrollPane scrollPane = new ScrollPane(vBox);
         scrollPane.maxWidth(-Infinity);
         scrollPane.prefWidth(220);
+
+        scrollPane.setMaxWidth(300);
+        scrollPane.setPrefWidth(300);
+
         scrollPane.setHbarPolicy(NEVER);
         //scrollPane.()BorderPane.alignment="CENTER"
 
@@ -223,7 +227,7 @@ public class CiudadController extends MapasController implements Initializable {
         imageViewPropio.setPickOnBounds(true);
         imageViewPropio.setPreserveRatio(true);
         childrenVBox.add(imageViewPropio);
-        if (edificioQueSaleEnMenu.getId() == 0) {
+        if (edificioQueSaleEnMenu.getId() != 0) {
             Label nivelEdificioPropio = new Label("Nivel: " + edificioQueSaleEnMenu.getNivel());
             nivelEdificioPropio.setTextAlignment(CENTER);
             nivelEdificioPropio.setAlignment(Pos.CENTER);
@@ -248,14 +252,14 @@ public class CiudadController extends MapasController implements Initializable {
                 if (tipo != 0) {// System.out.println("NO GENERADOR: " + edificioQueEstaEnElMapa.getId());
                     printBoton(childrenFlowPane, tipo);// NO GENERA RECURSOS
                 } else {//System.out.println("GENERADOR: " + edificioQueEstaEnElMapa.getId());
-                    printRecursosEdificios(borderPane,childrenFlowPane, edificioQueSaleEnMenu.getRecursosProductores().entrySet(), 1, edificioQueEstaEnElMapa, flowPaneRecuros);//Ponemos las barras de los selectores
+                    printRecursosEdificios(borderPane, childrenFlowPane, edificioQueSaleEnMenu.getRecursosProductores().entrySet(), 1, edificioQueEstaEnElMapa, flowPaneRecuros);//Ponemos las barras de los selectores
                 }
             } else {
-                printRecursosEdificios(borderPane,childrenFlowPane, edificioQueSaleEnMenu.getRecursosProductores().entrySet(), 1, null, flowPaneRecuros);
+                printRecursosEdificios(borderPane, childrenFlowPane, edificioQueSaleEnMenu.getRecursosProductores().entrySet(), 1, null, flowPaneRecuros);
             }
-            printRecursosEdificios(borderPane,childrenFlowPane, edificioQueSaleEnMenu.getRecursosAlmacen().entrySet(), 2, null, flowPaneRecuros);
+            printRecursosEdificios(borderPane, childrenFlowPane, edificioQueSaleEnMenu.getRecursosAlmacen().entrySet(), 2, null, flowPaneRecuros);
             if (tipoDeBoton == 1 || tipoDeBoton == 2) {
-                printRecursosEdificios(borderPane,childrenFlowPane, edificioQueSaleEnMenu.getRecursosBuild().entrySet(), 3, null, flowPaneRecuros);
+                printRecursosEdificios(borderPane, childrenFlowPane, edificioQueSaleEnMenu.getRecursosBuild().entrySet(), 3, null, flowPaneRecuros);
             }
 
 
@@ -347,13 +351,19 @@ public class CiudadController extends MapasController implements Initializable {
             case 2:
                 button.setText("Entrenar nuevos Unidades");
                 button.setOnMouseClicked(e -> {
-                    createMenuLeftSpecial(borderPane, flowPaneRecuros, 0);
+                    createMenuLeftSpecial(borderPane, flowPaneRecuros, 2);
                 });
                 break;
             case 3:
                 button.setText("Construir maquinaria de asedio");
                 button.setOnMouseClicked(e -> {
-                    createMenuLeftSpecial(borderPane, flowPaneRecuros, 1);
+                    createMenuLeftSpecial(borderPane, flowPaneRecuros, 3);
+                });
+                break;
+            case 4:
+                button.setText("Comerciar");
+                button.setOnMouseClicked(e -> {
+                    createMenuLeftSpecial(borderPane, flowPaneRecuros, 4);
                 });
                 break;
         }
@@ -367,11 +377,14 @@ public class CiudadController extends MapasController implements Initializable {
     private static void createMenuLeftSpecial(BorderPane borderPane, FlowPane flowPaneRecuros, int i) {
         List<VBox> vBoxList = new ArrayList<>();
         switch (i) {
-            case 0:
+            case 2:
                 vBoxList.add(cajaCrearUnidades(listaSoldadosPreCargada, 0, borderPane, flowPaneRecuros));//El que tenemos puesto
                 break;
-            case 1:
+            case 3:
                 vBoxList.add(cajaCrearUnidades(listaSoldadosPreCargada, 5, borderPane, flowPaneRecuros));//El que tenemos puesto
+                break;
+            case 4:
+                vBoxList.add(cajaCrearUnidades(listaSoldadosPreCargada, 4, borderPane, flowPaneRecuros));//El que tenemos puesto//TODO // PUERTO , COMERCIAR
                 break;
         }
         rellenador(borderPane, vBoxList);
@@ -626,7 +639,7 @@ public class CiudadController extends MapasController implements Initializable {
         childrenFlowPane.add(separator3);
     }
 
-    private static void printRecursosEdificios(BorderPane borderPane,ObservableList<Node> childrenFlowPane, Set<Map.Entry<Integer, Recursos>> recursosEdificio, int produce_Almacena_Cuesta_Resto, Edificio edificioSlider, FlowPane flowPaneRecuros) {
+    private static void printRecursosEdificios(BorderPane borderPane, ObservableList<Node> childrenFlowPane, Set<Map.Entry<Integer, Recursos>> recursosEdificio, int produce_Almacena_Cuesta_Resto, Edificio edificioSlider, FlowPane flowPaneRecuros) {
         boolean paso0 = false;
         for (Map.Entry<Integer, Recursos> recurso : recursosEdificio) {
             Recursos recursoValor = recurso.getValue();
@@ -682,7 +695,7 @@ public class CiudadController extends MapasController implements Initializable {
                                     recursoAQuitar.addCantidad(number);
                                     edificioSlider.getTrabajadoresNecesarios().get(recursoValor.getId()).addCantidad(number);
                                     recursosMenu(flowPaneRecuros);
-                                }else {
+                                } else {
                                     borderPane.setLeft(null);
                                 }
                             }

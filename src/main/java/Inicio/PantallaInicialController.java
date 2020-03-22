@@ -149,12 +149,13 @@ public class PantallaInicialController extends PrimaryStageControler implements 
         //1=NewCiudad
         //2=CreaSoldados
         //3=CreaMaquinas
-        new EdificiosPreCargados(0, false, false, 1, 0, 0, -1, "parcela-Construible", "Descripción del edificio que sera mas larga que el nombre del edificio", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);//NO MEJORABLE
+        new EdificiosPreCargados(0, false, false, 1, 0, 0, 0, "parcela-Construible", "Descripción del edificio que sera mas larga que el nombre del edificio", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);//NO MEJORABLE
         new EdificiosPreCargados(1, false, false, 1, 0, -1, 0, "Castillo", "Descripción del edificio que sera mas larga que el nombre del edificio", 99, 99, 99, 99, 0, 0, 0, 0, 0, 0, 10, 1, 1000, 1000, 1000, 1000, 100);
         new EdificiosPreCargados(1, false, false, 1, 1, 0, 0, "Castillo", "Descripción 1_1", 99, 99, 99, 99, 10, 0, 1000, 500, 0, 0, 10, 1, 1000, 1000, 1000, 1000, 200);
         new EdificiosPreCargados(1, false, false, 1, 2, 1, 0, "Castillo", "X", 99, 99, 99, 99, 10, 1000, 1000, 1000, 1000, 0, 10, 1, 1000, 1000, 1000, 1000, 300);
-        new EdificiosPreCargados(2, false, false, 2, 0, 0, -1, "Muralla", "XXXXXXXXXXX", 99, 99, 99, 20, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
-        new EdificiosPreCargados(2, false, false, 2, 1, 0, -1, TRADUCCIONES.getString("muralla"), "XXXXXXXXXXX", 99, 99, 99, 20, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+        new EdificiosPreCargados(2, false, false, 2, 0, 0, 0, "Muralla", "XXXXXXXXXXX", 99, 99, 99, 20, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+        new EdificiosPreCargados(2, false, false, 2, 1, 0, 0, TRADUCCIONES.getString("muralla"), "XXXXXXXXXXX", 99, 99, 99, 20, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+        new EdificiosPreCargados(3, false, true, 1, 0, 0, 4, "Puerto", "PuertoDeLaCiudad", 99, 99, 99, 20, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
         progresBar.setProgress(20);
         new EdificiosPreCargados(10, true, true, 2, 0, -1, 0, "Almacen", "XXXXXXXXXXX", 99, 19, 25, 30, 10, 0, 0, 0, 0, 0, 0, 0, 1000, 1000, 1000, 1000, 1000);
         new EdificiosPreCargados(11, true, true, 1, 0, 0, 0, "Centro cientifico", "NONE", 99, 99, 99, 20, 10, 0, 10, 0, 0, 0, 0, 50, 0, 0, 0, 0, 0);
@@ -163,6 +164,7 @@ public class PantallaInicialController extends PrimaryStageControler implements 
         new EdificiosPreCargados(13, true, true, 1, 0, 0, 1, "Palacio", "NONE", 99, 99, 99, 20, 10, 10, 10, 10, 10, 10, 10, 50, 0, 0, 0, 0, 0);
         new EdificiosPreCargados(14, true, true, 1, 0, 1, 2, "Cuartel", "Crea soldados", 99, 99, 99, 20, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
         new EdificiosPreCargados(15, true, true, 1, 0, 2, 3, "Maquinas de guerra", "Crear maquinas de guerra", 99, 99, 99, 20, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+        new EdificiosPreCargados(16, true, true, 1, 0, 0, 0, "Taberna", "PuertoDeLaCiudad", 99, 99, 99, 20, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
         progresBar.setProgress(30);
         List<Recursos> recursosList = new ArrayList<>();
         recursosList.add(new Recursos(0, 0));

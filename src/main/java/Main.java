@@ -79,9 +79,9 @@ public class Main extends Application {
     }
 
     public static void main(String[] args) {
+        listaIdiomasPath.add("Català$##$flags/cat");
         listaIdiomasPath.add("Castellano$##$flags/es");
         listaIdiomasPath.add("English$##$flags/en");
-        listaIdiomasPath.add("Català$##$flags/cat");
         if (new File(pathImagesExternal).exists()) {
             Temas.PATH_USE = pathImagesExternal;
         } else {
@@ -89,7 +89,6 @@ public class Main extends Application {
         }
 
 
-        System.out.println(System.getProperty("user.language"));
         String nameLanguage = Traductor.getLanguageEquals(System.getProperty("user.language"), Main.class);
         if (nameLanguage != null) {
             LOCALE = new Locale(nameLanguage);
