@@ -17,7 +17,8 @@ import java.util.Map;
 import java.util.ResourceBundle;
 
 public class PrimaryStageControler {
-
+    public static Locale LOCALE;
+    public static ResourceBundle TRADUCCIONES;
     //
 
     public static String NAME_TEMA;
@@ -65,7 +66,7 @@ public class PrimaryStageControler {
     }
 
 
-    public void cambiarNombreStage(String nuevoNombre) {
+    public static void cambiarNombreStage(String nuevoNombre) {
         if (nuevoNombre == null) {
             stagePrimaryStageController.setTitle("Nombre Aplicación");
         } else {
@@ -121,7 +122,35 @@ public class PrimaryStageControler {
         if (primaryStage.isMaximized()) {
             setMaximized = true;
         }
+        cambiarNombreStage(TRADUCCIONES.getString("nombreDelJuego"));
+        primaryStage.setMaximized(setMaximized);//Pone el Stage en maximizado
+        if (oldStageOwner != null) {
+            primaryStage.showAndWait();
+        }
+    }
 
+    public static void reloadLanguage(Stage oldStageOwner, Stage primaryStage, String rute, boolean setMaximized, Locale locale) throws IOException {
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(Main.class.getResource(rute));
+
+        if (locale != null) {
+            LOCALE = locale;
+            TRADUCCIONES = ResourceBundle.getBundle(TRADUCCIONES.getBaseBundleName(), LOCALE);
+        }
+        loader.setResources(TRADUCCIONES);
+
+        Parent root = loader.load();
+        if (oldStageOwner != null) {
+            primaryStage.initOwner(oldStageOwner);
+            Scene scene = new Scene(root);
+            primaryStage.setScene(scene);
+        } else {
+            primaryStage.getScene().setRoot(root);
+        }
+        if (primaryStage.isMaximized()) {
+            setMaximized = true;
+        }
+        cambiarNombreStage(TRADUCCIONES.getString("nombreDelJuego"));
         primaryStage.setMaximized(setMaximized);//Pone el Stage en maximizado
         if (oldStageOwner != null) {
             primaryStage.showAndWait();

@@ -21,7 +21,7 @@ public class CustomTextField extends TextField {
     }
 
     //
-    public void setBindSlider(SliderCustom slider) {
+    public void setBindSlider(CustomSlider slider) {
         this.textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {

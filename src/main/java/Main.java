@@ -6,19 +6,22 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import main.java.Inicio.PantallaInicialController;
-import main.java.utils.PrimaryStageControler;
+import main.java.temas.Temas;
+import main.java.utils.traductor.Traductor;
 
+import java.io.File;
 import java.net.URL;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
+import static main.java.temas.Temas.pathImagesExternal;
+import static main.java.utils.PrimaryStageControler.*;
+import static main.java.utils.traductor.Traductor.listaIdiomasPath;
+
 
 public class Main extends Application {
     public static final String RUTEINTERNAL = System.getProperty("user.dir") + "/src/main/";
-
-
-    private static Locale locale = new Locale("en");
-    public static ResourceBundle TRADUCCIONES = ResourceBundle.getBundle("main.resources.traductions.UIResources", locale);
+    public static String pathImagesInternal = Main.RUTEINTERNAL + "resources/images/";
 
     /*
     private static final SessionFactory ourSessionFactory;
@@ -41,7 +44,7 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         FXMLLoader loader = new FXMLLoader();
-        URL url = getClass().getResource(PrimaryStageControler.getPathToFXML(PantallaInicialController.class));
+        URL url = getClass().getResource(getPathToFXML(PantallaInicialController.class));
         loader.setLocation(url);
         loader.setControllerFactory((Class<?> type) -> {
             try {
@@ -67,7 +70,7 @@ public class Main extends Application {
         });*/
         loader.setResources(TRADUCCIONES);
         Parent root = loader.load();
-        primaryStage.setTitle("Nombre del juego");
+        primaryStage.setTitle(TRADUCCIONES.getString("nombreDelJuego"));
         Scene scene = new Scene(root);
         //scene.getStylesheets().add("main.resources/style/styles.css");
         primaryStage.setScene(scene);
@@ -76,6 +79,25 @@ public class Main extends Application {
     }
 
     public static void main(String[] args) {
+        listaIdiomasPath.add("Castellano$##$flags/es");
+        listaIdiomasPath.add("English$##$flags/en");
+        listaIdiomasPath.add("Català$##$flags/cat");
+        if (new File(pathImagesExternal).exists()) {
+            Temas.PATH_USE = pathImagesExternal;
+        } else {
+            Temas.PATH_USE = pathImagesInternal;
+        }
+
+
+        System.out.println(System.getProperty("user.language"));
+        String nameLanguage = Traductor.getLanguageEquals(System.getProperty("user.language"), Main.class);
+        if (nameLanguage != null) {
+            LOCALE = new Locale(nameLanguage);
+        } else {
+            LOCALE = new Locale("en");
+        }
+        TRADUCCIONES = ResourceBundle.getBundle("main.resources.traductions.UIResources", LOCALE);
+
         /*
         final Session session = getSession();
         try {

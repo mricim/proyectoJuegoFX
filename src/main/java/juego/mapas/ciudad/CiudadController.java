@@ -24,7 +24,7 @@ import main.java.juego.mapas.Recursos;
 import main.java.juego.mapas.ciudad.contenidoCiudad.Edificio;
 import main.java.juego.mapas.pelea.*;
 import main.java.utils.tagsFXML.CustomTextField;
-import main.java.utils.tagsFXML.SliderCustom;
+import main.java.utils.tagsFXML.CustomSlider;
 
 import java.net.URL;
 import java.util.*;
@@ -483,7 +483,7 @@ public class CiudadController extends MapasController implements Initializable {
                 if (conters > 0) {
                     label2.setTextFill(Color.GREEN);
                 }
-                SliderCustom slider = new SliderCustom(0, maxSoldados, 0);
+                CustomSlider slider = new CustomSlider(0, maxSoldados, 0);
                 slider.setmargin(25, 0, 0, 0);
                 slider.valueProperty().addListener(new ChangeListener<Number>() {
                     @Override
@@ -669,7 +669,7 @@ public class CiudadController extends MapasController implements Initializable {
                     int maxPoblacion = Math.min(poblacionMaximaQueSePuedePoner, pobacionCiudad + poblacionPuesta);
                     CustomTextField customTextField = new CustomTextField(String.valueOf(poblacionPuesta), true, maxPoblacion);
                     Label labelMax = new Label(" /" + poblacionMaximaQueSePuedePoner);
-                    SliderCustom slider = new SliderCustom(0, maxPoblacion, poblacionPuesta);
+                    CustomSlider slider = new CustomSlider(0, maxPoblacion, poblacionPuesta);
                     slider.setPadding(new Insets(25, 5, 0, 0));
                     slider.valueProperty().addListener(new ChangeListener<Number>() {
                         @Override

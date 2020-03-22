@@ -7,10 +7,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import static main.java.Main.pathImagesInternal;
+
 public class Temas {
     private static boolean filesIsExternal;
     public static String pathImagesExternal = System.getProperty("user.dir").replace("proyectoJuegoFX", "") + "/videoJuegoresources/images/";
-    private static String pathImagesInternal = Main.RUTEINTERNAL + "resources/images/";
+
 
     private static String pathImagesTemaInternal = pathImagesInternal + "temas/";
     private static String pathImagesTemaExternal = pathImagesExternal + "temas/";

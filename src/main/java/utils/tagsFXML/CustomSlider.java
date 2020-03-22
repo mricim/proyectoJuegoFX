@@ -5,9 +5,9 @@ import javafx.scene.control.Slider;
 
 import javax.swing.plaf.PanelUI;
 
-public class SliderCustom extends Slider {
+public class CustomSlider extends Slider {
 
-    public SliderCustom(int min, int max, int value) {
+    public CustomSlider(int min, int max, int value) {
         super(min, max, value);
         int counterX;
         if (max < 1) {

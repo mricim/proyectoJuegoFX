@@ -29,7 +29,7 @@ public class CustomComboBoxImager extends ListCell<String> {
     }
 
     private static ImageView getImageView(String imageName) {
-        ImageView imageView = null;
+        ImageView imageView;
         switch (imageName) {
             case "Castellano":
                 imageName ="es";

@@ -45,7 +45,7 @@ public class CallImages {
         }
     }
 
-    private String searchFiles(String posibleRute, String name) {
+    private static String searchFiles(String posibleRute, String name) {
         File filex = new File(posibleRute);
         File[] list = filex.listFiles();
         for (File file : list) {
@@ -54,7 +54,7 @@ public class CallImages {
                 return nameFile.split("\\.", 2)[1];
             }
         }
-        System.err.println("Error: CallImages (Extension not found) = " + posibleRute+" "+name);
+        System.err.println("Error: CallImages (Extension not found) = " + posibleRute + " " + name);
         return "";
     }
 
@@ -86,5 +86,35 @@ public class CallImages {
             }
         }
         return ERRORIMAGE;
+    }
+
+    //
+
+    public static Image getImageNotSaveNOTHEMA(String rute, String name) {
+        Image image = null;
+        String ruteUse;
+        ruteUse = PATH_USE + rute + name;
+        try {
+            try {
+                File file = new File(ruteUse + ".png");
+                if (!file.exists()) {
+                    throw new Exception("nove");
+                }
+                image = new Image(file.toURI().toString());
+                //System.out.println(ruteUse + ".png");
+
+            } catch (Exception e) {
+                String format = searchFiles(PATH_USE + rute, name);
+                File file = new File(ruteUse + "." + format);
+                if (!file.exists()) {
+                    throw new Exception("nove");
+                }
+                image = new Image(file.toURI().toString());
+                System.out.println("catch - " + file.toURI().toString());
+            }
+        } catch (Exception e) {
+            System.err.println("Error: CallImages (Image not found) = " + ruteUse);
+        }
+        return image;
     }
 }

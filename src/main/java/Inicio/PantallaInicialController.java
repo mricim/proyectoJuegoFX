@@ -17,11 +17,13 @@ import main.java.juego.mapas.ciudad.CiudadController;
 import main.java.juego.mapas.ciudad.EdificiosPreCargados;
 import main.java.jugadores.iniciarSession.IniciarSessionController;
 import main.java.temas.Temas;
+import main.java.utils.traductor.Traductor;
 
 import java.net.URL;
 import java.util.*;
 
 import static main.java.temas.Temas.arrayListTemas;
+import static main.java.utils.traductor.Traductor.listaIdiomasPath;
 
 
 public class PantallaInicialController extends PrimaryStageControler implements Initializable {
@@ -40,18 +42,15 @@ public class PantallaInicialController extends PrimaryStageControler implements 
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
+
 //https://stackoverflow.com/questions/32362802/javafx-combobox-cells-disappear-when-clicked
-        ComboBox<String> comboBox2 = new ComboBox<>();
-        comboBox2.getItems().addAll("Castellano", "Català", "English");
-        //Set the cellFactory property
-        comboBox2.setCellFactory(listview -> new CustomComboBoxImager());
-        // Set the buttonCell property
-        comboBox2.setButtonCell(new CustomComboBoxImager());
-        comboBox2.getSelectionModel().selectedItemProperty().addListener((options, oldValue, newValue) -> {
-            seleccionarIdioma(newValue);
+        ComboBox<String> comboBox = Traductor.traduccciones(listaIdiomasPath,PantallaInicialController.class);
+        comboBox.getSelectionModel().selectedItemProperty().addListener((options, oldValue, newValue) -> {
+                    seleccionarIdioma(newValue);
                 }
         );
-        seleccionarIdioma.getChildren().add(comboBox2);
+        seleccionarIdioma.getChildren().add(comboBox);
 
 //
 
@@ -61,8 +60,17 @@ public class PantallaInicialController extends PrimaryStageControler implements 
         idJugadorTemp = 1;//TODO BORRAR
     }
 
+    private void seleccionarIdioma(String imageName) {
+        try {
+            reloadLanguage(null, stagePrimaryStageController, PantallaInicialController.getPathToFXML(PantallaInicialController.class), false, new Locale(imageName.substring(1 + imageName.lastIndexOf("/"))));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     boolean sesioniniciada = false;
     boolean mundoSeleccionado = false;
+
     String mundoSeleccionadoName = null;
 
     public void iniciarSession() {
@@ -87,23 +95,7 @@ public class PantallaInicialController extends PrimaryStageControler implements 
 
         iniciarJuegoEnable();
     }
-    private void seleccionarIdioma(String imageName) {
-        switch (imageName) {
-            case "Castellano":
-                imageName ="es";
-                break;
-            case "English":
-                imageName ="en";
-                break;
-            case "Català":
-                imageName ="cat";
-                break;
-            default:
-                imageName = "es";
-                break;
-        }
-        System.out.println(imageName);
-    }
+
     public void selecotorMundo(ActionEvent actionEvent) {
         mundoSeleccionadoName = seleccionarMundo.getValue();
 
@@ -162,7 +154,7 @@ public class PantallaInicialController extends PrimaryStageControler implements 
         new EdificiosPreCargados(1, false, false, 1, 1, 0, 0, "Castillo", "Descripción 1_1", 99, 99, 99, 99, 10, 0, 1000, 500, 0, 0, 10, 1, 1000, 1000, 1000, 1000, 200);
         new EdificiosPreCargados(1, false, false, 1, 2, 1, 0, "Castillo", "X", 99, 99, 99, 99, 10, 1000, 1000, 1000, 1000, 0, 10, 1, 1000, 1000, 1000, 1000, 300);
         new EdificiosPreCargados(2, false, false, 2, 0, 0, -1, "Muralla", "XXXXXXXXXXX", 99, 99, 99, 20, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
-        new EdificiosPreCargados(2, false, false, 2, 1, 0, -1, "Muralla", "XXXXXXXXXXX", 99, 99, 99, 20, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+        new EdificiosPreCargados(2, false, false, 2, 1, 0, -1, TRADUCCIONES.getString("muralla"), "XXXXXXXXXXX", 99, 99, 99, 20, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
         progresBar.setProgress(20);
         new EdificiosPreCargados(10, true, true, 2, 0, -1, 0, "Almacen", "XXXXXXXXXXX", 99, 19, 25, 30, 10, 0, 0, 0, 0, 0, 0, 0, 1000, 1000, 1000, 1000, 1000);
         new EdificiosPreCargados(11, true, true, 1, 0, 0, 0, "Centro cientifico", "NONE", 99, 99, 99, 20, 10, 0, 10, 0, 0, 0, 0, 50, 0, 0, 0, 0, 0);
