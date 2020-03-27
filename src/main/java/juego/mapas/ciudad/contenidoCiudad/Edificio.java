@@ -2,17 +2,20 @@ package main.java.juego.mapas.ciudad.contenidoCiudad;
 
 import javafx.scene.image.Image;
 import main.java.juego.mapas.Recursos;
+import main.java.juego.mapas.RecursosPrecargados;
 import main.java.utils.Posicion;
 import main.java.juego.mapas.ciudad.Ciudad;
 import main.java.juego.mapas.ciudad.EdificiosPreCargados;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.TreeMap;
 
 
 public class Edificio extends Posicion implements Cloneable {
     private int id;//GUARDAR
     private int nivel;//GUARDAR
-    TreeMap<Integer, Recursos> trabajadoresNecesarios = new TreeMap<>();//GUARDAR
+    ArrayList<Recursos> trabajadoresNecesarios = new ArrayList<>();//GUARDAR
     private EdificiosPreCargados edificiosPreCargado;
 
 
@@ -21,9 +24,11 @@ public class Edificio extends Posicion implements Cloneable {
         this.id = edificioPreCargado.getId();
         this.nivel = edificioPreCargado.getNivel();
         this.edificiosPreCargado = edificioPreCargado;
-        for (Recursos recursos : edificioPreCargado.getRecursosProductores().values()) {
-            int recursoId = recursos.getId();
-            trabajadoresNecesarios.put(recursoId, new Recursos(recursoId, recursos.getCantidad()));
+
+        if (edificioPreCargado.getRecursosCosteXmin() != null) {
+            for (RecursosPrecargados recursos : edificioPreCargado.getRecursosCosteXmin().keySet()) {
+                trabajadoresNecesarios.add(new Recursos(recursos, 0));
+            }
         }
 
 
@@ -49,10 +54,9 @@ public class Edificio extends Posicion implements Cloneable {
     }
 
 
-    public TreeMap<Integer, Recursos> getTrabajadoresNecesarios() {
+    public ArrayList<Recursos> getTrabajadoresNecesarios() {
         return trabajadoresNecesarios;
     }
-
 
     public EdificiosPreCargados getEdificiosPreCargado() {
         return edificiosPreCargado;

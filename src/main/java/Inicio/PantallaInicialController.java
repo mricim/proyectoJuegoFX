@@ -45,7 +45,7 @@ public class PantallaInicialController extends PrimaryStageControler implements 
 
 
 //https://stackoverflow.com/questions/32362802/javafx-combobox-cells-disappear-when-clicked
-        ComboBox<String> comboBox = Traductor.traduccciones(listaIdiomasPath,PantallaInicialController.class);
+        ComboBox<String> comboBox = Traductor.traduccciones(listaIdiomasPath, PantallaInicialController.class);
         comboBox.getSelectionModel().selectedItemProperty().addListener((options, oldValue, newValue) -> {
                     seleccionarIdioma(newValue);
                 }
@@ -135,53 +135,140 @@ public class PantallaInicialController extends PrimaryStageControler implements 
 
     private void callbd() {
         //TODO LEER DESDE LA BD
-        new RecursosPrecargados(0, "Oro", false, null);
-        new RecursosPrecargados(1, "Madera", true, 5);
-        new RecursosPrecargados(2, "Piedra", true, 5);
-        new RecursosPrecargados(3, "Comida", true, 5);
-        new RecursosPrecargados(4, "Hierro", true, 5);
-        new RecursosPrecargados(5, "Poblacion", false, null);
-        new RecursosPrecargados(6, "Felicidad", false, null);
-        new RecursosPrecargados(7, "investigacion", false, null);
+        RecursosPrecargados oroPre = new RecursosPrecargados(0, TRADUCCIONES.getString("recurso.oro"), true);
+        RecursosPrecargados maderaPre = new RecursosPrecargados(1, TRADUCCIONES.getString("recurso.madera"), true);
+        RecursosPrecargados piedraPre = new RecursosPrecargados(2, TRADUCCIONES.getString("recurso.piedra"), true);
+        RecursosPrecargados comidaPre = new RecursosPrecargados(3, TRADUCCIONES.getString("recurso.comida"), true);
+        RecursosPrecargados hierroPre = new RecursosPrecargados(4, TRADUCCIONES.getString("recurso.hierro"), true);
+        RecursosPrecargados poblacionPre = new RecursosPrecargados(5, TRADUCCIONES.getString("recurso.poblacion"), false);
+        RecursosPrecargados felicidadPre = new RecursosPrecargados(6, TRADUCCIONES.getString("recurso.felicidad"), true);
+        RecursosPrecargados investigacionPre = new RecursosPrecargados(7, TRADUCCIONES.getString("recurso.investigacion"), true);
+        RecursosPrecargados municionPre = new RecursosPrecargados(8, "municion", true);
         progresBar.setProgress(15);
+        //TODO MENUS ESPECIALES
         //-1=noDanNiGeneranNada
         //0=EdificioNormal
         //1=NewCiudad
         //2=CreaSoldados
         //3=CreaMaquinas
-        new EdificiosPreCargados(0, false, false, 1, 0, 0, 0, "parcela-Construible", "Descripción del edificio que sera mas larga que el nombre del edificio", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);//NO MEJORABLE
-        new EdificiosPreCargados(1, false, false, 1, 0, -1, 0, "Castillo", "Descripción del edificio que sera mas larga que el nombre del edificio", 99, 99, 99, 99, 0, 0, 0, 0, 0, 0, 10, 1, 1000, 1000, 1000, 1000, 100);
-        new EdificiosPreCargados(1, false, false, 1, 1, 0, 0, "Castillo", "Descripción 1_1", 99, 99, 99, 99, 10, 0, 1000, 500, 0, 0, 10, 1, 1000, 1000, 1000, 1000, 200);
-        new EdificiosPreCargados(1, false, false, 1, 2, 1, 0, "Castillo", "X", 99, 99, 99, 99, 10, 1000, 1000, 1000, 1000, 0, 10, 1, 1000, 1000, 1000, 1000, 300);
-        new EdificiosPreCargados(2, false, false, 2, 0, 0, 0, "Muralla", "XXXXXXXXXXX", 99, 99, 99, 20, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
-        new EdificiosPreCargados(2, false, false, 2, 1, 0, 0, TRADUCCIONES.getString("muralla"), "XXXXXXXXXXX", 99, 99, 99, 20, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
-        new EdificiosPreCargados(3, false, true, 1, 0, 0, 4, "Puerto", "PuertoDeLaCiudad", 99, 99, 99, 20, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+
+        //RECURSOS - CONSTRUIR
+        ArrayList<Recursos> recursosBuild = new ArrayList<>();
+        recursosBuild.add( new Recursos(oroPre, 5));
+        recursosBuild.add( new Recursos(maderaPre, 5));
+        recursosBuild.add( new Recursos(piedraPre, 5));
+        recursosBuild.add( new Recursos(comidaPre, 5));
+        recursosBuild.add( new Recursos(hierroPre, 5));
+        recursosBuild.add( new Recursos(poblacionPre, 5));
+        //RECURSOS -Productores
+        ArrayList<Recursos> recursosProductores = new ArrayList<>();
+        recursosProductores.add( new Recursos(oroPre, 10));
+        recursosProductores.add( new Recursos(maderaPre, 10));
+        recursosProductores.add( new Recursos(piedraPre, 10));
+        recursosProductores.add( new Recursos(comidaPre, 10));
+        recursosProductores.add( new Recursos(hierroPre, 10));
+        recursosProductores.add( new Recursos(poblacionPre, 10));
+        recursosProductores.add( new Recursos(felicidadPre, 10));
+        recursosProductores.add( new Recursos(investigacionPre, 10));
+        //RECURSOS - COSTE X MIN
+        ArrayList<Recursos> recursosCosteXmin5 = new ArrayList<>();
+        recursosCosteXmin5.add(new Recursos(poblacionPre, 20));
+        TreeMap<RecursosPrecargados, ArrayList<Recursos>> recursosCosteXmin = new TreeMap<>();
+        recursosCosteXmin.put(maderaPre, recursosCosteXmin5);
+        recursosCosteXmin.put(piedraPre, recursosCosteXmin5);
+        recursosCosteXmin.put(comidaPre, recursosCosteXmin5);
+        recursosCosteXmin.put(hierroPre, recursosCosteXmin5);
+
+        ArrayList<Recursos> recursosCosteXmin5V2 = new ArrayList<>();
+        recursosCosteXmin5V2.add(new Recursos(poblacionPre, 20));
+        recursosCosteXmin5V2.add(new Recursos(comidaPre, 15));
+        TreeMap<RecursosPrecargados, ArrayList<Recursos>> recursosCosteXminV2 = new TreeMap<>();
+        recursosCosteXminV2.put(maderaPre, recursosCosteXmin5V2);
+        recursosCosteXminV2.put(piedraPre, recursosCosteXmin5V2);
+        recursosCosteXminV2.put(comidaPre, recursosCosteXmin5V2);
+        recursosCosteXminV2.put(hierroPre, recursosCosteXmin5V2);
+        //RECURSOS -ALMACEN
+        ArrayList<Recursos> recursosAlmacen = new ArrayList<>();
+        recursosAlmacen.add( new Recursos(oroPre, 31));
+        recursosAlmacen.add( new Recursos(maderaPre, 31));
+        recursosAlmacen.add( new Recursos(piedraPre, 31));
+        recursosAlmacen.add( new Recursos(comidaPre, 31));
+        recursosAlmacen.add( new Recursos(hierroPre, 31));
+        recursosAlmacen.add( new Recursos(poblacionPre, 31));
+        recursosAlmacen.add( new Recursos(felicidadPre, 31));
+        recursosAlmacen.add( new Recursos(investigacionPre, 31));
+
+        new EdificiosPreCargados(0, 0, false, false, 0, 0, 0, "parcela-Construible", "Descripción del edificio que sera mas larga que el nombre del edificio", null, null, null, null);//NO MEJORABLE
+
+        new EdificiosPreCargados(1, 0, false, false, 1, 0, 0, "Castillo", "Descripción del edificio que sera mas larga que el nombre del edificio", recursosBuild, recursosProductores, null, recursosAlmacen);
+        new EdificiosPreCargados(1, 1, false, true, 1, 1, 0, "Castillo", "Descripción 1_1", recursosBuild, recursosProductores, null, recursosAlmacen);
+        new EdificiosPreCargados(1, 2, false, true, 1, 2, 0, "Castillo", "X", recursosBuild, recursosProductores, null, recursosAlmacen);
+
+        new EdificiosPreCargados(2, 0, false, false, 2, 0, 0, TRADUCCIONES.getString("muralla"), "XXXXXXXXXXX", recursosBuild, null, null, null);
+        new EdificiosPreCargados(2, 1, true, true, 2, 1, 0, TRADUCCIONES.getString("muralla"), "XXXXXXXXXXX", recursosBuild, null, null, null);
+        new EdificiosPreCargados(2, 2, true, true, 2, 2, 0, TRADUCCIONES.getString("muralla"), "XXXXXXXXXXX", recursosBuild, null, null, null);
+
+        new EdificiosPreCargados(10, 0, true, true, 0, -1, 0, "Almacen", "XXXXXXXXXXX", recursosBuild, null, null, recursosAlmacen);
+        new EdificiosPreCargados(10, 1, true, true, 0, 0, 0, "Almacen", "XXXXXXXXXXX", recursosBuild, null, null, recursosAlmacen);
+        new EdificiosPreCargados(10, 2, true, true, 0, 1, 0, "Almacen", "XXXXXXXXXXX", recursosBuild, null, null, recursosAlmacen);
+
+        new EdificiosPreCargados(11, 0, true, true, 0, 1, 1, "Palacio", "NONE", recursosBuild, null, null, null);
+        new EdificiosPreCargados(11, 1, true, true, 0, 2, 1, "Palacio", "NONE", recursosBuild, null, null, null);
+        new EdificiosPreCargados(11, 2, true, true, 0, 2, 1, "Palacio", "NONE", recursosBuild, null, null, null);
         progresBar.setProgress(20);
-        new EdificiosPreCargados(10, true, true, 2, 0, -1, 0, "Almacen", "XXXXXXXXXXX", 99, 19, 25, 30, 10, 0, 0, 0, 0, 0, 0, 0, 1000, 1000, 1000, 1000, 1000);
-        new EdificiosPreCargados(11, true, true, 1, 0, 0, 0, "Centro cientifico", "NONE", 99, 99, 99, 20, 10, 0, 10, 0, 0, 0, 0, 50, 0, 0, 0, 0, 0);
-        new EdificiosPreCargados(12, true, true, 2, 0, 0, 0, "Lupas", "XXXXXXXXXXX", 99, 99, 99, 20, 3000, 0, 0, 10, 0, 0, 0, -50, 0, 0, 0, 0, 0);
-        new EdificiosPreCargados(12, true, true, 2, 1, 0, 0, "Lupas", "XXXXXXXXXXX 1", 99, 99, 99, 20, 2000, 200, 10, 10, 10, 10, 10, -50, 0, 0, 0, 0, 0);
-        new EdificiosPreCargados(13, true, true, 1, 0, 0, 1, "Palacio", "NONE", 99, 99, 99, 20, 10, 10, 10, 10, 10, 10, 10, 50, 0, 0, 0, 0, 0);
-        new EdificiosPreCargados(14, true, true, 1, 0, 1, 2, "Cuartel", "Crea soldados", 99, 99, 99, 20, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
-        new EdificiosPreCargados(15, true, true, 1, 0, 2, 3, "Maquinas de guerra", "Crear maquinas de guerra", 99, 99, 99, 20, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
-        new EdificiosPreCargados(16, true, true, 1, 0, 0, 0, "Taberna", "PuertoDeLaCiudad", 99, 99, 99, 20, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+        new EdificiosPreCargados(12, 0, true, true, 0, 0, 0, "Centro Cientifico", "NONE", recursosBuild, recursosProductores, recursosCosteXmin, recursosAlmacen);
+        new EdificiosPreCargados(12, 1, true, true, 0, 0, 0, "Centro Cientifico", "NONE", recursosBuild, recursosProductores, recursosCosteXmin, recursosAlmacen);
+        new EdificiosPreCargados(12, 2, true, true, 0, 0, 0, "Centro Cientifico", "NONE", recursosBuild, recursosProductores, recursosCosteXmin, recursosAlmacen);
+
+        new EdificiosPreCargados(13, 0, true, true, 0, 0, 0, "Cantera", "NONE", recursosBuild, recursosProductores, recursosCosteXmin, recursosAlmacen);
+        new EdificiosPreCargados(13, 1, true, true, 0, 0, 0, "Cantera", "NONE", recursosBuild, recursosProductores, recursosCosteXmin, recursosAlmacen);
+        new EdificiosPreCargados(13, 2, true, true, 0, 0, 0, "Cantera", "NONE", recursosBuild, recursosProductores, recursosCosteXmin, recursosAlmacen);
+
+        new EdificiosPreCargados(14, 0, true, true, 0, 0, 0, "Aserradero", "NONE", recursosBuild, recursosProductores, recursosCosteXmin, recursosAlmacen);
+        new EdificiosPreCargados(14, 1, true, true, 0, 0, 0, "Aserradero", "NONE", recursosBuild, recursosProductores, recursosCosteXmin, recursosAlmacen);
+        new EdificiosPreCargados(14, 2, true, true, 0, 0, 0, "Aserradero", "NONE", recursosBuild, recursosProductores, recursosCosteXmin, recursosAlmacen);
+
+        new EdificiosPreCargados(15, 0, true, true, 0, 0, 0, "Fundicion", "NONE", recursosBuild, recursosProductores, recursosCosteXmin, recursosAlmacen);
+        new EdificiosPreCargados(15, 1, true, true, 0, 0, 0, "Fundicion", "NONE", recursosBuild, recursosProductores, recursosCosteXmin, recursosAlmacen);
+        new EdificiosPreCargados(15, 2, true, true, 0, 0, 0, "Fundicion", "NONE", recursosBuild, recursosProductores, recursosCosteXmin, recursosAlmacen);
+
+        new EdificiosPreCargados(16, 0, true, true, 0, 0, 0, "Granja", "NONE", recursosBuild, recursosProductores, recursosCosteXmin, recursosAlmacen);
+        new EdificiosPreCargados(16, 1, true, true, 0, 0, 0, "Granja", "NONE", recursosBuild, recursosProductores, recursosCosteXmin, recursosAlmacen);
+        new EdificiosPreCargados(16, 2, true, true, 0, 0, 0, "Granja", "NONE", recursosBuild, recursosProductores, recursosCosteXmin, recursosAlmacen);
+
+        new EdificiosPreCargados(17, 0, true, true, 0, 0, 0, "Taberna", "NONE", recursosBuild, recursosProductores, recursosCosteXminV2, recursosAlmacen);
+        new EdificiosPreCargados(17, 1, true, true, 0, 0, 0, "Taberna", "NONE", recursosBuild, recursosProductores, recursosCosteXminV2, recursosAlmacen);
+        new EdificiosPreCargados(17, 2, true, true, 0, 0, 0, "Taberna", "NONE", recursosBuild, recursosProductores, recursosCosteXminV2, recursosAlmacen);
         progresBar.setProgress(30);
+        new EdificiosPreCargados(18, 0, false, false, 0, 0, 4, "Puerto", "NONE", recursosBuild, null, null, null);
+        new EdificiosPreCargados(18, 1, true, true, 0, 0, 4, "Puerto", "NONE", recursosBuild, null, null, null);
+        new EdificiosPreCargados(18, 2, true, true, 0, 0, 4, "Puerto", "NONE", recursosBuild, null, null, null);
+
+        new EdificiosPreCargados(19, 0, true, true, 0, 0, 2, "Cuartel", "NONE", recursosBuild, null, null, null);
+        new EdificiosPreCargados(19, 1, true, true, 0, 0, 2, "Cuartel", "NONE", recursosBuild, null, null, null);
+        new EdificiosPreCargados(19, 2, true, true, 0, 0, 2, "Cuartel", "NONE", recursosBuild, null, null, null);
+
+        new EdificiosPreCargados(20, 0, true, true, 0, 0, 3, "Taller armas de asedio", "NONE", recursosBuild, null, null, null);
+        new EdificiosPreCargados(20, 1, true, true, 0, 0, 3, "Taller armas de asedio", "NONE", recursosBuild, null, null, null);
+        new EdificiosPreCargados(20, 2, true, true, 0, 0, 3, "Taller armas de asedio", "NONE", recursosBuild, null, null, null);
+
+        progresBar.setProgress(40);
         List<Recursos> recursosList = new ArrayList<>();
-        recursosList.add(new Recursos(0, 0));
-        recursosList.add(new Recursos(1, 5));
-        recursosList.add(new Recursos(2, 15));
-        recursosList.add(new Recursos(3, 0));
-        recursosList.add(new Recursos(4, 3));
-        recursosList.add(new Recursos(5, 1));
-        recursosList.add(new Recursos(6, 0));
+        recursosList.add(new Recursos(oroPre, 0));
+        recursosList.add(new Recursos(maderaPre, 5));
+        recursosList.add(new Recursos(piedraPre, 15));
+        recursosList.add(new Recursos(comidaPre, 0));
+        recursosList.add(new Recursos(hierroPre, 3));
+        recursosList.add(new Recursos(felicidadPre, 1));
+        recursosList.add(new Recursos(municionPre, 0));
         List<Recursos> recursosList2 = new ArrayList<>();
-        recursosList2.add(new Recursos(0, 0));
-        recursosList2.add(new Recursos(1, 5));
-        recursosList2.add(new Recursos(2, 15));
-        recursosList2.add(new Recursos(3, 60));
-        recursosList2.add(new Recursos(4, 3));
-        recursosList2.add(new Recursos(5, 1));
-        recursosList2.add(new Recursos(6, 0));
+        recursosList2.add(new Recursos(oroPre, 3));
+        recursosList2.add(new Recursos(maderaPre, 6));
+        recursosList2.add(new Recursos(piedraPre, 65));
+        recursosList2.add(new Recursos(comidaPre, 7));
+        recursosList2.add(new Recursos(hierroPre, 8));
+        recursosList2.add(new Recursos(felicidadPre, 3));
+        recursosList2.add(new Recursos(municionPre, 5));
         new UnidadesPreCargadas(0, "Espadachines", 0, recursosList, 0);//se podria poner comida
         new UnidadesPreCargadas(1, "Lanceros", 0, recursosList, 0);
         new UnidadesPreCargadas(2, "Arqueros", 100, recursosList, 0);

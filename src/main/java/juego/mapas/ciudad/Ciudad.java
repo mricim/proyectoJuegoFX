@@ -8,6 +8,7 @@ import main.java.jugadores.Clan;
 import main.java.jugadores.Jugador;
 
 
+import java.util.ArrayList;
 import java.util.TreeMap;
 
 import static main.java.jugadores.Jugador.*;
@@ -17,7 +18,7 @@ public class Ciudad extends Posicion {
     private TreeMap<String, Edificio> listaPosicionesEdificios = new TreeMap<>();
     private int idCiudad;
     private String nameCity;
-    private TreeMap<Integer, Recursos> recursosTreeMap = new TreeMap<>();//TODO COMPROBAR QUE NO PUEDE PASAR DEL LIMITE DE CAPACIDAD DE LA CIUDAD
+    private ArrayList<Recursos> recursosTreeMap = new ArrayList<>();//TODO COMPROBAR QUE NO PUEDE PASAR DEL LIMITE DE CAPACIDAD DE LA CIUDAD
     private int nivelCiudad;
     private TreeMap<Integer, Unidades> listSoldadosCity = new TreeMap<>();
 
@@ -26,19 +27,19 @@ public class Ciudad extends Posicion {
         this.idCiudad = lastId++;
         this.nameCity = nameCity;
         this.nivelCiudad = nivelCiudad;
-        recursosTreeMap.put(0, new Recursos(0, oro));
+        recursosTreeMap.add( new Recursos(0, oro));
 //        this.oro = oro;
-        recursosTreeMap.put(1, new Recursos(1, madera));
+        recursosTreeMap.add( new Recursos(1, madera));
 //        this.madera = madera;
-        recursosTreeMap.put(2, new Recursos(2, piedra));
+        recursosTreeMap.add( new Recursos(2, piedra));
 //        this.piedra = piedra;
-        recursosTreeMap.put(3, new Recursos(3, comida));
+        recursosTreeMap.add( new Recursos(3, comida));
 //        this.comida = comida;
-        recursosTreeMap.put(4, new Recursos(4, hierro));
+        recursosTreeMap.add( new Recursos(4, hierro));
 //        this.hierro = hierro;
-        recursosTreeMap.put(5, new Recursos(5, poblacion));
+        recursosTreeMap.add( new Recursos(5, poblacion));
 //        this.poblacion = poblacion;
-        recursosTreeMap.put(6, new Recursos(6, felicidad));
+        recursosTreeMap.add( new Recursos(6, felicidad));
 //        this.felicidad = felicidad;
 
         for (UnidadesPreCargadas soldaditos : listaSoldadosPreCargada.values()) {
@@ -49,26 +50,27 @@ public class Ciudad extends Posicion {
         //todo Solicitar a la bd la tabla de posiciones y edificios que tiene el usuario
         try {
             if (idCiudad == 2) {
-                new Edificio(listaEdificiosPreCargados.get(0 + "-" + 0), 8, 8, this);//parcela
-                new Edificio(listaEdificiosPreCargados.get(2 + "-" + 0), 7, 8, this);
-                new Edificio(listaEdificiosPreCargados.get(0 + "-" + 0), 6, 8, this);//parcela
-                new Edificio(listaEdificiosPreCargados.get(1 + "-" + 0), 8, 15, this);
+                new Edificio(listaEdificiosPreCargados.get(0 + "_" + 0), 8, 8, this);//parcela
+                new Edificio(listaEdificiosPreCargados.get(2 + "_" + 0), 7, 8, this);
+                new Edificio(listaEdificiosPreCargados.get(0 + "_" + 0), 6, 8, this);//parcela
+                new Edificio(listaEdificiosPreCargados.get(1 + "_" + 0), 8, 15, this);
             } else if (idCiudad == 1) {
-                new Edificio(listaEdificiosPreCargados.get(1 + "-" + 1), 8, 7, this);
+                new Edificio(listaEdificiosPreCargados.get(1 + "_" + 1), 8, 7, this);
             }
-            new Edificio(listaEdificiosPreCargados.get(2 + "-" + 0), 3, 13, this);
-            new Edificio(listaEdificiosPreCargados.get(10 + "-" + 0), 10, 4, this);
-            new Edificio(listaEdificiosPreCargados.get(11 + "-" + 0), 8, 12, this);
-            new Edificio(listaEdificiosPreCargados.get(0 + "-" + 0), 5, 7, this);
-            new Edificio(listaEdificiosPreCargados.get(10 + "-" + 0), 7, 13, this);//todos tendrian "parcela"
-            new Edificio(listaEdificiosPreCargados.get(11 + "-" + 0), 12, 2, this);//todos tendrian "parcela"
-            new Edificio(listaEdificiosPreCargados.get(12 + "-" + 1), 5, 18, this);//todos tendrian "parcela"
+            new Edificio(listaEdificiosPreCargados.get(2 + "_" + 0), 3, 13, this);
+            new Edificio(listaEdificiosPreCargados.get(10 + "_" + 0), 10, 4, this);
+            new Edificio(listaEdificiosPreCargados.get(11 + "_" + 0), 8, 12, this);
+            new Edificio(listaEdificiosPreCargados.get(0 + "_" + 0), 5, 7, this);
+            new Edificio(listaEdificiosPreCargados.get(10 + "_" + 0), 7, 13, this);//todos tendrian "parcela"
+            new Edificio(listaEdificiosPreCargados.get(11 + "_" + 0), 12, 2, this);//todos tendrian "parcela"
+            new Edificio(listaEdificiosPreCargados.get(12 + "_" + 1), 5, 18, this);//todos tendrian "parcela"
 
-            new Edificio(listaEdificiosPreCargados.get(13 + "-" + 0), 7, 15, this);//todos tendrian "parcela"
-            new Edificio(listaEdificiosPreCargados.get(14 + "-" + 0), 7, 16, this);//todos tendrian "parcela"
-            new Edificio(listaEdificiosPreCargados.get(15 + "-" + 0), 7, 17, this);//todos tendrian "parcela"
+            new Edificio(listaEdificiosPreCargados.get(13 + "_" + 0), 7, 15, this);//todos tendrian "parcela"
+            new Edificio(listaEdificiosPreCargados.get(14 + "_" + 0), 7, 16, this);//todos tendrian "parcela"
+            new Edificio(listaEdificiosPreCargados.get(15 + "_" + 0), 7, 17, this);//todos tendrian "parcela"
         } catch (Exception e) {
-            System.err.println("Error: Ciudad (Edificio no creado)\n" + e);
+            System.err.println("Error: Ciudad (Edificio no creado)\n");
+            e.printStackTrace();
         }
         jugador.listaCiudadesPropias.put(getPosition(), this);
         if (Clan.jugadoresQueEstanEnUnClan.containsKey(jugador)) {
@@ -95,18 +97,18 @@ public class Ciudad extends Posicion {
     }
 
     public void addListaPosicionesEdificios(int colum, int row, Edificio posicionEdificio) {
-        this.listaPosicionesEdificios.put(colum + "-" + row, posicionEdificio);
+        this.listaPosicionesEdificios.put(colum + "_" + row, posicionEdificio);
     }
 
     public void addListaPosicionesEdificios(String colum_row, Edificio posicionEdificio) {
         this.listaPosicionesEdificios.put(colum_row, posicionEdificio);
     }
 
-    public TreeMap<Integer, Recursos> getRecursosTreeMap() {
+    public ArrayList<Recursos> getRecursosTreeMap() {
         return recursosTreeMap;
     }
 
-    public void setRecursosTreeMap(TreeMap<Integer, Recursos> recursosTreeMap) {
+    public void setRecursosTreeMap(ArrayList<Recursos> recursosTreeMap) {
         this.recursosTreeMap = recursosTreeMap;
     }
 

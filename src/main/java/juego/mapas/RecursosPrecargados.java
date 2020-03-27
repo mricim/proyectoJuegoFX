@@ -6,7 +6,7 @@ import main.java.utils.ImageGetter;
 import java.util.HashMap;
 import java.util.Objects;
 
-public class RecursosPrecargados implements ImageGetter {
+public class RecursosPrecargados implements ImageGetter, Comparable<RecursosPrecargados>{
     static String RUTEIMAGES = "icons/recursos/";
     static HashMap<Integer,RecursosPrecargados> recursosPrecargadosList=new HashMap<>();
     //oro=0;
@@ -19,19 +19,17 @@ public class RecursosPrecargados implements ImageGetter {
     //investigacion=7
     private int id;
     private String name;
-    private boolean esSelectable;
-    private Integer elSeletableSera;//apuntan a poblacion
+    private boolean seGasta;//?
 
-    public RecursosPrecargados(int id, String name, boolean esSelectable, Integer elSeletableSera) {
+    public RecursosPrecargados(int id, String name,boolean seGasta) {
         this.id = id;
         this.name = name;
-        this.esSelectable = esSelectable;
-        this.elSeletableSera = elSeletableSera;
+        this.seGasta=seGasta;
         getImage();
         recursosPrecargadosList.put(id,this);
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
@@ -39,12 +37,26 @@ public class RecursosPrecargados implements ImageGetter {
         return name;
     }
 
-    public boolean isEsSelectable() {
-        return esSelectable;
+    public boolean isSeGasta() {
+        return seGasta;
     }
 
-    public Integer getElSeletableSera() {
-        return elSeletableSera;
+
+
+    @Override
+    public Image getImage() {
+        return getImage(RUTEIMAGES, String.valueOf(id));
+    }
+
+    @Override
+    public Image getImageClicable() {
+        System.err.println("getImageClicable() en Recursos no funciona!");
+        return null;
+    }
+
+    @Override
+    public Image getImageIcon() {
+        return null;
     }
 
     @Override
@@ -61,18 +73,7 @@ public class RecursosPrecargados implements ImageGetter {
     }
 
     @Override
-    public Image getImage() {
-        return getImage(RUTEIMAGES, String.valueOf(id));
-    }
-
-    @Override
-    public Image getImageClicable() {
-        System.err.println("getImageClicable() en Recursos no funciona!");
-        return null;
-    }
-
-    @Override
-    public Image getImageIcon() {
-        return null;
+    public int compareTo(RecursosPrecargados o) {
+        return this.getId().compareTo( o.getId() );
     }
 }

@@ -1,9 +1,11 @@
 package main.java.juego.mapas.ciudad;
 
 import javafx.scene.image.Image;
+import main.java.juego.mapas.RecursosPrecargados;
 import main.java.utils.ImageGetter;
 import main.java.juego.mapas.Recursos;
 
+import java.util.ArrayList;
 import java.util.Objects;
 import java.util.TreeMap;
 
@@ -22,18 +24,22 @@ public class EdificiosPreCargados implements ImageGetter {
     //Mejorables
     private int nivel;
     private int nivelCastilloNecesario;
-    public TreeMap<Integer, Recursos> recursosBuild = new TreeMap<>();
-    //Productores
-    public TreeMap<Integer, Recursos> recursosProductores = new TreeMap<>();
-    //ALMACEN
-    public TreeMap<Integer, Recursos> recursosAlmacen = new TreeMap<>();
+
+    //RECURSOS - CONSTRUIR
+    public ArrayList<Recursos> recursosBuild = null;
+    //RECURSOS - Productores
+    public ArrayList<Recursos> recursosProductores = null;
+    //RECURSOS - COSTE X MIN
+    public TreeMap<RecursosPrecargados, ArrayList<Recursos>> recursosCosteXmin = null;
+    //RECURSOS -ALMACEN
+    public ArrayList<Recursos> recursosAlmacen = null;
 
     static String RUTEIMAGES = "mapas/city/";
     private String imagePath;
     private String imageClicablePath;
 
 
-    public EdificiosPreCargados(int id, boolean destruible, boolean construible, int maximoEdificiosDelMismoTipo, int nivel, int nivelCastilloNecesario, int menuEspecial, String nombre, String descripcion, int costeOro, int costeMadera, int costePiedra, int costehierro, int TrabajadoresXminMaximos, int produceMaderaXmin, int producePiedraXmin, int produceHierroXmin, int produceComidaXmin, int costeOroXmin, int produceFelicidadXmin, int produceInvestigacionXmin, int maderaAlmacen, int piedraAlmacen, int hierroAlmacen, int comidaAlmacen, int poblacionAlmacen) {
+    public EdificiosPreCargados(int id, int nivel, boolean destruible, boolean construible, int maximoEdificiosDelMismoTipo, int nivelCastilloNecesario, int menuEspecial, String nombre, String descripcion, ArrayList<Recursos> recursosBuild, ArrayList<Recursos> recursosProductores, TreeMap<RecursosPrecargados, ArrayList<Recursos>> recursosCosteXmin, ArrayList<Recursos> recursosAlmacen) {
         this.id = id;
         this.tipo = menuEspecial;
         this.nombre = nombre;
@@ -44,42 +50,25 @@ public class EdificiosPreCargados implements ImageGetter {
         //MEJORABLES
         this.nivel = nivel;
         this.nivelCastilloNecesario = nivelCastilloNecesario;
-        recursosBuild.put(0, new Recursos(0, costeOro));
-        recursosBuild.put(1, new Recursos(1, costeMadera));
-        recursosBuild.put(2, new Recursos(2, costePiedra));
-        recursosBuild.put(3, new Recursos(3, costehierro));
-        recursosBuild.put(5, new Recursos(5, TrabajadoresXminMaximos));
-        //PRODUCTORES
-        if (costeOroXmin > 0) {
-            recursosProductores.put(0, new Recursos(0, costeOroXmin));
+        //RECURSOS - CONSTRUIR
+        if (recursosBuild != null) {
+            this.recursosBuild = recursosBuild;
         }
-        if (produceMaderaXmin > 0) {
-            recursosProductores.put(1, new Recursos(1, produceMaderaXmin));
+        //RECURSOS -Productores
+        if (recursosProductores != null) {
+            this.recursosProductores = recursosProductores;
         }
-        if (producePiedraXmin > 0) {
-            recursosProductores.put(2, new Recursos(2, producePiedraXmin));
+        //RECURSOS - COSTE X MIN
+        if (recursosCosteXmin != null) {
+            this.recursosCosteXmin = recursosCosteXmin;
         }
-        if (produceHierroXmin > 0) {
-            recursosProductores.put(3, new Recursos(3, produceHierroXmin));
+        //RECURSOS -ALMACEN
+        if (recursosAlmacen != null) {
+            this.recursosAlmacen = recursosAlmacen;
         }
-        if (produceComidaXmin > 0) {
-            recursosProductores.put(4, new Recursos(4, produceComidaXmin));
-        }
-        if (produceFelicidadXmin > 0) {
-            recursosProductores.put(6, new Recursos(6, produceFelicidadXmin));
-        }
-        if (produceInvestigacionXmin > 0) {
-            recursosProductores.put(7, new Recursos(7, produceInvestigacionXmin));
-        }
-        //ALMACEN
-        recursosAlmacen.put(1, new Recursos(1, maderaAlmacen));
-        recursosAlmacen.put(2, new Recursos(2, piedraAlmacen));
-        recursosAlmacen.put(3, new Recursos(3, hierroAlmacen));
-        recursosAlmacen.put(4, new Recursos(4, comidaAlmacen));
-        recursosAlmacen.put(7, new Recursos(7, poblacionAlmacen));
 
 
-        String resultado = id + "-" + nivel;
+        String resultado = id + "_" + nivel;
         this.imagePath = resultado;
         this.imageClicablePath = resultado + "@h";
 
@@ -123,86 +112,22 @@ public class EdificiosPreCargados implements ImageGetter {
         return nivelCastilloNecesario;
     }
 
-    public TreeMap<Integer, Recursos> getRecursosBuild() {
+    public ArrayList<Recursos> getRecursosBuild() {
         return recursosBuild;
     }
 
-    /*
-        public int getCosteOro() {
-            return recursosCostes.get(0).getCantidad();
-        }
-
-        public int getCosteMadera() {
-            return costeMadera;
-        }
-
-        public int getCostePiedra() {
-            return costePiedra;
-        }
-
-        public int getCostehierro() {
-            return costehierro;
-        }
-
-        public int getTrabajadoresXminMaximos() {
-            return TrabajadoresXminMaximos;
-        }
-    */
-
-    public TreeMap<Integer, Recursos> getRecursosProductores() {
+    public ArrayList<Recursos> getRecursosProductores() {
         return recursosProductores;
     }
 
-    /*
-        public int getProduceMaderaXmin() {
-            return produceMaderaXmin;
-        }
+    public TreeMap<RecursosPrecargados, ArrayList<Recursos>> getRecursosCosteXmin() {
+        return recursosCosteXmin;
+    }
 
-        public int getProducePiedraXmin() {
-            return producePiedraXmin;
-        }
-
-        public int getProduceHierroXmin() {
-            return produceHierroXmin;
-        }
-
-        public int getProduceComidaXmin() {
-            return produceComidaXmin;
-        }
-
-        public int getCosteOroXmin() {
-            return costeOroXmin;
-        }
-
-        public int getProduceFelicidadXmin() {
-            return produceFelicidadXmin;
-        }
-
-        public int getProduceInvestigacionXmin() {
-            return produceInvestigacionXmin;
-        }
-    */
-    public TreeMap<Integer, Recursos> getRecursosAlmacen() {
+    public ArrayList<Recursos> getRecursosAlmacen() {
         return recursosAlmacen;
     }
 
-    /*
-        public int getMaderaAlmacen() {
-            return maderaAlmacen;
-        }
-
-        public int getPiedraAlmacen() {
-            return piedraAlmacen;
-        }
-
-        public int getHierroAlmacen() {
-            return hierroAlmacen;
-        }
-
-        public int getComidaAlmacen() {
-            return comidaAlmacen;
-        }
-    */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
