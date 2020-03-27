@@ -427,7 +427,7 @@ public class CiudadController extends MapasController implements Initializable {
         flowPane.setAlignment(Pos.CENTER);
         ObservableList<Node> childrenFlowPane = flowPane.getChildren();
 
-        ArrayList<Recursos> recursosCiudadTemp = new ArrayList<>();
+        TreeMap<Integer,Recursos> recursosCiudadTemp = new TreeMap<>();
         TreeMap<Integer, Recursos> resta = new TreeMap<>();
 
         TreeMap<Integer, Unidades> soldadesca = new TreeMap<>();
@@ -436,10 +436,10 @@ public class CiudadController extends MapasController implements Initializable {
         }
 
 
-        for (Recursos integer : getCiudadPrimaryStageController().getRecursosTreeMap()) {
+        for (Recursos integer : getCiudadPrimaryStageController().getRecursosTreeMap().values()) {
             int id = integer.getId();
             resta.put(id, new Recursos(id, 0));
-            recursosCiudadTemp.add(new Recursos(id, integer.getCantidad()));
+            recursosCiudadTemp.put(id,new Recursos(id, integer.getCantidad()));
         }
 
         //ESTO ES PARA QUE ENTRE EN EL SISTEMA
@@ -453,7 +453,7 @@ public class CiudadController extends MapasController implements Initializable {
         Button button = new Button("Entrenar");
         button.setOnMouseClicked(e -> {
             getCiudadPrimaryStageController().addSoldados(soldadesca);
-            for (Recursos recursos : getCiudadPrimaryStageController().getRecursosTreeMap()) {
+            for (Recursos recursos : getCiudadPrimaryStageController().getRecursosTreeMap().values()) {
                 recursos.removeCantidad(resta.get(recursos.getId()).getCantidad());
             }
 
@@ -533,7 +533,7 @@ public class CiudadController extends MapasController implements Initializable {
     }
 
 
-    private static synchronized void controllerSlider(int seleccionadoNumber, UnidadesPreCargadas unidadesPreCargadas, TreeMap<Integer, Unidades> soldadesca, List<Recursos> costesRecursosUnidades, TreeMap<Integer, Recursos> resta, ArrayList<Recursos> recursosCiudadTemp, Button button, VBox flowPane2, VBox flowPane3) {
+    private static synchronized void controllerSlider(int seleccionadoNumber, UnidadesPreCargadas unidadesPreCargadas, TreeMap<Integer, Unidades> soldadesca, List<Recursos> costesRecursosUnidades, TreeMap<Integer, Recursos> resta, TreeMap<Integer, Recursos> recursosCiudadTemp, Button button, VBox flowPane2, VBox flowPane3) {
         boolean controladora = false;
         boolean controladoraToFor = false;
         int conversorAPositivo = (seleccionadoNumber < 0 ? -seleccionadoNumber : seleccionadoNumber);
@@ -576,7 +576,7 @@ public class CiudadController extends MapasController implements Initializable {
     }
 
 
-    private synchronized static void printRecursosRestando(ObservableList<Node> childrenFlowPane, ArrayList<Recursos> recursosEnLaCIty, TreeMap<Integer, Recursos> recursosResta, ArrayList<Recursos> recursosCiudadTemp, int produce_Almacena_Cuesta_Devolucion_Resto_cambio) {
+    private synchronized static void printRecursosRestando(ObservableList<Node> childrenFlowPane, TreeMap<Integer, Recursos> recursosEnLaCIty, TreeMap<Integer, Recursos> recursosResta, TreeMap<Integer, Recursos> recursosCiudadTemp, int produce_Almacena_Cuesta_Devolucion_Resto_cambio) {
 
         Separator separator = new Separator();
         separator.setPrefWidth(220);
@@ -592,7 +592,7 @@ public class CiudadController extends MapasController implements Initializable {
         childrenFlowPane.add(separator2);
 
 
-        for (Recursos recursoValor : recursosEnLaCIty) {
+        for (Recursos recursoValor : recursosEnLaCIty.values()) {
             HBox hBox = new HBox();
             hBox.setMaxWidth(250);//TODO
             hBox.setAlignment(Pos.CENTER);

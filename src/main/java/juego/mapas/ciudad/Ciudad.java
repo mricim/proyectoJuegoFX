@@ -8,7 +8,6 @@ import main.java.jugadores.Clan;
 import main.java.jugadores.Jugador;
 
 
-import java.util.ArrayList;
 import java.util.TreeMap;
 
 import static main.java.jugadores.Jugador.*;
@@ -18,7 +17,7 @@ public class Ciudad extends Posicion {
     private TreeMap<String, Edificio> listaPosicionesEdificios = new TreeMap<>();
     private int idCiudad;
     private String nameCity;
-    private ArrayList<Recursos> recursosTreeMap = new ArrayList<>();//TODO COMPROBAR QUE NO PUEDE PASAR DEL LIMITE DE CAPACIDAD DE LA CIUDAD
+    private TreeMap<Integer, Recursos> recursosTreeMap = new TreeMap<>();//TODO COMPROBAR QUE NO PUEDE PASAR DEL LIMITE DE CAPACIDAD DE LA CIUDAD
     private int nivelCiudad;
     private TreeMap<Integer, Unidades> listSoldadosCity = new TreeMap<>();
 
@@ -27,19 +26,19 @@ public class Ciudad extends Posicion {
         this.idCiudad = lastId++;
         this.nameCity = nameCity;
         this.nivelCiudad = nivelCiudad;
-        recursosTreeMap.add( new Recursos(0, oro));
+        recursosTreeMap.put(0, new Recursos(0, oro));
 //        this.oro = oro;
-        recursosTreeMap.add( new Recursos(1, madera));
+        recursosTreeMap.put(1, new Recursos(1, madera));
 //        this.madera = madera;
-        recursosTreeMap.add( new Recursos(2, piedra));
+        recursosTreeMap.put(2, new Recursos(2, piedra));
 //        this.piedra = piedra;
-        recursosTreeMap.add( new Recursos(3, comida));
+        recursosTreeMap.put(3, new Recursos(3, comida));
 //        this.comida = comida;
-        recursosTreeMap.add( new Recursos(4, hierro));
+        recursosTreeMap.put(4, new Recursos(4, hierro));
 //        this.hierro = hierro;
-        recursosTreeMap.add( new Recursos(5, poblacion));
+        recursosTreeMap.put(5, new Recursos(5, poblacion));
 //        this.poblacion = poblacion;
-        recursosTreeMap.add( new Recursos(6, felicidad));
+        recursosTreeMap.put(6, new Recursos(6, felicidad));
 //        this.felicidad = felicidad;
 
         for (UnidadesPreCargadas soldaditos : listaSoldadosPreCargada.values()) {
@@ -104,11 +103,11 @@ public class Ciudad extends Posicion {
         this.listaPosicionesEdificios.put(colum_row, posicionEdificio);
     }
 
-    public ArrayList<Recursos> getRecursosTreeMap() {
+    public TreeMap<Integer, Recursos> getRecursosTreeMap() {
         return recursosTreeMap;
     }
 
-    public void setRecursosTreeMap(ArrayList<Recursos> recursosTreeMap) {
+    public void setRecursosTreeMap(TreeMap<Integer, Recursos> recursosTreeMap) {
         this.recursosTreeMap = recursosTreeMap;
     }
 

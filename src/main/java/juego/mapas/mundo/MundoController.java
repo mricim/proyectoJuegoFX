@@ -304,7 +304,7 @@ public class MundoController extends MapasController implements Initializable {
         //Ciudad propia
         if (getJugadorPrimaryStageController().listaCiudadesPropias.containsKey(ciudadMapa.getPosition())) {
             backgroundFill = new BackgroundFill(Color.ANTIQUEWHITE, CornerRadii.EMPTY, Insets.EMPTY);
-            printRecursos(childrenVBox, ciudadMapa.getRecursosTreeMap(), 2);
+            printRecursos(childrenVBox, ciudadMapa.getRecursosTreeMap().entrySet(), 2);
             vBoxBloquePropio.setMargin(descripcionCiudad, new Insets(0, 15, 0, 15));
         } else {//Ciudad enemiga o aliada
             if (getClanPrimaryStageController().getCiudadesDelClan().contains(ciudadMapa)) {
@@ -440,10 +440,11 @@ public class MundoController extends MapasController implements Initializable {
         return vBoxBloquePropio;
     }
 
-    private static void printRecursos(ObservableList<Node> childrenFlowPane, ArrayList<Recursos> recursos, int produceAlmacenaCuesta) {
+    private static void printRecursos(ObservableList<Node> childrenFlowPane, Set<Map.Entry<Integer, Recursos>> recursos, int produceAlmacenaCuesta) {
         boolean paso0 = false;
-        for (Recursos recurso : recursos) {
-            if (recurso.getCantidad() > 0) {
+        for (Map.Entry<Integer, Recursos> recurso : recursos) {
+            Recursos recursoValor = recurso.getValue();
+            if (recursoValor.getCantidad() > 0) {
                 paso0 = true;
             }
         }
@@ -476,8 +477,8 @@ public class MundoController extends MapasController implements Initializable {
             childrenFlowPane.add(separator2);
         }
         boolean paso1 = false;
-        for (Recursos recurso : recursos) {
-            Recursos recursoValor = recurso;
+        for (Map.Entry<Integer, Recursos> recurso : recursos) {
+            Recursos recursoValor = recurso.getValue();
             int numero = recursoValor.getCantidad();
             if (numero != 0) {
                 ImageView imageView = new ImageView(recursoValor.getImage());
