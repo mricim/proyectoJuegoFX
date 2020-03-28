@@ -135,15 +135,15 @@ public class PantallaInicialController extends PrimaryStageControler implements 
 
     private void callbd() {
         //TODO LEER DESDE LA BD
-        RecursosPrecargados oroPre = new RecursosPrecargados(0, TRADUCCIONES.getString("recurso.oro"), true);
-        RecursosPrecargados maderaPre = new RecursosPrecargados(1, TRADUCCIONES.getString("recurso.madera"), true);
-        RecursosPrecargados piedraPre = new RecursosPrecargados(2, TRADUCCIONES.getString("recurso.piedra"), true);
-        RecursosPrecargados comidaPre = new RecursosPrecargados(3, TRADUCCIONES.getString("recurso.comida"), true);
-        RecursosPrecargados hierroPre = new RecursosPrecargados(4, TRADUCCIONES.getString("recurso.hierro"), true);
-        RecursosPrecargados poblacionPre = new RecursosPrecargados(5, TRADUCCIONES.getString("recurso.poblacion"), false);
-        RecursosPrecargados felicidadPre = new RecursosPrecargados(6, TRADUCCIONES.getString("recurso.felicidad"), true);
-        RecursosPrecargados investigacionPre = new RecursosPrecargados(7, TRADUCCIONES.getString("recurso.investigacion"), true);
-        RecursosPrecargados municionPre = new RecursosPrecargados(8, "municion", true);
+        RecursosPrecargados oroPre = new RecursosPrecargados(0, TRADUCCIONES.getString("recurso.oro"), true, true, false, true);
+        RecursosPrecargados maderaPre = new RecursosPrecargados(1, TRADUCCIONES.getString("recurso.madera"), true, true, false, true);
+        RecursosPrecargados piedraPre = new RecursosPrecargados(2, TRADUCCIONES.getString("recurso.piedra"), true, true, false, true);
+        RecursosPrecargados comidaPre = new RecursosPrecargados(3, TRADUCCIONES.getString("recurso.comida"), true, true, false, true);
+        RecursosPrecargados hierroPre = new RecursosPrecargados(4, TRADUCCIONES.getString("recurso.hierro"), true, true, false, true);
+        RecursosPrecargados poblacionPre = new RecursosPrecargados(5, TRADUCCIONES.getString("recurso.poblacion"), true, true, false, false);
+        RecursosPrecargados felicidadPre = new RecursosPrecargados(6, TRADUCCIONES.getString("recurso.felicidad"), true, true, true, true);
+        RecursosPrecargados investigacionPre = new RecursosPrecargados(7, TRADUCCIONES.getString("recurso.investigacion"), false, false, false, true);
+        RecursosPrecargados municionPre = new RecursosPrecargados(8, "municion", true, true, true, true);
         progresBar.setProgress(15);
         //TODO MENUS ESPECIALES
         //-1=noDanNiGeneranNada
@@ -153,23 +153,23 @@ public class PantallaInicialController extends PrimaryStageControler implements 
         //3=CreaMaquinas
 
         //RECURSOS - CONSTRUIR
-        ArrayList<Recursos> recursosBuild = new ArrayList<>();
-        recursosBuild.add( new Recursos(oroPre, 5));
-        recursosBuild.add( new Recursos(maderaPre, 5));
-        recursosBuild.add( new Recursos(piedraPre, 5));
-        recursosBuild.add( new Recursos(comidaPre, 5));
-        recursosBuild.add( new Recursos(hierroPre, 5));
-        recursosBuild.add( new Recursos(poblacionPre, 5));
+        TreeMap<Integer, Recursos> recursosBuild = new TreeMap<>();
+        recursosBuild.put(oroPre.getId(), new Recursos(oroPre, 5));
+        recursosBuild.put(maderaPre.getId(), new Recursos(maderaPre, 5));
+        recursosBuild.put(piedraPre.getId(), new Recursos(piedraPre, 5));
+        recursosBuild.put(comidaPre.getId(), new Recursos(comidaPre, 5));
+        recursosBuild.put(hierroPre.getId(), new Recursos(hierroPre, 5));
+        recursosBuild.put(poblacionPre.getId(), new Recursos(poblacionPre, 5));
         //RECURSOS -Productores
-        ArrayList<Recursos> recursosProductores = new ArrayList<>();
-        recursosProductores.add( new Recursos(oroPre, 10));
-        recursosProductores.add( new Recursos(maderaPre, 10));
-        recursosProductores.add( new Recursos(piedraPre, 10));
-        recursosProductores.add( new Recursos(comidaPre, 10));
-        recursosProductores.add( new Recursos(hierroPre, 10));
-        recursosProductores.add( new Recursos(poblacionPre, 10));
-        recursosProductores.add( new Recursos(felicidadPre, 10));
-        recursosProductores.add( new Recursos(investigacionPre, 10));
+        TreeMap<Integer, Recursos> recursosProductores = new TreeMap<>();
+        recursosProductores.put(oroPre.getId(), new Recursos(oroPre, 10));
+        recursosProductores.put(maderaPre.getId(), new Recursos(maderaPre, 10));
+        recursosProductores.put(piedraPre.getId(), new Recursos(piedraPre, 10));
+        recursosProductores.put(comidaPre.getId(), new Recursos(comidaPre, 10));
+        recursosProductores.put(hierroPre.getId(), new Recursos(hierroPre, 10));
+        recursosProductores.put(poblacionPre.getId(), new Recursos(poblacionPre, 10));
+        recursosProductores.put(felicidadPre.getId(), new Recursos(felicidadPre, 10));
+        recursosProductores.put(investigacionPre.getId(), new Recursos(investigacionPre, 10));
         //RECURSOS - COSTE X MIN
         ArrayList<Recursos> recursosCosteXmin5 = new ArrayList<>();
         recursosCosteXmin5.add(new Recursos(poblacionPre, 20));
@@ -188,15 +188,15 @@ public class PantallaInicialController extends PrimaryStageControler implements 
         recursosCosteXminV2.put(comidaPre, recursosCosteXmin5V2);
         recursosCosteXminV2.put(hierroPre, recursosCosteXmin5V2);
         //RECURSOS -ALMACEN
-        ArrayList<Recursos> recursosAlmacen = new ArrayList<>();
-        recursosAlmacen.add( new Recursos(oroPre, 31));
-        recursosAlmacen.add( new Recursos(maderaPre, 31));
-        recursosAlmacen.add( new Recursos(piedraPre, 31));
-        recursosAlmacen.add( new Recursos(comidaPre, 31));
-        recursosAlmacen.add( new Recursos(hierroPre, 31));
-        recursosAlmacen.add( new Recursos(poblacionPre, 31));
-        recursosAlmacen.add( new Recursos(felicidadPre, 31));
-        recursosAlmacen.add( new Recursos(investigacionPre, 31));
+        TreeMap<Integer, Recursos> recursosAlmacen = new TreeMap<>();
+        recursosAlmacen.put(oroPre.getId(), new Recursos(oroPre, 31));
+        recursosAlmacen.put(maderaPre.getId(), new Recursos(maderaPre, 31));
+        recursosAlmacen.put(piedraPre.getId(), new Recursos(piedraPre, 31));
+        recursosAlmacen.put(comidaPre.getId(), new Recursos(comidaPre, 31));
+        recursosAlmacen.put(hierroPre.getId(), new Recursos(hierroPre, 31));
+        recursosAlmacen.put(poblacionPre.getId(), new Recursos(poblacionPre, 31));
+        recursosAlmacen.put(felicidadPre.getId(), new Recursos(felicidadPre, 31));
+        recursosAlmacen.put(investigacionPre.getId(), new Recursos(investigacionPre, 31));
 
         new EdificiosPreCargados(0, 0, false, false, 0, 0, 0, "parcela-Construible", "Descripción del edificio que sera mas larga que el nombre del edificio", null, null, null, null);//NO MEJORABLE
 

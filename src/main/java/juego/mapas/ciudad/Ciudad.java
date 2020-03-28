@@ -1,5 +1,6 @@
 package main.java.juego.mapas.ciudad;
 
+import main.java.juego.mapas.RecursosPrecargados;
 import main.java.utils.Posicion;
 import main.java.juego.mapas.Recursos;
 import main.java.juego.mapas.ciudad.contenidoCiudad.Edificio;
@@ -8,8 +9,11 @@ import main.java.jugadores.Clan;
 import main.java.jugadores.Jugador;
 
 
+import java.util.ArrayList;
+import java.util.Map;
 import java.util.TreeMap;
 
+import static main.java.juego.mapas.RecursosPrecargados.recursosPrecargadosList;
 import static main.java.jugadores.Jugador.*;
 
 public class Ciudad extends Posicion {
@@ -21,28 +25,30 @@ public class Ciudad extends Posicion {
     private int nivelCiudad;
     private TreeMap<Integer, Unidades> listSoldadosCity = new TreeMap<>();
 
-    public Ciudad(Jugador jugador, String nameCity, int fila, int columna, int nivelCiudad, int oro, int madera, int piedra, int comida, int hierro, int poblacion, int felicidad) {
+    public Ciudad(Jugador jugador, String nameCity, int fila, int columna, int nivelCiudad, ArrayList<Recursos> recursosDeLaCity) {
         super(fila, columna);
         this.idCiudad = lastId++;
         this.nameCity = nameCity;
         this.nivelCiudad = nivelCiudad;
-        recursosTreeMap.put(0, new Recursos(0, oro));
-//        this.oro = oro;
-        recursosTreeMap.put(1, new Recursos(1, madera));
-//        this.madera = madera;
-        recursosTreeMap.put(2, new Recursos(2, piedra));
-//        this.piedra = piedra;
-        recursosTreeMap.put(3, new Recursos(3, comida));
-//        this.comida = comida;
-        recursosTreeMap.put(4, new Recursos(4, hierro));
-//        this.hierro = hierro;
-        recursosTreeMap.put(5, new Recursos(5, poblacion));
-//        this.poblacion = poblacion;
-        recursosTreeMap.put(6, new Recursos(6, felicidad));
-//        this.felicidad = felicidad;
+
+
+
+        for (Map.Entry<Integer, RecursosPrecargados> integerRecursosPrecargadosEntry : recursosPrecargadosList.entrySet()) {
+            RecursosPrecargados a = integerRecursosPrecargadosEntry.getValue();
+            if (a.isMenuCiudad()) {
+                int i = integerRecursosPrecargadosEntry.getKey();
+                try {
+                    Recursos recursos = recursosDeLaCity.get(i);
+                    recursosTreeMap.put(i, recursos);
+                }catch (Exception e){
+                    recursosTreeMap.put(i, new Recursos(i, 0));
+                }
+            }
+        }
+
 
         for (UnidadesPreCargadas soldaditos : listaSoldadosPreCargada.values()) {
-            this.listSoldadosCity.put(soldaditos.getIdType(),new Unidades(soldaditos,0,0,0,0));
+            this.listSoldadosCity.put(soldaditos.getIdType(), new Unidades(soldaditos, 0, 0, 0, 0));
         }
 
 
@@ -125,9 +131,9 @@ public class Ciudad extends Posicion {
 
     public void addSoldados(TreeMap<Integer, Unidades> soldados) {
         for (Unidades soldado : soldados.values()) {
-            Unidades soldados2=this.listSoldadosCity.get(soldado.getUnidadesPreCargadas().getIdType());
-            System.out.println(soldados2.getCantidad()+soldado.getCantidad());
-            soldados2.setCantidad(soldados2.getCantidad()+soldado.getCantidad());
+            Unidades soldados2 = this.listSoldadosCity.get(soldado.getUnidadesPreCargadas().getIdType());
+            System.out.println(soldados2.getCantidad() + soldado.getCantidad());
+            soldados2.setCantidad(soldados2.getCantidad() + soldado.getCantidad());
         }
     }
 }

@@ -8,7 +8,7 @@ import java.util.Objects;
 
 public class RecursosPrecargados implements ImageGetter, Comparable<RecursosPrecargados>{
     static String RUTEIMAGES = "icons/recursos/";
-    static HashMap<Integer,RecursosPrecargados> recursosPrecargadosList=new HashMap<>();
+    public static HashMap<Integer,RecursosPrecargados> recursosPrecargadosList=new HashMap<>();
     //oro=0;
     //madera=1;
     //piedra=2;
@@ -19,12 +19,20 @@ public class RecursosPrecargados implements ImageGetter, Comparable<RecursosPrec
     //investigacion=7
     private int id;
     private String name;
-    private boolean seGasta;//?
 
-    public RecursosPrecargados(int id, String name,boolean seGasta) {
+    private boolean menuCiudad;//?
+    private boolean menuMundo;//?
+    private boolean menupelea;//?
+
+    private boolean esTrabajadores;//?
+
+    public RecursosPrecargados(int id, String name,boolean menuCiudad,boolean menuMundo,boolean menupelea,boolean esTrabajadores) {
         this.id = id;
         this.name = name;
-        this.seGasta=seGasta;
+        this.menuCiudad=menuCiudad;
+        this.menuMundo=menuMundo;
+        this.menupelea=menupelea;
+        this.esTrabajadores = esTrabajadores;
         getImage();
         recursosPrecargadosList.put(id,this);
     }
@@ -37,8 +45,20 @@ public class RecursosPrecargados implements ImageGetter, Comparable<RecursosPrec
         return name;
     }
 
-    public boolean isSeGasta() {
-        return seGasta;
+    public boolean isMenuCiudad() {
+        return menuCiudad;
+    }
+
+    public boolean isMenuMundo() {
+        return menuMundo;
+    }
+
+    public boolean isMenupelea() {
+        return menupelea;
+    }
+
+    public boolean isEsTrabajadores() {
+        return esTrabajadores;
     }
 
 
@@ -75,5 +95,10 @@ public class RecursosPrecargados implements ImageGetter, Comparable<RecursosPrec
     @Override
     public int compareTo(RecursosPrecargados o) {
         return this.getId().compareTo( o.getId() );
+    }
+
+    @Override
+    public String toString() {
+        return "RecursosPrecargados{" + "id=" + id + ", name='" + name + '\'' + '}';
     }
 }

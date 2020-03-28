@@ -15,7 +15,7 @@ import java.util.TreeMap;
 public class Edificio extends Posicion implements Cloneable {
     private int id;//GUARDAR
     private int nivel;//GUARDAR
-    ArrayList<Recursos> trabajadoresNecesarios = new ArrayList<>();//GUARDAR
+    TreeMap<Integer, Recursos> trabajadoresNecesarios = new TreeMap<>();//GUARDAR
     private EdificiosPreCargados edificiosPreCargado;
 
 
@@ -27,7 +27,7 @@ public class Edificio extends Posicion implements Cloneable {
 
         if (edificioPreCargado.getRecursosCosteXmin() != null) {
             for (RecursosPrecargados recursos : edificioPreCargado.getRecursosCosteXmin().keySet()) {
-                trabajadoresNecesarios.add(new Recursos(recursos, 0));
+                trabajadoresNecesarios.put(recursos.getId(), new Recursos(recursos, 0));
             }
         }
 
@@ -54,7 +54,7 @@ public class Edificio extends Posicion implements Cloneable {
     }
 
 
-    public ArrayList<Recursos> getTrabajadoresNecesarios() {
+    public TreeMap<Integer, Recursos> getTrabajadoresNecesarios() {
         return trabajadoresNecesarios;
     }
 

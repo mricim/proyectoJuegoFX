@@ -26,20 +26,20 @@ public class EdificiosPreCargados implements ImageGetter {
     private int nivelCastilloNecesario;
 
     //RECURSOS - CONSTRUIR
-    public ArrayList<Recursos> recursosBuild = null;
+    private TreeMap<Integer, Recursos> recursosBuild = null;
     //RECURSOS - Productores
-    public ArrayList<Recursos> recursosProductores = null;
+    private TreeMap<Integer, Recursos> recursosProductores = null;
     //RECURSOS - COSTE X MIN
-    public TreeMap<RecursosPrecargados, ArrayList<Recursos>> recursosCosteXmin = null;
+    private TreeMap<RecursosPrecargados, ArrayList<Recursos>> recursosCosteXmin = null;
     //RECURSOS -ALMACEN
-    public ArrayList<Recursos> recursosAlmacen = null;
+    private TreeMap<Integer, Recursos> recursosAlmacen = null;
 
-    static String RUTEIMAGES = "mapas/city/";
+    private static String RUTEIMAGES = "mapas/city/";
     private String imagePath;
     private String imageClicablePath;
 
 
-    public EdificiosPreCargados(int id, int nivel, boolean destruible, boolean construible, int maximoEdificiosDelMismoTipo, int nivelCastilloNecesario, int menuEspecial, String nombre, String descripcion, ArrayList<Recursos> recursosBuild, ArrayList<Recursos> recursosProductores, TreeMap<RecursosPrecargados, ArrayList<Recursos>> recursosCosteXmin, ArrayList<Recursos> recursosAlmacen) {
+    public EdificiosPreCargados(int id, int nivel, boolean destruible, boolean construible, int maximoEdificiosDelMismoTipo, int nivelCastilloNecesario, int menuEspecial, String nombre, String descripcion, TreeMap<Integer, Recursos> recursosBuild, TreeMap<Integer, Recursos> recursosProductores, TreeMap<RecursosPrecargados, ArrayList<Recursos>> recursosCosteXmin, TreeMap<Integer, Recursos> recursosAlmacen) {
         this.id = id;
         this.tipo = menuEspecial;
         this.nombre = nombre;
@@ -112,11 +112,11 @@ public class EdificiosPreCargados implements ImageGetter {
         return nivelCastilloNecesario;
     }
 
-    public ArrayList<Recursos> getRecursosBuild() {
+    public TreeMap<Integer, Recursos> getRecursosBuild() {
         return recursosBuild;
     }
 
-    public ArrayList<Recursos> getRecursosProductores() {
+    public TreeMap<Integer, Recursos> getRecursosProductores() {
         return recursosProductores;
     }
 
@@ -124,7 +124,7 @@ public class EdificiosPreCargados implements ImageGetter {
         return recursosCosteXmin;
     }
 
-    public ArrayList<Recursos> getRecursosAlmacen() {
+    public TreeMap<Integer, Recursos> getRecursosAlmacen() {
         return recursosAlmacen;
     }
 

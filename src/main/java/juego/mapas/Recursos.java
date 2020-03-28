@@ -50,4 +50,9 @@ public class Recursos {
     public int getId() {
         return recursosPrecargados.getId();
     }
+
+    @Override
+    public String toString() {
+        return "Recurso{" + "id="+getRecursosPrecargados().getId()+", cantidad=" + cantidad + '}';
+    }
 }

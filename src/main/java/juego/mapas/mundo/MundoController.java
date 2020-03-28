@@ -420,7 +420,15 @@ public class MundoController extends MapasController implements Initializable {
             //System.out.println();
             System.out.println(getJugadorPrimaryStageController().getId());
             System.out.println(fila + " " + columna);
-            new Ciudad(getJugadorPrimaryStageController(), "New city " + imageView.getId(), fila, columna, 0, 100, 100, 100, 100, 10, 20, 50);
+            ArrayList<Recursos> city2=new ArrayList<>();
+            city2.add(new Recursos(0,3000));
+            city2.add(new Recursos(1,3000));
+            city2.add(new Recursos(2,3000));
+            city2.add(new Recursos(3,3000));
+            city2.add(new Recursos(4,3000));
+            city2.add(new Recursos(5,3000));
+            city2.add(new Recursos(6,3000));
+            new Ciudad(getJugadorPrimaryStageController(), "New city " + imageView.getId(), fila, columna, 0, city2);
             newCiudad = false;
             if (primeraCiudad) {
                 PrimaryStageControler.setCiudadPrimaryStageController(getJugadorPrimaryStageController().listaCiudadesPropias.values().iterator().next());

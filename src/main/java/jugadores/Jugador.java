@@ -38,9 +38,26 @@ public class Jugador {
         this.investigacion = new Recursos(7, investigacion);
 
 //TODO LEER DESDE LA BD
+        ArrayList<Recursos> city1=new ArrayList<>();
+        city1.add(new Recursos(0,300));
+        city1.add(new Recursos(1,20));
+        city1.add(new Recursos(2,50));
+        city1.add(new Recursos(3,70));
+        city1.add(new Recursos(4,90));
+        city1.add(new Recursos(5,3));
+        city1.add(new Recursos(6,50));
+        ArrayList<Recursos> city2=new ArrayList<>();
+        city2.add(new Recursos(0,3000));
+        city2.add(new Recursos(1,3000));
+        city2.add(new Recursos(2,3000));
+        city2.add(new Recursos(3,3000));
+        city2.add(new Recursos(4,3000));
+        city2.add(new Recursos(5,3000));
+        city2.add(new Recursos(6,3000));
         if (id == 1) {
-            new Ciudad(this, "ciudad P 1 1-1", 1, 1, 1, 300, 20, 50, 70, 90, 3, 50);
-            new Ciudad(this, "ciudad P 2 2-2", 2, 2, 1, Integer.MAX_VALUE, 5000, 60000, 3000, 756123, 6584110, 53);
+
+            new Ciudad(this, "ciudad P 1 1-1", 1, 1, 1,city1);
+            new Ciudad(this, "ciudad P 2 2-2", 2, 2, 1, city2);
 
 
             int numCiudad = Integer.MAX_VALUE;
@@ -64,10 +81,10 @@ public class Jugador {
             batallon2.setSoldadoHashMap(soldados3);
             batallon2.setSoldadoHashMap(soldados4);
         } else if (id == 2) {
-            new Ciudad(this, "ciudad E 3 1-6", 1, 6, 1, 300, 20, 50, 70, 90, 40, 50);
-            new Ciudad(this, "ciudad E 4 2-7", 2, 7, 1, Integer.MAX_VALUE, 5000, 60000, 3000, 756123, 6584110, 53);
-            new Ciudad(this, "ciudad E 5 3-8", 3, 8, 1, Integer.MAX_VALUE, 5000, 60000, 3000, 756123, 6584110, 53);
-            new Ciudad(this, "ciudad E 6 8-3", 8, 3, 1, Integer.MAX_VALUE, 5000, 60000, 3000, 756123, 6584110, 53);
+            new Ciudad(this, "ciudad E 3 1-6", 1, 6, 1, city1);
+            new Ciudad(this, "ciudad E 4 2-7", 2, 7, 1, city1);
+            new Ciudad(this, "ciudad E 5 3-8", 3, 8, 1, city1);
+            new Ciudad(this, "ciudad E 6 8-3", 8, 3, 1, city2);
 
             Batallon batallon1 = new Batallon("Batallon E 3 5-8", 5, 8, 400, this);
             Unidades soldados1 = new Unidades(listaSoldadosPreCargada.get(0), 100, 5, 0, 0);
@@ -93,10 +110,10 @@ public class Jugador {
             batallon4.setSoldadoHashMap(soldados7);
             batallon4.setSoldadoHashMap(soldados8);
         } else if (id == 3) {
-            new Ciudad(this, "ciudad Z 7 6-6", 6, 6, 1, 300, 20, 50, 70, 90, 40, 50);
-            new Ciudad(this, "ciudad Z 8 6-11", 6, 11, 1, Integer.MAX_VALUE, 5000, 60000, 3000, 756123, 6584110, 53);
-            new Ciudad(this, "ciudad Z 9 8-7", 8, 7, 1, Integer.MAX_VALUE, 5000, 60000, 3000, 756123, 6584110, 53);
-            new Ciudad(this, "ciudad Z 10 7-5", 7, 5, 1, Integer.MAX_VALUE, 5000, 60000, 3000, 756123, 6584110, 53);
+            new Ciudad(this, "ciudad Z 7 6-6", 6, 6, 1, city1);
+            new Ciudad(this, "ciudad Z 8 6-11", 6, 11, 1,city1);
+            new Ciudad(this, "ciudad Z 9 8-7", 8, 7, 1, city1);
+            new Ciudad(this, "ciudad Z 10 7-5", 7, 5, 1, city2);
 
             Batallon batallon1 = new Batallon("Batallon Z 6 5-8", 7, 7, 400, this);
             Unidades soldados1 = new Unidades(listaSoldadosPreCargada.get(0), 100, 5, 0, 0);
@@ -123,6 +140,7 @@ public class Jugador {
             batallon4.setSoldadoHashMap(soldados8);
         }
 //TODO FIN LEER DESDE LA BD
+
         Collections.sort(listaEdificiosKeys);
         //TODO Collections.sort(listaBatallonesPropios);
         //TODO Collections.sort(listaCiudadesPropias);
