@@ -12,6 +12,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
+import main.java.juego.mapas.pelea.Unidades;
+import main.java.juego.mapas.pelea.UnidadesPreCargadas;
 import main.java.utils.CallImages;
 import main.java.utils.PrimaryStageControler;
 import main.java.juego.MapasController;
@@ -333,6 +335,7 @@ public class MundoController extends MapasController implements Initializable {
         //Objetos de ciudad
         Label nombreBatallon = null;
         ImageView imgViewBatallon = null;
+        ImageView imgUnidadesBatallon = null;
 
 
         //BLOQUE
@@ -363,6 +366,26 @@ public class MundoController extends MapasController implements Initializable {
             imgViewBatallon.setPickOnBounds(true);
             imgViewBatallon.setPreserveRatio(true);
             childrenVBox.add(imgViewBatallon);
+
+            //TODO como buscar la imagen de cada tipo de soldado para poder printear en el menu izquierdo cada numero de unidades de cada batallon
+            for (Unidades unidades: batallon.getSoldadoHashMap().values()) {
+                System.out.println("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXxx");
+                System.out.println(unidades.getUnidadesPreCargadas().getImageIcon());
+                System.out.println("Id Type: "+unidades.getUnidadesPreCargadas().getIdType());
+                System.out.println("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXxx");
+                HBox hBox = new HBox();
+                hBox.setAlignment(Pos.CENTER);
+                hBox.setSpacing(10);
+                imgUnidadesBatallon = new ImageView(unidades.getUnidadesPreCargadas().getImageIcon());
+                imgUnidadesBatallon.setPickOnBounds(true);
+                imgUnidadesBatallon.setPreserveRatio(true);
+
+
+
+                hBox.getChildren().addAll(imgUnidadesBatallon);
+                childrenVBox.add(imgUnidadesBatallon);
+
+            }
 
             vBoxBloquePropio.setMargin(imgViewBatallon, new Insets(0, 15, 0, 15));
             if (getJugadorPrimaryStageController().listaBatallonesPropios.containsKey(batallon.getPosition())) {
@@ -420,14 +443,14 @@ public class MundoController extends MapasController implements Initializable {
             //System.out.println();
             System.out.println(getJugadorPrimaryStageController().getId());
             System.out.println(fila + " " + columna);
-            ArrayList<Recursos> city2=new ArrayList<>();
-            city2.add(new Recursos(0,3000));
-            city2.add(new Recursos(1,3000));
-            city2.add(new Recursos(2,3000));
-            city2.add(new Recursos(3,3000));
-            city2.add(new Recursos(4,3000));
-            city2.add(new Recursos(5,3000));
-            city2.add(new Recursos(6,3000));
+            ArrayList<Recursos> city2 = new ArrayList<>();
+            city2.add(new Recursos(0, 3000));
+            city2.add(new Recursos(1, 3000));
+            city2.add(new Recursos(2, 3000));
+            city2.add(new Recursos(3, 3000));
+            city2.add(new Recursos(4, 3000));
+            city2.add(new Recursos(5, 3000));
+            city2.add(new Recursos(6, 3000));
             new Ciudad(getJugadorPrimaryStageController(), "New city " + imageView.getId(), fila, columna, 0, city2);
             newCiudad = false;
             if (primeraCiudad) {
