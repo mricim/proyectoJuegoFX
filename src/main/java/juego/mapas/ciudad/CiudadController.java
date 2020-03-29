@@ -737,7 +737,7 @@ public class CiudadController extends MapasController implements Initializable {
                                 int number = oldValue.intValue() - seleccionado;
                                 if (number != 0) {
                                     textField.textProperty().setValue(String.valueOf(seleccionado));
-                                    Platform.runLater(() -> delSliderEdificiosConRecursos(recursosCosteXmin, poducidoMax, flowPane1, number, edificioSlider, flowPaneRecuros, getCiudadPrimaryStageController().getRecursosTreeMap()));
+                                    Platform.runLater(() -> delSliderEdificiosConRecursos(recursosCosteXmin, poducidoMax, flowPane1, number, edificioSlider, flowPaneRecuros, getCiudadPrimaryStageController().getRecursosTreeMap(),borderPane));
                                 }
                             }
                         });
@@ -746,7 +746,7 @@ public class CiudadController extends MapasController implements Initializable {
                         hBox.getChildren().add(textField);
                         vBox1.getChildren().add(hBox);
                         //METODO
-                        delSliderEdificiosConRecursos(recursosCosteXmin, poducidoMax, flowPane1, 0, edificioSlider, flowPaneRecuros, getCiudadPrimaryStageController().getRecursosTreeMap());
+                        delSliderEdificiosConRecursos(recursosCosteXmin, poducidoMax, flowPane1, 0, edificioSlider, flowPaneRecuros, getCiudadPrimaryStageController().getRecursosTreeMap(),borderPane);
                         vBox1.getChildren().add(flowPane1);
                         //METODO
                         vBox.add(vBox1);
@@ -784,20 +784,24 @@ public class CiudadController extends MapasController implements Initializable {
 
     }
 
-    private static void delSliderEdificiosConRecursos(TreeMap<RecursosPrecargados, ArrayList<Recursos>> recursosCosteXmin, RecursosPrecargados poducidoMax, FlowPane flowPane, int number, Edificio edificio, FlowPane flowPaneRecuros, TreeMap<Integer, Recursos> recursosDeLaCiudad) {
+    private static void delSliderEdificiosConRecursos(TreeMap<RecursosPrecargados, ArrayList<Recursos>> recursosCosteXmin, RecursosPrecargados poducidoMax, FlowPane flowPane, int number, Edificio edificio, FlowPane flowPaneRecuros, TreeMap<Integer, Recursos> recursosDeLaCiudad,BorderPane borderPane) {
         Recursos multiplicador = edificio.getTrabajadoresNecesarios().get(poducidoMax.getId());
         ArrayList<Recursos> recursosXMin = recursosCosteXmin.get(poducidoMax);
-        try {
+
             if (number < 0) {
                 int elnumerito = Math.abs(number);
                 multiplicador.addCantidad(elnumerito);
                 for (Recursos recursoxMin : recursosXMin) {
                     if (!recursoxMin.getRecursosPrecargados().isSeConsumeEnEdificios()) {
                         int aBuscar = recursoxMin.getId();
-                        recursosDeLaCiudad.get(aBuscar).removeCantidad(elnumerito * recursoxMin.getCantidad());
-                        if (recursosDeLaCiudad.get(aBuscar).getCantidad() < 0) {
-                            throw new Exception("No se puede tener menos de 0 -> " + recursosDeLaCiudad.get(aBuscar));
+                        int calculo=elnumerito * recursoxMin.getCantidad();
+                        if (recursosDeLaCiudad.get(aBuscar).getCantidad() - calculo< 0) {
+                            System.err.println("No se puede tener menos de 0 -> " + recursosDeLaCiudad.get(aBuscar));
+                            multiplicador.removeCantidad(elnumerito);
+                            borderPane.setLeft(null);
+                            break;
                         }
+                        recursosDeLaCiudad.get(aBuscar).removeCantidad(calculo);
                     }
                 }
             } else if (number > 0) {
@@ -829,9 +833,6 @@ public class CiudadController extends MapasController implements Initializable {
                 label.setGraphic(imageView2);
                 flowPane.getChildren().add(label);
             }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
         recursosMenu(flowPaneRecuros);
     }
 
