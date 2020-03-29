@@ -69,15 +69,15 @@ public class Jugador {
                 }
             }
 
-            Unidades soldados1 = new Unidades(listaSoldadosPreCargada.get(3), 100, 5, 0, 0);
-            Unidades soldados2 = new Unidades(listaSoldadosPreCargada.get(1), 100, 0, 0, 0);
+            Unidades soldados1 = new Unidades(listaSoldadosPreCargada.get(3), 50, 5, 0, 0);
+            Unidades soldados2 = new Unidades(listaSoldadosPreCargada.get(1), 30, 0, 0, 0);
             Batallon batallon1 = new Batallon("Batallon P 1 5-5", 5, 5, 400, this,ciudad1);
             batallon1.setSoldadoHashMap(soldados1);
             batallon1.setSoldadoHashMap(soldados2);
 
             Batallon batallon2 = new Batallon("Batallon P 2 8-7", 8, 7, 20, this,ciudad2);
-            Unidades soldados3 = new Unidades(listaSoldadosPreCargada.get(3), 100, 100, 0, 0);
-            Unidades soldados4 = new Unidades(listaSoldadosPreCargada.get(1), 100, 5, 0, 0);
+            Unidades soldados3 = new Unidades(listaSoldadosPreCargada.get(3), 98, 100, 0, 0);
+            Unidades soldados4 = new Unidades(listaSoldadosPreCargada.get(1), 80, 5, 0, 0);
             batallon2.setSoldadoHashMap(soldados3);
             batallon2.setSoldadoHashMap(soldados4);
         } else if (id == 2) {
@@ -88,7 +88,7 @@ public class Jugador {
 
             Batallon batallon1 = new Batallon("Batallon E 3 5-8", 5, 8, 400, this,ciudad1);
             Unidades soldados1 = new Unidades(listaSoldadosPreCargada.get(1), 100, 5, 0, 0);
-            Unidades soldados2 = new Unidades(listaSoldadosPreCargada.get(2), 100, 0, 0, 0);
+            Unidades soldados2 = new Unidades(listaSoldadosPreCargada.get(2), 50, 0, 0, 0);
             batallon1.setSoldadoHashMap(soldados1);
             batallon1.setSoldadoHashMap(soldados2);
 

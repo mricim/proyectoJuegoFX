@@ -1,6 +1,7 @@
 package main.java.juego.mapas.mundo;
 
 import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
@@ -12,6 +13,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import main.java.juego.mapas.pelea.Unidades;
 import main.java.juego.mapas.pelea.UnidadesPreCargadas;
 import main.java.utils.CallImages;
@@ -335,6 +338,7 @@ public class MundoController extends MapasController implements Initializable {
         //Objetos de ciudad
         Label nombreBatallon = null;
         ImageView imgViewBatallon = null;
+        Label numeroUnidades = null;
         ImageView imgUnidadesBatallon = null;
 
 
@@ -353,6 +357,7 @@ public class MundoController extends MapasController implements Initializable {
 
 
         BackgroundFill backgroundFill = null;
+        Separator separator2 = null;
 
 
         for (Batallon batallon : listaBatallones) {
@@ -360,25 +365,67 @@ public class MundoController extends MapasController implements Initializable {
             nombreBatallon.setTextAlignment(CENTER);
             nombreBatallon.setAlignment(Pos.CENTER);
             nombreBatallon.setWrapText(true);
-            childrenVBox.add(nombreBatallon);
+            separator2 = new Separator();
+            separator2.setPrefWidth(100);
+            Label finalNombreBatallon = nombreBatallon;
+            nombreBatallon.setOnMouseEntered(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent event) {
+                    finalNombreBatallon.setTextFill(Color.RED);
+                }
+            });
 
-            //TODO como buscar la imagen de cada tipo de soldado para poder printear en el menu izquierdo cada numero de unidades de cada batallon
+            nombreBatallon.setOnMouseExited(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent event) {
+                    finalNombreBatallon.setTextFill(Color.BLACK);
+                }
+            });
+            childrenVBox.addAll(separator2,finalNombreBatallon);
+
             for (Unidades unidades: batallon.getSoldadoHashMap().values()) {
-                System.out.println("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXxx");
-                System.out.println(unidades.getUnidadesPreCargadas().getImageIcon());
-                System.out.println("Id Type: "+unidades.getUnidadesPreCargadas().getIdType());
-                System.out.println("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXxx");
                 HBox hBox = new HBox();
                 hBox.setAlignment(Pos.CENTER);
                 hBox.setSpacing(10);
+
+                //Imagenes unidades
                 imgUnidadesBatallon = new ImageView(unidades.getUnidadesPreCargadas().getImageIcon());
                 imgUnidadesBatallon.setPickOnBounds(true);
                 imgUnidadesBatallon.setPreserveRatio(true);
+                imgUnidadesBatallon.setFitWidth(60);
+                imgUnidadesBatallon.setFitHeight(60);
+                imgUnidadesBatallon.setSmooth(true);
+                imgUnidadesBatallon.setCache(true);
+
+                //Cantidad unidades
+                numeroUnidades = new Label("Nº "+unidades.getUnidadesPreCargadas().getNombre()+": "+unidades.getCantidad());
+                numeroUnidades.setVisible(true);
+                numeroUnidades.setTextAlignment(CENTER);
+                numeroUnidades.setAlignment(Pos.CENTER);
+                numeroUnidades.setWrapText(true);
+                numeroUnidades.setFont(Font.font("Verdana", FontWeight.BOLD, 11));
+
+                Label finalNumeroUnidades = numeroUnidades;
+                numeroUnidades.setOnMouseEntered(new EventHandler<MouseEvent>() {
+                    @Override
+                    public void handle(MouseEvent event) {
+                        finalNumeroUnidades.setScaleX(1.2);
+                        finalNumeroUnidades.setScaleY(1.2);
+                    }
+                });
+
+                numeroUnidades.setOnMouseExited(new EventHandler<MouseEvent>() {
+                    @Override
+                    public void handle(MouseEvent event) {
+                        finalNumeroUnidades.setScaleX(1.0);
+                        finalNumeroUnidades.setScaleY(1.0);
+                    }
+                });
 
 
 
-                hBox.getChildren().addAll(imgUnidadesBatallon);
-                childrenVBox.add(imgUnidadesBatallon);
+                hBox.getChildren().addAll(imgUnidadesBatallon,finalNumeroUnidades);
+                childrenVBox.add(hBox);
 
             }
 
