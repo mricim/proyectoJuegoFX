@@ -24,15 +24,15 @@ public class RecursosPrecargados implements ImageGetter, Comparable<RecursosPrec
     private boolean menuMundo;//?
     private boolean menupelea;//?
 
-    private boolean esTrabajadores;//?
+    private boolean seConsumeEnEdificios;//?
 
-    public RecursosPrecargados(int id, String name,boolean menuCiudad,boolean menuMundo,boolean menupelea,boolean esTrabajadores) {
+    public RecursosPrecargados(int id, String name,boolean menuCiudad,boolean menuMundo,boolean menupelea,boolean seConsumeEnEdificios) {
         this.id = id;
         this.name = name;
         this.menuCiudad=menuCiudad;
         this.menuMundo=menuMundo;
         this.menupelea=menupelea;
-        this.esTrabajadores = esTrabajadores;
+        this.seConsumeEnEdificios = seConsumeEnEdificios;
         getImage();
         recursosPrecargadosList.put(id,this);
     }
@@ -57,8 +57,8 @@ public class RecursosPrecargados implements ImageGetter, Comparable<RecursosPrec
         return menupelea;
     }
 
-    public boolean isEsTrabajadores() {
-        return esTrabajadores;
+    public boolean isSeConsumeEnEdificios() {
+        return seConsumeEnEdificios;
     }
 
 

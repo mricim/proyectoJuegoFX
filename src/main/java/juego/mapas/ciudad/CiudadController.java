@@ -17,6 +17,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import main.java.juego.mapas.RecursosPrecargados;
+import main.java.testLucha.TipoSoldados;
 import main.java.utils.CallImages;
 import main.java.juego.MapasController;
 import main.java.juego.mapas.mundo.MundoController;
@@ -194,7 +195,6 @@ public class CiudadController extends MapasController implements Initializable {
         scrollPane.maxWidth(-Infinity);
 
 
-
         scrollPane.setHbarPolicy(NEVER);
         //scrollPane.()BorderPane.alignment="CENTER"
 
@@ -259,6 +259,14 @@ public class CiudadController extends MapasController implements Initializable {
             //VBox.setMargin(flowPane, new Insets(0, 15, 0, 15));
             childrenVBox.add(vBox);
             if (construir_Update_Dowgrade_Destruir != 0) {
+                if (construir_Update_Dowgrade_Destruir == 4) {//Si es el edificio que tenemos en el mapa
+                    Label label = new Label("Se te devolvera un " + PORCENTAGE_A_DEVOLVER + "% de los recursos de la construcción");
+                    label.setWrapText(true);
+                    label.setAlignment(Pos.CENTER);
+                    childrenVBox.add(label);
+                    childrenVBox.add(new CustomSeparator(220, true));
+                }
+
 
                 Button button = new Button(nameButton(construir_Update_Dowgrade_Destruir));
                 if (construir_Update_Dowgrade_Destruir == 1 || construir_Update_Dowgrade_Destruir == 2) {//CALCULAR RECURSOS
@@ -287,13 +295,21 @@ public class CiudadController extends MapasController implements Initializable {
                     recursosMenu(flowPaneRecuros);
                     borderPane.setLeft(null);
                     //devolvemos los trabajadores a la ciudad
-                    for (Recursos recursos : edificioPuesto.getTrabajadoresNecesarios().values()) {
-                        if (recursos.getRecursosPrecargados().isEsTrabajadores()){
-                            getCiudadPrimaryStageController().getRecursosTreeMap().get(recursos.getId()).addCantidad(recursos.getCantidad());
+                    TreeMap<Integer, Recursos> i = edificioPuesto.getTrabajadoresNecesarios();
+                    if (i != null) {
+                        TreeMap<RecursosPrecargados, ArrayList<Recursos>> xmin = edificioPuesto.getEdificiosPreCargado().getRecursosCosteXmin();
+                        for (Recursos recursos : i.values()) {
+                            for (Recursos recursos1 : xmin.get(recursos.getRecursosPrecargados())) {
+                                RecursosPrecargados peepe = recursos1.getRecursosPrecargados();
+                                if (!peepe.isSeConsumeEnEdificios()) {
+                                    getCiudadPrimaryStageController().getRecursosTreeMap().get(recursos1.getId()).addCantidad((recursos.getCantidad() * recursos1.getCantidad()));
+                                    break;
+                                }
+                            }
                         }
                     }
                     //ponemos el nuevo edificio
-                    new Edificio(edificioPosiblesConstrucciones,edificioPuesto.getFila(),edificioPuesto.getColumna(),getCiudadPrimaryStageController());
+                    new Edificio(edificioPosiblesConstrucciones, edificioPuesto.getFila(), edificioPuesto.getColumna(), getCiudadPrimaryStageController());
                     //edificioPuesto.setEdificiosPreCargado(edificioPosiblesConstrucciones);
                     //imageView.setImage(edificioPuesto.getImage());
                     reload(this.getClass());
@@ -461,7 +477,16 @@ public class CiudadController extends MapasController implements Initializable {
 
         Button button = new Button("Entrenar");
         button.setOnMouseClicked(e -> {
-            getCiudadPrimaryStageController().addSoldados(soldadesca);
+            //getCiudadPrimaryStageController().addSoldados(soldadesca);//TODO BORRAR
+
+            Ciudad esta = getCiudadPrimaryStageController();
+            Batallon batallon = new Batallon("pepito", esta.getFila(), esta.getColumna(), 0, getJugadorPrimaryStageController(), esta);
+            for (Unidades unidadesEntry : soldadesca.values()) {
+                if (unidadesEntry.getCantidad() > 0) {
+                    batallon.setSoldadoHashMap(unidadesEntry);
+                }
+            }
+
             for (Recursos recursos : getCiudadPrimaryStageController().getRecursosTreeMap().values()) {
                 recursos.removeCantidad(resta.get(recursos.getId()).getCantidad());
             }
@@ -470,6 +495,21 @@ public class CiudadController extends MapasController implements Initializable {
             recursosMenu(flowPaneRecuros);
         });
         //FIN ESTO ES PARA QUE ENTRE EN EL SISTEMA
+        //Buscar batallones en esta posicion
+        String positionCiudad = getCiudadPrimaryStageController().getPosition();
+        TreeMap<Integer, Integer> listaBatallonesSumandoSoldados = new TreeMap<>();
+        for (Batallon batallon : getJugadorPrimaryStageController().listaBatallonesPropios.values()) {
+            if (batallon.getPosition().equals(positionCiudad)) {
+                for (Unidades s : batallon.getSoldadoHashMap().values()) {
+                    if (listaBatallonesSumandoSoldados.get(s.getTipeUnit()) == null) {
+                        listaBatallonesSumandoSoldados.put(s.getTipeUnit(), s.getCantidad());
+                    } else {
+                        listaBatallonesSumandoSoldados.put(s.getTipeUnit(), (listaBatallonesSumandoSoldados.get(s.getTipeUnit()) + s.getCantidad()));
+                    }
+                }
+            }
+        }
+        //FIN BUSCAR BATALLONES
         for (UnidadesPreCargadas unidadesPreCargadas : listaUnidades.values()) {
             if (unidadesPreCargadas.getTipoLucha() == tipoDeUnidades) {
                 HBox hBox = new HBox();
@@ -496,7 +536,15 @@ public class CiudadController extends MapasController implements Initializable {
                 CustomTextField textField = new CustomTextField("0", true, maxSoldados);
                 //textField.textProperty().bind(slider.valueProperty().asString("%.0f"));
 
-                int conters = getCiudadPrimaryStageController().getListSoldadosCity().get(unidadesPreCargadas.getIdType()).getCantidad();
+
+                int conters;
+                Integer x = listaBatallonesSumandoSoldados.get(unidadesPreCargadas.getIdType());
+                if (x == null) {
+                    conters = 0;
+                } else {
+                    conters = x;
+                }
+                //int conters = getCiudadPrimaryStageController().getListSoldadosCity().get(unidadesPreCargadas.getIdType()).getCantidad();
                 Label label2 = new Label("+ " + conters);
                 if (conters > 0) {
                     label2.setTextFill(Color.GREEN);
@@ -661,10 +709,12 @@ public class CiudadController extends MapasController implements Initializable {
                 flowPane.setHgap(10);
                 flowPane.setVgap(10);
                 flowPane.setAlignment(Pos.CENTER);
-                for (Recursos recursosPoducidosMax : recursosAProducir.values()) {//SLIDER
+                for (Recursos recursosPoducidosMax : recursosAProducir.values()) {
                     RecursosPrecargados poducidoMax = recursosPoducidosMax.getRecursosPrecargados();
                     if (recursosCosteXmin.containsKey(poducidoMax)) {
+                        VBox vBox1 = new VBox();
                         HBox hBox = new HBox();
+                        hBox.setSpacing(10);
                         hBox.setAlignment(Pos.CENTER);
                         ImageView imageView = new ImageView(poducidoMax.getImage());
                         imageView.setFitWidth(25);
@@ -674,25 +724,32 @@ public class CiudadController extends MapasController implements Initializable {
                         //String variableDondeGuardamosCantidad=recursosCosteXmin.get(recursosPoducidosMax);
 
                         //recursosCosteXmin.get(i)
-                        System.out.println("FFFFFFFFFFFFFF");
-                        System.out.println(poducidoMax);
-                        System.out.println(trabajadoresEnEdificio.size());
-                        System.out.println("DDDDDDDDDDDDDDDDDDDD");
-                        System.out.println(trabajadoresEnEdificio.get(poducidoMax.getId()));
-                        System.out.println(trabajadoresEnEdificio.get(poducidoMax.getId()).getCantidad());
-                        System.out.println();
-                        CustomSlider customSlider = new CustomSlider(0, recursosPoducidosMax.getCantidad(), trabajadoresEnEdificio.get(poducidoMax.getId()).getCantidad());
+                        FlowPane flowPane1 = new FlowPane();
+                        int tope = trabajadoresEnEdificio.get(poducidoMax.getId()).getCantidad();
+                        CustomTextField textField = new CustomTextField(String.valueOf(tope), true, recursosPoducidosMax.getCantidad());
+
+                        CustomSlider customSlider = new CustomSlider(0, recursosPoducidosMax.getCantidad(), tope);
+                        customSlider.setmargin(25, 0, 0, 0);
+                        customSlider.valueProperty().addListener(new ChangeListener<Number>() {
+                            @Override
+                            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+                                int seleccionado = newValue.intValue();
+                                int number = oldValue.intValue() - seleccionado;
+                                if (number != 0) {
+                                    textField.textProperty().setValue(String.valueOf(seleccionado));
+                                    Platform.runLater(() -> delSliderEdificiosConRecursos(recursosCosteXmin, poducidoMax, flowPane1, number, edificioSlider, flowPaneRecuros, getCiudadPrimaryStageController().getRecursosTreeMap()));
+                                }
+                            }
+                        });
+                        textField.setBindSlider(customSlider);
                         hBox.getChildren().add(customSlider);
-                        ArrayList<Recursos> recursosXMin=recursosCosteXmin.get(poducidoMax);
-                        int f=recursosXMin.size();
-                        System.out.println(f);
-                        for (int i = 0; i < f; i++) {
-                            ImageView imageView2 = new ImageView(recursosXMin.get(i).getImage());
-                            imageView2.setFitWidth(25);
-                            imageView2.setFitHeight(25);
-                            hBox.getChildren().add(imageView2);
-                        }
-                        vBox.add(hBox);
+                        hBox.getChildren().add(textField);
+                        vBox1.getChildren().add(hBox);
+                        //METODO
+                        delSliderEdificiosConRecursos(recursosCosteXmin, poducidoMax, flowPane1, 0, edificioSlider, flowPaneRecuros, getCiudadPrimaryStageController().getRecursosTreeMap());
+                        vBox1.getChildren().add(flowPane1);
+                        //METODO
+                        vBox.add(vBox1);
                     } else {
 
                         Recursos recursos = recursosPoducidosMax;
@@ -710,11 +767,9 @@ public class CiudadController extends MapasController implements Initializable {
 
                 }
                 if (flowPane.getChildren().size() > 0) {// *1 estaconectado
-                    vBox.add(new CustomSeparator(220,false));
+                    vBox.add(new CustomSeparator(220, false));
                     vBox.add(flowPane);
                 }
-                //recursosAProducir
-                //TODO CustomSlider customSlider = new CustomSlider()
             }
 
         }
@@ -724,63 +779,60 @@ public class CiudadController extends MapasController implements Initializable {
             vBox.add(new CustomSeparator(220, true));
             printTodosLosRecursosEdificioSegunTipo(vBox, d, produce_Almacena_Cuesta_Devolucion_Resto_cambio, null);
         }
-/*
-                if (edificioprecargado.getRecursosCosteXmin()!=null) {
-
-                }
-                ArrayList<Recursos> recursosAQuitar = edificioprecargado.getRecursosCosteXmin().get(recursoValor.getRecursosPrecargados());//recursoValor.getRecursosPrecargados();
-                if (edificioSlider != null && recursosAQuitar != null) {//SLIDER
-                    ArrayList<Recursos> recursosAQuitarCiudad = new ArrayList<>();
-                    int maximos=Integer.MAX_VALUE;
-                    Recursos noSeGasta=null;
-                    Recursos noSeGastaCiudad=null;
-                    for (Recursos recursoAQuitar : recursosAQuitar) {
-                        Recursos recursoCiudad=getCiudadPrimaryStageController().getRecursosTreeMap().get(recursoAQuitar.getId());
-                        recursosAQuitarCiudad.add(recursoCiudad);
-                        int num=recursoCiudad.getCantidad()/recursoAQuitar.getCantidad();
-                        if (num<maximos){
-                            maximos=num;
-                        }
-                        if (!recursoAQuitar.getRecursosPrecargados().isSeGasta()){
-                            noSeGasta=recursoAQuitar;
-                            noSeGastaCiudad=recursoCiudad;
-                        }
-                    }
-
-                    HBox hBox = new HBox();
-                    //int maxPoblacion2 = Math.min(poblacionMaximaQueSePuedePoner, pobacionCiudad + poblacionPuesta);
-                    CustomTextField customTextField = new CustomTextField(String.valueOf(noSeGastaCiudad.getCantidad()), true, maximos);
-                    Label labelMax = new Label(" /" + noSeGasta.getCantidad());
-                    CustomSlider slider = new CustomSlider(0, noSeGasta.getCantidad(), noSeGasta.getCantidad());
-                    slider.setPadding(new Insets(25, 5, 0, 0));
-                    /*
-                    slider.valueProperty().addListener(new ChangeListener<Number>() {
-                        @Override
-                        public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
-                            int a = newValue.intValue();
-                            int number = oldValue.intValue() - a;
-                            if (number != 0) {
-                                if (recursosAQuitarCiudad.getCantidad() + number >= 0) {
-                                    customTextField.textProperty().setValue(String.valueOf(a));
-                                    recursosAQuitarCiudad.addCantidad(number);
-                                    edificioSlider.getTrabajadoresNecesarios().get(recursoValor.getId()).addCantidad(number);
-                                    recursosMenu(flowPaneRecuros);
-                                } else {
-                                    borderPane.setLeft(null);
-                                }
-                            }
-                        }
-                    });
-
-                     *//*
-                    customTextField.setBindSlider(slider);
-                    hBox.getChildren().addAll(imageView, slider, customTextField, labelMax);
-                    childrenFlowPane.add(hBox);
-                    */
-
 
         vBox.add(new CustomSeparator(220, true));
 
+    }
+
+    private static void delSliderEdificiosConRecursos(TreeMap<RecursosPrecargados, ArrayList<Recursos>> recursosCosteXmin, RecursosPrecargados poducidoMax, FlowPane flowPane, int number, Edificio edificio, FlowPane flowPaneRecuros, TreeMap<Integer, Recursos> recursosDeLaCiudad) {
+        Recursos multiplicador = edificio.getTrabajadoresNecesarios().get(poducidoMax.getId());
+        ArrayList<Recursos> recursosXMin = recursosCosteXmin.get(poducidoMax);
+        try {
+            if (number < 0) {
+                int elnumerito = Math.abs(number);
+                multiplicador.addCantidad(elnumerito);
+                for (Recursos recursoxMin : recursosXMin) {
+                    if (!recursoxMin.getRecursosPrecargados().isSeConsumeEnEdificios()) {
+                        int aBuscar = recursoxMin.getId();
+                        recursosDeLaCiudad.get(aBuscar).removeCantidad(elnumerito * recursoxMin.getCantidad());
+                        if (recursosDeLaCiudad.get(aBuscar).getCantidad() < 0) {
+                            throw new Exception("No se puede tener menos de 0 -> " + recursosDeLaCiudad.get(aBuscar));
+                        }
+                    }
+                }
+            } else if (number > 0) {
+                multiplicador.removeCantidad(number);
+                for (Recursos recursoxMin : recursosXMin) {
+                    if (!recursoxMin.getRecursosPrecargados().isSeConsumeEnEdificios()) {
+                        recursosDeLaCiudad.get(recursoxMin.getId()).addCantidad(number * recursoxMin.getCantidad());
+                    }
+                }
+            }
+            int multi = multiplicador.getCantidad();
+            if (multi == 0) {
+                multi = 1;
+            }
+
+            //FIN CALCULOS
+            flowPane.getChildren().clear();
+            int f = recursosXMin.size();
+            flowPane.setAlignment(Pos.CENTER);
+            flowPane.setHgap(15);
+            flowPane.setHgap(15);
+            for (int i = 0; i < f; i++) {
+                Recursos ff = recursosXMin.get(i);
+                ImageView imageView2 = new ImageView(ff.getImage());
+                imageView2.setFitWidth(25);
+                imageView2.setFitHeight(25);
+                Label label = new Label("-" + (ff.getCantidad() * multi));
+                label.setTextFill(Color.RED);
+                label.setGraphic(imageView2);
+                flowPane.getChildren().add(label);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        recursosMenu(flowPaneRecuros);
     }
 
     private static void printEdificioRecursos(ObservableList<Node> vBox, EdificiosPreCargados edificioprecargado, int construir_Update_Dowgrade_Destruir) {

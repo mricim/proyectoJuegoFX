@@ -25,9 +25,19 @@ public class Edificio extends Posicion implements Cloneable {
         this.nivel = edificioPreCargado.getNivel();
         this.edificiosPreCargado = edificioPreCargado;
 
-        if (edificioPreCargado.getRecursosCosteXmin() != null) {
-            for (RecursosPrecargados recursos : edificioPreCargado.getRecursosCosteXmin().keySet()) {
-                trabajadoresNecesarios.put(recursos.getId(), new Recursos(recursos, 0));
+        TreeMap<RecursosPrecargados, ArrayList<Recursos>> i = edificioPreCargado.getRecursosCosteXmin();
+        if (i != null) {
+            for (RecursosPrecargados recursos : i.keySet()) {
+                boolean temporal = false;
+                for (Recursos recursos1 : i.get(recursos)) {
+                    if (!recursos1.getRecursosPrecargados().isSeConsumeEnEdificios()) {
+                        temporal = true;
+                        break;
+                    }
+                }
+                if (temporal) {
+                    trabajadoresNecesarios.put(recursos.getId(), new Recursos(recursos, 0));
+                }
             }
         }
 

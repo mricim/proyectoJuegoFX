@@ -1,6 +1,7 @@
 package main.java.juego.mapas.pelea;
 
 
+import main.java.juego.mapas.ciudad.Ciudad;
 import main.java.jugadores.Jugador;
 import main.java.utils.Posicion;
 
@@ -8,22 +9,24 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Batallon extends Posicion {
-    private static int lastIdBatallon=1;
-    private HashMap<String, Unidades> SoldadoHashMap = new HashMap<>();
+    private static int lastIdBatallon = 1;
+    private HashMap<Integer, Unidades> SoldadoHashMap = new HashMap<>();
     private int idBatallon;
     private String nombre;
+    private Ciudad ciudadVolver;
     private int proyectiles;//TODO MAS QUE PROYECTILES SERIA COMO RACIONES O MUNICIONES O ALGO ASI
     private double poderMilitar;
 
 
-    public Batallon(String nombre, int filas, int columnas, int proyectiles, Jugador jugador) {
+    public Batallon(String nombre, int filas, int columnas, int proyectiles, Jugador jugador, Ciudad ciudadVolver) {
         super(filas, columnas);
         this.idBatallon = lastIdBatallon++;
         this.nombre = nombre;
         this.proyectiles = proyectiles;
+        this.ciudadVolver = ciudadVolver;
 
         String posicion = this.getPosition();
-        jugador.listaBatallonesPropios.put(posicion, this);
+        jugador.listaBatallonesPropios.put(idBatallon, this);
         //Jugador.listaBatallones.put(posicion, this);
         if (Jugador.listaPosicionesBatallones.containsKey(this.getPosition())) {
             Jugador.listaPosicionesBatallones.get(posicion).add(this);
@@ -64,11 +67,11 @@ public class Batallon extends Posicion {
     }
  */
 
-    public HashMap<String, Unidades> getSoldadoHashMap() {
+    public HashMap<Integer, Unidades> getSoldadoHashMap() {
         return SoldadoHashMap;
     }
 
     public void setSoldadoHashMap(Unidades soldado) {
-        SoldadoHashMap.put(soldado.getPosition(), soldado);
+        SoldadoHashMap.put(soldado.getId(), soldado);
     }
 }

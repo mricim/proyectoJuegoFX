@@ -150,7 +150,7 @@ public class MundoController extends MapasController implements Initializable {
                     boolean batallonAliado = false;
                     for (Batallon batallon : batallonesToGrid) {
                         if (getClanPrimaryStageController().getBatallonesDelClan().contains(batallon)) {//TODO new Batallon(position)
-                            if (getJugadorPrimaryStageController().listaBatallonesPropios.containsValue(batallon)) {
+                            if (getJugadorPrimaryStageController().listaBatallonesPropios.containsValue(batallon.getIdBatallon())) {
                                 batallonNuestro = true;
                             } else {
                                 batallonAliado = true;
@@ -361,11 +361,6 @@ public class MundoController extends MapasController implements Initializable {
             nombreBatallon.setAlignment(Pos.CENTER);
             nombreBatallon.setWrapText(true);
             childrenVBox.add(nombreBatallon);
-            //Imagen ciudad
-            imgViewBatallon = new ImageView(imageView.getImage());
-            imgViewBatallon.setPickOnBounds(true);
-            imgViewBatallon.setPreserveRatio(true);
-            childrenVBox.add(imgViewBatallon);
 
             //TODO como buscar la imagen de cada tipo de soldado para poder printear en el menu izquierdo cada numero de unidades de cada batallon
             for (Unidades unidades: batallon.getSoldadoHashMap().values()) {
@@ -387,14 +382,14 @@ public class MundoController extends MapasController implements Initializable {
 
             }
 
-            vBoxBloquePropio.setMargin(imgViewBatallon, new Insets(0, 15, 0, 15));
-            if (getJugadorPrimaryStageController().listaBatallonesPropios.containsKey(batallon.getPosition())) {
+            //vBoxBloquePropio.setMargin(new Insets(0, 15, 0, 15));
+            if (getJugadorPrimaryStageController().listaBatallonesPropios.containsKey(batallon.getIdBatallon())) {
                 backgroundFill = new BackgroundFill(Color.ANTIQUEWHITE, CornerRadii.EMPTY, Insets.EMPTY);
 
             } else {
                 boolean xi = false;
                 for (Jugador jugador : getClanPrimaryStageController().getJugadoresDelClan().values()) {
-                    if (jugador.listaBatallonesPropios.containsKey(batallon.getPosition())) {
+                    if (jugador.listaBatallonesPropios.containsKey(batallon.getIdBatallon())) {
                         xi = true;
                         break;
                     }
