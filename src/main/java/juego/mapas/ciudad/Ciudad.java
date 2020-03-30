@@ -56,12 +56,12 @@ public class Ciudad extends Posicion {
         try {
             if (idCiudad == 2) {
                 new Edificio(listaEdificiosPreCargados.get(0 + "_" + 0), 8, 8, this);//parcela
-                new Edificio(listaEdificiosPreCargados.get(2 + "_" + 1), 1, 9, this);
+                new Edificio(listaEdificiosPreCargados.get(2 + "_" + 1), 1, 12, this);
                 new Edificio(listaEdificiosPreCargados.get(0 + "_" + 0), 6, 8, this);//parcela
                 new Edificio(listaEdificiosPreCargados.get(1 + "_" + 0), 8, 15, this);
             } else if (idCiudad == 1) {
                 new Edificio(listaEdificiosPreCargados.get(1 + "_" + 1), 8, 7, this);
-                new Edificio(listaEdificiosPreCargados.get(2 + "_" + 0), 1, 9, this);
+                new Edificio(listaEdificiosPreCargados.get(2 + "_" + 0), 1, 12, this);
             }
             new Edificio(listaEdificiosPreCargados.get(10 + "_" + 0), 10, 4, this);
             new Edificio(listaEdificiosPreCargados.get(11 + "_" + 0), 8, 12, this);
@@ -75,7 +75,7 @@ public class Ciudad extends Posicion {
             new Edificio(listaEdificiosPreCargados.get(15 + "_" + 0), 7, 17, this);//todos tendrian "parcela"
             new Edificio(listaEdificiosPreCargados.get(16 + "_" + 0), 12, 17, this);//todos tendrian "parcela"
             new Edificio(listaEdificiosPreCargados.get(17 + "_" + 0), 13, 5, this);//todos tendrian "parcela"
-            new Edificio(listaEdificiosPreCargados.get(18 + "_" + 0), 14, 8, this);//todos tendrian "parcela"
+            new Edificio(listaEdificiosPreCargados.get(18 + "_" + 0), 14, 10, this);//todos tendrian "parcela"
             new Edificio(listaEdificiosPreCargados.get(19 + "_" + 0), 3, 7, this);//todos tendrian "parcela"
             new Edificio(listaEdificiosPreCargados.get(20 + "_" + 0), 4, 8, this);//todos tendrian "parcela"
         } catch (Exception e) {

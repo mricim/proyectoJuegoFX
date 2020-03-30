@@ -73,7 +73,7 @@ public class CiudadController extends MapasController implements Initializable {
         ObservableList<Node> x = dondeVaLaImagen.getChildren();
         List<Node> asd = new ArrayList<>();
         ImageView imageViewBase = new ImageView();
-        imageViewBase.setImage(CallImages.getImage(THIS_RUTE_IMAGES, "fondoCiudad", 2244, 1692));
+        imageViewBase.setImage(CallImages.getImage(THIS_RUTE_IMAGES, "fondoCiudad", 3000, 1700));
         asd.add(imageViewBase);
         asd.addAll(x);
         x.clear();
