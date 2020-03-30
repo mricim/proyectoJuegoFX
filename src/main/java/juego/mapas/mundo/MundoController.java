@@ -613,23 +613,7 @@ public class MundoController extends MapasController implements Initializable {
             controllerParaVerSiestaVacio = true;
         }
         if (controllerParaVerSiestaVacio) {
-            VBox vBox = new VBox();
-            for (VBox box : vBoxList) {
-                vBox.getChildren().add(box);
-                Separator separator = new Separator();
-                separator.setVisible(false);
-                vBox.getChildren().add(separator);
-            }
-            vBox.setSpacing(5);
-            vBox.setAlignment(TOP_CENTER);
-
-            ScrollPane scrollPane = new ScrollPane(vBox);
-            scrollPane.maxWidth(-Infinity);
-            scrollPane.prefWidth(200);
-            scrollPane.setHbarPolicy(NEVER);
-            //scrollPane.()BorderPane.alignment="CENTER"
-
-            borderPane.setLeft(scrollPane);
+            rellenador(borderPane,vBoxList,200);
         }
     }
 
