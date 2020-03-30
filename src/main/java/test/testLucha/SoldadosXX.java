@@ -1,6 +1,6 @@
-package main.java.testLucha;
+package main.java.test.testLucha;
 
-import static main.java.testLucha.MainLucha1.tipoSoldadosTreeMap;
+import static main.java.test.testLucha.MainLucha1.tipoSoldadosTreeMap;
 
 public class SoldadosXX {
     private static int lastId=0;

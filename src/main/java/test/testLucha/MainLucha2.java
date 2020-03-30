@@ -1,4 +1,4 @@
-package main.java.testLucha;
+package main.java.test.testLucha;
 
 import java.util.Collections;
 import java.util.HashMap;

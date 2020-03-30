@@ -1,4 +1,4 @@
-package main.java.login2;
+package main.java.test.login2;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;

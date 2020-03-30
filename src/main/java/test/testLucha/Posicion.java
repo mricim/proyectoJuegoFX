@@ -1,7 +1,7 @@
-package main.java.testLucha;
+package main.java.test.testLucha;
 
 
-import static main.java.testLucha.MainLucha2.*;
+import static main.java.test.testLucha.MainLucha2.*;
 
 public class Posicion extends main.java.utils.Posicion {
     private SoldadosXX soldadosXX;

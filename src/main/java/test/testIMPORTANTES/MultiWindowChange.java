@@ -1,4 +1,4 @@
-package main.java.testIMPORTANTES;
+package main.java.test.testIMPORTANTES;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
