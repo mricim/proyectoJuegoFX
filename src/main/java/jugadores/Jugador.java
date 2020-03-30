@@ -29,13 +29,16 @@ public class Jugador {
     private static int lastId=1;
     private int id;
     private String nombre;
-    private Recursos investigacion;
+    private TreeMap<Integer, Recursos> recursosJugador =new TreeMap<>();
     public Ciudad cargarCiudadPrincipal = null;
 
-    public Jugador( String nombre, int investigacion) {
+    public Jugador( String nombre, ArrayList<Recursos> recursosJugador) {
         this.id = lastId++;
         this.nombre = nombre;
-        this.investigacion = new Recursos(7, investigacion);
+        for (Recursos recursos : recursosJugador) {
+            this.recursosJugador.put(recursos.getId(),recursos);
+        }
+
 
 //TODO LEER DESDE LA BD
         ArrayList<Recursos> paraCity1=new ArrayList<>();
@@ -155,8 +158,8 @@ public class Jugador {
         return nombre;
     }
 
-    public int getInvestigacion() {
-        return investigacion.getCantidad();
+    public TreeMap<Integer, Recursos> getRecursosJugador() {
+        return recursosJugador;
     }
 
     public static Jugador returnJugador(int jugadorId) {

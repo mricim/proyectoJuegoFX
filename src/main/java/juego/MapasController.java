@@ -9,12 +9,16 @@ import javafx.scene.control.SplitMenuButton;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
+import main.java.juego.mapas.ciudad.CiudadController;
+import main.java.juego.mapas.mundo.MundoController;
+import main.java.juego.mapas.pelea.PeleaController;
 import main.java.utils.PrimaryStageControler;
 import main.java.juego.mapas.ciudad.Ciudad;
 import main.java.juego.mapas.Recursos;
-import main.java.juego.mapas.ciudad.CiudadController;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.TreeMap;
 
 abstract public class MapasController extends PrimaryStageControler {
     public static boolean newCiudad;
@@ -23,33 +27,55 @@ abstract public class MapasController extends PrimaryStageControler {
 
 
     public void inicialiceController() {
-            nameThisCityController = getCiudadPrimaryStageController().getNameCity();
+        nameThisCityController = getCiudadPrimaryStageController().getNameCity();
     }
 
-    public static void recursosMenu(FlowPane flowPaneRecuros) {
-        recursosMenu(flowPaneRecuros, getCiudadPrimaryStageController().getRecursosTreeMap().values());
+    public static void recursosMenu(FlowPane flowPaneRecuros, Class<? extends MapasController> aClass) {
+        ArrayList<Recursos> listaRecursosEnMenu = new ArrayList<>();
+        listaRecursosEnMenu.addAll(getCiudadPrimaryStageController().getRecursosTreeMap().values());
+        listaRecursosEnMenu.addAll(getJugadorPrimaryStageController().getRecursosJugador().values());
+
+        recursosMenu(flowPaneRecuros, listaRecursosEnMenu, aClass);
     }
 
-    public static void recursosMenu(FlowPane flowPane, Collection<Recursos> recursos2) {
+    public static void recursosMenu(FlowPane flowPane, ArrayList<Recursos> recursos2, Class<? extends MapasController> aClass) {
         ObservableList<Node> observableList = flowPane.getChildren();
         observableList.clear();
+        int numero = 0;
+        if (CiudadController.class.equals(aClass)) {
+            numero=1;
+        } else if (MundoController.class.equals(aClass)) {
+            numero=2;
+        } else if (PeleaController.class.equals(aClass)) {
+            numero=3;
+        }
         for (Recursos recursos : recursos2) {
-            Label label = new Label(String.valueOf(recursos.getCantidad()));
-            ImageView imageView = new ImageView(recursos.getImage());
-            imageView.setFitWidth(30.0);
-            imageView.setFitHeight(30.0);
-            HBox hBox = new HBox(imageView, label);
-            hBox.setId(String.valueOf(recursos.getId()));
-            hBox.setAlignment(Pos.CENTER);
-            hBox.setPrefHeight(20.0);
-            hBox.setMinWidth(70.0);
-            hBox.setSpacing(5.0);
+            boolean estaEnesteMenu=false;
+            if (numero==1&&recursos.getRecursosPrecargados().isMenuCiudad()) {
+                estaEnesteMenu=true;
+            }else if (numero==2&&recursos.getRecursosPrecargados().isMenuMundo()) {
+                estaEnesteMenu=true;
+            }else if (numero==3&&recursos.getRecursosPrecargados().isMenupelea()) {
+                estaEnesteMenu=true;
+            }
+            if (estaEnesteMenu){
+                Label label = new Label(String.valueOf(recursos.getCantidad()));
+                ImageView imageView = new ImageView(recursos.getImage());
+                imageView.setFitWidth(30);
+                imageView.setFitHeight(30);
+                HBox hBox = new HBox(imageView, label);
+                hBox.setId(String.valueOf(recursos.getId()));
+                hBox.setAlignment(Pos.CENTER);
+                hBox.setPrefHeight(20.0);
+                hBox.setMinWidth(70.0);
+                hBox.setSpacing(5.0);
 
-            observableList.add(hBox);
+                observableList.add(hBox);
+            }
         }
     }
 
-    public static void selectorDeCiudad(SplitMenuButton selectorCiudad, boolean toCity) {
+    public static void selectorDeCiudad(SplitMenuButton selectorCiudad, Class<? extends MapasController> toCity) {
         selectorCiudad.setText(nameThisCityController);//Seleccionar otra ciudad
         for (Ciudad ciudadTemp : getJugadorPrimaryStageController().listaCiudadesPropias.values()) {
             String nameCity = ciudadTemp.getNameCity();
@@ -58,9 +84,7 @@ abstract public class MapasController extends PrimaryStageControler {
                 menuItem.setText(nameCity);
                 menuItem.setOnAction((e) -> {
                     setCiudadPrimaryStageController(ciudadTemp);
-                    if (toCity) {
-                        reload(CiudadController.class);
-                    }
+                    reload(toCity);
                 });
                 selectorCiudad.getItems().add(menuItem);
             }

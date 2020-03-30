@@ -64,8 +64,8 @@ public class CiudadController extends MapasController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         inicialiceController();
-        recursosMenu(flowPaneRecuros);
-        selectorDeCiudad(selectorCiudad, true);
+        recursosMenu(flowPaneRecuros,this.getClass());
+        selectorDeCiudad(selectorCiudad, this.getClass());
         gridPaneMap.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {//Cerrar el menu
             queClicas(null, null);
         });
@@ -76,9 +76,8 @@ public class CiudadController extends MapasController implements Initializable {
         imageViewBase.setImage(CallImages.getImage(THIS_RUTE_IMAGES, "fondoCiudad", 2244, 1692));
         asd.add(imageViewBase);
         asd.addAll(x);
-        ObservableList<Node> f = dondeVaLaImagen.getChildren();
-        f.clear();
-        f.addAll(asd);
+        x.clear();
+        x.addAll(asd);
         //<--CARGAR IMAGEN DE FONDO
 
         Collection<Edificio> posicionEdificios = getCiudadPrimaryStageController().getListaPosicionesEdificios().values();
@@ -292,7 +291,7 @@ public class CiudadController extends MapasController implements Initializable {
                             recursosCity.addCantidad(((value.getCantidad() * PORCENTAGE_A_DEVOLVER) / 100));
                         }
                     }
-                    recursosMenu(flowPaneRecuros);
+                    recursosMenu(flowPaneRecuros,this.getClass());
                     borderPane.setLeft(null);
                     //devolvemos los trabajadores a la ciudad
                     TreeMap<Integer, Recursos> i = edificioPuesto.getTrabajadoresNecesarios();
@@ -492,7 +491,7 @@ public class CiudadController extends MapasController implements Initializable {
             }
 
             borderPane.setLeft(null);
-            recursosMenu(flowPaneRecuros);
+            recursosMenu(flowPaneRecuros,CiudadController.class);
         });
         //FIN ESTO ES PARA QUE ENTRE EN EL SISTEMA
         //Buscar batallones en esta posicion
@@ -833,7 +832,7 @@ public class CiudadController extends MapasController implements Initializable {
                 label.setGraphic(imageView2);
                 flowPane.getChildren().add(label);
             }
-        recursosMenu(flowPaneRecuros);
+        recursosMenu(flowPaneRecuros,CiudadController.class);
     }
 
     private static void printEdificioRecursos(ObservableList<Node> vBox, EdificiosPreCargados edificioprecargado, int construir_Update_Dowgrade_Destruir) {

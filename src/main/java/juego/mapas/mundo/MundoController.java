@@ -74,8 +74,8 @@ public class MundoController extends MapasController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         if (!primeraCiudad) {
             inicialiceController();
-            recursosMenu(recuros);
-            selectorDeCiudad(selectorCiudad, false);
+            recursosMenu(recuros,this.getClass());
+            selectorDeCiudad(selectorCiudad, this.getClass());
             gridPaneMap.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {//Cerrar el menu
                 queClicas(null, true, null, null, null);
             });
@@ -85,8 +85,8 @@ public class MundoController extends MapasController implements Initializable {
         //<-- Controlado por MapasController
 
 
-        //int numCiudades = listaCiudades.size();
-        int numCiudades = 12000;
+        int numCiudades = listaCiudades.size();
+        //int numCiudades = 12000;
         int tamaño = 15;
         int capacidadCiudades = 0;
         double casillasTotales = 0;

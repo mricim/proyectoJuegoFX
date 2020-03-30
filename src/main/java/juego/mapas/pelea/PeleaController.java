@@ -8,6 +8,7 @@ import javafx.scene.control.SplitMenuButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
+import main.java.juego.MapasController;
 import main.java.jugadores.Jugador;
 import main.java.utils.PrimaryStageControler;
 
@@ -15,7 +16,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 
-public class PeleaController extends PrimaryStageControler implements Initializable {
+public class PeleaController extends MapasController implements Initializable {
     private static String RUTE = "../../../resources/mapas/city/";
     static Jugador jugador;
     static boolean basura = true;

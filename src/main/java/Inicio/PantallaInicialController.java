@@ -140,9 +140,9 @@ public class PantallaInicialController extends PrimaryStageControler implements 
         RecursosPrecargados piedraPre = new RecursosPrecargados(2, TRADUCCIONES.getString("recurso.piedra"), true, true, false, true);
         RecursosPrecargados comidaPre = new RecursosPrecargados(3, TRADUCCIONES.getString("recurso.comida"), true, true, false, true);
         RecursosPrecargados hierroPre = new RecursosPrecargados(4, TRADUCCIONES.getString("recurso.hierro"), true, true, false, true);
-        RecursosPrecargados poblacionPre = new RecursosPrecargados(5, TRADUCCIONES.getString("recurso.poblacion"), true, true, false, false);
-        RecursosPrecargados felicidadPre = new RecursosPrecargados(6, TRADUCCIONES.getString("recurso.felicidad"), true, true, true, true);
-        RecursosPrecargados investigacionPre = new RecursosPrecargados(7, TRADUCCIONES.getString("recurso.investigacion"), false, false, false, true);
+        RecursosPrecargados poblacionPre = new RecursosPrecargados(5, TRADUCCIONES.getString("recurso.poblacion"), true, false, false, false);
+        RecursosPrecargados felicidadPre = new RecursosPrecargados(6, TRADUCCIONES.getString("recurso.felicidad"), true, false, true, true);
+        RecursosPrecargados investigacionPre = new RecursosPrecargados(7, TRADUCCIONES.getString("recurso.investigacion"), false, true, false, true);
         RecursosPrecargados municionPre = new RecursosPrecargados(8, "municion", true, true, true, true);
         progresBar.setProgress(15);
         //TODO MENUS ESPECIALES
@@ -277,12 +277,18 @@ public class PantallaInicialController extends PrimaryStageControler implements 
         progresBar.setProgress(50);
         //TODO FIN LEER DESDE LA BD
         Clan clan = new Clan(1, "Los mejores");
-        Jugador jugador = new Jugador("pepito", 500);
+        ArrayList<Recursos> jugador1ListaRecuros = new ArrayList<>();
+        jugador1ListaRecuros.add(new Recursos(investigacionPre,5));
+        Jugador jugador = new Jugador("pepito", jugador1ListaRecuros);
         setJugadorPrimaryStageController(jugador);
         setClanPrimaryStageController(clan);
         progresBar.setProgress(60);
-        new Jugador("juan", 300);
-        new Jugador("pedro", 8000);
+        ArrayList<Recursos> jugador2ListaRecuros = new ArrayList<>();
+        jugador2ListaRecuros.add(new Recursos(investigacionPre,25));
+        new Jugador("juan", jugador2ListaRecuros);
+        ArrayList<Recursos> jugador3ListaRecuros = new ArrayList<>();
+        jugador3ListaRecuros.add(new Recursos(investigacionPre,80));
+        new Jugador("pedro", jugador3ListaRecuros);
         progresBar.setProgress(70);
         clan.addJugadorClan(jugador);
         clan.addJugadorClan(3);
