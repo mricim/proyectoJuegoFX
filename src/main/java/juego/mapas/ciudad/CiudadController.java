@@ -11,11 +11,13 @@ import javafx.geometry.Pos;
 import javafx.scene.Cursor;
 import javafx.scene.Node;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
+import main.java.juego.comercio.Comercio;
 import main.java.juego.mapas.RecursosPrecargados;
 import main.java.utils.CallImages;
 import main.java.juego.MapasController;
@@ -320,10 +322,12 @@ public class CiudadController extends MapasController implements Initializable {
     }
 
     private void printEdificioEspecial(ObservableList<Node> childrenFlowPane, int tipoEdificio) {
-        Button button = new Button();
+        VBox vBox = new VBox();
+        vBox.setAlignment(Pos.CENTER);
         switch (tipoEdificio) {
-            case 1:
-                button.setText("New Ciudad");
+            case 1://PALACIO
+                Button buttonCase1 = new Button();
+                buttonCase1.setText("New Ciudad");
                 int total = getJugadorPrimaryStageController().listaCiudadesPropias.size();
                 int counter = 1;
                 for (Ciudad ciudad : getJugadorPrimaryStageController().listaCiudadesPropias.values()) {
@@ -334,34 +338,41 @@ public class CiudadController extends MapasController implements Initializable {
                     }
                 }
                 if (total < counter) {
-                    button.setOnMouseClicked(e -> {
+                    buttonCase1.setOnMouseClicked(e -> {
                         MapasController.newCiudad = true;
                         reload(MundoController.class);
                     });
                 } else {
-                    button.setDisable(true);
+                    buttonCase1.setDisable(true);
                 }
+                vBox.getChildren().add(buttonCase1);
                 break;
-            case 2:
-                button.setText(TRADUCCIONES.getString("city.button.entrenarNuevasUnidades"));
-                button.setOnMouseClicked(e -> {
+            case 2://CUARTEL (SOLDADOS)
+                Button buttonCase2 = new Button();
+                buttonCase2.setText(TRADUCCIONES.getString("city.button.entrenarNuevasUnidades"));
+                buttonCase2.setOnMouseClicked(e -> {
                     createMenuLeftSecond(borderPane, flowPaneRecuros, 2);
                 });
+                vBox.getChildren().add(buttonCase2);
                 break;
-            case 3:
-                button.setText(TRADUCCIONES.getString("city.button.construirMaquinariaAsedio"));
-                button.setOnMouseClicked(e -> {
+            case 3://ARMAS DE ASEDIO (SOLDADOS)
+                Button buttonCase3 = new Button();
+                buttonCase3.setText(TRADUCCIONES.getString("city.button.construirMaquinariaAsedio"));
+                buttonCase3.setOnMouseClicked(e -> {
                     createMenuLeftSecond(borderPane, flowPaneRecuros, 3);
                 });
+                vBox.getChildren().add(buttonCase3);
                 break;
-            case 4:
-                button.setText("Comerciar");
-                button.setOnMouseClicked(e -> {
+            case 4://PUERTO
+                Button buttonCase4 = new Button();
+                buttonCase4.setText("Comerciar");
+                buttonCase4.setOnMouseClicked(e -> {
                     createMenuLeftSecond(borderPane, flowPaneRecuros, 4);
                 });
+                vBox.getChildren().add(buttonCase4);
                 break;
         }
-        childrenFlowPane.add(button);
+        childrenFlowPane.add(vBox);
         Separator separator = new Separator();
         separator.setPrefWidth(220);
         separator.setVisible(false);
@@ -370,25 +381,68 @@ public class CiudadController extends MapasController implements Initializable {
 
     private static void createMenuLeftSecond(BorderPane borderPane, FlowPane flowPaneRecuros, int i) {
         List<VBox> vBoxList = new ArrayList<>();
+        int tamanoMenu=0;
         switch (i) {
             case 2:
-                vBoxList.add(cajaCrearUnidades(listaSoldadosPreCargada, 0, borderPane, flowPaneRecuros));//El que tenemos puesto
+                tamanoMenu=300;
+                vBoxList.add(cajaCrearUnidades(listaSoldadosPreCargada, 0, borderPane, flowPaneRecuros,tamanoMenu));
                 break;
             case 3:
-                vBoxList.add(cajaCrearUnidades(listaSoldadosPreCargada, 5, borderPane, flowPaneRecuros));//El que tenemos puesto
+                tamanoMenu=300;
+                vBoxList.add(cajaCrearUnidades(listaSoldadosPreCargada, 5, borderPane, flowPaneRecuros,tamanoMenu));
                 break;
             case 4:
-                vBoxList.add(cajaCrearUnidades(listaSoldadosPreCargada, 4, borderPane, flowPaneRecuros));//El que tenemos puesto//TODO // PUERTO , COMERCIAR
+                tamanoMenu=500;
+                vBoxList.add(cajaCrearComercio(Comercio.lista,  borderPane, flowPaneRecuros,tamanoMenu));
                 break;
         }
-        rellenador(borderPane, vBoxList,300);
+        rellenador(borderPane, vBoxList,tamanoMenu);
     }
 
-    private static VBox cajaCrearUnidades(TreeMap<Integer, UnidadesPreCargadas> listaUnidades, int tipoDeUnidades, BorderPane borderPane, FlowPane flowPaneRecuros) {
+    private static VBox cajaCrearComercio(TreeMap<Integer, Comercio> listaComercios, BorderPane borderPane, FlowPane flowPaneRecuros,int tamanoMenu) {
+        VBox vBoxBloquePropio = new VBox();
+        vBoxBloquePropio.setMinWidth(tamanoMenu);
+        vBoxBloquePropio.setMaxWidth(tamanoMenu);
+        vBoxBloquePropio.setAlignment(TOP_CENTER);
+        vBoxBloquePropio.setBackground(new Background(new BackgroundFill(Color.ANTIQUEWHITE, CornerRadii.EMPTY, Insets.EMPTY)));
+        vBoxBloquePropio.setSpacing(10);
+        ObservableList<Node> childrenVBox = vBoxBloquePropio.getChildren();
+        //BLOQUE
+        Separator separator2 = new Separator();
+        separator2.setPrefWidth(220);
+        separator2.setVisible(false);
+        childrenVBox.add(separator2);
+
+        Label nombreEdificioPropio = new Label("Comercio");
+        nombreEdificioPropio.setTextAlignment(CENTER);
+        nombreEdificioPropio.setAlignment(Pos.CENTER);
+        nombreEdificioPropio.setWrapText(true);
+        childrenVBox.add(nombreEdificioPropio);
+//TABLA
+        TableView<Comercio> comercioTableView = new TableView<Comercio>();
+        TableColumn firstNameCol = new TableColumn("Id");
+        firstNameCol.setMinWidth(100);
+        firstNameCol.setCellValueFactory(new PropertyValueFactory<Comercio, Integer>("id"));
+        TableColumn firstRecursoUnoCol = new TableColumn("Ofrece");
+        firstRecursoUnoCol.setMinWidth(100);
+        firstRecursoUnoCol.setCellValueFactory(new PropertyValueFactory<Comercio, Integer>("id"));
+
+        comercioTableView.setItems(Comercio.data);
+        comercioTableView.getColumns().addAll(firstRecursoUnoCol);
+//FINTABLA
+        childrenVBox.add(comercioTableView);
+        Separator separator = new Separator();
+        separator.setPrefWidth(220);
+        childrenVBox.add(separator);
+        //FIN BLOQUE
+        return vBoxBloquePropio;
+    }
+
+    private static VBox cajaCrearUnidades(TreeMap<Integer, UnidadesPreCargadas> listaUnidades, int tipoDeUnidades, BorderPane borderPane, FlowPane flowPaneRecuros,int tamanoMenu) {
         //BLOQUE
         VBox vBoxBloquePropio = new VBox();
-        vBoxBloquePropio.setMinWidth(300);
-        vBoxBloquePropio.setMaxWidth(300);
+        vBoxBloquePropio.setMinWidth(tamanoMenu);
+        vBoxBloquePropio.setMaxWidth(tamanoMenu);
         vBoxBloquePropio.setAlignment(TOP_CENTER);
         vBoxBloquePropio.setBackground(new Background(new BackgroundFill(Color.ANTIQUEWHITE, CornerRadii.EMPTY, Insets.EMPTY)));
         vBoxBloquePropio.setSpacing(10);

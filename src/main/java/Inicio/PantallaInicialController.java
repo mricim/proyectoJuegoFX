@@ -6,6 +6,7 @@ import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import main.java.juego.MapasController;
+import main.java.juego.comercio.Comercio;
 import main.java.juego.mapas.Recursos;
 import main.java.juego.mapas.RecursosPrecargados;
 import main.java.juego.mapas.mundo.MundoController;
@@ -293,5 +294,23 @@ public class PantallaInicialController extends PrimaryStageControler implements 
         clan.addJugadorClan(jugador);
         clan.addJugadorClan(3);
         progresBar.setProgress(80);
+
+        //COSAS DE TEST
+        new Comercio(new Recursos(oroPre,5),new Recursos(maderaPre,10),jugador);
+        new Comercio(new Recursos(hierroPre,6),new Recursos(comidaPre,11),jugador);
+        new Comercio(new Recursos(oroPre,7),new Recursos(maderaPre,12),jugador);
+        Thread thread = new Thread(){
+            public void run(){
+                try {
+                    Thread.sleep(60000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                System.out.println("Thread Running");
+                new Comercio(new Recursos(oroPre,7),new Recursos(maderaPre,12),jugador);
+            }
+        };
+        thread.start();
+
     }
 }

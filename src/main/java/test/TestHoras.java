@@ -1,4 +1,4 @@
-package main.java.juego.comercio;
+package main.java.test;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
