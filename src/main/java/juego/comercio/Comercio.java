@@ -1,9 +1,9 @@
 package main.java.juego.comercio;
 
-import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.image.ImageView;
 import main.java.juego.mapas.Recursos;
 import main.java.jugadores.Jugador;
 import main.java.utils.Time;
@@ -21,6 +21,8 @@ public class Comercio extends Time {
     private SimpleIntegerProperty id;
     private Recursos queSeOfrece;
     private Recursos queSePide;
+    private ImageView recursoOferta;
+    private ImageView recursoDemanda;
     private Jugador jugador;
     private LocalDateTime horaPublicacion;
     private LocalDateTime horaFin;
@@ -31,6 +33,8 @@ public class Comercio extends Time {
         this.queSeOfrece = queSeOfrece;
         this.queSePide = queSePide;
         this.jugador = jugador;
+        this.recursoOferta = new ImageView(queSeOfrece.getRecursosPrecargados().getImage());
+        this.recursoDemanda = new ImageView(queSePide.getRecursosPrecargados().getImage());
 
         horaPublicacion = horaActual_UTC;
         horaFin = horaPublicacion.plusHours(3);
@@ -62,6 +66,22 @@ public class Comercio extends Time {
 
     public Jugador getJugador() {
         return jugador;
+    }
+
+    public ImageView getRecursoOferta() {
+        return recursoOferta;
+    }
+
+    public void setRecursoOferta(ImageView recursoOferta) {
+        this.recursoOferta = recursoOferta;
+    }
+
+    public void setRecursoDemanda(ImageView recursoDemanda) {
+        this.recursoDemanda = recursoDemanda;
+    }
+
+    public ImageView getRecursoDemanda() {
+        return recursoDemanda;
     }
 
     public LocalDateTime getHoraPublicacionUTC() {

@@ -17,6 +17,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
+import javafx.util.Callback;
 import main.java.juego.comercio.Comercio;
 import main.java.juego.mapas.RecursosPrecargados;
 import main.java.utils.CallImages;
@@ -419,16 +420,54 @@ public class CiudadController extends MapasController implements Initializable {
         nombreEdificioPropio.setWrapText(true);
         childrenVBox.add(nombreEdificioPropio);
 //TABLA
-        TableView<Comercio> comercioTableView = new TableView<Comercio>();
-        TableColumn firstNameCol = new TableColumn("Id");
-        firstNameCol.setMinWidth(100);
-        firstNameCol.setCellValueFactory(new PropertyValueFactory<Comercio, Integer>("id"));
-        TableColumn firstRecursoUnoCol = new TableColumn("Ofrece");
-        firstRecursoUnoCol.setMinWidth(100);
-        firstRecursoUnoCol.setCellValueFactory(new PropertyValueFactory<Comercio, Integer>("id"));
+        TableView<Comercio> comercioTableView = new TableView<>();
+        TableColumn<Comercio,Integer> idCol = new TableColumn("Id");
+        idCol.setMinWidth(100);
+        idCol.setCellValueFactory(new PropertyValueFactory<>("id"));
+        TableColumn<Comercio,Recursos> recursoOferta = new TableColumn("Ofrece");
+        recursoOferta.setMinWidth(100);
 
+        //https://blog.ngopal.com.np/2011/10/01/tableview-cell-modifiy-in-javafx/
+        //TODO TABLE CELL
+//        recursoOferta.setCellValueFactory(new PropertyValueFactory<Comercio, ImageView>("recursoOferta"));
+        recursoOferta.setCellFactory(new Callback<TableColumn<Comercio, Recursos>, TableCell<Comercio, Recursos>>() {
+            @Override
+            public TableCell<Comercio, Recursos> call(TableColumn<Comercio, Recursos> param) {
+                TableCell<Comercio,Recursos> cell = new TableCell<Comercio,Recursos>(){
+                    ImageView imageview = new ImageView();
+
+                    @Override
+                    protected void updateItem(Recursos item, boolean empty) {
+                        super.updateItem(item, empty);
+                        if(item!=null){
+                            HBox box= new HBox();
+                            box.setSpacing(10) ;
+                            VBox vbox = new VBox();
+                            vbox.getChildren().add(new Label(String.valueOf(item.getCantidad())));
+
+
+                            imageview.setFitHeight(50);
+                            imageview.setFitWidth(50);
+                            imageview.setImage(item.getRecursosPrecargados().getImage());
+
+                            box.getChildren().addAll(imageview,vbox);
+                            //SETTING ALL THE GRAPHICS COMPONENT FOR CELL
+                            setGraphic(box);
+                        }
+                    }
+
+                };
+                System.out.println("Cell index: "+cell.getIndex());
+                return cell;
+            }
+        });
+
+        TableColumn<Comercio,ImageView> recursoDemanda = new TableColumn("Demanda");
+        recursoDemanda.setMinWidth(100);
+        recursoDemanda.setCellValueFactory(new PropertyValueFactory<Comercio, ImageView>("recursoDemanda"));
+
+        comercioTableView.getColumns().addAll(idCol,recursoOferta,recursoDemanda);
         comercioTableView.setItems(Comercio.data);
-        comercioTableView.getColumns().addAll(firstRecursoUnoCol);
 //FINTABLA
         childrenVBox.add(comercioTableView);
         Separator separator = new Separator();
