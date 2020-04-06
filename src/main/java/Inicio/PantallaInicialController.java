@@ -306,7 +306,7 @@ public class PantallaInicialController extends PrimaryStageControler implements 
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-                System.out.println("Thread Running");
+                System.out.println("Thread Running --> PANTALLA INICIAL CONTROLLER: add Comenrio recursos");
                 new Comercio(new Recursos(oroPre,7),new Recursos(maderaPre,12),jugador);
             }
         };

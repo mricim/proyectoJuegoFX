@@ -153,7 +153,7 @@ public class MundoController extends MapasController implements Initializable {
                     boolean batallonAliado = false;
                     for (Batallon batallon : batallonesToGrid) {
                         if (getClanPrimaryStageController().getBatallonesDelClan().contains(batallon)) {//TODO new Batallon(position)
-                            if (getJugadorPrimaryStageController().listaBatallonesPropios.containsValue(batallon.getIdBatallon())) {
+                            if (getJugadorPrimaryStageController().listaBatallonesPropios.containsValue(batallon)) {
                                 batallonNuestro = true;
                             } else {
                                 batallonAliado = true;

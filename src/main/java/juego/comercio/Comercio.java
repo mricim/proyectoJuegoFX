@@ -21,12 +21,12 @@ public class Comercio extends Time {
     private SimpleIntegerProperty id;
     private Recursos queSeOfrece;
     private Recursos queSePide;
-    private ImageView recursoOferta;
-    private ImageView recursoDemanda;
     private Jugador jugador;
     private LocalDateTime horaPublicacion;
     private LocalDateTime horaFin;
 
+    private ImageView recursoOferta;
+    private ImageView recursoDemanda;
 
     public Comercio(Recursos queSeOfrece, Recursos queSePide, Jugador jugador) {
         id = new SimpleIntegerProperty(lastId++);
@@ -58,6 +58,10 @@ public class Comercio extends Time {
 
     public Recursos getQueSeOfrece() {
         return queSeOfrece;
+    }
+
+    public void setQueSeOfrece(Recursos queSeOfrece) {
+        this.queSeOfrece = queSeOfrece;
     }
 
     public Recursos getQueSePide() {

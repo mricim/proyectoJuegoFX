@@ -1,6 +1,7 @@
 package main.java.juego.mapas.ciudad;
 
 import javafx.application.Platform;
+import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
@@ -174,7 +175,7 @@ public class CiudadController extends MapasController implements Initializable {
         }
 
 
-        rellenador(borderPane, vBoxList,300);
+        rellenador(borderPane, vBoxList, 300);
     }
 
     private VBox cajaEdificio(Edificio edificioPuesto, ImageView imageView, boolean parcela, EdificiosPreCargados edificioPosiblesConstrucciones, int construir_Update_Dowgrade_Destruir) {
@@ -382,25 +383,25 @@ public class CiudadController extends MapasController implements Initializable {
 
     private static void createMenuLeftSecond(BorderPane borderPane, FlowPane flowPaneRecuros, int i) {
         List<VBox> vBoxList = new ArrayList<>();
-        int tamanoMenu=0;
+        int tamanoMenu = 0;
         switch (i) {
             case 2:
-                tamanoMenu=300;
-                vBoxList.add(cajaCrearUnidades(listaSoldadosPreCargada, 0, borderPane, flowPaneRecuros,tamanoMenu));
+                tamanoMenu = 300;
+                vBoxList.add(cajaCrearUnidades(listaSoldadosPreCargada, 0, borderPane, flowPaneRecuros, tamanoMenu));
                 break;
             case 3:
-                tamanoMenu=300;
-                vBoxList.add(cajaCrearUnidades(listaSoldadosPreCargada, 5, borderPane, flowPaneRecuros,tamanoMenu));
+                tamanoMenu = 300;
+                vBoxList.add(cajaCrearUnidades(listaSoldadosPreCargada, 5, borderPane, flowPaneRecuros, tamanoMenu));
                 break;
             case 4:
-                tamanoMenu=500;
-                vBoxList.add(cajaCrearComercio(Comercio.lista,  borderPane, flowPaneRecuros,tamanoMenu));
+                tamanoMenu = 500;
+                vBoxList.add(cajaCrearComercio(Comercio.lista, borderPane, flowPaneRecuros, tamanoMenu));
                 break;
         }
-        rellenador(borderPane, vBoxList,tamanoMenu);
+        rellenador(borderPane, vBoxList, tamanoMenu);
     }
 
-    private static VBox cajaCrearComercio(TreeMap<Integer, Comercio> listaComercios, BorderPane borderPane, FlowPane flowPaneRecuros,int tamanoMenu) {
+    private static VBox cajaCrearComercio(TreeMap<Integer, Comercio> listaComercios, BorderPane borderPane, FlowPane flowPaneRecuros, int tamanoMenu) {
         VBox vBoxBloquePropio = new VBox();
         vBoxBloquePropio.setMinWidth(tamanoMenu);
         vBoxBloquePropio.setMaxWidth(tamanoMenu);
@@ -421,27 +422,29 @@ public class CiudadController extends MapasController implements Initializable {
         childrenVBox.add(nombreEdificioPropio);
 //TABLA
         TableView<Comercio> comercioTableView = new TableView<>();
-        TableColumn<Comercio,Integer> idCol = new TableColumn("Id");
+//columna
+        TableColumn<Comercio, Integer> idCol = new TableColumn("Id");
         idCol.setMinWidth(100);
         idCol.setCellValueFactory(new PropertyValueFactory<>("id"));
-        TableColumn<Comercio,Recursos> recursoOferta = new TableColumn("Ofrece");
+//columna
+        TableColumn<Comercio, Recursos> recursoOferta = new TableColumn("Ofrece");
         recursoOferta.setMinWidth(100);
-
         //https://blog.ngopal.com.np/2011/10/01/tableview-cell-modifiy-in-javafx/
         //TODO TABLE CELL
 //        recursoOferta.setCellValueFactory(new PropertyValueFactory<Comercio, ImageView>("recursoOferta"));
         recursoOferta.setCellFactory(new Callback<TableColumn<Comercio, Recursos>, TableCell<Comercio, Recursos>>() {
             @Override
             public TableCell<Comercio, Recursos> call(TableColumn<Comercio, Recursos> param) {
-                TableCell<Comercio,Recursos> cell = new TableCell<Comercio,Recursos>(){
+                TableCell<Comercio, Recursos> cell = new TableCell<Comercio, Recursos>() {
+                    Label label = new Label();
                     ImageView imageview = new ImageView();
 
                     @Override
                     protected void updateItem(Recursos item, boolean empty) {
                         super.updateItem(item, empty);
-                        if(item!=null){
-                            HBox box= new HBox();
-                            box.setSpacing(10) ;
+                        if (item != null) {
+                            HBox box = new HBox();
+                            box.setSpacing(10);
                             VBox vbox = new VBox();
                             vbox.getChildren().add(new Label(String.valueOf(item.getCantidad())));
 
@@ -450,25 +453,35 @@ public class CiudadController extends MapasController implements Initializable {
                             imageview.setFitWidth(50);
                             imageview.setImage(item.getRecursosPrecargados().getImage());
 
-                            box.getChildren().addAll(imageview,vbox);
+                            box.getChildren().addAll(imageview, vbox);
                             //SETTING ALL THE GRAPHICS COMPONENT FOR CELL
                             setGraphic(box);
+                            label.setText(String.valueOf(item.getCantidad()));
+                            label.setGraphic(new ImageView(item.getImage()));
                         }
                     }
 
                 };
-                System.out.println("Cell index: "+cell.getIndex());
+                System.out.println("Cell index: " + cell.getIndex());
                 return cell;
             }
         });
-
-        TableColumn<Comercio,ImageView> recursoDemanda = new TableColumn("Demanda");
+//columna
+        TableColumn<Comercio, ImageView> recursoDemanda = new TableColumn("Demanda");
         recursoDemanda.setMinWidth(100);
         recursoDemanda.setCellValueFactory(new PropertyValueFactory<Comercio, ImageView>("recursoDemanda"));
-
-        comercioTableView.getColumns().addAll(idCol,recursoOferta,recursoDemanda);
+//columna
+        TableColumn otracolumna = new TableColumn("Ofrece test1");
+        otracolumna.setMinWidth(100);
+        otracolumna.setCellValueFactory(new PropertyValueFactory("queSeOfrece"));
+//columna
+        TableColumn<Comercio, Recursos> otracolumna2 = new TableColumn<>("Gifts");
+        otracolumna2.setMinWidth(150);
+//TODO otracolumna2.XXXX // AQUI https://stackoverflow.com/questions/16360323/javafx-table-how-to-add-components
+//FIN COLUMNAS
+        comercioTableView.getColumns().addAll(idCol, recursoOferta, recursoDemanda, otracolumna, otracolumna2);
         comercioTableView.setItems(Comercio.data);
-//FINTABLA
+//FIN TABLA
         childrenVBox.add(comercioTableView);
         Separator separator = new Separator();
         separator.setPrefWidth(220);
@@ -477,7 +490,7 @@ public class CiudadController extends MapasController implements Initializable {
         return vBoxBloquePropio;
     }
 
-    private static VBox cajaCrearUnidades(TreeMap<Integer, UnidadesPreCargadas> listaUnidades, int tipoDeUnidades, BorderPane borderPane, FlowPane flowPaneRecuros,int tamanoMenu) {
+    private static VBox cajaCrearUnidades(TreeMap<Integer, UnidadesPreCargadas> listaUnidades, int tipoDeUnidades, BorderPane borderPane, FlowPane flowPaneRecuros, int tamanoMenu) {
         //BLOQUE
         VBox vBoxBloquePropio = new VBox();
         vBoxBloquePropio.setMinWidth(tamanoMenu);
