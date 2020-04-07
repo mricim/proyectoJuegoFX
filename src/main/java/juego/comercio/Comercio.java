@@ -1,6 +1,7 @@
 package main.java.juego.comercio;
 
 import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.image.ImageView;
@@ -19,22 +20,22 @@ public class Comercio extends Time {
     private static Integer lastId = 0;
 
     private SimpleIntegerProperty id;
-    private Recursos queSeOfrece;
-    private Recursos queSePide;
+
+    //TODO habia que poner ambos recursos como SimpleObjectProperty
+    private SimpleObjectProperty queSeOfrece;
+    private SimpleObjectProperty queSePide;
     private Jugador jugador;
     private LocalDateTime horaPublicacion;
     private LocalDateTime horaFin;
 
-    private ImageView recursoOferta;
-    private ImageView recursoDemanda;
+
 
     public Comercio(Recursos queSeOfrece, Recursos queSePide, Jugador jugador) {
         id = new SimpleIntegerProperty(lastId++);
-        this.queSeOfrece = queSeOfrece;
-        this.queSePide = queSePide;
+        this.queSeOfrece = new SimpleObjectProperty(queSeOfrece);
+        this.queSePide = new SimpleObjectProperty(queSePide);
         this.jugador = jugador;
-        this.recursoOferta = new ImageView(queSeOfrece.getRecursosPrecargados().getImage());
-        this.recursoDemanda = new ImageView(queSePide.getRecursosPrecargados().getImage());
+
 
         horaPublicacion = horaActual_UTC;
         horaFin = horaPublicacion.plusHours(3);
@@ -56,37 +57,35 @@ public class Comercio extends Time {
         return id;
     }
 
-    public Recursos getQueSeOfrece() {
+    public Object getQueSeOfrece() {
+        return queSeOfrece.get();
+    }
+
+    public SimpleObjectProperty queSeOfreceProperty() {
         return queSeOfrece;
     }
 
-    public void setQueSeOfrece(Recursos queSeOfrece) {
-        this.queSeOfrece = queSeOfrece;
+    public void setQueSeOfrece(Object queSeOfrece) {
+        this.queSeOfrece.set(queSeOfrece);
     }
 
-    public Recursos getQueSePide() {
+    public Object getQueSePide() {
+        return queSePide.get();
+    }
+
+    public SimpleObjectProperty queSePideProperty() {
         return queSePide;
+    }
+
+    public void setQueSePide(Object queSePide) {
+        this.queSePide.set(queSePide);
     }
 
     public Jugador getJugador() {
         return jugador;
     }
 
-    public ImageView getRecursoOferta() {
-        return recursoOferta;
-    }
 
-    public void setRecursoOferta(ImageView recursoOferta) {
-        this.recursoOferta = recursoOferta;
-    }
-
-    public void setRecursoDemanda(ImageView recursoDemanda) {
-        this.recursoDemanda = recursoDemanda;
-    }
-
-    public ImageView getRecursoDemanda() {
-        return recursoDemanda;
-    }
 
     public LocalDateTime getHoraPublicacionUTC() {
         return horaPublicacion;

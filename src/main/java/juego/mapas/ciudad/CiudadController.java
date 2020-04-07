@@ -427,49 +427,88 @@ public class CiudadController extends MapasController implements Initializable {
         idCol.setMinWidth(100);
         idCol.setCellValueFactory(new PropertyValueFactory<>("id"));
 //columna
-        TableColumn<Comercio, Recursos> recursoOferta = new TableColumn("Ofrece");
+        TableColumn<Comercio, Comercio> recursoOferta = new TableColumn("Ofrece");
         recursoOferta.setMinWidth(100);
         //https://blog.ngopal.com.np/2011/10/01/tableview-cell-modifiy-in-javafx/
         //TODO TABLE CELL
-//        recursoOferta.setCellValueFactory(new PropertyValueFactory<Comercio, ImageView>("recursoOferta"));
-        recursoOferta.setCellFactory(new Callback<TableColumn<Comercio, Recursos>, TableCell<Comercio, Recursos>>() {
+        recursoOferta.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Comercio, Comercio>, ObservableValue<Comercio>>() {
+            @Override public ObservableValue<Comercio> call(TableColumn.CellDataFeatures<Comercio, Comercio> features) {
+                return new ReadOnlyObjectWrapper(features.getValue());
+            }
+        });
+        recursoOferta.setCellFactory(new Callback<TableColumn<Comercio, Comercio>, TableCell<Comercio, Comercio>>() {
             @Override
-            public TableCell<Comercio, Recursos> call(TableColumn<Comercio, Recursos> param) {
-                TableCell<Comercio, Recursos> cell = new TableCell<Comercio, Recursos>() {
-                    Label label = new Label();
-                    ImageView imageview = new ImageView();
+            public TableCell<Comercio, Comercio> call(TableColumn<Comercio, Comercio> param) {
+                return new TableCell<Comercio,Comercio>(){
+                    final ImageView imageview = new ImageView();
+                    final Label button = new Label(); {
+                        button.setGraphic(imageview);
+                        button.setMinWidth(130);
+                    }
 
                     @Override
-                    protected void updateItem(Recursos item, boolean empty) {
+                    protected void updateItem(Comercio item, boolean empty) {
                         super.updateItem(item, empty);
-                        if (item != null) {
-                            HBox box = new HBox();
-                            box.setSpacing(10);
+                        if (item != null){
+                            HBox box= new HBox();
+                            box.setSpacing(10) ;
                             VBox vbox = new VBox();
-                            vbox.getChildren().add(new Label(String.valueOf(item.getCantidad())));
+                            vbox.getChildren().add(new Label(String.valueOf(((Recursos)item.getQueSeOfrece()).getCantidad())));
 
 
                             imageview.setFitHeight(50);
                             imageview.setFitWidth(50);
-                            imageview.setImage(item.getRecursosPrecargados().getImage());
+                            imageview.setImage(((Recursos)item.getQueSeOfrece()).getRecursosPrecargados().getImage());
 
-                            box.getChildren().addAll(imageview, vbox);
+                            box.getChildren().addAll(imageview,vbox);
                             //SETTING ALL THE GRAPHICS COMPONENT FOR CELL
                             setGraphic(box);
-                            label.setText(String.valueOf(item.getCantidad()));
-                            label.setGraphic(new ImageView(item.getImage()));
                         }
                     }
-
                 };
-                System.out.println("Cell index: " + cell.getIndex());
-                return cell;
             }
         });
+
 //columna
-        TableColumn<Comercio, ImageView> recursoDemanda = new TableColumn("Demanda");
+        TableColumn<Comercio, Comercio> recursoDemanda = new TableColumn("Demanda");
         recursoDemanda.setMinWidth(100);
-        recursoDemanda.setCellValueFactory(new PropertyValueFactory<Comercio, ImageView>("recursoDemanda"));
+        recursoDemanda.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Comercio, Comercio>, ObservableValue<Comercio>>() {
+            @Override public ObservableValue<Comercio> call(TableColumn.CellDataFeatures<Comercio, Comercio> features) {
+                return new ReadOnlyObjectWrapper(features.getValue());
+            }
+        });
+        recursoDemanda.setCellFactory(new Callback<TableColumn<Comercio, Comercio>, TableCell<Comercio, Comercio>>() {
+            @Override
+            public TableCell<Comercio, Comercio> call(TableColumn<Comercio, Comercio> param) {
+                return new TableCell<Comercio,Comercio>(){
+                    final ImageView imageview = new ImageView();
+                    final Label button = new Label(); {
+                        button.setGraphic(imageview);
+                        button.setMinWidth(130);
+                    }
+
+                    @Override
+                    protected void updateItem(Comercio item, boolean empty) {
+                        super.updateItem(item, empty);
+                        if (item != null){
+                            HBox box= new HBox();
+                            box.setSpacing(10) ;
+                            VBox vbox = new VBox();
+                            vbox.getChildren().add(new Label(String.valueOf(((Recursos)item.getQueSePide()).getCantidad())));
+
+
+                            imageview.setFitHeight(50);
+                            imageview.setFitWidth(50);
+                            imageview.setImage(((Recursos)item.getQueSePide()).getRecursosPrecargados().getImage());
+
+                            box.getChildren().addAll(imageview,vbox);
+                            //SETTING ALL THE GRAPHICS COMPONENT FOR CELL
+                            setGraphic(box);
+                        }
+                    }
+                };
+            }
+        });
 //columna
         TableColumn otracolumna = new TableColumn("Ofrece test1");
         otracolumna.setMinWidth(100);
