@@ -20,6 +20,7 @@ import static main.java.utils.traductor.Traductor.listaIdiomasPath;
 
 
 public class Main extends Application {
+    public static final String VERSION="0.1.3";
     public static final String RUTEINTERNAL = System.getProperty("user.dir") + "/src/main/";
     public static String pathImagesInternal = Main.RUTEINTERNAL + "resources/images/";
 

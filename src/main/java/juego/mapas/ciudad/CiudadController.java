@@ -395,13 +395,13 @@ public class CiudadController extends MapasController implements Initializable {
                 break;
             case 4:
                 tamanoMenu = 500;
-                vBoxList.add(cajaCrearComercio(Comercio.lista, borderPane, flowPaneRecuros, tamanoMenu));
+                vBoxList.add(cajaCrearComercio(borderPane, flowPaneRecuros, tamanoMenu));
                 break;
         }
         rellenador(borderPane, vBoxList, tamanoMenu);
     }
 
-    private static VBox cajaCrearComercio(TreeMap<Integer, Comercio> listaComercios, BorderPane borderPane, FlowPane flowPaneRecuros, int tamanoMenu) {
+    private static VBox cajaCrearComercio(BorderPane borderPane, FlowPane flowPaneRecuros, int tamanoMenu) {
         VBox vBoxBloquePropio = new VBox();
         vBoxBloquePropio.setMinWidth(tamanoMenu);
         vBoxBloquePropio.setMaxWidth(tamanoMenu);
@@ -421,107 +421,129 @@ public class CiudadController extends MapasController implements Initializable {
         nombreEdificioPropio.setWrapText(true);
         childrenVBox.add(nombreEdificioPropio);
 //TABLA
+        ScrollPane scrollPane = new ScrollPane();
+        scrollPane.setPannable(true);
+        scrollPane.setFitToWidth(true);
+        scrollPane.setFitToHeight(true);
+        scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+        scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         TableView<Comercio> comercioTableView = new TableView<>();
-//columna
-        TableColumn<Comercio, Integer> idCol = new TableColumn("Id");
-        idCol.setMinWidth(100);
-        idCol.setCellValueFactory(new PropertyValueFactory<>("id"));
+        comercioTableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 //columna
         TableColumn<Comercio, Comercio> recursoOferta = new TableColumn("Ofrece");
         recursoOferta.setMinWidth(100);
-        //https://blog.ngopal.com.np/2011/10/01/tableview-cell-modifiy-in-javafx/
-        //TODO TABLE CELL
+
         recursoOferta.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Comercio, Comercio>, ObservableValue<Comercio>>() {
-            @Override public ObservableValue<Comercio> call(TableColumn.CellDataFeatures<Comercio, Comercio> features) {
+            @Override
+            public ObservableValue<Comercio> call(TableColumn.CellDataFeatures<Comercio, Comercio> features) {
                 return new ReadOnlyObjectWrapper(features.getValue());
+                //return features.getValue();
             }
         });
         recursoOferta.setCellFactory(new Callback<TableColumn<Comercio, Comercio>, TableCell<Comercio, Comercio>>() {
             @Override
             public TableCell<Comercio, Comercio> call(TableColumn<Comercio, Comercio> param) {
-                return new TableCell<Comercio,Comercio>(){
-                    final ImageView imageview = new ImageView();
-                    final Label button = new Label(); {
-                        button.setGraphic(imageview);
-                        button.setMinWidth(130);
-                    }
-
+                return new TableCell<Comercio, Comercio>() {
                     @Override
                     protected void updateItem(Comercio item, boolean empty) {
                         super.updateItem(item, empty);
-                        if (item != null){
-                            HBox box= new HBox();
-                            box.setSpacing(10) ;
-                            VBox vbox = new VBox();
-                            vbox.getChildren().add(new Label(String.valueOf(((Recursos)item.getQueSeOfrece()).getCantidad())));
-
-
+                        if (item == null || empty) {
+                            //setText(null);
+                            //setStyle(null);
+                        } else {
+                            //recuperar el recurso
+                            Recursos recurso = (Recursos) item.getQueSeOfrece();
+                            //create objects
+                            ImageView imageview = new ImageView();
                             imageview.setFitHeight(50);
                             imageview.setFitWidth(50);
-                            imageview.setImage(((Recursos)item.getQueSeOfrece()).getRecursosPrecargados().getImage());
-
-                            box.getChildren().addAll(imageview,vbox);
+                            imageview.setImage(recurso.getRecursosPrecargados().getImage());
+                            //create and add HBOX
+                            HBox hBox = new HBox(imageview, new Label(String.valueOf(recurso.getCantidad())));
+                            hBox.setSpacing(10);
+                            hBox.setAlignment(Pos.CENTER);
                             //SETTING ALL THE GRAPHICS COMPONENT FOR CELL
-                            setGraphic(box);
+                            setGraphic(hBox);
                         }
                     }
                 };
             }
         });
-
+/*
 //columna
         TableColumn<Comercio, Comercio> recursoDemanda = new TableColumn("Demanda");
         recursoDemanda.setMinWidth(100);
         recursoDemanda.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Comercio, Comercio>, ObservableValue<Comercio>>() {
-            @Override public ObservableValue<Comercio> call(TableColumn.CellDataFeatures<Comercio, Comercio> features) {
+            @Override
+            public ObservableValue<Comercio> call(TableColumn.CellDataFeatures<Comercio, Comercio> features) {
                 return new ReadOnlyObjectWrapper(features.getValue());
             }
         });
         recursoDemanda.setCellFactory(new Callback<TableColumn<Comercio, Comercio>, TableCell<Comercio, Comercio>>() {
             @Override
             public TableCell<Comercio, Comercio> call(TableColumn<Comercio, Comercio> param) {
-                return new TableCell<Comercio,Comercio>(){
-                    final ImageView imageview = new ImageView();
-                    final Label button = new Label(); {
-                        button.setGraphic(imageview);
-                        button.setMinWidth(130);
-                    }
-
+                return new TableCell<Comercio, Comercio>() {
                     @Override
                     protected void updateItem(Comercio item, boolean empty) {
                         super.updateItem(item, empty);
-                        if (item != null){
-                            HBox box= new HBox();
-                            box.setSpacing(10) ;
-                            VBox vbox = new VBox();
-                            vbox.getChildren().add(new Label(String.valueOf(((Recursos)item.getQueSePide()).getCantidad())));
-
-
+                        if (item != null) {
+                            //recuperar el recurso
+                            Recursos recurso = (Recursos) item.getQueSePide();
+                            //create objects
+                            ImageView imageview = new ImageView();
                             imageview.setFitHeight(50);
                             imageview.setFitWidth(50);
-                            imageview.setImage(((Recursos)item.getQueSePide()).getRecursosPrecargados().getImage());
-
-                            box.getChildren().addAll(imageview,vbox);
+                            imageview.setImage(recurso.getRecursosPrecargados().getImage());
+                            //create and add HBOX
+                            HBox hBox = new HBox(imageview, new Label(String.valueOf(recurso.getCantidad())));
+                            hBox.setSpacing(10);
+                            hBox.setAlignment(Pos.CENTER);
                             //SETTING ALL THE GRAPHICS COMPONENT FOR CELL
-                            setGraphic(box);
+                            setGraphic(hBox);
                         }
                     }
                 };
             }
         });
 //columna
-        TableColumn otracolumna = new TableColumn("Ofrece test1");
-        otracolumna.setMinWidth(100);
-        otracolumna.setCellValueFactory(new PropertyValueFactory("queSeOfrece"));
+*/
+        TableColumn<Comercio, Integer> idCol = new TableColumn("Id");
+        idCol.setMinWidth(100);
+        idCol.setCellValueFactory(new PropertyValueFactory<>("id"));
+        /*
 //columna
-        TableColumn<Comercio, Recursos> otracolumna2 = new TableColumn<>("Gifts");
-        otracolumna2.setMinWidth(150);
-//TODO otracolumna2.XXXX // AQUI https://stackoverflow.com/questions/16360323/javafx-table-how-to-add-components
+        TableColumn<Comercio, Comercio> botonComprar = new TableColumn("Comprar");
+        botonComprar.setMinWidth(100);
+        botonComprar.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Comercio, Comercio>, ObservableValue<Comercio>>() {
+            @Override
+            public ObservableValue<Comercio> call(TableColumn.CellDataFeatures<Comercio, Comercio> features) {
+                return new ReadOnlyObjectWrapper(features.getValue());
+            }
+        });
+        botonComprar.setCellFactory(new Callback<TableColumn<Comercio, Comercio>, TableCell<Comercio, Comercio>>() {
+            @Override
+            public TableCell<Comercio, Comercio> call(TableColumn<Comercio, Comercio> param) {
+                return new TableCell<Comercio, Comercio>() {
+                    @Override
+                    protected void updateItem(Comercio item, boolean empty) {
+                        super.updateItem(item, empty);
+                        if (item != null) {
+                            Button button = new Button("Comprar");
+                            button.setAlignment(Pos.CENTER);
+                            setGraphic(button);
+                        }
+                    }
+                };
+            }
+        });
+        */
 //FIN COLUMNAS
-        comercioTableView.getColumns().addAll(idCol, recursoOferta, recursoDemanda, otracolumna, otracolumna2);
+        //comercioTableView.getColumns().addAll(recursoOferta, recursoDemanda, idCol, botonComprar);
+        comercioTableView.getColumns().addAll(recursoOferta,  idCol);
         comercioTableView.setItems(Comercio.data);
 //FIN TABLA
-        childrenVBox.add(comercioTableView);
+        scrollPane.setContent(comercioTableView);
+        childrenVBox.add(scrollPane);
         Separator separator = new Separator();
         separator.setPrefWidth(220);
         childrenVBox.add(separator);

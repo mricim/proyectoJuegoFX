@@ -1,7 +1,10 @@
 package main.java.juego.comercio;
 
+import javafx.beans.InvalidationListener;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.image.ImageView;
@@ -10,12 +13,15 @@ import main.java.jugadores.Jugador;
 import main.java.utils.Time;
 
 import java.time.LocalDateTime;
+import java.util.Observable;
 import java.util.TreeMap;
 
+import static main.java.utils.Time.changeZoneUTC_GMT;
 
-public class Comercio extends Time {
 
-    public static TreeMap<Integer, Comercio> lista = new TreeMap<>();
+public class Comercio {
+
+    //public static TreeMap<Integer, Comercio> lista = new TreeMap<>();
     public static final ObservableList<Comercio> data = FXCollections.observableArrayList();
     private static Integer lastId = 0;
 
@@ -37,11 +43,12 @@ public class Comercio extends Time {
         this.jugador = jugador;
 
 
-        horaPublicacion = horaActual_UTC;
+        horaPublicacion = Time.horaActual_UTC;
         horaFin = horaPublicacion.plusHours(3);
+
         //LocalDateTime gmt = changeZone(horaPublicacion,ZONE_UTC,ZONE_GTM);
         //LocalDateTime gmtMasHoras = changeZone(horaFin,ZONE_UTC,ZONE_GTM);
-        lista.put(id.intValue(), this);
+        //lista.put(id.intValue(), this);
         data.add(this);
     }
 
@@ -114,6 +121,11 @@ public class Comercio extends Time {
                 ", horaFin=" + horaFin +
                 '}';
     }
+
+    public void remove() {
+        data.remove(this);
+    }
+
 
     //METODOS
 /*

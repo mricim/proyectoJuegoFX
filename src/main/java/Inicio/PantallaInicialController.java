@@ -302,12 +302,41 @@ public class PantallaInicialController extends PrimaryStageControler implements 
         Thread thread = new Thread(){
             public void run(){
                 try {
-                    Thread.sleep(60000);
+                    Thread.sleep(30000);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-                System.out.println("Thread Running --> PANTALLA INICIAL CONTROLLER: add Comenrio recursos");
-                new Comercio(new Recursos(oroPre,7),new Recursos(maderaPre,12),jugador);
+                System.out.println("Thread Running --> PANTALLA INICIAL CONTROLLER: add Comenrio");
+                Comercio comercio1=new Comercio(new Recursos(felicidadPre,7),new Recursos(maderaPre,15),jugador);
+                Comercio comercio2=new Comercio(new Recursos(hierroPre,8),new Recursos(hierroPre,13),jugador);
+                Thread thread = new Thread(){
+                    public void run(){
+                        try {
+                            Thread.sleep(30000);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                        System.out.println("Thread Running --> PANTALLA INICIAL CONTROLLER: REMOVE Comercio");
+                        comercio1.remove();
+                    }
+                };
+                thread.start();
+                /*
+                new Comercio(new Recursos(hierroPre,9),new Recursos(hierroPre,13),jugador);
+                new Comercio(new Recursos(hierroPre,10),new Recursos(hierroPre,13),jugador);
+                new Comercio(new Recursos(hierroPre,11),new Recursos(hierroPre,13),jugador);
+                new Comercio(new Recursos(hierroPre,12),new Recursos(hierroPre,13),jugador);
+                new Comercio(new Recursos(hierroPre,13),new Recursos(hierroPre,13),jugador);
+                new Comercio(new Recursos(hierroPre,14),new Recursos(hierroPre,13),jugador);
+                new Comercio(new Recursos(hierroPre,15),new Recursos(hierroPre,13),jugador);
+                new Comercio(new Recursos(hierroPre,16),new Recursos(hierroPre,13),jugador);
+                new Comercio(new Recursos(hierroPre,17),new Recursos(hierroPre,13),jugador);
+                new Comercio(new Recursos(hierroPre,18),new Recursos(hierroPre,13),jugador);
+                new Comercio(new Recursos(hierroPre,19),new Recursos(hierroPre,13),jugador);
+                new Comercio(new Recursos(hierroPre,20),new Recursos(hierroPre,13),jugador);
+                new Comercio(new Recursos(comidaPre,21),new Recursos(hierroPre,13),jugador);
+
+                 */
             }
         };
         thread.start();
