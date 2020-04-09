@@ -20,7 +20,15 @@ import static main.java.utils.traductor.Traductor.listaIdiomasPath;
 
 
 public class Main extends Application {
-    public static final String VERSION="0.1.3";
+//    String userDir = System.getProperty("user.dir");
+//    Path path = Paths.get(userDir);
+//    String project = path.getFileName();
+    public static final String PATH = System.getProperty("user.dir").replace("proyectoJuegoFX", "");
+
+    public static final String WEB="http://armegis.tk/";
+    public static final String WEB_DOWNLOADS=WEB+"dowloads/";
+    public static final String VERSION="0.0.1";
+
     public static final String RUTEINTERNAL = System.getProperty("user.dir") + "/src/main/";
     public static String pathImagesInternal = Main.RUTEINTERNAL + "resources/images/";
 

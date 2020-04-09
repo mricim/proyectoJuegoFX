@@ -1,14 +1,11 @@
-package main.java.utils.tagsFXML;
+package main.java.utils.tagsFX;
 
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import main.java.Main;
 import main.java.utils.CallImages;
 
-import java.io.File;
 import java.util.ArrayList;
 
 public class CustomComboBoxImager extends ListCell<String> {

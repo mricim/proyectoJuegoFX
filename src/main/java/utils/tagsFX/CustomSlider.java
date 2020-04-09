@@ -1,9 +1,7 @@
-package main.java.utils.tagsFXML;
+package main.java.utils.tagsFX;
 
 import javafx.geometry.Insets;
 import javafx.scene.control.Slider;
-
-import javax.swing.plaf.PanelUI;
 
 public class CustomSlider extends Slider {
 

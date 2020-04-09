@@ -1,9 +1,8 @@
 package main.java.utils.traductor;
 
 import javafx.scene.control.ComboBox;
-import main.java.Inicio.PantallaInicialController;
 import main.java.utils.PrimaryStageControler;
-import main.java.utils.tagsFXML.CustomComboBoxImager;
+import main.java.utils.tagsFX.CustomComboBoxImager;
 
 import java.util.ArrayList;
 

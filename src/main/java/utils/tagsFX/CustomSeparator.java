@@ -1,4 +1,4 @@
-package main.java.utils.tagsFXML;
+package main.java.utils.tagsFX;
 
 import javafx.scene.control.Separator;
 

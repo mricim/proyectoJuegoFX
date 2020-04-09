@@ -27,9 +27,9 @@ import main.java.juego.mapas.mundo.MundoController;
 import main.java.juego.mapas.Recursos;
 import main.java.juego.mapas.ciudad.contenidoCiudad.Edificio;
 import main.java.juego.mapas.pelea.*;
-import main.java.utils.tagsFXML.CustomSeparator;
-import main.java.utils.tagsFXML.CustomTextField;
-import main.java.utils.tagsFXML.CustomSlider;
+import main.java.utils.tagsFX.CustomSeparator;
+import main.java.utils.tagsFX.CustomTextField;
+import main.java.utils.tagsFX.CustomSlider;
 
 import java.net.URL;
 import java.util.*;
