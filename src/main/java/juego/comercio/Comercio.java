@@ -22,12 +22,14 @@ import static main.java.utils.Time.changeZoneUTC_GMT;
 public class Comercio {
 
     //public static TreeMap<Integer, Comercio> lista = new TreeMap<>();
+    /**
+     * La lista de comercios creados.
+     */
     public static final ObservableList<Comercio> data = FXCollections.observableArrayList();
     private static Integer lastId = 0;
 
     private SimpleIntegerProperty id;
 
-    //TODO habia que poner ambos recursos como SimpleObjectProperty
     private SimpleObjectProperty queSeOfrece;
     private SimpleObjectProperty queSePide;
     private Jugador jugador;
@@ -35,7 +37,13 @@ public class Comercio {
     private LocalDateTime horaFin;
 
 
-
+    /**
+     * Crea un comercio con los datos de la transacción y se añade a la lista
+     * de Comercios creados.
+     * @param queSeOfrece El Recurso que se ofrece en el comercio.
+     * @param queSePide El Recurso que se pide a cambio.
+     * @param jugador El jugador que ha creado la oferta de comercio.
+     */
     public Comercio(Recursos queSeOfrece, Recursos queSePide, Jugador jugador) {
         id = new SimpleIntegerProperty(lastId++);
         this.queSeOfrece = new SimpleObjectProperty(queSeOfrece);
@@ -52,10 +60,19 @@ public class Comercio {
         data.add(this);
     }
 
+    /**
+     * Devuelve el id del comercio.
+     * @return Un integer que contiene el valor del id del comercio.
+     */
     public int getId() {
         return id.get();
     }
 
+
+    /**
+     * Asigna el valor del id del comercio.
+     * @param id Un integer que contiene el valor del id del comercio.
+     */
     public void setId(int id) {
         this.id.set(id);
     }
@@ -64,6 +81,10 @@ public class Comercio {
         return id;
     }
 
+    /**
+     * Devuelve el recurso
+     * @return
+     */
     public Object getQueSeOfrece() {
         return queSeOfrece.get();
     }
