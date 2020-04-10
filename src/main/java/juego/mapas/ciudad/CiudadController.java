@@ -178,6 +178,15 @@ public class CiudadController extends MapasController implements Initializable {
         rellenador(borderPane, vBoxList, 300);
     }
 
+    /**
+     *
+     * @param edificioPuesto
+     * @param imageView
+     * @param parcela
+     * @param edificioPosiblesConstrucciones
+     * @param construir_Update_Dowgrade_Destruir
+     * @return
+     */
     private VBox cajaEdificio(Edificio edificioPuesto, ImageView imageView, boolean parcela, EdificiosPreCargados edificioPosiblesConstrucciones, int construir_Update_Dowgrade_Destruir) {
 
         //BLOQUE

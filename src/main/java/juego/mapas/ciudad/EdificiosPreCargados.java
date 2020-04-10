@@ -1,7 +1,10 @@
 package main.java.juego.mapas.ciudad;
 
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import main.java.juego.mapas.RecursosPrecargados;
+import main.java.juego.mapas.ciudad.contenidoCiudad.Edificio;
+import main.java.jugadores.Jugador;
 import main.java.utils.ImageGetter;
 import main.java.juego.mapas.Recursos;
 
@@ -13,6 +16,13 @@ import static main.java.jugadores.Jugador.listaEdificiosKeys;
 import static main.java.jugadores.Jugador.listaEdificiosPreCargados;
 
 //https://github.com/k33ptoo/JavaFX-MySQL-Login
+
+/**
+ * Representa los datos utilizados en la clase {@link main.java.juego.mapas.ciudad.contenidoCiudad.Edificio}.
+ * @author Eric Casanova y Alejandro Riera
+ * @version 1.0
+ * @since 1.0
+ */
 public class EdificiosPreCargados implements ImageGetter {
     private int id;
     private int tipo;
@@ -39,6 +49,22 @@ public class EdificiosPreCargados implements ImageGetter {
     private String imageClicablePath;
 
 
+    /**
+     * Datos utilizados en la clase {@link main.java.juego.mapas.ciudad.contenidoCiudad.Edificio} para la creación de los mismos.
+     * @param id Un integer que contiene el valor del id del {@code Edificio}.
+     * @param nivel Un integer que contiene el valor del nivel del {@code Edificio}.
+     * @param destruible Un {@code boolean} que indica si el {@code Edificio} se puede destruir o no.
+     * @param construible Un {@code boolean} que indica si el {@code Edificio} se puede construir o no.
+     * @param maximoEdificiosDelMismoTipo Un integer que indica el número máximo de edificios de un mismo tipo.
+     * @param nivelCastilloNecesario Un integer que indica el nivel necesario del castillo para construir este {@code Edificio}.
+     * @param menuEspecial Un integer que indica si el {@code Edificio} que menu tiene que tener.
+     * @param nombre Un String que contiene el nombre del {@code Edificio};
+     * @param descripcion Un String que contiene la descripción del {@code Edificio};
+     * @param recursosBuild Un TreeMap que contiene los valores del coste en recursos  de construcción del edificio, que se mostrarán en {@link CiudadController} en la cajaEdificio.
+     * @param recursosProductores Un TreeMap que contiene los valores del coste en recursos de producción del edificio, que se mostrarán en {@link CiudadController} en la cajaEdificio.
+     * @param recursosCosteXmin Un TreeMap que contiene los valores del coste en recursos por minuto del edificio, que se mostrarán en {@link CiudadController} en la cajaEdificio.
+     * @param recursosAlmacen Un TreeMap que contiene los valores de los recursos almacenados en el edificio, que se mostrarán en {@link CiudadController} en la cajaEdificio.
+     */
     public EdificiosPreCargados(int id, int nivel, boolean destruible, boolean construible, int maximoEdificiosDelMismoTipo, int nivelCastilloNecesario, int menuEspecial, String nombre, String descripcion, TreeMap<Integer, Recursos> recursosBuild, TreeMap<Integer, Recursos> recursosProductores, TreeMap<RecursosPrecargados, ArrayList<Recursos>> recursosCosteXmin, TreeMap<Integer, Recursos> recursosAlmacen) {
         this.id = id;
         this.tipo = menuEspecial;
@@ -76,14 +102,23 @@ public class EdificiosPreCargados implements ImageGetter {
         listaEdificiosKeys.add(id);
     }
 
+    /**
+     * Devuelve el id del edificio.
+     * @return Un integer que contiene el valor del id del edificio.
+     */
     public int getId() {
         return id;
     }
 
+    /**
+     * Devuelve el tipo de edificio.
+     * @return Un integer que contiene el valor del tipo  edificio.
+     */
     public int getTipo() {
         return tipo;
     }
 
+    //TODO continuar javadoc
     public String getNombre() {
         return nombre;
     }
