@@ -27,7 +27,7 @@ public class Main extends Application {
 
     public static final String WEB="http://armegis.tk/";
     public static final String WEB_DOWNLOADS=WEB+"dowloads/";
-    public static final String VERSION="0.0.1";
+    public static final String VERSION="0.0.4.20200409";
 
     public static final String RUTEINTERNAL = System.getProperty("user.dir") + "/src/main/";
     public static String pathImagesInternal = Main.RUTEINTERNAL + "resources/images/";

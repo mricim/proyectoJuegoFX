@@ -1,13 +1,13 @@
 package main.java.update.utils.XML;
 
-public class aXML implements Comparable<aXML>{
+public class XMLtoUploader implements Comparable<XMLtoUploader>{
     private String url;
     private String versionOld;
     private String versionNew;
     private boolean installer;
     private String fileName;
 
-    public aXML(String url, String versionOld, String versionNew, boolean installer, String fileName) {
+    public XMLtoUploader(String url, String versionOld, String versionNew, boolean installer, String fileName) {
         this.url = url;
         this.versionOld = versionOld;
         this.versionNew = versionNew;
@@ -47,7 +47,7 @@ public class aXML implements Comparable<aXML>{
     }
 
     @Override
-    public int compareTo(aXML o) {
+    public int compareTo(XMLtoUploader o) {
         return o.getVersionNew().compareTo(this.getVersionNew());
     }
 }
