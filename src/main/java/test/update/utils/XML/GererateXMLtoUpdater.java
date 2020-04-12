@@ -1,6 +1,5 @@
-package main.java.update.utils.XML;
+package main.java.test.update.utils.XML;
 
-import org.w3c.dom.Attr;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
@@ -35,25 +34,37 @@ public class GererateXMLtoUpdater {
 
         //you can also use staff.setAttribute("id", "1") for this
 
-        // firstname element
+        //url
         Element firstName = document.createElement("url");
         firstName.appendChild(document.createTextNode(XMLtoUploader.getUrl()));
         root.appendChild(firstName);
 
-        // lastname element
+        //versionOld
         Element lastname = document.createElement("versionOld");
         lastname.appendChild(document.createTextNode(XMLtoUploader.getVersionOld()));
         root.appendChild(lastname);
 
-        // email element
+        //versionNew
         Element email = document.createElement("versionNew");
         email.appendChild(document.createTextNode(XMLtoUploader.getVersionNew()));
         root.appendChild(email);
 
-        // department elements
-        Element department = document.createElement("Installer");
+        //is Installer?
+        Element department = document.createElement("installer");
         department.appendChild(document.createTextNode(String.valueOf(XMLtoUploader.isInstaller())));
         root.appendChild(department);
+        //md5
+        Element md5 = document.createElement("md5");
+        md5.appendChild(document.createTextNode(String.valueOf(XMLtoUploader.getMd5())));
+        root.appendChild(md5);
+        //path
+        Element path = document.createElement("path");
+        path.appendChild(document.createTextNode(String.valueOf(XMLtoUploader.getPath())));
+        root.appendChild(path);
+        //fileName
+        Element fileName = document.createElement("fileName");
+        fileName.appendChild(document.createTextNode(String.valueOf(XMLtoUploader.getFileName())));
+        root.appendChild(fileName);
 
         // create the xml file
         //transform the DOM Object to an XML File
@@ -71,5 +82,43 @@ public class GererateXMLtoUpdater {
 
         System.out.println("Done creating XML File");
     }
-
+        /*
+        File file = new File(PATH + "/bin/toUpdater.xml");
+        System.out.println(file.getAbsolutePath());
+        try {
+            Document dowloadPrincipal = ListWeb.parseFile(WEB_DOWNLOADS, "list.html");
+            XMLtoUploader toXML = CallUpdater.chekUpdateMajor(dowloadPrincipal);
+            //TODO XMLtoUploader toXML = null;
+            if (toXML == null) {
+                System.out.println("SUBVERSION");
+                toXML = CallUpdater.chekUpdateMinor(dowloadPrincipal);
+            }
+            if (toXML != null) {
+                System.out.println(toXML);
+                GererateXMLtoUpdater.generar(file, toXML);
+                try {
+                    (new Thread() {
+                        public void run() {
+                            try {
+                                Runtime.getRuntime().exec("cmd /c "+PATH+"/bin/updater.exe", null, new File(PATH+"/bin\\"));
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }).start();
+                    //Runtime.getRuntime().exec("rundll32 url.dll,FileProtocolHandler "+PATH+"/bin/updater.exe", null, new File(PATH+"/bin\\"));
+                    System.exit(0);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            } else {
+                System.out.println("NO UPDATES");
+                //TODO TODO CORRECTO
+            }
+        } catch (IOException | ParserConfigurationException | TransformerException e) {
+            //} catch (IOException e) {
+            e.printStackTrace();
+            //TODO LANZAR ERROR
+        }
+*/
 }

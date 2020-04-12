@@ -1,15 +1,15 @@
-package main.java.update.utils.jsoup;
+package main.java.test.update.utils.jsoup;
 
 public class ListaDeRutas {
     private String href;
     private String md5;
-    private String folder;
+    private String path;
     private String file;
 
-    public ListaDeRutas(String href, String md5, String folder, String file) {
+    public ListaDeRutas(String href, String md5, String path, String file) {
         this.href=href;
         this.md5=md5;
-        this.folder=folder;
+        this.path = path;
         this.file=file;
     }
 
@@ -21,8 +21,8 @@ public class ListaDeRutas {
         return md5;
     }
 
-    public String getFolder() {
-        return folder;
+    public String getPath() {
+        return path;
     }
 
     public String getFile() {

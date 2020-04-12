@@ -7,6 +7,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import main.java.Inicio.PantallaInicialController;
 import main.java.temas.Temas;
+import main.java.utils.os.Os;
 import main.java.utils.traductor.Traductor;
 
 import java.io.File;
@@ -16,19 +17,24 @@ import java.util.ResourceBundle;
 
 import static main.java.temas.Temas.pathImagesExternal;
 import static main.java.utils.PrimaryStageControler.*;
+import static main.java.utils.propietiesAndPreferences.PropertiesApp.createPropieties;
 import static main.java.utils.traductor.Traductor.listaIdiomasPath;
 
 
 public class Main extends Application {
-//    String userDir = System.getProperty("user.dir");
-//    Path path = Paths.get(userDir);
-//    String project = path.getFileName();
+    //SYSTEMA
+    public static final String OS = Os.operativeSystem();
     public static final String PATH = System.getProperty("user.dir").replace("proyectoJuegoFX", "");
-
-    public static final String WEB="http://armegis.tk/";
-    public static final String WEB_DOWNLOADS=WEB+"dowloads/";
-    public static final String VERSION="0.0.4.20200409";
-
+    //    String userDir = System.getProperty("user.dir");
+    //    Path path = Paths.get(userDir);
+    //    String project = path.getFileName();
+//CONFIGS
+    public static final String NAME = "nombreDelJuego";
+    public static final String VERSION = "0.-15.-14.4.20200412.0";
+    public static final String HOST = "http://armegis.tk/";
+    public static final String PROJECT = "downloads/";
+    public static final String FILELIST = "list.html";
+    //INTERNAS
     public static final String RUTEINTERNAL = System.getProperty("user.dir") + "/src/main/";
     public static String pathImagesInternal = Main.RUTEINTERNAL + "resources/images/";
 
@@ -52,6 +58,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
+        createPropieties();
         FXMLLoader loader = new FXMLLoader();
         URL url = getClass().getResource(getPathToFXML(PantallaInicialController.class));
         loader.setLocation(url);
@@ -79,7 +86,7 @@ public class Main extends Application {
         });*/
         loader.setResources(TRADUCCIONES);
         Parent root = loader.load();
-        primaryStage.setTitle(TRADUCCIONES.getString("nombreDelJuego"));
+        primaryStage.setTitle(NAME);
         Scene scene = new Scene(root);
         //scene.getStylesheets().add("main.resources/style/styles.css");
         primaryStage.setScene(scene);
@@ -88,6 +95,11 @@ public class Main extends Application {
     }
 
     public static void main(String[] args) {
+
+
+        //
+
+
         listaIdiomasPath.add("Català$##$flags/cat");
         listaIdiomasPath.add("Castellano$##$flags/es");
         listaIdiomasPath.add("English$##$flags/en");

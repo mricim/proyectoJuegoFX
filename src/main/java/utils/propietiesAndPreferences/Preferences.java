@@ -1,4 +1,4 @@
-package main.java;
+package main.java.utils.propietiesAndPreferences;
 
 import java.io.File;
 

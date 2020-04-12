@@ -1,4 +1,4 @@
-package main.java.update.utils.jsoup;
+package main.java.test.update.utils.jsoup;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -6,7 +6,7 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import java.io.IOException;
-import java.util.TreeMap;
+import java.util.LinkedHashMap;
 
 public class ListWeb {
     //https://jsoup.org/cookbook/extracting-data/example-list-links
@@ -15,8 +15,8 @@ public class ListWeb {
         System.out.println(urlList);
         return Jsoup.connect(urlList).get();
     }
-    public static TreeMap<String, ListaDeRutas> getListVersionsWeb(Document docs, String tags) {
-        TreeMap<String, ListaDeRutas> lista = new TreeMap<>();
+    public static LinkedHashMap<String, ListaDeRutas> getListVersionsWeb(Document docs, String tags) {
+        LinkedHashMap<String, ListaDeRutas> lista = new LinkedHashMap<>();
         Elements links;
         if (tags == null) {
             links = docs.select("a[href]");
@@ -29,9 +29,9 @@ public class ListWeb {
         return lista;
     }
 
-    public static TreeMap<String, ListaDeRutas> getListVersionsWeb(String url, String fileList, String tags) {
+    public static LinkedHashMap<String, ListaDeRutas> getListVersionsWeb(String url, String fileList, String tags) {
         try {
-            TreeMap<String, ListaDeRutas> lista = new TreeMap<>();
+            LinkedHashMap<String, ListaDeRutas> lista = new LinkedHashMap<>();
 //https://jsoup.org/cookbook/extracting-data/example-list-links
             String urlList = url + fileList;
             System.out.println(url + " " + fileList);
