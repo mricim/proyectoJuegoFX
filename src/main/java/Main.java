@@ -25,12 +25,13 @@ public class Main extends Application {
     //SYSTEMA
     public static final String OS = Os.operativeSystem();
     public static final String PATH = System.getProperty("user.dir").replace("proyectoJuegoFX", "");
+    public static final String propFileName = PATH + "\\conf\\config.properties";
     //    String userDir = System.getProperty("user.dir");
     //    Path path = Paths.get(userDir);
     //    String project = path.getFileName();
-//CONFIGS
+    //CONFIGS
     public static final String NAME = "nombreDelJuego";
-    public static final String VERSION = "0.-15.-14.4.20200412.0";
+    public static final String VERSION = "0.-14.0.0.20200413.0";
     public static final String HOST = "http://armegis.tk/";
     public static final String PROJECT = "downloads/";
     public static final String FILELIST = "list.html";
@@ -95,7 +96,6 @@ public class Main extends Application {
     }
 
     public static void main(String[] args) {
-
 
         //
 

@@ -1,25 +1,24 @@
 package main.java.utils.propietiesAndPreferences;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.OutputStream;
+import java.io.*;
 import java.util.Properties;
 import java.util.stream.Stream;
 
 import static main.java.Main.*;
 
 public class PropertiesApp {
+    private static File filePropieties;
+
     public static void createPropieties() throws IOException {
         boolean exist=true;
         System.out.println(PATH);
-        File file = new File(PATH + "\\config.properties");
-        if (file.exists()){
-            file.delete();
+        filePropieties=new File(propFileName);
+        if (filePropieties.exists()){
+            filePropieties.delete();
         }else{
             exist=false;
         }
-        try (OutputStream outputStream = new FileOutputStream(file)) {
+        try (OutputStream outputStream = new FileOutputStream(filePropieties)) {
 
             Properties prop = new Properties();
             // set key and value
