@@ -10,14 +10,15 @@ public class PropertiesApp {
     private static File filePropieties;
 
     public static void createPropieties() throws IOException {
-        boolean exist=true;
+        //boolean exist=true;
         System.out.println(PATH);
         filePropieties=new File(propFileName);
         if (filePropieties.exists()){
             filePropieties.delete();
-        }else{
-            exist=false;
         }
+        //else{
+//            exist=false;
+//        }
         try (OutputStream outputStream = new FileOutputStream(filePropieties)) {
 
             Properties prop = new Properties();
@@ -33,11 +34,11 @@ public class PropertiesApp {
         } catch (IOException io) {
             io.printStackTrace();
         }
-        if (!exist){
-            String iniciar=PATH+"/";
-            String app=iniciar+"run.exe";
-            Runtime.getRuntime().exec(app, null, new File(iniciar));
-            System.exit(0);
-        }
+//        if (!exist){
+//            String iniciar=PATH+"/";
+//            String app=iniciar+"run.exe";
+//            Runtime.getRuntime().exec(app, null, new File(iniciar));
+//            System.exit(0);
+//        }
     }
 }

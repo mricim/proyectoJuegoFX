@@ -11,6 +11,7 @@ import main.java.utils.os.Os;
 import main.java.utils.traductor.Traductor;
 
 import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 import java.util.Locale;
 import java.util.ResourceBundle;
@@ -58,8 +59,7 @@ public class Main extends Application {
     */
 
     @Override
-    public void start(Stage primaryStage) throws Exception {
-        createPropieties();
+    public void start(Stage primaryStage) throws IOException {
         FXMLLoader loader = new FXMLLoader();
         URL url = getClass().getResource(getPathToFXML(PantallaInicialController.class));
         loader.setLocation(url);
@@ -96,10 +96,6 @@ public class Main extends Application {
     }
 
     public static void main(String[] args) {
-
-        //
-
-
         listaIdiomasPath.add("Català$##$flags/cat");
         listaIdiomasPath.add("Castellano$##$flags/es");
         listaIdiomasPath.add("English$##$flags/en");
