@@ -21,6 +21,7 @@ public class Temas {
     private static List<String> obtainListaTemas() {
         List<String> listaTemas = new ArrayList<>();
 
+        System.out.println("TEMAS PATH: "+pathImagesTemaExternal);
         File temasDirectoryExternalFile = new File(pathImagesTemaExternal);
         File[] f;
         if (temasDirectoryExternalFile.exists()) {
