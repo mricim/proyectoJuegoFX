@@ -32,7 +32,8 @@ public class Main extends Application {
     //    String project = path.getFileName();
     //CONFIGS
     public static final String NAME = "nombreDelJuego";
-    public static final String VERSION = "0.-14.0.0.20200413.0";
+    //public static final String VERSION = "0.-14.0.0.20200413.0";
+    public static final String VERSION = "0.-15.-15.0.20200413.0";
     public static final String HOST = "http://armegis.tk/";
     public static final String PROJECT = "downloads/";
     public static final String FILELIST = "list.html";
