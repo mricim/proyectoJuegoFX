@@ -2,6 +2,7 @@ package main.java.juego.mapas.ciudad;
 
 import javafx.application.Platform;
 import javafx.beans.property.ReadOnlyObjectWrapper;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
@@ -446,6 +447,7 @@ public class CiudadController extends MapasController implements Initializable {
             @Override
             public ObservableValue<Comercio> call(TableColumn.CellDataFeatures<Comercio, Comercio> features) {
                 return new ReadOnlyObjectWrapper(features.getValue());
+//                return new SimpleObjectProperty<Recursos>((Recursos) features.getValue().getQueSeOfrece());
                 //return features.getValue();
             }
         });
@@ -473,6 +475,9 @@ public class CiudadController extends MapasController implements Initializable {
                             hBox.setAlignment(Pos.CENTER);
                             //SETTING ALL THE GRAPHICS COMPONENT FOR CELL
                             setGraphic(hBox);
+                            System.out.println("Tamaño Columnas TableView: "+comercioTableView.getColumns().size());
+                            System.out.println("Tamaño Contenido TableView: "+comercioTableView.getItems().size());
+                            System.out.println("Tamaño lista de Comercios: "+Comercio.data.size());
                         }
                     }
                 };
@@ -550,6 +555,7 @@ public class CiudadController extends MapasController implements Initializable {
         //comercioTableView.getColumns().addAll(recursoOferta, recursoDemanda, idCol, botonComprar);
         comercioTableView.getColumns().addAll(recursoOferta,  idCol);
         comercioTableView.setItems(Comercio.data);
+
 //FIN TABLA
         scrollPane.setContent(comercioTableView);
         childrenVBox.add(scrollPane);
