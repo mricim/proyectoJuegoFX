@@ -15,6 +15,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.Locale;
 import java.util.ResourceBundle;
+import java.util.jar.Manifest;
 
 import static main.java.temas.Temas.pathImagesExternal;
 import static main.java.utils.PrimaryStageControler.*;
@@ -26,7 +27,7 @@ public class Main extends Application {
     //SYSTEMA
     public static final String OS = Os.operativeSystem();
     public static final String PATH = System.getProperty("user.dir").replace("proyectoJuegoFX", "");
-    public static final String propFileName = PATH + "\\conf\\config.properties";
+    public static final String propFileName = PATH + "/conf/config.properties";
     //    String userDir = System.getProperty("user.dir");
     //    Path path = Paths.get(userDir);
     //    String project = path.getFileName();
@@ -97,7 +98,7 @@ public class Main extends Application {
     }
 
     public static void main(String[] args) {
-        System.out.println("Main.java");
+        System.out.println("Executing Main.java");
         listaIdiomasPath.add("Català$##$flags/cat");
         listaIdiomasPath.add("Castellano$##$flags/es");
         listaIdiomasPath.add("English$##$flags/en");

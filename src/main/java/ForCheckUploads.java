@@ -6,7 +6,7 @@ import static main.java.utils.propietiesAndPreferences.PropertiesApp.createPropi
 
 public class ForCheckUploads {
     public static void main(String[] args) throws IOException {
-        System.out.println("ForCheckUploads.java");
+        System.out.println("Executing ForCheckUploads.java");
         createPropieties();
     }
 }

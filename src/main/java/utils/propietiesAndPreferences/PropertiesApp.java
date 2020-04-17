@@ -11,7 +11,8 @@ public class PropertiesApp {
 
     public static void createPropieties() throws IOException {
         //boolean exist=true;
-        System.out.println(PATH);
+        System.out.println("PATH var: "+PATH);
+        System.out.println("PropFileName:"+ propFileName);
         filePropieties=new File(propFileName);
         if (filePropieties.exists()){
             filePropieties.delete();
