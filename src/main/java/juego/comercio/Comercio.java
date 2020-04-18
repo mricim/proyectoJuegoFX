@@ -30,7 +30,7 @@ public class Comercio {
     /**
      * La lista de comercios creados.
      */
-
+private static int lastId=0;
     private SimpleIntegerProperty id;
 
     private SimpleObjectProperty queSeOfrece;
@@ -47,8 +47,8 @@ public class Comercio {
      * @param queSePide El Recurso que se pide a cambio.
      * @param jugador El jugador que ha creado la oferta de comercio.
      */
-    public Comercio(int id,Recursos queSeOfrece, Recursos queSePide, Jugador jugador) {
-        this.id = new SimpleIntegerProperty(id);
+    public Comercio(Recursos queSeOfrece, Recursos queSePide, Jugador jugador) {
+        this.id = new SimpleIntegerProperty(lastId++);
         System.out.println("Comercio id="+id);
         this.queSeOfrece = new SimpleObjectProperty(queSeOfrece);
         this.queSePide = new SimpleObjectProperty(queSePide);

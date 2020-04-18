@@ -303,13 +303,13 @@ public class PantallaInicialController extends PrimaryStageControler implements 
         progresBar.setProgress(80);
 
         //COSAS DE TEST
-        Comercio comercio0 = new Comercio(data.size(), new Recursos(oroPre, 5), new Recursos(maderaPre, 10), jugador);
+        Comercio comercio0 = new Comercio( new Recursos(oroPre, 5), new Recursos(maderaPre, 10), jugador);
         data.add(comercio0);
-        Comercio comercio1 = new Comercio(data.size(), new Recursos(hierroPre, 6), new Recursos(comidaPre, 11), jugador);
+        Comercio comercio1 = new Comercio( new Recursos(hierroPre, 6), new Recursos(comidaPre, 11), jugador);
         data.add(comercio1);
-        Comercio comercio2 = new Comercio(data.size(), new Recursos(oroPre, 7), new Recursos(maderaPre, 12), jugador);
+        Comercio comercio2 = new Comercio( new Recursos(oroPre, 7), new Recursos(maderaPre, 12), jugador);
         data.add(comercio2);
-        Comercio comercio3 = new Comercio(data.size(), new Recursos(felicidadPre, 7), new Recursos(maderaPre, 15), jugador);
+        Comercio comercio3 = new Comercio( new Recursos(hierroPre, 7), new Recursos(maderaPre, 15), jugador);
         data.add(comercio3);
 
 
@@ -317,10 +317,10 @@ public class PantallaInicialController extends PrimaryStageControler implements 
             @Override
             public void handle(ActionEvent event) {
                 System.out.println("Thread Running --> PANTALLA INICIAL CONTROLLER: ADD Comercio");
-                Comercio comercio4 = new Comercio(data.size(), new Recursos(felicidadPre, 7), new Recursos(maderaPre, 15), jugador);
-                data.add(comercio4);
-                Comercio comercio5 = new Comercio(data.size(), new Recursos(felicidadPre, 7), new Recursos(maderaPre, 15), jugador);
+                Comercio comercio5 = new Comercio( new Recursos(maderaPre, 7), new Recursos(maderaPre, 15), jugador);
                 data.add(comercio5);
+                Comercio comercio6 = new Comercio( new Recursos(maderaPre, 7), new Recursos(maderaPre, 15), jugador);
+                data.add(comercio6);
             }
         }));
         thirtySeconds.setCycleCount(Timeline.INDEFINITE);
@@ -331,15 +331,15 @@ public class PantallaInicialController extends PrimaryStageControler implements 
         Thread thread = new Thread() {
             public void run() {
                 try {
-                    Thread.sleep(40000);
+                    Thread.sleep(20000);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
                 System.out.println("Thread Running --> PANTALLA INICIAL CONTROLLER: REMOVE Comercio");
                 data.remove(comercio1);
                 data.remove(comercio2);
-                Comercio comercio6 = new Comercio(data.size(), new Recursos(felicidadPre, 7), new Recursos(maderaPre, 15), jugador);
-                data.add(comercio6);
+                Comercio comercio4 = new Comercio( new Recursos(piedraPre, 7), new Recursos(maderaPre, 15), jugador);
+                data.add(comercio4);
             }
         };
         thread.start();
