@@ -311,12 +311,10 @@ public class PantallaInicialController extends PrimaryStageControler implements 
         data.add(comercio3);
 
 
-
         Timeline thirtySeconds = new Timeline(new KeyFrame(Duration.seconds(30), new EventHandler<ActionEvent>() {
-
             @Override
             public void handle(ActionEvent event) {
-                System.out.println("Thread Running --> PANTALLA INICIAL CONTROLLER: add Comercio");
+                System.out.println("Thread Running --> PANTALLA INICIAL CONTROLLER: ADD Comercio");
                 Comercio comercio = new Comercio(data.size(), new Recursos(felicidadPre, 7), new Recursos(maderaPre, 15), jugador);
                 data.add(comercio);
             }
@@ -324,5 +322,19 @@ public class PantallaInicialController extends PrimaryStageControler implements 
         thirtySeconds.setCycleCount(Timeline.INDEFINITE);
         thirtySeconds.play();
 
+
+        //TODO TEST
+        Thread thread = new Thread() {
+            public void run() {
+                try {
+                    Thread.sleep(31000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                System.out.println("Thread Running --> PANTALLA INICIAL CONTROLLER: REMOVE Comercio");
+                data.remove(comercio2);
+            }
+        };
+        thread.start();
     }
 }
