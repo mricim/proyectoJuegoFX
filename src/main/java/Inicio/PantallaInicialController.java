@@ -1,10 +1,16 @@
 package main.java.Inicio;
 
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.util.Duration;
 import main.java.juego.MapasController;
 import main.java.juego.comercio.Comercio;
 import main.java.juego.mapas.Recursos;
@@ -31,6 +37,7 @@ public class PantallaInicialController extends PrimaryStageControler implements 
     public static int idJugadorTemp;
     public static String nameJugadorTemp;
     public static String emailJugadorTemp;
+    public static ObservableList<Comercio> data = FXCollections.observableArrayList();
 
 
     public ProgressBar progresBar;
@@ -279,16 +286,16 @@ public class PantallaInicialController extends PrimaryStageControler implements 
         //TODO FIN LEER DESDE LA BD
         Clan clan = new Clan(1, "Los mejores");
         ArrayList<Recursos> jugador1ListaRecuros = new ArrayList<>();
-        jugador1ListaRecuros.add(new Recursos(investigacionPre,5));
+        jugador1ListaRecuros.add(new Recursos(investigacionPre, 5));
         Jugador jugador = new Jugador("pepito", jugador1ListaRecuros);
         setJugadorPrimaryStageController(jugador);
         setClanPrimaryStageController(clan);
         progresBar.setProgress(60);
         ArrayList<Recursos> jugador2ListaRecuros = new ArrayList<>();
-        jugador2ListaRecuros.add(new Recursos(investigacionPre,25));
+        jugador2ListaRecuros.add(new Recursos(investigacionPre, 25));
         new Jugador("juan", jugador2ListaRecuros);
         ArrayList<Recursos> jugador3ListaRecuros = new ArrayList<>();
-        jugador3ListaRecuros.add(new Recursos(investigacionPre,80));
+        jugador3ListaRecuros.add(new Recursos(investigacionPre, 80));
         new Jugador("pedro", jugador3ListaRecuros);
         progresBar.setProgress(70);
         clan.addJugadorClan(jugador);
@@ -296,50 +303,26 @@ public class PantallaInicialController extends PrimaryStageControler implements 
         progresBar.setProgress(80);
 
         //COSAS DE TEST
-        new Comercio(new Recursos(oroPre,5),new Recursos(maderaPre,10),jugador);
-        new Comercio(new Recursos(hierroPre,6),new Recursos(comidaPre,11),jugador);
-        new Comercio(new Recursos(oroPre,7),new Recursos(maderaPre,12),jugador);
-        Thread thread = new Thread(){
-            public void run(){
-                try {
-                    Thread.sleep(30000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                System.out.println("Thread Running --> PANTALLA INICIAL CONTROLLER: add Comenrio");
-                Comercio comercio1=new Comercio(new Recursos(felicidadPre,7),new Recursos(maderaPre,15),jugador);
-                Comercio comercio2=new Comercio(new Recursos(hierroPre,8),new Recursos(hierroPre,13),jugador);
-                Thread thread = new Thread(){
-                    public void run(){
-                        try {
-                            Thread.sleep(30000);
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
-                        System.out.println("Thread Running --> PANTALLA INICIAL CONTROLLER: REMOVE Comercio");
-                        comercio1.remove();
-                    }
-                };
-                thread.start();
-                /*
-                new Comercio(new Recursos(hierroPre,9),new Recursos(hierroPre,13),jugador);
-                new Comercio(new Recursos(hierroPre,10),new Recursos(hierroPre,13),jugador);
-                new Comercio(new Recursos(hierroPre,11),new Recursos(hierroPre,13),jugador);
-                new Comercio(new Recursos(hierroPre,12),new Recursos(hierroPre,13),jugador);
-                new Comercio(new Recursos(hierroPre,13),new Recursos(hierroPre,13),jugador);
-                new Comercio(new Recursos(hierroPre,14),new Recursos(hierroPre,13),jugador);
-                new Comercio(new Recursos(hierroPre,15),new Recursos(hierroPre,13),jugador);
-                new Comercio(new Recursos(hierroPre,16),new Recursos(hierroPre,13),jugador);
-                new Comercio(new Recursos(hierroPre,17),new Recursos(hierroPre,13),jugador);
-                new Comercio(new Recursos(hierroPre,18),new Recursos(hierroPre,13),jugador);
-                new Comercio(new Recursos(hierroPre,19),new Recursos(hierroPre,13),jugador);
-                new Comercio(new Recursos(hierroPre,20),new Recursos(hierroPre,13),jugador);
-                new Comercio(new Recursos(comidaPre,21),new Recursos(hierroPre,13),jugador);
+        Comercio comercio1 = new Comercio(data.size(), new Recursos(oroPre, 5), new Recursos(maderaPre, 10), jugador);
+        data.add(comercio1);
+        Comercio comercio2 = new Comercio(data.size(), new Recursos(hierroPre, 6), new Recursos(comidaPre, 11), jugador);
+        data.add(comercio2);
+        Comercio comercio3 = new Comercio(data.size(), new Recursos(oroPre, 7), new Recursos(maderaPre, 12), jugador);
+        data.add(comercio3);
 
-                 */
+
+
+        Timeline thirtySeconds = new Timeline(new KeyFrame(Duration.seconds(30), new EventHandler<ActionEvent>() {
+
+            @Override
+            public void handle(ActionEvent event) {
+                System.out.println("Thread Running --> PANTALLA INICIAL CONTROLLER: add Comercio");
+                Comercio comercio = new Comercio(data.size(), new Recursos(felicidadPre, 7), new Recursos(maderaPre, 15), jugador);
+                data.add(comercio);
             }
-        };
-        thread.start();
+        }));
+        thirtySeconds.setCycleCount(Timeline.INDEFINITE);
+        thirtySeconds.play();
 
     }
 }

@@ -20,6 +20,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.util.Callback;
+import main.java.Inicio.PantallaInicialController;
 import main.java.juego.comercio.Comercio;
 import main.java.juego.mapas.RecursosPrecargados;
 import main.java.utils.CallImages;
@@ -437,124 +438,45 @@ public class CiudadController extends MapasController implements Initializable {
         scrollPane.setFitToHeight(true);
         scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
-        TableView<Comercio> comercioTableView = new TableView<>();
-        comercioTableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
-//columna
-        TableColumn<Comercio, Comercio> recursoOferta = new TableColumn("Ofrece");
-        recursoOferta.setMinWidth(100);
 
-        recursoOferta.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Comercio, Comercio>, ObservableValue<Comercio>>() {
-            @Override
-            public ObservableValue<Comercio> call(TableColumn.CellDataFeatures<Comercio, Comercio> features) {
-                return new ReadOnlyObjectWrapper(features.getValue());
-//                return new SimpleObjectProperty<Recursos>((Recursos) features.getValue().getQueSeOfrece());
-                //return features.getValue();
-            }
-        });
-        recursoOferta.setCellFactory(new Callback<TableColumn<Comercio, Comercio>, TableCell<Comercio, Comercio>>() {
-            @Override
-            public TableCell<Comercio, Comercio> call(TableColumn<Comercio, Comercio> param) {
-                return new TableCell<Comercio, Comercio>() {
-                    @Override
-                    protected void updateItem(Comercio item, boolean empty) {
-                        super.updateItem(item, empty);
-                        if (item == null || empty) {
-                            //setText(null);
-                            //setStyle(null);
-                        } else {
-                            //recuperar el recurso
-                            Recursos recurso = (Recursos) item.getQueSeOfrece();
-                            //create objects
-                            ImageView imageview = new ImageView();
-                            imageview.setFitHeight(50);
-                            imageview.setFitWidth(50);
-                            imageview.setImage(recurso.getRecursosPrecargados().getImage());
-                            //create and add HBOX
-                            HBox hBox = new HBox(imageview, new Label(String.valueOf(recurso.getCantidad())));
-                            hBox.setSpacing(10);
-                            hBox.setAlignment(Pos.CENTER);
-                            //SETTING ALL THE GRAPHICS COMPONENT FOR CELL
-                            setGraphic(hBox);
-                            System.out.println("Tamaño Columnas TableView: "+comercioTableView.getColumns().size());
-                            System.out.println("Tamaño Contenido TableView: "+comercioTableView.getItems().size());
-                            System.out.println("Tamaño lista de Comercios: "+Comercio.data.size());
-                        }
-                    }
-                };
-            }
-        });
-/*
+
+        TableView<Comercio> comercioTableView = new TableView<>();
+//        comercioTableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 //columna
-        TableColumn<Comercio, Comercio> recursoDemanda = new TableColumn("Demanda");
-        recursoDemanda.setMinWidth(100);
-        recursoDemanda.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Comercio, Comercio>, ObservableValue<Comercio>>() {
-            @Override
-            public ObservableValue<Comercio> call(TableColumn.CellDataFeatures<Comercio, Comercio> features) {
-                return new ReadOnlyObjectWrapper(features.getValue());
-            }
-        });
-        recursoDemanda.setCellFactory(new Callback<TableColumn<Comercio, Comercio>, TableCell<Comercio, Comercio>>() {
-            @Override
-            public TableCell<Comercio, Comercio> call(TableColumn<Comercio, Comercio> param) {
-                return new TableCell<Comercio, Comercio>() {
-                    @Override
-                    protected void updateItem(Comercio item, boolean empty) {
-                        super.updateItem(item, empty);
-                        if (item != null) {
-                            //recuperar el recurso
-                            Recursos recurso = (Recursos) item.getQueSePide();
-                            //create objects
-                            ImageView imageview = new ImageView();
-                            imageview.setFitHeight(50);
-                            imageview.setFitWidth(50);
-                            imageview.setImage(recurso.getRecursosPrecargados().getImage());
-                            //create and add HBOX
-                            HBox hBox = new HBox(imageview, new Label(String.valueOf(recurso.getCantidad())));
-                            hBox.setSpacing(10);
-                            hBox.setAlignment(Pos.CENTER);
-                            //SETTING ALL THE GRAPHICS COMPONENT FOR CELL
-                            setGraphic(hBox);
-                        }
+        TableColumn<Comercio, Recursos> recursoOferta = new TableColumn("Oferta");
+        recursoOferta.setMinWidth(100);
+        recursoOferta.setCellFactory(param -> {
+            final ImageView recurso = new ImageView();
+            final Label cantidad = new Label();
+            HBox contenidoCelda = new HBox();
+            recurso.setFitHeight(50);
+            recurso.setFitWidth(50);
+
+            TableCell<Comercio,Recursos> cell = new TableCell<Comercio,Recursos>(){
+                @Override
+                protected void updateItem(Recursos item, boolean empty) {
+                    super.updateItem(item, empty);
+                    if (item != null){
+                        recurso.setImage(item.getRecursosPrecargados().getImage());
+                        cantidad.setText(String.valueOf(item.getCantidad()));
                     }
-                };
-            }
+                }
+            };
+            contenidoCelda.getChildren().addAll(recurso,cantidad);
+            cell.setGraphic(contenidoCelda);
+//            cell.setGraphic(recurso);
+            return cell;
         });
-//columna
-*/
+        recursoOferta.setCellValueFactory(new PropertyValueFactory<Comercio,Recursos>("queSeOfrece"));
+
         TableColumn<Comercio, Integer> idCol = new TableColumn("Id");
         idCol.setMinWidth(100);
         idCol.setCellValueFactory(new PropertyValueFactory<>("id"));
-        /*
-//columna
-        TableColumn<Comercio, Comercio> botonComprar = new TableColumn("Comprar");
-        botonComprar.setMinWidth(100);
-        botonComprar.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Comercio, Comercio>, ObservableValue<Comercio>>() {
-            @Override
-            public ObservableValue<Comercio> call(TableColumn.CellDataFeatures<Comercio, Comercio> features) {
-                return new ReadOnlyObjectWrapper(features.getValue());
-            }
-        });
-        botonComprar.setCellFactory(new Callback<TableColumn<Comercio, Comercio>, TableCell<Comercio, Comercio>>() {
-            @Override
-            public TableCell<Comercio, Comercio> call(TableColumn<Comercio, Comercio> param) {
-                return new TableCell<Comercio, Comercio>() {
-                    @Override
-                    protected void updateItem(Comercio item, boolean empty) {
-                        super.updateItem(item, empty);
-                        if (item != null) {
-                            Button button = new Button("Comprar");
-                            button.setAlignment(Pos.CENTER);
-                            setGraphic(button);
-                        }
-                    }
-                };
-            }
-        });
-        */
+
 //FIN COLUMNAS
         //comercioTableView.getColumns().addAll(recursoOferta, recursoDemanda, idCol, botonComprar);
-        comercioTableView.getColumns().addAll(recursoOferta,  idCol);
-        comercioTableView.setItems(Comercio.data);
+        comercioTableView.getColumns().addAll(idCol,recursoOferta);
+        comercioTableView.setItems(PantallaInicialController.data);
 
 //FIN TABLA
         scrollPane.setContent(comercioTableView);

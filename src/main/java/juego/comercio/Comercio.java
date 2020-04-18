@@ -30,8 +30,6 @@ public class Comercio {
     /**
      * La lista de comercios creados.
      */
-    public static final ObservableList<Comercio> data = FXCollections.observableArrayList();
-    private static Integer lastId = 0;
 
     private SimpleIntegerProperty id;
 
@@ -49,8 +47,8 @@ public class Comercio {
      * @param queSePide El Recurso que se pide a cambio.
      * @param jugador El jugador que ha creado la oferta de comercio.
      */
-    public Comercio(Recursos queSeOfrece, Recursos queSePide, Jugador jugador) {
-        id = new SimpleIntegerProperty(lastId++);
+    public Comercio(int id,Recursos queSeOfrece, Recursos queSePide, Jugador jugador) {
+        this.id = new SimpleIntegerProperty(id);
         this.queSeOfrece = new SimpleObjectProperty(queSeOfrece);
         this.queSePide = new SimpleObjectProperty(queSePide);
         this.jugador = jugador;
@@ -62,7 +60,7 @@ public class Comercio {
         //LocalDateTime gmt = changeZone(horaPublicacion,ZONE_UTC,ZONE_GTM);
         //LocalDateTime gmtMasHoras = changeZone(horaFin,ZONE_UTC,ZONE_GTM);
         //lista.put(id.intValue(), this);
-        data.add(this);
+
     }
 
     /**
@@ -183,9 +181,6 @@ public class Comercio {
                 '}';
     }
 
-    public void remove() {
-        data.remove(this);
-    }
 
 
     //METODOS
