@@ -18,6 +18,7 @@ import javafx.stage.Stage;
 import javafx.util.Callback;
 
 import java.io.File;
+import java.lang.reflect.ParameterizedType;
 
 public class Main extends Application {
     public static final String PATH = System.getProperty("user.dir") + "/src/main/java/test/TableView/";
@@ -30,6 +31,7 @@ public class Main extends Application {
         image = new Image(file.toURI().toString());
 
         System.out.println(PATH + "error.png");
+        Persona persona0 =new Persona(new DatosPersona(image, "nombre0", 901));
         Persona persona1 =new Persona(new DatosPersona(image, "nombre1", 123));
         Persona persona2 =new Persona(new DatosPersona(image, "nombre2", 234));
         Persona persona3 =new Persona(new DatosPersona(image, "nombre3", 345));
@@ -38,7 +40,7 @@ public class Main extends Application {
         Thread thread = new Thread(){
             public void run(){
                 try {
-                    Thread.sleep(300);
+                    Thread.sleep(30000);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -46,8 +48,11 @@ public class Main extends Application {
                 persona3.remove();
                 persona4.remove();
                 Persona persona6 =new Persona(new DatosPersona(image, "nombre6", 678));
+                Persona persona7 =new Persona(new DatosPersona(image, "nombre7", 789));
+                Persona persona8 =new Persona(new DatosPersona(image, "nombre8", 890));
             }
         };
+        thread.start();
         launch(args);
     }
 
@@ -63,15 +68,16 @@ public class Main extends Application {
                 System.out.println("Hello World!");
             }
         });
-        VBox vBox = new VBox(btn, generateTable());
+        VBox vBox = new VBox(btn, generateTable(primaryStage));
 
         StackPane root = new StackPane();
         root.getChildren().add(vBox);
-        primaryStage.setScene(new Scene(root, 300, 250));
+        //primaryStage.setScene(new Scene(root, 300, 300));//TODO CON ESTE NO DA EL ERROR
+        primaryStage.setScene(new Scene(root, 300, 800));//TODO CON ESTE SI
         primaryStage.show();
     }
 
-    private static ScrollPane generateTable() {
+    private static ScrollPane generateTable(Stage primaryStage) {
         //TABLA
         ScrollPane scrollPane = new ScrollPane();
         scrollPane.setPannable(true);
@@ -79,8 +85,10 @@ public class Main extends Application {
         scrollPane.setFitToHeight(true);
         scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
-        TableView<Persona> ParaTablaTableView = new TableView<>();
-        ParaTablaTableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+        TableView<Persona> personaTableView = new TableView<>();
+        //personaTableView.setPrefHeight(primaryStage.heightProperty().multiply(0.80));
+        personaTableView.prefHeightProperty().bind(primaryStage.heightProperty().multiply(0.80));
+        personaTableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 //columna
         TableColumn<Persona, Persona> recursoOferta = new TableColumn("peronas");
         recursoOferta.setMinWidth(100);
@@ -117,8 +125,8 @@ public class Main extends Application {
                             hBox.setAlignment(Pos.CENTER);
                             //SETTING ALL THE GRAPHICS COMPONENT FOR CELL
                             setGraphic(hBox);
-                            System.out.println("Tamaño Columnas TableView: " + ParaTablaTableView.getColumns().size());
-                            System.out.println("Tamaño Contenido TableView: " + ParaTablaTableView.getItems().size());
+                            System.out.println("Tamaño Columnas TableView: " + personaTableView.getColumns().size());
+                            System.out.println("Tamaño Contenido TableView: " + personaTableView.getItems().size());
                             System.out.println("Tamaño lista de ParaTablas: " + Persona.data.size());
                         }
                     }
@@ -132,11 +140,11 @@ public class Main extends Application {
 
 //FIN COLUMNAS
         //ParaTablaTableView.getColumns().addAll(recursoOferta, recursoDemanda, idCol, botonComprar);
-        ParaTablaTableView.getColumns().addAll(recursoOferta, idCol);
-        ParaTablaTableView.setItems(Persona.data);
+        personaTableView.getColumns().addAll(recursoOferta, idCol);
+        personaTableView.setItems(Persona.data);
 
 //FIN TABLA
-        scrollPane.setContent(ParaTablaTableView);
+        scrollPane.setContent(personaTableView);
         return scrollPane;
     }
 }
