@@ -33,14 +33,13 @@ public class Main extends Application {
     //    String project = path.getFileName();
     //CONFIGS
     public static final String NAME = "nombreDelJuego";
-    //public static final String VERSION = "0.-14.0.0.20200413.0";
-    public static final String VERSION = "0.-15.-15.0.20200413.0";
+    public static final String VERSION = "0.-13.0.4.20200417.0";
     public static final String HOST = "http://armegis.tk/";
     public static final String PROJECT = "downloads/";
-    public static final String FILELIST = "list.html";
+    public static final String FILELIST = "list.xml";
     //INTERNAS
     public static final String RUTEINTERNAL = System.getProperty("user.dir") + "/src/main/";
-    public static String pathImagesInternal = Main.RUTEINTERNAL + "resources/images/";
+    public static String pathImagesInternal = RUTEINTERNAL + "resources/images/";
 
     /*
     private static final SessionFactory ourSessionFactory;
@@ -98,6 +97,8 @@ public class Main extends Application {
     }
 
     public static void main(String[] args) {
+        System.out.println(RUTEINTERNAL);
+        System.out.println();
         System.out.println("Executing Main.java");
         listaIdiomasPath.add("Català$##$flags/cat");
         listaIdiomasPath.add("Castellano$##$flags/es");
