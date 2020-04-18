@@ -49,6 +49,7 @@ public class Comercio {
      */
     public Comercio(int id,Recursos queSeOfrece, Recursos queSePide, Jugador jugador) {
         this.id = new SimpleIntegerProperty(id);
+        System.out.println("Comercio id="+id);
         this.queSeOfrece = new SimpleObjectProperty(queSeOfrece);
         this.queSePide = new SimpleObjectProperty(queSePide);
         this.jugador = jugador;
