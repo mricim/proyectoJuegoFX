@@ -459,6 +459,7 @@ public class CiudadController extends MapasController implements Initializable {
                     if (item != null){
                         recurso.setImage(item.getRecursosPrecargados().getImage());
                         cantidad.setText(String.valueOf(item.getCantidad()));
+                        comercioTableView.refresh();
                     }
                 }
             };
