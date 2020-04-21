@@ -2,6 +2,8 @@ package main.java.juego.mapas;
 
 import javafx.scene.image.Image;
 
+import java.util.Objects;
+
 public class Recursos {
     //oro=0;
     //madera=1;
@@ -49,6 +51,19 @@ public class Recursos {
 
     public int getId() {
         return recursosPrecargados.getId();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Recursos)) return false;
+        Recursos recursos = (Recursos) o;
+        return getRecursosPrecargados().equals(recursos.getRecursosPrecargados());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getRecursosPrecargados());
     }
 
     @Override

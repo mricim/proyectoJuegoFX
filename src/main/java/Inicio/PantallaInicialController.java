@@ -285,6 +285,7 @@ public class PantallaInicialController extends PrimaryStageControler implements 
         progresBar.setProgress(50);
         //TODO FIN LEER DESDE LA BD
         Clan clan = new Clan(1, "Los mejores");
+        Clan clan2 = new Clan(2, "Los peores");
         ArrayList<Recursos> jugador1ListaRecuros = new ArrayList<>();
         jugador1ListaRecuros.add(new Recursos(investigacionPre, 5));
         Jugador jugador = new Jugador("pepito", jugador1ListaRecuros);
@@ -293,10 +294,12 @@ public class PantallaInicialController extends PrimaryStageControler implements 
         progresBar.setProgress(60);
         ArrayList<Recursos> jugador2ListaRecuros = new ArrayList<>();
         jugador2ListaRecuros.add(new Recursos(investigacionPre, 25));
-        new Jugador("juan", jugador2ListaRecuros);
+        Jugador jugador2 =new Jugador("juan", jugador2ListaRecuros);
         ArrayList<Recursos> jugador3ListaRecuros = new ArrayList<>();
         jugador3ListaRecuros.add(new Recursos(investigacionPre, 80));
-        new Jugador("pedro", jugador3ListaRecuros);
+        Jugador jugador3 =new Jugador("pedro", jugador3ListaRecuros);
+        Jugador jugador4 =new Jugador("julito", jugador3ListaRecuros);
+        clan2.addJugadorClan(jugador4);
         progresBar.setProgress(70);
         clan.addJugadorClan(jugador);
         clan.addJugadorClan(3);
@@ -305,11 +308,11 @@ public class PantallaInicialController extends PrimaryStageControler implements 
         //COSAS DE TEST
         Comercio comercio0 = new Comercio( new Recursos(oroPre, 5), new Recursos(maderaPre, 300), jugador);
         data.add(comercio0);
-        Comercio comercio1 = new Comercio( new Recursos(hierroPre, 6), new Recursos(comidaPre, 11), jugador);
+        Comercio comercio1 = new Comercio( new Recursos(hierroPre, 6), new Recursos(comidaPre, 11), jugador2);
         data.add(comercio1);
-        Comercio comercio2 = new Comercio( new Recursos(oroPre, 7), new Recursos(maderaPre, 12), jugador);
+        Comercio comercio2 = new Comercio( new Recursos(oroPre, 7), new Recursos(maderaPre, 12), jugador3);
         data.add(comercio2);
-        Comercio comercio3 = new Comercio( new Recursos(hierroPre, 7000000), new Recursos(maderaPre, 15), jugador);
+        Comercio comercio3 = new Comercio( new Recursos(hierroPre, 7000000), new Recursos(maderaPre, 15), jugador4);
         data.add(comercio3);
 
 
@@ -319,7 +322,7 @@ public class PantallaInicialController extends PrimaryStageControler implements 
                 System.out.println("Thread Running --> PANTALLA INICIAL CONTROLLER: ADD Comercio");
                 Comercio comercio5 = new Comercio( new Recursos(maderaPre, 7), new Recursos(maderaPre, 15), jugador);
                 data.add(comercio5);
-                Comercio comercio6 = new Comercio( new Recursos(maderaPre, 7), new Recursos(maderaPre, 15), jugador);
+                Comercio comercio6 = new Comercio( new Recursos(maderaPre, 7), new Recursos(maderaPre, 15), jugador2);
                 data.add(comercio6);
             }
         }));
@@ -338,7 +341,7 @@ public class PantallaInicialController extends PrimaryStageControler implements 
                 System.out.println("Thread Running --> PANTALLA INICIAL CONTROLLER: REMOVE Comercio");
                 data.remove(comercio1);
                 data.remove(comercio2);
-                Comercio comercio4 = new Comercio( new Recursos(piedraPre, 7), new Recursos(maderaPre, 15), jugador);
+                Comercio comercio4 = new Comercio( new Recursos(piedraPre, 7), new Recursos(maderaPre, 15), jugador3);
                 data.add(comercio4);
             }
         };

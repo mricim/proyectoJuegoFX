@@ -2,6 +2,7 @@ package main.java.juego.mapas.ciudad;
 
 import javafx.application.Platform;
 import javafx.beans.property.ReadOnlyObjectWrapper;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -22,19 +23,24 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.util.Callback;
 import main.java.Inicio.PantallaInicialController;
+import main.java.Main;
 import main.java.juego.comercio.Comercio;
 import main.java.juego.mapas.RecursosPrecargados;
+import main.java.jugadores.Clan;
+import main.java.jugadores.Jugador;
 import main.java.utils.CallImages;
 import main.java.juego.MapasController;
 import main.java.juego.mapas.mundo.MundoController;
 import main.java.juego.mapas.Recursos;
 import main.java.juego.mapas.ciudad.contenidoCiudad.Edificio;
 import main.java.juego.mapas.pelea.*;
+import main.java.utils.Time;
 import main.java.utils.tagsFX.CustomSeparator;
 import main.java.utils.tagsFX.CustomTextField;
 import main.java.utils.tagsFX.CustomSlider;
 
 import java.net.URL;
+import java.time.LocalDateTime;
 import java.util.*;
 
 import static javafx.geometry.Pos.TOP_CENTER;
@@ -441,14 +447,58 @@ public class CiudadController extends MapasController implements Initializable {
 
 
         TableView<Comercio> comercioTableView = new TableView<>();
-//        comercioTableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+        comercioTableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+         /*
+        TableColumn<Comercio, Integer> idCol = new TableColumn("Id");
+        idCol.setMinWidth(100);
+        idCol.setCellValueFactory(new PropertyValueFactory<>("id"));
+         */
+        //columna
+        TableColumn<Comercio, Jugador> clan = new TableColumn("User");
+        clan.setMinWidth(120);
+        clan.setCellFactory(param -> {
+            HBox hBox = new HBox();
+            hBox.setAlignment(Pos.CENTER);
+            VBox vBox = new VBox();
+            vBox.setAlignment(Pos.CENTER);
+            TableCell<Comercio, Jugador> cell = new TableCell<Comercio, Jugador>() {
+                @Override
+                protected void updateItem(Jugador item, boolean empty) {
+                    super.updateItem(item, empty);
+                    if (item != null) {
+                        vBox.getChildren().clear();
+                        Label label1 = new Label();
+                        Clan clan = Clan.jugadoresQueEstanEnUnClan.get(item);
+                        if (clan != null) {
+                            Label label2 = new Label();
+                            label1.setText(item.getNombre());
+                            label2.setText("(" + clan.getName() + " )");
+                            vBox.getChildren().addAll(label1, label2);
+                            if (clan == Clan.jugadoresQueEstanEnUnClan.get(getJugadorPrimaryStageController())) {
+                                setBackground(new Background(new BackgroundFill(Color.GREEN, CornerRadii.EMPTY, Insets.EMPTY)));
+                            } else {
+                                setBackground(new Background(new BackgroundFill(Color.RED, CornerRadii.EMPTY, Insets.EMPTY)));
+                            }
+                        } else {
+                            label1.setText(item.getNombre());
+                            vBox.getChildren().add(label1);
+                        }
+                        comercioTableView.refresh();
+                    }
+                }
+            };
+            hBox.getChildren().add(vBox);
+            cell.setGraphic(hBox);
+            return cell;
+        });
+        clan.setCellValueFactory(new PropertyValueFactory<Comercio, Jugador>("jugador"));
 //columna
         TableColumn<Comercio, Recursos> recursoOferta = new TableColumn("Oferta");
         recursoOferta.setMinWidth(120);
         recursoOferta.setCellFactory(param -> {
             HBox contenidoCelda = new HBox();
             contenidoCelda.setAlignment(Pos.CENTER);
-            contenidoCelda.setSpacing(recursoOferta.getWidth()*0.1);
+            contenidoCelda.setSpacing(recursoOferta.getWidth() * 0.1);
             final Label cantidad = new Label();
             final ImageView recurso = new ImageView();
             recurso.setFitHeight(50);
@@ -464,9 +514,8 @@ public class CiudadController extends MapasController implements Initializable {
                     }
                 }
             };
-            contenidoCelda.getChildren().addAll(cantidad,recurso);
+            contenidoCelda.getChildren().addAll(cantidad, recurso);
             cell.setGraphic(contenidoCelda);
-//            cell.setGraphic(recurso);
             return cell;
         });
         recursoOferta.setCellValueFactory(new PropertyValueFactory<Comercio, Recursos>("queSeOfrece"));
@@ -476,7 +525,7 @@ public class CiudadController extends MapasController implements Initializable {
         recursoDemanda.setCellFactory(param -> {
             HBox contenidoCelda = new HBox();
             contenidoCelda.setAlignment(Pos.CENTER);
-            contenidoCelda.setSpacing(recursoDemanda.getWidth()*0.1);
+            contenidoCelda.setSpacing(recursoDemanda.getWidth() * 0.1);
             final Label cantidad = new Label();
             final ImageView recurso = new ImageView();
             recurso.setFitHeight(50);
@@ -492,52 +541,81 @@ public class CiudadController extends MapasController implements Initializable {
                     }
                 }
             };
-            contenidoCelda.getChildren().addAll(cantidad,recurso);
+            contenidoCelda.getChildren().addAll(cantidad, recurso);
             cell.setGraphic(contenidoCelda);
-//            cell.setGraphic(recurso);
             return cell;
         });
         recursoDemanda.setCellValueFactory(new PropertyValueFactory<Comercio, Recursos>("queSePide"));
-        /*
-//columnas
-        TableColumn<Comercio, Integer> idCol = new TableColumn("Id");
-        idCol.setMinWidth(100);
-        idCol.setCellValueFactory(new PropertyValueFactory<>("id"));
-         */
+
 //columna
-        TableColumn<Comercio, Void> elBoton = new TableColumn("Button Column");
-
-        Callback<TableColumn<Comercio, Void>, TableCell<Comercio, Void>> cellFactory = new Callback<TableColumn<Comercio, Void>, TableCell<Comercio, Void>>() {
-            @Override
-            public TableCell<Comercio, Void> call(final TableColumn<Comercio, Void> param) {
-                final TableCell<Comercio, Void> cell = new TableCell<Comercio, Void>() {
-
-                    private final Button btn = new Button("Action");
-
-                    {
-                        btn.setOnAction((ActionEvent event) -> {
-                            Comercio data = getTableView().getItems().get(getIndex());
-                            System.out.println("selectedData: " + data);
-                        });
+        TableColumn<Comercio, LocalDateTime> hora = new TableColumn("Finaliza");
+        hora.setMinWidth(100);
+        hora.setCellFactory(param -> {
+            HBox hBox = new HBox();
+            hBox.setAlignment(Pos.CENTER);
+            final Label label = new Label();
+            TableCell<Comercio, LocalDateTime> cell = new TableCell<Comercio, LocalDateTime>() {
+                @Override
+                protected void updateItem(LocalDateTime item, boolean empty) {
+                    super.updateItem(item, empty);
+                    if (item != null) {
+                        label.setText(Time.getChronomether(item));
+                        comercioTableView.refresh();
                     }
+                }
+            };
+            hBox.getChildren().add(label);
+            cell.setGraphic(hBox);
+            return cell;
+        });
+        hora.setCellValueFactory(new PropertyValueFactory<Comercio, LocalDateTime>("horafin"));
+//columna
+        //columna
+        TableColumn<Comercio, Integer> boton = new TableColumn("Options");
+        boton.setMinWidth(100);
+        boton.setCellFactory(param -> {
+            HBox hBox = new HBox();
+            hBox.setAlignment(Pos.CENTER);
+            Button btn = new Button();
+            TableCell<Comercio, Integer> cell = new TableCell<Comercio, Integer>() {
+                {
+                    btn.setOnAction((ActionEvent event) -> {
+                        Comercio data = getTableView().getItems().get(getIndex());
+                        TreeMap<Integer, Recursos> a=getCiudadPrimaryStageController().getRecursosTreeMap();
+                        System.out.println("selectedData: " + data);
+                        Recursos b=data.getQueSePide();
+                        Recursos c=data.getQueSeOfrece();
+                        a.get(b.getId()).removeCantidad(b.getCantidad());
+                        a.get(c.getId()).addCantidad(c.getCantidad());
+                        PantallaInicialController.data.remove(data);
+                        recursosMenu(flowPaneRecuros, CiudadController.class);
+                    });
+                }
 
-                    @Override
-                    public void updateItem(Void item, boolean empty) {
-                        super.updateItem(item, empty);
-                        if (empty) {
-                            setGraphic(null);
+                @Override
+                protected void updateItem(Integer item, boolean empty) {
+                    super.updateItem(item, empty);
+                    if (item != null && !empty) {
+                        Comercio comercio = getTableView().getItems().get(getIndex());
+                        Recursos sePide = comercio.getQueSePide();
+                        if (getCiudadPrimaryStageController().getRecursosTreeMap().get(sePide.getId()).getCantidad() > sePide.getCantidad()) {
+                            btn.setText("Comprar");
                         } else {
-                            setGraphic(btn);
+                            btn.setText("insuficiente");
+                            btn.setDisable(true);
                         }
+                        hBox.getChildren().clear();
+                        hBox.getChildren().add(btn);
                     }
-                };
-                return cell;
-            }
-        };
+                }
+            };
+            cell.setGraphic(hBox);
+            return cell;
+        });
+        boton.setCellValueFactory(new PropertyValueFactory<Comercio, Integer>("id"));
 
-        elBoton.setCellFactory(cellFactory);
 //FIN COLUMNAS
-        comercioTableView.getColumns().addAll(recursoOferta, recursoDemanda,  elBoton);
+        comercioTableView.getColumns().addAll(clan, recursoOferta, recursoDemanda, hora, boton);
         comercioTableView.setItems(PantallaInicialController.data);
 
 //FIN TABLA
