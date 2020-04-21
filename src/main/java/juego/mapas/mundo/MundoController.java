@@ -1,6 +1,7 @@
 package main.java.juego.mapas.mundo;
 
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -8,15 +9,17 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Cursor;
 import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
+import javafx.stage.Stage;
 import main.java.juego.mapas.pelea.Unidades;
-import main.java.juego.mapas.pelea.UnidadesPreCargadas;
 import main.java.utils.CallImages;
 import main.java.utils.PrimaryStageControler;
 import main.java.juego.MapasController;
@@ -26,13 +29,12 @@ import main.java.juego.mapas.ciudad.CiudadController;
 import main.java.juego.mapas.pelea.Batallon;
 import main.java.jugadores.Jugador;
 
+import javax.crypto.spec.PSource;
 import java.net.URL;
 import java.util.*;
 
 import static javafx.geometry.Pos.TOP_CENTER;
-import static javafx.scene.control.ScrollPane.ScrollBarPolicy.NEVER;
 import static javafx.scene.text.TextAlignment.CENTER;
-import static jdk.nashorn.internal.objects.Global.Infinity;
 import static main.java.jugadores.Jugador.listaCiudades;
 import static main.java.jugadores.Jugador.listaPosicionesBatallones;
 
@@ -68,16 +70,40 @@ public class MundoController extends MapasController implements Initializable {
 
     final static String letter_random = "$r";
     final static String letter_hover = "@h";
+    private static Integer fila = 0;
+    private static Integer columna = 0;
+
 
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         if (!primeraCiudad) {
             inicialiceController();
-            recursosMenu(recuros,this.getClass());
+            recursosMenu(recuros, this.getClass());
             selectorDeCiudad(selectorCiudad, this.getClass());
             gridPaneMap.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {//Cerrar el menu
-                queClicas(null, true, null, null, null);
+                switch (event.getButton()){
+                    case PRIMARY:
+                        gridPaneMap.getChildren().forEach(item ->{
+                            item.setOnMouseEntered(new EventHandler<MouseEvent>() {
+                                @Override
+                                public void handle(MouseEvent event) {
+                                    Node node = (Node)event.getSource();
+                                    columna = GridPane.getColumnIndex(node);
+                                    fila = GridPane.getRowIndex(node);
+                                }
+                            });
+                        });
+
+                        break;
+                    case SECONDARY:
+                        queClicas(null, true, null, null, null);
+                        break;
+                    default:
+                        break;
+
+                }
+
             });
         } else {
             createMenuLeft(borderPane, null, null, null, null, false);
@@ -342,6 +368,12 @@ public class MundoController extends MapasController implements Initializable {
         ImageView imgUnidadesBatallon = null;
 
 
+        Button btnMove = new Button();
+        btnMove.setText("Mover a");
+        btnMove.setAlignment(Pos.CENTER);
+        btnMove.setMaxWidth(Double.MAX_VALUE);
+
+
         //BLOQUE
         VBox vBoxBloquePropio = new VBox();
         vBoxBloquePropio.setMinWidth(200);
@@ -350,14 +382,54 @@ public class MundoController extends MapasController implements Initializable {
 
         ObservableList<Node> childrenVBox = vBoxBloquePropio.getChildren();
 
-        /*TODO crear metodo para crear la cajaBatallon , reutilizar código de aquí para no repetir código, ver si se puede reutilizar el printRecursos()
-           para printear recursos donde haga falta,
-           problema!! --> como puedo printear los distintos tipos de soldados, si ahora la clase Soldados no tiene tipo de soldado(tienen id tipo int)
-         */
-
 
         BackgroundFill backgroundFill = null;
         Separator separator2 = null;
+
+
+
+        btnMove.setOnMousePressed(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                System.out.println("Entro button event handler");
+                final String[] position = new String[1];
+                vBoxBloquePropio.getChildren()
+                        .stream()
+                        .filter(Label.class::isInstance)
+                        .map(Label.class::cast)
+                        .forEach(label -> position[0] = label.getText());
+                System.out.println("Posición Batallon "+position[0]);
+
+                String posicionBatallon = position[0].substring(position[0].indexOf('-')-1,position[0].indexOf('-')+2);
+                System.out.println("Posición en grid de batallon "+posicionBatallon);
+                getStagePrimaryStageController().getScene().setCursor(Cursor.CROSSHAIR);
+                getStagePrimaryStageController().getScene().setOnMouseClicked(new EventHandler<MouseEvent>() {
+                    @Override
+                    public void handle(MouseEvent event) {
+                        System.out.println("Entro scene handler");
+                        if (event.getButton().equals(MouseButton.PRIMARY)) {
+                            final String position = posicionBatallon;
+                            getStagePrimaryStageController().getScene().setCursor(Cursor.DEFAULT);
+                            //TODO pendiente mover batallon de una posicion a otra, a partir de la variable position. Falta saber que lista usar.
+                            //ya que aunque cambie la posición, no se refresca en la pantalla
+                            for (Batallon batallon : getJugadorPrimaryStageController().listaBatallonesPropios.values()) {
+                                if (batallon.getPosition().equals(position)) {
+                                    System.out.println("Posición de Batallon "+batallon.getNombre()+" "+batallon.getPosition()+" antes de cambio.");
+                                    batallon.setFilaColumna(fila,columna);
+                                    System.out.println("Posición de Batallon "+batallon.getNombre()+" "+batallon.getPosition()+" después de cambio.");
+                                    event.consume();
+                                }
+                            }
+
+                        } else {
+                            getStagePrimaryStageController().getScene().setCursor(Cursor.DEFAULT);
+                            event.consume();
+                        }
+                    }
+
+                });
+            }
+        });
 
 
         for (Batallon batallon : listaBatallones) {
@@ -381,9 +453,15 @@ public class MundoController extends MapasController implements Initializable {
                     finalNombreBatallon.setTextFill(Color.BLACK);
                 }
             });
-            childrenVBox.addAll(separator2,finalNombreBatallon);
+            childrenVBox.addAll(separator2, finalNombreBatallon);
 
-            for (Unidades unidades: batallon.getSoldadoHashMap().values()) {
+
+
+
+            for (Unidades unidades : batallon.getSoldadoHashMap().values()) {
+                GridPane gridPaneBatallon = new GridPane();
+                gridPaneBatallon.setAlignment(Pos.CENTER);
+
                 HBox hBox = new HBox();
                 hBox.setAlignment(Pos.CENTER);
                 hBox.setSpacing(10);
@@ -398,7 +476,7 @@ public class MundoController extends MapasController implements Initializable {
                 imgUnidadesBatallon.setCache(true);
 
                 //Cantidad unidades
-                numeroUnidades = new Label("Nº "+unidades.getUnidadesPreCargadas().getNombre()+": "+unidades.getCantidad());
+                numeroUnidades = new Label("Nº " + unidades.getUnidadesPreCargadas().getNombre() + ": " + unidades.getCantidad());
                 numeroUnidades.setVisible(true);
                 numeroUnidades.setTextAlignment(CENTER);
                 numeroUnidades.setAlignment(Pos.CENTER);
@@ -422,10 +500,19 @@ public class MundoController extends MapasController implements Initializable {
                     }
                 });
 
+                if (getJugadorPrimaryStageController().listaBatallonesPropios.containsKey(batallon.getIdBatallon())) {
+                    hBox.getChildren().addAll(imgUnidadesBatallon, finalNumeroUnidades, btnMove);
+                    gridPaneBatallon.add(hBox, 0, 0);
+                    gridPaneBatallon.add(btnMove, 0, 1);
 
+                } else {
+                    hBox.getChildren().addAll(imgUnidadesBatallon, finalNumeroUnidades);
+                    gridPaneBatallon.add(hBox, 0, 0);
 
-                hBox.getChildren().addAll(imgUnidadesBatallon,finalNumeroUnidades);
-                childrenVBox.add(hBox);
+                }
+
+                childrenVBox.add(gridPaneBatallon);
+
 
             }
 
@@ -458,6 +545,17 @@ public class MundoController extends MapasController implements Initializable {
 
         //FIN BLOQUE
         return vBoxBloquePropio;
+    }
+
+    public static void showMessage() {
+        Stage newStage = new Stage();
+        VBox comp = new VBox();
+        TextField message = new TextField("No puedes moverte a esta posición, intentalo de nuevo.");
+        comp.getChildren().add(message);
+
+        Scene stageScene = new Scene(comp, 300, 300);
+        newStage.setScene(stageScene);
+        newStage.show();
     }
 
     private static VBox cajaNewCity(ImageView imageView, String imageName) {
@@ -613,7 +711,7 @@ public class MundoController extends MapasController implements Initializable {
             controllerParaVerSiestaVacio = true;
         }
         if (controllerParaVerSiestaVacio) {
-            rellenador(borderPane,vBoxList,200);
+            rellenador(borderPane, vBoxList, 200);
         }
     }
 
