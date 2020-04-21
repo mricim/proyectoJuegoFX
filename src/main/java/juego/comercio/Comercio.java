@@ -33,8 +33,8 @@ public class Comercio {
 private static int lastId=0;
     private SimpleIntegerProperty id;
 
-    private SimpleObjectProperty queSeOfrece;
-    private SimpleObjectProperty queSePide;
+    private SimpleObjectProperty<Recursos> queSeOfrece;
+    private SimpleObjectProperty<Recursos> queSePide;
     private Jugador jugador;
     private LocalDateTime horaPublicacion;
     private LocalDateTime horaFin;
@@ -93,7 +93,7 @@ private static int lastId=0;
         return queSeOfrece.get();
     }
 
-    public SimpleObjectProperty queSeOfreceProperty() {
+    public SimpleObjectProperty<Recursos> queSeOfreceProperty() {
         return queSeOfrece;
     }
 
@@ -101,7 +101,7 @@ private static int lastId=0;
      * Asigna el recurso que se ofrece.
      * @param queSeOfrece Un objeto de tipo Recursos que contiene el valor del recurso que se ofrece.
      */
-    public void setQueSeOfrece(Object queSeOfrece) {
+    public void setQueSeOfrece(Recursos queSeOfrece) {
         this.queSeOfrece.set(queSeOfrece);
     }
 
@@ -113,7 +113,7 @@ private static int lastId=0;
         return queSePide.get();
     }
 
-    public SimpleObjectProperty queSePideProperty() {
+    public SimpleObjectProperty<Recursos> queSePideProperty() {
         return queSePide;
     }
 
@@ -121,7 +121,7 @@ private static int lastId=0;
      * Asigna el recurso que se pide.
      * @param queSePide Un objeto de tipo Recursos que contiene el valor del recurso que se pide.
      */
-    public void setQueSePide(Object queSePide) {
+    public void setQueSePide(Recursos queSePide) {
         this.queSePide.set(queSePide);
     }
 

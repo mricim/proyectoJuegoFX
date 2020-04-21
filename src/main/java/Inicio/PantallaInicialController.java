@@ -303,13 +303,13 @@ public class PantallaInicialController extends PrimaryStageControler implements 
         progresBar.setProgress(80);
 
         //COSAS DE TEST
-        Comercio comercio0 = new Comercio( new Recursos(oroPre, 5), new Recursos(maderaPre, 10), jugador);
+        Comercio comercio0 = new Comercio( new Recursos(oroPre, 5), new Recursos(maderaPre, 300), jugador);
         data.add(comercio0);
         Comercio comercio1 = new Comercio( new Recursos(hierroPre, 6), new Recursos(comidaPre, 11), jugador);
         data.add(comercio1);
         Comercio comercio2 = new Comercio( new Recursos(oroPre, 7), new Recursos(maderaPre, 12), jugador);
         data.add(comercio2);
-        Comercio comercio3 = new Comercio( new Recursos(hierroPre, 7), new Recursos(maderaPre, 15), jugador);
+        Comercio comercio3 = new Comercio( new Recursos(hierroPre, 7000000), new Recursos(maderaPre, 15), jugador);
         data.add(comercio3);
 
 
