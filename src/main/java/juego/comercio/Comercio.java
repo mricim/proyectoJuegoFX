@@ -2,6 +2,8 @@ package main.java.juego.comercio;
 
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import main.java.juego.mapas.Recursos;
 import main.java.jugadores.Jugador;
 import main.java.utils.Time;
@@ -17,6 +19,7 @@ import static main.java.utils.Time.changeZoneUTC_GMT;
  * @since 1.0
  */
 public class Comercio {
+    public static ObservableList<Comercio> data = FXCollections.observableArrayList();
 
     //public static TreeMap<Integer, Comercio> lista = new TreeMap<>();
     /**

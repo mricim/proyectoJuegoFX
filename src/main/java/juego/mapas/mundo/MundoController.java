@@ -33,6 +33,7 @@ import javax.crypto.spec.PSource;
 import java.net.URL;
 import java.util.*;
 
+import static com.sun.java.accessibility.util.AWTEventMonitor.removeMouseListener;
 import static javafx.geometry.Pos.TOP_CENTER;
 import static javafx.scene.text.TextAlignment.CENTER;
 import static main.java.jugadores.Jugador.listaCiudades;
@@ -74,7 +75,6 @@ public class MundoController extends MapasController implements Initializable {
     private static Integer columna = 0;
 
 
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         if (!primeraCiudad) {
@@ -82,13 +82,13 @@ public class MundoController extends MapasController implements Initializable {
             recursosMenu(recuros, this.getClass());
             selectorDeCiudad(selectorCiudad, this.getClass());
             gridPaneMap.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {//Cerrar el menu
-                switch (event.getButton()){
+                switch (event.getButton()) {
                     case PRIMARY:
-                        gridPaneMap.getChildren().forEach(item ->{
+                        gridPaneMap.getChildren().forEach(item -> {
                             item.setOnMouseEntered(new EventHandler<MouseEvent>() {
                                 @Override
                                 public void handle(MouseEvent event) {
-                                    Node node = (Node)event.getSource();
+                                    Node node = (Node) event.getSource();
                                     columna = GridPane.getColumnIndex(node);
                                     fila = GridPane.getRowIndex(node);
                                 }
@@ -361,19 +361,6 @@ public class MundoController extends MapasController implements Initializable {
     }
 
     private static VBox cajaBatallon(ArrayList<Batallon> listaBatallones, ImageView imageView, String imageName) {
-        //Objetos de ciudad
-        Label nombreBatallon = null;
-        ImageView imgViewBatallon = null;
-        Label numeroUnidades = null;
-        ImageView imgUnidadesBatallon = null;
-
-
-        Button btnMove = new Button();
-        btnMove.setText("Mover a");
-        btnMove.setAlignment(Pos.CENTER);
-        btnMove.setMaxWidth(Double.MAX_VALUE);
-
-
         //BLOQUE
         VBox vBoxBloquePropio = new VBox();
         vBoxBloquePropio.setMinWidth(200);
@@ -382,92 +369,41 @@ public class MundoController extends MapasController implements Initializable {
 
         ObservableList<Node> childrenVBox = vBoxBloquePropio.getChildren();
 
-
         BackgroundFill backgroundFill = null;
-        Separator separator2 = null;
-
-
-
-        btnMove.setOnMousePressed(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                System.out.println("Entro button event handler");
-                final String[] position = new String[1];
-                vBoxBloquePropio.getChildren()
-                        .stream()
-                        .filter(Label.class::isInstance)
-                        .map(Label.class::cast)
-                        .forEach(label -> position[0] = label.getText());
-                System.out.println("Posición Batallon "+position[0]);
-
-                String posicionBatallon = position[0].substring(position[0].indexOf('-')-1,position[0].indexOf('-')+2);
-                System.out.println("Posición en grid de batallon "+posicionBatallon);
-                getStagePrimaryStageController().getScene().setCursor(Cursor.CROSSHAIR);
-                getStagePrimaryStageController().getScene().setOnMouseClicked(new EventHandler<MouseEvent>() {
-                    @Override
-                    public void handle(MouseEvent event) {
-                        System.out.println("Entro scene handler");
-                        if (event.getButton().equals(MouseButton.PRIMARY)) {
-                            final String position = posicionBatallon;
-                            getStagePrimaryStageController().getScene().setCursor(Cursor.DEFAULT);
-                            //TODO pendiente mover batallon de una posicion a otra, a partir de la variable position. Falta saber que lista usar.
-                            //ya que aunque cambie la posición, no se refresca en la pantalla
-                            for (Batallon batallon : getJugadorPrimaryStageController().listaBatallonesPropios.values()) {
-                                if (batallon.getPosition().equals(position)) {
-                                    System.out.println("Posición de Batallon "+batallon.getNombre()+" "+batallon.getPosition()+" antes de cambio.");
-                                    batallon.setFilaColumna(fila,columna);
-                                    System.out.println("Posición de Batallon "+batallon.getNombre()+" "+batallon.getPosition()+" después de cambio.");
-                                    event.consume();
-                                }
-                            }
-
-                        } else {
-                            getStagePrimaryStageController().getScene().setCursor(Cursor.DEFAULT);
-                            event.consume();
-                        }
-                    }
-
-                });
-            }
-        });
 
 
         for (Batallon batallon : listaBatallones) {
-            nombreBatallon = new Label(batallon.getNombre());
+
+
+            Label nombreBatallon = new Label(batallon.getNombre());
             nombreBatallon.setTextAlignment(CENTER);
             nombreBatallon.setAlignment(Pos.CENTER);
             nombreBatallon.setWrapText(true);
-            separator2 = new Separator();
+            Separator separator2 = new Separator();
             separator2.setPrefWidth(100);
-            Label finalNombreBatallon = nombreBatallon;
             nombreBatallon.setOnMouseEntered(new EventHandler<MouseEvent>() {
                 @Override
                 public void handle(MouseEvent event) {
-                    finalNombreBatallon.setTextFill(Color.RED);
+                    nombreBatallon.setTextFill(Color.RED);
                 }
             });
 
             nombreBatallon.setOnMouseExited(new EventHandler<MouseEvent>() {
                 @Override
                 public void handle(MouseEvent event) {
-                    finalNombreBatallon.setTextFill(Color.BLACK);
+                    nombreBatallon.setTextFill(Color.BLACK);
                 }
             });
-            childrenVBox.addAll(separator2, finalNombreBatallon);
-
-
+            childrenVBox.addAll(separator2, nombreBatallon);
 
 
             for (Unidades unidades : batallon.getSoldadoHashMap().values()) {
-                GridPane gridPaneBatallon = new GridPane();
-                gridPaneBatallon.setAlignment(Pos.CENTER);
-
                 HBox hBox = new HBox();
                 hBox.setAlignment(Pos.CENTER);
                 hBox.setSpacing(10);
 
                 //Imagenes unidades
-                imgUnidadesBatallon = new ImageView(unidades.getUnidadesPreCargadas().getImageIcon());
+                ImageView imgUnidadesBatallon = new ImageView(unidades.getUnidadesPreCargadas().getImageIcon());
                 imgUnidadesBatallon.setPickOnBounds(true);
                 imgUnidadesBatallon.setPreserveRatio(true);
                 imgUnidadesBatallon.setFitWidth(60);
@@ -476,50 +412,134 @@ public class MundoController extends MapasController implements Initializable {
                 imgUnidadesBatallon.setCache(true);
 
                 //Cantidad unidades
-                numeroUnidades = new Label("Nº " + unidades.getUnidadesPreCargadas().getNombre() + ": " + unidades.getCantidad());
+                Label numeroUnidades = new Label("Nº " + unidades.getUnidadesPreCargadas().getNombre() + ": " + unidades.getCantidad());
                 numeroUnidades.setVisible(true);
                 numeroUnidades.setTextAlignment(CENTER);
                 numeroUnidades.setAlignment(Pos.CENTER);
                 numeroUnidades.setWrapText(true);
                 numeroUnidades.setFont(Font.font("Verdana", FontWeight.BOLD, 11));
 
-                Label finalNumeroUnidades = numeroUnidades;
                 numeroUnidades.setOnMouseEntered(new EventHandler<MouseEvent>() {
                     @Override
                     public void handle(MouseEvent event) {
-                        finalNumeroUnidades.setScaleX(1.2);
-                        finalNumeroUnidades.setScaleY(1.2);
+                        numeroUnidades.setScaleX(1.2);
+                        numeroUnidades.setScaleY(1.2);
                     }
                 });
 
                 numeroUnidades.setOnMouseExited(new EventHandler<MouseEvent>() {
                     @Override
                     public void handle(MouseEvent event) {
-                        finalNumeroUnidades.setScaleX(1.0);
-                        finalNumeroUnidades.setScaleY(1.0);
+                        numeroUnidades.setScaleX(1.0);
+                        numeroUnidades.setScaleY(1.0);
                     }
                 });
 
                 if (getJugadorPrimaryStageController().listaBatallonesPropios.containsKey(batallon.getIdBatallon())) {
-                    hBox.getChildren().addAll(imgUnidadesBatallon, finalNumeroUnidades, btnMove);
-                    gridPaneBatallon.add(hBox, 0, 0);
-                    gridPaneBatallon.add(btnMove, 0, 1);
-
+                    hBox.getChildren().addAll(imgUnidadesBatallon, numeroUnidades);
                 } else {
-                    hBox.getChildren().addAll(imgUnidadesBatallon, finalNumeroUnidades);
-                    gridPaneBatallon.add(hBox, 0, 0);
-
+                    hBox.getChildren().addAll(imgUnidadesBatallon, numeroUnidades);
                 }
 
-                childrenVBox.add(gridPaneBatallon);
 
-
+                childrenVBox.add(hBox);
             }
 
             //vBoxBloquePropio.setMargin(new Insets(0, 15, 0, 15));
             if (getJugadorPrimaryStageController().listaBatallonesPropios.containsKey(batallon.getIdBatallon())) {
                 backgroundFill = new BackgroundFill(Color.ANTIQUEWHITE, CornerRadii.EMPTY, Insets.EMPTY);
 
+                Button btnMove = new Button("mover unidades");
+                btnMove.setAlignment(Pos.CENTER);
+                btnMove.setOnMousePressed(new EventHandler<javafx.scene.input.MouseEvent>() {
+                    @Override
+                    public void handle(javafx.scene.input.MouseEvent event1) {
+                        System.out.println("Entro button event handler");
+                        final String[] position = new String[1];
+                        vBoxBloquePropio.getChildren()
+                                .stream()
+                                .filter(Label.class::isInstance)
+                                .map(Label.class::cast)
+                                .forEach(label -> position[0] = label.getText());
+                        System.out.println("Posición Batallon " + position[0]);
+
+                        String posicionBatallon = position[0].substring(position[0].indexOf('-') - 1, position[0].indexOf('-') + 2);
+                        System.out.println("Posición en grid de batallon " + posicionBatallon);
+                        getStagePrimaryStageController().getScene().setCursor(Cursor.CROSSHAIR);
+                        getStagePrimaryStageController().getScene().setOnMouseClicked(new EventHandler<javafx.scene.input.MouseEvent>() {
+                            @Override
+                            public void handle(javafx.scene.input.MouseEvent event2) {
+                                System.out.println("Entro scene handler");
+                                if (event2.getButton().equals(MouseButton.PRIMARY)) {
+
+                                    //TODO pendiente mover batallon de una posicion a otra, a partir de la variable position. Falta saber que lista usar.
+                                    //ya que aunque cambie la posición, no se refresca en la pantalla
+
+                                    System.out.println("Posición de Batallon " + batallon.getNombre() + " " + batallon.getPosition() + " antes de cambio.");
+                                    //getJugadorPrimaryStageController().listaBatallonesPropios.get(batallon.getIdBatallon()).setFilaColumna(fila, columna);
+
+                                    ArrayList<Batallon> batallon1 = listaPosicionesBatallones.get(batallon.getPosition());
+                                    batallon1.remove(batallon);
+                                    batallon.setFilaColumna(fila, columna);
+                                    ArrayList<Batallon> batallon2 = listaPosicionesBatallones.get(batallon.getPosition());
+                                    if (batallon2 == null) {
+                                        ArrayList<Batallon> x = new ArrayList<>();
+                                        x.add(batallon);
+                                        listaPosicionesBatallones.put(batallon.getPosition(), x);
+                                    } else {
+                                        batallon2.add(batallon);
+                                    }
+                                    System.out.println("Posición de Batallon " + batallon.getNombre() + " " + batallon.getPosition() + " después de cambio.");
+
+
+/*
+                                    ArrayList<Batallon> batallonList= listaPosicionesBatallones.get(posicionBatallon);
+                                    for (Batallon batallon : batallonList) {
+                                        System.out.println(batallon.getNombre()+" - "+batallon.getPosition());
+                                        getJugadorPrimaryStageController().listaBatallonesPropios.get(batallon.getIdBatallon()).setFilaColumna(fila,columna);
+                                        batallon.setFilaColumna(fila,columna);
+                                        System.out.println(batallon.getNombre()+" - "+batallon.getPosition());
+                                    }
+*/
+                                    /*
+                                    for (Batallon batallon : getJugadorPrimaryStageController().listaBatallonesPropios.values()) {
+                                        if (batallon.getPosition().equals(posicionBatallon)) {
+                                            System.out.println("Posición de Batallon " + batallon.getNombre() + " " + batallon.getPosition() + " antes de cambio.");
+                                            ArrayList<Batallon> batallons = listaPosicionesBatallones.get(posicionBatallon);
+                                            batallons.remove(batallon);
+                                            batallon.setFilaColumna(fila, columna);
+                                            ArrayList<Batallon> a = listaPosicionesBatallones.get(batallon.getPosition());
+                                            if (a == null) {
+                                                ArrayList<Batallon> x = new ArrayList<>();
+                                                x.add(batallon);
+                                                listaPosicionesBatallones.put(batallon.getPosition(), x);
+                                            } else {
+                                                a.add(batallon);
+                                            }
+                                            getJugadorPrimaryStageController().listaBatallonesPropios.remove(batallon.getIdBatallon());
+                                            getJugadorPrimaryStageController().listaBatallonesPropios.put(batallon.getIdBatallon(), batallon);
+                                            System.out.println("Posición de Batallon " + batallon.getNombre() + " " + batallon.getPosition() + " después de cambio.");
+                                            event.consume();
+                                        }
+                                    }
+*/
+                                    System.out.println("evento2 "+event2.isConsumed());
+                                    event2.consume();//TODO ESTO NO CHUTA
+                                    System.out.println("evento2 "+event2.isConsumed());
+                                    getStagePrimaryStageController().getScene().setCursor(Cursor.DEFAULT);
+                                    reload(MundoController.class);
+                                } else {
+                                    getStagePrimaryStageController().getScene().setCursor(Cursor.DEFAULT);
+                                    event2.consume();
+                                }
+                            }
+                        });
+                        System.out.println("evento1 "+event1.isConsumed());
+                        event1.consume();
+                        System.out.println("evento1 "+event1.isConsumed());
+                    }
+                });
+                childrenVBox.add(btnMove);
             } else {
                 boolean xi = false;
                 for (Jugador jugador : getClanPrimaryStageController().getJugadoresDelClan().values()) {

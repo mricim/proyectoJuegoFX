@@ -2,8 +2,6 @@ package main.java.Inicio;
 
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.Initializable;
@@ -37,7 +35,6 @@ public class PantallaInicialController extends PrimaryStageControler implements 
     public static int idJugadorTemp;
     public static String nameJugadorTemp;
     public static String emailJugadorTemp;
-    public static ObservableList<Comercio> data = FXCollections.observableArrayList();
 
 
     public ProgressBar progresBar;
@@ -307,13 +304,13 @@ public class PantallaInicialController extends PrimaryStageControler implements 
 
         //COSAS DE TEST
         Comercio comercio0 = new Comercio( new Recursos(oroPre, 5), new Recursos(maderaPre, 300), jugador);
-        data.add(comercio0);
+        Comercio.data.add(comercio0);
         Comercio comercio1 = new Comercio( new Recursos(hierroPre, 6), new Recursos(comidaPre, 11), jugador2);
-        data.add(comercio1);
+        Comercio.data.add(comercio1);
         Comercio comercio2 = new Comercio( new Recursos(oroPre, 7), new Recursos(maderaPre, 12), jugador3);
-        data.add(comercio2);
+        Comercio.data.add(comercio2);
         Comercio comercio3 = new Comercio( new Recursos(hierroPre, 7000000), new Recursos(maderaPre, 15), jugador4);
-        data.add(comercio3);
+        Comercio.data.add(comercio3);
 
 
         Timeline thirtySeconds = new Timeline(new KeyFrame(Duration.seconds(30), new EventHandler<ActionEvent>() {
@@ -321,9 +318,9 @@ public class PantallaInicialController extends PrimaryStageControler implements 
             public void handle(ActionEvent event) {
                 System.out.println("Thread Running --> PANTALLA INICIAL CONTROLLER: ADD Comercio");
                 Comercio comercio5 = new Comercio( new Recursos(maderaPre, 7), new Recursos(maderaPre, 15), jugador);
-                data.add(comercio5);
+                Comercio.data.add(comercio5);
                 Comercio comercio6 = new Comercio( new Recursos(maderaPre, 7), new Recursos(maderaPre, 15), jugador2);
-                data.add(comercio6);
+                Comercio.data.add(comercio6);
             }
         }));
         thirtySeconds.setCycleCount(Timeline.INDEFINITE);
@@ -339,10 +336,10 @@ public class PantallaInicialController extends PrimaryStageControler implements 
                     e.printStackTrace();
                 }
                 System.out.println("Thread Running --> PANTALLA INICIAL CONTROLLER: REMOVE Comercio");
-                data.remove(comercio1);
-                data.remove(comercio2);
+                Comercio.data.remove(comercio1);
+                Comercio.data.remove(comercio2);
                 Comercio comercio4 = new Comercio( new Recursos(piedraPre, 7), new Recursos(maderaPre, 15), jugador3);
-                data.add(comercio4);
+                Comercio.data.add(comercio4);
             }
         };
         thread.start();

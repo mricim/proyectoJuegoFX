@@ -7,6 +7,7 @@ import main.java.utils.Posicion;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Objects;
 
 public class Batallon extends Posicion {
     private static int lastIdBatallon = 1;
@@ -73,5 +74,19 @@ public class Batallon extends Posicion {
 
     public void setSoldadoHashMap(Unidades soldado) {
         SoldadoHashMap.put(soldado.getId(), soldado);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Batallon)) return false;
+        if (!super.equals(o)) return false;
+        Batallon batallon = (Batallon) o;
+        return getIdBatallon() == batallon.getIdBatallon();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), getIdBatallon());
     }
 }

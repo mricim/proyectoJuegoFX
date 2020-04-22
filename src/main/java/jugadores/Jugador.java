@@ -118,13 +118,13 @@ public class Jugador {
             Ciudad ciudad3=new Ciudad(this, "ciudad Z 9 8-7", 8, 7, 1, paraCity1);
             Ciudad ciudad4=new Ciudad(this, "ciudad Z 10 7-5", 7, 5, 1, paraCity2);
 
-            Batallon batallon1 = new Batallon("Batallon Z 6 5-8", 7, 7, 400, this,ciudad1);
+            Batallon batallon1 = new Batallon("Batallon Z 6 7-7", 7, 7, 400, this,ciudad1);
             Unidades soldados1 = new Unidades(listaSoldadosPreCargada.get(1), 100, 5, 0, 0);
             Unidades soldados2 = new Unidades(listaSoldadosPreCargada.get(2), 100, 0, 0, 0);
             batallon1.setSoldadoHashMap(soldados1);
             batallon1.setSoldadoHashMap(soldados2);
 
-            Batallon batallon2 = new Batallon("Batallon Z 7 2-2", 8, 10, 400, this,ciudad2);
+            Batallon batallon2 = new Batallon("Batallon Z 7 8-10", 8, 10, 400, this,ciudad2);
             Unidades soldados3 = new Unidades(listaSoldadosPreCargada.get(1), 100, 5, 0, 0);
             Unidades soldados4 = new Unidades(listaSoldadosPreCargada.get(2), 100, 0, 0, 0);
             batallon2.setSoldadoHashMap(soldados3);

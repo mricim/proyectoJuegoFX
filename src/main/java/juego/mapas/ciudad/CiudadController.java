@@ -1,9 +1,6 @@
 package main.java.juego.mapas.ciudad;
 
 import javafx.application.Platform;
-import javafx.beans.property.ReadOnlyObjectWrapper;
-import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
@@ -21,9 +18,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
-import javafx.util.Callback;
-import main.java.Inicio.PantallaInicialController;
-import main.java.Main;
 import main.java.juego.comercio.Comercio;
 import main.java.juego.mapas.RecursosPrecargados;
 import main.java.jugadores.Clan;
@@ -587,7 +581,7 @@ public class CiudadController extends MapasController implements Initializable {
                         Recursos c=data.getQueSeOfrece();
                         a.get(b.getId()).removeCantidad(b.getCantidad());
                         a.get(c.getId()).addCantidad(c.getCantidad());
-                        PantallaInicialController.data.remove(data);
+                        Comercio.data.remove(data);
                         recursosMenu(flowPaneRecuros, CiudadController.class);
                     });
                 }
@@ -616,7 +610,7 @@ public class CiudadController extends MapasController implements Initializable {
 
 //FIN COLUMNAS
         comercioTableView.getColumns().addAll(clan, recursoOferta, recursoDemanda, hora, boton);
-        comercioTableView.setItems(PantallaInicialController.data);
+        comercioTableView.setItems(Comercio.data);
 
 //FIN TABLA
         scrollPane.setContent(comercioTableView);

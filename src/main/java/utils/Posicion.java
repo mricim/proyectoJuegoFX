@@ -35,18 +35,6 @@ abstract public class Posicion {
         this.fila = fila;
         this.columna = columna;
         this.position = fila + "-" + columna;
-    }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Posicion)) return false;
-        Posicion posicion = (Posicion) o;
-        return getPosition().equals(posicion.getPosition());
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(getPosition());
     }
 }
