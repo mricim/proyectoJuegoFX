@@ -3,11 +3,13 @@ package main.java.juego.mapas.ciudad;
 import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
+import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 import javafx.scene.Cursor;
 import javafx.scene.Node;
@@ -29,9 +31,7 @@ import main.java.juego.mapas.Recursos;
 import main.java.juego.mapas.ciudad.contenidoCiudad.Edificio;
 import main.java.juego.mapas.pelea.*;
 import main.java.utils.Time;
-import main.java.utils.tagsFX.CustomSeparator;
-import main.java.utils.tagsFX.CustomTextField;
-import main.java.utils.tagsFX.CustomSlider;
+import main.java.utils.tagsFX.*;
 
 import java.net.URL;
 import java.time.LocalDateTime;
@@ -431,6 +431,91 @@ public class CiudadController extends MapasController implements Initializable {
         nombreEdificioPropio.setAlignment(Pos.CENTER);
         nombreEdificioPropio.setWrapText(true);
         childrenVBox.add(nombreEdificioPropio);
+        //AÑADIR
+        HBox hBoxAddToTableView = new HBox();
+        hBoxAddToTableView.setAlignment(Pos.CENTER);
+        ObservableList<Node> hBoxAddToTableViewChildren = hBoxAddToTableView.getChildren();
+
+        ObservableList<TextImage> recursosObservableList = FXCollections.observableArrayList();
+        for (Recursos recursos : getCiudadPrimaryStageController().getRecursosTreeMap().values()) {
+            recursosObservableList.add(new TextImage(String.valueOf(recursos.getId()),recursos.getImage()));
+        }
+        ComboBox<TextImage> combo = CustomComboBoxLabel.createCombox(recursosObservableList);
+        int maximoQueSePuedePedir = getCiudadPrimaryStageController().getRecursosTreeMap().get(Integer.valueOf(combo.getValue().getString())).getCantidad();
+        hBoxAddToTableViewChildren.add(combo);
+
+        CustomTextField textField = new CustomTextField("0", true, maximoQueSePuedePedir);
+        CustomSlider slider = new CustomSlider(0, maximoQueSePuedePedir, 0);
+        slider.setmargin(25, 0, 0, 0);
+        slider.valueProperty().addListener(new ChangeListener<Number>() {
+            @Override
+            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+                int seleccionado = newValue.intValue();
+                int number = oldValue.intValue() - seleccionado;
+                if (number != 0) {
+                    textField.textProperty().setValue(String.valueOf(seleccionado));
+                    //Platform.runLater(() -> controllerSliderAddComercio(number, unidadesPreCargadas, soldadesca, costesRecursos, resta, recursosCiudadTemp, button, vBox, vBox1));
+                }
+            }
+        });
+        textField.setBindSlider(slider);
+        combo.getSelectionModel().selectedItemProperty().addListener( (options, oldValue, newValue) -> {
+                    System.out.println(newValue);
+                    int x= (getCiudadPrimaryStageController().getRecursosTreeMap().get(Integer.valueOf(newValue.getString())).getCantidad());
+                    slider.setMax(x);
+                }
+        );
+        hBoxAddToTableViewChildren.add(slider);
+        hBoxAddToTableViewChildren.add(textField);
+        hBoxAddToTableViewChildren.add(new Separator(Orientation.VERTICAL));
+//AÑADIR 2
+
+        ComboBox<TextImage> combo2 = CustomComboBoxLabel.createCombox(recursosObservableList);
+        hBoxAddToTableViewChildren.add(combo2);
+
+        int maximoQueSePuedePedir2 = 1000;
+        CustomTextField textField2 = new CustomTextField("0", true, maximoQueSePuedePedir2);
+        CustomSlider slider2 = new CustomSlider(0, maximoQueSePuedePedir2, 0);
+        slider2.setmargin(25, 0, 0, 0);
+        slider2.valueProperty().addListener(new ChangeListener<Number>() {
+            @Override
+            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+                int seleccionado = newValue.intValue();
+                int number = oldValue.intValue() - seleccionado;
+                if (number != 0) {
+                    textField2.textProperty().setValue(String.valueOf(seleccionado));
+                    //Platform.runLater(() -> controllerSliderAddComercio(number, unidadesPreCargadas, soldadesca, costesRecursos, resta, recursosCiudadTemp, button, vBox, vBox1));
+                }
+            }
+        });
+        textField2.setBindSlider(slider2);
+        combo2.getSelectionModel().selectedItemProperty().addListener( (options, oldValue, newValue) -> {
+                    System.out.println(newValue);
+                    int x= (getCiudadPrimaryStageController().getRecursosTreeMap().get(Integer.valueOf(newValue.getString())).getCantidad());
+                    slider2.setMax(x);
+                }
+        );
+        hBoxAddToTableViewChildren.add(slider2);
+        hBoxAddToTableViewChildren.add(textField2);
+
+        childrenVBox.add(hBoxAddToTableView);
+        /*
+        final Button addButton = new Button("Add");
+        addButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override public void handle(ActionEvent e) {
+                Comercio.data.add(new Comercio(
+                        textField.getText(),
+                        addLastName.getText(),
+                        addEmail.getText()
+                ));
+                addFirstName.clear();
+                addLastName.clear();
+                addEmail.clear();
+            }
+        });
+childrenVBox.add(addButton);
+ */
+
 //TABLA
         ScrollPane scrollPane = new ScrollPane();
         scrollPane.setPannable(true);
@@ -575,10 +660,10 @@ public class CiudadController extends MapasController implements Initializable {
                 {
                     btn.setOnAction((ActionEvent event) -> {
                         Comercio data = getTableView().getItems().get(getIndex());
-                        TreeMap<Integer, Recursos> a=getCiudadPrimaryStageController().getRecursosTreeMap();
+                        TreeMap<Integer, Recursos> a = getCiudadPrimaryStageController().getRecursosTreeMap();
                         System.out.println("selectedData: " + data);
-                        Recursos b=data.getQueSePide();
-                        Recursos c=data.getQueSeOfrece();
+                        Recursos b = data.getQueSePide();
+                        Recursos c = data.getQueSeOfrece();
                         a.get(b.getId()).removeCantidad(b.getCantidad());
                         a.get(c.getId()).addCantidad(c.getCantidad());
                         Comercio.data.remove(data);
@@ -590,16 +675,20 @@ public class CiudadController extends MapasController implements Initializable {
                 protected void updateItem(Integer item, boolean empty) {
                     super.updateItem(item, empty);
                     if (item != null && !empty) {
-                        Comercio comercio = getTableView().getItems().get(getIndex());
-                        Recursos sePide = comercio.getQueSePide();
-                        if (getCiudadPrimaryStageController().getRecursosTreeMap().get(sePide.getId()).getCantidad() > sePide.getCantidad()) {
-                            btn.setText("Comprar");
-                        } else {
-                            btn.setText("insuficiente");
-                            btn.setDisable(true);
-                        }
                         hBox.getChildren().clear();
-                        hBox.getChildren().add(btn);
+                        Comercio comercio = getTableView().getItems().get(getIndex());
+                        if (comercio.getJugador() != getJugadorPrimaryStageController()) {
+                            Recursos sePide = comercio.getQueSePide();
+                            if (getCiudadPrimaryStageController().getRecursosTreeMap().get(sePide.getId()).getCantidad() > sePide.getCantidad()) {
+                                btn.setText("Comprar");
+                            } else {
+                                btn.setText("insuficiente");
+                                btn.setDisable(true);
+                            }
+                            hBox.getChildren().add(btn);
+                        }
+
+
                     }
                 }
             };
