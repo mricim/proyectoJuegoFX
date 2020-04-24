@@ -1,5 +1,6 @@
 package main.java.juego.mapas.mundo;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -454,7 +455,37 @@ public class MundoController extends MapasController implements Initializable {
 
             if (getJugadorPrimaryStageController().listaBatallonesPropios.containsKey(batallon.getIdBatallon())) {
                 backgroundFill = new BackgroundFill(Color.ANTIQUEWHITE, CornerRadii.EMPTY, Insets.EMPTY);
-                vBoxBatallonChildren.add(buttonMoverbatallon(batallon));
+                vBoxBatallonChildren.add(buttonMoverbatallon(batallon));//BOTON PARA MOVER UN BATALLON
+
+                boolean ponerBoton = false;
+
+                ObservableList<String> strings = FXCollections.observableArrayList();
+                for (Batallon batallon1 : listaBatallones) {
+                    if (getJugadorPrimaryStageController().listaBatallonesPropios.containsKey(batallon1.getIdBatallon())) {
+                        if (batallon1 != batallon) {
+                            ponerBoton = true;
+                            strings.add(batallon1.getNombre());
+
+                        }
+                    }
+                }
+                if (ponerBoton) {
+                    ComboBox<String> unirBatallones = new ComboBox<>(strings);
+                    unirBatallones.setValue("unir");
+                    unirBatallones.getSelectionModel().selectedItemProperty().addListener((options, oldValue, newValue) -> {
+                                System.out.println("DDDDDDDDDDD "+newValue);
+                                for (Batallon batallon1 : getJugadorPrimaryStageController().listaBatallonesPropios.values()) {
+                                    if (batallon1.getNombre().equals(newValue)){
+                                        batallon.addSoldados(batallon1.getSoldadoHashMap());
+                                        batallon1.remove(getJugadorPrimaryStageController());
+                                        break;
+                                    }
+                                }
+
+                            }
+                    );
+                    vBoxBatallonChildren.add(unirBatallones);
+                }
             } else {
                 if (getClanPrimaryStageController().getBatallonesDelClan().contains(batallon)) {
                     System.out.println("COLOR" + batallon.getIdBatallon());

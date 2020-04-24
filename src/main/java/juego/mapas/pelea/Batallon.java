@@ -5,9 +5,11 @@ import main.java.juego.mapas.ciudad.Ciudad;
 import main.java.jugadores.Jugador;
 import main.java.utils.Posicion;
 
+import java.lang.Character.UnicodeBlock;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Objects;
+import java.util.Set;
 
 import static main.java.jugadores.Jugador.listaPosicionesBatallones;
 
@@ -69,10 +71,25 @@ public class Batallon extends Posicion {
         SoldadoHashMap.put(soldado.getId(), soldado);
     }
 
+    public void addSoldados(HashMap<Integer, Unidades> anadir) {
+        Set<Integer> a = anadir.keySet();
+        for (Integer integer : a){//TODO
+            System.out.println(a);
+            Unidades b = anadir.get(integer);
+            System.out.println(b.getId()+" "+b.getCantidad());
+            System.out.println("FFFFFF");
+            System.out.println(getSoldadoHashMap().get(b.getId()));
+            getSoldadoHashMap().get(b.getId()).addCantidad(b.getCantidad());
+        }
+
+    }
+
     @Override
     public void setFilaColumna(int fila, int columna) {
-        try { listaPosicionesBatallones.get(getPosition()).remove(this);
-        }catch (Exception ignored){}
+        try {
+            listaPosicionesBatallones.get(getPosition()).remove(this);
+        } catch (Exception ignored) {
+        }
         super.setFilaColumna(fila, columna);
         ArrayList<Batallon> batallon2 = listaPosicionesBatallones.get(getPosition());
         if (batallon2 == null) {
@@ -82,6 +99,14 @@ public class Batallon extends Posicion {
         } else {
             batallon2.add(this);
         }
+    }
+
+    public void remove(Jugador jugador) {
+        try {
+            listaPosicionesBatallones.get(getPosition()).remove(this);
+        } catch (Exception ignored) {
+        }
+        jugador.listaBatallonesPropios.remove(getIdBatallon());
     }
 
     @Override

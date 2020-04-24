@@ -5,7 +5,7 @@ import main.java.utils.Posicion;
 
 
 public class Unidades extends Posicion {
-    private static int lastId=1;
+    private static int lastId = 1;
     private int id;
     private int cantidad;
     private UnidadesPreCargadas unidadesPreCargadas;
@@ -15,7 +15,7 @@ public class Unidades extends Posicion {
     public Unidades(UnidadesPreCargadas unidadesPreCargadas, int cantidad, int municion, int filas, int columnas) {
         super(filas, columnas);
         this.id = lastId++;
-        this.unidadesPreCargadas=unidadesPreCargadas;
+        this.unidadesPreCargadas = unidadesPreCargadas;
         this.cantidad = cantidad;
         this.municion = municion;
     }
@@ -23,6 +23,7 @@ public class Unidades extends Posicion {
     public int getId() {
         return id;
     }
+
     public int getTipeUnit() {
         return unidadesPreCargadas.getIdType();
     }
@@ -33,6 +34,16 @@ public class Unidades extends Posicion {
 
     public void setCantidad(int cantidad) {
         this.cantidad = cantidad;
+    }
+
+    public void addCantidad(int cantidad) {
+        int conversorAPositivo = (cantidad < 0 ? -cantidad : cantidad);
+        this.cantidad += conversorAPositivo;
+    }
+
+    public void removeCantidad(int cantidad) {
+        int conversorAPositivo = (cantidad < 0 ? -cantidad : cantidad);
+        this.cantidad -= conversorAPositivo;
     }
 
     public UnidadesPreCargadas getUnidadesPreCargadas() {

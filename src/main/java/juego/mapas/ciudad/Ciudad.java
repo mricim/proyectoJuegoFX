@@ -138,7 +138,7 @@ public class Ciudad extends Posicion {
         for (Unidades soldado : soldados.values()) {
             Unidades soldados2 = this.listSoldadosCity.get(soldado.getUnidadesPreCargadas().getIdType());
             System.out.println(soldados2.getCantidad() + soldado.getCantidad());
-            soldados2.setCantidad(soldados2.getCantidad() + soldado.getCantidad());
+            soldados2.addCantidad(soldado.getCantidad());
         }
     }
 }

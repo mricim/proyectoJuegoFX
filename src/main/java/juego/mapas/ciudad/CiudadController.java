@@ -932,10 +932,10 @@ public class CiudadController extends MapasController implements Initializable {
             int idQueEs = unidadesPreCargadas.getIdType();
             Unidades unidades = soldadesca.get(idQueEs);
             if (seleccionadoNumber < 0) {
-                unidades.setCantidad(unidades.getCantidad() + conversorAPositivo);
+                unidades.addCantidad(seleccionadoNumber);
                 controladoraToFor = true;
             } else {
-                unidades.setCantidad(unidades.getCantidad() - conversorAPositivo);
+                unidades.removeCantidad(seleccionadoNumber);
             }
         }
 
