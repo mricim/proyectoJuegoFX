@@ -454,58 +454,7 @@ public class MundoController extends MapasController implements Initializable {
 
             if (getJugadorPrimaryStageController().listaBatallonesPropios.containsKey(batallon.getIdBatallon())) {
                 backgroundFill = new BackgroundFill(Color.ANTIQUEWHITE, CornerRadii.EMPTY, Insets.EMPTY);
-                System.out.println("ENTRO" + batallon.getIdBatallon());
-                final Button btnMove = new Button("mover unidades");
-                btnMove.setAlignment(Pos.CENTER);
-                btnMove.setOnAction(new EventHandler<ActionEvent>() {
-                    @Override
-                    public void handle(ActionEvent event1) {
-                        System.out.println("Entro button event handler");
-                        /*
-                        final String[] position = new String[1];
-                        vBoxBloquePropio.getChildren()
-                                .stream()
-                                .filter(Label.class::isInstance)
-                                .map(Label.class::cast)
-                                .forEach(label -> position[0] = label.getText());
-                        System.out.println("Posición Batallon " + position[0]);
-                        String posicionBatallon = position[0].substring(position[0].indexOf('-') - 1, position[0].indexOf('-') + 2);
-                        System.out.println("Posición en grid de batallon " + posicionBatallon);
-*/
-                        getStagePrimaryStageController().getScene().setCursor(Cursor.CROSSHAIR);
-                        getStagePrimaryStageController().getScene().setOnMouseClicked(
-                                new EventHandler<MouseEvent>() {
-                                    @Override
-                                    public void handle(MouseEvent event2) {
-                                        System.out.println("Entro scene handler");
-                                        if (event2.getButton().equals(MouseButton.PRIMARY)) {
-                                            //System.out.println("Posición de Batallon " + batallon.getNombre() + " " + batallon.getPosition() + " antes de cambio.");
-                                            ArrayList<Batallon> batallon1 = listaPosicionesBatallones.get(batallon.getPosition());
-                                            batallon1.remove(batallon);
-                                            batallon.setFilaColumna(fila, columna);
-                                            ArrayList<Batallon> batallon2 = listaPosicionesBatallones.get(batallon.getPosition());
-                                            if (batallon2 == null) {
-                                                ArrayList<Batallon> x = new ArrayList<>();
-                                                x.add(batallon);
-                                                listaPosicionesBatallones.put(batallon.getPosition(), x);
-                                            } else {
-                                                batallon2.add(batallon);
-                                            }
-                                            //System.out.println("Posición de Batallon " + batallon.getNombre() + " " + batallon.getPosition() + " después de cambio.");
-                                            event2.consume();
-                                            event1.consume();
-                                            getStagePrimaryStageController().getScene().setCursor(Cursor.DEFAULT);
-                                            reload(MundoController.class);
-                                            getStagePrimaryStageController().getScene().setOnMouseClicked(null);
-                                        } else {
-                                            getStagePrimaryStageController().getScene().setCursor(Cursor.DEFAULT);
-                                            event2.consume();
-                                        }
-                                    }
-                                });
-                    }
-                });
-                vBoxBatallonChildren.add(btnMove);
+                vBoxBatallonChildren.add(buttonMoverbatallon(batallon));
             } else {
                 if (getClanPrimaryStageController().getBatallonesDelClan().contains(batallon)) {
                     System.out.println("COLOR" + batallon.getIdBatallon());
@@ -524,6 +473,50 @@ public class MundoController extends MapasController implements Initializable {
 
         //FIN BLOQUE
         return vBoxBloquePropio;
+    }
+
+    private static Button buttonMoverbatallon(Batallon batallon) {
+        Button btnMove = new Button("mover unidades");
+        btnMove.setAlignment(Pos.CENTER);
+        btnMove.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event1) {
+                //System.out.println("Entro button event handler");
+                /*
+                final String[] position = new String[1];
+                vBoxBloquePropio.getChildren()
+                        .stream()
+                        .filter(Label.class::isInstance)
+                        .map(Label.class::cast)
+                        .forEach(label -> position[0] = label.getText());
+                System.out.println("Posición Batallon " + position[0]);
+                String posicionBatallon = position[0].substring(position[0].indexOf('-') - 1, position[0].indexOf('-') + 2);
+                System.out.println("Posición en grid de batallon " + posicionBatallon);
+*/
+                getStagePrimaryStageController().getScene().setCursor(Cursor.CROSSHAIR);
+                getStagePrimaryStageController().getScene().setOnMouseClicked(
+                        new EventHandler<MouseEvent>() {
+                            @Override
+                            public void handle(MouseEvent event2) {
+                                //System.out.println("Entro scene handler");
+                                if (event2.getButton().equals(MouseButton.PRIMARY)) {
+                                    //System.out.println("Posición de Batallon " + batallon.getNombre() + " " + batallon.getPosition() + " antes de cambio.");
+                                    batallon.setFilaColumna(fila, columna);
+                                    //System.out.println("Posición de Batallon " + batallon.getNombre() + " " + batallon.getPosition() + " después de cambio.");
+                                    event2.consume();
+                                    event1.consume();
+                                    getStagePrimaryStageController().getScene().setCursor(Cursor.DEFAULT);
+                                    reload(MundoController.class);
+                                    getStagePrimaryStageController().getScene().setOnMouseClicked(null);
+                                } else {
+                                    getStagePrimaryStageController().getScene().setCursor(Cursor.DEFAULT);
+                                    event2.consume();
+                                }
+                            }
+                        });
+            }
+        });
+        return btnMove;
     }
 
     public static void showMessage() {

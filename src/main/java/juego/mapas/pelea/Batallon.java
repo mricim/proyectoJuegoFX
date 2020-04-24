@@ -9,6 +9,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Objects;
 
+import static main.java.jugadores.Jugador.listaPosicionesBatallones;
+
 public class Batallon extends Posicion {
     private static int lastIdBatallon = 1;
     private HashMap<Integer, Unidades> SoldadoHashMap = new HashMap<>();
@@ -26,16 +28,7 @@ public class Batallon extends Posicion {
         this.proyectiles = proyectiles;
         this.ciudadVolver = ciudadVolver;
 
-        String posicion = this.getPosition();
         jugador.listaBatallonesPropios.put(idBatallon, this);
-        //Jugador.listaBatallones.put(posicion, this);
-        if (Jugador.listaPosicionesBatallones.containsKey(this.getPosition())) {
-            Jugador.listaPosicionesBatallones.get(posicion).add(this);
-        } else {
-            ArrayList<Batallon> batallonArrayList = new ArrayList<>();
-            batallonArrayList.add(this);
-            Jugador.listaPosicionesBatallones.put(posicion, batallonArrayList);
-        }
     }
 
     public Batallon(String position) {
@@ -74,6 +67,21 @@ public class Batallon extends Posicion {
 
     public void setSoldadoHashMap(Unidades soldado) {
         SoldadoHashMap.put(soldado.getId(), soldado);
+    }
+
+    @Override
+    public void setFilaColumna(int fila, int columna) {
+        try { listaPosicionesBatallones.get(getPosition()).remove(this);
+        }catch (Exception ignored){}
+        super.setFilaColumna(fila, columna);
+        ArrayList<Batallon> batallon2 = listaPosicionesBatallones.get(getPosition());
+        if (batallon2 == null) {
+            ArrayList<Batallon> x = new ArrayList<>();
+            x.add(this);
+            listaPosicionesBatallones.put(getPosition(), x);
+        } else {
+            batallon2.add(this);
+        }
     }
 
     @Override

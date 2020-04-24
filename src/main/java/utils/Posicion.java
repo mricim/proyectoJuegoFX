@@ -3,6 +3,8 @@ package main.java.utils;
 
 import java.util.Objects;
 
+import static main.java.jugadores.Jugador.listaPosicionesBatallones;
+
 abstract public class Posicion {
     private int fila;
     private int columna;
@@ -35,6 +37,5 @@ abstract public class Posicion {
         this.fila = fila;
         this.columna = columna;
         this.position = fila + "-" + columna;
-
     }
 }
