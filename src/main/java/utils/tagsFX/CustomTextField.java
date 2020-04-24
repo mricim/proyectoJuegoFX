@@ -25,7 +25,12 @@ public class CustomTextField extends TextField {
         this.textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-                slider.setValue(Double.parseDouble(newValue));
+                try {
+                    slider.setValue(Double.parseDouble(newValue));
+                }catch (NumberFormatException e){
+                    e.printStackTrace();
+                    slider.setValue(0);
+                }
             }
         });
     }
@@ -50,9 +55,15 @@ public class CustomTextField extends TextField {
                     customTextField.setText(newValue.replaceAll("[^\\d]", ""));
 
                 }
-                if (Integer.parseInt(customTextField.getText()) > numMaxim) {
-                    customTextField.setText(String.valueOf(numMaxim));
+                try {
+                    if (Integer.parseInt(customTextField.getText()) > numMaxim) {
+                        customTextField.setText(String.valueOf(numMaxim));
+                    }
+                }catch (NumberFormatException e){
+                    e.printStackTrace();
+                    customTextField.setText("0");
                 }
+
             }
         });
     }

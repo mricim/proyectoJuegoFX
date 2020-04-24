@@ -6,6 +6,7 @@ import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
@@ -39,6 +40,7 @@ import java.util.*;
 
 import static javafx.geometry.Pos.TOP_CENTER;
 import static javafx.scene.text.TextAlignment.CENTER;
+import static main.java.juego.mapas.RecursosPrecargados.recursosPrecargadosList;
 import static main.java.jugadores.Jugador.*;
 
 
@@ -405,7 +407,7 @@ public class CiudadController extends MapasController implements Initializable {
                 vBoxList.add(cajaCrearUnidades(listaSoldadosPreCargada, 5, borderPane, flowPaneRecuros, tamanoMenu));
                 break;
             case 4:
-                tamanoMenu = 500;
+                tamanoMenu = 650;
                 vBoxList.add(cajaCrearComercio(borderPane, flowPaneRecuros, tamanoMenu));
                 break;
         }
@@ -431,14 +433,23 @@ public class CiudadController extends MapasController implements Initializable {
         nombreEdificioPropio.setAlignment(Pos.CENTER);
         nombreEdificioPropio.setWrapText(true);
         childrenVBox.add(nombreEdificioPropio);
-        //AÑADIR
+
+        childrenVBox.add(new CustomSeparator((int) (flowPaneRecuros.getHeight() * 0.8), false));
+//AÑADIR
+        Label oferta = new Label("Ofrezco");
+        oferta.setTextAlignment(CENTER);
+        oferta.setAlignment(Pos.CENTER);
+        oferta.setWrapText(true);
+        childrenVBox.add(oferta);
+
         HBox hBoxAddToTableView = new HBox();
         hBoxAddToTableView.setAlignment(Pos.CENTER);
+        hBoxAddToTableView.setSpacing(flowPaneRecuros.getHeight() * 0.8);
         ObservableList<Node> hBoxAddToTableViewChildren = hBoxAddToTableView.getChildren();
 
         ObservableList<TextImage> recursosObservableList = FXCollections.observableArrayList();
         for (Recursos recursos : getCiudadPrimaryStageController().getRecursosTreeMap().values()) {
-            recursosObservableList.add(new TextImage(String.valueOf(recursos.getId()),recursos.getImage()));
+            recursosObservableList.add(new TextImage(String.valueOf(recursos.getId()), recursos.getImage()));
         }
         ComboBox<TextImage> combo = CustomComboBoxLabel.createCombox(recursosObservableList);
         int maximoQueSePuedePedir = getCiudadPrimaryStageController().getRecursosTreeMap().get(Integer.valueOf(combo.getValue().getString())).getCantidad();
@@ -459,21 +470,35 @@ public class CiudadController extends MapasController implements Initializable {
             }
         });
         textField.setBindSlider(slider);
-        combo.getSelectionModel().selectedItemProperty().addListener( (options, oldValue, newValue) -> {
+        combo.getSelectionModel().selectedItemProperty().addListener((options, oldValue, newValue) -> {
                     System.out.println(newValue);
-                    int x= (getCiudadPrimaryStageController().getRecursosTreeMap().get(Integer.valueOf(newValue.getString())).getCantidad());
+                    int x = (getCiudadPrimaryStageController().getRecursosTreeMap().get(Integer.valueOf(newValue.getString())).getCantidad());
                     slider.setMax(x);
                 }
         );
         hBoxAddToTableViewChildren.add(slider);
         hBoxAddToTableViewChildren.add(textField);
-        hBoxAddToTableViewChildren.add(new Separator(Orientation.VERTICAL));
+        childrenVBox.add(hBoxAddToTableView);
 //AÑADIR 2
+        Label demanda = new Label("Pido");
+        demanda.setTextAlignment(CENTER);
+        demanda.setAlignment(Pos.CENTER);
+        demanda.setWrapText(true);
+        childrenVBox.add(demanda);
 
-        ComboBox<TextImage> combo2 = CustomComboBoxLabel.createCombox(recursosObservableList);
-        hBoxAddToTableViewChildren.add(combo2);
+        HBox hBoxAddToTableView2 = new HBox();
+        hBoxAddToTableView2.setSpacing(flowPaneRecuros.getHeight() * 0.8);
+        hBoxAddToTableView2.setAlignment(Pos.CENTER);
+        ObservableList<Node> hBoxAddToTableViewChildren2 = hBoxAddToTableView2.getChildren();
 
-        int maximoQueSePuedePedir2 = 1000;
+        ObservableList<TextImage> recursosObservableList2 = FXCollections.observableArrayList();
+        for (Recursos recursos : getCiudadPrimaryStageController().getRecursosTreeMap().values()) {
+            recursosObservableList2.add(new TextImage(String.valueOf(recursos.getId()), recursos.getImage()));
+        }
+        ComboBox<TextImage> combo2 = CustomComboBoxLabel.createCombox(recursosObservableList2);
+        int maximoQueSePuedePedir2 = getCiudadPrimaryStageController().getRecursosTreeMap().get(Integer.valueOf(combo2.getValue().getString())).getCantidad();
+        hBoxAddToTableViewChildren2.add(combo2);
+
         CustomTextField textField2 = new CustomTextField("0", true, maximoQueSePuedePedir2);
         CustomSlider slider2 = new CustomSlider(0, maximoQueSePuedePedir2, 0);
         slider2.setmargin(25, 0, 0, 0);
@@ -489,33 +514,36 @@ public class CiudadController extends MapasController implements Initializable {
             }
         });
         textField2.setBindSlider(slider2);
-        combo2.getSelectionModel().selectedItemProperty().addListener( (options, oldValue, newValue) -> {
+        combo2.getSelectionModel().selectedItemProperty().addListener((options, oldValue, newValue) -> {
                     System.out.println(newValue);
-                    int x= (getCiudadPrimaryStageController().getRecursosTreeMap().get(Integer.valueOf(newValue.getString())).getCantidad());
+                    int x = (getCiudadPrimaryStageController().getRecursosTreeMap().get(Integer.valueOf(newValue.getString())).getCantidad());
                     slider2.setMax(x);
                 }
         );
-        hBoxAddToTableViewChildren.add(slider2);
-        hBoxAddToTableViewChildren.add(textField2);
-
-        childrenVBox.add(hBoxAddToTableView);
-        /*
+        hBoxAddToTableViewChildren2.add(slider2);
+        hBoxAddToTableViewChildren2.add(textField2);
+        childrenVBox.add(hBoxAddToTableView2);
+//AÑADIR BUTTON
         final Button addButton = new Button("Add");
         addButton.setOnAction(new EventHandler<ActionEvent>() {
-            @Override public void handle(ActionEvent e) {
-                Comercio.data.add(new Comercio(
-                        textField.getText(),
-                        addLastName.getText(),
-                        addEmail.getText()
-                ));
-                addFirstName.clear();
-                addLastName.clear();
-                addEmail.clear();
+            @Override
+            public void handle(ActionEvent e) {
+                int cantidad = (int) slider.getValue();
+                int cantidad2 = (int) slider2.getValue();
+                if (!(cantidad < 1) || !(cantidad2 < 1)) {
+                    RecursosPrecargados recursosPrecargados = recursosPrecargadosList.get(Integer.valueOf(combo.getSelectionModel().getSelectedItem().getString()));
+                    RecursosPrecargados recursosPrecargados2 = recursosPrecargadosList.get(Integer.valueOf(combo2.getSelectionModel().getSelectedItem().getString()));
+                    if (recursosPrecargados.getId() != recursosPrecargados2.getId()) {
+                        Comercio.data.add(new Comercio(new Recursos(recursosPrecargados, cantidad), new Recursos(recursosPrecargados2, cantidad2), getJugadorPrimaryStageController()));
+                    }
+                }
+                slider.setValue(0);
+                slider2.setValue(0);
             }
         });
-childrenVBox.add(addButton);
- */
+        childrenVBox.add(addButton);
 
+        childrenVBox.add(new CustomSeparator((int) (flowPaneRecuros.getHeight() * 0.8), false));
 //TABLA
         ScrollPane scrollPane = new ScrollPane();
         scrollPane.setPannable(true);
@@ -524,8 +552,8 @@ childrenVBox.add(addButton);
         scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
 
-
         TableView<Comercio> comercioTableView = new TableView<>();
+        comercioTableView.setPrefHeight(500);
         comercioTableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
          /*
         TableColumn<Comercio, Integer> idCol = new TableColumn("Id");
@@ -738,12 +766,6 @@ childrenVBox.add(addButton);
         childrenVBox.add(imageViewPropio);
 
  */
-
-        Label descripcionEdificioPropio = new Label("Señor! Todo preparado! Si, Señor!");
-        descripcionEdificioPropio.setTextAlignment(CENTER);
-        descripcionEdificioPropio.setAlignment(Pos.CENTER);
-        descripcionEdificioPropio.setWrapText(true);
-        childrenVBox.add(descripcionEdificioPropio);
         //vBox.setMargin(descripcionEdificioPropio, new Insets(0, 15, 0, 15));
 
         FlowPane flowPane = new FlowPane();
@@ -777,7 +799,6 @@ childrenVBox.add(addButton);
 
         Button button = new Button("Entrenar");
         button.setOnMouseClicked(e -> {
-            //getCiudadPrimaryStageController().addSoldados(soldadesca);//TODO BORRAR
 
             Ciudad esta = getCiudadPrimaryStageController();
             Batallon batallon = new Batallon("pepito", esta.getFila(), esta.getColumna(), 0, getJugadorPrimaryStageController(), esta);
@@ -866,7 +887,22 @@ childrenVBox.add(addButton);
                 hBox.getChildren().addAll(imageView, slider, textField, label2);
                 childrenFlowPane.add(hBox);
 
-
+                FlowPane flowPaneCostes = new FlowPane();
+                flowPaneCostes.setMaxWidth(280);
+                //flowPaneCostes.setPadding(new Insets(20));
+                flowPaneCostes.setHgap(15);
+                flowPaneCostes.setAlignment(Pos.CENTER);
+                ObservableList<Node> a = flowPaneCostes.getChildren();
+                for (Recursos coste : unidadesPreCargadas.getCostes()) {
+                    Label label = new Label();
+                    label.setText(String.valueOf(coste.getCantidad()));
+                    ImageView imageView1 = new ImageView(coste.getImage());
+                    imageView1.setFitWidth(25);
+                    imageView1.setFitHeight(25);
+                    label.setGraphic(imageView1);
+                    a.add(label);
+                }
+                childrenFlowPane.add(flowPaneCostes);
             }
         }
 
