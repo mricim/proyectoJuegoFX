@@ -465,7 +465,6 @@ public class CiudadController extends MapasController implements Initializable {
                 int number = oldValue.intValue() - seleccionado;
                 if (number != 0) {
                     textField.textProperty().setValue(String.valueOf(seleccionado));
-                    //Platform.runLater(() -> controllerSliderAddComercio(number, unidadesPreCargadas, soldadesca, costesRecursos, resta, recursosCiudadTemp, button, vBox, vBox1));
                 }
             }
         });
@@ -865,7 +864,6 @@ public class CiudadController extends MapasController implements Initializable {
                 } else {
                     conters = x;
                 }
-                //int conters = getCiudadPrimaryStageController().getListSoldadosCity().get(unidadesPreCargadas.getIdType()).getCantidad();
                 Label label2 = new Label("+ " + conters);
                 if (conters > 0) {
                     label2.setTextFill(Color.GREEN);
@@ -1062,7 +1060,20 @@ public class CiudadController extends MapasController implements Initializable {
                         //recursosCosteXmin.get(i)
                         FlowPane flowPane1 = new FlowPane();
                         int tope = trabajadoresEnEdificio.get(poducidoMax.getId()).getCantidad();
-                        CustomTextField textField = new CustomTextField(String.valueOf(tope), true, recursosPoducidosMax.getCantidad());
+
+                        int maxDivisor = Integer.MAX_VALUE;
+                        for (Recursos recursos : recursosCosteXmin.get(poducidoMax)) {
+                            int enCiudadR = getCiudadPrimaryStageController().getRecursosTreeMap().get(recursos.getId()).getCantidad() / recursos.getCantidad();
+                            if (maxDivisor > enCiudadR) {
+                                maxDivisor = enCiudadR;
+                            }
+                        }
+                        int maximosQueSePuedenPoner = recursosPoducidosMax.getCantidad();
+                        if (maximosQueSePuedenPoner > maxDivisor) {
+                            maximosQueSePuedenPoner = maxDivisor;
+                        }
+
+                        CustomTextField textField = new CustomTextField(String.valueOf(tope), true, maximosQueSePuedenPoner);
 
                         CustomSlider customSlider = new CustomSlider(0, recursosPoducidosMax.getCantidad(), tope);
                         customSlider.setmargin(25, 0, 0, 0);

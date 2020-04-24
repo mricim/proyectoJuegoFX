@@ -60,7 +60,7 @@ public class CustomTextField extends TextField {
                         customTextField.setText(String.valueOf(numMaxim));
                     }
                 }catch (NumberFormatException e){
-                    e.printStackTrace();
+                    //e.printStackTrace();
                     customTextField.setText("0");
                 }
 
