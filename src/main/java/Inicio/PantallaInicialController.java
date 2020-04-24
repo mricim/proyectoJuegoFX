@@ -312,7 +312,7 @@ public class PantallaInicialController extends PrimaryStageControler implements 
         Comercio comercio3 = new Comercio( new Recursos(hierroPre, 7000000), new Recursos(maderaPre, 15), jugador4);
         Comercio.data.add(comercio3);
 
-
+/*
         Timeline thirtySeconds = new Timeline(new KeyFrame(Duration.seconds(30), new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
@@ -325,7 +325,7 @@ public class PantallaInicialController extends PrimaryStageControler implements 
         }));
         thirtySeconds.setCycleCount(Timeline.INDEFINITE);
         thirtySeconds.play();
-
+*/
 
         //TODO TEST
         Thread thread = new Thread() {

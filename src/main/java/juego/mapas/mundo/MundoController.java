@@ -20,6 +20,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 import main.java.juego.mapas.pelea.Unidades;
+import main.java.jugadores.Clan;
 import main.java.utils.CallImages;
 import main.java.utils.PrimaryStageControler;
 import main.java.juego.MapasController;
@@ -28,6 +29,7 @@ import main.java.juego.mapas.ciudad.Ciudad;
 import main.java.juego.mapas.ciudad.CiudadController;
 import main.java.juego.mapas.pelea.Batallon;
 import main.java.jugadores.Jugador;
+import main.java.utils.tagsFX.CustomSeparator;
 
 import javax.crypto.spec.PSource;
 import java.net.URL;
@@ -373,7 +375,10 @@ public class MundoController extends MapasController implements Initializable {
 
 
         for (Batallon batallon : listaBatallones) {
-
+            VBox vBoxBatallon = new VBox();
+            vBoxBatallon.setAlignment(Pos.CENTER);
+            vBoxBatallon.setSpacing(10);
+            ObservableList<Node> vBoxBatallonChildren = vBoxBatallon.getChildren();
 
             Label nombreBatallon = new Label(batallon.getNombre());
             nombreBatallon.setTextAlignment(CENTER);
@@ -394,7 +399,7 @@ public class MundoController extends MapasController implements Initializable {
                     nombreBatallon.setTextFill(Color.BLACK);
                 }
             });
-            childrenVBox.addAll(separator2, nombreBatallon);
+            vBoxBatallonChildren.addAll(separator2, nombreBatallon);
 
 
             for (Unidades unidades : batallon.getSoldadoHashMap().values()) {
@@ -442,19 +447,21 @@ public class MundoController extends MapasController implements Initializable {
                 }
 
 
-                childrenVBox.add(hBox);
+                vBoxBatallonChildren.add(hBox);
             }
 
             //vBoxBloquePropio.setMargin(new Insets(0, 15, 0, 15));
+
             if (getJugadorPrimaryStageController().listaBatallonesPropios.containsKey(batallon.getIdBatallon())) {
                 backgroundFill = new BackgroundFill(Color.ANTIQUEWHITE, CornerRadii.EMPTY, Insets.EMPTY);
-
+                System.out.println("ENTRO"+ batallon.getIdBatallon());
                 Button btnMove = new Button("mover unidades");
                 btnMove.setAlignment(Pos.CENTER);
                 btnMove.setOnMousePressed(new EventHandler<javafx.scene.input.MouseEvent>() {
                     @Override
                     public void handle(javafx.scene.input.MouseEvent event1) {
                         System.out.println("Entro button event handler");
+                        /*
                         final String[] position = new String[1];
                         vBoxBloquePropio.getChildren()
                                 .stream()
@@ -462,9 +469,9 @@ public class MundoController extends MapasController implements Initializable {
                                 .map(Label.class::cast)
                                 .forEach(label -> position[0] = label.getText());
                         System.out.println("Posición Batallon " + position[0]);
-
-                        String posicionBatallon = position[0].substring(position[0].indexOf('-') - 1, position[0].indexOf('-') + 2);
-                        System.out.println("Posición en grid de batallon " + posicionBatallon);
+*/
+                        //String posicionBatallon = position[0].substring(position[0].indexOf('-') - 1, position[0].indexOf('-') + 2);
+                        //System.out.println("Posición en grid de batallon " + posicionBatallon);
                         getStagePrimaryStageController().getScene().setCursor(Cursor.CROSSHAIR);
                         getStagePrimaryStageController().getScene().setOnMouseClicked(new EventHandler<javafx.scene.input.MouseEvent>() {
                             @Override
@@ -539,28 +546,21 @@ public class MundoController extends MapasController implements Initializable {
                         System.out.println("evento1 "+event1.isConsumed());
                     }
                 });
-                childrenVBox.add(btnMove);
+                vBoxBatallonChildren.add(btnMove);
             } else {
-                boolean xi = false;
-                for (Jugador jugador : getClanPrimaryStageController().getJugadoresDelClan().values()) {
-                    if (jugador.listaBatallonesPropios.containsKey(batallon.getIdBatallon())) {
-                        xi = true;
-                        break;
-                    }
-                }
-                if (xi) {
+                if (getClanPrimaryStageController().getBatallonesDelClan().contains(batallon)) {
+                    System.out.println("COLOR"+ batallon.getIdBatallon());
                     backgroundFill = new BackgroundFill(Color.GREEN, CornerRadii.EMPTY, Insets.EMPTY);
                 } else {
                     backgroundFill = new BackgroundFill(Color.DARKRED, CornerRadii.EMPTY, Insets.EMPTY);
                 }
             }
-
+            vBoxBatallon.setBackground(new Background(backgroundFill));
+            vBoxBatallonChildren.add(new CustomSeparator(200,true));
+            childrenVBox.add(vBoxBatallon);
         }
-        vBoxBloquePropio.setBackground(new Background(backgroundFill));
 
-        Separator separator = new Separator();
-        separator.setPrefWidth(200);
-        childrenVBox.add(separator);
+        childrenVBox.add(new CustomSeparator(200,true));
 
 
         //FIN BLOQUE
