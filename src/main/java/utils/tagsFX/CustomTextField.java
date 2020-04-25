@@ -10,6 +10,7 @@ public class CustomTextField extends TextField {
         if (isNumeric) {
             isNumeric(this);
         }
+        this.setMinWidth(50);
     }
 
     public CustomTextField(String text, boolean isNumeric, int numMaxim) {
@@ -18,6 +19,7 @@ public class CustomTextField extends TextField {
         if (isNumeric) {
             isNumericNumMax(this, numMaxim);
         }
+        this.setMinWidth(50);
     }
 
     //

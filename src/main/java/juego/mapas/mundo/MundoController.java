@@ -84,45 +84,26 @@ public class MundoController extends MapasController implements Initializable {
             inicialiceController();
             recursosMenu(recuros, this.getClass());
             selectorDeCiudad(selectorCiudad, this.getClass());
-            gridPaneMap.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {//Cerrar el menu
-                switch (event.getButton()) {
-                    case PRIMARY:
-                        gridPaneMap.getChildren().forEach(item -> {
-                            item.setOnMouseEntered(new EventHandler<MouseEvent>() {
-                                @Override
-                                public void handle(MouseEvent event) {
-                                    Node node = (Node) event.getSource();
-                                    columna = GridPane.getColumnIndex(node);
-                                    fila = GridPane.getRowIndex(node);
-                                }
-                            });
-                        });
-
-                        break;
-                    case SECONDARY:
-                        queClicas(null, true, null, null, null);
-                        break;
-                    default:
-                        break;
-
-                }
-
-            });
         } else {
             createMenuLeft(borderPane, null, null, null, null, false);
         }
+
+        recargaGripPane();
+    }
+
+    private void recargaGripPane() {
         //<-- Controlado por MapasController
 
 
         int numCiudades = listaCiudades.size();
         //int numCiudades = 12000;
-        int tamaño = 15;
+        int tamano = 15;
         int capacidadCiudades = 0;
         double casillasTotales = 0;
         do {
-            casillasTotales = (tamaño * tamaño);
+            casillasTotales = (tamano * tamano);
             capacidadCiudades = (int) (casillasTotales * 8) / 25;
-            tamaño += 5;
+            tamano += 5;
 
         } while (numCiudades > capacidadCiudades - 1);
 
@@ -130,10 +111,10 @@ public class MundoController extends MapasController implements Initializable {
         gridPaneMap.setGridLinesVisible(true);
 
 
-        for (int fila = 0; fila < tamaño; fila++) {
+        for (int fila = 0; fila < tamano; fila++) {
             ColumnConstraints col = new ColumnConstraints(100);
             gridPaneMap.getColumnConstraints().add(col);
-            for (int columna = 0; columna < tamaño; columna++) {
+            for (int columna = 0; columna < tamano; columna++) {
                 Ciudad ciudadToGrid = null;
                 ArrayList<Batallon> batallonesToGrid = null;//creamos las variables por si nos hacen falta
                 ImageView imageView = new ImageView();
@@ -251,6 +232,32 @@ public class MundoController extends MapasController implements Initializable {
             }
         }
 
+
+
+        gridPaneMap.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {//Cerrar el menu
+            switch (event.getButton()) {
+                case PRIMARY:
+                    gridPaneMap.getChildren().forEach(item -> {
+                        item.setOnMouseEntered(new EventHandler<MouseEvent>() {
+                            @Override
+                            public void handle(MouseEvent event) {
+                                Node node = (Node) event.getSource();
+                                columna = GridPane.getColumnIndex(node);
+                                fila = GridPane.getRowIndex(node);
+                            }
+                        });
+                    });
+
+                    break;
+                case SECONDARY:
+                    queClicas(null, true, null, null, null);
+                    break;
+                default:
+                    break;
+
+            }
+
+        });
     }
 
     private void queClicas(ImageView imageView, boolean agua, Ciudad ciudad, ArrayList<Batallon> batallones, String imageName) {
@@ -276,7 +283,7 @@ public class MundoController extends MapasController implements Initializable {
     }
 
 
-    private static VBox cajaCiudadMundo(Ciudad ciudadMapa, ImageView imageView, String imageName) {
+    private  VBox cajaCiudadMundo(Ciudad ciudadMapa, ImageView imageView, String imageName) {
 
 
         //Objetos de ciudad
@@ -304,21 +311,21 @@ public class MundoController extends MapasController implements Initializable {
 //        nombreCiudad.setWrapText(true);
 //        childrenVBox.add(nombreCiudad);
         //Imagen ciudad
+
         String[] image = imageName.split(REGEX_SPLIT_PATTERN);
-        System.out.println("Image1 index 0: " + image[0]);
+        //System.out.println("Image1 index 0: " + image[0]);
         String image2;
         try {
-            System.out.println("XXXXXXX " + image[0]);
-            System.out.println("XXXXXXX " + image[1]);
-            System.out.println("XXXXXXX " + image[1].split("_")[0]);
+            //System.out.println("XXXXXXX " + image[0]);
+            //System.out.println("XXXXXXX " + image[1]);
+            //System.out.println("XXXXXXX " + image[1].split("_")[0]);
             image2 = image[0] + 'c' + image[1].split("_")[0];
-            System.out.println("Image1 index1 : " + image[1]);
-
+            //System.out.println("Image1 index1 : " + image[1]);
         } catch (Exception e) {
             image2 = image[0] + "c";
         }
 
-        System.out.println("Image 2 : " + image2);
+        //System.out.println("Image 2 : " + image2);
         imgViewCiudad = new ImageView(CallImages.getImage(RUTE_IMAGES, image2));
         imgViewCiudad.setPickOnBounds(true);
         imgViewCiudad.setPreserveRatio(true);
@@ -363,7 +370,7 @@ public class MundoController extends MapasController implements Initializable {
         return vBoxBloquePropio;
     }
 
-    private static VBox cajaBatallon(ArrayList<Batallon> listaBatallones, ImageView imageView, String imageName) {
+    private  VBox cajaBatallon(ArrayList<Batallon> listaBatallones, ImageView imageView, String imageName) {
         //BLOQUE
         VBox vBoxBloquePropio = new VBox();
         vBoxBloquePropio.setMinWidth(200);
@@ -473,9 +480,14 @@ public class MundoController extends MapasController implements Initializable {
                     ComboBox<String> unirBatallones = new ComboBox<>(strings);
                     unirBatallones.setValue("unir");
                     unirBatallones.getSelectionModel().selectedItemProperty().addListener((options, oldValue, newValue) -> {
-                                System.out.println("DDDDDDDDDDD "+newValue);
+                                System.out.println("DDDDDDDDDDD " + newValue);
+                                System.out.println("DDDDDDDDDDD " + newValue);
+                                System.out.println("DDDDDDDDDDD " + newValue);
+                                System.out.println("DDDDDDDDDDD " + newValue);
+                                System.out.println("DDDDDDDDDDD " + newValue);
+                                System.out.println("DDDDDDDDDDD " + newValue);
                                 for (Batallon batallon1 : getJugadorPrimaryStageController().listaBatallonesPropios.values()) {
-                                    if (batallon1.getNombre().equals(newValue)){
+                                    if (batallon1.getNombre().equals(newValue)) {
                                         batallon.addSoldados(batallon1.getSoldadoHashMap());
                                         batallon1.remove(getJugadorPrimaryStageController());
                                         break;
@@ -506,7 +518,7 @@ public class MundoController extends MapasController implements Initializable {
         return vBoxBloquePropio;
     }
 
-    private static Button buttonMoverbatallon(Batallon batallon) {
+    private  Button buttonMoverbatallon(Batallon batallon) {
         Button btnMove = new Button("mover unidades");
         btnMove.setAlignment(Pos.CENTER);
         btnMove.setOnAction(new EventHandler<ActionEvent>() {
@@ -525,20 +537,59 @@ public class MundoController extends MapasController implements Initializable {
                 System.out.println("Posición en grid de batallon " + posicionBatallon);
 */
                 getStagePrimaryStageController().getScene().setCursor(Cursor.CROSSHAIR);
+                //basura=false; TODO XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+                //basura=false;
                 getStagePrimaryStageController().getScene().setOnMouseClicked(
                         new EventHandler<MouseEvent>() {
                             @Override
                             public void handle(MouseEvent event2) {
+                                //basura=true;
+                                //basura=true; TODO XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
                                 //System.out.println("Entro scene handler");
                                 if (event2.getButton().equals(MouseButton.PRIMARY)) {
+                                    //System.out.println(fila+" - "+columna);
                                     //System.out.println("Posición de Batallon " + batallon.getNombre() + " " + batallon.getPosition() + " antes de cambio.");
-                                    batallon.setFilaColumna(fila, columna);
-                                    //System.out.println("Posición de Batallon " + batallon.getNombre() + " " + batallon.getPosition() + " después de cambio.");
+                                    int batallonFila = batallon.getFila();
+                                    int batallonColumna = batallon.getColumna();
+                                    boolean seMovio = false;
+                                    if (batallonFila == fila) {
+                                        if (batallonColumna > columna) {//moverse a la izquierda
+                                            int batallonColumTemp = batallonColumna - 1;
+                                            seMovio = isSePuedeMover(fila, batallonColumTemp, batallon);
+                                        } else {//moverse a la derecha
+                                            int batallonColumTemp = batallonColumna + 1;
+                                            seMovio = isSePuedeMover(fila, batallonColumTemp, batallon);
+                                        }
+                                    } else if (batallonColumna == columna) {
+                                        if (batallonFila > fila) {//moverse a la arriba
+                                            int batallonFilaTemp = batallonFila - 1;
+                                            seMovio = isSePuedeMover(batallonFilaTemp, columna, batallon);
+                                        } else {//moverse a la abajo
+                                            int batallonFilaTemp = batallonFila + 1;
+                                            seMovio = isSePuedeMover(batallonFilaTemp, columna, batallon);
+                                        }
+                                    }
                                     event2.consume();
                                     event1.consume();
                                     getStagePrimaryStageController().getScene().setCursor(Cursor.DEFAULT);
-                                    reload(MundoController.class);
                                     getStagePrimaryStageController().getScene().setOnMouseClicked(null);
+                                    //System.out.println("Posición de Batallon " + batallon.getNombre() + " " + batallon.getPosition() + " después de cambio.");
+
+//                                    event2.consume();
+//                                    event1.consume();
+//                                    getStagePrimaryStageController().getScene().setCursor(Cursor.DEFAULT);
+                                    //getStagePrimaryStageController().getScene().setOnMouseClicked(null);
+
+                                    if (!seMovio) {
+                                        Alert alert = new Alert(Alert.AlertType.WARNING);
+                                        alert.setTitle("Warning Dialog");
+                                        alert.setHeaderText("Posicion no permitida");
+                                        alert.setContentText("No puedes situarte en la misma posicion que una flota enemiga o en una isla si no es sobre una ciudad");
+
+                                        alert.showAndWait();
+                                    }
+                                    recargaGripPane();
+                                    //reload(MundoController.class);
                                 } else {
                                     getStagePrimaryStageController().getScene().setCursor(Cursor.DEFAULT);
                                     event2.consume();
@@ -550,7 +601,34 @@ public class MundoController extends MapasController implements Initializable {
         return btnMove;
     }
 
-    public static void showMessage() {
+    private  boolean isSePuedeMover(int batallonFilaTemp, int batallonColumTemp, Batallon batallon) {
+        String posicion = batallonFilaTemp + "-" + batallonColumTemp;
+        boolean sePuedeMover = true;
+        int filaModule = batallonFilaTemp % 5;
+        int columnaModule = batallonColumTemp % 5;
+        if (listaCiudades.get(posicion) == null) {
+            if (filaModule == 0 || filaModule == 4 || columnaModule == 0 || columnaModule == 4) {
+                try {
+                    ArrayList<Batallon> a = listaPosicionesBatallones.get(posicion);
+                    for (Batallon batallon1 : a) {
+                        if (!getClanPrimaryStageController().getBatallonesDelClan().contains(batallon1)) {
+                            sePuedeMover = false;
+                        }
+                    }
+                } catch (Exception ignore) {
+                }
+            } else {
+                sePuedeMover = false;
+            }
+        }
+        if (sePuedeMover) {
+            batallon.setFilaColumna(batallonFilaTemp, batallonColumTemp);
+            return true;
+        }
+        return false;
+    }
+
+    public  void showMessage() {
         Stage newStage = new Stage();
         VBox comp = new VBox();
         TextField message = new TextField("No puedes moverte a esta posición, intentalo de nuevo.");
@@ -561,7 +639,7 @@ public class MundoController extends MapasController implements Initializable {
         newStage.show();
     }
 
-    private static VBox cajaNewCity(ImageView imageView, String imageName) {
+    private  VBox cajaNewCity(ImageView imageView, String imageName) {
         //Objetos de ciudad
         Button botonNuevaCity = null;
         ImageView imgViewCity = null;
@@ -614,7 +692,7 @@ public class MundoController extends MapasController implements Initializable {
         return vBoxBloquePropio;
     }
 
-    private static void printRecursos(ObservableList<Node> childrenFlowPane, Set<Map.Entry<Integer, Recursos>> recursos, int produceAlmacenaCuesta) {
+    private  void printRecursos(ObservableList<Node> childrenFlowPane, Set<Map.Entry<Integer, Recursos>> recursos, int produceAlmacenaCuesta) {
         boolean paso0 = false;
         for (Map.Entry<Integer, Recursos> recurso : recursos) {
             Recursos recursoValor = recurso.getValue();
@@ -693,7 +771,7 @@ public class MundoController extends MapasController implements Initializable {
     }
 
 
-    private static void createMenuLeft(BorderPane borderPane, ImageView imageView, Ciudad ciudad, ArrayList<Batallon> batallones, String imageName, boolean pasoPorClicas) {
+    private  void createMenuLeft(BorderPane borderPane, ImageView imageView, Ciudad ciudad, ArrayList<Batallon> batallones, String imageName, boolean pasoPorClicas) {
         List<VBox> vBoxList = new ArrayList<>();
         boolean controllerParaVerSiestaVacio = false;
         if (ciudad != null) {
