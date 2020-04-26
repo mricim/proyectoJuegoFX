@@ -30,6 +30,7 @@ import main.java.juego.mapas.ciudad.Ciudad;
 import main.java.juego.mapas.ciudad.CiudadController;
 import main.java.juego.mapas.pelea.Batallon;
 import main.java.jugadores.Jugador;
+import main.java.utils.tagsFX.CustomAlert;
 import main.java.utils.tagsFX.CustomSeparator;
 
 import javax.crypto.spec.PSource;
@@ -575,11 +576,10 @@ public class MundoController extends MapasController implements Initializable {
                                     //getStagePrimaryStageController().getScene().setOnMouseClicked(null);
 
                                     if (!seMovio) {
-                                        Alert alert = new Alert(Alert.AlertType.WARNING);
+                                        CustomAlert alert = new CustomAlert(Alert.AlertType.WARNING);
                                         alert.setTitle("Warning Dialog");
                                         alert.setHeaderText("Posicion no permitida");
                                         alert.setContentText("No puedes situarte en la misma posicion que una flota enemiga o en una isla si no es sobre una ciudad");
-
                                         alert.showAndWait();
                                     }
                                     recargaGripPane();

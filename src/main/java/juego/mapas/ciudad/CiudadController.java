@@ -21,6 +21,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import main.java.Main;
 import main.java.juego.comercio.Comercio;
 import main.java.juego.mapas.RecursosPrecargados;
@@ -542,7 +544,7 @@ public class CiudadController extends MapasController implements Initializable {
                         getCiudadPrimaryStageController().getRecursosTreeMap().get(recursosPrecargados.getId()).removeCantidad(cantidad);
                         Comercio.data.add(new Comercio(new Recursos(recursosPrecargados, cantidad), new Recursos(recursosPrecargados2, cantidad2), getJugadorPrimaryStageController()));
                         recursosMenu(flowPaneRecuros, CiudadController.class);
-                        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                        CustomAlert alert = new CustomAlert(Alert.AlertType.INFORMATION);
                         alert.setTitle("Information Dialog");
                         alert.setHeaderText(null);
                         alert.setContentText("Oferta creada!");
@@ -833,7 +835,7 @@ public class CiudadController extends MapasController implements Initializable {
             borderPane.setLeft(null);
             recursosMenu(flowPaneRecuros, CiudadController.class);
 
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            CustomAlert alert = new CustomAlert(Alert.AlertType.INFORMATION);
             alert.setTitle("Information Dialog");
             alert.setHeaderText(null);
             alert.setContentText("Unidades preparadas/entrenadas!");
