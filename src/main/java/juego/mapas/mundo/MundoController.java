@@ -1,5 +1,8 @@
 package main.java.juego.mapas.mundo;
 
+import javafx.application.Platform;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -21,6 +24,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 import main.java.juego.mapas.pelea.Unidades;
+import main.java.juego.mapas.pelea.UnidadesPreCargadas;
 import main.java.jugadores.Clan;
 import main.java.utils.CallImages;
 import main.java.utils.PrimaryStageControler;
@@ -32,6 +36,8 @@ import main.java.juego.mapas.pelea.Batallon;
 import main.java.jugadores.Jugador;
 import main.java.utils.tagsFX.CustomAlert;
 import main.java.utils.tagsFX.CustomSeparator;
+import main.java.utils.tagsFX.CustomSlider;
+import main.java.utils.tagsFX.CustomTextField;
 
 import javax.crypto.spec.PSource;
 import java.net.URL;
@@ -465,9 +471,9 @@ public class MundoController extends MapasController implements Initializable {
             if (getJugadorPrimaryStageController().listaBatallonesPropios.containsKey(batallon.getIdBatallon())) {
                 backgroundFill = new BackgroundFill(Color.ANTIQUEWHITE, CornerRadii.EMPTY, Insets.EMPTY);
                 vBoxBatallonChildren.add(buttonMoverbatallon(batallon));//BOTON PARA MOVER UN BATALLON
+                vBoxBatallonChildren.add(buttonSplitbatallon(batallon));//BOTON PARA MOVER UN BATALLON
 
                 boolean ponerBoton = false;
-
                 ObservableList<String> strings = FXCollections.observableArrayList();
                 for (Batallon batallon1 : listaBatallones) {
                     if (getJugadorPrimaryStageController().listaBatallonesPropios.containsKey(batallon1.getIdBatallon())) {
@@ -481,7 +487,7 @@ public class MundoController extends MapasController implements Initializable {
                     ComboBox<String> unirBatallones = new ComboBox<>(strings);
                     unirBatallones.getSelectionModel().selectedItemProperty().addListener((options, oldValue, newValue) -> {
                                 for (Batallon batallon1 : getJugadorPrimaryStageController().listaBatallonesPropios.values()) {
-                                    System.out.println(batallon1.getNombre() + " - " + newValue);
+                                    //System.out.println(batallon1.getNombre() + " - " + newValue);
                                     if (batallon1.getNombre().equals(newValue)) {
                                         batallon.addSoldados(batallon1.getSoldadoHashMap());
                                         batallon1.remove(getJugadorPrimaryStageController());
@@ -511,6 +517,59 @@ public class MundoController extends MapasController implements Initializable {
 
         //FIN BLOQUE
         return vBoxBloquePropio;
+    }
+
+    private Node buttonSplitbatallon(Batallon batallon) {
+        Button btnSplit = new Button("Separar ejercito");
+        btnSplit.setAlignment(Pos.CENTER);
+        btnSplit.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                List<VBox> vBoxList = new ArrayList<>();
+
+                VBox vBox = new VBox();
+                vBox.setMinWidth(400);
+                vBox.setMaxWidth(400);
+                vBox.setAlignment(TOP_CENTER);
+                ObservableList<Node> vBoxChildren=vBox.getChildren();
+
+                for (Unidades soldados : batallon.getSoldadoHashMap().values()) {
+                    UnidadesPreCargadas unidadesPreCargadas = soldados.getUnidadesPreCargadas();
+                    HBox hBox = new HBox();
+                    hBox.setAlignment(Pos.CENTER);
+                    hBox.setSpacing(10);
+                    ImageView imageView = new ImageView(unidadesPreCargadas.getImageIcon());
+                    imageView.setFitWidth(50);
+                    imageView.setFitHeight(50);
+
+
+                    int maxSoldados = soldados.getCantidad();
+                    CustomTextField textField = new CustomTextField("0", true, maxSoldados);
+                    //textField.textProperty().bind(slider.valueProperty().asString("%.0f"));
+
+                    CustomSlider slider = new CustomSlider(0, maxSoldados, 0);
+                    slider.setmargin(25, 0, 0, 0);
+                    slider.valueProperty().addListener(new ChangeListener<Number>() {
+                        @Override
+                        public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+                            int seleccionado = newValue.intValue();
+                            int number = oldValue.intValue() - seleccionado;
+                            if (number != 0) {
+                                textField.textProperty().setValue(String.valueOf(seleccionado));
+                                //Platform.runLater(() -> controllerSlider(number, unidadesPreCargadas, soldadesca, costesRecursos, resta, recursosCiudadTemp, button, vBox, vBox1));
+                            }
+                        }
+                    });
+                    textField.setBindSlider(slider);
+                    hBox.getChildren().addAll(imageView, slider, textField);
+
+                    vBoxChildren.add(hBox);
+                }
+                vBoxList.add(vBox);
+                rellenador(borderPane, vBoxList, 400);
+            }
+        });
+        return btnSplit;
     }
 
     private Button buttonMoverbatallon(Batallon batallon) {
