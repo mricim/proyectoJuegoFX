@@ -95,6 +95,11 @@ public class MundoController extends MapasController implements Initializable {
         //<-- Controlado por MapasController
 
 
+        gridPaneMap.getColumnConstraints().clear();
+        gridPaneMap.getRowConstraints().clear();
+        gridPaneMap.getChildren().clear();
+
+
         int numCiudades = listaCiudades.size();
         //int numCiudades = 12000;
         int tamano = 15;
@@ -225,13 +230,9 @@ public class MundoController extends MapasController implements Initializable {
                         });
                     }
                 }
-
-
                 gridPaneMap.add(imageView, columna, fila);
-
             }
         }
-
 
 
         gridPaneMap.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {//Cerrar el menu
@@ -283,7 +284,7 @@ public class MundoController extends MapasController implements Initializable {
     }
 
 
-    private  VBox cajaCiudadMundo(Ciudad ciudadMapa, ImageView imageView, String imageName) {
+    private VBox cajaCiudadMundo(Ciudad ciudadMapa, ImageView imageView, String imageName) {
 
 
         //Objetos de ciudad
@@ -370,7 +371,7 @@ public class MundoController extends MapasController implements Initializable {
         return vBoxBloquePropio;
     }
 
-    private  VBox cajaBatallon(ArrayList<Batallon> listaBatallones, ImageView imageView, String imageName) {
+    private VBox cajaBatallon(ArrayList<Batallon> listaBatallones, ImageView imageView, String imageName) {
         //BLOQUE
         VBox vBoxBloquePropio = new VBox();
         vBoxBloquePropio.setMinWidth(200);
@@ -472,28 +473,21 @@ public class MundoController extends MapasController implements Initializable {
                         if (batallon1 != batallon) {
                             ponerBoton = true;
                             strings.add(batallon1.getNombre());
-
                         }
                     }
                 }
                 if (ponerBoton) {
                     ComboBox<String> unirBatallones = new ComboBox<>(strings);
-                    unirBatallones.setValue("unir");
                     unirBatallones.getSelectionModel().selectedItemProperty().addListener((options, oldValue, newValue) -> {
-                                System.out.println("DDDDDDDDDDD " + newValue);
-                                System.out.println("DDDDDDDDDDD " + newValue);
-                                System.out.println("DDDDDDDDDDD " + newValue);
-                                System.out.println("DDDDDDDDDDD " + newValue);
-                                System.out.println("DDDDDDDDDDD " + newValue);
-                                System.out.println("DDDDDDDDDDD " + newValue);
                                 for (Batallon batallon1 : getJugadorPrimaryStageController().listaBatallonesPropios.values()) {
+                                    System.out.println(batallon1.getNombre() + " - " + newValue);
                                     if (batallon1.getNombre().equals(newValue)) {
                                         batallon.addSoldados(batallon1.getSoldadoHashMap());
                                         batallon1.remove(getJugadorPrimaryStageController());
                                         break;
                                     }
                                 }
-
+                                reload(this.getClass());
                             }
                     );
                     vBoxBatallonChildren.add(unirBatallones);
@@ -518,7 +512,7 @@ public class MundoController extends MapasController implements Initializable {
         return vBoxBloquePropio;
     }
 
-    private  Button buttonMoverbatallon(Batallon batallon) {
+    private Button buttonMoverbatallon(Batallon batallon) {
         Button btnMove = new Button("mover unidades");
         btnMove.setAlignment(Pos.CENTER);
         btnMove.setOnAction(new EventHandler<ActionEvent>() {
@@ -601,7 +595,7 @@ public class MundoController extends MapasController implements Initializable {
         return btnMove;
     }
 
-    private  boolean isSePuedeMover(int batallonFilaTemp, int batallonColumTemp, Batallon batallon) {
+    private boolean isSePuedeMover(int batallonFilaTemp, int batallonColumTemp, Batallon batallon) {
         String posicion = batallonFilaTemp + "-" + batallonColumTemp;
         boolean sePuedeMover = true;
         int filaModule = batallonFilaTemp % 5;
@@ -628,7 +622,7 @@ public class MundoController extends MapasController implements Initializable {
         return false;
     }
 
-    public  void showMessage() {
+    public void showMessage() {
         Stage newStage = new Stage();
         VBox comp = new VBox();
         TextField message = new TextField("No puedes moverte a esta posición, intentalo de nuevo.");
@@ -639,7 +633,7 @@ public class MundoController extends MapasController implements Initializable {
         newStage.show();
     }
 
-    private  VBox cajaNewCity(ImageView imageView, String imageName) {
+    private VBox cajaNewCity(ImageView imageView, String imageName) {
         //Objetos de ciudad
         Button botonNuevaCity = null;
         ImageView imgViewCity = null;
@@ -692,7 +686,7 @@ public class MundoController extends MapasController implements Initializable {
         return vBoxBloquePropio;
     }
 
-    private  void printRecursos(ObservableList<Node> childrenFlowPane, Set<Map.Entry<Integer, Recursos>> recursos, int produceAlmacenaCuesta) {
+    private void printRecursos(ObservableList<Node> childrenFlowPane, Set<Map.Entry<Integer, Recursos>> recursos, int produceAlmacenaCuesta) {
         boolean paso0 = false;
         for (Map.Entry<Integer, Recursos> recurso : recursos) {
             Recursos recursoValor = recurso.getValue();
@@ -771,7 +765,7 @@ public class MundoController extends MapasController implements Initializable {
     }
 
 
-    private  void createMenuLeft(BorderPane borderPane, ImageView imageView, Ciudad ciudad, ArrayList<Batallon> batallones, String imageName, boolean pasoPorClicas) {
+    private void createMenuLeft(BorderPane borderPane, ImageView imageView, Ciudad ciudad, ArrayList<Batallon> batallones, String imageName, boolean pasoPorClicas) {
         List<VBox> vBoxList = new ArrayList<>();
         boolean controllerParaVerSiestaVacio = false;
         if (ciudad != null) {

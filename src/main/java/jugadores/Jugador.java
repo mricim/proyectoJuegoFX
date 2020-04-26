@@ -79,7 +79,7 @@ public class Jugador {
             batallon1.setSoldadoHashMap(soldados2);
 
             Batallon batallon2 = new Batallon("Batallon P 2 8-7", 8, 7, 20, this,ciudad2);
-            Unidades soldados3 = new Unidades(listaSoldadosPreCargada.get(3), 98, 100, 0, 0);
+            Unidades soldados3 = new Unidades(listaSoldadosPreCargada.get(2), 98, 100, 0, 0);
             Unidades soldados4 = new Unidades(listaSoldadosPreCargada.get(1), 80, 5, 0, 0);
             batallon2.setSoldadoHashMap(soldados3);
             batallon2.setSoldadoHashMap(soldados4);

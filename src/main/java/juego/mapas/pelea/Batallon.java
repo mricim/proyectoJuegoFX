@@ -6,10 +6,7 @@ import main.java.jugadores.Jugador;
 import main.java.utils.Posicion;
 
 import java.lang.Character.UnicodeBlock;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 import static main.java.jugadores.Jugador.listaPosicionesBatallones;
 
@@ -72,14 +69,20 @@ public class Batallon extends Posicion {
     }
 
     public void addSoldados(HashMap<Integer, Unidades> anadir) {
-        Set<Integer> a = anadir.keySet();
-        for (Integer integer : a){//TODO
-            System.out.println(a);
-            Unidades b = anadir.get(integer);
-            System.out.println(b.getId()+" "+b.getCantidad());
-            System.out.println("FFFFFF");
-            System.out.println(getSoldadoHashMap().get(b.getId()));
-            getSoldadoHashMap().get(b.getId()).addCantidad(b.getCantidad());
+
+        Collection<Unidades> a = anadir.values();
+        for (Unidades unidadAnadir : a) {//TODO
+            int tipo = unidadAnadir.getTipeUnit();
+            boolean seanadio = false;
+            for (Unidades value : SoldadoHashMap.values()) {
+                if (value.getTipeUnit() == tipo) {
+                    value.addCantidad(unidadAnadir.getCantidad());
+                    seanadio = true;
+                }
+            }
+            if (!seanadio) {
+                SoldadoHashMap.put(unidadAnadir.getId(), unidadAnadir);
+            }
         }
 
     }
