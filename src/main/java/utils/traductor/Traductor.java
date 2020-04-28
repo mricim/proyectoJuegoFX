@@ -11,7 +11,7 @@ public class Traductor {
 
     public static ComboBox<String> traduccciones(ArrayList<String> arrayList, Class clasS) {
         ComboBox<String> comboBox = CustomComboBoxImager.createCombox(arrayList);
-        String nameLocale = PrimaryStageControler.TRADUCCIONES.getLocale().getLanguage();
+        String nameLocale = PrimaryStageControler.TRADUCCIONES_GENERALES.getLocale().getLanguage();
         String elValue = getLanguagePathEquals(nameLocale,clasS);
         comboBox.setValue(elValue);
 

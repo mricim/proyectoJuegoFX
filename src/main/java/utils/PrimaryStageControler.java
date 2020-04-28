@@ -18,10 +18,12 @@ import java.util.ResourceBundle;
 
 public class PrimaryStageControler {
     public static Locale LOCALE;
-    public static ResourceBundle TRADUCCIONES;
+    public static ResourceBundle TRADUCCIONES_GENERALES;
+    public static ResourceBundle TRADUCCIONES_THEMA;
     //
 
     public static String NAME_TEMA;
+    public static String NAME_TEMA_PATH;
     //VARIABLES PREDEFINIDAS
     private static Clan clanPrimaryStageController;
 
@@ -122,7 +124,7 @@ public class PrimaryStageControler {
         if (primaryStage.isMaximized()) {
             setMaximized = true;
         }
-        cambiarNombreStage(TRADUCCIONES.getString("nombreDelJuego"));
+        cambiarNombreStage(TRADUCCIONES_GENERALES.getString("nombreDelJuego"));
         primaryStage.setMaximized(setMaximized);//Pone el Stage en maximizado
         if (oldStageOwner != null) {
             primaryStage.showAndWait();
@@ -135,9 +137,9 @@ public class PrimaryStageControler {
 
         if (locale != null) {
             LOCALE = locale;
-            TRADUCCIONES = ResourceBundle.getBundle(TRADUCCIONES.getBaseBundleName(), LOCALE);
+            TRADUCCIONES_GENERALES = ResourceBundle.getBundle(TRADUCCIONES_GENERALES.getBaseBundleName(), LOCALE);
         }
-        loader.setResources(TRADUCCIONES);
+        loader.setResources(TRADUCCIONES_GENERALES);
 
         Parent root = loader.load();
         if (oldStageOwner != null) {
@@ -150,7 +152,7 @@ public class PrimaryStageControler {
         if (primaryStage.isMaximized()) {
             setMaximized = true;
         }
-        cambiarNombreStage(TRADUCCIONES.getString("nombreDelJuego"));
+        cambiarNombreStage(TRADUCCIONES_GENERALES.getString("nombreDelJuego"));
         primaryStage.setMaximized(setMaximized);//Pone el Stage en maximizado
         if (oldStageOwner != null) {
             primaryStage.showAndWait();

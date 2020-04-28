@@ -15,11 +15,9 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.Locale;
 import java.util.ResourceBundle;
-import java.util.jar.Manifest;
 
 import static main.java.temas.Temas.pathImagesExternal;
 import static main.java.utils.PrimaryStageControler.*;
-import static main.java.utils.propietiesAndPreferences.PropertiesApp.createPropieties;
 import static main.java.utils.traductor.Traductor.listaIdiomasPath;
 
 
@@ -86,7 +84,7 @@ public class Main extends Application {
                 throw new RuntimeException(e);
             }
         });*/
-        loader.setResources(TRADUCCIONES);
+        loader.setResources(TRADUCCIONES_GENERALES);
         Parent root = loader.load();
         primaryStage.setTitle(NAME);
         Scene scene = new Scene(root);
@@ -116,7 +114,7 @@ public class Main extends Application {
         } else {
             LOCALE = new Locale("en");
         }
-        TRADUCCIONES = ResourceBundle.getBundle("main.resources.traductions.UIResources", LOCALE);
+        TRADUCCIONES_GENERALES = ResourceBundle.getBundle("main.resources.traductions.UIResources", LOCALE);
 
         /*
         final Session session = getSession();

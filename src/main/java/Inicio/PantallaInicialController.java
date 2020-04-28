@@ -1,14 +1,10 @@
 package main.java.Inicio;
 
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.util.Duration;
 import main.java.juego.MapasController;
 import main.java.juego.comercio.Comercio;
 import main.java.juego.mapas.Recursos;
@@ -47,8 +43,6 @@ public class PantallaInicialController extends PrimaryStageControler implements 
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
-
 //https://stackoverflow.com/questions/32362802/javafx-combobox-cells-disappear-when-clicked
         ComboBox<String> comboBox = Traductor.traduccciones(listaIdiomasPath, PantallaInicialController.class);
         comboBox.getSelectionModel().selectedItemProperty().addListener((options, oldValue, newValue) -> {
@@ -56,9 +50,7 @@ public class PantallaInicialController extends PrimaryStageControler implements 
                 }
         );
         seleccionarIdioma.getChildren().add(comboBox);
-
 //
-
         seleccionarMundo.getItems().addAll(arrayListTemas);
 
         sesioniniciada = true;//TODO BORRAR
@@ -120,9 +112,13 @@ public class PantallaInicialController extends PrimaryStageControler implements 
         NAME_TEMA = mundoSeleccionadoName;
         char[] a = NAME_TEMA.replaceAll(" ", "").toCharArray();
         a[0] = Character.toLowerCase(a[0]);
-        Temas.ruteUse(String.valueOf(a) + "/");
+        NAME_TEMA_PATH=String.valueOf(a);
+        Temas.ruteUse(NAME_TEMA_PATH + "/");
+        System.out.println();
 
         progresBar.setProgress(10);//TODO NO FUNCIONA // https://stackoverflow.com/questions/44398611/running-a-process-in-a-separate-thread-so-rest-of-java-fx-application-is-usable
+
+        TRADUCCIONES_THEMA = ResourceBundle.getBundle("main.resources.traductions.temas."+NAME_TEMA_PATH+".UIResources", TRADUCCIONES_GENERALES.getLocale());
         callbd();
         progresBar.setProgress(100);
         //Jugador borrar=new Jugador("nombre",0);//TODO DESCOMENTAR PARA INICIAR COMO UN NUEVO JUGADOR
@@ -140,14 +136,14 @@ public class PantallaInicialController extends PrimaryStageControler implements 
 
     private void callbd() {
         //TODO LEER DESDE LA BD
-        RecursosPrecargados oroPre = new RecursosPrecargados(0, TRADUCCIONES.getString("recurso.oro"), true, true, false, true);
-        RecursosPrecargados maderaPre = new RecursosPrecargados(1, TRADUCCIONES.getString("recurso.madera"), true, true, false, true);
-        RecursosPrecargados piedraPre = new RecursosPrecargados(2, TRADUCCIONES.getString("recurso.piedra"), true, true, false, true);
-        RecursosPrecargados comidaPre = new RecursosPrecargados(3, TRADUCCIONES.getString("recurso.comida"), true, true, false, true);
-        RecursosPrecargados hierroPre = new RecursosPrecargados(4, TRADUCCIONES.getString("recurso.hierro"), true, true, false, true);
-        RecursosPrecargados poblacionPre = new RecursosPrecargados(5, TRADUCCIONES.getString("recurso.poblacion"), true, false, false, false);
-        RecursosPrecargados felicidadPre = new RecursosPrecargados(6, TRADUCCIONES.getString("recurso.felicidad"), true, false, true, true);
-        RecursosPrecargados investigacionPre = new RecursosPrecargados(7, TRADUCCIONES.getString("recurso.investigacion"), false, true, false, true);
+        RecursosPrecargados oroPre = new RecursosPrecargados(0, TRADUCCIONES_THEMA.getString("recurso.oro"), true, true, false, true);
+        RecursosPrecargados maderaPre = new RecursosPrecargados(1, TRADUCCIONES_THEMA.getString("recurso.madera"), true, true, false, true);
+        RecursosPrecargados piedraPre = new RecursosPrecargados(2, TRADUCCIONES_THEMA.getString("recurso.piedra"), true, true, false, true);
+        RecursosPrecargados comidaPre = new RecursosPrecargados(3, TRADUCCIONES_THEMA.getString("recurso.comida"), true, true, false, true);
+        RecursosPrecargados hierroPre = new RecursosPrecargados(4, TRADUCCIONES_THEMA.getString("recurso.hierro"), true, true, false, true);
+        RecursosPrecargados poblacionPre = new RecursosPrecargados(5, TRADUCCIONES_THEMA.getString("recurso.poblacion"), true, false, false, false);
+        RecursosPrecargados felicidadPre = new RecursosPrecargados(6, TRADUCCIONES_THEMA.getString("recurso.felicidad"), true, false, true, true);
+        RecursosPrecargados investigacionPre = new RecursosPrecargados(7, TRADUCCIONES_THEMA.getString("recurso.investigacion"), false, true, false, true);
         RecursosPrecargados municionPre = new RecursosPrecargados(8, "municion", true, true, true, true);
         progresBar.setProgress(15);
         //TODO MENUS ESPECIALES
@@ -209,9 +205,9 @@ public class PantallaInicialController extends PrimaryStageControler implements 
         new EdificiosPreCargados(1, 1, false, true, 1, 1, 0, "Castillo", "Descripción 1_1", recursosBuild, recursosProductores, null, recursosAlmacen);
         new EdificiosPreCargados(1, 2, false, true, 1, 2, 0, "Castillo", "X", recursosBuild, recursosProductores, null, recursosAlmacen);
 
-        new EdificiosPreCargados(2, 0, false, false, 2, 0, 0, TRADUCCIONES.getString("muralla"), "XXXXXXXXXXX", recursosBuild, null, null, null);
-        new EdificiosPreCargados(2, 1, true, true, 2, 1, 0, TRADUCCIONES.getString("muralla"), "XXXXXXXXXXX", recursosBuild, null, null, null);
-        new EdificiosPreCargados(2, 2, true, true, 2, 2, 0, TRADUCCIONES.getString("muralla"), "XXXXXXXXXXX", recursosBuild, null, null, null);
+        new EdificiosPreCargados(2, 0, false, false, 2, 0, 0, TRADUCCIONES_THEMA.getString("muralla"), "XXXXXXXXXXX", recursosBuild, null, null, null);
+        new EdificiosPreCargados(2, 1, true, true, 2, 1, 0, TRADUCCIONES_THEMA.getString("muralla"), "XXXXXXXXXXX", recursosBuild, null, null, null);
+        new EdificiosPreCargados(2, 2, true, true, 2, 2, 0, TRADUCCIONES_THEMA.getString("muralla"), "XXXXXXXXXXX", recursosBuild, null, null, null);
 
         new EdificiosPreCargados(10, 0, true, true, 0, -1, 0, "Almacen", "XXXXXXXXXXX", recursosBuild, null, null, recursosAlmacen);
         new EdificiosPreCargados(10, 1, true, true, 0, 0, 0, "Almacen", "XXXXXXXXXXX", recursosBuild, null, null, recursosAlmacen);

@@ -10,7 +10,6 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
-import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 import javafx.scene.Cursor;
 import javafx.scene.Node;
@@ -21,9 +20,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
-import main.java.Main;
 import main.java.juego.comercio.Comercio;
 import main.java.juego.mapas.RecursosPrecargados;
 import main.java.jugadores.Clan;
@@ -372,7 +368,7 @@ public class CiudadController extends MapasController implements Initializable {
                 break;
             case 2://CUARTEL (SOLDADOS)
                 Button buttonCase2 = new Button();
-                buttonCase2.setText(TRADUCCIONES.getString("city.button.entrenarNuevasUnidades"));
+                buttonCase2.setText(TRADUCCIONES_GENERALES.getString("city.button.entrenarNuevasUnidades"));
                 buttonCase2.setOnMouseClicked(e -> {
                     createMenuLeftSecond(borderPane, flowPaneRecuros, 2);
                 });
@@ -380,7 +376,7 @@ public class CiudadController extends MapasController implements Initializable {
                 break;
             case 3://ARMAS DE ASEDIO (SOLDADOS)
                 Button buttonCase3 = new Button();
-                buttonCase3.setText(TRADUCCIONES.getString("city.button.construirMaquinariaAsedio"));
+                buttonCase3.setText(TRADUCCIONES_GENERALES.getString("city.button.construirMaquinariaAsedio"));
                 buttonCase3.setOnMouseClicked(e -> {
                     createMenuLeftSecond(borderPane, flowPaneRecuros, 3);
                 });
