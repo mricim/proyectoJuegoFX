@@ -387,7 +387,7 @@ public class MundoController extends MapasController implements Initializable {
 
         ObservableList<Node> childrenVBox = vBoxBloquePropio.getChildren();
 
-        BackgroundFill backgroundFill = null;
+        BackgroundFill backgroundFill = new BackgroundFill(Color.ANTIQUEWHITE, CornerRadii.EMPTY, Insets.EMPTY);
 
 
         for (Batallon batallon : listaBatallones) {
@@ -469,7 +469,7 @@ public class MundoController extends MapasController implements Initializable {
             //vBoxBloquePropio.setMargin(new Insets(0, 15, 0, 15));
 
             if (getJugadorPrimaryStageController().listaBatallonesPropios.containsKey(batallon.getIdBatallon())) {
-                backgroundFill = new BackgroundFill(Color.ANTIQUEWHITE, CornerRadii.EMPTY, Insets.EMPTY);
+
                 vBoxBatallonChildren.add(buttonMoverbatallon(batallon));//BOTON PARA MOVER UN BATALLON
                 vBoxBatallonChildren.add(buttonSplitbatallon(batallon));//BOTON PARA MOVER UN BATALLON
 
@@ -530,18 +530,21 @@ public class MundoController extends MapasController implements Initializable {
                 VBox vBox = new VBox();
                 vBox.setMinWidth(400);
                 vBox.setMaxWidth(400);
+                vBox.setBackground(new Background(new BackgroundFill(Color.ANTIQUEWHITE, CornerRadii.EMPTY, Insets.EMPTY)));
                 vBox.setAlignment(TOP_CENTER);
-                ObservableList<Node> vBoxChildren=vBox.getChildren();
+                ObservableList<Node> vBoxChildren = vBox.getChildren();
 
+                HashMap<Integer, Unidades> temp = new HashMap<>();
+                Button btnSplit = new Button("Separar");
                 for (Unidades soldados : batallon.getSoldadoHashMap().values()) {
                     UnidadesPreCargadas unidadesPreCargadas = soldados.getUnidadesPreCargadas();
+                    temp.put(unidadesPreCargadas.getIdType(), soldados.clone());
                     HBox hBox = new HBox();
                     hBox.setAlignment(Pos.CENTER);
                     hBox.setSpacing(10);
                     ImageView imageView = new ImageView(unidadesPreCargadas.getImageIcon());
                     imageView.setFitWidth(50);
                     imageView.setFitHeight(50);
-
 
                     int maxSoldados = soldados.getCantidad();
                     CustomTextField textField = new CustomTextField("0", true, maxSoldados);
@@ -556,7 +559,22 @@ public class MundoController extends MapasController implements Initializable {
                             int number = oldValue.intValue() - seleccionado;
                             if (number != 0) {
                                 textField.textProperty().setValue(String.valueOf(seleccionado));
-                                //Platform.runLater(() -> controllerSlider(number, unidadesPreCargadas, soldadesca, costesRecursos, resta, recursosCiudadTemp, button, vBox, vBox1));
+                                Platform.runLater(() -> {
+                                    int id = unidadesPreCargadas.getIdType();
+                                    Unidades unidades = temp.get(id);
+                                    unidades.setCantidad(seleccionado);
+                                    temp.put(id, unidades);
+
+                                    boolean sePuedeSeparar=true;
+                                    for (Unidades value : temp.values()) {
+                                        if (value.getCantidad()<5){
+                                            sePuedeSeparar=false;
+                                        }else if(soldados.getCantidad()-value.getCantidad()<5){
+                                            sePuedeSeparar=false;
+                                        }
+                                    }
+                                    btnSplit.setDisable(!sePuedeSeparar);
+                                });
                             }
                         }
                     });
@@ -565,6 +583,33 @@ public class MundoController extends MapasController implements Initializable {
 
                     vBoxChildren.add(hBox);
                 }
+                vBoxChildren.add(new CustomSeparator(20, false, 10));
+                TextField textField = new TextField();
+                textField.setPromptText("name");
+                textField.setAlignment(Pos.CENTER);
+                textField.setMaxWidth(200);
+                vBoxChildren.add(textField);
+                vBoxChildren.add(new CustomSeparator(20, false, 10));
+                btnSplit.setAlignment(Pos.CENTER);
+                btnSplit.setOnAction(new EventHandler<ActionEvent>() {
+                    @Override
+                    public void handle(ActionEvent event) {
+                        String name = textField.getText();
+                        if (name.equals("")) {
+                            name = "Batallon " + getJugadorPrimaryStageController().listaBatallonesPropios.size();
+                        }
+                        Batallon elNuevo = new Batallon(name, batallon.getFila(), batallon.getColumna(), 0, getJugadorPrimaryStageController(), batallon.getCiudadVolver());
+                        for (Unidades value : batallon.getSoldadoHashMap().values()) {
+                            Unidades unidadesTemp = temp.get(value.getUnidadesPreCargadas().getIdType());
+                            elNuevo.setSoldadoHashMap(unidadesTemp);
+                            value.removeCantidad(unidadesTemp.getCantidad());
+                        }
+                        reload(MundoController.class);
+                    }
+                });
+                vBoxChildren.add(btnSplit);
+                vBoxChildren.add(new CustomSeparator(20, false, 10));
+
                 vBoxList.add(vBox);
                 rellenador(borderPane, vBoxList, 400);
             }

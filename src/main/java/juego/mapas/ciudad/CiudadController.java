@@ -512,7 +512,6 @@ public class CiudadController extends MapasController implements Initializable {
                 int number = oldValue.intValue() - seleccionado;
                 if (number != 0) {
                     textField2.textProperty().setValue(String.valueOf(seleccionado));
-                    //Platform.runLater(() -> controllerSliderAddComercio(number, unidadesPreCargadas, soldadesca, costesRecursos, resta, recursosCiudadTemp, button, vBox, vBox1));
                 }
             }
         });

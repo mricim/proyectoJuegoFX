@@ -4,7 +4,7 @@ import javafx.scene.image.Image;
 import main.java.utils.Posicion;
 
 
-public class Unidades extends Posicion {
+public class Unidades extends Posicion implements Cloneable {
     private static int lastId = 1;
     private int id;
     private int cantidad;
@@ -60,5 +60,14 @@ public class Unidades extends Posicion {
 
     public Image getImageIcon() {
         return unidadesPreCargadas.getImageIcon();
+    }
+
+    public Unidades clone() {
+        try {
+            return (Unidades) super.clone();
+        }catch (CloneNotSupportedException e){
+            e.printStackTrace();
+        }
+        return null;
     }
 }

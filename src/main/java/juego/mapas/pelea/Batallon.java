@@ -2,6 +2,7 @@ package main.java.juego.mapas.pelea;
 
 
 import main.java.juego.mapas.ciudad.Ciudad;
+import main.java.jugadores.Clan;
 import main.java.jugadores.Jugador;
 import main.java.utils.Posicion;
 
@@ -28,6 +29,13 @@ public class Batallon extends Posicion {
         this.ciudadVolver = ciudadVolver;
 
         jugador.listaBatallonesPropios.put(idBatallon, this);
+        for (Clan clan : Clan.clanArrayList) {
+            if (clan.getJugadoresDelClan().containsKey(jugador.getId())) {
+                clan.addBatallon(this);
+                break;
+            }
+        }
+
     }
 
     public Batallon(String position) {
@@ -66,6 +74,14 @@ public class Batallon extends Posicion {
 
     public void setSoldadoHashMap(Unidades soldado) {
         SoldadoHashMap.put(soldado.getId(), soldado);
+    }
+
+    public Ciudad getCiudadVolver() {
+        return ciudadVolver;
+    }
+
+    public int getProyectiles() {
+        return proyectiles;
     }
 
     public void addSoldados(HashMap<Integer, Unidades> anadir) {
@@ -110,6 +126,13 @@ public class Batallon extends Posicion {
         } catch (Exception ignored) {
         }
         jugador.listaBatallonesPropios.remove(getIdBatallon());
+
+        for (Clan clan : Clan.clanArrayList) {
+            if (clan.getJugadoresDelClan().containsKey(jugador.getId())) {
+                clan.removeBatallon(this);
+                break;
+            }
+        }
     }
 
     @Override
