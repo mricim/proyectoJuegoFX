@@ -84,6 +84,10 @@ public class Batallon extends Posicion {
         return proyectiles;
     }
 
+    public void setCiudadVolver(Ciudad ciudadVolver) {
+        this.ciudadVolver = ciudadVolver;
+    }
+
     public void addSoldados(HashMap<Integer, Unidades> anadir) {
 
         Collection<Unidades> a = anadir.values();

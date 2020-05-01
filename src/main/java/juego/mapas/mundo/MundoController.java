@@ -23,6 +23,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
+import main.java.juego.mapas.pelea.PeleaController;
 import main.java.juego.mapas.pelea.Unidades;
 import main.java.juego.mapas.pelea.UnidadesPreCargadas;
 import main.java.jugadores.Clan;
@@ -33,17 +34,14 @@ import main.java.juego.mapas.Recursos;
 import main.java.juego.mapas.ciudad.Ciudad;
 import main.java.juego.mapas.ciudad.CiudadController;
 import main.java.juego.mapas.pelea.Batallon;
-import main.java.jugadores.Jugador;
 import main.java.utils.tagsFX.CustomAlert;
 import main.java.utils.tagsFX.CustomSeparator;
 import main.java.utils.tagsFX.CustomSlider;
 import main.java.utils.tagsFX.CustomTextField;
 
-import javax.crypto.spec.PSource;
 import java.net.URL;
 import java.util.*;
 
-import static com.sun.java.accessibility.util.AWTEventMonitor.removeMouseListener;
 import static javafx.geometry.Pos.TOP_CENTER;
 import static javafx.scene.text.TextAlignment.CENTER;
 import static main.java.jugadores.Jugador.listaCiudades;
@@ -198,7 +196,6 @@ public class MundoController extends MapasController implements Initializable {
                     }
                 }
                 String nameImage = stringBuilder.toString();
-
                 imageView.setImage(CallImages.getImage(RUTE_IMAGES, nameImage));
                 imageView.setId(position);
 
@@ -470,8 +467,31 @@ public class MundoController extends MapasController implements Initializable {
 
             if (getJugadorPrimaryStageController().listaBatallonesPropios.containsKey(batallon.getIdBatallon())) {
 
-                vBoxBatallonChildren.add(buttonMoverbatallon(batallon));//BOTON PARA MOVER UN BATALLON
-                vBoxBatallonChildren.add(buttonSplitbatallon(batallon));//BOTON PARA MOVER UN BATALLON
+                vBoxBatallonChildren.add(buttonMoverBatallon(batallon));//BOTON PARA MOVER UN BATALLON
+                vBoxBatallonChildren.add(buttonSplitBatallon(batallon));//BOTON PARA dividir BATALLON
+                if (imageName.contains("_c_")) {
+                    String posicion = batallon.getPosition();
+                    Ciudad ciudad = getJugadorPrimaryStageController().listaCiudadesPropias.get(posicion);
+                    if (ciudad != null) {
+                        System.out.println("DEFENDER Propia");
+                        vBoxBatallonChildren.add(buttonDefenderBatallon(batallon, ciudad));//BOTON PARA atacar
+                    } else {
+                        Clan a = Clan.jugadoresQueEstanEnUnClan.get(getJugadorPrimaryStageController());
+                        for (Ciudad ciudad2 : a.getCiudadesDelClan()) {
+                            if (ciudad2.getPosition().equals(posicion)) {
+                                ciudad = ciudad2;
+                                break;
+                            }
+                        }
+                        if (ciudad != null) {
+                            System.out.println("DEFENDER");
+                            vBoxBatallonChildren.add(buttonDefenderBatallon(batallon, ciudad));//BOTON PARA atacar
+                        } else {
+                            System.out.println("ATACAR");
+                            //vBoxBatallonChildren.add(buttonAttackBatallon(batallon, listaCiudades.get(posicion)));//BOTON PARA atacar
+                        }
+                    }
+                }
 
                 boolean ponerBoton = false;
                 ObservableList<String> strings = FXCollections.observableArrayList();
@@ -519,7 +539,31 @@ public class MundoController extends MapasController implements Initializable {
         return vBoxBloquePropio;
     }
 
-    private Node buttonSplitbatallon(Batallon batallon) {
+    private Node buttonDefenderBatallon(Batallon batallon, Ciudad ciudad) {
+        Button btnSplit = new Button("Defender");
+        btnSplit.setAlignment(Pos.CENTER);
+        btnSplit.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                batallon.setCiudadVolver(ciudad);
+            }
+        });
+        return btnSplit;
+    }
+
+    private Node buttonAttackBatallon(Batallon batallon) {
+        Button btnSplit = new Button("Atacar");
+        btnSplit.setAlignment(Pos.CENTER);
+        btnSplit.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                reload(PeleaController.class);
+            }
+        });
+        return btnSplit;
+    }
+
+    private Node buttonSplitBatallon(Batallon batallon) {
         Button btnSplit = new Button("Separar ejercito");
         btnSplit.setAlignment(Pos.CENTER);
         btnSplit.setOnAction(new EventHandler<ActionEvent>() {
@@ -536,6 +580,7 @@ public class MundoController extends MapasController implements Initializable {
 
                 HashMap<Integer, Unidades> temp = new HashMap<>();
                 Button btnSplit = new Button("Separar");
+                btnSplit.setDisable(true);
                 for (Unidades soldados : batallon.getSoldadoHashMap().values()) {
                     UnidadesPreCargadas unidadesPreCargadas = soldados.getUnidadesPreCargadas();
                     temp.put(unidadesPreCargadas.getIdType(), soldados.clone());
@@ -565,12 +610,12 @@ public class MundoController extends MapasController implements Initializable {
                                     unidades.setCantidad(seleccionado);
                                     temp.put(id, unidades);
 
-                                    boolean sePuedeSeparar=true;
+                                    boolean sePuedeSeparar = true;
                                     for (Unidades value : temp.values()) {
-                                        if (value.getCantidad()<5){
-                                            sePuedeSeparar=false;
-                                        }else if(soldados.getCantidad()-value.getCantidad()<5){
-                                            sePuedeSeparar=false;
+                                        if (value.getCantidad() < 5) {
+                                            sePuedeSeparar = false;
+                                        } else if (soldados.getCantidad() - value.getCantidad() < 5) {
+                                            sePuedeSeparar = false;
                                         }
                                     }
                                     btnSplit.setDisable(!sePuedeSeparar);
@@ -617,7 +662,7 @@ public class MundoController extends MapasController implements Initializable {
         return btnSplit;
     }
 
-    private Button buttonMoverbatallon(Batallon batallon) {
+    private Button buttonMoverBatallon(Batallon batallon) {
         Button btnMove = new Button("mover unidades");
         btnMove.setAlignment(Pos.CENTER);
         btnMove.setOnAction(new EventHandler<ActionEvent>() {
@@ -870,6 +915,7 @@ public class MundoController extends MapasController implements Initializable {
 
 
     private void createMenuLeft(BorderPane borderPane, ImageView imageView, Ciudad ciudad, ArrayList<Batallon> batallones, String imageName, boolean pasoPorClicas) {
+        System.out.println("DDDDDD " + imageName);
         List<VBox> vBoxList = new ArrayList<>();
         boolean controllerParaVerSiestaVacio = false;
         if (ciudad != null) {
