@@ -9,6 +9,7 @@ import main.java.juego.mapas.Recursos;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
+import java.util.Objects;
 
 import static main.java.jugadores.Jugador.listaSoldadosPreCargada;
 
@@ -48,7 +49,7 @@ public class UnidadesPreCargadas implements ImageGetter , Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "unidades_precargadas_id", unique = true, nullable = false)
+    @Column(name = "unidades_precargadas_id", unique = true, nullable = true)
     public Integer getIdDB() {
         return idDB;
     }
@@ -78,13 +79,13 @@ public class UnidadesPreCargadas implements ImageGetter , Serializable {
     }
 
     @Basic
-    @Column(name = "id_tipo",nullable = false)
+    @Column(name = "id_tipo",unique = true,nullable = false)
     public int getIdType() {
         return idType;
     }
 
     @Basic
-    @Column(name = "nombre",nullable = false)
+    @Column(name = "nombre",nullable = true)
     public String getNombre() {
         return nombre;
     }
@@ -96,7 +97,7 @@ public class UnidadesPreCargadas implements ImageGetter , Serializable {
     }
 
     @Basic
-    @Column(name = "tipo_lucha",nullable = false)
+    @Column(name = "tipo_lucha",nullable = true)
     public int getTipoLucha() {
         return tipoLucha;
     }
@@ -119,5 +120,18 @@ public class UnidadesPreCargadas implements ImageGetter , Serializable {
     public Image getImageIcon() {
         return getImageClicable(RUTEICON, imageIconPath);
         //return CallImages.getImage(RUTEIMAGES, imageClicablePath);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        UnidadesPreCargadas that = (UnidadesPreCargadas) o;
+        return idType == that.idType;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(idType);
     }
 }

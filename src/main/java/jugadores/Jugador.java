@@ -1,15 +1,19 @@
 package main.java.jugadores;
 
 import javafx.scene.image.Image;
+import main.java.hibernate.DbOperations;
 import main.java.utils.CallImages;
 import main.java.juego.mapas.Recursos;
 import main.java.juego.mapas.pelea.*;
 import main.java.juego.mapas.ciudad.EdificiosPreCargados;
 import main.java.juego.mapas.ciudad.Ciudad;
 
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.*;
 
+@Entity
+@Table(name = "Jugador", schema = "proyecto")
 public class Jugador implements Serializable {
     public static final Image ERRORIMAGE = CallImages.getImageNoTema("", "error");//TODO LLEVAR ESTO LO MAS ALTO POSIBLE
     public static Map<Integer, Jugador> listaTodosLosJugadores = new TreeMap<>();
@@ -24,20 +28,40 @@ public class Jugador implements Serializable {
 
 
     public Map<Integer, Batallon> listaBatallonesPropios = new TreeMap<>();
+
+    @OneToMany(targetEntity = Batallon.class)
+    @JoinColumn(name="batallones_jugador_fk")
+    public Map<Integer, Batallon> getListaBatallonesPropios() {
+        return listaBatallonesPropios;
+    }
+
+    public void setListaBatallonesPropios(Map<Integer, Batallon> listaBatallonesPropios) {
+        this.listaBatallonesPropios = listaBatallonesPropios;
+    }
+
     public Map<String, Ciudad> listaCiudadesPropias = new TreeMap<>();
 
-    private static int lastId=1;
-    private int id;
+    @OneToMany(targetEntity = Ciudad.class)
+    @JoinColumn(name="ciudades_jugador_fk")
+    public Map<String, Ciudad> getListaCiudadesPropias() {
+        return listaCiudadesPropias;
+    }
+
+    public void setListaCiudadesPropias(Map<String, Ciudad> listaCiudadesPropias) {
+        this.listaCiudadesPropias = listaCiudadesPropias;
+    }
+
+    private Integer id;
     private String nombre;
     private Map<Integer, Recursos> recursosJugador =new TreeMap<>();
     public Ciudad cargarCiudadPrincipal = null;
 
     public Jugador( String nombre, ArrayList<Recursos> recursosJugador) {
-        this.id = lastId++;
         this.nombre = nombre;
         for (Recursos recursos : recursosJugador) {
             this.recursosJugador.put(recursos.getId(),recursos);
         }
+        DbOperations.createRecord(this);
 
 
 //TODO LEER DESDE LA BD
@@ -57,15 +81,15 @@ public class Jugador implements Serializable {
         paraCity2.add(new Recursos(4,3000));
         paraCity2.add(new Recursos(5,3000));
         paraCity2.add(new Recursos(6,3000));
-        if (id == 1) {
+        if (getId() == 1) {
 
             Ciudad ciudad1=new Ciudad(this, "ciudad P 1 1-1", 1, 1, 1,paraCity1);
             Ciudad ciudad2=new Ciudad(this, "ciudad P 2 2-2", 2, 2, 1, paraCity2);
 
 
-            int numCiudad = Integer.MAX_VALUE;
+            Integer numCiudad = Integer.MAX_VALUE;
             for (Ciudad ciudad : listaCiudadesPropias.values()) {
-                int idCiudad = ciudad.getIdCiudad();
+                Integer idCiudad = ciudad.getIdCiudad();
                 if (numCiudad > idCiudad) {
                     numCiudad = idCiudad;
                     cargarCiudadPrincipal = ciudad;
@@ -148,15 +172,21 @@ public class Jugador implements Serializable {
         //TODO Collections.sort(listaCiudadesPropias);
         listaTodosLosJugadores.put(id, this);
     }
-
-    public int getId() {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "jugador_id", unique = true, nullable = false)
+    public Integer getId() {
         return id;
     }
 
+    @Basic
+    @Column(name = "nombreJugador",unique = true,nullable = true)
     public String getNombre() {
         return nombre;
     }
 
+    @OneToMany(cascade = CascadeType.ALL,targetEntity = Recursos.class)
+    @JoinColumn(name="recursos_jugador_fk")
     public Map<Integer, Recursos> getRecursosJugador() {
         return recursosJugador;
     }
@@ -164,10 +194,39 @@ public class Jugador implements Serializable {
     public static Jugador returnJugador(int jugadorId) {
         return Jugador.listaTodosLosJugadores.get(jugadorId);
     }
-/*
+
+    public Jugador() {
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public void setRecursosJugador(Map<Integer, Recursos> recursosJugador) {
+        this.recursosJugador = recursosJugador;
+    }
+
+    /*
     public static void addBatallon(Batallon batallon) {//TODO QUEDA HACER ESTO PARA LOS BATALLONES IGUAL QUE ESTA EN CIUDAD
         //return //Jugador.listaTodosLosJugadores.get(jugadorId);
     }
 
  */
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Jugador jugador = (Jugador) o;
+        return Objects.equals(nombre, jugador.nombre);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(nombre);
+    }
 }

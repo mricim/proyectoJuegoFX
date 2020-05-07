@@ -27,12 +27,12 @@ public class Unidades extends Posicion implements Cloneable, Serializable {
         this.unidadesPreCargadas = unidadesPreCargadas;
         this.cantidad = cantidad;
         this.municion = municion;
-        DbOperations.createRecord(this);
+//        DbOperations.createRecord(this);
     }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "unidades_id", unique = true, nullable = false)
+    @Column(name = "unidades_id", unique = true, nullable = true)
     public Integer getId() {
         return idDB;
     }
@@ -44,7 +44,7 @@ public class Unidades extends Posicion implements Cloneable, Serializable {
 
 
     @Basic
-    @Column(name = "cantidad",nullable = false)
+    @Column(name = "cantidad",nullable = true)
     public int getCantidad() {
         return cantidad;
     }

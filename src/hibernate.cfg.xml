@@ -17,8 +17,11 @@
 
 <!--        MAPPING CLASES-->
 <!--        <mapping class="test.Car"/>-->
+        <mapping class="main.java.jugadores.Clan"/>
+        <mapping class="main.java.jugadores.Jugador"/>
         <mapping class="main.java.utils.Posicion"/>
         <mapping class="main.java.juego.mapas.ciudad.Ciudad"/>
+        <mapping class="main.java.juego.mapas.pelea.Batallon"/>
         <mapping class="main.java.juego.mapas.pelea.UnidadesPreCargadas"/>
         <mapping class="main.java.juego.mapas.pelea.Unidades"/>
         <mapping class="main.java.juego.mapas.ciudad.contenidoCiudad.Edificio"/>

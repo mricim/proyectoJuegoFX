@@ -27,18 +27,18 @@ public class Recursos implements Serializable {
 
     public Recursos(int idRecursosPrecargados, int cantidad) {
         this(RecursosPrecargados.recursosPrecargadosList.get(idRecursosPrecargados), cantidad);
-        DbOperations.createRecord(this);
+//        DbOperations.createRecord(this);
     }
 
     public Recursos(RecursosPrecargados recursosPrecargados, int cantidad) {
         this.recursosPrecargados = recursosPrecargados;
         this.cantidad = cantidad;
-        DbOperations.createRecord(this);
+//        DbOperations.createRecord(this);
     }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "recurso_id", unique = true, nullable = false)
+    @Column(name = "recurso_id", unique = true, nullable = true)
     public Integer getIdDB() {
         return idDB;
     }
@@ -54,7 +54,7 @@ public class Recursos implements Serializable {
     }
 
     @Basic
-    @Column(name = "cantidad",nullable = false)
+    @Column(name = "cantidad",nullable = true)
     public int getCantidad() {
         return cantidad;
     }
@@ -68,7 +68,7 @@ public class Recursos implements Serializable {
     }
 
     @Basic
-    @Column(name = "nombre",nullable = false)
+    @Column(name = "nombre",nullable = true)
     public String getName() {
         return recursosPrecargados.getName();
     }
@@ -84,7 +84,7 @@ public class Recursos implements Serializable {
     }
 
     @Basic
-    @Column(name = "idRecursoPrecargado",nullable = false)
+    @Column(name = "idRecursoPrecargado",nullable = true)
     public int getId() {
         return recursosPrecargados.getId();
     }

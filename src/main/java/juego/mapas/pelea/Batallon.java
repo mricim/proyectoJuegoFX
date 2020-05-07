@@ -1,13 +1,14 @@
 package main.java.juego.mapas.pelea;
 
 
+import main.java.hibernate.DbOperations;
 import main.java.juego.mapas.ciudad.Ciudad;
+import main.java.juego.mapas.ciudad.contenidoCiudad.Edificio;
 import main.java.jugadores.Clan;
 import main.java.jugadores.Jugador;
 import main.java.utils.Posicion;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.lang.Character.UnicodeBlock;
 import java.util.*;
@@ -15,15 +16,13 @@ import java.util.*;
 import static main.java.jugadores.Jugador.listaPosicionesBatallones;
 
 @Entity
-@Table(name = "Ciudad", schema = "proyecto")
+@Table(name = "Batallon", schema = "proyecto")
 public class Batallon extends Posicion implements Serializable {
-    private static int lastIdBatallon = 1;
     private Map<Integer, Unidades> SoldadoHashMap = new HashMap<>();
-    private int idBatallon;
+    private Integer idBatallon;
     private String nombre;
     private Ciudad ciudadVolver;
     private int proyectiles;//TODO MAS QUE PROYECTILES SERIA COMO RACIONES O MUNICIONES O ALGO ASI
-    private double poderMilitar;
 
 
     public Batallon() {
@@ -31,11 +30,10 @@ public class Batallon extends Posicion implements Serializable {
 
     public Batallon(String nombre, int filas, int columnas, int proyectiles, Jugador jugador, Ciudad ciudadVolver) {
         super(filas, columnas);
-        this.idBatallon = lastIdBatallon++;
         this.nombre = nombre;
         this.proyectiles = proyectiles;
         this.ciudadVolver = ciudadVolver;
-
+        DbOperations.createRecord(this);
         jugador.listaBatallonesPropios.put(idBatallon, this);
         for (Clan clan : Clan.clanArrayList) {
             if (clan.getJugadoresDelClan().containsKey(jugador.getId())) {
@@ -50,32 +48,39 @@ public class Batallon extends Posicion implements Serializable {
         super(position);
     }
 
-    public int getIdBatallon() {
+    public void setSoldadoHashMap(Map<Integer, Unidades> soldadoHashMap) {
+        SoldadoHashMap = soldadoHashMap;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public void setProyectiles(int proyectiles) {
+        this.proyectiles = proyectiles;
+    }
+
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "batallon_id", unique = true, nullable = false)
+    public Integer getIdBatallon() {
         return idBatallon;
     }
 
-    public synchronized void setIdBatallon(int idBatallon) {
+    public  void setIdBatallon(int idBatallon) {
         this.idBatallon = idBatallon;
     }
-
+    //TODO cambiar unique batallon a true
+    @Basic
+    @Column(name = "nombreBatallon",unique = true,nullable = true)
     public String getNombre() {
         return nombre;
     }
 
-    public double getPoderMilitar() {
-        return poderMilitar;
-    }
-/*
-    public void setPoderMilitar() {
-        double poderMilitar = 0;
-        for (PosicionSoldado p : posicionSoldadoHashMap.values()) {
-            //TODO iterar sobre el map de posicion de soldados y calcular el podermilitar del batallon
-            poderMilitar += p.getSoldado().getCantidad() * p.getSoldado().getSoldadosPreCargados().getId();
-        }
-        this.poderMilitar = poderMilitar;
-    }
- */
 
+    @OneToMany(cascade = CascadeType.ALL,targetEntity = Unidades.class)
+    @JoinColumn(name="unidades_batallon_fk")
     public Map<Integer, Unidades> getSoldadoHashMap() {
         return SoldadoHashMap;
     }
@@ -84,12 +89,10 @@ public class Batallon extends Posicion implements Serializable {
         SoldadoHashMap.put(soldado.getId(), soldado);
     }
 
+    @OneToOne
+    @JoinColumn(name = "ciudad_fk" , nullable = false)
     public Ciudad getCiudadVolver() {
         return ciudadVolver;
-    }
-
-    public int getProyectiles() {
-        return proyectiles;
     }
 
     public void setCiudadVolver(Ciudad ciudadVolver) {
@@ -153,7 +156,7 @@ public class Batallon extends Posicion implements Serializable {
         if (!(o instanceof Batallon)) return false;
         if (!super.equals(o)) return false;
         Batallon batallon = (Batallon) o;
-        return getIdBatallon() == batallon.getIdBatallon();
+        return getIdBatallon().equals(batallon.getIdBatallon());
     }
 
     @Override

@@ -34,7 +34,7 @@ public class DbOperations {
 
 
     // Method 1: This Method creates a new Record of a certain Object on the Database.
-    public static Integer createRecord(Object obj) {
+    public synchronized static Integer createRecord(Object obj) {
         Session sessionObj = getSessionFactory().openSession();
 
         //Creating Transaction Object

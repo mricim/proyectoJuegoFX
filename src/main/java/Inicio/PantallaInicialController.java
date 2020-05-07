@@ -277,8 +277,8 @@ public class PantallaInicialController extends PrimaryStageControler implements 
         new UnidadesPreCargadas(4, "Catapultas", 50, recursosList2, 5);
         progresBar.setProgress(50);
         //TODO FIN LEER DESDE LA BD
-        Clan clan = new Clan(1, "Los mejores");
-        Clan clan2 = new Clan(2, "Los peores");
+        Clan clan = new Clan( "Los mejores");
+        Clan clan2 = new Clan( "Los peores");
         ArrayList<Recursos> jugador1ListaRecuros = new ArrayList<>();
         jugador1ListaRecuros.add(new Recursos(investigacionPre, 5));
         Jugador jugador = new Jugador("pepito", jugador1ListaRecuros);

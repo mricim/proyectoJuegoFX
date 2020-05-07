@@ -44,7 +44,7 @@ public class Edificio extends Posicion implements Cloneable, Serializable {
         this.id = edificioPreCargado.getId();
         this.nivel = edificioPreCargado.getNivel();
         this.edificiosPreCargado = edificioPreCargado;
-        DbOperations.createRecord(this);
+//        DbOperations.createRecord(this);
 
         Map<RecursosPrecargados, ArrayList<Recursos>> i = edificioPreCargado.getRecursosCosteXmin();
         if (i != null) {
@@ -85,7 +85,7 @@ public class Edificio extends Posicion implements Cloneable, Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "edificio_id", unique = true, nullable = false)
+    @Column(name = "edificio_id", unique = true, nullable = true)
     public Integer getIdDb() {
         return idDb;
     }
@@ -107,7 +107,7 @@ public class Edificio extends Posicion implements Cloneable, Serializable {
      * @return Un integer que contiene el valor del id del edificio.
      */
     @Basic
-    @Column(name = "idEdificio",nullable = false)
+    @Column(name = "idEdificio",nullable = true)
     public int getId() {
         return id;
     }
@@ -117,7 +117,7 @@ public class Edificio extends Posicion implements Cloneable, Serializable {
      * @return Un integer que contiene el valor del nivel del edificio.
      */
     @Basic
-    @Column(name = "nivelEdificio",nullable = false)
+    @Column(name = "nivelEdificio",nullable = true)
     public int getNivel() {
         return nivel;
     }

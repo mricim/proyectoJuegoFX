@@ -50,7 +50,7 @@ public class RecursosPrecargados implements ImageGetter, Comparable<RecursosPrec
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "recurso_precargado_id", unique = true, nullable = false)
+    @Column(name = "recurso_precargado_id", unique = true, nullable = true)
     public Integer getIdDB() {
         return idDB;
     }

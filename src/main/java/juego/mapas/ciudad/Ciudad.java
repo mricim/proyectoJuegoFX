@@ -40,7 +40,6 @@ public class Ciudad extends Posicion implements Serializable {
         this.nameCity = nameCity;
         this.nivelCiudad = nivelCiudad;
 
-        DbOperations.createRecord(this);
 
 
 
@@ -65,12 +64,12 @@ public class Ciudad extends Posicion implements Serializable {
 
         //todo Solicitar a la bd la tabla de posiciones y edificios que tiene el usuario
         try {
-            if (idCiudad == 2) {
+            if (getIdCiudad() == 2) {
                 new Edificio(listaEdificiosPreCargados.get(0 + "_" + 0), 8, 8, this);//parcela
                 new Edificio(listaEdificiosPreCargados.get(2 + "_" + 1), 1, 12, this);
                 new Edificio(listaEdificiosPreCargados.get(0 + "_" + 0), 6, 8, this);//parcela
                 new Edificio(listaEdificiosPreCargados.get(1 + "_" + 0), 8, 15, this);
-            } else if (idCiudad == 1) {
+            } else if (getIdCiudad() == 1) {
                 new Edificio(listaEdificiosPreCargados.get(1 + "_" + 1), 8, 7, this);
                 new Edificio(listaEdificiosPreCargados.get(2 + "_" + 0), 1, 12, this);
             }
@@ -98,6 +97,7 @@ public class Ciudad extends Posicion implements Serializable {
             Clan.jugadoresQueEstanEnUnClan.get(jugador).addCiudades(this);
         }
         listaCiudades.put(getPosition(), this);
+        DbOperations.createRecord(this);
     }
 
     public Ciudad() {
@@ -110,7 +110,7 @@ public class Ciudad extends Posicion implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ciudad_id", unique = true, nullable = false)
+    @Column(name = "ciudad_id", unique = false, nullable = false)
     public Integer getIdCiudad() {
         return idCiudad;
     }
@@ -131,8 +131,9 @@ public class Ciudad extends Posicion implements Serializable {
         this.listSoldadosCity = listSoldadosCity;
     }
 
+    //TODO cambiar unique ciudad a true
     @Basic
-    @Column(name = "nombreCiudad",unique = false,nullable = false)
+    @Column(name = "nombreCiudad",unique = false,nullable = true)
     public String getNameCity() {
         return nameCity;
     }
@@ -162,7 +163,7 @@ public class Ciudad extends Posicion implements Serializable {
     }
 
     @Basic
-    @Column(name = "nivelCiudad",nullable = false)
+    @Column(name = "nivelCiudad",nullable = true)
     public int getNivelCiudad() {
         return nivelCiudad;
     }
@@ -188,18 +189,18 @@ public class Ciudad extends Posicion implements Serializable {
 
 
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Ciudad ciudad = (Ciudad) o;
-        return Objects.equals(nameCity, ciudad.nameCity);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(nameCity);
-    }
+//    @Override
+//    public boolean equals(Object o) {
+//        if (this == o) return true;
+//        if (o == null || getClass() != o.getClass()) return false;
+//        Ciudad ciudad = (Ciudad) o;
+//        return Objects.equals(nameCity, ciudad.nameCity);
+//    }
+//
+//    @Override
+//    public int hashCode() {
+//        return Objects.hash(nameCity);
+//    }
 
 
     @Override

@@ -115,7 +115,7 @@ public class EdificiosPreCargados implements ImageGetter, Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "edificio_precargado_id", unique = true, nullable = false)
+    @Column(name = "edificio_precargado_id", unique = true, nullable = true)
     public Integer getIdDb() {
         return idDb;
     }
@@ -129,7 +129,7 @@ public class EdificiosPreCargados implements ImageGetter, Serializable {
      * @return Un integer que contiene el valor del id del edificio.
      */
     @Basic
-    @Column(name = "idEdificioPrecargado",nullable = false)
+    @Column(name = "idEdificioPrecargado",nullable = true)
     public int getId() {
         return id;
     }
@@ -191,50 +191,50 @@ public class EdificiosPreCargados implements ImageGetter, Serializable {
      * @return Un integer que contiene el valor del tipo  edificio.
      */
     @Basic
-    @Column(name = "tipo",nullable = false)
+    @Column(name = "tipo",nullable = true)
     public int getTipo() {
         return tipo;
     }
 
     //TODO continuar javadoc
     @Basic
-    @Column(name = "nombre",nullable = false)
+    @Column(name = "nombre",nullable = true)
     public String getNombre() {
         return nombre;
     }
 
     @Basic
-    @Column(name = "descripcion",nullable = false)
+    @Column(name = "descripcion",nullable = true)
     public String getDescripcion() {
         return descripcion;
     }
 
     @Basic
-    @Column(name = "sePuedeDestruir",nullable = false)
+    @Column(name = "sePuedeDestruir",nullable = true)
     public boolean isDestruible() {
         return destruible;
     }
 
     @Basic
-    @Column(name = "sePuedeConstruir",nullable = false)
+    @Column(name = "sePuedeConstruir",nullable = true)
     public boolean isConstruible() {
         return construible;
     }
 
     @Basic
-    @Column(name = "maximoEdificios",nullable = false)
+    @Column(name = "maximoEdificios",nullable = true)
     public int getMaximoEdificiosDelMismoTipo() {
         return maximoEdificiosDelMismoTipo;
     }
 
     @Basic
-    @Column(name = "nivelEdificio",nullable = false)
+    @Column(name = "nivelEdificio",nullable = true)
     public int getNivel() {
         return nivel;
     }
 
     @Basic
-    @Column(name = "nivelCastillo",nullable = false)
+    @Column(name = "nivelCastillo",nullable = true)
     public int getNivelCastilloNecesario() {
         return nivelCastilloNecesario;
     }
