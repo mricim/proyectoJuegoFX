@@ -20,7 +20,7 @@ public class Jugador {
     public static TreeMap<String, ArrayList<Batallon>> listaPosicionesBatallones = new TreeMap<>();
     //public static TreeMap<int, Batallon> listaBatallones = new TreeMap<>();
     public static TreeMap<String, Ciudad> listaCiudades = new TreeMap<>();
-    public static List<Integer> listaEdificiosKeys = new ArrayList<>();
+    public static List<Integer> listaEdificiosKeys = new ArrayList<>();//TODO BORRAR (casi seguro)
 
 
     public TreeMap<Integer, Batallon> listaBatallonesPropios = new TreeMap<>();
