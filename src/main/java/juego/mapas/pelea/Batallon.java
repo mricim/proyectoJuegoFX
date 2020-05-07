@@ -6,12 +6,17 @@ import main.java.jugadores.Clan;
 import main.java.jugadores.Jugador;
 import main.java.utils.Posicion;
 
+import javax.persistence.Entity;
+import javax.persistence.Table;
+import java.io.Serializable;
 import java.lang.Character.UnicodeBlock;
 import java.util.*;
 
 import static main.java.jugadores.Jugador.listaPosicionesBatallones;
 
-public class Batallon extends Posicion {
+@Entity
+@Table(name = "Ciudad", schema = "proyecto")
+public class Batallon extends Posicion implements Serializable {
     private static int lastIdBatallon = 1;
     private Map<Integer, Unidades> SoldadoHashMap = new HashMap<>();
     private int idBatallon;
@@ -20,6 +25,9 @@ public class Batallon extends Posicion {
     private int proyectiles;//TODO MAS QUE PROYECTILES SERIA COMO RACIONES O MUNICIONES O ALGO ASI
     private double poderMilitar;
 
+
+    public Batallon() {
+    }
 
     public Batallon(String nombre, int filas, int columnas, int proyectiles, Jugador jugador, Ciudad ciudadVolver) {
         super(filas, columnas);

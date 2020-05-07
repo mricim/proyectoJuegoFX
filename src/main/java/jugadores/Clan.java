@@ -3,12 +3,13 @@ package main.java.jugadores;
 import main.java.juego.mapas.ciudad.Ciudad;
 import main.java.juego.mapas.pelea.Batallon;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 
-public class Clan {
+public class Clan implements Serializable {
     public static ArrayList<Clan> clanArrayList = new ArrayList<>();
     public static Map<Jugador,Clan> jugadoresQueEstanEnUnClan = new HashMap<>();
 

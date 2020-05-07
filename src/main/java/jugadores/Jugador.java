@@ -7,9 +7,10 @@ import main.java.juego.mapas.pelea.*;
 import main.java.juego.mapas.ciudad.EdificiosPreCargados;
 import main.java.juego.mapas.ciudad.Ciudad;
 
+import java.io.Serializable;
 import java.util.*;
 
-public class Jugador {
+public class Jugador implements Serializable {
     public static final Image ERRORIMAGE = CallImages.getImageNoTema("", "error");//TODO LLEVAR ESTO LO MAS ALTO POSIBLE
     public static Map<Integer, Jugador> listaTodosLosJugadores = new TreeMap<>();
 

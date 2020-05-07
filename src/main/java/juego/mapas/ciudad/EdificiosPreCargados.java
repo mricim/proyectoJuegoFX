@@ -2,16 +2,21 @@ package main.java.juego.mapas.ciudad;
 
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import main.java.hibernate.DbOperations;
 import main.java.juego.mapas.RecursosPrecargados;
 import main.java.juego.mapas.ciudad.contenidoCiudad.Edificio;
 import main.java.jugadores.Jugador;
 import main.java.utils.ImageGetter;
 import main.java.juego.mapas.Recursos;
 
+import javax.persistence.*;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.Objects;
+import java.util.TreeMap;
 
+//import static main.java.jugadores.Jugador.listaEdificiosKeys; TODO fix this list that doesnt exists in Jugador
 import static main.java.jugadores.Jugador.listaEdificiosPreCargados;
 
 //https://github.com/k33ptoo/JavaFX-MySQL-Login
@@ -22,7 +27,10 @@ import static main.java.jugadores.Jugador.listaEdificiosPreCargados;
  * @version 1.0
  * @since 1.0
  */
-public class EdificiosPreCargados implements ImageGetter {
+@Entity
+@Table(name = "EdificioPrecargado", schema = "proyecto")
+public class EdificiosPreCargados implements ImageGetter, Serializable {
+    private Integer idDb;
     private int id;
     private int tipo;
     private String nombre;
@@ -59,10 +67,10 @@ public class EdificiosPreCargados implements ImageGetter {
      * @param menuEspecial Un integer que indica si el {@code Edificio} que menu tiene que tener.
      * @param nombre Un String que contiene el nombre del {@code Edificio};
      * @param descripcion Un String que contiene la descripción del {@code Edificio};
-     * @param recursosBuild Un Map que contiene los valores del coste en recursos  de construcción del edificio, que se mostrarán en {@link CiudadController} en la cajaEdificio.
-     * @param recursosProductores Un Map que contiene los valores del coste en recursos de producción del edificio, que se mostrarán en {@link CiudadController} en la cajaEdificio.
-     * @param recursosCosteXmin Un Map que contiene los valores del coste en recursos por minuto del edificio, que se mostrarán en {@link CiudadController} en la cajaEdificio.
-     * @param recursosAlmacen Un Map que contiene los valores de los recursos almacenados en el edificio, que se mostrarán en {@link CiudadController} en la cajaEdificio.
+     * @param recursosBuild Un TreeMap que contiene los valores del coste en recursos  de construcción del edificio, que se mostrarán en {@link CiudadController} en la cajaEdificio.
+     * @param recursosProductores Un TreeMap que contiene los valores del coste en recursos de producción del edificio, que se mostrarán en {@link CiudadController} en la cajaEdificio.
+     * @param recursosCosteXmin Un TreeMap que contiene los valores del coste en recursos por minuto del edificio, que se mostrarán en {@link CiudadController} en la cajaEdificio.
+     * @param recursosAlmacen Un TreeMap que contiene los valores de los recursos almacenados en el edificio, que se mostrarán en {@link CiudadController} en la cajaEdificio.
      */
     public EdificiosPreCargados(int id, int nivel, boolean destruible, boolean construible, int maximoEdificiosDelMismoTipo, int nivelCastilloNecesario, int menuEspecial, String nombre, String descripcion, Map<Integer, Recursos> recursosBuild, Map<Integer, Recursos> recursosProductores, Map<RecursosPrecargados, ArrayList<Recursos>> recursosCosteXmin, Map<Integer, Recursos> recursosAlmacen) {
         this.id = id;
@@ -92,71 +100,165 @@ public class EdificiosPreCargados implements ImageGetter {
             this.recursosAlmacen = recursosAlmacen;
         }
 
+//        DbOperations.createRecord(this);
 
         String resultado = id + "_" + nivel;
         this.imagePath = resultado;
         this.imageClicablePath = resultado + "@h";
 
         listaEdificiosPreCargados.put(resultado, this);
+//        listaEdificiosKeys.add(id);
+    }
+
+    public EdificiosPreCargados() {
+    }
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "edificio_precargado_id", unique = true, nullable = false)
+    public Integer getIdDb() {
+        return idDb;
+    }
+
+    public void setIdDb(Integer idDb) {
+        this.idDb = idDb;
     }
 
     /**
      * Devuelve el id del edificio.
      * @return Un integer que contiene el valor del id del edificio.
      */
+    @Basic
+    @Column(name = "idEdificioPrecargado",nullable = false)
     public int getId() {
         return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setTipo(int tipo) {
+        this.tipo = tipo;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+
+    public void setDestruible(boolean destruible) {
+        this.destruible = destruible;
+    }
+
+    public void setConstruible(boolean construible) {
+        this.construible = construible;
+    }
+
+    public void setMaximoEdificiosDelMismoTipo(int maximoEdificiosDelMismoTipo) {
+        this.maximoEdificiosDelMismoTipo = maximoEdificiosDelMismoTipo;
+    }
+
+    public void setNivel(int nivel) {
+        this.nivel = nivel;
+    }
+
+    public void setNivelCastilloNecesario(int nivelCastilloNecesario) {
+        this.nivelCastilloNecesario = nivelCastilloNecesario;
+    }
+
+    public void setRecursosBuild(Map<Integer, Recursos> recursosBuild) {
+        this.recursosBuild = recursosBuild;
+    }
+
+    public void setRecursosProductores(Map<Integer, Recursos> recursosProductores) {
+        this.recursosProductores = recursosProductores;
+    }
+
+    public void setRecursosCosteXmin(Map<RecursosPrecargados, ArrayList<Recursos>> recursosCosteXmin) {
+        this.recursosCosteXmin = recursosCosteXmin;
+    }
+
+    public void setRecursosAlmacen(Map<Integer, Recursos> recursosAlmacen) {
+        this.recursosAlmacen = recursosAlmacen;
     }
 
     /**
      * Devuelve el tipo de edificio.
      * @return Un integer que contiene el valor del tipo  edificio.
      */
+    @Basic
+    @Column(name = "tipo",nullable = false)
     public int getTipo() {
         return tipo;
     }
 
     //TODO continuar javadoc
+    @Basic
+    @Column(name = "nombre",nullable = false)
     public String getNombre() {
         return nombre;
     }
 
+    @Basic
+    @Column(name = "descripcion",nullable = false)
     public String getDescripcion() {
         return descripcion;
     }
 
+    @Basic
+    @Column(name = "sePuedeDestruir",nullable = false)
     public boolean isDestruible() {
         return destruible;
     }
 
+    @Basic
+    @Column(name = "sePuedeConstruir",nullable = false)
     public boolean isConstruible() {
         return construible;
     }
 
+    @Basic
+    @Column(name = "maximoEdificios",nullable = false)
     public int getMaximoEdificiosDelMismoTipo() {
         return maximoEdificiosDelMismoTipo;
     }
 
+    @Basic
+    @Column(name = "nivelEdificio",nullable = false)
     public int getNivel() {
         return nivel;
     }
 
+    @Basic
+    @Column(name = "nivelCastillo",nullable = false)
     public int getNivelCastilloNecesario() {
         return nivelCastilloNecesario;
     }
 
+    @OneToMany(cascade = CascadeType.ALL,targetEntity = Recursos.class)
+    @JoinColumn(name="recursos_build_fk")
     public Map<Integer, Recursos> getRecursosBuild() {
         return recursosBuild;
     }
 
+    @OneToMany(cascade = CascadeType.ALL,targetEntity = Recursos.class)
+    @JoinColumn(name="recursos_productores_fk")
     public Map<Integer, Recursos> getRecursosProductores() {
         return recursosProductores;
     }
 
+    @OneToMany(cascade = CascadeType.ALL,targetEntity = Recursos.class)
+    @JoinColumn(name="coste_recursos_fk")
     public Map<RecursosPrecargados, ArrayList<Recursos>> getRecursosCosteXmin() {
         return recursosCosteXmin;
     }
 
+    @OneToMany(cascade = CascadeType.ALL,targetEntity = Recursos.class)
+    @JoinColumn(name="recursos_almacen_fk")
     public Map<Integer, Recursos> getRecursosAlmacen() {
         return recursosAlmacen;
     }
@@ -184,20 +286,35 @@ public class EdificiosPreCargados implements ImageGetter {
                 '}';
     }
 
+    @Transient
     @Override
     public Image getImage() {
         return getImage(RUTEIMAGES, imagePath);
         //return CallImages.getImage(RUTEIMAGES, imagePath);
     }
 
+    @Transient
     @Override
     public Image getImageClicable() {
         return getImageClicable(RUTEIMAGES, imageClicablePath);
         //return CallImages.getImage(RUTEIMAGES, imageClicablePath);
     }
 
+    @Transient
     @Override
     public Image getImageIcon() {
         return null;
+    }
+
+    public static void setRUTEIMAGES(String RUTEIMAGES) {
+        EdificiosPreCargados.RUTEIMAGES = RUTEIMAGES;
+    }
+
+    public void setImagePath(String imagePath) {
+        this.imagePath = imagePath;
+    }
+
+    public void setImageClicablePath(String imageClicablePath) {
+        this.imageClicablePath = imageClicablePath;
     }
 }

@@ -1,5 +1,6 @@
 package main.java.juego.mapas.ciudad;
 
+import main.java.hibernate.DbOperations;
 import main.java.juego.mapas.RecursosPrecargados;
 import main.java.utils.Posicion;
 import main.java.juego.mapas.Recursos;
@@ -7,30 +8,39 @@ import main.java.juego.mapas.ciudad.contenidoCiudad.Edificio;
 import main.java.juego.mapas.pelea.*;
 import main.java.jugadores.Clan;
 import main.java.jugadores.Jugador;
+import org.hibernate.Hibernate;
+import org.hibernate.HibernateException;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
 
 
+import javax.annotation.Nonnull;
+import javax.persistence.*;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Map;
-import java.util.Map;
+import java.util.Objects;
 import java.util.TreeMap;
 
 import static main.java.juego.mapas.RecursosPrecargados.recursosPrecargadosList;
 import static main.java.jugadores.Jugador.*;
 
-public class Ciudad extends Posicion {
-    private static int lastId = 1;
+@Entity
+@Table(name = "Ciudad", schema = "proyecto")
+public class Ciudad extends Posicion implements Serializable {
     private Map<String, Edificio> listaPosicionesEdificios = new TreeMap<>();
-    private int idCiudad;
+    private Integer idCiudad;
     private String nameCity;
     private Map<Integer, Recursos> recursosTreeMap = new TreeMap<>();//TODO COMPROBAR QUE NO PUEDE PASAR DEL LIMITE DE CAPACIDAD DE LA CIUDAD
     private int nivelCiudad;
     private Map<Integer, Unidades> listSoldadosCity = new TreeMap<>();
 
-    public Ciudad(Jugador jugador, String nameCity, int fila, int columna, int nivelCiudad, ArrayList<Recursos> recursosDeLaCity) {
+    public Ciudad(Jugador jugador,  String nameCity, int fila, int columna, int nivelCiudad, ArrayList<Recursos> recursosDeLaCity) {
         super(fila, columna);
-        this.idCiudad = lastId++;
         this.nameCity = nameCity;
         this.nivelCiudad = nivelCiudad;
+
+        DbOperations.createRecord(this);
 
 
 
@@ -90,19 +100,45 @@ public class Ciudad extends Posicion {
         listaCiudades.put(getPosition(), this);
     }
 
+    public Ciudad() {
+    }
+
     public Ciudad(String position) {
         super(position);
     }
 
 
-    public int getIdCiudad() {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "ciudad_id", unique = true, nullable = false)
+    public Integer getIdCiudad() {
         return idCiudad;
     }
 
+    public void setListaPosicionesEdificios(Map<String, Edificio> listaPosicionesEdificios) {
+        this.listaPosicionesEdificios = listaPosicionesEdificios;
+    }
+
+    public void setIdCiudad(Integer idCiudad) {
+        this.idCiudad = idCiudad;
+    }
+
+    public void setNameCity(String nameCity) {
+        this.nameCity = nameCity;
+    }
+
+    public void setListSoldadosCity(Map<Integer, Unidades> listSoldadosCity) {
+        this.listSoldadosCity = listSoldadosCity;
+    }
+
+    @Basic
+    @Column(name = "nombreCiudad",unique = false,nullable = false)
     public String getNameCity() {
         return nameCity;
     }
 
+    @OneToMany(cascade = CascadeType.ALL,targetEntity = Edificio.class)
+    @JoinColumn(name="posicion_edificio_fk")
     public Map<String, Edificio> getListaPosicionesEdificios() {
         return listaPosicionesEdificios;
     }
@@ -115,6 +151,8 @@ public class Ciudad extends Posicion {
         this.listaPosicionesEdificios.put(colum_row, posicionEdificio);
     }
 
+    @OneToMany(cascade = CascadeType.ALL,targetEntity = Recursos.class)
+    @JoinColumn(name="recursos_fk")
     public Map<Integer, Recursos> getRecursosTreeMap() {
         return recursosTreeMap;
     }
@@ -123,6 +161,8 @@ public class Ciudad extends Posicion {
         this.recursosTreeMap = recursosTreeMap;
     }
 
+    @Basic
+    @Column(name = "nivelCiudad",nullable = false)
     public int getNivelCiudad() {
         return nivelCiudad;
     }
@@ -131,15 +171,43 @@ public class Ciudad extends Posicion {
         this.nivelCiudad = nivelCiudad;
     }
 
+    @OneToMany(cascade = CascadeType.ALL,targetEntity = Unidades.class)
+    @JoinColumn(name="unidades_fk")
     public Map<Integer, Unidades> getListSoldadosCity() {
         return listSoldadosCity;
     }
 
-    public void addSoldados(Map<Integer, Unidades> soldados) {
+    public void addSoldados(TreeMap<Integer, Unidades> soldados) {
         for (Unidades soldado : soldados.values()) {
             Unidades soldados2 = this.listSoldadosCity.get(soldado.getUnidadesPreCargadas().getIdType());
             System.out.println(soldados2.getCantidad() + soldado.getCantidad());
             soldados2.addCantidad(soldado.getCantidad());
         }
+    }
+
+
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Ciudad ciudad = (Ciudad) o;
+        return Objects.equals(nameCity, ciudad.nameCity);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(nameCity);
+    }
+
+
+    @Override
+    public String toString() {
+        return "Ciudad{" +
+                "idCiudad=" + idCiudad +
+                ", nameCity='" + nameCity + '\'' +
+                ", nivelCiudad=" + nivelCiudad +
+                '}';
     }
 }
