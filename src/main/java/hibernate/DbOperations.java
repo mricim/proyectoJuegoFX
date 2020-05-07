@@ -9,8 +9,10 @@ import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.query.Query;
 
-public class DbOperations {
+import java.util.List;
 
+public class DbOperations {
+/*
     private static final Logger logger = LogManager.getLogger(DbOperations.class);
     public static final SessionFactory ourSessionFactory;
     static {
@@ -123,5 +125,5 @@ public class DbOperations {
         logger.info("Successfully Deleted All Records From The Database Table!");
     }
 
-
+*/
 }

@@ -10,6 +10,7 @@ import main.java.juego.mapas.ciudad.EdificiosPreCargados;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.TreeMap;
 
 /**
@@ -22,7 +23,7 @@ import java.util.TreeMap;
 public class Edificio extends Posicion implements Cloneable {
     private int id;//GUARDAR
     private int nivel;//GUARDAR
-    TreeMap<Integer, Recursos> trabajadoresNecesarios = new TreeMap<>();//GUARDAR
+    Map<Integer, Recursos> trabajadoresNecesarios = new TreeMap<>();//GUARDAR
     private EdificiosPreCargados edificiosPreCargado;
 
 
@@ -40,7 +41,7 @@ public class Edificio extends Posicion implements Cloneable {
         this.nivel = edificioPreCargado.getNivel();
         this.edificiosPreCargado = edificioPreCargado;
 
-        TreeMap<RecursosPrecargados, ArrayList<Recursos>> i = edificioPreCargado.getRecursosCosteXmin();
+        Map<RecursosPrecargados, ArrayList<Recursos>> i = edificioPreCargado.getRecursosCosteXmin();
         if (i != null) {
             for (RecursosPrecargados recursos : i.keySet()) {
                 boolean temporal = false;
@@ -93,11 +94,11 @@ public class Edificio extends Posicion implements Cloneable {
 
 
     /**
-     * Devuelve un {@code TreeMap} del edificio con el id del recurso como {@code key} y
+     * Devuelve un {@code Map} del edificio con el id del recurso como {@code key} y
      * un Recurso como {@code valor}.
-     * @return Un {@code TreeMap<Integer,Recursos>} que contiene el valor de los trabajadores necesarios para producir x Recursos en ese edificio.
+     * @return Un {@code Map<Integer,Recursos>} que contiene el valor de los trabajadores necesarios para producir x Recursos en ese edificio.
      */
-    public TreeMap<Integer, Recursos> getTrabajadoresNecesarios() {
+    public Map<Integer, Recursos> getTrabajadoresNecesarios() {
         return trabajadoresNecesarios;
     }
 

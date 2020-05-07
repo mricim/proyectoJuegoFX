@@ -158,7 +158,7 @@ public class CiudadController extends MapasController implements Initializable {
             }
         } else {//PARCELAS
             Collection<Edificio> posicionEdificios = getCiudadPrimaryStageController().getListaPosicionesEdificios().values();
-            TreeMap<Integer, Integer> counterTiposDeEdificioEnLaCiudad = new TreeMap<>();
+            Map<Integer, Integer> counterTiposDeEdificioEnLaCiudad = new TreeMap<>();
             for (Edificio edificio1 : posicionEdificios) {
                 int id = edificio1.getId();
                 if (counterTiposDeEdificioEnLaCiudad.containsKey(id)) {
@@ -289,9 +289,9 @@ public class CiudadController extends MapasController implements Initializable {
                     recursosMenu(flowPaneRecuros, this.getClass());
                     borderPane.setLeft(null);
                     //devolvemos los trabajadores a la ciudad
-                    TreeMap<Integer, Recursos> i = edificioPuesto.getTrabajadoresNecesarios();
+                    Map<Integer, Recursos> i = edificioPuesto.getTrabajadoresNecesarios();
                     if (i != null) {
-                        TreeMap<RecursosPrecargados, ArrayList<Recursos>> xmin = edificioPuesto.getEdificiosPreCargado().getRecursosCosteXmin();
+                        Map<RecursosPrecargados, ArrayList<Recursos>> xmin = edificioPuesto.getEdificiosPreCargado().getRecursosCosteXmin();
                         for (Recursos recursos : i.values()) {
                             for (Recursos recursos1 : xmin.get(recursos.getRecursosPrecargados())) {
                                 RecursosPrecargados peepe = recursos1.getRecursosPrecargados();
@@ -697,7 +697,7 @@ public class CiudadController extends MapasController implements Initializable {
                 {
                     btn.setOnAction((ActionEvent event) -> {
                         Comercio data = getTableView().getItems().get(getIndex());
-                        TreeMap<Integer, Recursos> a = getCiudadPrimaryStageController().getRecursosTreeMap();
+                        Map<Integer, Recursos> a = getCiudadPrimaryStageController().getRecursosTreeMap();
                         System.out.println("selectedData: " + data);
                         Recursos b = data.getQueSePide();
                         Recursos c = data.getQueSeOfrece();
@@ -754,7 +754,7 @@ public class CiudadController extends MapasController implements Initializable {
         return vBoxBloquePropio;
     }
 
-    private static VBox cajaCrearUnidades(TreeMap<Integer, UnidadesPreCargadas> listaUnidades, int tipoDeUnidades, BorderPane borderPane, FlowPane flowPaneRecuros, int tamanoMenu) {
+    private static VBox cajaCrearUnidades(Map<Integer, UnidadesPreCargadas> listaUnidades, int tipoDeUnidades, BorderPane borderPane, FlowPane flowPaneRecuros, int tamanoMenu) {
         //BLOQUE
         VBox vBoxBloquePropio = new VBox();
         vBoxBloquePropio.setMinWidth(tamanoMenu);
@@ -789,10 +789,10 @@ public class CiudadController extends MapasController implements Initializable {
         flowPane.setAlignment(Pos.CENTER);
         ObservableList<Node> childrenFlowPane = flowPane.getChildren();
 
-        TreeMap<Integer, Recursos> recursosCiudadTemp = new TreeMap<>();
-        TreeMap<Integer, Recursos> resta = new TreeMap<>();
+        Map<Integer, Recursos> recursosCiudadTemp = new TreeMap<>();
+        Map<Integer, Recursos> resta = new TreeMap<>();
 
-        TreeMap<Integer, Unidades> soldadesca = new TreeMap<>();
+        Map<Integer, Unidades> soldadesca = new TreeMap<>();
         for (Unidades unidades : getCiudadPrimaryStageController().getListSoldadosCity().values()) {
             soldadesca.put(unidades.getTipeUnit(), new Unidades(unidades.getUnidadesPreCargadas(), 0, 0, 0, 0));
         }
@@ -839,7 +839,7 @@ public class CiudadController extends MapasController implements Initializable {
         //FIN ESTO ES PARA QUE ENTRE EN EL SISTEMA
         //Buscar batallones en esta posicion
         String positionCiudad = getCiudadPrimaryStageController().getPosition();
-        TreeMap<Integer, Integer> listaBatallonesSumandoSoldados = new TreeMap<>();
+        Map<Integer, Integer> listaBatallonesSumandoSoldados = new TreeMap<>();
         for (Batallon batallon : getJugadorPrimaryStageController().listaBatallonesPropios.values()) {
             if (batallon.getPosition().equals(positionCiudad)) {
                 for (Unidades s : batallon.getSoldadoHashMap().values()) {
@@ -946,7 +946,7 @@ public class CiudadController extends MapasController implements Initializable {
     }
 
 
-    private static synchronized void controllerSlider(int seleccionadoNumber, UnidadesPreCargadas unidadesPreCargadas, TreeMap<Integer, Unidades> soldadesca, List<Recursos> costesRecursosUnidades, TreeMap<Integer, Recursos> resta, TreeMap<Integer, Recursos> recursosCiudadTemp, Button button, VBox flowPane2, VBox flowPane3) {
+    private static synchronized void controllerSlider(int seleccionadoNumber, UnidadesPreCargadas unidadesPreCargadas, Map<Integer, Unidades> soldadesca, List<Recursos> costesRecursosUnidades, Map<Integer, Recursos> resta, Map<Integer, Recursos> recursosCiudadTemp, Button button, VBox flowPane2, VBox flowPane3) {
         boolean controladora = false;
         boolean controladoraToFor = false;
         int conversorAPositivo = (seleccionadoNumber < 0 ? -seleccionadoNumber : seleccionadoNumber);
@@ -989,7 +989,7 @@ public class CiudadController extends MapasController implements Initializable {
     }
 
 
-    private synchronized static void printRecursosRestando(ObservableList<Node> childrenFlowPane, TreeMap<Integer, Recursos> recursosEnLaCIty, TreeMap<Integer, Recursos> recursosResta, TreeMap<Integer, Recursos> recursosCiudadTemp, int produce_Almacena_Cuesta_Devolucion_Resto_cambio) {
+    private synchronized static void printRecursosRestando(ObservableList<Node> childrenFlowPane, Map<Integer, Recursos> recursosEnLaCIty, Map<Integer, Recursos> recursosResta, Map<Integer, Recursos> recursosCiudadTemp, int produce_Almacena_Cuesta_Devolucion_Resto_cambio) {
 
         Separator separator = new Separator();
         separator.setPrefWidth(220);
@@ -1049,18 +1049,18 @@ public class CiudadController extends MapasController implements Initializable {
     private static void printEdificioRecursos(ObservableList<Node> vBox, Edificio edificioSlider, BorderPane borderPane, FlowPane flowPaneRecuros) {
         EdificiosPreCargados edificioprecargado = edificioSlider.getEdificiosPreCargado();
 
-        TreeMap<Integer, Recursos> recursosAProducir = edificioprecargado.getRecursosProductores();
+        Map<Integer, Recursos> recursosAProducir = edificioprecargado.getRecursosProductores();
 
 
         if (recursosAProducir != null) {
             vBox.add(new CustomSeparator(220, true));
-            TreeMap<RecursosPrecargados, ArrayList<Recursos>> recursosCosteXmin = edificioprecargado.getRecursosCosteXmin();
+            Map<RecursosPrecargados, ArrayList<Recursos>> recursosCosteXmin = edificioprecargado.getRecursosCosteXmin();
             if (recursosCosteXmin == null) {
                 int produce_Almacena_Cuesta_Devolucion_Resto_cambio = 1;
                 printTodosLosRecursosEdificioSegunTipo(vBox, recursosAProducir, produce_Almacena_Cuesta_Devolucion_Resto_cambio, null);
             } else {
                 vBox.add(new Label(nombreEtiquetas(1)));
-                TreeMap<Integer, Recursos> trabajadoresEnEdificio = edificioSlider.getTrabajadoresNecesarios();
+                Map<Integer, Recursos> trabajadoresEnEdificio = edificioSlider.getTrabajadoresNecesarios();
                 FlowPane flowPane = new FlowPane();
                 flowPane.setHgap(10);
                 flowPane.setVgap(10);
@@ -1142,7 +1142,7 @@ public class CiudadController extends MapasController implements Initializable {
             }
 
         }
-        TreeMap<Integer, Recursos> d = edificioprecargado.getRecursosAlmacen();
+        Map<Integer, Recursos> d = edificioprecargado.getRecursosAlmacen();
         if (d != null) {
             int produce_Almacena_Cuesta_Devolucion_Resto_cambio = 2;
             vBox.add(new CustomSeparator(220, true));
@@ -1153,7 +1153,7 @@ public class CiudadController extends MapasController implements Initializable {
 
     }
 
-    private static void delSliderEdificiosConRecursos(TreeMap<RecursosPrecargados, ArrayList<Recursos>> recursosCosteXmin, RecursosPrecargados poducidoMax, FlowPane flowPane, int number, Edificio edificio, FlowPane flowPaneRecuros, TreeMap<Integer, Recursos> recursosDeLaCiudad, BorderPane borderPane) {
+    private static void delSliderEdificiosConRecursos(Map<RecursosPrecargados, ArrayList<Recursos>> recursosCosteXmin, RecursosPrecargados poducidoMax, FlowPane flowPane, int number, Edificio edificio, FlowPane flowPaneRecuros, Map<Integer, Recursos> recursosDeLaCiudad, BorderPane borderPane) {
         Recursos multiplicador = edificio.getTrabajadoresNecesarios().get(poducidoMax.getId());
         ArrayList<Recursos> recursosXMin = recursosCosteXmin.get(poducidoMax);
 
@@ -1206,10 +1206,10 @@ public class CiudadController extends MapasController implements Initializable {
     }
 
     private static void printEdificioRecursos(ObservableList<Node> vBox, EdificiosPreCargados edificioprecargado, int construir_Update_Dowgrade_Destruir, boolean construirTrueDestruirFalse) {
-        TreeMap<Integer, Recursos> b = edificioprecargado.getRecursosProductores();
-        TreeMap<RecursosPrecargados, ArrayList<Recursos>> c = edificioprecargado.getRecursosCosteXmin();
-        TreeMap<Integer, Recursos> d = edificioprecargado.getRecursosAlmacen();
-        TreeMap<Integer, Recursos> a = edificioprecargado.getRecursosBuild();
+        Map<Integer, Recursos> b = edificioprecargado.getRecursosProductores();
+        Map<RecursosPrecargados, ArrayList<Recursos>> c = edificioprecargado.getRecursosCosteXmin();
+        Map<Integer, Recursos> d = edificioprecargado.getRecursosAlmacen();
+        Map<Integer, Recursos> a = edificioprecargado.getRecursosBuild();
 
         if (b != null) {
             int produce_Almacena_Cuesta_Devolucion_Resto_cambio = 1;
@@ -1241,7 +1241,7 @@ public class CiudadController extends MapasController implements Initializable {
         vBox.add(new CustomSeparator(220, true));
     }
 
-    private static void printTodosLosRecursosEdificioSegunTipo(ObservableList<Node> vBox, TreeMap<RecursosPrecargados, ArrayList<Recursos>> a, int produce_Almacena_Cuesta_Devolucion_Resto_cambio, boolean daIgualLoQuePongas) {
+    private static void printTodosLosRecursosEdificioSegunTipo(ObservableList<Node> vBox, Map<RecursosPrecargados, ArrayList<Recursos>> a, int produce_Almacena_Cuesta_Devolucion_Resto_cambio, boolean daIgualLoQuePongas) {
         Label label = new Label(nombreEtiquetas(produce_Almacena_Cuesta_Devolucion_Resto_cambio));
         label.setBackground(new Background(new BackgroundFill(Color.rgb(238, 174, 160), CornerRadii.EMPTY, Insets.EMPTY)));
         vBox.add(label);
@@ -1273,7 +1273,7 @@ public class CiudadController extends MapasController implements Initializable {
         }
     }
 
-    private static void printTodosLosRecursosEdificioSegunTipo(ObservableList<Node> vBox, TreeMap<Integer, Recursos> a, int produce_Almacena_Cuesta_Devolucion_Resto_cambio, Integer construir_Update_Dowgrade_Destruir) {
+    private static void printTodosLosRecursosEdificioSegunTipo(ObservableList<Node> vBox, Map<Integer, Recursos> a, int produce_Almacena_Cuesta_Devolucion_Resto_cambio, Integer construir_Update_Dowgrade_Destruir) {
         Label label = new Label(nombreEtiquetas(produce_Almacena_Cuesta_Devolucion_Resto_cambio));
         label.setBackground(new Background(new BackgroundFill(Color.rgb(238, 174, 160), CornerRadii.EMPTY, Insets.EMPTY)));
         vBox.add(label);

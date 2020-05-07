@@ -11,25 +11,24 @@ import java.util.*;
 
 public class Jugador {
     public static final Image ERRORIMAGE = CallImages.getImageNoTema("", "error");//TODO LLEVAR ESTO LO MAS ALTO POSIBLE
-    public static TreeMap<Integer, Jugador> listaTodosLosJugadores = new TreeMap<>();
+    public static Map<Integer, Jugador> listaTodosLosJugadores = new TreeMap<>();
 
 
-    public static TreeMap<String, EdificiosPreCargados> listaEdificiosPreCargados = new TreeMap<>();
-    public static TreeMap<Integer, UnidadesPreCargadas> listaSoldadosPreCargada = new TreeMap();
+    public static Map<String, EdificiosPreCargados> listaEdificiosPreCargados = new TreeMap<>();
+    public static Map<Integer, UnidadesPreCargadas> listaSoldadosPreCargada = new TreeMap();
 
-    public static TreeMap<String, ArrayList<Batallon>> listaPosicionesBatallones = new TreeMap<>();
-    //public static TreeMap<int, Batallon> listaBatallones = new TreeMap<>();
-    public static TreeMap<String, Ciudad> listaCiudades = new TreeMap<>();
-    public static List<Integer> listaEdificiosKeys = new ArrayList<>();//TODO BORRAR (casi seguro)
+    public static Map<String, ArrayList<Batallon>> listaPosicionesBatallones = new TreeMap<>();
+    //public static Map<int, Batallon> listaBatallones = new TreeMap<>();
+    public static Map<String, Ciudad> listaCiudades = new TreeMap<>();
 
 
-    public TreeMap<Integer, Batallon> listaBatallonesPropios = new TreeMap<>();
-    public TreeMap<String, Ciudad> listaCiudadesPropias = new TreeMap<>();
+    public Map<Integer, Batallon> listaBatallonesPropios = new TreeMap<>();
+    public Map<String, Ciudad> listaCiudadesPropias = new TreeMap<>();
 
     private static int lastId=1;
     private int id;
     private String nombre;
-    private TreeMap<Integer, Recursos> recursosJugador =new TreeMap<>();
+    private Map<Integer, Recursos> recursosJugador =new TreeMap<>();
     public Ciudad cargarCiudadPrincipal = null;
 
     public Jugador( String nombre, ArrayList<Recursos> recursosJugador) {
@@ -144,7 +143,6 @@ public class Jugador {
         }
 //TODO FIN LEER DESDE LA BD
 
-        Collections.sort(listaEdificiosKeys);
         //TODO Collections.sort(listaBatallonesPropios);
         //TODO Collections.sort(listaCiudadesPropias);
         listaTodosLosJugadores.put(id, this);
@@ -158,7 +156,7 @@ public class Jugador {
         return nombre;
     }
 
-    public TreeMap<Integer, Recursos> getRecursosJugador() {
+    public Map<Integer, Recursos> getRecursosJugador() {
         return recursosJugador;
     }
 

@@ -21,7 +21,7 @@ import static main.java.utils.Time.changeZoneUTC_GMT;
 public class Comercio {
     public static ObservableList<Comercio> data = FXCollections.observableArrayList();
 
-    //public static TreeMap<Integer, Comercio> lista = new TreeMap<>();
+    //public static Map<Integer, Comercio> lista = new TreeMap<>();
     /**
      * La lista de comercios creados.
      */

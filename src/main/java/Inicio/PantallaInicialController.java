@@ -154,7 +154,7 @@ public class PantallaInicialController extends PrimaryStageControler implements 
         //3=CreaMaquinas
 
         //RECURSOS - CONSTRUIR
-        TreeMap<Integer, Recursos> recursosBuild = new TreeMap<>();
+        Map<Integer, Recursos> recursosBuild = new TreeMap<>();
         recursosBuild.put(oroPre.getId(), new Recursos(oroPre, 5));
         recursosBuild.put(maderaPre.getId(), new Recursos(maderaPre, 5));
         recursosBuild.put(piedraPre.getId(), new Recursos(piedraPre, 5));
@@ -162,7 +162,7 @@ public class PantallaInicialController extends PrimaryStageControler implements 
         recursosBuild.put(hierroPre.getId(), new Recursos(hierroPre, 5));
         recursosBuild.put(poblacionPre.getId(), new Recursos(poblacionPre, 5));
         //RECURSOS -Productores
-        TreeMap<Integer, Recursos> recursosProductores = new TreeMap<>();
+        Map<Integer, Recursos> recursosProductores = new TreeMap<>();
         recursosProductores.put(oroPre.getId(), new Recursos(oroPre, 10));
         recursosProductores.put(maderaPre.getId(), new Recursos(maderaPre, 10));
         recursosProductores.put(piedraPre.getId(), new Recursos(piedraPre, 10));
@@ -174,7 +174,7 @@ public class PantallaInicialController extends PrimaryStageControler implements 
         //RECURSOS - COSTE X MIN
         ArrayList<Recursos> recursosCosteXmin5 = new ArrayList<>();
         recursosCosteXmin5.add(new Recursos(poblacionPre, 20));
-        TreeMap<RecursosPrecargados, ArrayList<Recursos>> recursosCosteXmin = new TreeMap<>();
+        Map<RecursosPrecargados, ArrayList<Recursos>> recursosCosteXmin = new TreeMap<>();
         recursosCosteXmin.put(maderaPre, recursosCosteXmin5);
         recursosCosteXmin.put(piedraPre, recursosCosteXmin5);
         recursosCosteXmin.put(comidaPre, recursosCosteXmin5);
@@ -183,13 +183,13 @@ public class PantallaInicialController extends PrimaryStageControler implements 
         ArrayList<Recursos> recursosCosteXmin5V2 = new ArrayList<>();
         recursosCosteXmin5V2.add(new Recursos(poblacionPre, 20));
         recursosCosteXmin5V2.add(new Recursos(comidaPre, 15));
-        TreeMap<RecursosPrecargados, ArrayList<Recursos>> recursosCosteXminV2 = new TreeMap<>();
+        Map<RecursosPrecargados, ArrayList<Recursos>> recursosCosteXminV2 = new TreeMap<>();
         recursosCosteXminV2.put(maderaPre, recursosCosteXmin5V2);
         recursosCosteXminV2.put(piedraPre, recursosCosteXmin5V2);
         recursosCosteXminV2.put(comidaPre, recursosCosteXmin5V2);
         recursosCosteXminV2.put(hierroPre, recursosCosteXmin5V2);
         //RECURSOS -ALMACEN
-        TreeMap<Integer, Recursos> recursosAlmacen = new TreeMap<>();
+        Map<Integer, Recursos> recursosAlmacen = new TreeMap<>();
         recursosAlmacen.put(oroPre.getId(), new Recursos(oroPre, 31));
         recursosAlmacen.put(maderaPre.getId(), new Recursos(maderaPre, 31));
         recursosAlmacen.put(piedraPre.getId(), new Recursos(piedraPre, 31));

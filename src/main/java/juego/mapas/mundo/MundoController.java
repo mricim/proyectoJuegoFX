@@ -578,7 +578,7 @@ public class MundoController extends MapasController implements Initializable {
                 vBox.setAlignment(TOP_CENTER);
                 ObservableList<Node> vBoxChildren = vBox.getChildren();
 
-                HashMap<Integer, Unidades> temp = new HashMap<>();
+                Map<Integer, Unidades> temp = new HashMap<>();
                 Button btnSplit = new Button("Separar");
                 btnSplit.setDisable(true);
                 for (Unidades soldados : batallon.getSoldadoHashMap().values()) {

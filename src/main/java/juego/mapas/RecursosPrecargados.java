@@ -4,11 +4,12 @@ import javafx.scene.image.Image;
 import main.java.utils.ImageGetter;
 
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 public class RecursosPrecargados implements ImageGetter, Comparable<RecursosPrecargados>{
     static String RUTEIMAGES = "icons/recursos/";
-    public static HashMap<Integer,RecursosPrecargados> recursosPrecargadosList=new HashMap<>();
+    public static Map<Integer,RecursosPrecargados> recursosPrecargadosList=new HashMap<>();
     //oro=0;
     //madera=1;
     //piedra=2;

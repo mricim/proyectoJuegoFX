@@ -44,8 +44,8 @@ public class CallUpdater {
 
     public static XMLtoUploader chekUpdateMajor(Document doc) throws IOException {
         String[] versionOld = VERSION.split("\\.");
-        LinkedHashMap<String, ListaDeRutas> listaDowloadsApp = ListWeb.getListVersionsWeb(doc, "div[id=aplication] div[id=installer]");
-        LinkedHashMap<String, ListaDeRutas> dowloadPrincipal = null;
+        Map<String, ListaDeRutas> listaDowloadsApp = ListWeb.getListVersionsWeb(doc, "div[id=aplication] div[id=installer]");
+        Map<String, ListaDeRutas> dowloadPrincipal = null;
         String rute = null;
         for (ListaDeRutas value : listaDowloadsApp.values()) {//donde esta la lista?
             rute = HOST+PROJECT + value.getHref();//dowloads/list.html
@@ -87,8 +87,8 @@ public class CallUpdater {
 
     public static XMLtoUploader chekUpdateMinor(Document doc) {
         String[] versionOld = VERSION.split("\\.");
-        LinkedHashMap<String, ListaDeRutas> listaDowloadsJar = ListWeb.getListVersionsWeb(doc, "div[id=aplication] div[id=jar]");
-        LinkedHashMap<String, ListaDeRutas> dowloadPrincipal = null;
+        Map<String, ListaDeRutas> listaDowloadsJar = ListWeb.getListVersionsWeb(doc, "div[id=aplication] div[id=jar]");
+        Map<String, ListaDeRutas> dowloadPrincipal = null;
 
         String rute = null;
         for (ListaDeRutas value : listaDowloadsJar.values()) {//obtenemos de donde tenemos que mirar

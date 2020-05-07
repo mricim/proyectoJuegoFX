@@ -11,6 +11,7 @@ import main.java.jugadores.Jugador;
 
 import java.util.ArrayList;
 import java.util.Map;
+import java.util.Map;
 import java.util.TreeMap;
 
 import static main.java.juego.mapas.RecursosPrecargados.recursosPrecargadosList;
@@ -18,12 +19,12 @@ import static main.java.jugadores.Jugador.*;
 
 public class Ciudad extends Posicion {
     private static int lastId = 1;
-    private TreeMap<String, Edificio> listaPosicionesEdificios = new TreeMap<>();
+    private Map<String, Edificio> listaPosicionesEdificios = new TreeMap<>();
     private int idCiudad;
     private String nameCity;
-    private TreeMap<Integer, Recursos> recursosTreeMap = new TreeMap<>();//TODO COMPROBAR QUE NO PUEDE PASAR DEL LIMITE DE CAPACIDAD DE LA CIUDAD
+    private Map<Integer, Recursos> recursosTreeMap = new TreeMap<>();//TODO COMPROBAR QUE NO PUEDE PASAR DEL LIMITE DE CAPACIDAD DE LA CIUDAD
     private int nivelCiudad;
-    private TreeMap<Integer, Unidades> listSoldadosCity = new TreeMap<>();
+    private Map<Integer, Unidades> listSoldadosCity = new TreeMap<>();
 
     public Ciudad(Jugador jugador, String nameCity, int fila, int columna, int nivelCiudad, ArrayList<Recursos> recursosDeLaCity) {
         super(fila, columna);
@@ -102,7 +103,7 @@ public class Ciudad extends Posicion {
         return nameCity;
     }
 
-    public TreeMap<String, Edificio> getListaPosicionesEdificios() {
+    public Map<String, Edificio> getListaPosicionesEdificios() {
         return listaPosicionesEdificios;
     }
 
@@ -114,11 +115,11 @@ public class Ciudad extends Posicion {
         this.listaPosicionesEdificios.put(colum_row, posicionEdificio);
     }
 
-    public TreeMap<Integer, Recursos> getRecursosTreeMap() {
+    public Map<Integer, Recursos> getRecursosTreeMap() {
         return recursosTreeMap;
     }
 
-    public void setRecursosTreeMap(TreeMap<Integer, Recursos> recursosTreeMap) {
+    public void setRecursosTreeMap(Map<Integer, Recursos> recursosTreeMap) {
         this.recursosTreeMap = recursosTreeMap;
     }
 
@@ -130,11 +131,11 @@ public class Ciudad extends Posicion {
         this.nivelCiudad = nivelCiudad;
     }
 
-    public TreeMap<Integer, Unidades> getListSoldadosCity() {
+    public Map<Integer, Unidades> getListSoldadosCity() {
         return listSoldadosCity;
     }
 
-    public void addSoldados(TreeMap<Integer, Unidades> soldados) {
+    public void addSoldados(Map<Integer, Unidades> soldados) {
         for (Unidades soldado : soldados.values()) {
             Unidades soldados2 = this.listSoldadosCity.get(soldado.getUnidadesPreCargadas().getIdType());
             System.out.println(soldados2.getCantidad() + soldado.getCantidad());

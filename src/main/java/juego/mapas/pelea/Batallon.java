@@ -13,7 +13,7 @@ import static main.java.jugadores.Jugador.listaPosicionesBatallones;
 
 public class Batallon extends Posicion {
     private static int lastIdBatallon = 1;
-    private HashMap<Integer, Unidades> SoldadoHashMap = new HashMap<>();
+    private Map<Integer, Unidades> SoldadoHashMap = new HashMap<>();
     private int idBatallon;
     private String nombre;
     private Ciudad ciudadVolver;
@@ -68,7 +68,7 @@ public class Batallon extends Posicion {
     }
  */
 
-    public HashMap<Integer, Unidades> getSoldadoHashMap() {
+    public Map<Integer, Unidades> getSoldadoHashMap() {
         return SoldadoHashMap;
     }
 
@@ -88,7 +88,7 @@ public class Batallon extends Posicion {
         this.ciudadVolver = ciudadVolver;
     }
 
-    public void addSoldados(HashMap<Integer, Unidades> anadir) {
+    public void addSoldados(Map<Integer, Unidades> anadir) {
 
         Collection<Unidades> a = anadir.values();
         for (Unidades unidadAnadir : a) {//TODO

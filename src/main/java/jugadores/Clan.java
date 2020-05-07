@@ -6,13 +6,14 @@ import main.java.juego.mapas.pelea.Batallon;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 
 public class Clan {
     public static ArrayList<Clan> clanArrayList = new ArrayList<>();
-    public static HashMap<Jugador,Clan> jugadoresQueEstanEnUnClan = new HashMap<>();
+    public static Map<Jugador,Clan> jugadoresQueEstanEnUnClan = new HashMap<>();
 
     private int id;
-    private HashMap<Integer, Jugador> jugadoresDelClan = new HashMap<>();
+    private Map<Integer, Jugador> jugadoresDelClan = new HashMap<>();
     private HashSet<Ciudad> ciudadesDelClan = new HashSet<>();
     private HashSet<Batallon> batallonesDelClan = new HashSet<>();
     private String name;
@@ -28,7 +29,7 @@ public class Clan {
         return id;
     }
 
-    public HashMap<Integer, Jugador> getJugadoresDelClan() {
+    public Map<Integer, Jugador> getJugadoresDelClan() {
         return jugadoresDelClan;
     }
 

@@ -1,10 +1,11 @@
 package main.java.test.testLucha;
 
 import java.util.ArrayList;
+import java.util.Map;
 import java.util.TreeMap;
 
 public class MainLucha1 {
-    public static TreeMap<Integer, TipoSoldados> tipoSoldadosTreeMap = new TreeMap();
+    public static Map<Integer, TipoSoldados> tipoSoldadosTreeMap = new TreeMap();
 
     private static ArrayList<SoldadosXX> listaSoldados = new ArrayList<>();
     private static ArrayList<SoldadosXX> listaSoldadosXX2 = new ArrayList<>();
