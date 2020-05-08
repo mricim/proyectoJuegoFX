@@ -28,6 +28,9 @@ import static main.java.utils.traductor.Traductor.listaIdiomasPath;
 
 
 public class PantallaInicialController extends PrimaryStageControler implements Initializable {
+    //TEMAS
+    public static Temas elTemaSeleccionado;
+    //
     public static int idJugadorTemp;
     public static String nameJugadorTemp;
     public static String emailJugadorTemp;
@@ -117,8 +120,14 @@ public class PantallaInicialController extends PrimaryStageControler implements 
         System.out.println();
 
         progresBar.setProgress(10);//TODO NO FUNCIONA // https://stackoverflow.com/questions/44398611/running-a-process-in-a-separate-thread-so-rest-of-java-fx-application-is-usable
-
         TRADUCCIONES_THEMA = ResourceBundle.getBundle("main.resources.traductions.temas."+NAME_TEMA_PATH+".UIResources", TRADUCCIONES_GENERALES.getLocale());
+        for (Temas temas : Temas.listaDeTemas) {
+            if (temas.getName().equals(NAME_TEMA)){
+                elTemaSeleccionado=temas;
+                break;
+            }
+        }
+
         callbd();
         progresBar.setProgress(100);
         //Jugador borrar=new Jugador("nombre",0);//TODO DESCOMENTAR PARA INICIAR COMO UN NUEVO JUGADOR

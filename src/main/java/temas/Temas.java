@@ -1,18 +1,22 @@
 package main.java.temas;
 
 import main.java.Main;
+import main.java.juego.mapas.RecursosPrecargados;
+import main.java.juego.mapas.ciudad.Ciudad;
+import main.java.juego.mapas.ciudad.EdificiosPreCargados;
+import main.java.juego.mapas.pelea.Batallon;
+import main.java.juego.mapas.pelea.UnidadesPreCargadas;
+import main.java.jugadores.Jugador;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 import static main.java.Main.pathImagesInternal;
 
 public class Temas {
+    public static List<Temas> listaDeTemas = new ArrayList<>();
     private static boolean filesIsExternal;
     public static String pathImagesExternal = System.getProperty("user.dir").replace("proyectoJuegoFX", "") + "/res/images/";
-
 
     private static String pathImagesTemaInternal = pathImagesInternal + "temas/";
     private static String pathImagesTemaExternal = pathImagesExternal + "temas/";
@@ -34,12 +38,16 @@ public class Temas {
         }
 
         int x = Objects.requireNonNull(f).length;
-        for (
-                int i = 0;
-                i < x; i++) {
+        for (int i = 0; i < x; i++) {
             String str = f[i].getName().replaceAll("[0-9]", "").replaceAll("(.)([A-Z])", "$1 $2");
             listaTemas.add((str.substring(0, 1).toUpperCase() + str.substring(1)));
         }
+
+        //TODO BORRAR
+        for (String listaTema : listaTemas) {
+            listaDeTemas.add(new Temas(listaTema));
+        }
+        //TODO BORRAR
         return listaTemas;
     }
 
@@ -56,4 +64,30 @@ public class Temas {
         }
     }
 
+
+    //
+
+
+    private String name;
+    public Map<String, EdificiosPreCargados> listaEdificiosPreCargados = new TreeMap<>();
+    public Map<Integer, UnidadesPreCargadas> listaSoldadosPreCargada = new TreeMap();
+    public Map<Integer, RecursosPrecargados> listaRecursosPreCargada = new TreeMap();
+
+    public static Map<Integer, Jugador> listaTodosLosJugadores = new TreeMap<>();
+    public static Map<String, ArrayList<Batallon>> listaPosicionesBatallones = new TreeMap<>();
+    //public static Map<int, Batallon> listaBatallones = new TreeMap<>();
+    public static Map<String, Ciudad> listaCiudades = new TreeMap<>();
+
+    public Temas(Map<String, EdificiosPreCargados> edificiosPreCargados, Map<Integer, UnidadesPreCargadas> soldadosPreCargados, Map<Integer, RecursosPrecargados> recursosPrecargados) {
+        //<listaEdificiosPreCargados=;
+        //listaSoldadosPreCargada=;
+    }
+
+    public Temas(String name) {
+        this.name = name;
+    }
+
+    public String getName() {
+        return name;
+    }
 }

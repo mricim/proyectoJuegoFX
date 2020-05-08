@@ -23,6 +23,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
+import main.java.Inicio.PantallaInicialController;
 import main.java.juego.mapas.pelea.PeleaController;
 import main.java.juego.mapas.pelea.Unidades;
 import main.java.juego.mapas.pelea.UnidadesPreCargadas;
@@ -44,8 +45,6 @@ import java.util.*;
 
 import static javafx.geometry.Pos.TOP_CENTER;
 import static javafx.scene.text.TextAlignment.CENTER;
-import static main.java.jugadores.Jugador.listaCiudades;
-import static main.java.jugadores.Jugador.listaPosicionesBatallones;
 
 
 public class MundoController extends MapasController implements Initializable {
@@ -105,7 +104,7 @@ public class MundoController extends MapasController implements Initializable {
         gridPaneMap.getChildren().clear();
 
 
-        int numCiudades = listaCiudades.size();
+        int numCiudades = PantallaInicialController.elTemaSeleccionado.listaCiudades.size();
         //int numCiudades = 12000;
         int tamano = 15;
         int capacidadCiudades = 0;
@@ -142,7 +141,7 @@ public class MundoController extends MapasController implements Initializable {
                     stringBuilder.append(letter_agua);
                 } else {
                     stringBuilder.append(letter_isla).append(letter_guionBajo).append(filaModule).append(letter_guion).append(columnaModule);
-                    ciudadToGrid = listaCiudades.get(position);
+                    ciudadToGrid = PantallaInicialController.elTemaSeleccionado.listaCiudades.get(position);
                     if (ciudadToGrid != null) {
                         stringBuilder.append(letter_guionBajo).append(letter_city);
                         if (getClanPrimaryStageController().getCiudadesDelClan().contains(new Ciudad(position))) {
@@ -166,7 +165,7 @@ public class MundoController extends MapasController implements Initializable {
                     }
 
                 }
-                batallonesToGrid = listaPosicionesBatallones.get(position);
+                batallonesToGrid = PantallaInicialController.elTemaSeleccionado.listaPosicionesBatallones.get(position);
                 if (batallonesToGrid != null) {
                     boolean batallonEnemigo = false;
                     boolean batallonNuestro = false;
@@ -749,10 +748,10 @@ public class MundoController extends MapasController implements Initializable {
         boolean sePuedeMover = true;
         int filaModule = batallonFilaTemp % 5;
         int columnaModule = batallonColumTemp % 5;
-        if (listaCiudades.get(posicion) == null) {
+        if (PantallaInicialController.elTemaSeleccionado.listaCiudades.get(posicion) == null) {
             if (filaModule == 0 || filaModule == 4 || columnaModule == 0 || columnaModule == 4) {
                 try {
-                    ArrayList<Batallon> a = listaPosicionesBatallones.get(posicion);
+                    ArrayList<Batallon> a = PantallaInicialController.elTemaSeleccionado.listaPosicionesBatallones.get(posicion);
                     for (Batallon batallon1 : a) {
                         if (!getClanPrimaryStageController().getBatallonesDelClan().contains(batallon1)) {
                             sePuedeMover = false;

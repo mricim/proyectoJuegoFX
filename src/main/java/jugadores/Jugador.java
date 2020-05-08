@@ -12,19 +12,14 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.*;
 
+import static main.java.Inicio.PantallaInicialController.elTemaSeleccionado;
+
 @Entity
 @Table(name = "Jugador", schema = "proyecto")
 public class Jugador implements Serializable {
     public static final Image ERRORIMAGE = CallImages.getImageNoTema("", "error");//TODO LLEVAR ESTO LO MAS ALTO POSIBLE
-    public static Map<Integer, Jugador> listaTodosLosJugadores = new TreeMap<>();
 
 
-    public static Map<String, EdificiosPreCargados> listaEdificiosPreCargados = new TreeMap<>();
-    public static Map<Integer, UnidadesPreCargadas> listaSoldadosPreCargada = new TreeMap();
-
-    public static Map<String, ArrayList<Batallon>> listaPosicionesBatallones = new TreeMap<>();
-    //public static Map<int, Batallon> listaBatallones = new TreeMap<>();
-    public static Map<String, Ciudad> listaCiudades = new TreeMap<>();
 
 
     public Map<Integer, Batallon> listaBatallonesPropios = new TreeMap<>();
@@ -96,15 +91,15 @@ public class Jugador implements Serializable {
                 }
             }
 
-            Unidades soldados1 = new Unidades(listaSoldadosPreCargada.get(3), 50, 5, 0, 0);
-            Unidades soldados2 = new Unidades(listaSoldadosPreCargada.get(1), 30, 0, 0, 0);
+            Unidades soldados1 = new Unidades(elTemaSeleccionado.listaSoldadosPreCargada.get(3), 50, 5, 0, 0);
+            Unidades soldados2 = new Unidades(elTemaSeleccionado.listaSoldadosPreCargada.get(1), 30, 0, 0, 0);
             Batallon batallon1 = new Batallon("Batallon P 1 5-5", 5, 5, 400, this,ciudad1);
             batallon1.setSoldadoHashMap(soldados1);
             batallon1.setSoldadoHashMap(soldados2);
 
             Batallon batallon2 = new Batallon("Batallon P 2 8-7", 8, 7, 20, this,ciudad2);
-            Unidades soldados3 = new Unidades(listaSoldadosPreCargada.get(2), 98, 100, 0, 0);
-            Unidades soldados4 = new Unidades(listaSoldadosPreCargada.get(1), 80, 5, 0, 0);
+            Unidades soldados3 = new Unidades(elTemaSeleccionado.listaSoldadosPreCargada.get(2), 98, 100, 0, 0);
+            Unidades soldados4 = new Unidades(elTemaSeleccionado.listaSoldadosPreCargada.get(1), 80, 5, 0, 0);
             batallon2.setSoldadoHashMap(soldados3);
             batallon2.setSoldadoHashMap(soldados4);
         } else if (id == 2) {
@@ -114,26 +109,26 @@ public class Jugador implements Serializable {
             Ciudad ciudad4=new Ciudad(this, "ciudad E 6 8-3", 8, 3, 1, paraCity2);
 
             Batallon batallon1 = new Batallon("Batallon E 3 5-8", 5, 8, 400, this,ciudad1);
-            Unidades soldados1 = new Unidades(listaSoldadosPreCargada.get(1), 100, 5, 0, 0);
-            Unidades soldados2 = new Unidades(listaSoldadosPreCargada.get(2), 50, 0, 0, 0);
+            Unidades soldados1 = new Unidades(elTemaSeleccionado.listaSoldadosPreCargada.get(1), 100, 5, 0, 0);
+            Unidades soldados2 = new Unidades(elTemaSeleccionado.listaSoldadosPreCargada.get(2), 50, 0, 0, 0);
             batallon1.setSoldadoHashMap(soldados1);
             batallon1.setSoldadoHashMap(soldados2);
 
             Batallon batallon2 = new Batallon("Batallon E 4 2-2", 2, 2, 400, this,ciudad2);
-            Unidades soldados3 = new Unidades(listaSoldadosPreCargada.get(1), 100, 5, 0, 0);
-            Unidades soldados4 = new Unidades(listaSoldadosPreCargada.get(2), 100, 0, 0, 0);
+            Unidades soldados3 = new Unidades(elTemaSeleccionado.listaSoldadosPreCargada.get(1), 100, 5, 0, 0);
+            Unidades soldados4 = new Unidades(elTemaSeleccionado.listaSoldadosPreCargada.get(2), 100, 0, 0, 0);
             batallon2.setSoldadoHashMap(soldados3);
             batallon2.setSoldadoHashMap(soldados4);
 
             Batallon batallon3 = new Batallon("Batallon E 5 2-7", 2, 7, 400, this,ciudad3);
-            Unidades soldados5 = new Unidades(listaSoldadosPreCargada.get(1), 100, 5, 0, 0);
-            Unidades soldados6 = new Unidades(listaSoldadosPreCargada.get(2), 100, 0, 0, 0);
+            Unidades soldados5 = new Unidades(elTemaSeleccionado.listaSoldadosPreCargada.get(1), 100, 5, 0, 0);
+            Unidades soldados6 = new Unidades(elTemaSeleccionado.listaSoldadosPreCargada.get(2), 100, 0, 0, 0);
             batallon3.setSoldadoHashMap(soldados5);
             batallon3.setSoldadoHashMap(soldados6);
 
             Batallon batallon4 = new Batallon("Batallon E 9 8-7", 8, 7, 400, this,ciudad4);
-            Unidades soldados7 = new Unidades(listaSoldadosPreCargada.get(1), 100, 5, 0, 0);
-            Unidades soldados8 = new Unidades(listaSoldadosPreCargada.get(2), 100, 0, 0, 0);
+            Unidades soldados7 = new Unidades(elTemaSeleccionado.listaSoldadosPreCargada.get(1), 100, 5, 0, 0);
+            Unidades soldados8 = new Unidades(elTemaSeleccionado.listaSoldadosPreCargada.get(2), 100, 0, 0, 0);
             batallon4.setSoldadoHashMap(soldados7);
             batallon4.setSoldadoHashMap(soldados8);
         } else if (id == 3) {
@@ -143,26 +138,26 @@ public class Jugador implements Serializable {
             Ciudad ciudad4=new Ciudad(this, "ciudad Z 10 7-5", 7, 5, 1, paraCity2);
 
             Batallon batallon1 = new Batallon("Batallon Z 6 7-7", 7, 7, 400, this,ciudad1);
-            Unidades soldados1 = new Unidades(listaSoldadosPreCargada.get(1), 100, 5, 0, 0);
-            Unidades soldados2 = new Unidades(listaSoldadosPreCargada.get(2), 100, 0, 0, 0);
+            Unidades soldados1 = new Unidades(elTemaSeleccionado.listaSoldadosPreCargada.get(1), 100, 5, 0, 0);
+            Unidades soldados2 = new Unidades(elTemaSeleccionado.listaSoldadosPreCargada.get(2), 100, 0, 0, 0);
             batallon1.setSoldadoHashMap(soldados1);
             batallon1.setSoldadoHashMap(soldados2);
 
             Batallon batallon2 = new Batallon("Batallon Z 7 8-10", 8, 10, 400, this,ciudad2);
-            Unidades soldados3 = new Unidades(listaSoldadosPreCargada.get(1), 100, 5, 0, 0);
-            Unidades soldados4 = new Unidades(listaSoldadosPreCargada.get(2), 100, 0, 0, 0);
+            Unidades soldados3 = new Unidades(elTemaSeleccionado.listaSoldadosPreCargada.get(1), 100, 5, 0, 0);
+            Unidades soldados4 = new Unidades(elTemaSeleccionado.listaSoldadosPreCargada.get(2), 100, 0, 0, 0);
             batallon2.setSoldadoHashMap(soldados3);
             batallon2.setSoldadoHashMap(soldados4);
 
             Batallon batallon3 = new Batallon("Batallon Z 8 2-7", 12, 7, 400, this,ciudad3);
-            Unidades soldados5 = new Unidades(listaSoldadosPreCargada.get(1), 100, 5, 0, 0);
-            Unidades soldados6 = new Unidades(listaSoldadosPreCargada.get(2), 100, 0, 0, 0);
+            Unidades soldados5 = new Unidades(elTemaSeleccionado.listaSoldadosPreCargada.get(1), 100, 5, 0, 0);
+            Unidades soldados6 = new Unidades(elTemaSeleccionado.listaSoldadosPreCargada.get(2), 100, 0, 0, 0);
             batallon3.setSoldadoHashMap(soldados5);
             batallon3.setSoldadoHashMap(soldados6);
 
             Batallon batallon4 = new Batallon("Batallon Z 10 8-7", 8, 7, 400, this,ciudad4);
-            Unidades soldados7 = new Unidades(listaSoldadosPreCargada.get(1), 100, 5, 0, 0);
-            Unidades soldados8 = new Unidades(listaSoldadosPreCargada.get(2), 100, 0, 0, 0);
+            Unidades soldados7 = new Unidades(elTemaSeleccionado.listaSoldadosPreCargada.get(1), 100, 5, 0, 0);
+            Unidades soldados8 = new Unidades(elTemaSeleccionado.listaSoldadosPreCargada.get(2), 100, 0, 0, 0);
             batallon4.setSoldadoHashMap(soldados7);
             batallon4.setSoldadoHashMap(soldados8);
         }
@@ -170,7 +165,7 @@ public class Jugador implements Serializable {
 
         //TODO Collections.sort(listaBatallonesPropios);
         //TODO Collections.sort(listaCiudadesPropias);
-        listaTodosLosJugadores.put(id, this);
+        elTemaSeleccionado.listaTodosLosJugadores.put(id, this);
     }
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -192,7 +187,7 @@ public class Jugador implements Serializable {
     }
 
     public static Jugador returnJugador(int jugadorId) {
-        return Jugador.listaTodosLosJugadores.get(jugadorId);
+        return elTemaSeleccionado.listaTodosLosJugadores.get(jugadorId);
     }
 
     public Jugador() {

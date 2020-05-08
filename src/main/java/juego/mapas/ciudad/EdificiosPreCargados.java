@@ -16,8 +16,7 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.TreeMap;
 
-//import static main.java.jugadores.Jugador.listaEdificiosKeys; TODO fix this list that doesnt exists in Jugador
-import static main.java.jugadores.Jugador.listaEdificiosPreCargados;
+import static main.java.Inicio.PantallaInicialController.elTemaSeleccionado;
 
 //https://github.com/k33ptoo/JavaFX-MySQL-Login
 
@@ -106,7 +105,7 @@ public class EdificiosPreCargados implements ImageGetter, Serializable {
         this.imagePath = resultado;
         this.imageClicablePath = resultado + "@h";
 
-        listaEdificiosPreCargados.put(resultado, this);
+        elTemaSeleccionado.listaEdificiosPreCargados.put(resultado, this);
 //        listaEdificiosKeys.add(id);
     }
 

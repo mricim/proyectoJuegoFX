@@ -1,6 +1,7 @@
 package main.java.juego.mapas.pelea;
 
 
+import main.java.Inicio.PantallaInicialController;
 import main.java.hibernate.DbOperations;
 import main.java.juego.mapas.ciudad.Ciudad;
 import main.java.juego.mapas.ciudad.contenidoCiudad.Edificio;
@@ -13,7 +14,7 @@ import java.io.Serializable;
 import java.lang.Character.UnicodeBlock;
 import java.util.*;
 
-import static main.java.jugadores.Jugador.listaPosicionesBatallones;
+import static main.java.Inicio.PantallaInicialController.elTemaSeleccionado;
 
 @Entity
 @Table(name = "Batallon", schema = "proyecto")
@@ -121,15 +122,15 @@ public class Batallon extends Posicion implements Serializable {
     @Override
     public void setFilaColumna(int fila, int columna) {
         try {
-            listaPosicionesBatallones.get(getPosition()).remove(this);
+            PantallaInicialController.elTemaSeleccionado.listaPosicionesBatallones.get(getPosition()).remove(this);
         } catch (Exception ignored) {
         }
         super.setFilaColumna(fila, columna);
-        ArrayList<Batallon> batallon2 = listaPosicionesBatallones.get(getPosition());
+        ArrayList<Batallon> batallon2 = PantallaInicialController.elTemaSeleccionado.listaPosicionesBatallones.get(getPosition());
         if (batallon2 == null) {
             ArrayList<Batallon> x = new ArrayList<>();
             x.add(this);
-            listaPosicionesBatallones.put(getPosition(), x);
+            elTemaSeleccionado.listaPosicionesBatallones.put(getPosition(), x);
         } else {
             batallon2.add(this);
         }
@@ -137,7 +138,7 @@ public class Batallon extends Posicion implements Serializable {
 
     public void remove(Jugador jugador) {
         try {
-            listaPosicionesBatallones.get(getPosition()).remove(this);
+            PantallaInicialController.elTemaSeleccionado.listaPosicionesBatallones.get(getPosition()).remove(this);
         } catch (Exception ignored) {
         }
         jugador.listaBatallonesPropios.remove(getIdBatallon());

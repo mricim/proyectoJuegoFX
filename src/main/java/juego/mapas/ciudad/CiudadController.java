@@ -20,6 +20,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
+import main.java.Inicio.PantallaInicialController;
 import main.java.juego.comercio.Comercio;
 import main.java.juego.mapas.RecursosPrecargados;
 import main.java.jugadores.Clan;
@@ -39,8 +40,6 @@ import java.util.*;
 
 import static javafx.geometry.Pos.TOP_CENTER;
 import static javafx.scene.text.TextAlignment.CENTER;
-import static main.java.juego.mapas.RecursosPrecargados.recursosPrecargadosList;
-import static main.java.jugadores.Jugador.*;
 
 
 public class CiudadController extends MapasController implements Initializable {
@@ -143,17 +142,17 @@ public class CiudadController extends MapasController implements Initializable {
             vBoxList.add(cajaEdificio(edificioPuesto, imageView, false, edificioPuesto.getEdificiosPreCargado(), 0));//El que tenemos puesto
             if (edificioNivel > 0) {
                 try {
-                    vBoxList.add(cajaEdificio(edificioPuesto, imageView, false, listaEdificiosPreCargados.get(edificioId + "_" + (edificioNivel + 1)), 2));
+                    vBoxList.add(cajaEdificio(edificioPuesto, imageView, false, PantallaInicialController.elTemaSeleccionado.listaEdificiosPreCargados.get(edificioId + "_" + (edificioNivel + 1)), 2));
                 } catch (Exception e) {
                 }
-                vBoxList.add(cajaEdificio(edificioPuesto, imageView, false, listaEdificiosPreCargados.get(edificioId + "_" + (edificioNivel - 1)), 3));
+                vBoxList.add(cajaEdificio(edificioPuesto, imageView, false, PantallaInicialController.elTemaSeleccionado.listaEdificiosPreCargados.get(edificioId + "_" + (edificioNivel - 1)), 3));
             } else {
                 try {
-                    vBoxList.add(cajaEdificio(edificioPuesto, imageView, false, listaEdificiosPreCargados.get(edificioId + "_" + (edificioNivel + 1)), 2));
+                    vBoxList.add(cajaEdificio(edificioPuesto, imageView, false, PantallaInicialController.elTemaSeleccionado.listaEdificiosPreCargados.get(edificioId + "_" + (edificioNivel + 1)), 2));
                 } catch (Exception e) {
                 }
                 if (edificioPuesto.getEdificiosPreCargado().isDestruible()) {
-                    vBoxList.add(cajaEdificio(edificioPuesto, imageView, false, listaEdificiosPreCargados.get(0 + "_" + 0), 4));
+                    vBoxList.add(cajaEdificio(edificioPuesto, imageView, false, PantallaInicialController.elTemaSeleccionado.listaEdificiosPreCargados.get(0 + "_" + 0), 4));
                 }
             }
         } else {//PARCELAS
@@ -168,7 +167,7 @@ public class CiudadController extends MapasController implements Initializable {
                 }
             }
             vBoxList.add(cajaEdificio(edificioPuesto, imageView, true, edificioPuesto.getEdificiosPreCargado(), 0));
-            for (Map.Entry<String, EdificiosPreCargados> preCargadosEntry : listaEdificiosPreCargados.entrySet()) {
+            for (Map.Entry<String, EdificiosPreCargados> preCargadosEntry : PantallaInicialController.elTemaSeleccionado.listaEdificiosPreCargados.entrySet()) {
                 EdificiosPreCargados temp = preCargadosEntry.getValue();
                 if (temp.getNivel() == 0 && temp.isConstruible() && getCiudadPrimaryStageController().getNivelCiudad() >= temp.getNivelCastilloNecesario()) {
                     if (counterTiposDeEdificioEnLaCiudad.get(temp.getId()) == null || counterTiposDeEdificioEnLaCiudad.get(temp.getId()) < temp.getMaximoEdificiosDelMismoTipo()) {
@@ -404,11 +403,11 @@ public class CiudadController extends MapasController implements Initializable {
         switch (i) {
             case 2:
                 tamanoMenu = 300;
-                vBoxList.add(cajaCrearUnidades(listaSoldadosPreCargada, 0, borderPane, flowPaneRecuros, tamanoMenu));
+                vBoxList.add(cajaCrearUnidades(PantallaInicialController.elTemaSeleccionado.listaSoldadosPreCargada, 0, borderPane, flowPaneRecuros, tamanoMenu));
                 break;
             case 3:
                 tamanoMenu = 300;
-                vBoxList.add(cajaCrearUnidades(listaSoldadosPreCargada, 5, borderPane, flowPaneRecuros, tamanoMenu));
+                vBoxList.add(cajaCrearUnidades(PantallaInicialController.elTemaSeleccionado.listaSoldadosPreCargada, 5, borderPane, flowPaneRecuros, tamanoMenu));
                 break;
             case 4:
                 tamanoMenu = 650;
@@ -533,8 +532,8 @@ public class CiudadController extends MapasController implements Initializable {
                 int cantidad = (int) slider.getValue();
                 int cantidad2 = (int) slider2.getValue();
                 if (cantidad > 0 && cantidad2 > 0) {
-                    RecursosPrecargados recursosPrecargados = recursosPrecargadosList.get(Integer.valueOf(combo.getSelectionModel().getSelectedItem().getString()));
-                    RecursosPrecargados recursosPrecargados2 = recursosPrecargadosList.get(Integer.valueOf(combo2.getSelectionModel().getSelectedItem().getString()));
+                    RecursosPrecargados recursosPrecargados = PantallaInicialController.elTemaSeleccionado.listaRecursosPreCargada.get(Integer.valueOf(combo.getSelectionModel().getSelectedItem().getString()));
+                    RecursosPrecargados recursosPrecargados2 = PantallaInicialController.elTemaSeleccionado.listaRecursosPreCargada.get(Integer.valueOf(combo2.getSelectionModel().getSelectedItem().getString()));
                     if (recursosPrecargados.getId() != recursosPrecargados2.getId()) {
                         getCiudadPrimaryStageController().getRecursosTreeMap().get(recursosPrecargados.getId()).removeCantidad(cantidad);
                         Comercio.data.add(new Comercio(new Recursos(recursosPrecargados, cantidad), new Recursos(recursosPrecargados2, cantidad2), getJugadorPrimaryStageController()));

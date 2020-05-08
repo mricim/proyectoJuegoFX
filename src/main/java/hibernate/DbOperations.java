@@ -10,7 +10,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.query.Query;
-import sun.java2d.BackBufferCapsProvider;
+//import sun.java2d.BackBufferCapsProvider;
 
 public class DbOperations {
 

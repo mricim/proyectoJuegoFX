@@ -1,5 +1,6 @@
 package main.java.juego.mapas.ciudad;
 
+import main.java.Inicio.PantallaInicialController;
 import main.java.hibernate.DbOperations;
 import main.java.juego.mapas.RecursosPrecargados;
 import main.java.utils.Posicion;
@@ -8,22 +9,15 @@ import main.java.juego.mapas.ciudad.contenidoCiudad.Edificio;
 import main.java.juego.mapas.pelea.*;
 import main.java.jugadores.Clan;
 import main.java.jugadores.Jugador;
-import org.hibernate.Hibernate;
-import org.hibernate.HibernateException;
-import org.hibernate.Session;
-import org.hibernate.Transaction;
 
 
-import javax.annotation.Nonnull;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Map;
-import java.util.Objects;
 import java.util.TreeMap;
 
-import static main.java.juego.mapas.RecursosPrecargados.recursosPrecargadosList;
-import static main.java.jugadores.Jugador.*;
+import static main.java.Inicio.PantallaInicialController.elTemaSeleccionado;
 
 @Entity
 @Table(name = "Ciudad", schema = "proyecto")
@@ -43,7 +37,7 @@ public class Ciudad extends Posicion implements Serializable {
 
 
 
-        for (Map.Entry<Integer, RecursosPrecargados> integerRecursosPrecargadosEntry : recursosPrecargadosList.entrySet()) {
+        for (Map.Entry<Integer, RecursosPrecargados> integerRecursosPrecargadosEntry : PantallaInicialController.elTemaSeleccionado.listaRecursosPreCargada.entrySet()) {
             RecursosPrecargados a = integerRecursosPrecargadosEntry.getValue();
             if (a.isMenuCiudad()) {
                 int i = integerRecursosPrecargadosEntry.getKey();
@@ -57,7 +51,7 @@ public class Ciudad extends Posicion implements Serializable {
         }
 
 
-        for (UnidadesPreCargadas soldaditos : listaSoldadosPreCargada.values()) {
+        for (UnidadesPreCargadas soldaditos : elTemaSeleccionado.listaSoldadosPreCargada.values()) {
             this.listSoldadosCity.put(soldaditos.getIdType(), new Unidades(soldaditos, 0, 0, 0, 0));
         }
 
@@ -65,29 +59,29 @@ public class Ciudad extends Posicion implements Serializable {
         //todo Solicitar a la bd la tabla de posiciones y edificios que tiene el usuario
         try {
             if (getIdCiudad() == 2) {
-                new Edificio(listaEdificiosPreCargados.get(0 + "_" + 0), 8, 8, this);//parcela
-                new Edificio(listaEdificiosPreCargados.get(2 + "_" + 1), 1, 12, this);
-                new Edificio(listaEdificiosPreCargados.get(0 + "_" + 0), 6, 8, this);//parcela
-                new Edificio(listaEdificiosPreCargados.get(1 + "_" + 0), 8, 15, this);
+                new Edificio(elTemaSeleccionado.listaEdificiosPreCargados.get(0 + "_" + 0), 8, 8, this);//parcela
+                new Edificio(elTemaSeleccionado.listaEdificiosPreCargados.get(2 + "_" + 1), 1, 12, this);
+                new Edificio(elTemaSeleccionado.listaEdificiosPreCargados.get(0 + "_" + 0), 6, 8, this);//parcela
+                new Edificio(elTemaSeleccionado.listaEdificiosPreCargados.get(1 + "_" + 0), 8, 15, this);
             } else if (getIdCiudad() == 1) {
-                new Edificio(listaEdificiosPreCargados.get(1 + "_" + 1), 8, 7, this);
-                new Edificio(listaEdificiosPreCargados.get(2 + "_" + 0), 1, 12, this);
+                new Edificio(elTemaSeleccionado.listaEdificiosPreCargados.get(1 + "_" + 1), 8, 7, this);
+                new Edificio(elTemaSeleccionado.listaEdificiosPreCargados.get(2 + "_" + 0), 1, 12, this);
             }
-            new Edificio(listaEdificiosPreCargados.get(10 + "_" + 0), 10, 4, this);
-            new Edificio(listaEdificiosPreCargados.get(11 + "_" + 0), 8, 12, this);
-            new Edificio(listaEdificiosPreCargados.get(0 + "_" + 0), 5, 7, this);
-            new Edificio(listaEdificiosPreCargados.get(10 + "_" + 0), 7, 13, this);//todos tendrian "parcela"
-            new Edificio(listaEdificiosPreCargados.get(11 + "_" + 0), 12, 2, this);//todos tendrian "parcela"
-            new Edificio(listaEdificiosPreCargados.get(12 + "_" + 1), 5, 18, this);//todos tendrian "parcela"
+            new Edificio(elTemaSeleccionado.listaEdificiosPreCargados.get(10 + "_" + 0), 10, 4, this);
+            new Edificio(elTemaSeleccionado.listaEdificiosPreCargados.get(11 + "_" + 0), 8, 12, this);
+            new Edificio(elTemaSeleccionado.listaEdificiosPreCargados.get(0 + "_" + 0), 5, 7, this);
+            new Edificio(elTemaSeleccionado.listaEdificiosPreCargados.get(10 + "_" + 0), 7, 13, this);//todos tendrian "parcela"
+            new Edificio(elTemaSeleccionado.listaEdificiosPreCargados.get(11 + "_" + 0), 12, 2, this);//todos tendrian "parcela"
+            new Edificio(elTemaSeleccionado.listaEdificiosPreCargados.get(12 + "_" + 1), 5, 18, this);//todos tendrian "parcela"
 
-            new Edificio(listaEdificiosPreCargados.get(13 + "_" + 0), 7, 15, this);//todos tendrian "parcela"
-            new Edificio(listaEdificiosPreCargados.get(14 + "_" + 0), 7, 16, this);//todos tendrian "parcela"
-            new Edificio(listaEdificiosPreCargados.get(15 + "_" + 0), 7, 17, this);//todos tendrian "parcela"
-            new Edificio(listaEdificiosPreCargados.get(16 + "_" + 0), 12, 17, this);//todos tendrian "parcela"
-            new Edificio(listaEdificiosPreCargados.get(17 + "_" + 0), 13, 5, this);//todos tendrian "parcela"
-            new Edificio(listaEdificiosPreCargados.get(18 + "_" + 0), 14, 10, this);//todos tendrian "parcela"
-            new Edificio(listaEdificiosPreCargados.get(19 + "_" + 0), 3, 7, this);//todos tendrian "parcela"
-            new Edificio(listaEdificiosPreCargados.get(20 + "_" + 0), 4, 8, this);//todos tendrian "parcela"
+            new Edificio(elTemaSeleccionado.listaEdificiosPreCargados.get(13 + "_" + 0), 7, 15, this);//todos tendrian "parcela"
+            new Edificio(elTemaSeleccionado.listaEdificiosPreCargados.get(14 + "_" + 0), 7, 16, this);//todos tendrian "parcela"
+            new Edificio(elTemaSeleccionado.listaEdificiosPreCargados.get(15 + "_" + 0), 7, 17, this);//todos tendrian "parcela"
+            new Edificio(elTemaSeleccionado.listaEdificiosPreCargados.get(16 + "_" + 0), 12, 17, this);//todos tendrian "parcela"
+            new Edificio(elTemaSeleccionado.listaEdificiosPreCargados.get(17 + "_" + 0), 13, 5, this);//todos tendrian "parcela"
+            new Edificio(elTemaSeleccionado.listaEdificiosPreCargados.get(18 + "_" + 0), 14, 10, this);//todos tendrian "parcela"
+            new Edificio(elTemaSeleccionado.listaEdificiosPreCargados.get(19 + "_" + 0), 3, 7, this);//todos tendrian "parcela"
+            new Edificio(elTemaSeleccionado.listaEdificiosPreCargados.get(20 + "_" + 0), 4, 8, this);//todos tendrian "parcela"
         } catch (Exception e) {
             System.err.println("Error: Ciudad (Edificio no creado)\n");
             e.printStackTrace();
@@ -96,7 +90,7 @@ public class Ciudad extends Posicion implements Serializable {
         if (Clan.jugadoresQueEstanEnUnClan.containsKey(jugador)) {
             Clan.jugadoresQueEstanEnUnClan.get(jugador).addCiudades(this);
         }
-        listaCiudades.put(getPosition(), this);
+        elTemaSeleccionado.listaCiudades.put(getPosition(), this);
         DbOperations.createRecord(this);
     }
 

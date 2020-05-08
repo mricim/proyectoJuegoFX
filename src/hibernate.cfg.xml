@@ -17,6 +17,8 @@
 
 <!--        MAPPING CLASES-->
 <!--        <mapping class="test.Car"/>-->
+
+
         <mapping class="main.java.jugadores.Clan"/>
         <mapping class="main.java.jugadores.Jugador"/>
         <mapping class="main.java.utils.Posicion"/>

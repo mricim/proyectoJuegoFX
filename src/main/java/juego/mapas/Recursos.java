@@ -1,8 +1,7 @@
 package main.java.juego.mapas;
 
 import javafx.scene.image.Image;
-import main.java.hibernate.DbOperations;
-import main.java.juego.mapas.ciudad.EdificiosPreCargados;
+import main.java.Inicio.PantallaInicialController;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -26,7 +25,7 @@ public class Recursos implements Serializable {
     }
 
     public Recursos(int idRecursosPrecargados, int cantidad) {
-        this(RecursosPrecargados.recursosPrecargadosList.get(idRecursosPrecargados), cantidad);
+        this(PantallaInicialController.elTemaSeleccionado.listaRecursosPreCargada.get(idRecursosPrecargados), cantidad);
 //        DbOperations.createRecord(this);
     }
 

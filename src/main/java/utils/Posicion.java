@@ -6,7 +6,6 @@ import javax.persistence.Embeddable;
 import javax.persistence.MappedSuperclass;
 import java.util.Objects;
 
-import static main.java.jugadores.Jugador.listaPosicionesBatallones;
 @Embeddable
 @MappedSuperclass
 abstract public class Posicion {

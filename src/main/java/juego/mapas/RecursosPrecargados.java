@@ -1,7 +1,7 @@
 package main.java.juego.mapas;
 
 import javafx.scene.image.Image;
-import main.java.hibernate.DbOperations;
+import main.java.Inicio.PantallaInicialController;
 import main.java.utils.ImageGetter;
 
 import javax.persistence.*;
@@ -14,7 +14,6 @@ import java.util.Objects;
 @Table(name = "RecursosPrecargados", schema = "proyecto")
 public class RecursosPrecargados implements ImageGetter, Comparable<RecursosPrecargados>, Serializable {
     static String RUTEIMAGES = "icons/recursos/";
-    public static Map<Integer,RecursosPrecargados> recursosPrecargadosList=new HashMap<>();
     //oro=0;
     //madera=1;
     //piedra=2;
@@ -44,7 +43,7 @@ public class RecursosPrecargados implements ImageGetter, Comparable<RecursosPrec
         this.menupelea=menupelea;
         this.seConsumeEnEdificios = seConsumeEnEdificios;
         getImage();
-        recursosPrecargadosList.put(id,this);
+        PantallaInicialController.elTemaSeleccionado.listaRecursosPreCargada.put(id,this);
 //        DbOperations.createRecord(this);
     }
 
@@ -69,8 +68,8 @@ public class RecursosPrecargados implements ImageGetter, Comparable<RecursosPrec
         RecursosPrecargados.RUTEIMAGES = RUTEIMAGES;
     }
 
-    public static void setRecursosPrecargadosList(Map<Integer, RecursosPrecargados> recursosPrecargadosList) {
-        RecursosPrecargados.recursosPrecargadosList = recursosPrecargadosList;
+    public static void setListaRecursosPreCargada(Map<Integer, RecursosPrecargados> listaRecursosPreCargada) {
+        PantallaInicialController.elTemaSeleccionado.listaRecursosPreCargada = listaRecursosPreCargada;
     }
 
     public void setId(int id) {

@@ -11,7 +11,7 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
 
-import static main.java.jugadores.Jugador.listaSoldadosPreCargada;
+import static main.java.Inicio.PantallaInicialController.elTemaSeleccionado;
 
 @Entity
 @Table(name = "UnidadesPrecargado", schema = "proyecto")
@@ -41,7 +41,7 @@ public class UnidadesPreCargadas implements ImageGetter , Serializable {
         this.imageIconPath = imagePath;
         this.tipoLucha = tipoLucha;
 //        DbOperations.createRecord(this);
-        listaSoldadosPreCargada.put(idType,this);
+        elTemaSeleccionado.listaSoldadosPreCargada.put(idType,this);
     }
 
     public UnidadesPreCargadas() {
