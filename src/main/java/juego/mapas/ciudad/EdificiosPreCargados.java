@@ -106,7 +106,7 @@ public class EdificiosPreCargados implements ImageGetter, Serializable {
         this.imageClicablePath = resultado + "@h";
 
         elTemaSeleccionado.listaEdificiosPreCargados.put(resultado, this);
-//        listaEdificiosKeys.add(id);
+        DbOperations.updateRecord(elTemaSeleccionado);
     }
 
     public EdificiosPreCargados() {

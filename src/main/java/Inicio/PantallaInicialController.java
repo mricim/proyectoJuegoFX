@@ -122,7 +122,9 @@ public class PantallaInicialController extends PrimaryStageControler implements 
         progresBar.setProgress(10);//TODO NO FUNCIONA // https://stackoverflow.com/questions/44398611/running-a-process-in-a-separate-thread-so-rest-of-java-fx-application-is-usable
         TRADUCCIONES_THEMA = ResourceBundle.getBundle("main.resources.traductions.temas."+NAME_TEMA_PATH+".UIResources", TRADUCCIONES_GENERALES.getLocale());
         for (Temas temas : Temas.listaDeTemas) {
+            System.out.println(temas.getName()+" "+NAME_TEMA);
             if (temas.getName().equals(NAME_TEMA)){
+                System.out.println("DDDDDDCCCCCCCCCCCFFFFFFFFFFFFFFF");
                 elTemaSeleccionado=temas;
                 break;
             }

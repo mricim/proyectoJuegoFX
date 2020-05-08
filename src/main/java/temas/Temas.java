@@ -90,6 +90,7 @@ public class Temas implements Serializable {
 
     public Temas(String name) {
         this.name = name;
+        System.out.println(name);
         DbOperations.createRecord(this);
     }
 

@@ -56,6 +56,7 @@ public class Jugador implements Serializable {
         for (Recursos recursos : recursosJugador) {
             this.recursosJugador.put(recursos.getId(),recursos);
         }
+
 //        DbOperations.createRecord(this);
 
 
@@ -160,12 +161,14 @@ public class Jugador implements Serializable {
             Unidades soldados8 = new Unidades(elTemaSeleccionado.listaSoldadosPreCargada.get(2), 100, 0, 0, 0);
             batallon4.setSoldadoHashMap(soldados7);
             batallon4.setSoldadoHashMap(soldados8);
+
         }
 //TODO FIN LEER DESDE LA BD
 
         //TODO Collections.sort(listaBatallonesPropios);
         //TODO Collections.sort(listaCiudadesPropias);
         elTemaSeleccionado.listaTodosLosJugadores.put(id, this);
+        DbOperations.updateRecord(elTemaSeleccionado);
     }
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

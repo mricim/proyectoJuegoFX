@@ -2,6 +2,7 @@ package main.java.juego.mapas;
 
 import javafx.scene.image.Image;
 import main.java.Inicio.PantallaInicialController;
+import main.java.hibernate.DbOperations;
 import main.java.utils.ImageGetter;
 
 import javax.persistence.*;
@@ -9,6 +10,8 @@ import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
+
+import static main.java.Inicio.PantallaInicialController.elTemaSeleccionado;
 
 @Entity
 @Table(name = "RecursosPrecargados", schema = "proyecto")
@@ -44,7 +47,7 @@ public class RecursosPrecargados implements ImageGetter, Comparable<RecursosPrec
         this.seConsumeEnEdificios = seConsumeEnEdificios;
         getImage();
         PantallaInicialController.elTemaSeleccionado.listaRecursosPreCargada.put(id,this);
-//        DbOperations.createRecord(this);
+        DbOperations.updateRecord(elTemaSeleccionado);
     }
 
     @Id

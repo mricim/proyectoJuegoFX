@@ -42,6 +42,7 @@ public class UnidadesPreCargadas implements ImageGetter , Serializable {
         this.tipoLucha = tipoLucha;
 //        DbOperations.createRecord(this);
         elTemaSeleccionado.listaSoldadosPreCargada.put(idType,this);
+        DbOperations.updateRecord(elTemaSeleccionado);
     }
 
     public UnidadesPreCargadas() {

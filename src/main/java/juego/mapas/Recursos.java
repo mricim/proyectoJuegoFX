@@ -2,10 +2,14 @@ package main.java.juego.mapas;
 
 import javafx.scene.image.Image;
 import main.java.Inicio.PantallaInicialController;
+import main.java.hibernate.DbOperations;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
+
+import static main.java.Inicio.PantallaInicialController.elTemaSeleccionado;
+
 @Entity
 @Table(name = "Recursos", schema = "proyecto")
 public class Recursos implements Serializable {
@@ -27,12 +31,14 @@ public class Recursos implements Serializable {
     public Recursos(int idRecursosPrecargados, int cantidad) {
         this(PantallaInicialController.elTemaSeleccionado.listaRecursosPreCargada.get(idRecursosPrecargados), cantidad);
 //        DbOperations.createRecord(this);
+        DbOperations.createRecord(elTemaSeleccionado);
     }
 
     public Recursos(RecursosPrecargados recursosPrecargados, int cantidad) {
         this.recursosPrecargados = recursosPrecargados;
         this.cantidad = cantidad;
 //        DbOperations.createRecord(this);
+        DbOperations.updateRecord(elTemaSeleccionado);
     }
 
     @Id

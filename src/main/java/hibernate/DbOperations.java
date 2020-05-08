@@ -52,6 +52,24 @@ public class DbOperations {
         //TODO change return statement.
         return 1;
     }
+    public synchronized static Integer updateRecord(Object obj) {
+        Session sessionObj = getSessionFactory().openSession();
+
+        //Creating Transaction Object
+        Transaction transObj = sessionObj.beginTransaction();
+        String objType = obj.getClass().getName();
+        logger.info("DbOperations object type = "+objType);
+        sessionObj.update(obj);
+
+        // Transaction Is Committed To Database
+        transObj.commit();
+
+        // Closing The Session Object
+        sessionObj.close();
+        logger.info("Successfully Created " + obj.toString());
+        //TODO change return statement.
+        return 1;
+    }
 
 //    // Method 2: This Method Is Used To Display The Records From The Database Table
 //    @SuppressWarnings("unchecked")
