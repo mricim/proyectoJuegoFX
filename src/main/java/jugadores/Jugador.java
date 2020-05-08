@@ -56,7 +56,7 @@ public class Jugador implements Serializable {
         for (Recursos recursos : recursosJugador) {
             this.recursosJugador.put(recursos.getId(),recursos);
         }
-        DbOperations.createRecord(this);
+//        DbOperations.createRecord(this);
 
 
 //TODO LEER DESDE LA BD

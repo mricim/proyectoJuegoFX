@@ -27,7 +27,7 @@ public class Clan implements Serializable {
     public Clan(String name) {
         this.name = name;
         clanArrayList.add(this);
-        DbOperations.createRecord(this);
+//        DbOperations.createRecord(this);
     }
 
     @Id

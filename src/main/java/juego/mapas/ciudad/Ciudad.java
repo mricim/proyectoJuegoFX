@@ -91,7 +91,7 @@ public class Ciudad extends Posicion implements Serializable {
             Clan.jugadoresQueEstanEnUnClan.get(jugador).addCiudades(this);
         }
         elTemaSeleccionado.listaCiudades.put(getPosition(), this);
-        DbOperations.createRecord(this);
+//        DbOperations.createRecord(this);
     }
 
     public Ciudad() {

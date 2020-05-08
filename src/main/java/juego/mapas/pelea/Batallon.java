@@ -34,7 +34,7 @@ public class Batallon extends Posicion implements Serializable {
         this.nombre = nombre;
         this.proyectiles = proyectiles;
         this.ciudadVolver = ciudadVolver;
-        DbOperations.createRecord(this);
+//        DbOperations.createRecord(this);
         jugador.listaBatallonesPropios.put(idBatallon, this);
         for (Clan clan : Clan.clanArrayList) {
             if (clan.getJugadoresDelClan().containsKey(jugador.getId())) {
