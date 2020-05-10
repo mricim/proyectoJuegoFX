@@ -138,6 +138,7 @@ public class MundoController extends MapasController implements Initializable {
                 String position = String.valueOf(fila) + letter_guion + columna;
                 int filaModule = fila % 5;
                 int columnaModule = columna % 5;
+                StringBuilder rando = new StringBuilder();
                 if (filaModule == 0 || filaModule == 4 || columnaModule == 0 || columnaModule == 4) {
                     stringBuilder.append(letter_agua);
                 } else {
@@ -145,26 +146,27 @@ public class MundoController extends MapasController implements Initializable {
                     ciudadToGrid = listaCiudades.get(position);
                     if (ciudadToGrid != null) {
                         stringBuilder.append(letter_guionBajo).append(letter_city);
-                        if (getClanPrimaryStageController().getCiudadesDelClan().contains(new Ciudad(position))) {
-                            if (getJugadorPrimaryStageController().listaCiudadesPropias.containsKey(position)) {
-                                stringBuilder.append(letter_esNuestro);
-                            } else {
-                                stringBuilder.append(letter_Clan);
+                        if (getJugadorPrimaryStageController().listaCiudadesPropias.containsKey(position)){
+                            stringBuilder.append(letter_esNuestro);
+                        }else{
+                            for (Ciudad ciudad : getClanPrimaryStageController().getCiudadesDelClan()) {
+                                if (ciudad.getPosition().equals(position)){
+                                    stringBuilder.append(letter_Clan);
+                                    break;
+                                }
                             }
-
                         }
                     }
                     if (filaModule == 3 && columnaModule == 3) {//TODO RANDOMIZADOR PARA LA POSICION 3-3
-                        stringBuilder.append(letter_random);
+                        rando.append(letter_random);
                         if (ciudadToGrid != null) {
-                            stringBuilder.append(ciudadToGrid.getIdCiudad() % 3);
+                            rando.append(ciudadToGrid.getIdCiudad() % 3);
                         } else if (columna % 2 == 0) {
-                            stringBuilder.append((fila + columna + 2) % 3);
+                            rando.append((fila + columna + 2) % 3);
                         } else {
-                            stringBuilder.append((fila + columna) % 3);
+                            rando.append((fila + columna) % 3);
                         }
                     }
-
                 }
                 batallonesToGrid = listaPosicionesBatallones.get(position);
                 if (batallonesToGrid != null) {
@@ -172,7 +174,7 @@ public class MundoController extends MapasController implements Initializable {
                     boolean batallonNuestro = false;
                     boolean batallonAliado = false;
                     for (Batallon batallon : batallonesToGrid) {
-                        if (getClanPrimaryStageController().getBatallonesDelClan().contains(batallon)) {//TODO new Batallon(position)
+                        if (getClanPrimaryStageController().getBatallonesDelClan().contains(batallon)) {
                             if (getJugadorPrimaryStageController().listaBatallonesPropios.containsValue(batallon)) {
                                 batallonNuestro = true;
                             } else {
@@ -195,6 +197,7 @@ public class MundoController extends MapasController implements Initializable {
                         stringBuilder.append(letter_guionBajo).append(letter_batallon);
                     }
                 }
+                stringBuilder.append(rando);
                 String nameImage = stringBuilder.toString();
                 imageView.setImage(CallImages.getImage(RUTE_IMAGES, nameImage));
                 imageView.setId(position);

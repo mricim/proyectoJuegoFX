@@ -9,7 +9,7 @@ import java.util.HashSet;
 
 public class Clan {
     public static ArrayList<Clan> clanArrayList = new ArrayList<>();
-    public static HashMap<Jugador,Clan> jugadoresQueEstanEnUnClan = new HashMap<>();
+    public static HashMap<Jugador, Clan> jugadoresQueEstanEnUnClan = new HashMap<>();
 
     private int id;
     private HashMap<Integer, Jugador> jugadoresDelClan = new HashMap<>();
@@ -55,7 +55,7 @@ public class Clan {
         for (Batallon batallon : jugador.listaBatallonesPropios.values()) {
             addBatallon(batallon);
         }
-        jugadoresQueEstanEnUnClan.put(jugador,this);
+        jugadoresQueEstanEnUnClan.put(jugador, this);
         this.jugadoresDelClan.put(jugador.getId(), jugador);
     }
 
@@ -77,14 +77,17 @@ public class Clan {
     public void addCiudades(Ciudad ciudad) {
         ciudadesDelClan.add(ciudad);
     }
+
     public void addBatallon(Batallon batallon) {
         batallonesDelClan.add(batallon);
     }
+
     public void removeCiudad(Ciudad ciudad) {
-        ciudadesDelClan.add(ciudad);
+        ciudadesDelClan.remove(ciudad);
     }
+
     public void removeBatallon(Batallon batallon) {
-        batallonesDelClan.add(batallon);
+        batallonesDelClan.remove(batallon);
     }
 
 
