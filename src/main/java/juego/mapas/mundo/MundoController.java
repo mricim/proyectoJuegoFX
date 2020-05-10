@@ -157,11 +157,11 @@ public class MundoController extends MapasController implements Initializable {
                     if (filaModule == 3 && columnaModule == 3) {//TODO RANDOMIZADOR PARA LA POSICION 3-3
                         stringBuilder.append(letter_random);
                         if (ciudadToGrid != null) {
-                            stringBuilder.append(ciudadToGrid.getIdCiudad() % 9);
+                            stringBuilder.append(ciudadToGrid.getIdCiudad() % 3);
                         } else if (columna % 2 == 0) {
-                            stringBuilder.append((fila + columna + 2) % 9);
+                            stringBuilder.append((fila + columna + 2) % 3);
                         } else {
-                            stringBuilder.append((fila + columna) % 9);
+                            stringBuilder.append((fila + columna) % 3);
                         }
                     }
 
