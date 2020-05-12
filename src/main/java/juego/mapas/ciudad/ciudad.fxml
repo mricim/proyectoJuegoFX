@@ -73,7 +73,7 @@ prefHeight="${screen.visualBounds.height}" prefWidth="${screen.visualBounds.widt
             <content>
                 <StackPane fx:id="dondeVaLaImagen">
                     <children><!-- https://gist.github.com/jewelsea/5032398 -->
-                        <GridPane fx:id="gridPaneMap" gridLinesVisible="true">
+                        <GridPane fx:id="gridPaneMap" gridLinesVisible="false">
                             <columnConstraints>
                                 <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="100.0" />
                                 <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="100.0" />

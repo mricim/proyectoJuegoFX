@@ -285,10 +285,34 @@ public class MundoController extends MapasController implements Initializable {
         }
     }
 
+    private void createMenuLeft(BorderPane borderPane, ImageView imageView, Ciudad ciudad, ArrayList<Batallon> batallones, String imageName, boolean pasoPorClicas) {
+        System.out.println("DDDDDD " + imageName);
+        List<VBox> vBoxList = new ArrayList<>();
+        boolean controllerParaVerSiestaVacio = false;
+        if (ciudad != null) {
+            vBoxList.add(cajaCiudadMundo(ciudad, imageName));
+            controllerParaVerSiestaVacio = true;
+        } else if (newCiudad && pasoPorClicas) {
+            vBoxList.add(cajaNewCity(imageView, imageName));
+            controllerParaVerSiestaVacio = true;
+        } else if (primeraCiudad) {
+            VBox vBox = new VBox();
+            Label label = new Label("Selecciona una isla y funda una ciudad");
+            vBox.getChildren().add(label);
+            vBoxList.add(vBox);
+            controllerParaVerSiestaVacio = true;
+        }
+        if (batallones != null) {
+            vBoxList.add(cajaBatallon(batallones, imageView, imageName));
+            controllerParaVerSiestaVacio = true;
+        }
+        if (controllerParaVerSiestaVacio) {
+            rellenador(borderPane, vBoxList, 200);
+        }
+    }
 
-    private VBox cajaCiudadMundo(Ciudad ciudadMapa, ImageView imageView, String imageName) {
 
-
+    private VBox cajaCiudadMundo(Ciudad ciudadMapa, String imageName) {
         //Objetos de ciudad
         Label nombreCiudad = null;
         Label nivelCiudadPropia = null;
@@ -460,19 +484,29 @@ public class MundoController extends MapasController implements Initializable {
             }
 
             //vBoxBloquePropio.setMargin(new Insets(0, 15, 0, 15));
-
+            VBox vBox = new VBox();
+            Label label1 = new Label("Destino: ");
+            String city = "-";
+            if (batallon.getCiudadDestino() != null) {
+                city = batallon.getCiudadDestino().getNameCity();
+            }
+            Label label2 = new Label(city);
+            HBox hBox = new HBox(label1, label2);
+            hBox.setAlignment(Pos.CENTER);
+            Label label3 = new Label("Origen: ");
+            String city2 = "-";
+            if (batallon.getCiudadVolver() != null) {
+                city2 = batallon.getCiudadVolver().getNameCity();
+            }
+            Label label4 = new Label(city2);
+            HBox hBox2 = new HBox(label3, label4);
+            hBox2.setAlignment(Pos.CENTER);
+            vBox.getChildren().addAll(hBox, hBox2);
+            vBoxBatallonChildren.add(vBox);
             if (getJugadorPrimaryStageController().listaBatallonesPropios.containsKey(batallon.getIdBatallon())) {
 
                 vBoxBatallonChildren.add(buttonMoverBatallon(batallon));//BOTON PARA MOVER UN BATALLON
                 vBoxBatallonChildren.add(buttonSplitBatallon(batallon));//BOTON PARA dividir BATALLON
-                if (imageName.contains("_c")) {
-                    String posicion = batallon.getPosition();
-                    if (imageName.contains("_c_")) {
-                        vBoxBatallonChildren.add(buttonAttackBatallon(batallon, listaCiudades.get(posicion)));//BOTON PARA atacar
-                    } else {
-                        vBoxBatallonChildren.add(buttonDefenderBatallon(batallon, getClanPrimaryStageController().getCiudadesDelClan().get(posicion)));//BOTON PARA defender
-                    }
-                }
 
 
                 boolean ponerBoton = false;
@@ -665,8 +699,6 @@ public class MundoController extends MapasController implements Initializable {
                 System.out.println("Posición en grid de batallon " + posicionBatallon);
 */
                 getStagePrimaryStageController().getScene().setCursor(Cursor.CROSSHAIR);
-                //basura=false; TODO XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-                //basura=false;
                 getStagePrimaryStageController().getScene().setOnMouseClicked(
                         new EventHandler<MouseEvent>() {
                             @Override
@@ -675,28 +707,33 @@ public class MundoController extends MapasController implements Initializable {
                                 //basura=true; TODO XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
                                 //System.out.println("Entro scene handler");
                                 if (event2.getButton().equals(MouseButton.PRIMARY)) {
-                                    //System.out.println(fila+" - "+columna);
-                                    //System.out.println("Posición de Batallon " + batallon.getNombre() + " " + batallon.getPosition() + " antes de cambio.");
-                                    int batallonFila = batallon.getFila();
-                                    int batallonColumna = batallon.getColumna();
-                                    boolean seMovio = false;
-                                    if (batallonFila == fila) {
-                                        if (batallonColumna > columna) {//moverse a la izquierda
-                                            int batallonColumTemp = batallonColumna - 1;
-                                            seMovio = isSePuedeMover(fila, batallonColumTemp, batallon);
-                                        } else {//moverse a la derecha
-                                            int batallonColumTemp = batallonColumna + 1;
-                                            seMovio = isSePuedeMover(fila, batallonColumTemp, batallon);
+
+                                    //
+                                    String position = fila + "-" + columna;
+                                    Ciudad ciudad = listaCiudades.get(position);
+                                    if (ciudad != null) {
+                                        if (getClanPrimaryStageController().getCiudadesDelClan().containsKey(position)) {
+                                            batallon.setCiudadVolver(ciudad);
+                                            batallon.setCiudadDestino(ciudad);
+                                            reload(MundoController.class);
+                                        } else {
+                                            batallon.setCiudadDestino(ciudad);
+                                            reload(MundoController.class);
                                         }
-                                    } else if (batallonColumna == columna) {
-                                        if (batallonFila > fila) {//moverse a la arriba
-                                            int batallonFilaTemp = batallonFila - 1;
-                                            seMovio = isSePuedeMover(batallonFilaTemp, columna, batallon);
-                                        } else {//moverse a la abajo
-                                            int batallonFilaTemp = batallonFila + 1;
-                                            seMovio = isSePuedeMover(batallonFilaTemp, columna, batallon);
-                                        }
+                                        CustomAlert alert = new CustomAlert(Alert.AlertType.INFORMATION);
+                                        alert.setTitle("Information Dialog");
+                                        alert.setHeaderText("Señor, alli estaremos!");
+                                        alert.setContentText("Nos ponemos en marcha, vamos a " + ciudad.getNameCity());
+                                        alert.showAndWait();
+                                    } else {
+                                        CustomAlert alert = new CustomAlert(Alert.AlertType.WARNING);
+                                        alert.setTitle("Warning Dialog");
+                                        alert.setHeaderText("Posicion no permitida");
+                                        alert.setContentText("No puedes situarte en la misma posicion que una flota enemiga o en una isla si no es sobre una ciudad");
+                                        alert.showAndWait();
                                     }
+                                    //
+
                                     event2.consume();
                                     event1.consume();
                                     getStagePrimaryStageController().getScene().setCursor(Cursor.DEFAULT);
@@ -708,13 +745,6 @@ public class MundoController extends MapasController implements Initializable {
 //                                    getStagePrimaryStageController().getScene().setCursor(Cursor.DEFAULT);
                                     //getStagePrimaryStageController().getScene().setOnMouseClicked(null);
 
-                                    if (!seMovio) {
-                                        CustomAlert alert = new CustomAlert(Alert.AlertType.WARNING);
-                                        alert.setTitle("Warning Dialog");
-                                        alert.setHeaderText("Posicion no permitida");
-                                        alert.setContentText("No puedes situarte en la misma posicion que una flota enemiga o en una isla si no es sobre una ciudad");
-                                        alert.showAndWait();
-                                    }
                                     recargaGripPane();
                                     //reload(MundoController.class);
                                 } else {
@@ -894,33 +924,6 @@ public class MundoController extends MapasController implements Initializable {
             Separator separator = new Separator();
             separator.setPrefWidth(200);
             childrenFlowPane.add(separator);
-        }
-    }
-
-
-    private void createMenuLeft(BorderPane borderPane, ImageView imageView, Ciudad ciudad, ArrayList<Batallon> batallones, String imageName, boolean pasoPorClicas) {
-        System.out.println("DDDDDD " + imageName);
-        List<VBox> vBoxList = new ArrayList<>();
-        boolean controllerParaVerSiestaVacio = false;
-        if (ciudad != null) {
-            vBoxList.add(cajaCiudadMundo(ciudad, imageView, imageName));
-            controllerParaVerSiestaVacio = true;
-        } else if (newCiudad && pasoPorClicas) {
-            vBoxList.add(cajaNewCity(imageView, imageName));
-            controllerParaVerSiestaVacio = true;
-        } else if (primeraCiudad) {
-            VBox vBox = new VBox();
-            Label label = new Label("Selecciona una isla y funda una ciudad");
-            vBox.getChildren().add(label);
-            vBoxList.add(vBox);
-            controllerParaVerSiestaVacio = true;
-        }
-        if (batallones != null) {
-            vBoxList.add(cajaBatallon(batallones, imageView, imageName));
-            controllerParaVerSiestaVacio = true;
-        }
-        if (controllerParaVerSiestaVacio) {
-            rellenador(borderPane, vBoxList, 200);
         }
     }
 
