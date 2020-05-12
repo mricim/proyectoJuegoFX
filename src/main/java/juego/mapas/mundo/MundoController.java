@@ -146,15 +146,10 @@ public class MundoController extends MapasController implements Initializable {
                     ciudadToGrid = listaCiudades.get(position);
                     if (ciudadToGrid != null) {
                         stringBuilder.append(letter_guionBajo).append(letter_city);
-                        if (getJugadorPrimaryStageController().listaCiudadesPropias.containsKey(position)){
+                        if (getJugadorPrimaryStageController().listaCiudadesPropias.containsKey(position)) {
                             stringBuilder.append(letter_esNuestro);
-                        }else{
-                            for (Ciudad ciudad : getClanPrimaryStageController().getCiudadesDelClan()) {
-                                if (ciudad.getPosition().equals(position)){
-                                    stringBuilder.append(letter_Clan);
-                                    break;
-                                }
-                            }
+                        } else if (getClanPrimaryStageController().getCiudadesDelClan().get(position) != null) {
+                            stringBuilder.append(letter_Clan);
                         }
                     }
                     if (filaModule == 3 && columnaModule == 3) {//TODO RANDOMIZADOR PARA LA POSICION 3-3
@@ -307,7 +302,6 @@ public class MundoController extends MapasController implements Initializable {
         vBoxBloquePropio.setMaxWidth(200);
         vBoxBloquePropio.setAlignment(TOP_CENTER);
 
-        System.out.println("Imagename = " + imageName);
         BackgroundFill backgroundFill = null;
 
         ObservableList<Node> childrenVBox = vBoxBloquePropio.getChildren();
@@ -356,7 +350,7 @@ public class MundoController extends MapasController implements Initializable {
             printRecursos(childrenVBox, ciudadMapa.getRecursosTreeMap().entrySet(), 2);
             vBoxBloquePropio.setMargin(descripcionCiudad, new Insets(0, 15, 0, 15));
         } else {//Ciudad enemiga o aliada
-            if (getClanPrimaryStageController().getCiudadesDelClan().contains(ciudadMapa)) {
+            if (getClanPrimaryStageController().getCiudadesDelClan().containsKey(ciudadMapa.getPosition())) {
                 backgroundFill = new BackgroundFill(Color.GREEN, CornerRadii.EMPTY, Insets.EMPTY);
             } else {
                 backgroundFill = new BackgroundFill(Color.DARKRED, CornerRadii.EMPTY, Insets.EMPTY);
@@ -387,10 +381,9 @@ public class MundoController extends MapasController implements Initializable {
 
         ObservableList<Node> childrenVBox = vBoxBloquePropio.getChildren();
 
-        BackgroundFill backgroundFill = new BackgroundFill(Color.ANTIQUEWHITE, CornerRadii.EMPTY, Insets.EMPTY);
-
 
         for (Batallon batallon : listaBatallones) {
+            BackgroundFill backgroundFill = new BackgroundFill(Color.ANTIQUEWHITE, CornerRadii.EMPTY, Insets.EMPTY);
             VBox vBoxBatallon = new VBox();
             vBoxBatallon.setAlignment(Pos.CENTER);
             vBoxBatallon.setSpacing(10);
@@ -472,29 +465,15 @@ public class MundoController extends MapasController implements Initializable {
 
                 vBoxBatallonChildren.add(buttonMoverBatallon(batallon));//BOTON PARA MOVER UN BATALLON
                 vBoxBatallonChildren.add(buttonSplitBatallon(batallon));//BOTON PARA dividir BATALLON
-                if (imageName.contains("_c_")) {
+                if (imageName.contains("_c")) {
                     String posicion = batallon.getPosition();
-                    Ciudad ciudad = getJugadorPrimaryStageController().listaCiudadesPropias.get(posicion);
-                    if (ciudad != null) {
-                        System.out.println("DEFENDER Propia");
-                        vBoxBatallonChildren.add(buttonDefenderBatallon(batallon, ciudad));//BOTON PARA atacar
+                    if (imageName.contains("_c_")) {
+                        vBoxBatallonChildren.add(buttonAttackBatallon(batallon, listaCiudades.get(posicion)));//BOTON PARA atacar
                     } else {
-                        Clan a = Clan.jugadoresQueEstanEnUnClan.get(getJugadorPrimaryStageController());
-                        for (Ciudad ciudad2 : a.getCiudadesDelClan()) {
-                            if (ciudad2.getPosition().equals(posicion)) {
-                                ciudad = ciudad2;
-                                break;
-                            }
-                        }
-                        if (ciudad != null) {
-                            System.out.println("DEFENDER");
-                            vBoxBatallonChildren.add(buttonDefenderBatallon(batallon, ciudad));//BOTON PARA atacar
-                        } else {
-                            System.out.println("ATACAR");
-                            //vBoxBatallonChildren.add(buttonAttackBatallon(batallon, listaCiudades.get(posicion)));//BOTON PARA atacar
-                        }
+                        vBoxBatallonChildren.add(buttonDefenderBatallon(batallon, getClanPrimaryStageController().getCiudadesDelClan().get(posicion)));//BOTON PARA defender
                     }
                 }
+
 
                 boolean ponerBoton = false;
                 ObservableList<String> strings = FXCollections.observableArrayList();
@@ -524,7 +503,6 @@ public class MundoController extends MapasController implements Initializable {
                 }
             } else {
                 if (getClanPrimaryStageController().getBatallonesDelClan().contains(batallon)) {
-                    System.out.println("COLOR" + batallon.getIdBatallon());
                     backgroundFill = new BackgroundFill(Color.GREEN, CornerRadii.EMPTY, Insets.EMPTY);
                 } else {
                     backgroundFill = new BackgroundFill(Color.DARKRED, CornerRadii.EMPTY, Insets.EMPTY);
@@ -535,7 +513,9 @@ public class MundoController extends MapasController implements Initializable {
             childrenVBox.add(vBoxBatallon);
         }
 
-        childrenVBox.add(new CustomSeparator(200, true));
+        childrenVBox.add(new
+
+                CustomSeparator(200, true));
 
 
         //FIN BLOQUE
@@ -554,12 +534,13 @@ public class MundoController extends MapasController implements Initializable {
         return btnSplit;
     }
 
-    private Node buttonAttackBatallon(Batallon batallon) {
+    private Node buttonAttackBatallon(Batallon batallon, Ciudad ciudad) {
         Button btnSplit = new Button("Atacar");
         btnSplit.setAlignment(Pos.CENTER);
         btnSplit.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
+                batallon.setCiudadDestino(ciudad);
                 reload(PeleaController.class);
             }
         });

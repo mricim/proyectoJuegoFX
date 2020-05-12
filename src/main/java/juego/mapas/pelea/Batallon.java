@@ -17,6 +17,7 @@ public class Batallon extends Posicion {
     private int idBatallon;
     private String nombre;
     private Ciudad ciudadVolver;
+    private Ciudad ciudadDestino;
     private int proyectiles;//TODO MAS QUE PROYECTILES SERIA COMO RACIONES O MUNICIONES O ALGO ASI
     private double poderMilitar;
 
@@ -27,6 +28,7 @@ public class Batallon extends Posicion {
         this.nombre = nombre;
         this.proyectiles = proyectiles;
         this.ciudadVolver = ciudadVolver;
+        this.ciudadDestino = null;
 
         jugador.listaBatallonesPropios.put(idBatallon, this);
         for (Clan clan : Clan.clanArrayList) {
@@ -80,12 +82,20 @@ public class Batallon extends Posicion {
         return ciudadVolver;
     }
 
+    public Ciudad getCiudadDestino() {
+        return ciudadDestino;
+    }
+
     public int getProyectiles() {
         return proyectiles;
     }
 
     public void setCiudadVolver(Ciudad ciudadVolver) {
         this.ciudadVolver = ciudadVolver;
+    }
+
+    public void setCiudadDestino(Ciudad ciudadDestino) {
+        this.ciudadDestino = ciudadDestino;
     }
 
     public void addSoldados(HashMap<Integer, Unidades> anadir) {

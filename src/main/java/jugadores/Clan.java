@@ -3,9 +3,7 @@ package main.java.jugadores;
 import main.java.juego.mapas.ciudad.Ciudad;
 import main.java.juego.mapas.pelea.Batallon;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
+import java.util.*;
 
 public class Clan {
     public static ArrayList<Clan> clanArrayList = new ArrayList<>();
@@ -13,7 +11,7 @@ public class Clan {
 
     private int id;
     private HashMap<Integer, Jugador> jugadoresDelClan = new HashMap<>();
-    private HashSet<Ciudad> ciudadesDelClan = new HashSet<>();
+    private Map<String, Ciudad> ciudadesDelClan = new TreeMap<>();
     private HashSet<Batallon> batallonesDelClan = new HashSet<>();
     private String name;
 
@@ -36,7 +34,7 @@ public class Clan {
         return name;
     }
 
-    public HashSet<Ciudad> getCiudadesDelClan() {
+    public Map<String, Ciudad> getCiudadesDelClan() {
         return ciudadesDelClan;
     }
 
@@ -75,7 +73,7 @@ public class Clan {
     }
 
     public void addCiudades(Ciudad ciudad) {
-        ciudadesDelClan.add(ciudad);
+        ciudadesDelClan.put(ciudad.getPosition(), ciudad);
     }
 
     public void addBatallon(Batallon batallon) {
@@ -83,7 +81,11 @@ public class Clan {
     }
 
     public void removeCiudad(Ciudad ciudad) {
-        ciudadesDelClan.remove(ciudad);
+        ciudadesDelClan.remove(ciudad.getPosition());
+    }
+
+    public void removeCiudad(String posicionCiudad) {
+        ciudadesDelClan.remove(posicionCiudad);
     }
 
     public void removeBatallon(Batallon batallon) {
