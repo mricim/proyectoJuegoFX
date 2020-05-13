@@ -111,6 +111,7 @@ public class PrimaryStageControler {
 
     public static void reloadNewStage(Stage oldStageOwner, Stage primaryStage, String rute, boolean setMaximized) throws IOException {
         FXMLLoader loader = new FXMLLoader();
+        loader.setResources(TRADUCCIONES_GENERALES);
         loader.setLocation(Main.class.getResource(rute));
 
         Parent root = loader.load();

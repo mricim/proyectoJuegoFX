@@ -17,9 +17,9 @@ prefHeight="${screen.visualBounds.height}" prefWidth="${screen.visualBounds.widt
          <children>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="5.0">
                <children>
-                  <TextField promptText="Usuario" />
-                  <PasswordField promptText="Password" />
-                  <Button mnemonicParsing="false" onMouseClicked="#iniciarSession" text="Iniciar Sesión" />
+                  <TextField promptText="%usuario" />
+                  <PasswordField promptText="%password" />
+                  <Button mnemonicParsing="false" onMouseClicked="#iniciarSession" text="%iniciarSession" />
                </children>
             </HBox>
          </children>

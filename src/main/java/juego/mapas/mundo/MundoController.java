@@ -23,10 +23,8 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
-import main.java.juego.mapas.pelea.PeleaController;
 import main.java.juego.mapas.pelea.Unidades;
 import main.java.juego.mapas.pelea.UnidadesPreCargadas;
-import main.java.jugadores.Clan;
 import main.java.utils.CallImages;
 import main.java.utils.PrimaryStageControler;
 import main.java.juego.MapasController;
@@ -40,6 +38,7 @@ import main.java.utils.tagsFX.CustomSlider;
 import main.java.utils.tagsFX.CustomTextField;
 
 import java.net.URL;
+import java.text.MessageFormat;
 import java.util.*;
 
 import static javafx.geometry.Pos.TOP_CENTER;
@@ -297,7 +296,7 @@ public class MundoController extends MapasController implements Initializable {
             controllerParaVerSiestaVacio = true;
         } else if (primeraCiudad) {
             VBox vBox = new VBox();
-            Label label = new Label("Selecciona una isla y funda una ciudad");
+            Label label = new Label(TRADUCCIONES_THEMA.getString("mundo.FundarNuevaCiudad"));
             vBox.getChildren().add(label);
             vBoxList.add(vBox);
             controllerParaVerSiestaVacio = true;
@@ -357,13 +356,13 @@ public class MundoController extends MapasController implements Initializable {
         imgViewCiudad.setPreserveRatio(true);
         childrenVBox.add(imgViewCiudad);
         //Nivel ciudad
-        nivelCiudadPropia = new Label("Nivel: " + ciudadMapa.getNivelCiudad());
+        nivelCiudadPropia = new Label(MessageFormat.format(TRADUCCIONES_THEMA.getString("mundo.nivelCiudad"), ciudadMapa.getNivelCiudad()));
         nivelCiudadPropia.setTextAlignment(CENTER);
         nivelCiudadPropia.setAlignment(Pos.CENTER);
         nivelCiudadPropia.setWrapText(true);
         childrenVBox.add(nivelCiudadPropia);
         //Descripción ciudad
-        descripcionCiudad = new Label("Descripción ciudad");
+        descripcionCiudad = new Label(TRADUCCIONES_THEMA.getString("mundo.descripcionCiudad"));
         descripcionCiudad.setTextAlignment(CENTER);
         descripcionCiudad.setAlignment(Pos.CENTER);
         descripcionCiudad.setWrapText(true);
@@ -371,7 +370,7 @@ public class MundoController extends MapasController implements Initializable {
         //Ciudad propia
         if (getJugadorPrimaryStageController().listaCiudadesPropias.containsKey(ciudadMapa.getPosition())) {
             backgroundFill = new BackgroundFill(Color.ANTIQUEWHITE, CornerRadii.EMPTY, Insets.EMPTY);
-            printRecursos(childrenVBox, ciudadMapa.getRecursosTreeMap().entrySet(), 2);
+            printRecursos(childrenVBox, ciudadMapa.getRecursosTreeMap().entrySet());
             vBoxBloquePropio.setMargin(descripcionCiudad, new Insets(0, 15, 0, 15));
         } else {//Ciudad enemiga o aliada
             if (getClanPrimaryStageController().getCiudadesDelClan().containsKey(ciudadMapa.getPosition())) {
@@ -485,7 +484,7 @@ public class MundoController extends MapasController implements Initializable {
 
             //vBoxBloquePropio.setMargin(new Insets(0, 15, 0, 15));
             VBox vBox = new VBox();
-            Label label1 = new Label("Destino: ");
+            Label label1 = new Label(TRADUCCIONES_THEMA.getString("mundo.destino"));
             String city = "-";
             if (batallon.getCiudadDestino() != null) {
                 city = batallon.getCiudadDestino().getNameCity();
@@ -493,7 +492,7 @@ public class MundoController extends MapasController implements Initializable {
             Label label2 = new Label(city);
             HBox hBox = new HBox(label1, label2);
             hBox.setAlignment(Pos.CENTER);
-            Label label3 = new Label("Origen: ");
+            Label label3 = new Label(TRADUCCIONES_THEMA.getString("mundo.origen"));
             String city2 = "-";
             if (batallon.getCiudadVolver() != null) {
                 city2 = batallon.getCiudadVolver().getNameCity();
@@ -556,33 +555,8 @@ public class MundoController extends MapasController implements Initializable {
         return vBoxBloquePropio;
     }
 
-    private Node buttonDefenderBatallon(Batallon batallon, Ciudad ciudad) {
-        Button btnSplit = new Button("Defender");
-        btnSplit.setAlignment(Pos.CENTER);
-        btnSplit.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                batallon.setCiudadVolver(ciudad);
-            }
-        });
-        return btnSplit;
-    }
-
-    private Node buttonAttackBatallon(Batallon batallon, Ciudad ciudad) {
-        Button btnSplit = new Button("Atacar");
-        btnSplit.setAlignment(Pos.CENTER);
-        btnSplit.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                batallon.setCiudadDestino(ciudad);
-                reload(PeleaController.class);
-            }
-        });
-        return btnSplit;
-    }
-
     private Node buttonSplitBatallon(Batallon batallon) {
-        Button btnSplit = new Button("Separar ejercito");
+        Button btnSplit = new Button(TRADUCCIONES_THEMA.getString("mundo.splitEjercito"));
         btnSplit.setAlignment(Pos.CENTER);
         btnSplit.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -597,7 +571,7 @@ public class MundoController extends MapasController implements Initializable {
                 ObservableList<Node> vBoxChildren = vBox.getChildren();
 
                 HashMap<Integer, Unidades> temp = new HashMap<>();
-                Button btnSplit = new Button("Separar");
+                Button btnSplit = new Button(TRADUCCIONES_THEMA.getString("mundo.button.separarEjercito"));
                 btnSplit.setDisable(true);
                 for (Unidades soldados : batallon.getSoldadoHashMap().values()) {
                     UnidadesPreCargadas unidadesPreCargadas = soldados.getUnidadesPreCargadas();
@@ -648,7 +622,7 @@ public class MundoController extends MapasController implements Initializable {
                 }
                 vBoxChildren.add(new CustomSeparator(20, false, 10));
                 TextField textField = new TextField();
-                textField.setPromptText("name");
+                textField.setPromptText(TRADUCCIONES_THEMA.getString("mundo.textfield.batallonName"));
                 textField.setAlignment(Pos.CENTER);
                 textField.setMaxWidth(200);
                 vBoxChildren.add(textField);
@@ -659,7 +633,7 @@ public class MundoController extends MapasController implements Initializable {
                     public void handle(ActionEvent event) {
                         String name = textField.getText();
                         if (name.equals("")) {
-                            name = "Batallon " + getJugadorPrimaryStageController().listaBatallonesPropios.size();
+                            name = MessageFormat.format(TRADUCCIONES_THEMA.getString("mundo.batallonDefaultName"), getJugadorPrimaryStageController().listaBatallonesPropios.size());
                         }
                         Batallon elNuevo = new Batallon(name, batallon.getFila(), batallon.getColumna(), 0, getJugadorPrimaryStageController(), batallon.getCiudadVolver());
                         for (Unidades value : batallon.getSoldadoHashMap().values()) {
@@ -681,7 +655,7 @@ public class MundoController extends MapasController implements Initializable {
     }
 
     private Button buttonMoverBatallon(Batallon batallon) {
-        Button btnMove = new Button("mover unidades");
+        Button btnMove = new Button(TRADUCCIONES_GENERALES.getString("mundo.moverUnidades"));
         btnMove.setAlignment(Pos.CENTER);
         btnMove.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -721,15 +695,15 @@ public class MundoController extends MapasController implements Initializable {
                                             reload(MundoController.class);
                                         }
                                         CustomAlert alert = new CustomAlert(Alert.AlertType.INFORMATION);
-                                        alert.setTitle("Information Dialog");
-                                        alert.setHeaderText("Señor, alli estaremos!");
-                                        alert.setContentText("Nos ponemos en marcha, vamos a " + ciudad.getNameCity());
+                                        alert.setTitle(TRADUCCIONES_GENERALES.getString("information.dialog"));
+                                        alert.setHeaderText(TRADUCCIONES_THEMA.getString("mundo.dialog.header.moverTropas"));
+                                        alert.setContentText(MessageFormat.format(TRADUCCIONES_THEMA.getString("mundo.dialog.text.moverTropas"), ciudad.getNameCity()));
                                         alert.showAndWait();
                                     } else {
                                         CustomAlert alert = new CustomAlert(Alert.AlertType.WARNING);
-                                        alert.setTitle("Warning Dialog");
-                                        alert.setHeaderText("Posicion no permitida");
-                                        alert.setContentText("No puedes situarte en la misma posicion que una flota enemiga o en una isla si no es sobre una ciudad");
+                                        alert.setTitle(TRADUCCIONES_GENERALES.getString("warning.dialog"));
+                                        alert.setHeaderText(TRADUCCIONES_THEMA.getString("mundo.batallon.dialog.header.posicionNoPermitida"));
+                                        alert.setContentText(TRADUCCIONES_THEMA.getString("mundo.batallon.dialog.text.PosicionNoPermitida"));
                                         alert.showAndWait();
                                     }
                                     //
@@ -785,17 +759,6 @@ public class MundoController extends MapasController implements Initializable {
         return false;
     }
 
-    public void showMessage() {
-        Stage newStage = new Stage();
-        VBox comp = new VBox();
-        TextField message = new TextField("No puedes moverte a esta posición, intentalo de nuevo.");
-        comp.getChildren().add(message);
-
-        Scene stageScene = new Scene(comp, 300, 300);
-        newStage.setScene(stageScene);
-        newStage.show();
-    }
-
     private VBox cajaNewCity(ImageView imageView, String imageName) {
         //Objetos de ciudad
         Button botonNuevaCity = null;
@@ -814,7 +777,7 @@ public class MundoController extends MapasController implements Initializable {
         String[] asd = imageView.getId().split("-");
         int fila = Integer.parseInt(asd[0]);
         int columna = Integer.parseInt(asd[1]);
-        botonNuevaCity = new Button("Fundar una nueva ciudad " + imageView.getId());
+        botonNuevaCity = new Button(MessageFormat.format(TRADUCCIONES_THEMA.getString("mundo.fundarNuevaCiudad"), imageView.getId()));
         botonNuevaCity.setTextAlignment(CENTER);
         botonNuevaCity.setAlignment(Pos.CENTER);
         botonNuevaCity.setOnMouseClicked(e -> {
@@ -829,7 +792,7 @@ public class MundoController extends MapasController implements Initializable {
             city2.add(new Recursos(4, 3000));
             city2.add(new Recursos(5, 3000));
             city2.add(new Recursos(6, 3000));
-            new Ciudad(getJugadorPrimaryStageController(), "New city " + imageView.getId(), fila, columna, 0, city2);
+            new Ciudad(getJugadorPrimaryStageController(), MessageFormat.format(TRADUCCIONES_THEMA.getString("mundo.newCity"), imageView.getId()), fila, columna, 0, city2);
             newCiudad = false;
             if (primeraCiudad) {
                 PrimaryStageControler.setCiudadPrimaryStageController(getJugadorPrimaryStageController().listaCiudadesPropias.values().iterator().next());
@@ -849,82 +812,28 @@ public class MundoController extends MapasController implements Initializable {
         return vBoxBloquePropio;
     }
 
-    private void printRecursos(ObservableList<Node> childrenFlowPane, Set<Map.Entry<Integer, Recursos>> recursos, int produceAlmacenaCuesta) {
-        boolean paso0 = false;
-        for (Map.Entry<Integer, Recursos> recurso : recursos) {
-            Recursos recursoValor = recurso.getValue();
-            if (recursoValor.getCantidad() > 0) {
-                paso0 = true;
-            }
-        }
-        if (paso0) {
-            if (produceAlmacenaCuesta == 1) {
-                Separator separator = new Separator();
-                separator.setPrefWidth(200);
-                childrenFlowPane.add(separator);
-            }
-            Label label = new Label();
-            label.setBackground(new Background(new BackgroundFill(Color.rgb(238, 174, 160), CornerRadii.EMPTY, Insets.EMPTY)));
-            switch (produceAlmacenaCuesta) {
-                case 1:
-                    label.setText("Produce:");
-                    break;
-                case 2:
-                    label.setText("Almacena:");
-                    break;
-                case 3:
-                    label.setText("Cuesta:");
-                    break;
-                default:
-                    label.setText("Error");
-                    break;
-            }
-            childrenFlowPane.add(label);
-            Separator separator2 = new Separator();
-            separator2.setPrefWidth(200);
-            separator2.setVisible(false);
-            childrenFlowPane.add(separator2);
-        }
-        boolean paso1 = false;
+    private void printRecursos(ObservableList<Node> childrenFlowPane, Set<Map.Entry<Integer, Recursos>> recursos) {
+        Separator separator2 = new Separator();
+        separator2.setPrefWidth(200);
+        separator2.setVisible(false);
+        childrenFlowPane.add(separator2);
         for (Map.Entry<Integer, Recursos> recurso : recursos) {
             Recursos recursoValor = recurso.getValue();
             int numero = recursoValor.getCantidad();
-            if (numero != 0) {
-                ImageView imageView = new ImageView(recursoValor.getImage());
-                imageView.setFitWidth(25);
-                imageView.setFitHeight(25);
-                Label label = new Label();
-                switch (produceAlmacenaCuesta) {
-                    case 1:
-                        if (numero > 0) {
-                            label.setText("+" + numero + "/h");
-                            label.setTextFill(Color.GREEN);
-                        } else if (numero < 0) {
-                            label.setText(numero + "/h");
-                            label.setTextFill(Color.RED);
-                        }
-                        break;
-                    case 2:
-                        label.setText(String.valueOf(numero));
-                        break;
-                    case 3:
-                        label.setText("-" + numero);
-                        label.setTextFill(Color.RED);
-                        break;
-                }
-                label.setGraphic(imageView);
-                label.setTextAlignment(CENTER);
-                label.setAlignment(Pos.CENTER);
-                label.setWrapText(true);
-                childrenFlowPane.add(label);
-                paso1 = true;
-            }
+            ImageView imageView = new ImageView(recursoValor.getImage());
+            imageView.setFitWidth(25);
+            imageView.setFitHeight(25);
+            Label label = new Label(String.valueOf(numero));
+            label.setGraphic(imageView);
+            label.setTextAlignment(CENTER);
+            label.setAlignment(Pos.CENTER);
+            label.setWrapText(true);
+            childrenFlowPane.add(label);
         }
-        if (paso1) {
-            Separator separator = new Separator();
-            separator.setPrefWidth(200);
-            childrenFlowPane.add(separator);
-        }
+        Separator separator = new Separator();
+        separator.setPrefWidth(200);
+        childrenFlowPane.add(separator);
+
     }
 
 

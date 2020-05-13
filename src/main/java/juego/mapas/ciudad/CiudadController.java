@@ -217,7 +217,7 @@ public class CiudadController extends MapasController implements Initializable {
         imageViewPropio.setPreserveRatio(true);
         childrenVBox.add(imageViewPropio);
         if (edificioPosiblesConstrucciones.getId() != 0) {
-            Label nivelEdificioPropio = new Label("Nivel: " + edificioPosiblesConstrucciones.getNivel());
+            Label nivelEdificioPropio = new Label(TRADUCCIONES_THEMA.getString("ciudad.nivelEdificio") + edificioPosiblesConstrucciones.getNivel());
             nivelEdificioPropio.setTextAlignment(CENTER);
             nivelEdificioPropio.setAlignment(Pos.CENTER);
             nivelEdificioPropio.setWrapText(true);
@@ -254,7 +254,7 @@ public class CiudadController extends MapasController implements Initializable {
             childrenVBox.add(vBox);
             if (construir_Update_Dowgrade_Destruir != 0) {
                 if (construir_Update_Dowgrade_Destruir == 4) {//Si es el edificio que tenemos en el mapa
-                    Label label = new Label("Se te devolvera un " + PORCENTAGE_A_DEVOLVER + "% de los recursos de la construcción");
+                    Label label = new Label(TRADUCCIONES_THEMA.getString("ciudad.seDevolvera.Parte1") + PORCENTAGE_A_DEVOLVER + TRADUCCIONES_THEMA.getString("ciudad.seDevolvera.Parte2"));
                     label.setWrapText(true);
                     label.setAlignment(Pos.CENTER);
                     childrenVBox.add(label);
@@ -325,16 +325,16 @@ public class CiudadController extends MapasController implements Initializable {
         String text = null;
         switch (construir_Update_Dowgrade_Destruir) {
             case 1:
-                text = "Construir";
+                text = TRADUCCIONES_THEMA.getString("ciudad.construir");
                 break;
             case 2:
-                text = "Update";
+                text = TRADUCCIONES_THEMA.getString("ciudad.update");
                 break;
             case 3:
-                text = "Downgrade";
+                text = TRADUCCIONES_THEMA.getString("ciudad.downgrade");
                 break;
             case 4:
-                text = "Destruir";
+                text = TRADUCCIONES_THEMA.getString("ciudad.destruir");
                 break;
         }
         return text;
@@ -346,7 +346,7 @@ public class CiudadController extends MapasController implements Initializable {
         switch (tipoEdificio) {
             case 1://PALACIO
                 Button buttonCase1 = new Button();
-                buttonCase1.setText("New Ciudad");
+                buttonCase1.setText(TRADUCCIONES_THEMA.getString("ciudad.new.ciudad"));
                 int total = getJugadorPrimaryStageController().listaCiudadesPropias.size();
                 int counter = 1;
                 for (Ciudad ciudad : getJugadorPrimaryStageController().listaCiudadesPropias.values()) {
@@ -368,7 +368,7 @@ public class CiudadController extends MapasController implements Initializable {
                 break;
             case 2://CUARTEL (SOLDADOS)
                 Button buttonCase2 = new Button();
-                buttonCase2.setText(TRADUCCIONES_GENERALES.getString("city.button.entrenarNuevasUnidades"));
+                buttonCase2.setText(TRADUCCIONES_THEMA.getString("city.button.entrenarNuevasUnidades"));
                 buttonCase2.setOnMouseClicked(e -> {
                     createMenuLeftSecond(borderPane, flowPaneRecuros, 2);
                 });
@@ -376,7 +376,7 @@ public class CiudadController extends MapasController implements Initializable {
                 break;
             case 3://ARMAS DE ASEDIO (SOLDADOS)
                 Button buttonCase3 = new Button();
-                buttonCase3.setText(TRADUCCIONES_GENERALES.getString("city.button.construirMaquinariaAsedio"));
+                buttonCase3.setText(TRADUCCIONES_THEMA.getString("city.button.construirMaquinariaAsedio"));
                 buttonCase3.setOnMouseClicked(e -> {
                     createMenuLeftSecond(borderPane, flowPaneRecuros, 3);
                 });
@@ -384,7 +384,7 @@ public class CiudadController extends MapasController implements Initializable {
                 break;
             case 4://PUERTO
                 Button buttonCase4 = new Button();
-                buttonCase4.setText("Comerciar");
+                buttonCase4.setText(TRADUCCIONES_THEMA.getString("ciudad.comercio.comerciar"));
                 buttonCase4.setOnMouseClicked(e -> {
                     createMenuLeftSecond(borderPane, flowPaneRecuros, 4);
                 });
@@ -432,7 +432,7 @@ public class CiudadController extends MapasController implements Initializable {
         separator2.setVisible(false);
         childrenVBox.add(separator2);
 
-        Label nombreEdificioPropio = new Label("Comercio");
+        Label nombreEdificioPropio = new Label(TRADUCCIONES_THEMA.getString("ciudad.comercio.comercio"));
         nombreEdificioPropio.setTextAlignment(CENTER);
         nombreEdificioPropio.setAlignment(Pos.CENTER);
         nombreEdificioPropio.setWrapText(true);
@@ -440,7 +440,7 @@ public class CiudadController extends MapasController implements Initializable {
 
         childrenVBox.add(new CustomSeparator((int) (flowPaneRecuros.getHeight() * 0.8), false));
 //AÑADIR
-        Label oferta = new Label("Ofrezco");
+        Label oferta = new Label(TRADUCCIONES_THEMA.getString("ciudad.comercio.ofrezco"));
         oferta.setTextAlignment(CENTER);
         oferta.setAlignment(Pos.CENTER);
         oferta.setWrapText(true);
@@ -483,7 +483,7 @@ public class CiudadController extends MapasController implements Initializable {
         hBoxAddToTableViewChildren.add(textField);
         childrenVBox.add(hBoxAddToTableView);
 //AÑADIR 2
-        Label demanda = new Label("Pido");
+        Label demanda = new Label(TRADUCCIONES_THEMA.getString("ciudad.comercio.pido"));
         demanda.setTextAlignment(CENTER);
         demanda.setAlignment(Pos.CENTER);
         demanda.setWrapText(true);
@@ -526,7 +526,7 @@ public class CiudadController extends MapasController implements Initializable {
         hBoxAddToTableViewChildren2.add(textField2);
         childrenVBox.add(hBoxAddToTableView2);
 //AÑADIR BUTTON
-        final Button addButton = new Button("Crear oferta");
+        final Button addButton = new Button(TRADUCCIONES_THEMA.getString("ciudad.comercio.crearOferta"));
         addButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent e) {
@@ -540,9 +540,9 @@ public class CiudadController extends MapasController implements Initializable {
                         Comercio.data.add(new Comercio(new Recursos(recursosPrecargados, cantidad), new Recursos(recursosPrecargados2, cantidad2), getJugadorPrimaryStageController()));
                         recursosMenu(flowPaneRecuros, CiudadController.class);
                         CustomAlert alert = new CustomAlert(Alert.AlertType.INFORMATION);
-                        alert.setTitle("Information Dialog");
+                        alert.setTitle(TRADUCCIONES_GENERALES.getString("information.dialog"));
                         alert.setHeaderText(null);
-                        alert.setContentText("Oferta creada!");
+                        alert.setContentText(TRADUCCIONES_THEMA.getString("ciudad.comercio.ofertaCreada"));
                         alert.showAndWait();
                     }
                 }
@@ -570,7 +570,7 @@ public class CiudadController extends MapasController implements Initializable {
         idCol.setCellValueFactory(new PropertyValueFactory<>("id"));
          */
         //columna
-        TableColumn<Comercio, Jugador> clan = new TableColumn("User");
+        TableColumn<Comercio, Jugador> clan = new TableColumn(TRADUCCIONES_THEMA.getString("ciudad.comercio.usuario"));
         clan.setMinWidth(120);
         clan.setCellFactory(param -> {
             HBox hBox = new HBox();
@@ -609,7 +609,7 @@ public class CiudadController extends MapasController implements Initializable {
         });
         clan.setCellValueFactory(new PropertyValueFactory<Comercio, Jugador>("jugador"));
 //columna
-        TableColumn<Comercio, Recursos> recursoOferta = new TableColumn("Oferta");
+        TableColumn<Comercio, Recursos> recursoOferta = new TableColumn(TRADUCCIONES_THEMA.getString("ciudad.comercio.oferta"));
         recursoOferta.setMinWidth(120);
         recursoOferta.setCellFactory(param -> {
             HBox contenidoCelda = new HBox();
@@ -636,7 +636,7 @@ public class CiudadController extends MapasController implements Initializable {
         });
         recursoOferta.setCellValueFactory(new PropertyValueFactory<Comercio, Recursos>("queSeOfrece"));
 //columna
-        TableColumn<Comercio, Recursos> recursoDemanda = new TableColumn("Requiere");
+        TableColumn<Comercio, Recursos> recursoDemanda = new TableColumn(TRADUCCIONES_THEMA.getString("ciudad.comercio.requiere"));
         recursoDemanda.setMinWidth(120);
         recursoDemanda.setCellFactory(param -> {
             HBox contenidoCelda = new HBox();
@@ -664,7 +664,7 @@ public class CiudadController extends MapasController implements Initializable {
         recursoDemanda.setCellValueFactory(new PropertyValueFactory<Comercio, Recursos>("queSePide"));
 
 //columna
-        TableColumn<Comercio, LocalDateTime> hora = new TableColumn("Finaliza");
+        TableColumn<Comercio, LocalDateTime> hora = new TableColumn(TRADUCCIONES_THEMA.getString("ciudad.comercio.finaliza"));
         hora.setMinWidth(100);
         hora.setCellFactory(param -> {
             HBox hBox = new HBox();
@@ -687,7 +687,7 @@ public class CiudadController extends MapasController implements Initializable {
         hora.setCellValueFactory(new PropertyValueFactory<Comercio, LocalDateTime>("horafin"));
 //columna
         //columna
-        TableColumn<Comercio, Integer> boton = new TableColumn("Options");
+        TableColumn<Comercio, Integer> boton = new TableColumn(TRADUCCIONES_THEMA.getString("ciudad.comercio.options"));
         boton.setMinWidth(100);
         boton.setCellFactory(param -> {
             HBox hBox = new HBox();
@@ -721,13 +721,13 @@ public class CiudadController extends MapasController implements Initializable {
                         if (comercio.getJugador() != getJugadorPrimaryStageController()) {
                             Recursos sePide = comercio.getQueSePide();
                             if (getCiudadPrimaryStageController().getRecursosTreeMap().get(sePide.getId()).getCantidad() > sePide.getCantidad()) {
-                                btn.setText("Comprar");
+                                btn.setText(TRADUCCIONES_THEMA.getString("ciudad.comercio.button.comprar"));
                             } else {
-                                btn.setText("insuficiente");
+                                btn.setText(TRADUCCIONES_THEMA.getString("ciudad.comercio.button.insuficiente"));
                                 btn.setDisable(true);
                             }
                         } else {
-                            btn.setText("Borrar");
+                            btn.setText(TRADUCCIONES_THEMA.getString("ciudad.comercio.button.borrar"));
                             btn.setStyle("-fx-border-color:red; -fx-border-width: 2px;-fx-text-fill:red;-fx-border-radius: 2pt;-fx-background-radius: 2pt;");
                         }
                         hBox.getChildren().add(btn);
@@ -769,7 +769,7 @@ public class CiudadController extends MapasController implements Initializable {
         separator2.setVisible(false);
         childrenVBox.add(separator2);
 
-        Label nombreEdificioPropio = new Label("Entrenar unidades");
+        Label nombreEdificioPropio = new Label(TRADUCCIONES_THEMA.getString("ciudad.unidades.entrenarUnidades"));
         nombreEdificioPropio.setTextAlignment(CENTER);
         nombreEdificioPropio.setAlignment(Pos.CENTER);
         nombreEdificioPropio.setWrapText(true);
@@ -812,7 +812,7 @@ public class CiudadController extends MapasController implements Initializable {
 
         printRecursosRestando(vBox.getChildren(), getCiudadPrimaryStageController().getRecursosTreeMap(), resta, recursosCiudadTemp, 7);
 
-        Button button = new Button("Entrenar");
+        Button button = new Button(TRADUCCIONES_THEMA.getString("ciudad.unidades.entrenar"));
         button.setOnMouseClicked(e -> {
 
             Ciudad esta = getCiudadPrimaryStageController();
@@ -831,9 +831,9 @@ public class CiudadController extends MapasController implements Initializable {
             recursosMenu(flowPaneRecuros, CiudadController.class);
 
             CustomAlert alert = new CustomAlert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Information Dialog");
+            alert.setTitle(TRADUCCIONES_GENERALES.getString("information.dialog"));
             alert.setHeaderText(null);
-            alert.setContentText("Unidades preparadas/entrenadas!");
+            alert.setContentText(TRADUCCIONES_THEMA.getString("ciudad.unidades.entrenadas"));
             alert.showAndWait();
         });
         //FIN ESTO ES PARA QUE ENTRE EN EL SISTEMA
@@ -1007,7 +1007,7 @@ public class CiudadController extends MapasController implements Initializable {
 
         for (Recursos recursoValor : recursosEnLaCIty.values()) {
             HBox hBox = new HBox();
-            hBox.setMaxWidth(250);//TODO
+            hBox.setMaxWidth(250);
             hBox.setAlignment(Pos.CENTER);
             int id = recursoValor.getId();
 
@@ -1332,21 +1332,21 @@ public class CiudadController extends MapasController implements Initializable {
     private static String nombreEtiquetas(int produce_Almacena_Cuesta_Devolucion_Resto_cambio) {
         switch (produce_Almacena_Cuesta_Devolucion_Resto_cambio) {
             case 1:
-                return "Produce:";
+                return TRADUCCIONES_THEMA.getString("ciudad.etiquetas.produce");
             case 2:
-                return "Almacena:";
+                return TRADUCCIONES_THEMA.getString("ciudad.etiquetas.almacena");
             case 3:
-                return "Coste de construcción:";
+                return TRADUCCIONES_THEMA.getString("ciudad.etiquetas.costeDeConstruccion");
             case 4:
-                return "Devolucion:";
+                return TRADUCCIONES_THEMA.getString("ciudad.etiquetas.devolucion");
             case 5:
-                return "Resto:";
+                return TRADUCCIONES_THEMA.getString("ciudad.etiquetas.resto");
             case 6:
-                return "Cambio:";
+                return TRADUCCIONES_THEMA.getString("ciudad.etiquetas.cambio");
             case 7:
-                return "Entrenar:";
+                return TRADUCCIONES_THEMA.getString("ciudad.etiquetas.entrenar");
             case 8:
-                return "Costes del entrenamiento:";
+                return TRADUCCIONES_THEMA.getString("ciudad.etiquetas.costesDelEntrenamiento");
             case 9:
                 return "Coste de destrucción:";
             default:

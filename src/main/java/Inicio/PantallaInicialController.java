@@ -112,13 +112,13 @@ public class PantallaInicialController extends PrimaryStageControler implements 
         NAME_TEMA = mundoSeleccionadoName;
         char[] a = NAME_TEMA.replaceAll(" ", "").toCharArray();
         a[0] = Character.toLowerCase(a[0]);
-        NAME_TEMA_PATH=String.valueOf(a);
+        NAME_TEMA_PATH = String.valueOf(a);
         Temas.ruteUse(NAME_TEMA_PATH + "/");
         System.out.println();
 
         progresBar.setProgress(10);//TODO NO FUNCIONA // https://stackoverflow.com/questions/44398611/running-a-process-in-a-separate-thread-so-rest-of-java-fx-application-is-usable
 
-        TRADUCCIONES_THEMA = ResourceBundle.getBundle("main.resources.traductions.temas."+NAME_TEMA_PATH+".UIResources", TRADUCCIONES_GENERALES.getLocale());
+        TRADUCCIONES_THEMA = ResourceBundle.getBundle("main.resources.traductions.temas." + NAME_TEMA_PATH + ".UIResources", TRADUCCIONES_GENERALES.getLocale());
         callbd();
         progresBar.setProgress(100);
         //Jugador borrar=new Jugador("nombre",0);//TODO DESCOMENTAR PARA INICIAR COMO UN NUEVO JUGADOR
@@ -144,7 +144,7 @@ public class PantallaInicialController extends PrimaryStageControler implements 
         RecursosPrecargados poblacionPre = new RecursosPrecargados(5, TRADUCCIONES_THEMA.getString("recurso.poblacion"), true, false, false, false);
         RecursosPrecargados felicidadPre = new RecursosPrecargados(6, TRADUCCIONES_THEMA.getString("recurso.felicidad"), true, false, true, true);
         RecursosPrecargados investigacionPre = new RecursosPrecargados(7, TRADUCCIONES_THEMA.getString("recurso.investigacion"), false, true, false, true);
-        RecursosPrecargados municionPre = new RecursosPrecargados(8, "municion", true, true, true, true);
+        RecursosPrecargados municionPre = new RecursosPrecargados(8, TRADUCCIONES_THEMA.getString("recurso.municion"), true, true, true, true);
         progresBar.setProgress(15);
         //TODO MENUS ESPECIALES
         //-1=noDanNiGeneranNada
@@ -199,59 +199,59 @@ public class PantallaInicialController extends PrimaryStageControler implements 
         recursosAlmacen.put(felicidadPre.getId(), new Recursos(felicidadPre, 31));
         recursosAlmacen.put(investigacionPre.getId(), new Recursos(investigacionPre, 31));
 
-        new EdificiosPreCargados(0, 0, false, false, 0, 0, 0, "parcela-Construible", "Descripción del edificio que sera mas larga que el nombre del edificio", null, null, null, null);//NO MEJORABLE
+        new EdificiosPreCargados(0, 0, false, false, 0, 0, 0, TRADUCCIONES_THEMA.getString("edificio.name.parcelaConstruible"), TRADUCCIONES_THEMA.getString("edificio.descripcion.parcelaConstruible"), null, null, null, null);//NO MEJORABLE
 
-        new EdificiosPreCargados(1, 0, false, false, 1, 0, 0, "Castillo", "Descripción del edificio que sera mas larga que el nombre del edificio", recursosBuild, recursosProductores, null, recursosAlmacen);
-        new EdificiosPreCargados(1, 1, false, true, 1, 1, 0, "Castillo", "Descripción 1_1", recursosBuild, recursosProductores, null, recursosAlmacen);
-        new EdificiosPreCargados(1, 2, false, true, 1, 2, 0, "Castillo", "X", recursosBuild, recursosProductores, null, recursosAlmacen);
+        new EdificiosPreCargados(1, 0, false, false, 1, 0, 0, TRADUCCIONES_THEMA.getString("edificio.name.castillo"), TRADUCCIONES_THEMA.getString("edificio.descripcion.castillo"), recursosBuild, recursosProductores, null, recursosAlmacen);
+        new EdificiosPreCargados(1, 1, false, true, 1, 1, 0, TRADUCCIONES_THEMA.getString("edificio.name.castillo"), TRADUCCIONES_THEMA.getString("edificio.descripcion.castillo"), recursosBuild, recursosProductores, null, recursosAlmacen);
+        new EdificiosPreCargados(1, 2, false, true, 1, 2, 0, TRADUCCIONES_THEMA.getString("edificio.name.castillo"), TRADUCCIONES_THEMA.getString("edificio.descripcion.castillo"), recursosBuild, recursosProductores, null, recursosAlmacen);
 
-        new EdificiosPreCargados(2, 0, false, false, 2, 0, 0, TRADUCCIONES_THEMA.getString("muralla"), "XXXXXXXXXXX", recursosBuild, null, null, null);
-        new EdificiosPreCargados(2, 1, true, true, 2, 1, 0, TRADUCCIONES_THEMA.getString("muralla"), "XXXXXXXXXXX", recursosBuild, null, null, null);
-        new EdificiosPreCargados(2, 2, true, true, 2, 2, 0, TRADUCCIONES_THEMA.getString("muralla"), "XXXXXXXXXXX", recursosBuild, null, null, null);
+        new EdificiosPreCargados(2, 0, false, false, 2, 0, 0, TRADUCCIONES_THEMA.getString("edificio.name.muralla"), TRADUCCIONES_THEMA.getString("edificio.descripcion.muralla"), recursosBuild, null, null, null);
+        new EdificiosPreCargados(2, 1, true, true, 2, 1, 0, TRADUCCIONES_THEMA.getString("edificio.name.muralla"), TRADUCCIONES_THEMA.getString("edificio.descripcion.muralla"), recursosBuild, null, null, null);
+        new EdificiosPreCargados(2, 2, true, true, 2, 2, 0, TRADUCCIONES_THEMA.getString("edificio.name.muralla"), TRADUCCIONES_THEMA.getString("edificio.descripcion.muralla"), recursosBuild, null, null, null);
 
-        new EdificiosPreCargados(10, 0, true, true, 0, -1, 0, "Almacen", "XXXXXXXXXXX", recursosBuild, null, null, recursosAlmacen);
-        new EdificiosPreCargados(10, 1, true, true, 0, 0, 0, "Almacen", "XXXXXXXXXXX", recursosBuild, null, null, recursosAlmacen);
-        new EdificiosPreCargados(10, 2, true, true, 0, 1, 0, "Almacen", "XXXXXXXXXXX", recursosBuild, null, null, recursosAlmacen);
+        new EdificiosPreCargados(10, 0, true, true, 0, -1, 0, TRADUCCIONES_THEMA.getString("edificio.name.almacen"), TRADUCCIONES_THEMA.getString("edificio.descripcion.almacen"), recursosBuild, null, null, recursosAlmacen);
+        new EdificiosPreCargados(10, 1, true, true, 0, 0, 0, TRADUCCIONES_THEMA.getString("edificio.name.almacen"), TRADUCCIONES_THEMA.getString("edificio.descripcion.almacen"), recursosBuild, null, null, recursosAlmacen);
+        new EdificiosPreCargados(10, 2, true, true, 0, 1, 0, TRADUCCIONES_THEMA.getString("edificio.name.almacen"), TRADUCCIONES_THEMA.getString("edificio.descripcion.almacen"), recursosBuild, null, null, recursosAlmacen);
 
-        new EdificiosPreCargados(11, 0, true, true, 0, 1, 1, "Palacio", "NONE", recursosBuild, null, null, null);
-        new EdificiosPreCargados(11, 1, true, true, 0, 2, 1, "Palacio", "NONE", recursosBuild, null, null, null);
-        new EdificiosPreCargados(11, 2, true, true, 0, 2, 1, "Palacio", "NONE", recursosBuild, null, null, null);
+        new EdificiosPreCargados(11, 0, true, true, 0, 1, 1, TRADUCCIONES_THEMA.getString("edificio.name.palacio"), TRADUCCIONES_THEMA.getString("edificio.descripcion.palacio"), recursosBuild, null, null, null);
+        new EdificiosPreCargados(11, 1, true, true, 0, 2, 1, TRADUCCIONES_THEMA.getString("edificio.name.almacen"), TRADUCCIONES_THEMA.getString("edificio.descripcion.palacio"), recursosBuild, null, null, null);
+        new EdificiosPreCargados(11, 2, true, true, 0, 2, 1, TRADUCCIONES_THEMA.getString("edificio.name.almacen"), TRADUCCIONES_THEMA.getString("edificio.descripcion.palacio"), recursosBuild, null, null, null);
         progresBar.setProgress(20);
-        new EdificiosPreCargados(12, 0, true, true, 0, 0, 0, "Centro Cientifico", "NONE", recursosBuild, recursosProductores, recursosCosteXmin, recursosAlmacen);
-        new EdificiosPreCargados(12, 1, true, true, 0, 0, 0, "Centro Cientifico", "NONE", recursosBuild, recursosProductores, recursosCosteXmin, recursosAlmacen);
-        new EdificiosPreCargados(12, 2, true, true, 0, 0, 0, "Centro Cientifico", "NONE", recursosBuild, recursosProductores, recursosCosteXmin, recursosAlmacen);
+        new EdificiosPreCargados(12, 0, true, true, 0, 0, 0, TRADUCCIONES_THEMA.getString("edificio.name.centroCientifico"), TRADUCCIONES_THEMA.getString("edificio.descripcion.centroCientifico"), recursosBuild, recursosProductores, recursosCosteXmin, recursosAlmacen);
+        new EdificiosPreCargados(12, 1, true, true, 0, 0, 0, TRADUCCIONES_THEMA.getString("edificio.name.centroCientifico"), TRADUCCIONES_THEMA.getString("edificio.descripcion.centroCientifico"), recursosBuild, recursosProductores, recursosCosteXmin, recursosAlmacen);
+        new EdificiosPreCargados(12, 2, true, true, 0, 0, 0, TRADUCCIONES_THEMA.getString("edificio.name.centroCientifico"), TRADUCCIONES_THEMA.getString("edificio.descripcion.centroCientifico"), recursosBuild, recursosProductores, recursosCosteXmin, recursosAlmacen);
 
-        new EdificiosPreCargados(13, 0, true, true, 0, 0, 0, "Cantera", "NONE", recursosBuild, recursosProductores, recursosCosteXmin, recursosAlmacen);
-        new EdificiosPreCargados(13, 1, true, true, 0, 0, 0, "Cantera", "NONE", recursosBuild, recursosProductores, recursosCosteXmin, recursosAlmacen);
-        new EdificiosPreCargados(13, 2, true, true, 0, 0, 0, "Cantera", "NONE", recursosBuild, recursosProductores, recursosCosteXmin, recursosAlmacen);
+        new EdificiosPreCargados(13, 0, true, true, 0, 0, 0, TRADUCCIONES_THEMA.getString("edificio.name.cantera"), TRADUCCIONES_THEMA.getString("edificio.descripcion.cantera"), recursosBuild, recursosProductores, recursosCosteXmin, recursosAlmacen);
+        new EdificiosPreCargados(13, 1, true, true, 0, 0, 0, TRADUCCIONES_THEMA.getString("edificio.name.cantera"), TRADUCCIONES_THEMA.getString("edificio.descripcion.cantera"), recursosBuild, recursosProductores, recursosCosteXmin, recursosAlmacen);
+        new EdificiosPreCargados(13, 2, true, true, 0, 0, 0, TRADUCCIONES_THEMA.getString("edificio.name.cantera"), TRADUCCIONES_THEMA.getString("edificio.descripcion.cantera"), recursosBuild, recursosProductores, recursosCosteXmin, recursosAlmacen);
 
-        new EdificiosPreCargados(14, 0, true, true, 0, 0, 0, "Aserradero", "NONE", recursosBuild, recursosProductores, recursosCosteXmin, recursosAlmacen);
-        new EdificiosPreCargados(14, 1, true, true, 0, 0, 0, "Aserradero", "NONE", recursosBuild, recursosProductores, recursosCosteXmin, recursosAlmacen);
-        new EdificiosPreCargados(14, 2, true, true, 0, 0, 0, "Aserradero", "NONE", recursosBuild, recursosProductores, recursosCosteXmin, recursosAlmacen);
+        new EdificiosPreCargados(14, 0, true, true, 0, 0, 0, TRADUCCIONES_THEMA.getString("edificio.name.aserradero"), TRADUCCIONES_THEMA.getString("edificio.descripcion.aserradero"), recursosBuild, recursosProductores, recursosCosteXmin, recursosAlmacen);
+        new EdificiosPreCargados(14, 1, true, true, 0, 0, 0, TRADUCCIONES_THEMA.getString("edificio.name.aserradero"), TRADUCCIONES_THEMA.getString("edificio.descripcion.aserradero"), recursosBuild, recursosProductores, recursosCosteXmin, recursosAlmacen);
+        new EdificiosPreCargados(14, 2, true, true, 0, 0, 0, TRADUCCIONES_THEMA.getString("edificio.name.aserradero"), TRADUCCIONES_THEMA.getString("edificio.descripcion.aserradero"), recursosBuild, recursosProductores, recursosCosteXmin, recursosAlmacen);
 
-        new EdificiosPreCargados(15, 0, true, true, 0, 0, 0, "Fundicion", "NONE", recursosBuild, recursosProductores, recursosCosteXmin, recursosAlmacen);
-        new EdificiosPreCargados(15, 1, true, true, 0, 0, 0, "Fundicion", "NONE", recursosBuild, recursosProductores, recursosCosteXmin, recursosAlmacen);
-        new EdificiosPreCargados(15, 2, true, true, 0, 0, 0, "Fundicion", "NONE", recursosBuild, recursosProductores, recursosCosteXmin, recursosAlmacen);
+        new EdificiosPreCargados(15, 0, true, true, 0, 0, 0, TRADUCCIONES_THEMA.getString("edificio.name.fundicion"), TRADUCCIONES_THEMA.getString("edificio.descripcion.fundicion"), recursosBuild, recursosProductores, recursosCosteXmin, recursosAlmacen);
+        new EdificiosPreCargados(15, 1, true, true, 0, 0, 0, TRADUCCIONES_THEMA.getString("edificio.name.fundicion"), TRADUCCIONES_THEMA.getString("edificio.descripcion.fundicion"), recursosBuild, recursosProductores, recursosCosteXmin, recursosAlmacen);
+        new EdificiosPreCargados(15, 2, true, true, 0, 0, 0, TRADUCCIONES_THEMA.getString("edificio.name.fundicion"), TRADUCCIONES_THEMA.getString("edificio.descripcion.fundicion"), recursosBuild, recursosProductores, recursosCosteXmin, recursosAlmacen);
 
-        new EdificiosPreCargados(16, 0, true, true, 0, 0, 0, "Granja", "NONE", recursosBuild, recursosProductores, recursosCosteXmin, recursosAlmacen);
-        new EdificiosPreCargados(16, 1, true, true, 0, 0, 0, "Granja", "NONE", recursosBuild, recursosProductores, recursosCosteXmin, recursosAlmacen);
-        new EdificiosPreCargados(16, 2, true, true, 0, 0, 0, "Granja", "NONE", recursosBuild, recursosProductores, recursosCosteXmin, recursosAlmacen);
+        new EdificiosPreCargados(16, 0, true, true, 0, 0, 0, TRADUCCIONES_THEMA.getString("edificio.name.granja"), TRADUCCIONES_THEMA.getString("edificio.descripcion.granja"), recursosBuild, recursosProductores, recursosCosteXmin, recursosAlmacen);
+        new EdificiosPreCargados(16, 1, true, true, 0, 0, 0, TRADUCCIONES_THEMA.getString("edificio.name.granja"), TRADUCCIONES_THEMA.getString("edificio.descripcion.granja"), recursosBuild, recursosProductores, recursosCosteXmin, recursosAlmacen);
+        new EdificiosPreCargados(16, 2, true, true, 0, 0, 0, TRADUCCIONES_THEMA.getString("edificio.name.granja"), TRADUCCIONES_THEMA.getString("edificio.descripcion.granja"), recursosBuild, recursosProductores, recursosCosteXmin, recursosAlmacen);
 
-        new EdificiosPreCargados(17, 0, true, true, 0, 0, 0, "Taberna", "NONE", recursosBuild, recursosProductores, recursosCosteXminV2, recursosAlmacen);
-        new EdificiosPreCargados(17, 1, true, true, 0, 0, 0, "Taberna", "NONE", recursosBuild, recursosProductores, recursosCosteXminV2, recursosAlmacen);
-        new EdificiosPreCargados(17, 2, true, true, 0, 0, 0, "Taberna", "NONE", recursosBuild, recursosProductores, recursosCosteXminV2, recursosAlmacen);
+        new EdificiosPreCargados(17, 0, true, true, 0, 0, 0, TRADUCCIONES_THEMA.getString("edificio.name.taberna"), TRADUCCIONES_THEMA.getString("edificio.descripcion.taberna"), recursosBuild, recursosProductores, recursosCosteXminV2, recursosAlmacen);
+        new EdificiosPreCargados(17, 1, true, true, 0, 0, 0, TRADUCCIONES_THEMA.getString("edificio.name.taberna"), TRADUCCIONES_THEMA.getString("edificio.descripcion.taberna"), recursosBuild, recursosProductores, recursosCosteXminV2, recursosAlmacen);
+        new EdificiosPreCargados(17, 2, true, true, 0, 0, 0, TRADUCCIONES_THEMA.getString("edificio.name.taberna"), TRADUCCIONES_THEMA.getString("edificio.descripcion.taberna"), recursosBuild, recursosProductores, recursosCosteXminV2, recursosAlmacen);
         progresBar.setProgress(30);
-        new EdificiosPreCargados(18, 0, false, false, 0, 0, 4, "Puerto", "NONE", recursosBuild, null, null, null);
-        new EdificiosPreCargados(18, 1, true, true, 0, 0, 4, "Puerto", "NONE", recursosBuild, null, null, null);
-        new EdificiosPreCargados(18, 2, true, true, 0, 0, 4, "Puerto", "NONE", recursosBuild, null, null, null);
+        new EdificiosPreCargados(18, 0, false, false, 0, 0, 4, TRADUCCIONES_THEMA.getString("edificio.name.puerto"), TRADUCCIONES_THEMA.getString("edificio.descripcion.puerto"), recursosBuild, null, null, null);
+        new EdificiosPreCargados(18, 1, true, true, 0, 0, 4, TRADUCCIONES_THEMA.getString("edificio.name.puerto"), TRADUCCIONES_THEMA.getString("edificio.descripcion.puerto"), recursosBuild, null, null, null);
+        new EdificiosPreCargados(18, 2, true, true, 0, 0, 4, TRADUCCIONES_THEMA.getString("edificio.name.puerto"), TRADUCCIONES_THEMA.getString("edificio.descripcion.puerto"), recursosBuild, null, null, null);
 
-        new EdificiosPreCargados(19, 0, true, true, 0, 0, 2, "Cuartel", "NONE", recursosBuild, null, null, null);
-        new EdificiosPreCargados(19, 1, true, true, 0, 0, 2, "Cuartel", "NONE", recursosBuild, null, null, null);
-        new EdificiosPreCargados(19, 2, true, true, 0, 0, 2, "Cuartel", "NONE", recursosBuild, null, null, null);
+        new EdificiosPreCargados(19, 0, true, true, 0, 0, 2, TRADUCCIONES_THEMA.getString("edificio.name.cuartel"), TRADUCCIONES_THEMA.getString("edificio.descripcion.cuartel"), recursosBuild, null, null, null);
+        new EdificiosPreCargados(19, 1, true, true, 0, 0, 2, TRADUCCIONES_THEMA.getString("edificio.name.cuartel"), TRADUCCIONES_THEMA.getString("edificio.descripcion.cuartel"), recursosBuild, null, null, null);
+        new EdificiosPreCargados(19, 2, true, true, 0, 0, 2, TRADUCCIONES_THEMA.getString("edificio.name.cuartel"), TRADUCCIONES_THEMA.getString("edificio.descripcion.cuartel"), recursosBuild, null, null, null);
 
-        new EdificiosPreCargados(20, 0, true, true, 0, 0, 3, "Taller armas de asedio", "NONE", recursosBuild, null, null, null);
-        new EdificiosPreCargados(20, 1, true, true, 0, 0, 3, "Taller armas de asedio", "NONE", recursosBuild, null, null, null);
-        new EdificiosPreCargados(20, 2, true, true, 0, 0, 3, "Taller armas de asedio", "NONE", recursosBuild, null, null, null);
+        new EdificiosPreCargados(20, 0, true, true, 0, 0, 3, TRADUCCIONES_THEMA.getString("edificio.name.tallerArmasAsedio"), TRADUCCIONES_THEMA.getString("edificio.descripcion.tallerArmasDeAsedio"), recursosBuild, null, null, null);
+        new EdificiosPreCargados(20, 1, true, true, 0, 0, 3, TRADUCCIONES_THEMA.getString("edificio.name.tallerArmasAsedio"), TRADUCCIONES_THEMA.getString("edificio.descripcion.tallerArmasDeAsedio"), recursosBuild, null, null, null);
+        new EdificiosPreCargados(20, 2, true, true, 0, 0, 3, TRADUCCIONES_THEMA.getString("edificio.name.tallerArmasAsedio"), TRADUCCIONES_THEMA.getString("edificio.descripcion.tallerArmasDeAsedio"), recursosBuild, null, null, null);
 
         progresBar.setProgress(40);
         List<Recursos> recursosList = new ArrayList<>();
@@ -270,11 +270,11 @@ public class PantallaInicialController extends PrimaryStageControler implements 
         recursosList2.add(new Recursos(hierroPre, 8));
         recursosList2.add(new Recursos(felicidadPre, 3));
         recursosList2.add(new Recursos(municionPre, 5));
-        new UnidadesPreCargadas(0, "Espadachines", 0, recursosList, 0);//se podria poner comida
-        new UnidadesPreCargadas(1, "Lanceros", 0, recursosList, 0);
-        new UnidadesPreCargadas(2, "Arqueros", 100, recursosList, 0);
-        new UnidadesPreCargadas(3, "Caballeros", 50, recursosList2, 0);
-        new UnidadesPreCargadas(4, "Catapultas", 50, recursosList2, 5);
+        new UnidadesPreCargadas(0, TRADUCCIONES_THEMA.getString("unidades.soldados.espadachines"), 0, recursosList, 0);//se podria poner comida
+        new UnidadesPreCargadas(1, TRADUCCIONES_THEMA.getString("unidades.soldados.lanceros"), 0, recursosList, 0);
+        new UnidadesPreCargadas(2, TRADUCCIONES_THEMA.getString("unidades.soldados.arqueros"), 100, recursosList, 0);
+        new UnidadesPreCargadas(3, TRADUCCIONES_THEMA.getString("unidades.soldados.caballeros"), 50, recursosList2, 0);
+        new UnidadesPreCargadas(4, TRADUCCIONES_THEMA.getString("unidades.asedio.catapultas"), 50, recursosList2, 5);
         progresBar.setProgress(50);
         //TODO FIN LEER DESDE LA BD
         Clan clan = new Clan(1, "Los mejores");
@@ -287,11 +287,11 @@ public class PantallaInicialController extends PrimaryStageControler implements 
         progresBar.setProgress(60);
         ArrayList<Recursos> jugador2ListaRecuros = new ArrayList<>();
         jugador2ListaRecuros.add(new Recursos(investigacionPre, 25));
-        Jugador jugador2 =new Jugador("juan", jugador2ListaRecuros);
+        Jugador jugador2 = new Jugador("juan", jugador2ListaRecuros);
         ArrayList<Recursos> jugador3ListaRecuros = new ArrayList<>();
         jugador3ListaRecuros.add(new Recursos(investigacionPre, 80));
-        Jugador jugador3 =new Jugador("pedro", jugador3ListaRecuros);
-        Jugador jugador4 =new Jugador("julito", jugador3ListaRecuros);
+        Jugador jugador3 = new Jugador("pedro", jugador3ListaRecuros);
+        Jugador jugador4 = new Jugador("julito", jugador3ListaRecuros);
         clan2.addJugadorClan(jugador4);
         progresBar.setProgress(70);
         clan.addJugadorClan(jugador);
@@ -299,13 +299,13 @@ public class PantallaInicialController extends PrimaryStageControler implements 
         progresBar.setProgress(80);
 
         //COSAS DE TEST
-        Comercio comercio0 = new Comercio( new Recursos(oroPre, 5), new Recursos(maderaPre, 300), jugador);
+        Comercio comercio0 = new Comercio(new Recursos(oroPre, 5), new Recursos(maderaPre, 300), jugador);
         Comercio.data.add(comercio0);
-        Comercio comercio1 = new Comercio( new Recursos(hierroPre, 6), new Recursos(comidaPre, 11), jugador2);
+        Comercio comercio1 = new Comercio(new Recursos(hierroPre, 6), new Recursos(comidaPre, 11), jugador2);
         Comercio.data.add(comercio1);
-        Comercio comercio2 = new Comercio( new Recursos(oroPre, 7), new Recursos(maderaPre, 12), jugador3);
+        Comercio comercio2 = new Comercio(new Recursos(oroPre, 7), new Recursos(maderaPre, 12), jugador3);
         Comercio.data.add(comercio2);
-        Comercio comercio3 = new Comercio( new Recursos(hierroPre, 7000000), new Recursos(maderaPre, 15), jugador4);
+        Comercio comercio3 = new Comercio(new Recursos(hierroPre, 7000000), new Recursos(maderaPre, 15), jugador4);
         Comercio.data.add(comercio3);
 
 /*
@@ -334,7 +334,7 @@ public class PantallaInicialController extends PrimaryStageControler implements 
                 System.out.println("Thread Running --> PANTALLA INICIAL CONTROLLER: REMOVE Comercio");
                 Comercio.data.remove(comercio1);
                 Comercio.data.remove(comercio2);
-                Comercio comercio4 = new Comercio( new Recursos(piedraPre, 7), new Recursos(maderaPre, 15), jugador3);
+                Comercio comercio4 = new Comercio(new Recursos(piedraPre, 7), new Recursos(maderaPre, 15), jugador3);
                 Comercio.data.add(comercio4);
             }
         };
