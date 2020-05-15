@@ -35,6 +35,7 @@ import main.java.utils.Time;
 import main.java.utils.tagsFX.*;
 
 import java.net.URL;
+import java.text.MessageFormat;
 import java.time.LocalDateTime;
 import java.util.*;
 
@@ -449,7 +450,7 @@ public class CiudadController extends MapasController implements Initializable {
         separator2.setVisible(false);
         childrenVBox.add(separator2);
 
-        Label nombreEdificioPropio = new Label("Clan");
+        Label nombreEdificioPropio = new Label(TRADUCCIONES_THEMA.getString("clan.label.clan"));
         nombreEdificioPropio.setTextAlignment(CENTER);
         nombreEdificioPropio.setAlignment(Pos.CENTER);
         nombreEdificioPropio.setWrapText(true);
@@ -458,12 +459,12 @@ public class CiudadController extends MapasController implements Initializable {
         childrenVBox.add(new CustomSeparator((int) (flowPaneRecuros.getHeight() * 0.8), false));
 //AÑADIR
         TextField textField = new TextField();
-        textField.setPromptText("Nombre del clan");
+        textField.setPromptText(TRADUCCIONES_THEMA.getString("clan.label.nombre"));
         textField.setMaxWidth(150);
         textField.setAlignment(Pos.CENTER);
         CustomSeparator separator3 = new CustomSeparator(20, false);
         TextField textFieldPassword = new TextField();
-        textFieldPassword.setPromptText("Contraseña");
+        textFieldPassword.setPromptText(TRADUCCIONES_THEMA.getString("clan.label.password"));
         textFieldPassword.setMaxWidth(150);
         textFieldPassword.setAlignment(Pos.CENTER);
         //
@@ -482,7 +483,7 @@ public class CiudadController extends MapasController implements Initializable {
         });
         textFieldSlider.setBindSlider(slider);
         CustomSeparator separator4 = new CustomSeparator(20, false);
-        Button button = new Button("Fundar Clan");
+        Button button = new Button(TRADUCCIONES_THEMA.getString("clan.label.fundar"));
         button.setDisable(true);
         textField.textProperty().addListener((observable, oldValue, newValue) -> {
             String newValueTrim = newValue.trim();
@@ -539,7 +540,7 @@ public class CiudadController extends MapasController implements Initializable {
         clanesTableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 //INCIO COLUMNAS
         //columna
-        TableColumn clanName = new TableColumn("Nombre del clan");
+        TableColumn clanName = new TableColumn();
         clanName.setMinWidth(120);
         clanName.setStyle("-fx-alignment: CENTER;");
         clanName.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Clan, String>, ObservableValue<String>>() {
@@ -549,7 +550,7 @@ public class CiudadController extends MapasController implements Initializable {
             }
         });
         //columna
-        TableColumn clanJugadores = new TableColumn("Jugadores");
+        TableColumn clanJugadores = new TableColumn(TRADUCCIONES_THEMA.getString("clan.label.miembros"));
         clanJugadores.setMinWidth(80);
         clanJugadores.setStyle("-fx-alignment: CENTER;");
         clanJugadores.setCellFactory(param -> {
@@ -569,7 +570,7 @@ public class CiudadController extends MapasController implements Initializable {
         });
         clanJugadores.setCellValueFactory(new PropertyValueFactory<Clan, Integer>("id"));
         //columna
-        TableColumn clanCiudades = new TableColumn("Ciudades");
+        TableColumn clanCiudades = new TableColumn(TRADUCCIONES_THEMA.getString("clan.label.ciudades"));
         clanCiudades.setMinWidth(80);
         clanCiudades.setStyle("-fx-alignment: CENTER;");
         clanCiudades.setCellFactory(param -> {
@@ -589,7 +590,7 @@ public class CiudadController extends MapasController implements Initializable {
         });
         clanCiudades.setCellValueFactory(new PropertyValueFactory<Clan, Integer>("id"));
         //columna
-        TableColumn clanBatallones = new TableColumn("Batallones");
+        TableColumn clanBatallones = new TableColumn(TRADUCCIONES_THEMA.getString("clan.label.batallones"));
         clanBatallones.setMinWidth(80);
         clanBatallones.setStyle("-fx-alignment: CENTER;");
         clanBatallones.setCellFactory(param -> {
@@ -609,7 +610,7 @@ public class CiudadController extends MapasController implements Initializable {
         });
         clanBatallones.setCellValueFactory(new PropertyValueFactory<Clan, Integer>("id"));
         //columna
-        TableColumn clanboton = new TableColumn("Opciones");
+        TableColumn clanboton = new TableColumn(TRADUCCIONES_THEMA.getString("clan.label.opciones"));
         clanboton.setMinWidth(Clan.costeCrear);
         clanboton.setCellFactory(param -> {
             HBox hBox2 = new HBox();
@@ -622,9 +623,9 @@ public class CiudadController extends MapasController implements Initializable {
                         try {
                             unirseAunClan.getContrasenya();
                             TextInputDialog dialog = new TextInputDialog();
-                            dialog.setTitle("Contraseña del clan");
-                            dialog.setHeaderText("Look, a Text Input Dialog");
-                            dialog.setContentText("Please enter password:");
+                            dialog.setTitle(TRADUCCIONES_THEMA.getString("clan.label.alertDialog.contrasena"));
+                            dialog.setHeaderText(TRADUCCIONES_THEMA.getString("clan.label.alertDialog.contrasena.header"));
+                            dialog.setContentText(TRADUCCIONES_THEMA.getString("clan.label.alertDialog.contrasena.text"));
                             // Traditional way to get the response value.
                             Optional<String> result = dialog.showAndWait();
                             if (result.isPresent()) {
@@ -635,7 +636,7 @@ public class CiudadController extends MapasController implements Initializable {
                                         break;
                                     }
                                 } else {
-                                    CustomAlert customAlert = new CustomAlert(Alert.AlertType.ERROR, "La contraseña no es valida");
+                                    CustomAlert customAlert = new CustomAlert(Alert.AlertType.ERROR, TRADUCCIONES_THEMA.getString("clan.label.alert.error"));
                                     customAlert.showAndWait();
                                 }
                             }
@@ -666,7 +667,7 @@ public class CiudadController extends MapasController implements Initializable {
                             btn.setDisable(true);
                             btn.setText(String.valueOf(comercio.getCoste()));
                         } else {
-                            btn.setText("Unirse por " + (comercio.getCoste() + Clan.costeBaseUnirse));
+                            btn.setText(MessageFormat.format(TRADUCCIONES_THEMA.getString("clan.label.unirsePor"), comercio.getCoste() + Clan.costeBaseUnirse));
                         }
                         hBox2.getChildren().add(btn);
 
@@ -727,7 +728,7 @@ public class CiudadController extends MapasController implements Initializable {
         separator2.setVisible(false);
         childrenVBox.add(separator2);
 
-        Label nombreEdificioPropio = new Label("Miembros");
+        Label nombreEdificioPropio = new Label(TRADUCCIONES_THEMA.getString("clan.label.miembros"));
         nombreEdificioPropio.setTextAlignment(CENTER);
         nombreEdificioPropio.setAlignment(Pos.CENTER);
         nombreEdificioPropio.setWrapText(true);
@@ -747,7 +748,7 @@ public class CiudadController extends MapasController implements Initializable {
         jugadorDelClanTableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 //INCIO COLUMNAS
         //columna
-        TableColumn jugadorClanName = new TableColumn("Nombre");
+        TableColumn jugadorClanName = new TableColumn(TRADUCCIONES_THEMA.getString("clan.label.miembros"));
         jugadorClanName.setMinWidth(120);
         jugadorClanName.setStyle("-fx-alignment: CENTER;");
         jugadorClanName.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Jugador, String>, ObservableValue<String>>() {
@@ -757,7 +758,7 @@ public class CiudadController extends MapasController implements Initializable {
             }
         });
         //columna
-        TableColumn jugadorClanCiudades = new TableColumn("Ciudades");
+        TableColumn jugadorClanCiudades = new TableColumn(TRADUCCIONES_THEMA.getString("clan.label.ciudades"));
         jugadorClanCiudades.setMinWidth(80);
         jugadorClanCiudades.setStyle("-fx-alignment: CENTER;");
         jugadorClanCiudades.setCellFactory(param -> {
@@ -777,7 +778,7 @@ public class CiudadController extends MapasController implements Initializable {
         });
         jugadorClanCiudades.setCellValueFactory(new PropertyValueFactory<Clan, Integer>("id"));
         //columna
-        TableColumn jugadorClanBatallones = new TableColumn("Batallones");
+        TableColumn jugadorClanBatallones = new TableColumn(TRADUCCIONES_THEMA.getString("clan.label.batallones"));
         jugadorClanBatallones.setMinWidth(80);
         jugadorClanBatallones.setStyle("-fx-alignment: CENTER;");
         jugadorClanBatallones.setCellFactory(param -> {
@@ -797,7 +798,7 @@ public class CiudadController extends MapasController implements Initializable {
         });
         jugadorClanBatallones.setCellValueFactory(new PropertyValueFactory<Clan, Integer>("id"));
         //columna
-        TableColumn jugadorClanboton = new TableColumn("Opciones");
+        TableColumn jugadorClanboton = new TableColumn(TRADUCCIONES_THEMA.getString("clan.label.opciones"));
         jugadorClanboton.setMinWidth(100);
         jugadorClanboton.setCellFactory(param -> {
             HBox hBox2 = new HBox();
@@ -821,14 +822,14 @@ public class CiudadController extends MapasController implements Initializable {
                             Jugador comercio = getTableView().getItems().get(getIndex());
                             if (getJugadorPrimaryStageController().equals(comercio)) {
                                 btn.setDisable(true);
-                                btn.setText("No puedes");
+                                btn.setText(TRADUCCIONES_THEMA.getString("clan.label.noPuedes"));
                             } else {
                                 btn.setDisable(false);
-                                btn.setText("Hechar");
+                                btn.setText(TRADUCCIONES_THEMA.getString("clan.label.hechar"));
                             }
                         } else {
                             btn.setDisable(true);
-                            btn.setText("Options");
+                            btn.setText(TRADUCCIONES_THEMA.getString("clan.label.options"));
                         }
                         hBox2.getChildren().add(btn);
 
@@ -914,7 +915,6 @@ public class CiudadController extends MapasController implements Initializable {
         });
         textField.setBindSlider(slider);
         combo.getSelectionModel().selectedItemProperty().addListener((options, oldValue, newValue) -> {
-                    System.out.println(newValue);
                     int x = (getCiudadPrimaryStageController().getRecursosTreeMap().get(Integer.valueOf(newValue.getString())).getCantidad());
                     slider.setMax(x);
                 }
@@ -957,7 +957,6 @@ public class CiudadController extends MapasController implements Initializable {
         });
         textField2.setBindSlider(slider2);
         combo2.getSelectionModel().selectedItemProperty().addListener((options, oldValue, newValue) -> {
-                    System.out.println(newValue);
                     int x = (getCiudadPrimaryStageController().getRecursosTreeMap().get(Integer.valueOf(newValue.getString())).getCantidad());
                     slider2.setMax(x);
                 }
@@ -1137,7 +1136,6 @@ public class CiudadController extends MapasController implements Initializable {
                     btn.setOnAction((ActionEvent event) -> {
                         Comercio data = getTableView().getItems().get(getIndex());
                         TreeMap<Integer, Recursos> a = getCiudadPrimaryStageController().getRecursosTreeMap();
-                        System.out.println("selectedData: " + data);
                         Recursos b = data.getQueSePide();
                         Recursos c = data.getQueSeOfrece();
                         if (data.getJugador().getId() == getJugadorPrimaryStageController().getId()) {//borrar
@@ -1668,10 +1666,8 @@ public class CiudadController extends MapasController implements Initializable {
             int produce_Almacena_Cuesta_Devolucion_Resto_cambio;
             if (construirTrueDestruirFalse) {
                 produce_Almacena_Cuesta_Devolucion_Resto_cambio = 3;
-                System.out.println("3");
             } else {
                 produce_Almacena_Cuesta_Devolucion_Resto_cambio = 9;
-                System.out.println("9");
             }
             vBox.add(new CustomSeparator(220, true));
             printTodosLosRecursosEdificioSegunTipo(vBox, a, produce_Almacena_Cuesta_Devolucion_Resto_cambio, construir_Update_Dowgrade_Destruir);
