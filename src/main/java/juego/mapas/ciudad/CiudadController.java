@@ -550,7 +550,7 @@ public class CiudadController extends MapasController implements Initializable {
             }
         });
         //columna
-        TableColumn clanJugadores = new TableColumn(TRADUCCIONES_THEMA.getString("clan.label.miembros"));
+        TableColumn clanJugadores = new TableColumn(TRADUCCIONES_THEMA.getString("clan.tableView.miembros"));
         clanJugadores.setMinWidth(80);
         clanJugadores.setStyle("-fx-alignment: CENTER;");
         clanJugadores.setCellFactory(param -> {
@@ -570,7 +570,7 @@ public class CiudadController extends MapasController implements Initializable {
         });
         clanJugadores.setCellValueFactory(new PropertyValueFactory<Clan, Integer>("id"));
         //columna
-        TableColumn clanCiudades = new TableColumn(TRADUCCIONES_THEMA.getString("clan.label.ciudades"));
+        TableColumn clanCiudades = new TableColumn(TRADUCCIONES_THEMA.getString("clan.tableView.ciudades"));
         clanCiudades.setMinWidth(80);
         clanCiudades.setStyle("-fx-alignment: CENTER;");
         clanCiudades.setCellFactory(param -> {
@@ -590,7 +590,7 @@ public class CiudadController extends MapasController implements Initializable {
         });
         clanCiudades.setCellValueFactory(new PropertyValueFactory<Clan, Integer>("id"));
         //columna
-        TableColumn clanBatallones = new TableColumn(TRADUCCIONES_THEMA.getString("clan.label.batallones"));
+        TableColumn clanBatallones = new TableColumn(TRADUCCIONES_THEMA.getString("clan.tableView.batallones"));
         clanBatallones.setMinWidth(80);
         clanBatallones.setStyle("-fx-alignment: CENTER;");
         clanBatallones.setCellFactory(param -> {
@@ -610,7 +610,7 @@ public class CiudadController extends MapasController implements Initializable {
         });
         clanBatallones.setCellValueFactory(new PropertyValueFactory<Clan, Integer>("id"));
         //columna
-        TableColumn clanboton = new TableColumn(TRADUCCIONES_THEMA.getString("clan.label.opciones"));
+        TableColumn clanboton = new TableColumn(TRADUCCIONES_THEMA.getString("clan.tableView.column.opciones"));
         clanboton.setMinWidth(Clan.costeCrear);
         clanboton.setCellFactory(param -> {
             HBox hBox2 = new HBox();
@@ -667,7 +667,7 @@ public class CiudadController extends MapasController implements Initializable {
                             btn.setDisable(true);
                             btn.setText(String.valueOf(comercio.getCoste()));
                         } else {
-                            btn.setText(MessageFormat.format(TRADUCCIONES_THEMA.getString("clan.label.unirsePor"), comercio.getCoste() + Clan.costeBaseUnirse));
+                            btn.setText(MessageFormat.format(TRADUCCIONES_THEMA.getString("clan.tableView.jugador.button.unirsePor"), comercio.getCoste() + Clan.costeBaseUnirse));
                         }
                         hBox2.getChildren().add(btn);
 
@@ -728,7 +728,7 @@ public class CiudadController extends MapasController implements Initializable {
         separator2.setVisible(false);
         childrenVBox.add(separator2);
 
-        Label nombreEdificioPropio = new Label(TRADUCCIONES_THEMA.getString("clan.label.miembros"));
+        Label nombreEdificioPropio = new Label(TRADUCCIONES_THEMA.getString("clan.tableView.miembros"));
         nombreEdificioPropio.setTextAlignment(CENTER);
         nombreEdificioPropio.setAlignment(Pos.CENTER);
         nombreEdificioPropio.setWrapText(true);
@@ -748,7 +748,7 @@ public class CiudadController extends MapasController implements Initializable {
         jugadorDelClanTableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 //INCIO COLUMNAS
         //columna
-        TableColumn jugadorClanName = new TableColumn(TRADUCCIONES_THEMA.getString("clan.label.miembros"));
+        TableColumn jugadorClanName = new TableColumn(TRADUCCIONES_THEMA.getString("clan.tableView.miembros"));
         jugadorClanName.setMinWidth(120);
         jugadorClanName.setStyle("-fx-alignment: CENTER;");
         jugadorClanName.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Jugador, String>, ObservableValue<String>>() {
@@ -758,7 +758,7 @@ public class CiudadController extends MapasController implements Initializable {
             }
         });
         //columna
-        TableColumn jugadorClanCiudades = new TableColumn(TRADUCCIONES_THEMA.getString("clan.label.ciudades"));
+        TableColumn jugadorClanCiudades = new TableColumn(TRADUCCIONES_THEMA.getString("clan.tableView.ciudades"));
         jugadorClanCiudades.setMinWidth(80);
         jugadorClanCiudades.setStyle("-fx-alignment: CENTER;");
         jugadorClanCiudades.setCellFactory(param -> {
@@ -778,7 +778,7 @@ public class CiudadController extends MapasController implements Initializable {
         });
         jugadorClanCiudades.setCellValueFactory(new PropertyValueFactory<Clan, Integer>("id"));
         //columna
-        TableColumn jugadorClanBatallones = new TableColumn(TRADUCCIONES_THEMA.getString("clan.label.batallones"));
+        TableColumn jugadorClanBatallones = new TableColumn(TRADUCCIONES_THEMA.getString("clan.tableView.batallones"));
         jugadorClanBatallones.setMinWidth(80);
         jugadorClanBatallones.setStyle("-fx-alignment: CENTER;");
         jugadorClanBatallones.setCellFactory(param -> {
@@ -798,7 +798,7 @@ public class CiudadController extends MapasController implements Initializable {
         });
         jugadorClanBatallones.setCellValueFactory(new PropertyValueFactory<Clan, Integer>("id"));
         //columna
-        TableColumn jugadorClanboton = new TableColumn(TRADUCCIONES_THEMA.getString("clan.label.opciones"));
+        TableColumn jugadorClanboton = new TableColumn(TRADUCCIONES_THEMA.getString("clan.tableView.column.opciones"));
         jugadorClanboton.setMinWidth(100);
         jugadorClanboton.setCellFactory(param -> {
             HBox hBox2 = new HBox();
@@ -822,14 +822,14 @@ public class CiudadController extends MapasController implements Initializable {
                             Jugador comercio = getTableView().getItems().get(getIndex());
                             if (getJugadorPrimaryStageController().equals(comercio)) {
                                 btn.setDisable(true);
-                                btn.setText(TRADUCCIONES_THEMA.getString("clan.label.noPuedes"));
+                                btn.setText(TRADUCCIONES_THEMA.getString("clan.tableView.jugador.button.noPuedes"));
                             } else {
                                 btn.setDisable(false);
-                                btn.setText(TRADUCCIONES_THEMA.getString("clan.label.hechar"));
+                                btn.setText(TRADUCCIONES_THEMA.getString("clan.tableView.jugador.button.hechar"));
                             }
                         } else {
                             btn.setDisable(true);
-                            btn.setText(TRADUCCIONES_THEMA.getString("clan.label.options"));
+                            btn.setText(TRADUCCIONES_THEMA.getString("clan.tableView.jugador.button.options"));
                         }
                         hBox2.getChildren().add(btn);
 
