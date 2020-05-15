@@ -1,5 +1,6 @@
 package main.java.jugadores;
 
+import javafx.beans.property.SimpleStringProperty;
 import javafx.scene.image.Image;
 import main.java.utils.CallImages;
 import main.java.juego.mapas.Recursos;
@@ -28,13 +29,13 @@ public class Jugador {
 
     private static int lastId=1;
     private int id;
-    private String nombre;
+    private SimpleStringProperty nombre;
     private TreeMap<Integer, Recursos> recursosJugador =new TreeMap<>();
     public Ciudad cargarCiudadPrincipal = null;
 
     public Jugador( String nombre, ArrayList<Recursos> recursosJugador) {
         this.id = lastId++;
-        this.nombre = nombre;
+        this.nombre = new SimpleStringProperty(nombre);
         for (Recursos recursos : recursosJugador) {
             this.recursosJugador.put(recursos.getId(),recursos);
         }
@@ -160,8 +161,11 @@ public class Jugador {
         return id;
     }
 
-    public String getNombre() {
+    public SimpleStringProperty getNombre() {
         return nombre;
+    }
+    public String getNombreString() {
+        return nombre.getValue();
     }
 
     public TreeMap<Integer, Recursos> getRecursosJugador() {

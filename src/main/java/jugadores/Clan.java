@@ -1,23 +1,34 @@
 package main.java.jugadores;
 
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import main.java.juego.mapas.ciudad.Ciudad;
 import main.java.juego.mapas.pelea.Batallon;
 
 import java.util.*;
 
 public class Clan {
-    public static ArrayList<Clan> clanArrayList = new ArrayList<>();
-    public static HashMap<Jugador, Clan> jugadoresQueEstanEnUnClan = new HashMap<>();
+    public static int costeCrear = 100;
+    public static int costeBaseUnirse = 10;
+    public static int lastId = 1;
+    public static ObservableList<Clan> clanArrayList = FXCollections.observableArrayList();
+    public static Map<Jugador, Clan> jugadoresQueEstanEnUnClan = new HashMap<>();
 
     private int id;
-    private HashMap<Integer, Jugador> jugadoresDelClan = new HashMap<>();
+    private Map<Integer, Jugador> jugadoresDelClan = new HashMap<>();
     private Map<String, Ciudad> ciudadesDelClan = new TreeMap<>();
     private HashSet<Batallon> batallonesDelClan = new HashSet<>();
-    private String name;
+    private SimpleStringProperty name;
+    private Jugador creador;
+    private SimpleStringProperty contrasenya = null;
+    private SimpleIntegerProperty coste;
 
-    public Clan(int id, String name) {
-        this.id = id;
-        this.name = name;
+    public Clan(String name,int coste) {
+        this.id = lastId++;
+        this.name = new SimpleStringProperty(name);
+        this.coste=new SimpleIntegerProperty(coste);
         clanArrayList.add(this);
     }
 
@@ -26,11 +37,11 @@ public class Clan {
         return id;
     }
 
-    public HashMap<Integer, Jugador> getJugadoresDelClan() {
+    public Map<Integer, Jugador> getJugadoresDelClan() {
         return jugadoresDelClan;
     }
 
-    public String getName() {
+    public SimpleStringProperty getName() {
         return name;
     }
 
@@ -40,6 +51,38 @@ public class Clan {
 
     public HashSet<Batallon> getBatallonesDelClan() {
         return batallonesDelClan;
+    }
+
+    public Jugador getCreador() {
+        return creador;
+    }
+
+    public void setCreador(Jugador creador) {
+        this.creador = creador;
+    }
+
+    public int getCoste() {
+        return coste.get();
+    }
+
+    public SimpleIntegerProperty costeProperty() {
+        return coste;
+    }
+
+    public void setCoste(int coste) {
+        this.coste.set(coste);
+    }
+
+    public String getContrasenya() {
+        return contrasenya.get();
+    }
+
+    public SimpleStringProperty contrasenyaProperty() {
+        return contrasenya;
+    }
+
+    public void setContrasenya(String contrasenya) {
+        this.contrasenya = new SimpleStringProperty(contrasenya);
     }
 
     public void addJugadorClan(int jugadorId) {

@@ -277,8 +277,9 @@ public class PantallaInicialController extends PrimaryStageControler implements 
         new UnidadesPreCargadas(4, TRADUCCIONES_THEMA.getString("unidades.asedio.catapultas"), 50, recursosList2, 5);
         progresBar.setProgress(50);
         //TODO FIN LEER DESDE LA BD
-        Clan clan = new Clan(1, "Los mejores");
-        Clan clan2 = new Clan(2, "Los peores");
+        Clan clan = new Clan("Los mejores",10);
+        Clan clan2 = new Clan("Los peores",10);
+        clan2.setContrasenya("1234");
         ArrayList<Recursos> jugador1ListaRecuros = new ArrayList<>();
         jugador1ListaRecuros.add(new Recursos(investigacionPre, 5));
         Jugador jugador = new Jugador("pepito", jugador1ListaRecuros);
@@ -292,9 +293,11 @@ public class PantallaInicialController extends PrimaryStageControler implements 
         jugador3ListaRecuros.add(new Recursos(investigacionPre, 80));
         Jugador jugador3 = new Jugador("pedro", jugador3ListaRecuros);
         Jugador jugador4 = new Jugador("julito", jugador3ListaRecuros);
+        clan2.setCreador(jugador4);
         clan2.addJugadorClan(jugador4);
         progresBar.setProgress(70);
         clan.addJugadorClan(jugador);
+        clan.setCreador(jugador);
         clan.addJugadorClan(3);
         progresBar.setProgress(80);
 

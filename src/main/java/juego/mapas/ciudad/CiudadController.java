@@ -20,6 +20,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
+import javafx.util.Callback;
 import main.java.juego.comercio.Comercio;
 import main.java.juego.mapas.RecursosPrecargados;
 import main.java.jugadores.Clan;
@@ -365,6 +366,15 @@ public class CiudadController extends MapasController implements Initializable {
                     buttonCase1.setDisable(true);
                 }
                 vBox.getChildren().add(buttonCase1);
+
+                vBox.getChildren().add(new CustomSeparator(20, false, 5));
+
+                Button buttonCase1Clan = new Button();
+                buttonCase1Clan.setText(TRADUCCIONES_THEMA.getString("city.button.clan"));
+                buttonCase1Clan.setOnMouseClicked(e -> {
+                    createMenuLeftSecond(borderPane, flowPaneRecuros, 1);
+                });
+                vBox.getChildren().add(buttonCase1Clan);
                 break;
             case 2://CUARTEL (SOLDADOS)
                 Button buttonCase2 = new Button();
@@ -402,6 +412,13 @@ public class CiudadController extends MapasController implements Initializable {
         List<VBox> vBoxList = new ArrayList<>();
         int tamanoMenu = 0;
         switch (i) {
+            case 1:
+                tamanoMenu = 500;
+                vBoxList.add(cajaClanes(borderPane, flowPaneRecuros, tamanoMenu));
+                if (getClanPrimaryStageController() != null) {
+                    vBoxList.add(cajaTuClan(borderPane, flowPaneRecuros, tamanoMenu));
+                }
+                break;
             case 2:
                 tamanoMenu = 300;
                 vBoxList.add(cajaCrearUnidades(listaSoldadosPreCargada, 0, borderPane, flowPaneRecuros, tamanoMenu));
@@ -416,6 +433,423 @@ public class CiudadController extends MapasController implements Initializable {
                 break;
         }
         rellenador(borderPane, vBoxList, tamanoMenu);
+    }
+
+    private static VBox cajaClanes(BorderPane borderPane, FlowPane flowPaneRecuros, int tamanoMenu) {
+        VBox vBoxBloquePropio = new VBox();
+        vBoxBloquePropio.setMinWidth(tamanoMenu);
+        vBoxBloquePropio.setMaxWidth(tamanoMenu);
+        vBoxBloquePropio.setAlignment(TOP_CENTER);
+        vBoxBloquePropio.setBackground(new Background(new BackgroundFill(Color.ANTIQUEWHITE, CornerRadii.EMPTY, Insets.EMPTY)));
+        vBoxBloquePropio.setSpacing(10);
+        ObservableList<Node> childrenVBox = vBoxBloquePropio.getChildren();
+        //BLOQUE
+        Separator separator2 = new Separator();
+        separator2.setPrefWidth(220);
+        separator2.setVisible(false);
+        childrenVBox.add(separator2);
+
+        Label nombreEdificioPropio = new Label("Clan");
+        nombreEdificioPropio.setTextAlignment(CENTER);
+        nombreEdificioPropio.setAlignment(Pos.CENTER);
+        nombreEdificioPropio.setWrapText(true);
+        childrenVBox.add(nombreEdificioPropio);
+
+        childrenVBox.add(new CustomSeparator((int) (flowPaneRecuros.getHeight() * 0.8), false));
+//AÑADIR
+        TextField textField = new TextField();
+        textField.setPromptText("Nombre del clan");
+        textField.setMaxWidth(150);
+        textField.setAlignment(Pos.CENTER);
+        CustomSeparator separator3 = new CustomSeparator(20, false);
+        TextField textFieldPassword = new TextField();
+        textFieldPassword.setPromptText("Contraseña");
+        textFieldPassword.setMaxWidth(150);
+        textFieldPassword.setAlignment(Pos.CENTER);
+        //
+        CustomTextField textFieldSlider = new CustomTextField("0", true, 1000);
+        CustomSlider slider = new CustomSlider(0, 1000, 0);
+        slider.setmargin(25, 0, 0, 0);
+        slider.valueProperty().addListener(new ChangeListener<Number>() {
+            @Override
+            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+                int seleccionado = newValue.intValue();
+                int number = oldValue.intValue() - seleccionado;
+                if (number != 0) {
+                    textFieldSlider.textProperty().setValue(String.valueOf(seleccionado));
+                }
+            }
+        });
+        textFieldSlider.setBindSlider(slider);
+        CustomSeparator separator4 = new CustomSeparator(20, false);
+        Button button = new Button("Fundar Clan");
+        button.setDisable(true);
+        textField.textProperty().addListener((observable, oldValue, newValue) -> {
+            String newValueTrim = newValue.trim();
+            String newValueAltered = newValueTrim.toLowerCase();
+            if (newValueTrim.length() < 5) {
+                button.setDisable(true);
+            } else {
+                Recursos recursos = getCiudadPrimaryStageController().getRecursosTreeMap().get(0);
+                if (recursos.getCantidad() >= Clan.costeCrear) {
+                    boolean existeElClan = false;
+                    for (Clan clan : Clan.clanArrayList) {
+                        if (newValueAltered.equals(clan.getName().getValue().toLowerCase())) {
+                            existeElClan = true;
+                            break;
+                        }
+                    }
+                    if (!existeElClan) {
+                        button.setDisable(false);
+                        button.setOnMouseClicked(e -> {
+                            Clan clan = new Clan(newValueTrim, (int) slider.getValue());
+                            clan.setCreador(getJugadorPrimaryStageController());
+                            String contrasenya = textFieldPassword.getText().trim();
+                            if (contrasenya.length() > 0) {
+                                clan.setContrasenya(contrasenya);
+                            }
+                            unirseClan(recursos, clan, Clan.costeCrear);
+                            reload(CiudadController.class);
+                        });
+                    } else {
+                        button.setDisable(true);
+                    }
+                } else {
+                    button.setDisable(true);
+                }
+            }
+        });
+        HBox hBox = new HBox(textField, separator3, textFieldPassword);
+        hBox.setAlignment(Pos.CENTER);
+        childrenVBox.add(hBox);
+        HBox hBoxSlider = new HBox(slider, textFieldSlider, separator4, button);
+        hBoxSlider.setAlignment(Pos.CENTER);
+        childrenVBox.add(hBoxSlider);
+        childrenVBox.add(new CustomSeparator((int) (flowPaneRecuros.getHeight() * 0.8), false));
+//INICIO TABLA
+        ScrollPane scrollPane = new ScrollPane();
+        scrollPane.setPannable(true);
+        scrollPane.setFitToWidth(true);
+        scrollPane.setFitToHeight(true);
+        scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+        scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+//TABLA
+        TableView<Clan> clanesTableView = new TableView<>();
+        clanesTableView.setPrefHeight(300);
+        clanesTableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+//INCIO COLUMNAS
+        //columna
+        TableColumn clanName = new TableColumn("Nombre del clan");
+        clanName.setMinWidth(120);
+        clanName.setStyle("-fx-alignment: CENTER;");
+        clanName.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Clan, String>, ObservableValue<String>>() {
+            @Override
+            public ObservableValue<String> call(TableColumn.CellDataFeatures<Clan, String> param) {
+                return param.getValue().getName();
+            }
+        });
+        //columna
+        TableColumn clanJugadores = new TableColumn("Jugadores");
+        clanJugadores.setMinWidth(80);
+        clanJugadores.setStyle("-fx-alignment: CENTER;");
+        clanJugadores.setCellFactory(param -> {
+            Label labeJugador = new Label();
+            TableCell<Clan, Integer> cell = new TableCell<Clan, Integer>() {
+                @Override
+                protected void updateItem(Integer item, boolean empty) {
+                    super.updateItem(item, empty);
+                    if (item != null && !empty) {
+                        Clan comercio = getTableView().getItems().get(getIndex());
+                        labeJugador.setText(String.valueOf(comercio.getJugadoresDelClan().size()));
+                    }
+                }
+            };
+            cell.setGraphic(labeJugador);
+            return cell;
+        });
+        clanJugadores.setCellValueFactory(new PropertyValueFactory<Clan, Integer>("id"));
+        //columna
+        TableColumn clanCiudades = new TableColumn("Ciudades");
+        clanCiudades.setMinWidth(80);
+        clanCiudades.setStyle("-fx-alignment: CENTER;");
+        clanCiudades.setCellFactory(param -> {
+            Label labelname = new Label();
+            TableCell<Clan, Integer> cell = new TableCell<Clan, Integer>() {
+                @Override
+                protected void updateItem(Integer item, boolean empty) {
+                    super.updateItem(item, empty);
+                    if (item != null && !empty) {
+                        Clan comercio = getTableView().getItems().get(getIndex());
+                        labelname.setText(String.valueOf(comercio.getCiudadesDelClan().size()));
+                    }
+                }
+            };
+            cell.setGraphic(labelname);
+            return cell;
+        });
+        clanCiudades.setCellValueFactory(new PropertyValueFactory<Clan, Integer>("id"));
+        //columna
+        TableColumn clanBatallones = new TableColumn("Batallones");
+        clanBatallones.setMinWidth(80);
+        clanBatallones.setStyle("-fx-alignment: CENTER;");
+        clanBatallones.setCellFactory(param -> {
+            Label labelBatallon = new Label();
+            TableCell<Clan, Integer> cell = new TableCell<Clan, Integer>() {
+                @Override
+                protected void updateItem(Integer item, boolean empty) {
+                    super.updateItem(item, empty);
+                    if (item != null && !empty) {
+                        Clan comercio = getTableView().getItems().get(getIndex());
+                        labelBatallon.setText(String.valueOf(comercio.getBatallonesDelClan().size()));
+                    }
+                }
+            };
+            cell.setGraphic(labelBatallon);
+            return cell;
+        });
+        clanBatallones.setCellValueFactory(new PropertyValueFactory<Clan, Integer>("id"));
+        //columna
+        TableColumn clanboton = new TableColumn("Opciones");
+        clanboton.setMinWidth(Clan.costeCrear);
+        clanboton.setCellFactory(param -> {
+            HBox hBox2 = new HBox();
+            hBox2.setAlignment(Pos.CENTER);
+            Button btn = new Button();
+            TableCell<Clan, Integer> cell = new TableCell<Clan, Integer>() {
+                {
+                    btn.setOnAction((ActionEvent event) -> {
+                        Clan unirseAunClan = getTableView().getItems().get(getIndex());
+                        try {
+                            unirseAunClan.getContrasenya();
+                            TextInputDialog dialog = new TextInputDialog();
+                            dialog.setTitle("Contraseña del clan");
+                            dialog.setHeaderText("Look, a Text Input Dialog");
+                            dialog.setContentText("Please enter password:");
+                            // Traditional way to get the response value.
+                            Optional<String> result = dialog.showAndWait();
+                            if (result.isPresent()) {
+                                if (unirseAunClan.getContrasenya().equals(result.get())) {
+                                    unirseClan(clanesTableView, getCiudadPrimaryStageController().getRecursosTreeMap().get(0), unirseAunClan, (unirseAunClan.getCoste() + Clan.costeBaseUnirse));
+                                    for (Ciudad value : unirseAunClan.getCreador().listaCiudadesPropias.values()) {
+                                        value.getRecursosTreeMap().get(0).addCantidad(unirseAunClan.getCoste());
+                                        break;
+                                    }
+                                } else {
+                                    CustomAlert customAlert = new CustomAlert(Alert.AlertType.ERROR, "La contraseña no es valida");
+                                    customAlert.showAndWait();
+                                }
+                            }
+                        } catch (NullPointerException ignore) {
+                            unirseClan(clanesTableView, getCiudadPrimaryStageController().getRecursosTreeMap().get(0), unirseAunClan, (unirseAunClan.getCoste() + Clan.costeBaseUnirse));
+                            for (Ciudad value : unirseAunClan.getCreador().listaCiudadesPropias.values()) {
+                                value.getRecursosTreeMap().get(0).addCantidad(unirseAunClan.getCoste());
+                                break;
+                            }
+                            reload(CiudadController.class);
+                        }
+                    });
+                }
+
+                @Override
+                protected void updateItem(Integer item, boolean empty) {
+                    super.updateItem(item, empty);
+                    if (item != null && !empty) {
+                        hBox2.getChildren().clear();
+                        Clan comercio = getTableView().getItems().get(getIndex());
+
+                        if (getCiudadPrimaryStageController().getRecursosTreeMap().get(0).getCantidad() <= Clan.costeBaseUnirse) {
+                            btn.setDisable(true);
+                        } else {
+                            btn.setDisable(false);
+                        }
+                        if (comercio.equals(getClanPrimaryStageController())) {
+                            btn.setDisable(true);
+                            btn.setText(String.valueOf(comercio.getCoste()));
+                        } else {
+                            btn.setText("Unirse por " + (comercio.getCoste() + Clan.costeBaseUnirse));
+                        }
+                        hBox2.getChildren().add(btn);
+
+                    }
+                }
+            };
+            cell.setGraphic(hBox2);
+            return cell;
+        });
+        clanboton.setCellValueFactory(new PropertyValueFactory<Clan, Integer>("id"));
+//FIN COLUMNAS
+        clanesTableView.getColumns().addAll(clanName, clanJugadores, clanCiudades, clanBatallones, clanboton);
+        clanesTableView.setItems(Clan.clanArrayList);
+        scrollPane.setContent(clanesTableView);
+//FIN TABLA
+        Separator separator = new Separator();
+        separator.setPrefWidth(220);
+        childrenVBox.add(scrollPane);
+        childrenVBox.add(separator);
+        //FIN BLOQUE
+        return vBoxBloquePropio;
+    }
+
+    private static void unirseClan(Recursos recursos, Clan clan, int costeEnOro) {
+        unirseClan2(recursos, clan, costeEnOro);
+        reload(CiudadController.class);
+    }
+
+    private static void unirseClan2(Recursos recursos, Clan clan, int costeEnOro) {
+        Clan clanOld = getClanPrimaryStageController();
+        if (clanOld != null) {
+            clanOld.removeJugadorClan(getJugadorPrimaryStageController());
+            if (clanOld.getJugadoresDelClan().size() < 1) {
+                Clan.clanArrayList.remove(clanOld);
+            }
+        }
+        clan.addJugadorClan(getJugadorPrimaryStageController());
+        setClanPrimaryStageController(clan);
+        recursos.removeCantidad(costeEnOro);
+    }
+
+    private static void unirseClan(TableView<Clan> clanesTableView, Recursos recursos, Clan clan, int costeEnOro) {
+        unirseClan2(recursos, clan, costeEnOro);
+        clanesTableView.refresh();
+    }
+
+    private static VBox cajaTuClan(BorderPane borderPane, FlowPane flowPaneRecuros, int tamanoMenu) {
+        VBox vBoxBloquePropio = new VBox();
+        vBoxBloquePropio.setMinWidth(tamanoMenu);
+        vBoxBloquePropio.setMaxWidth(tamanoMenu);
+        vBoxBloquePropio.setAlignment(TOP_CENTER);
+        vBoxBloquePropio.setBackground(new Background(new BackgroundFill(Color.ANTIQUEWHITE, CornerRadii.EMPTY, Insets.EMPTY)));
+        vBoxBloquePropio.setSpacing(10);
+        ObservableList<Node> childrenVBox = vBoxBloquePropio.getChildren();
+        //BLOQUE
+        Separator separator2 = new Separator();
+        separator2.setPrefWidth(220);
+        separator2.setVisible(false);
+        childrenVBox.add(separator2);
+
+        Label nombreEdificioPropio = new Label("Miembros");
+        nombreEdificioPropio.setTextAlignment(CENTER);
+        nombreEdificioPropio.setAlignment(Pos.CENTER);
+        nombreEdificioPropio.setWrapText(true);
+        childrenVBox.add(nombreEdificioPropio);
+
+        childrenVBox.add(new CustomSeparator((int) (flowPaneRecuros.getHeight() * 0.8), false));
+//INICIO TABLA
+        ScrollPane scrollPane = new ScrollPane();
+        scrollPane.setPannable(true);
+        scrollPane.setFitToWidth(true);
+        scrollPane.setFitToHeight(true);
+        scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+        scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+//TABLA
+        TableView<Jugador> jugadorDelClanTableView = new TableView<>();
+        jugadorDelClanTableView.setPrefHeight(300);
+        jugadorDelClanTableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+//INCIO COLUMNAS
+        //columna
+        TableColumn jugadorClanName = new TableColumn("Nombre");
+        jugadorClanName.setMinWidth(120);
+        jugadorClanName.setStyle("-fx-alignment: CENTER;");
+        jugadorClanName.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Jugador, String>, ObservableValue<String>>() {
+            @Override
+            public ObservableValue<String> call(TableColumn.CellDataFeatures<Jugador, String> param) {
+                return param.getValue().getNombre();
+            }
+        });
+        //columna
+        TableColumn jugadorClanCiudades = new TableColumn("Ciudades");
+        jugadorClanCiudades.setMinWidth(80);
+        jugadorClanCiudades.setStyle("-fx-alignment: CENTER;");
+        jugadorClanCiudades.setCellFactory(param -> {
+            Label labeJugador = new Label();
+            TableCell<Jugador, Integer> cell = new TableCell<Jugador, Integer>() {
+                @Override
+                protected void updateItem(Integer item, boolean empty) {
+                    super.updateItem(item, empty);
+                    if (item != null && !empty) {
+                        Jugador comercio = getTableView().getItems().get(getIndex());
+                        labeJugador.setText(String.valueOf(comercio.listaCiudadesPropias.size()));
+                    }
+                }
+            };
+            cell.setGraphic(labeJugador);
+            return cell;
+        });
+        jugadorClanCiudades.setCellValueFactory(new PropertyValueFactory<Clan, Integer>("id"));
+        //columna
+        TableColumn jugadorClanBatallones = new TableColumn("Batallones");
+        jugadorClanBatallones.setMinWidth(80);
+        jugadorClanBatallones.setStyle("-fx-alignment: CENTER;");
+        jugadorClanBatallones.setCellFactory(param -> {
+            Label labelBatallon = new Label();
+            TableCell<Jugador, Integer> cell = new TableCell<Jugador, Integer>() {
+                @Override
+                protected void updateItem(Integer item, boolean empty) {
+                    super.updateItem(item, empty);
+                    if (item != null && !empty) {
+                        Jugador comercio = getTableView().getItems().get(getIndex());
+                        labelBatallon.setText(String.valueOf(comercio.listaBatallonesPropios.size()));
+                    }
+                }
+            };
+            cell.setGraphic(labelBatallon);
+            return cell;
+        });
+        jugadorClanBatallones.setCellValueFactory(new PropertyValueFactory<Clan, Integer>("id"));
+        //columna
+        TableColumn jugadorClanboton = new TableColumn("Opciones");
+        jugadorClanboton.setMinWidth(100);
+        jugadorClanboton.setCellFactory(param -> {
+            HBox hBox2 = new HBox();
+            hBox2.setAlignment(Pos.CENTER);
+            Button btn = new Button();
+            TableCell<Jugador, Integer> cell = new TableCell<Jugador, Integer>() {
+                {
+                    btn.setOnAction((ActionEvent event) -> {
+                        Jugador unirseAunClan = getTableView().getItems().get(getIndex());
+                        getClanPrimaryStageController().removeJugadorClan(unirseAunClan);
+                        jugadorDelClanTableView.refresh();
+                    });
+                }
+
+                @Override
+                protected void updateItem(Integer item, boolean empty) {
+                    super.updateItem(item, empty);
+                    if (item != null && !empty) {
+                        hBox2.getChildren().clear();
+                        if (getClanPrimaryStageController().getCreador().equals(getJugadorPrimaryStageController())) {
+                            Jugador comercio = getTableView().getItems().get(getIndex());
+                            if (getJugadorPrimaryStageController().equals(comercio)) {
+                                btn.setDisable(true);
+                                btn.setText("No puedes");
+                            } else {
+                                btn.setDisable(false);
+                                btn.setText("Hechar");
+                            }
+                        } else {
+                            btn.setDisable(true);
+                            btn.setText("Options");
+                        }
+                        hBox2.getChildren().add(btn);
+
+                    }
+                }
+            };
+            cell.setGraphic(hBox2);
+            return cell;
+        });
+        jugadorClanboton.setCellValueFactory(new PropertyValueFactory<Clan, Integer>("id"));
+//FIN COLUMNAS
+        jugadorDelClanTableView.getColumns().addAll(jugadorClanName, jugadorClanCiudades, jugadorClanBatallones, jugadorClanboton);
+        jugadorDelClanTableView.setItems(FXCollections.observableArrayList(new ArrayList<Jugador>(getClanPrimaryStageController().getJugadoresDelClan().values())));
+        scrollPane.setContent(jugadorDelClanTableView);
+//FIN TABLA
+        Separator separator = new Separator();
+        separator.setPrefWidth(220);
+        childrenVBox.add(scrollPane);
+        childrenVBox.add(separator);
+        //FIN BLOQUE
+        return vBoxBloquePropio;
     }
 
     private static VBox cajaCrearComercio(BorderPane borderPane, FlowPane flowPaneRecuros, int tamanoMenu) {
@@ -469,6 +903,12 @@ public class CiudadController extends MapasController implements Initializable {
                 int number = oldValue.intValue() - seleccionado;
                 if (number != 0) {
                     textField.textProperty().setValue(String.valueOf(seleccionado));
+                    if (getClanPrimaryStageController() != null) {
+                        Clan clan = getClanPrimaryStageController();
+                        if (clan.getCreador().equals(getJugadorPrimaryStageController())) {
+                            clan.setCoste(seleccionado);
+                        }
+                    }
                 }
             }
         });
@@ -587,7 +1027,7 @@ public class CiudadController extends MapasController implements Initializable {
                         Clan clan = Clan.jugadoresQueEstanEnUnClan.get(item);
                         if (clan != null) {
                             Label label2 = new Label();
-                            label1.setText(item.getNombre());
+                            label1.setText(item.getNombreString());
                             label2.setText("(" + clan.getName() + " )");
                             vBox.getChildren().addAll(label1, label2);
                             if (clan == Clan.jugadoresQueEstanEnUnClan.get(getJugadorPrimaryStageController())) {
@@ -596,7 +1036,7 @@ public class CiudadController extends MapasController implements Initializable {
                                 setBackground(new Background(new BackgroundFill(Color.RED, CornerRadii.EMPTY, Insets.EMPTY)));
                             }
                         } else {
-                            label1.setText(item.getNombre());
+                            label1.setText(item.getNombreString());
                             vBox.getChildren().add(label1);
                         }
                         comercioTableView.refresh();
@@ -685,7 +1125,6 @@ public class CiudadController extends MapasController implements Initializable {
             return cell;
         });
         hora.setCellValueFactory(new PropertyValueFactory<Comercio, LocalDateTime>("horafin"));
-//columna
         //columna
         TableColumn<Comercio, Integer> boton = new TableColumn(TRADUCCIONES_THEMA.getString("ciudad.comercio.options"));
         boton.setMinWidth(100);
@@ -743,9 +1182,8 @@ public class CiudadController extends MapasController implements Initializable {
 //FIN COLUMNAS
         comercioTableView.getColumns().addAll(clan, recursoOferta, recursoDemanda, hora, boton);
         comercioTableView.setItems(Comercio.data);
-
-//FIN TABLA
         scrollPane.setContent(comercioTableView);
+//FIN TABLA
         childrenVBox.add(scrollPane);
         Separator separator = new Separator();
         separator.setPrefWidth(220);
