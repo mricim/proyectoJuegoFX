@@ -43,8 +43,7 @@ import java.util.*;
 
 import static javafx.geometry.Pos.TOP_CENTER;
 import static javafx.scene.text.TextAlignment.CENTER;
-import static main.java.jugadores.Jugador.listaCiudades;
-import static main.java.jugadores.Jugador.listaPosicionesBatallones;
+import static main.java.Inicio.PantallaInicialController.elTemaSeleccionado;
 
 
 public class MundoController extends MapasController implements Initializable {
@@ -104,7 +103,7 @@ public class MundoController extends MapasController implements Initializable {
         gridPaneMap.getChildren().clear();
 
 
-        int numCiudades = listaCiudades.size();
+        int numCiudades = elTemaSeleccionado.listaCiudades.size();
         //int numCiudades = 12000;
         int tamano = 15;
         int capacidadCiudades = 0;
@@ -142,7 +141,7 @@ public class MundoController extends MapasController implements Initializable {
                     stringBuilder.append(letter_agua);
                 } else {
                     stringBuilder.append(letter_isla).append(letter_guionBajo).append(filaModule).append(letter_guion).append(columnaModule);
-                    ciudadToGrid = listaCiudades.get(position);
+                    ciudadToGrid = elTemaSeleccionado.listaCiudades.get(position);
                     if (ciudadToGrid != null) {
                         stringBuilder.append(letter_guionBajo).append(letter_city);
                         if (getJugadorPrimaryStageController().listaCiudadesPropias.containsKey(position)) {
@@ -162,7 +161,7 @@ public class MundoController extends MapasController implements Initializable {
                         }
                     }
                 }
-                batallonesToGrid = listaPosicionesBatallones.get(position);
+                batallonesToGrid = elTemaSeleccionado.listaPosicionesBatallones.get(position);
                 if (batallonesToGrid != null) {
                     boolean batallonEnemigo = false;
                     boolean batallonNuestro = false;
@@ -655,7 +654,7 @@ public class MundoController extends MapasController implements Initializable {
     }
 
     private Button buttonMoverBatallon(Batallon batallon) {
-        Button btnMove = new Button(TRADUCCIONES_GENERALES.getString("mundo.moverUnidades"));
+        Button btnMove = new Button(TRADUCCIONES_THEMA.getString("mundo.moverUnidades"));
         btnMove.setAlignment(Pos.CENTER);
         btnMove.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -684,7 +683,7 @@ public class MundoController extends MapasController implements Initializable {
 
                                     //
                                     String position = fila + "-" + columna;
-                                    Ciudad ciudad = listaCiudades.get(position);
+                                    Ciudad ciudad = elTemaSeleccionado.listaCiudades.get(position);
                                     if (ciudad != null) {
                                         if (getClanPrimaryStageController().getCiudadesDelClan().containsKey(position)) {
                                             batallon.setCiudadVolver(ciudad);
@@ -697,7 +696,7 @@ public class MundoController extends MapasController implements Initializable {
                                         CustomAlert alert = new CustomAlert(Alert.AlertType.INFORMATION);
                                         alert.setTitle(TRADUCCIONES_GENERALES.getString("information.dialog"));
                                         alert.setHeaderText(TRADUCCIONES_THEMA.getString("mundo.dialog.header.moverTropas"));
-                                        alert.setContentText(MessageFormat.format(TRADUCCIONES_THEMA.getString("mundo.dialog.text.moverTropas"), ciudad.getNameCity()));
+                                        alert.setContentText(MessageFormat.format(TRADUCCIONES_THEMA.getString("mundo.dialog.text.moverTropas")+" ", ciudad.getNameCity()));
                                         alert.showAndWait();
                                     } else {
                                         CustomAlert alert = new CustomAlert(Alert.AlertType.WARNING);
@@ -737,10 +736,10 @@ public class MundoController extends MapasController implements Initializable {
         boolean sePuedeMover = true;
         int filaModule = batallonFilaTemp % 5;
         int columnaModule = batallonColumTemp % 5;
-        if (listaCiudades.get(posicion) == null) {
+        if (elTemaSeleccionado.listaCiudades.get(posicion) == null) {
             if (filaModule == 0 || filaModule == 4 || columnaModule == 0 || columnaModule == 4) {
                 try {
-                    ArrayList<Batallon> a = listaPosicionesBatallones.get(posicion);
+                    ArrayList<Batallon> a = elTemaSeleccionado.listaPosicionesBatallones.get(posicion);
                     for (Batallon batallon1 : a) {
                         if (!getClanPrimaryStageController().getBatallonesDelClan().contains(batallon1)) {
                             sePuedeMover = false;
@@ -777,7 +776,7 @@ public class MundoController extends MapasController implements Initializable {
         String[] asd = imageView.getId().split("-");
         int fila = Integer.parseInt(asd[0]);
         int columna = Integer.parseInt(asd[1]);
-        botonNuevaCity = new Button(MessageFormat.format(TRADUCCIONES_THEMA.getString("mundo.fundarNuevaCiudad"), imageView.getId()));
+        botonNuevaCity = new Button(MessageFormat.format(TRADUCCIONES_THEMA.getString("mundo.fundarNuevaCiudad")+" ", imageView.getId()));
         botonNuevaCity.setTextAlignment(CENTER);
         botonNuevaCity.setAlignment(Pos.CENTER);
         botonNuevaCity.setOnMouseClicked(e -> {
@@ -792,7 +791,7 @@ public class MundoController extends MapasController implements Initializable {
             city2.add(new Recursos(4, 3000));
             city2.add(new Recursos(5, 3000));
             city2.add(new Recursos(6, 3000));
-            new Ciudad(getJugadorPrimaryStageController(), MessageFormat.format(TRADUCCIONES_THEMA.getString("mundo.newCity"), imageView.getId()), fila, columna, 0, city2);
+            new Ciudad(getJugadorPrimaryStageController(), MessageFormat.format(TRADUCCIONES_THEMA.getString("mundo.newCity")+" ", imageView.getId()), fila, columna, 0, city2);
             newCiudad = false;
             if (primeraCiudad) {
                 PrimaryStageControler.setCiudadPrimaryStageController(getJugadorPrimaryStageController().listaCiudadesPropias.values().iterator().next());

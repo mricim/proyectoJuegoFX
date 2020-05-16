@@ -7,7 +7,7 @@ import main.java.juego.mapas.Recursos;
 
 import java.util.List;
 
-import static main.java.jugadores.Jugador.listaSoldadosPreCargada;
+import static main.java.Inicio.PantallaInicialController.elTemaSeleccionado;
 
 
 public class UnidadesPreCargadas implements ImageGetter {
@@ -34,7 +34,7 @@ public class UnidadesPreCargadas implements ImageGetter {
         this.imageClicablePath = imagePath + "@H";
         this.imageIconPath = imagePath;
         this.tipoLucha = tipoLucha;
-        listaSoldadosPreCargada.put(idType,this);
+        elTemaSeleccionado.listaSoldadosPreCargada.put(idType,this);
     }
 
     public int getIdType() {

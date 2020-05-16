@@ -8,12 +8,16 @@ import main.java.jugadores.Jugador;
 import main.java.utils.ImageGetter;
 import main.java.juego.mapas.Recursos;
 
+import javax.persistence.Column;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import java.util.ArrayList;
+import java.util.Map;
 import java.util.Objects;
 import java.util.TreeMap;
 
-import static main.java.jugadores.Jugador.listaEdificiosKeys;
-import static main.java.jugadores.Jugador.listaEdificiosPreCargados;
+import static main.java.Inicio.PantallaInicialController.elTemaSeleccionado;
 
 //https://github.com/k33ptoo/JavaFX-MySQL-Login
 
@@ -24,6 +28,7 @@ import static main.java.jugadores.Jugador.listaEdificiosPreCargados;
  * @since 1.0
  */
 public class EdificiosPreCargados implements ImageGetter {
+    private Integer idDb;
     private int id;
     private int tipo;
     private String nombre;
@@ -36,13 +41,13 @@ public class EdificiosPreCargados implements ImageGetter {
     private int nivelCastilloNecesario;
 
     //RECURSOS - CONSTRUIR
-    private TreeMap<Integer, Recursos> recursosBuild = null;
+    private Map<Integer, Recursos> recursosBuild = null;
     //RECURSOS - Productores
-    private TreeMap<Integer, Recursos> recursosProductores = null;
+    private Map<Integer, Recursos> recursosProductores = null;
     //RECURSOS - COSTE X MIN
-    private TreeMap<RecursosPrecargados, ArrayList<Recursos>> recursosCosteXmin = null;
+    private Map<RecursosPrecargados, ArrayList<Recursos>> recursosCosteXmin = null;
     //RECURSOS -ALMACEN
-    private TreeMap<Integer, Recursos> recursosAlmacen = null;
+    private Map<Integer, Recursos> recursosAlmacen = null;
 
     private static String RUTEIMAGES = "mapas/city/";
     private String imagePath;
@@ -65,7 +70,7 @@ public class EdificiosPreCargados implements ImageGetter {
      * @param recursosCosteXmin Un TreeMap que contiene los valores del coste en recursos por minuto del edificio, que se mostrarán en {@link CiudadController} en la cajaEdificio.
      * @param recursosAlmacen Un TreeMap que contiene los valores de los recursos almacenados en el edificio, que se mostrarán en {@link CiudadController} en la cajaEdificio.
      */
-    public EdificiosPreCargados(int id, int nivel, boolean destruible, boolean construible, int maximoEdificiosDelMismoTipo, int nivelCastilloNecesario, int menuEspecial, String nombre, String descripcion, TreeMap<Integer, Recursos> recursosBuild, TreeMap<Integer, Recursos> recursosProductores, TreeMap<RecursosPrecargados, ArrayList<Recursos>> recursosCosteXmin, TreeMap<Integer, Recursos> recursosAlmacen) {
+    public EdificiosPreCargados(int id, int nivel, boolean destruible, boolean construible, int maximoEdificiosDelMismoTipo, int nivelCastilloNecesario, int menuEspecial, String nombre, String descripcion, Map<Integer, Recursos> recursosBuild, Map<Integer, Recursos> recursosProductores, Map<RecursosPrecargados, ArrayList<Recursos>> recursosCosteXmin, Map<Integer, Recursos> recursosAlmacen) {
         this.id = id;
         this.tipo = menuEspecial;
         this.nombre = nombre;
@@ -98,10 +103,18 @@ public class EdificiosPreCargados implements ImageGetter {
         this.imagePath = resultado;
         this.imageClicablePath = resultado + "@h";
 
-        listaEdificiosPreCargados.put(resultado, this);
-        listaEdificiosKeys.add(id);
+        elTemaSeleccionado.listaEdificiosPreCargados.put(resultado, this);
+    }
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "edificio_precargado_id", unique = true, nullable = true)
+    public Integer getIdDb() {
+        return idDb;
     }
 
+    public void setIdDb(Integer idDb) {
+        this.idDb = idDb;
+    }
     /**
      * Devuelve el id del edificio.
      * @return Un integer que contiene el valor del id del edificio.
@@ -147,19 +160,19 @@ public class EdificiosPreCargados implements ImageGetter {
         return nivelCastilloNecesario;
     }
 
-    public TreeMap<Integer, Recursos> getRecursosBuild() {
+    public Map<Integer, Recursos> getRecursosBuild() {
         return recursosBuild;
     }
 
-    public TreeMap<Integer, Recursos> getRecursosProductores() {
+    public Map<Integer, Recursos> getRecursosProductores() {
         return recursosProductores;
     }
 
-    public TreeMap<RecursosPrecargados, ArrayList<Recursos>> getRecursosCosteXmin() {
+    public Map<RecursosPrecargados, ArrayList<Recursos>> getRecursosCosteXmin() {
         return recursosCosteXmin;
     }
 
-    public TreeMap<Integer, Recursos> getRecursosAlmacen() {
+    public Map<Integer, Recursos> getRecursosAlmacen() {
         return recursosAlmacen;
     }
 

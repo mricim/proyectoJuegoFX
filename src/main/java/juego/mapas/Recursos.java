@@ -2,6 +2,10 @@ package main.java.juego.mapas;
 
 import javafx.scene.image.Image;
 
+import javax.persistence.Column;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import java.util.Objects;
 
 public class Recursos {
@@ -13,6 +17,7 @@ public class Recursos {
     //poblacion=5;
     //felicidad=6;
     //investigacion=7
+    private Integer idDB;
     private RecursosPrecargados recursosPrecargados;
     private int cantidad;
 
@@ -24,7 +29,16 @@ public class Recursos {
         this.recursosPrecargados = recursosPrecargados;
         this.cantidad = cantidad;
     }
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "recurso_id", unique = true, nullable = true)
+    public Integer getIdDB() {
+        return idDB;
+    }
 
+    public void setIdDB(Integer idDB) {
+        this.idDB = idDB;
+    }
     public RecursosPrecargados getRecursosPrecargados() {
         return recursosPrecargados;
     }

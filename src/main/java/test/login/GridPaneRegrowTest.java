@@ -14,7 +14,8 @@ import javafx.scene.layout.RowConstraints;
 import javafx.stage.Stage;
 import main.java.utils.CallImages;
 
-import static main.java.jugadores.Jugador.listaCiudades;
+import static main.java.Inicio.PantallaInicialController.elTemaSeleccionado;
+
 
 public class GridPaneRegrowTest extends Application {
 
@@ -83,7 +84,7 @@ public class GridPaneRegrowTest extends Application {
 
                 } else {
                     boolean containsCity = false;
-                    if (listaCiudades.containsKey(fila+"-"+columna)){
+                    if (elTemaSeleccionado.listaCiudades.containsKey(fila+"-"+columna)){
                         containsCity = true;
                     }
                     if(fila%5 == 1 && columna % 5 == 1){

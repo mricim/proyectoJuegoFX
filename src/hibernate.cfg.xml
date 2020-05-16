@@ -4,18 +4,32 @@
         "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
     <session-factory>
-<!--        HIBERNATE DIALECT-->
+        <!--        HIBERNATE DIALECT-->
         <property name="hibernate.dialect">org.hibernate.dialect.MySQL8Dialect</property>
 
-<!--        DATABASE DATA-->
+        <!--        DATABASE DATA-->
         <property name="connection.url">jdbc:mysql://armegis.tk:3306/proyecto?serverTimezone=UTC</property>
         <property name="connection.driver_class">com.mysql.cj.jdbc.Driver</property>
-        <property name="connection.username">test</property>
-        <property name="connection.password">test12345!Ab</property>
+        <property name="connection.username">user</property>
+        <property name="connection.password">user12345!Ab</property>
         <property name="show_sql">true</property>
         <property name="hibernate.hbm2ddl.auto">update</property>
 
-<!--        MAPPING CLASES-->
-<!--        <mapping class="test.Car"/>-->
+        <!--        MAPPING CLASES-->
+        <!--        <mapping class="test.Car"/>-->
+
+
+        <mapping class="main.java.temas.Temas"/>
+        <mapping class="main.java.jugadores.Clan"/>
+        <mapping class="main.java.jugadores.Jugador"/>
+        <mapping class="main.java.utils.Posicion"/>
+        <mapping class="main.java.juego.mapas.ciudad.Ciudad"/>
+        <mapping class="main.java.juego.mapas.pelea.Batallon"/>
+        <mapping class="main.java.juego.mapas.pelea.UnidadesPreCargadas"/>
+        <mapping class="main.java.juego.mapas.pelea.Unidades"/>
+        <mapping class="main.java.juego.mapas.ciudad.contenidoCiudad.Edificio"/>
+        <mapping class="main.java.juego.mapas.ciudad.EdificiosPreCargados"/>
+        <mapping class="main.java.juego.mapas.Recursos"/>
+        <mapping class="main.java.juego.mapas.RecursosPrecargados"/>
     </session-factory>
 </hibernate-configuration>

@@ -28,6 +28,9 @@ import static main.java.utils.traductor.Traductor.listaIdiomasPath;
 
 
 public class PantallaInicialController extends PrimaryStageControler implements Initializable {
+    //TEMAS
+    public static Temas elTemaSeleccionado;
+    //
     public static int idJugadorTemp;
     public static String nameJugadorTemp;
     public static String emailJugadorTemp;
@@ -119,6 +122,15 @@ public class PantallaInicialController extends PrimaryStageControler implements 
         progresBar.setProgress(10);//TODO NO FUNCIONA // https://stackoverflow.com/questions/44398611/running-a-process-in-a-separate-thread-so-rest-of-java-fx-application-is-usable
 
         TRADUCCIONES_THEMA = ResourceBundle.getBundle("main.resources.traductions.temas." + NAME_TEMA_PATH + ".UIResources", TRADUCCIONES_GENERALES.getLocale());
+        for (Temas temas : Temas.listaDeTemas) {
+            System.out.println(temas.getName()+" "+NAME_TEMA);
+            if (temas.getName().equals(NAME_TEMA)){
+                System.out.println("DDDDDDCCCCCCCCCCCFFFFFFFFFFFFFFF");
+                elTemaSeleccionado=temas;
+                break;
+            }
+        }
+
         callbd();
         progresBar.setProgress(100);
         //Jugador borrar=new Jugador("nombre",0);//TODO DESCOMENTAR PARA INICIAR COMO UN NUEVO JUGADOR
@@ -154,7 +166,7 @@ public class PantallaInicialController extends PrimaryStageControler implements 
         //3=CreaMaquinas
 
         //RECURSOS - CONSTRUIR
-        TreeMap<Integer, Recursos> recursosBuild = new TreeMap<>();
+        Map<Integer, Recursos> recursosBuild = new TreeMap<>();
         recursosBuild.put(oroPre.getId(), new Recursos(oroPre, 5));
         recursosBuild.put(maderaPre.getId(), new Recursos(maderaPre, 5));
         recursosBuild.put(piedraPre.getId(), new Recursos(piedraPre, 5));
@@ -162,7 +174,7 @@ public class PantallaInicialController extends PrimaryStageControler implements 
         recursosBuild.put(hierroPre.getId(), new Recursos(hierroPre, 5));
         recursosBuild.put(poblacionPre.getId(), new Recursos(poblacionPre, 5));
         //RECURSOS -Productores
-        TreeMap<Integer, Recursos> recursosProductores = new TreeMap<>();
+        Map<Integer, Recursos> recursosProductores = new TreeMap<>();
         recursosProductores.put(oroPre.getId(), new Recursos(oroPre, 10));
         recursosProductores.put(maderaPre.getId(), new Recursos(maderaPre, 10));
         recursosProductores.put(piedraPre.getId(), new Recursos(piedraPre, 10));
@@ -174,7 +186,7 @@ public class PantallaInicialController extends PrimaryStageControler implements 
         //RECURSOS - COSTE X MIN
         ArrayList<Recursos> recursosCosteXmin5 = new ArrayList<>();
         recursosCosteXmin5.add(new Recursos(poblacionPre, 20));
-        TreeMap<RecursosPrecargados, ArrayList<Recursos>> recursosCosteXmin = new TreeMap<>();
+        Map<RecursosPrecargados, ArrayList<Recursos>> recursosCosteXmin = new TreeMap<>();
         recursosCosteXmin.put(maderaPre, recursosCosteXmin5);
         recursosCosteXmin.put(piedraPre, recursosCosteXmin5);
         recursosCosteXmin.put(comidaPre, recursosCosteXmin5);
@@ -183,13 +195,13 @@ public class PantallaInicialController extends PrimaryStageControler implements 
         ArrayList<Recursos> recursosCosteXmin5V2 = new ArrayList<>();
         recursosCosteXmin5V2.add(new Recursos(poblacionPre, 20));
         recursosCosteXmin5V2.add(new Recursos(comidaPre, 15));
-        TreeMap<RecursosPrecargados, ArrayList<Recursos>> recursosCosteXminV2 = new TreeMap<>();
+        Map<RecursosPrecargados, ArrayList<Recursos>> recursosCosteXminV2 = new TreeMap<>();
         recursosCosteXminV2.put(maderaPre, recursosCosteXmin5V2);
         recursosCosteXminV2.put(piedraPre, recursosCosteXmin5V2);
         recursosCosteXminV2.put(comidaPre, recursosCosteXmin5V2);
         recursosCosteXminV2.put(hierroPre, recursosCosteXmin5V2);
         //RECURSOS -ALMACEN
-        TreeMap<Integer, Recursos> recursosAlmacen = new TreeMap<>();
+        Map<Integer, Recursos> recursosAlmacen = new TreeMap<>();
         recursosAlmacen.put(oroPre.getId(), new Recursos(oroPre, 31));
         recursosAlmacen.put(maderaPre.getId(), new Recursos(maderaPre, 31));
         recursosAlmacen.put(piedraPre.getId(), new Recursos(piedraPre, 31));
@@ -342,5 +354,24 @@ public class PantallaInicialController extends PrimaryStageControler implements 
             }
         };
         thread.start();
+        Thread thread2 = new Thread() {
+            public void run() {
+                try {
+                    Thread.sleep(30000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                System.out.println("CLAN");
+                clan.removeJugadorClan(3);
+                try {
+                    Thread.sleep(20000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                System.out.println("CLAN2");
+                clan2.addJugadorClan(3);
+            }
+        };
+        thread2.start();
     }
 }

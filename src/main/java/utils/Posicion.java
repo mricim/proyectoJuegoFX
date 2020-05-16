@@ -3,7 +3,6 @@ package main.java.utils;
 
 import java.util.Objects;
 
-import static main.java.jugadores.Jugador.listaPosicionesBatallones;
 
 abstract public class Posicion {
     private int fila;

@@ -3,6 +3,10 @@ package main.java.juego.mapas;
 import javafx.scene.image.Image;
 import main.java.utils.ImageGetter;
 
+import javax.persistence.Column;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import java.util.HashMap;
 import java.util.Objects;
 
@@ -17,6 +21,7 @@ public class RecursosPrecargados implements ImageGetter, Comparable<RecursosPrec
     //poblacion=5;
     //felicidad=6;
     //investigacion=7
+    private Integer idDB;
     private int id;
     private String name;
 
@@ -35,6 +40,16 @@ public class RecursosPrecargados implements ImageGetter, Comparable<RecursosPrec
         this.seConsumeEnEdificios = seConsumeEnEdificios;
         getImage();
         recursosPrecargadosList.put(id,this);
+    }
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "recurso_precargado_id", unique = true, nullable = true)
+    public Integer getIdDB() {
+        return idDB;
+    }
+
+    public void setIdDB(Integer idDB) {
+        this.idDB = idDB;
     }
 
     public Integer getId() {

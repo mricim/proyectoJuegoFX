@@ -9,7 +9,8 @@ import main.java.utils.Posicion;
 import java.lang.Character.UnicodeBlock;
 import java.util.*;
 
-import static main.java.jugadores.Jugador.listaPosicionesBatallones;
+import static main.java.Inicio.PantallaInicialController.elTemaSeleccionado;
+
 
 public class Batallon extends Posicion {
     private static int lastIdBatallon = 1;
@@ -120,15 +121,15 @@ public class Batallon extends Posicion {
     @Override
     public void setFilaColumna(int fila, int columna) {
         try {
-            listaPosicionesBatallones.get(getPosition()).remove(this);
+            elTemaSeleccionado.listaPosicionesBatallones.get(getPosition()).remove(this);
         } catch (Exception ignored) {
         }
         super.setFilaColumna(fila, columna);
-        ArrayList<Batallon> batallon2 = listaPosicionesBatallones.get(getPosition());
+        ArrayList<Batallon> batallon2 = elTemaSeleccionado.listaPosicionesBatallones.get(getPosition());
         if (batallon2 == null) {
             ArrayList<Batallon> x = new ArrayList<>();
             x.add(this);
-            listaPosicionesBatallones.put(getPosition(), x);
+            elTemaSeleccionado.listaPosicionesBatallones.put(getPosition(), x);
         } else {
             batallon2.add(this);
         }
@@ -136,7 +137,7 @@ public class Batallon extends Posicion {
 
     public void remove(Jugador jugador) {
         try {
-            listaPosicionesBatallones.get(getPosition()).remove(this);
+            elTemaSeleccionado.listaPosicionesBatallones.get(getPosition()).remove(this);
         } catch (Exception ignored) {
         }
         jugador.listaBatallonesPropios.remove(getIdBatallon());

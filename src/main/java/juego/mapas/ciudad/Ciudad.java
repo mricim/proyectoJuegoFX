@@ -13,17 +13,18 @@ import java.util.ArrayList;
 import java.util.Map;
 import java.util.TreeMap;
 
+import static main.java.Inicio.PantallaInicialController.elTemaSeleccionado;
 import static main.java.juego.mapas.RecursosPrecargados.recursosPrecargadosList;
 import static main.java.jugadores.Jugador.*;
 
 public class Ciudad extends Posicion {
     private static int lastId = 1;
-    private TreeMap<String, Edificio> listaPosicionesEdificios = new TreeMap<>();
+    private Map<String, Edificio> listaPosicionesEdificios = new TreeMap<>();
     private int idCiudad;
     private String nameCity;
-    private TreeMap<Integer, Recursos> recursosTreeMap = new TreeMap<>();//TODO COMPROBAR QUE NO PUEDE PASAR DEL LIMITE DE CAPACIDAD DE LA CIUDAD
+    private Map<Integer, Recursos> recursosTreeMap = new TreeMap<>();//TODO COMPROBAR QUE NO PUEDE PASAR DEL LIMITE DE CAPACIDAD DE LA CIUDAD
     private int nivelCiudad;
-    private TreeMap<Integer, Unidades> listSoldadosCity = new TreeMap<>();
+    private Map<Integer, Unidades> listSoldadosCity = new TreeMap<>();
 
     public Ciudad(Jugador jugador, String nameCity, int fila, int columna, int nivelCiudad, ArrayList<Recursos> recursosDeLaCity) {
         super(fila, columna);
@@ -47,7 +48,7 @@ public class Ciudad extends Posicion {
         }
 
 
-        for (UnidadesPreCargadas soldaditos : listaSoldadosPreCargada.values()) {
+        for (UnidadesPreCargadas soldaditos : elTemaSeleccionado.listaSoldadosPreCargada.values()) {
             this.listSoldadosCity.put(soldaditos.getIdType(), new Unidades(soldaditos, 0, 0, 0, 0));
         }
 
@@ -55,29 +56,29 @@ public class Ciudad extends Posicion {
         //todo Solicitar a la bd la tabla de posiciones y edificios que tiene el usuario
         try {
             if (idCiudad == 2) {
-                new Edificio(listaEdificiosPreCargados.get(0 + "_" + 0), 8, 8, this);//parcela
-                new Edificio(listaEdificiosPreCargados.get(2 + "_" + 1), 1, 12, this);
-                new Edificio(listaEdificiosPreCargados.get(0 + "_" + 0), 6, 8, this);//parcela
-                new Edificio(listaEdificiosPreCargados.get(1 + "_" + 0), 8, 15, this);
+                new Edificio(elTemaSeleccionado.listaEdificiosPreCargados.get(0 + "_" + 0), 8, 8, this);//parcela
+                new Edificio(elTemaSeleccionado.listaEdificiosPreCargados.get(2 + "_" + 1), 1, 12, this);
+                new Edificio(elTemaSeleccionado.listaEdificiosPreCargados.get(0 + "_" + 0), 6, 8, this);//parcela
+                new Edificio(elTemaSeleccionado.listaEdificiosPreCargados.get(1 + "_" + 0), 8, 15, this);
             } else if (idCiudad == 1) {
-                new Edificio(listaEdificiosPreCargados.get(1 + "_" + 1), 8, 7, this);
-                new Edificio(listaEdificiosPreCargados.get(2 + "_" + 0), 1, 12, this);
+                new Edificio(elTemaSeleccionado.listaEdificiosPreCargados.get(1 + "_" + 1), 8, 7, this);
+                new Edificio(elTemaSeleccionado.listaEdificiosPreCargados.get(2 + "_" + 0), 1, 12, this);
             }
-            new Edificio(listaEdificiosPreCargados.get(10 + "_" + 0), 10, 4, this);
-            new Edificio(listaEdificiosPreCargados.get(11 + "_" + 0), 8, 12, this);
-            new Edificio(listaEdificiosPreCargados.get(0 + "_" + 0), 5, 7, this);
-            new Edificio(listaEdificiosPreCargados.get(10 + "_" + 0), 7, 13, this);//todos tendrian "parcela"
-            new Edificio(listaEdificiosPreCargados.get(11 + "_" + 0), 12, 2, this);//todos tendrian "parcela"
-            new Edificio(listaEdificiosPreCargados.get(12 + "_" + 1), 5, 18, this);//todos tendrian "parcela"
+            new Edificio(elTemaSeleccionado.listaEdificiosPreCargados.get(10 + "_" + 0), 10, 4, this);
+            new Edificio(elTemaSeleccionado.listaEdificiosPreCargados.get(11 + "_" + 0), 8, 12, this);
+            new Edificio(elTemaSeleccionado.listaEdificiosPreCargados.get(0 + "_" + 0), 5, 7, this);
+            new Edificio(elTemaSeleccionado.listaEdificiosPreCargados.get(10 + "_" + 0), 7, 13, this);//todos tendrian "parcela"
+            new Edificio(elTemaSeleccionado.listaEdificiosPreCargados.get(11 + "_" + 0), 12, 2, this);//todos tendrian "parcela"
+            new Edificio(elTemaSeleccionado.listaEdificiosPreCargados.get(12 + "_" + 1), 5, 18, this);//todos tendrian "parcela"
 
-            new Edificio(listaEdificiosPreCargados.get(13 + "_" + 0), 7, 15, this);//todos tendrian "parcela"
-            new Edificio(listaEdificiosPreCargados.get(14 + "_" + 0), 7, 16, this);//todos tendrian "parcela"
-            new Edificio(listaEdificiosPreCargados.get(15 + "_" + 0), 7, 17, this);//todos tendrian "parcela"
-            new Edificio(listaEdificiosPreCargados.get(16 + "_" + 0), 12, 17, this);//todos tendrian "parcela"
-            new Edificio(listaEdificiosPreCargados.get(17 + "_" + 0), 13, 5, this);//todos tendrian "parcela"
-            new Edificio(listaEdificiosPreCargados.get(18 + "_" + 0), 14, 10, this);//todos tendrian "parcela"
-            new Edificio(listaEdificiosPreCargados.get(19 + "_" + 0), 3, 7, this);//todos tendrian "parcela"
-            new Edificio(listaEdificiosPreCargados.get(20 + "_" + 0), 4, 8, this);//todos tendrian "parcela"
+            new Edificio(elTemaSeleccionado.listaEdificiosPreCargados.get(13 + "_" + 0), 7, 15, this);//todos tendrian "parcela"
+            new Edificio(elTemaSeleccionado.listaEdificiosPreCargados.get(14 + "_" + 0), 7, 16, this);//todos tendrian "parcela"
+            new Edificio(elTemaSeleccionado.listaEdificiosPreCargados.get(15 + "_" + 0), 7, 17, this);//todos tendrian "parcela"
+            new Edificio(elTemaSeleccionado.listaEdificiosPreCargados.get(16 + "_" + 0), 12, 17, this);//todos tendrian "parcela"
+            new Edificio(elTemaSeleccionado.listaEdificiosPreCargados.get(17 + "_" + 0), 13, 5, this);//todos tendrian "parcela"
+            new Edificio(elTemaSeleccionado.listaEdificiosPreCargados.get(18 + "_" + 0), 14, 10, this);//todos tendrian "parcela"
+            new Edificio(elTemaSeleccionado.listaEdificiosPreCargados.get(19 + "_" + 0), 3, 7, this);//todos tendrian "parcela"
+            new Edificio(elTemaSeleccionado.listaEdificiosPreCargados.get(20 + "_" + 0), 4, 8, this);//todos tendrian "parcela"
         } catch (Exception e) {
             System.err.println("Error: Ciudad (Edificio no creado)\n");
             e.printStackTrace();
@@ -86,7 +87,7 @@ public class Ciudad extends Posicion {
         if (Clan.jugadoresQueEstanEnUnClan.containsKey(jugador)) {
             Clan.jugadoresQueEstanEnUnClan.get(jugador).addCiudades(this);
         }
-        listaCiudades.put(getPosition(), this);
+        elTemaSeleccionado.listaCiudades.put(getPosition(), this);
     }
 
     public Ciudad(String position) {
@@ -102,7 +103,7 @@ public class Ciudad extends Posicion {
         return nameCity;
     }
 
-    public TreeMap<String, Edificio> getListaPosicionesEdificios() {
+    public Map<String, Edificio> getListaPosicionesEdificios() {
         return listaPosicionesEdificios;
     }
 
@@ -114,11 +115,11 @@ public class Ciudad extends Posicion {
         this.listaPosicionesEdificios.put(colum_row, posicionEdificio);
     }
 
-    public TreeMap<Integer, Recursos> getRecursosTreeMap() {
+    public Map<Integer, Recursos> getRecursosTreeMap() {
         return recursosTreeMap;
     }
 
-    public void setRecursosTreeMap(TreeMap<Integer, Recursos> recursosTreeMap) {
+    public void setRecursosTreeMap(Map<Integer, Recursos> recursosTreeMap) {
         this.recursosTreeMap = recursosTreeMap;
     }
 
@@ -130,11 +131,11 @@ public class Ciudad extends Posicion {
         this.nivelCiudad = nivelCiudad;
     }
 
-    public TreeMap<Integer, Unidades> getListSoldadosCity() {
+    public Map<Integer, Unidades> getListSoldadosCity() {
         return listSoldadosCity;
     }
 
-    public void addSoldados(TreeMap<Integer, Unidades> soldados) {
+    public void addSoldados(Map<Integer, Unidades> soldados) {
         for (Unidades soldado : soldados.values()) {
             Unidades soldados2 = this.listSoldadosCity.get(soldado.getUnidadesPreCargadas().getIdType());
             System.out.println(soldados2.getCantidad() + soldado.getCantidad());
