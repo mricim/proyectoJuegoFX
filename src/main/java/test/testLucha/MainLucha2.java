@@ -2,15 +2,16 @@ package main.java.test.testLucha;
 
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.TreeMap;
 
 public class MainLucha2 {
-    protected static TreeMap<Integer, TipoSoldados> tipoSoldadosTreeMap = new TreeMap();
+    protected static Map<Integer, TipoSoldados> tipoSoldadosTreeMap = new TreeMap();
 
-    protected static TreeMap<Integer, SoldadosXX> ejercito1 = new TreeMap<>(Collections.reverseOrder());
-    protected static TreeMap<Integer, SoldadosXX> ejercito2 = new TreeMap<>(Collections.reverseOrder());
-    protected static HashMap<String, Posicion> listaPosicionesSoldados1 = new HashMap<>();
-    protected static HashMap<String, Posicion> listaPosicionesSoldados2 = new HashMap<>();
+    protected static Map<Integer, SoldadosXX> ejercito1 = new TreeMap<>(Collections.reverseOrder());
+    protected static Map<Integer, SoldadosXX> ejercito2 = new TreeMap<>(Collections.reverseOrder());
+    protected static Map<String, Posicion> listaPosicionesSoldados1 = new HashMap<>();
+    protected static Map<String, Posicion> listaPosicionesSoldados2 = new HashMap<>();
 
     public static void main(String[] args) {
         new TipoSoldados(0, "Espadachines");

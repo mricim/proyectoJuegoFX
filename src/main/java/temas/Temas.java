@@ -75,12 +75,11 @@ public class Temas  implements Serializable {
 
     private String name;
     private Integer id;
+
     public Map<String, EdificiosPreCargados> listaEdificiosPreCargados = new TreeMap<>();
     public Map<Integer, UnidadesPreCargadas> listaSoldadosPreCargada = new TreeMap();
     public Map<Integer, RecursosPrecargados> listaRecursosPreCargada = new TreeMap();
 
-
-    //TODO
     public  Map<Integer, Jugador> listaTodosLosJugadores = new TreeMap<>();
     public  Map<String, ArrayList<Batallon>> listaPosicionesBatallones = new TreeMap<>();
     public  Map<String, Ciudad> listaCiudades = new TreeMap<>();
