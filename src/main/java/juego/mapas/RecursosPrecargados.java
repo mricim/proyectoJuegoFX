@@ -1,6 +1,7 @@
 package main.java.juego.mapas;
 
 import javafx.scene.image.Image;
+import main.java.Inicio.PantallaInicialController;
 import main.java.utils.ImageGetter;
 
 import javax.persistence.Column;
@@ -13,7 +14,6 @@ import java.util.Objects;
 
 public class RecursosPrecargados implements ImageGetter, Comparable<RecursosPrecargados>{
     static String RUTEIMAGES = "icons/recursos/";
-    public static Map<Integer,RecursosPrecargados> recursosPrecargadosList=new HashMap<>();
     //oro=0;
     //madera=1;
     //piedra=2;
@@ -40,7 +40,7 @@ public class RecursosPrecargados implements ImageGetter, Comparable<RecursosPrec
         this.menupelea=menupelea;
         this.seConsumeEnEdificios = seConsumeEnEdificios;
         getImage();
-        recursosPrecargadosList.put(id,this);
+        PantallaInicialController.elTemaSeleccionado.listaRecursosPreCargada.put(id,this);
     }
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -119,7 +119,7 @@ public class Jugador {
             Ciudad ciudad1=new Ciudad(this, "ciudad Z 7 6-6", 6, 6, 1, paraCity1);
             Ciudad ciudad2=new Ciudad(this, "ciudad Z 8 6-11", 6, 11, 1,paraCity1);
             Ciudad ciudad3=new Ciudad(this, "ciudad Z 9 8-7", 8, 7, 1, paraCity1);
-            Ciudad ciudad4=new Ciudad(this, "ciudad Z 10 7-5", 7, 5, 1, paraCity2);
+            Ciudad ciudad4=new Ciudad(this, "ciudad Z 10 7-5", 7, 6, 1, paraCity2);
 
             Batallon batallon1 = new Batallon("Batallon Z 6 7-9", 7, 9, 400, this,ciudad1);
             Unidades soldados1 = new Unidades(elTemaSeleccionado.listaSoldadosPreCargada.get(1), 100, 5, 0, 0);

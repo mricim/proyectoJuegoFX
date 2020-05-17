@@ -32,10 +32,8 @@ import main.java.juego.mapas.Recursos;
 import main.java.juego.mapas.ciudad.Ciudad;
 import main.java.juego.mapas.ciudad.CiudadController;
 import main.java.juego.mapas.pelea.Batallon;
-import main.java.utils.tagsFX.CustomAlert;
-import main.java.utils.tagsFX.CustomSeparator;
-import main.java.utils.tagsFX.CustomSlider;
-import main.java.utils.tagsFX.CustomTextField;
+import main.java.utils.tagsFX.*;
+import sun.reflect.generics.tree.Tree;
 
 import java.net.URL;
 import java.text.MessageFormat;
@@ -50,6 +48,7 @@ public class MundoController extends MapasController implements Initializable {
     final private static String RUTE_IMAGES = "mapas/mundo/";
     public static final String THIS_RUTE = "juego/mapas/mundo/mundo.fxml";
     private static final String REGEX_SPLIT_PATTERN = "c";
+    private static final int tamanoBaseMenu = 300;
     static boolean basura = true;
     public FlowPane recuros;
 
@@ -284,7 +283,7 @@ public class MundoController extends MapasController implements Initializable {
     }
 
     private void createMenuLeft(BorderPane borderPane, ImageView imageView, Ciudad ciudad, ArrayList<Batallon> batallones, String imageName, boolean pasoPorClicas) {
-        System.out.println("DDDDDD " + imageName);
+        System.out.println("imageName: " + imageName);
         List<VBox> vBoxList = new ArrayList<>();
         boolean controllerParaVerSiestaVacio = false;
         if (ciudad != null) {
@@ -305,23 +304,16 @@ public class MundoController extends MapasController implements Initializable {
             controllerParaVerSiestaVacio = true;
         }
         if (controllerParaVerSiestaVacio) {
-            rellenador(borderPane, vBoxList, 200);
+            rellenador(borderPane, vBoxList, tamanoBaseMenu);
         }
     }
 
 
     private VBox cajaCiudadMundo(Ciudad ciudadMapa, String imageName) {
-        //Objetos de ciudad
-        Label nombreCiudad = null;
-        Label nivelCiudadPropia = null;
-        ImageView imgViewCiudad = null;
-        Label descripcionCiudad = null;
-
-
         //BLOQUE
         VBox vBoxBloquePropio = new VBox();
-        vBoxBloquePropio.setMinWidth(200);
-        vBoxBloquePropio.setMaxWidth(200);
+        vBoxBloquePropio.setPrefWidth(tamanoBaseMenu);
+        vBoxBloquePropio.setMaxWidth(tamanoBaseMenu);
         vBoxBloquePropio.setAlignment(TOP_CENTER);
 
         BackgroundFill backgroundFill = null;
@@ -348,57 +340,114 @@ public class MundoController extends MapasController implements Initializable {
         } catch (Exception e) {
             image2 = image[0] + "c";
         }
-
+        childrenVBox.add(new CustomSeparator((int) (tamanoBaseMenu * 0.8), false, 10));
         //System.out.println("Image 2 : " + image2);
-        imgViewCiudad = new ImageView(CallImages.getImage(RUTE_IMAGES, image2));
+        ImageView imgViewCiudad = new ImageView(CallImages.getImage(RUTE_IMAGES, image2));
         imgViewCiudad.setPickOnBounds(true);
         imgViewCiudad.setPreserveRatio(true);
         childrenVBox.add(imgViewCiudad);
+        childrenVBox.add(new CustomSeparator((int) (tamanoBaseMenu * 0.8), false, 10));
+        //Name ciudad
+        Label nombreCiudad = new Label(ciudadMapa.getNameCity());
+        nombreCiudad.setTextAlignment(CENTER);
+        nombreCiudad.setAlignment(Pos.CENTER);
+        nombreCiudad.setWrapText(true);
+        childrenVBox.add(nombreCiudad);
         //Nivel ciudad
-        nivelCiudadPropia = new Label(MessageFormat.format(TRADUCCIONES_THEMA.getString("mundo.nivelCiudad"), ciudadMapa.getNivelCiudad()));
+        Label nivelCiudadPropia = new Label(MessageFormat.format(TRADUCCIONES_THEMA.getString("mundo.nivelCiudad"), ciudadMapa.getNivelCiudad()));
         nivelCiudadPropia.setTextAlignment(CENTER);
         nivelCiudadPropia.setAlignment(Pos.CENTER);
         nivelCiudadPropia.setWrapText(true);
         childrenVBox.add(nivelCiudadPropia);
-        //Descripción ciudad
-        descripcionCiudad = new Label(TRADUCCIONES_THEMA.getString("mundo.descripcionCiudad"));
-        descripcionCiudad.setTextAlignment(CENTER);
-        descripcionCiudad.setAlignment(Pos.CENTER);
-        descripcionCiudad.setWrapText(true);
-        childrenVBox.add(descripcionCiudad);
         //Ciudad propia
         if (getJugadorPrimaryStageController().listaCiudadesPropias.containsKey(ciudadMapa.getPosition())) {
             backgroundFill = new BackgroundFill(Color.ANTIQUEWHITE, CornerRadii.EMPTY, Insets.EMPTY);
             printRecursos(childrenVBox, ciudadMapa.getRecursosTreeMap().entrySet());
-            vBoxBloquePropio.setMargin(descripcionCiudad, new Insets(0, 15, 0, 15));
         } else {//Ciudad enemiga o aliada
             if (getClanPrimaryStageController().getCiudadesDelClan().containsKey(ciudadMapa.getPosition())) {
                 backgroundFill = new BackgroundFill(Color.GREEN, CornerRadii.EMPTY, Insets.EMPTY);
             } else {
                 backgroundFill = new BackgroundFill(Color.DARKRED, CornerRadii.EMPTY, Insets.EMPTY);
             }
-            nombreCiudad = new Label(ciudadMapa.getNameCity());
-            nombreCiudad.setTextAlignment(CENTER);
-            nombreCiudad.setAlignment(Pos.CENTER);
-            nombreCiudad.setWrapText(true);
-            childrenVBox.add(nombreCiudad);
+            childrenVBox.add(new CustomSeparator((int) (tamanoBaseMenu * 0.8), true, 10));
+            VBox vBox = new VBox();
+            vBox.setAlignment(Pos.CENTER);
+            //bloque a borrar
+            Label label = new Label(TRADUCCIONES_THEMA.getString("mundo.ciudades.espia.enviar"));
+            FlowPane flowPane = new FlowPane();
+            flowPane.setHgap(5);
+            flowPane.setVgap(5);
+            flowPane.setAlignment(Pos.CENTER);
+            Button button1 = new Button("-1 (10%)");
+            button1.setGraphic(new CustomImageView(elTemaSeleccionado.listaRecursosPreCargada.get(0).getImage(), 30, 30));
+            button1.setOnMouseClicked(event -> {
+                espiaDeRecursos(vBox, ciudadMapa, 10);
+            });
+            Button button2 = new Button("-2 (25%)");
+            button2.setGraphic(new CustomImageView(elTemaSeleccionado.listaRecursosPreCargada.get(0).getImage(), 30, 30));
+            button2.setOnMouseClicked(event -> {
+                espiaDeRecursos(vBox, ciudadMapa, 25);
+            });
+            Button button3 = new Button("-5 (50%)");
+            button3.setGraphic(new CustomImageView(elTemaSeleccionado.listaRecursosPreCargada.get(0).getImage(), 30, 30));
+            button3.setOnMouseClicked(event -> {
+                espiaDeRecursos(vBox, ciudadMapa, 50);
+            });
+            Button button4 = new Button("-10 (80%)");
+            button4.setGraphic(new CustomImageView(elTemaSeleccionado.listaRecursosPreCargada.get(0).getImage(), 30, 30));
+            button4.setOnMouseClicked(event -> {
+                espiaDeRecursos(vBox, ciudadMapa, 80);
+            });
+            flowPane.getChildren().addAll(button1, button2, button3, button4);
+            vBox.getChildren().addAll(label, new CustomSeparator(200, false, 5), flowPane);
+            //fin bloque a borrar
+            childrenVBox.add(vBox);
+            //TODO printRecursos(childrenVBox, ciudadMapa.getRecursosTreeMap().entrySet());
+            childrenVBox.add(new CustomSeparator((int) (tamanoBaseMenu * 0.8), false, 10));
         }
 
         vBoxBloquePropio.setBackground(new Background(backgroundFill));
-        Separator separator = new Separator();
-        separator.setPrefWidth(200);
-        childrenVBox.add(separator);
+        childrenVBox.add(new CustomSeparator((int) (tamanoBaseMenu * 0.8), false, 5));
 
 
         //FIN BLOQUE
         return vBoxBloquePropio;
     }
 
+    private void espiaDeRecursos(VBox vBox, Ciudad ciudadMapa, int porcentage) {
+        vBox.getChildren().clear();
+        vBox.setMaxWidth((int) (tamanoBaseMenu*0.6));
+        ObservableList<Node> a = vBox.getChildren();
+        a.add(new Label(TRADUCCIONES_THEMA.getString("mundo.ciudades.espia.resultados")));
+        double porcentageToMax = ((100 - porcentage) * 0.01) + 1;
+        double porcentageToMin = porcentage * 0.01;
+        for (Recursos recurso : ciudadMapa.getRecursosTreeMap().values()) {
+            int cantidad = recurso.getCantidad();
+            int max = (int) ((cantidad + 10) * porcentageToMax);
+            int min = (int) ((cantidad + 1) * porcentageToMin);
+
+            Label maximo = new Label(String.valueOf(new Random().nextInt(max + 1 - cantidad) + cantidad));
+            CustomImageView imageView = new CustomImageView(recurso.getImage(), 25, 25);
+            Label minimo = new Label(String.valueOf(new Random().nextInt(cantidad + 1 - min) + min));
+            //System.out.println(porcentageToMax + " " + maximo.getText() + " - " + cantidad + " - " + minimo.getText() + " " + porcentageToMin);
+            Region filler = new Region();
+            Region filler2 = new Region();
+            filler.setMinWidth(5);
+            filler2.setMinWidth(5);
+            HBox.setHgrow(filler, Priority.ALWAYS);
+            HBox.setHgrow(filler2, Priority.ALWAYS);
+            HBox hBox = new HBox(maximo, filler, imageView, filler2, minimo);
+            hBox.setAlignment(Pos.CENTER);
+            a.add(hBox);
+        }
+
+    }
+
     private VBox cajaBatallon(ArrayList<Batallon> listaBatallones, ImageView imageView, String imageName) {
         //BLOQUE
         VBox vBoxBloquePropio = new VBox();
-        vBoxBloquePropio.setMinWidth(200);
-        vBoxBloquePropio.setMaxWidth(200);
+        vBoxBloquePropio.setPrefWidth(300);
+        vBoxBloquePropio.setMaxWidth(tamanoBaseMenu);
         vBoxBloquePropio.setAlignment(TOP_CENTER);
 
         ObservableList<Node> childrenVBox = vBoxBloquePropio.getChildren();
@@ -439,11 +488,9 @@ public class MundoController extends MapasController implements Initializable {
                 hBox.setSpacing(10);
 
                 //Imagenes unidades
-                ImageView imgUnidadesBatallon = new ImageView(unidades.getUnidadesPreCargadas().getImageIcon());
+                CustomImageView imgUnidadesBatallon = new CustomImageView(unidades.getUnidadesPreCargadas().getImageIcon(), 60, 60);
                 imgUnidadesBatallon.setPickOnBounds(true);
                 imgUnidadesBatallon.setPreserveRatio(true);
-                imgUnidadesBatallon.setFitWidth(60);
-                imgUnidadesBatallon.setFitHeight(60);
                 imgUnidadesBatallon.setSmooth(true);
                 imgUnidadesBatallon.setCache(true);
 
@@ -541,13 +588,11 @@ public class MundoController extends MapasController implements Initializable {
                 }
             }
             vBoxBatallon.setBackground(new Background(backgroundFill));
-            vBoxBatallonChildren.add(new CustomSeparator(200, true));
+            vBoxBatallonChildren.add(new CustomSeparator((int) (tamanoBaseMenu * 0.8), true));
             childrenVBox.add(vBoxBatallon);
         }
 
-        childrenVBox.add(new
-
-                CustomSeparator(200, true));
+        childrenVBox.add(new CustomSeparator((int) (tamanoBaseMenu * 0.8), true));
 
 
         //FIN BLOQUE
@@ -563,7 +608,7 @@ public class MundoController extends MapasController implements Initializable {
                 List<VBox> vBoxList = new ArrayList<>();
 
                 VBox vBox = new VBox();
-                vBox.setMinWidth(400);
+                vBox.setPrefWidth(400);
                 vBox.setMaxWidth(400);
                 vBox.setBackground(new Background(new BackgroundFill(Color.ANTIQUEWHITE, CornerRadii.EMPTY, Insets.EMPTY)));
                 vBox.setAlignment(TOP_CENTER);
@@ -578,9 +623,7 @@ public class MundoController extends MapasController implements Initializable {
                     HBox hBox = new HBox();
                     hBox.setAlignment(Pos.CENTER);
                     hBox.setSpacing(10);
-                    ImageView imageView = new ImageView(unidadesPreCargadas.getImageIcon());
-                    imageView.setFitWidth(50);
-                    imageView.setFitHeight(50);
+                    CustomImageView imageView = new CustomImageView(unidadesPreCargadas.getImageIcon(), 60, 60);
 
                     int maxSoldados = soldados.getCantidad();
                     CustomTextField textField = new CustomTextField("0", true, maxSoldados);
@@ -623,7 +666,7 @@ public class MundoController extends MapasController implements Initializable {
                 TextField textField = new TextField();
                 textField.setPromptText(TRADUCCIONES_THEMA.getString("mundo.textfield.batallonName"));
                 textField.setAlignment(Pos.CENTER);
-                textField.setMaxWidth(200);
+                textField.setMaxWidth((int) (tamanoBaseMenu * 0.8));
                 vBoxChildren.add(textField);
                 vBoxChildren.add(new CustomSeparator(20, false, 10));
                 btnSplit.setAlignment(Pos.CENTER);
@@ -696,7 +739,7 @@ public class MundoController extends MapasController implements Initializable {
                                         CustomAlert alert = new CustomAlert(Alert.AlertType.INFORMATION);
                                         alert.setTitle(TRADUCCIONES_GENERALES.getString("information.dialog"));
                                         alert.setHeaderText(TRADUCCIONES_THEMA.getString("mundo.dialog.header.moverTropas"));
-                                        alert.setContentText(MessageFormat.format(TRADUCCIONES_THEMA.getString("mundo.dialog.text.moverTropas")+" ", ciudad.getNameCity()));
+                                        alert.setContentText(MessageFormat.format(TRADUCCIONES_THEMA.getString("mundo.dialog.text.moverTropas") + " ", ciudad.getNameCity()));
                                         alert.showAndWait();
                                     } else {
                                         CustomAlert alert = new CustomAlert(Alert.AlertType.WARNING);
@@ -759,15 +802,10 @@ public class MundoController extends MapasController implements Initializable {
     }
 
     private VBox cajaNewCity(ImageView imageView, String imageName) {
-        //Objetos de ciudad
-        Button botonNuevaCity = null;
-        ImageView imgViewCity = null;
-
-
         //BLOQUE
         VBox vBoxBloquePropio = new VBox();
-        vBoxBloquePropio.setMinWidth(200);
-        vBoxBloquePropio.setMaxWidth(200);
+        vBoxBloquePropio.setPrefWidth(tamanoBaseMenu);
+        vBoxBloquePropio.setMaxWidth(tamanoBaseMenu);
         vBoxBloquePropio.setAlignment(TOP_CENTER);
 
         ObservableList<Node> childrenVBox = vBoxBloquePropio.getChildren();
@@ -776,7 +814,7 @@ public class MundoController extends MapasController implements Initializable {
         String[] asd = imageView.getId().split("-");
         int fila = Integer.parseInt(asd[0]);
         int columna = Integer.parseInt(asd[1]);
-        botonNuevaCity = new Button(MessageFormat.format(TRADUCCIONES_THEMA.getString("mundo.fundarNuevaCiudad")+" ", imageView.getId()));
+        Button botonNuevaCity = new Button(MessageFormat.format(TRADUCCIONES_THEMA.getString("mundo.fundarNuevaCiudad") + " ", imageView.getId()));
         botonNuevaCity.setTextAlignment(CENTER);
         botonNuevaCity.setAlignment(Pos.CENTER);
         botonNuevaCity.setOnMouseClicked(e -> {
@@ -791,7 +829,7 @@ public class MundoController extends MapasController implements Initializable {
             city2.add(new Recursos(4, 3000));
             city2.add(new Recursos(5, 3000));
             city2.add(new Recursos(6, 3000));
-            new Ciudad(getJugadorPrimaryStageController(), MessageFormat.format(TRADUCCIONES_THEMA.getString("mundo.newCity")+" ", imageView.getId()), fila, columna, 0, city2);
+            new Ciudad(getJugadorPrimaryStageController(), MessageFormat.format(TRADUCCIONES_THEMA.getString("mundo.newCity") + " ", imageView.getId()), fila, columna, 0, city2);
             newCiudad = false;
             if (primeraCiudad) {
                 PrimaryStageControler.setCiudadPrimaryStageController(getJugadorPrimaryStageController().listaCiudadesPropias.values().iterator().next());
@@ -803,25 +841,18 @@ public class MundoController extends MapasController implements Initializable {
 
         vBoxBloquePropio.setBackground(new Background(backgroundFill));
 
-        Separator separator = new Separator();
-        separator.setPrefWidth(200);
-        childrenVBox.add(separator);
+        childrenVBox.add(new CustomSeparator((int) (tamanoBaseMenu * 0.8), true, 5));
 
         //FIN BLOQUE
         return vBoxBloquePropio;
     }
 
     private void printRecursos(ObservableList<Node> childrenFlowPane, Set<Map.Entry<Integer, Recursos>> recursos) {
-        Separator separator2 = new Separator();
-        separator2.setPrefWidth(200);
-        separator2.setVisible(false);
-        childrenFlowPane.add(separator2);
+        childrenFlowPane.add(new CustomSeparator((int) (tamanoBaseMenu * 0.8), false, 5));
         for (Map.Entry<Integer, Recursos> recurso : recursos) {
             Recursos recursoValor = recurso.getValue();
             int numero = recursoValor.getCantidad();
-            ImageView imageView = new ImageView(recursoValor.getImage());
-            imageView.setFitWidth(25);
-            imageView.setFitHeight(25);
+            CustomImageView imageView = new CustomImageView(recursoValor.getImage(), 25, 25);
             Label label = new Label(String.valueOf(numero));
             label.setGraphic(imageView);
             label.setTextAlignment(CENTER);
@@ -830,7 +861,7 @@ public class MundoController extends MapasController implements Initializable {
             childrenFlowPane.add(label);
         }
         Separator separator = new Separator();
-        separator.setPrefWidth(200);
+        separator.setPrefWidth((int) (tamanoBaseMenu * 0.8));
         childrenFlowPane.add(separator);
 
     }

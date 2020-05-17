@@ -42,7 +42,6 @@ import java.util.*;
 import static javafx.geometry.Pos.TOP_CENTER;
 import static javafx.scene.text.TextAlignment.CENTER;
 import static main.java.Inicio.PantallaInicialController.elTemaSeleccionado;
-import static main.java.juego.mapas.RecursosPrecargados.recursosPrecargadosList;
 import static main.java.jugadores.Jugador.*;
 
 
@@ -973,8 +972,8 @@ public class CiudadController extends MapasController implements Initializable {
                 int cantidad = (int) slider.getValue();
                 int cantidad2 = (int) slider2.getValue();
                 if (cantidad > 0 && cantidad2 > 0) {
-                    RecursosPrecargados recursosPrecargados = recursosPrecargadosList.get(Integer.valueOf(combo.getSelectionModel().getSelectedItem().getString()));
-                    RecursosPrecargados recursosPrecargados2 = recursosPrecargadosList.get(Integer.valueOf(combo2.getSelectionModel().getSelectedItem().getString()));
+                    RecursosPrecargados recursosPrecargados = elTemaSeleccionado.listaRecursosPreCargada.get(Integer.valueOf(combo.getSelectionModel().getSelectedItem().getString()));
+                    RecursosPrecargados recursosPrecargados2 = elTemaSeleccionado.listaRecursosPreCargada.get(Integer.valueOf(combo2.getSelectionModel().getSelectedItem().getString()));
                     if (recursosPrecargados.getId() != recursosPrecargados2.getId()) {
                         getCiudadPrimaryStageController().getRecursosTreeMap().get(recursosPrecargados.getId()).removeCantidad(cantidad);
                         Comercio.data.add(new Comercio(new Recursos(recursosPrecargados, cantidad), new Recursos(recursosPrecargados2, cantidad2), getJugadorPrimaryStageController()));

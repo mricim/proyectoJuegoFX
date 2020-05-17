@@ -14,7 +14,6 @@ import java.util.Map;
 import java.util.TreeMap;
 
 import static main.java.Inicio.PantallaInicialController.elTemaSeleccionado;
-import static main.java.juego.mapas.RecursosPrecargados.recursosPrecargadosList;
 import static main.java.jugadores.Jugador.*;
 
 public class Ciudad extends Posicion {
@@ -34,7 +33,7 @@ public class Ciudad extends Posicion {
 
 
 
-        for (Map.Entry<Integer, RecursosPrecargados> integerRecursosPrecargadosEntry : recursosPrecargadosList.entrySet()) {
+        for (Map.Entry<Integer, RecursosPrecargados> integerRecursosPrecargadosEntry : elTemaSeleccionado.listaRecursosPreCargada.entrySet()) {
             RecursosPrecargados a = integerRecursosPrecargadosEntry.getValue();
             if (a.isMenuCiudad()) {
                 int i = integerRecursosPrecargadosEntry.getKey();

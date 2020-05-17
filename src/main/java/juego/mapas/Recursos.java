@@ -8,6 +8,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import java.util.Objects;
 
+import static main.java.Inicio.PantallaInicialController.elTemaSeleccionado;
+
 public class Recursos {
     //oro=0;
     //madera=1;
@@ -22,7 +24,7 @@ public class Recursos {
     private int cantidad;
 
     public Recursos(int idRecursosPrecargados, int cantidad) {
-        this(RecursosPrecargados.recursosPrecargadosList.get(idRecursosPrecargados), cantidad);
+        this(elTemaSeleccionado.listaRecursosPreCargada.get(idRecursosPrecargados), cantidad);
     }
 
     public Recursos(RecursosPrecargados recursosPrecargados, int cantidad) {
@@ -65,6 +67,10 @@ public class Recursos {
 
     public int getId() {
         return recursosPrecargados.getId();
+    }
+
+    public void setCantidad(int cantidad) {
+        this.cantidad = cantidad;
     }
 
     @Override
