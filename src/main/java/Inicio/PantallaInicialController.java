@@ -373,5 +373,11 @@ public class PantallaInicialController extends PrimaryStageControler implements 
             }
         };
         thread2.start();
+
+
+        elTemaSeleccionado.espias.put(1,10);
+        elTemaSeleccionado.espias.put(2,25);
+        elTemaSeleccionado.espias.put(5,50);
+        elTemaSeleccionado.espias.put(10,80);
     }
 }

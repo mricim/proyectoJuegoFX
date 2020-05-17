@@ -72,6 +72,9 @@ public class Temas  implements Serializable {
 
     //
 
+    //ESPIAS
+    public Map<Integer, Integer>espias = new HashMap<>();
+    //FIN ESPIAS
 
     private String name;
     private Integer id;

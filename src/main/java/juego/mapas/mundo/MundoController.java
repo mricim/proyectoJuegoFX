@@ -39,6 +39,7 @@ import java.net.URL;
 import java.text.MessageFormat;
 import java.util.*;
 
+import static java.util.stream.Collectors.toCollection;
 import static javafx.geometry.Pos.TOP_CENTER;
 import static javafx.scene.text.TextAlignment.CENTER;
 import static main.java.Inicio.PantallaInicialController.elTemaSeleccionado;
@@ -378,27 +379,24 @@ public class MundoController extends MapasController implements Initializable {
             flowPane.setHgap(5);
             flowPane.setVgap(5);
             flowPane.setAlignment(Pos.CENTER);
-            Button button1 = new Button("-1 (10%)");
-            button1.setGraphic(new CustomImageView(elTemaSeleccionado.listaRecursosPreCargada.get(0).getImage(), 30, 30));
-            button1.setOnMouseClicked(event -> {
-                espiaDeRecursos(vBox, ciudadMapa, 10);
-            });
-            Button button2 = new Button("-2 (25%)");
-            button2.setGraphic(new CustomImageView(elTemaSeleccionado.listaRecursosPreCargada.get(0).getImage(), 30, 30));
-            button2.setOnMouseClicked(event -> {
-                espiaDeRecursos(vBox, ciudadMapa, 25);
-            });
-            Button button3 = new Button("-5 (50%)");
-            button3.setGraphic(new CustomImageView(elTemaSeleccionado.listaRecursosPreCargada.get(0).getImage(), 30, 30));
-            button3.setOnMouseClicked(event -> {
-                espiaDeRecursos(vBox, ciudadMapa, 50);
-            });
-            Button button4 = new Button("-10 (80%)");
-            button4.setGraphic(new CustomImageView(elTemaSeleccionado.listaRecursosPreCargada.get(0).getImage(), 30, 30));
-            button4.setOnMouseClicked(event -> {
-                espiaDeRecursos(vBox, ciudadMapa, 80);
-            });
-            flowPane.getChildren().addAll(button1, button2, button3, button4);
+            ObservableList<Node> flowPaneChildren = flowPane.getChildren();
+            for (Map.Entry<Integer, Integer> espia : elTemaSeleccionado.espias.entrySet()) {
+                int coste = espia.getKey();
+                int porcentage = espia.getValue();
+                Button button = new Button("-" + coste + " (" + porcentage + "%)");
+                button.setGraphic(new CustomImageView(elTemaSeleccionado.listaRecursosPreCargada.get(0).getImage(), 30, 30));
+                button.setOnMouseClicked(event -> {
+                    Platform.runLater(() -> {
+                        getCiudadPrimaryStageController().getRecursosTreeMap().get(0).removeCantidad(coste);
+                        espiaDeRecursos(vBox, ciudadMapa, porcentage);
+                        recursosMenu(recuros, this.getClass());
+                    });
+                });
+                if (getCiudadPrimaryStageController().getRecursosTreeMap().get(0).getCantidad() < coste) {
+                    button.setDisable(true);
+                }
+                flowPaneChildren.add(button);
+            }
             vBox.getChildren().addAll(label, new CustomSeparator(200, false, 5), flowPane);
             //fin bloque a borrar
             childrenVBox.add(vBox);
@@ -416,7 +414,7 @@ public class MundoController extends MapasController implements Initializable {
 
     private void espiaDeRecursos(VBox vBox, Ciudad ciudadMapa, int porcentage) {
         vBox.getChildren().clear();
-        vBox.setMaxWidth((int) (tamanoBaseMenu*0.6));
+        vBox.setMaxWidth((int) (tamanoBaseMenu * 0.6));
         ObservableList<Node> a = vBox.getChildren();
         a.add(new Label(TRADUCCIONES_THEMA.getString("mundo.ciudades.espia.resultados")));
         double porcentageToMax = ((100 - porcentage) * 0.01) + 1;

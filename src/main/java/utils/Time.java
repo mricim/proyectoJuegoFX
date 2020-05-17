@@ -6,8 +6,8 @@ import java.time.temporal.ChronoUnit;
 import static java.time.temporal.ChronoUnit.SECONDS;
 
 public class Time {
-    public static final ZoneId ZONE_UTC = ZoneOffset.UTC;
-    public static final ZoneId ZONE_GMT = ZoneId.systemDefault();
+    private static final ZoneId ZONE_UTC = ZoneOffset.UTC;
+    private static final ZoneId ZONE_GMT = ZoneId.systemDefault();
     public static LocalDateTime horaActual_UTC = LocalDateTime.now(ZONE_UTC);
     public static LocalDateTime horaActual_GMT = LocalDateTime.now(ZONE_GMT);
 
