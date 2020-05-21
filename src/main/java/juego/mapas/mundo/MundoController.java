@@ -400,7 +400,6 @@ public class MundoController extends MapasController implements Initializable {
             vBox.getChildren().addAll(label, new CustomSeparator(200, false, 5), flowPane);
             //fin bloque a borrar
             childrenVBox.add(vBox);
-            //TODO printRecursos(childrenVBox, ciudadMapa.getRecursosTreeMap().entrySet());
             childrenVBox.add(new CustomSeparator((int) (tamanoBaseMenu * 0.8), false, 10));
         }
 
@@ -717,12 +716,7 @@ public class MundoController extends MapasController implements Initializable {
                         new EventHandler<MouseEvent>() {
                             @Override
                             public void handle(MouseEvent event2) {
-                                //basura=true;
-                                //basura=true; TODO XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-                                //System.out.println("Entro scene handler");
                                 if (event2.getButton().equals(MouseButton.PRIMARY)) {
-
-                                    //
                                     String position = fila + "-" + columna;
                                     Ciudad ciudad = elTemaSeleccionado.listaCiudades.get(position);
                                     if (ciudad != null) {

@@ -495,7 +495,7 @@ public class CiudadController extends MapasController implements Initializable {
                 if (recursos.getCantidad() >= Clan.costeCrear) {
                     boolean existeElClan = false;
                     for (Clan clan : Clan.clanArrayList) {
-                        if (newValueAltered.equals(clan.getName().getValue().toLowerCase())) {
+                        if (newValueAltered.equals(clan.getNameString().toLowerCase())) {
                             existeElClan = true;
                             break;
                         }
@@ -665,10 +665,11 @@ public class CiudadController extends MapasController implements Initializable {
                         }
                         if (comercio.equals(getClanPrimaryStageController())) {
                             btn.setDisable(true);
-                            btn.setText(String.valueOf(comercio.getCoste()));
+                            btn.setText("-"+comercio.getCoste());
                         } else {
-                            btn.setText(MessageFormat.format(TRADUCCIONES_THEMA.getString("clan.tableView.jugador.button.unirsePor"), comercio.getCoste() + Clan.costeBaseUnirse));
+                            btn.setText("-"+(comercio.getCoste() + Clan.costeBaseUnirse));
                         }
+                        btn.setGraphic(new CustomImageView(elTemaSeleccionado.listaRecursosPreCargada.get(0).getImage(),20,20));
                         hBox2.getChildren().add(btn);
 
                     }
@@ -707,6 +708,8 @@ public class CiudadController extends MapasController implements Initializable {
         clan.addJugadorClan(getJugadorPrimaryStageController());
         setClanPrimaryStageController(clan);
         recursos.removeCantidad(costeEnOro);
+        CustomAlert customAlert = new CustomAlert(Alert.AlertType.INFORMATION, TRADUCCIONES_THEMA.getString("clan.alert.seUnioAunClan")+" \""+clan.getNameString()+"\"");
+        customAlert.showAndWait();
     }
 
     private static void unirseClan(TableView<Clan> clanesTableView, Recursos recursos, Clan clan, int costeEnOro) {
@@ -728,7 +731,7 @@ public class CiudadController extends MapasController implements Initializable {
         separator2.setVisible(false);
         childrenVBox.add(separator2);
 
-        Label nombreEdificioPropio = new Label(TRADUCCIONES_THEMA.getString("clan.tableView.miembros.label")+" "+getClanPrimaryStageController().getName());
+        Label nombreEdificioPropio = new Label(TRADUCCIONES_THEMA.getString("clan.tableView.miembros.label")+" "+getClanPrimaryStageController().getNameString());
         nombreEdificioPropio.setTextAlignment(CENTER);
         nombreEdificioPropio.setAlignment(Pos.CENTER);
         nombreEdificioPropio.setWrapText(true);
@@ -895,7 +898,7 @@ public class CiudadController extends MapasController implements Initializable {
         hBoxAddToTableViewChildren.add(combo);
 
         CustomTextField textField = new CustomTextField("0", true, maximoQueSePuedePedir);
-        CustomSlider slider = new CustomSlider(0, maximoQueSePuedePedir, 0);
+        CustomSlider slider = new CustomSlider(0, maximoQueSePuedePedir, getClanPrimaryStageController().getCoste());
         slider.setmargin(25, 0, 0, 0);
         slider.valueProperty().addListener(new ChangeListener<Number>() {
             @Override

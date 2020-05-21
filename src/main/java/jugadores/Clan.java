@@ -25,10 +25,10 @@ public class Clan {
     private SimpleStringProperty contrasenya = null;
     private SimpleIntegerProperty coste;
 
-    public Clan(String name,int coste) {
+    public Clan(String name, int coste) {
         this.id = lastId++;
         this.name = new SimpleStringProperty(name);
-        this.coste=new SimpleIntegerProperty(coste);
+        this.coste = new SimpleIntegerProperty(coste);
         clanArrayList.add(this);
     }
 
@@ -43,6 +43,10 @@ public class Clan {
 
     public SimpleStringProperty getName() {
         return name;
+    }
+
+    public String getNameString() {
+        return name.getValue();
     }
 
     public Map<String, Ciudad> getCiudadesDelClan() {
