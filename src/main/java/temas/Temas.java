@@ -19,7 +19,7 @@ import static main.java.Main.pathImagesInternal;
 public class Temas  implements Serializable {
     public static List<Temas> listaDeTemas = new ArrayList<>();
     private static boolean filesIsExternal;
-    public static String pathImagesExternal = System.getProperty("user.dir").replace("proyectoJuegoFX", "") + "/res/images/";
+    public static String pathImagesExternal = System.getProperty("user.dir").replace("ProyectoJuegoFX", "") + "/res/images/";
 
 
     private static String pathImagesTemaInternal = pathImagesInternal + "temas/";

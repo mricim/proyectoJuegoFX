@@ -24,14 +24,14 @@ import static main.java.utils.traductor.Traductor.listaIdiomasPath;
 public class Main extends Application {
     //SYSTEMA
     public static final String OS = Os.operativeSystem();
-    public static final String PATH = System.getProperty("user.dir").replace("proyectoJuegoFX", "");
+    public static final String PATH = System.getProperty("user.dir").replace("ProyectoJuegoFX", "");
     public static final String propFileName = PATH + "/conf/config.properties";
     //    String userDir = System.getProperty("user.dir");
     //    Path path = Paths.get(userDir);
     //    String project = path.getFileName();
     //CONFIGS
     public static final String NAME = "Armegis";
-    public static final String VERSION = "0.-13.1.4.20200417.0";
+    public static final String VERSION = "0.-12.0.4.20200417.0";
     public static final String HOST = "http://armegis.tk/";
     public static final String PROJECT = "downloads/";
     public static final String FILELIST = "list.xml";
