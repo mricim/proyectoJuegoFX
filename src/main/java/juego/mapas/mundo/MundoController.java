@@ -415,7 +415,17 @@ public class MundoController extends MapasController implements Initializable {
         vBox.getChildren().clear();
         vBox.setMaxWidth((int) (tamanoBaseMenu * 0.6));
         ObservableList<Node> a = vBox.getChildren();
-        a.add(new Label(TRADUCCIONES_THEMA.getString("mundo.ciudades.espia.resultados")));
+        //
+        Region fillerBase = new Region();
+        Region fillerBase2 = new Region();
+        fillerBase.setMinWidth(5);
+        fillerBase2.setMinWidth(5);
+        HBox.setHgrow(fillerBase, Priority.ALWAYS);
+        HBox.setHgrow(fillerBase2, Priority.ALWAYS);
+        HBox hBoxBase = new HBox(new Label(TRADUCCIONES_THEMA.getString("mundo.ciudades.espia.resultados")), fillerBase,  new Label("(min)"), fillerBase2,new Label("(max)"));
+        hBoxBase.setAlignment(Pos.CENTER);
+        a.add(hBoxBase);
+        //
         double porcentageToMax = ((100 - porcentage) * 0.01) + 1;
         double porcentageToMin = porcentage * 0.01;
         for (Recursos recurso : ciudadMapa.getRecursosTreeMap().values()) {
@@ -433,7 +443,7 @@ public class MundoController extends MapasController implements Initializable {
             filler2.setMinWidth(5);
             HBox.setHgrow(filler, Priority.ALWAYS);
             HBox.setHgrow(filler2, Priority.ALWAYS);
-            HBox hBox = new HBox(maximo, filler, imageView, filler2, minimo);
+            HBox hBox = new HBox(imageView, filler,  minimo, filler2,maximo);
             hBox.setAlignment(Pos.CENTER);
             a.add(hBox);
         }
