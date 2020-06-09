@@ -8,6 +8,7 @@ import javafx.stage.Stage;
 import main.java.Inicio.PantallaInicialController;
 import main.java.temas.Temas;
 import main.java.utils.os.Os;
+import main.java.utils.propietiesAndPreferences.PreferencesApp;
 import main.java.utils.traductor.Traductor;
 
 import java.io.File;
@@ -25,7 +26,8 @@ public class Main extends Application {
     //SYSTEMA
     public static final String OS = Os.operativeSystem();
     public static final String PATH = System.getProperty("user.dir").replace("ProyectoJuegoFX", "");
-    public static final String propFileName = PATH + "/conf/config.properties";
+    public static final String propFile = PATH + "/conf/config.properties";
+    public static final String prefFile = PATH + "/pref/preferences.properties";
     //    String userDir = System.getProperty("user.dir");
     //    Path path = Paths.get(userDir);
     //    String project = path.getFileName();
@@ -39,23 +41,6 @@ public class Main extends Application {
     public static final String RUTEINTERNAL = System.getProperty("user.dir") + "/src/main/";
     public static String pathImagesInternal = RUTEINTERNAL + "resources/images/";
 
-    /*
-    private static final SessionFactory ourSessionFactory;
-
-    static {
-        try {
-            ourSessionFactory = new Configuration().
-                    configure("hibernate.cfg.xml").
-                    buildSessionFactory();
-        } catch (Throwable ex) {
-            throw new ExceptionInInitializerError(ex);
-        }
-    }
-
-    public static Session getSession() throws HibernateException {
-        return ourSessionFactory.openSession();
-    }
-    */
 
     @Override
     public void start(Stage primaryStage) throws IOException {
@@ -94,7 +79,7 @@ public class Main extends Application {
         primaryStage.show();
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         System.out.println(RUTEINTERNAL);
         System.out.println();
         System.out.println("Executing Main.java");
@@ -106,33 +91,21 @@ public class Main extends Application {
         } else {
             Temas.PATH_USE = pathImagesInternal;
         }
-
-        String nameLanguage = Traductor.getLanguageEquals(System.getProperty("user.language"), Main.class);
-        if (nameLanguage != null) {
-            LOCALE = new Locale(nameLanguage);
-        } else {
-            LOCALE = new Locale("en");
+        //FIN INICIO
+        if (PreferencesApp.createFilePrefereces()) {
+            PreferencesApp.readFilePrefereces();
+        }
+        //ANTES DE IDIOMA
+        if (LOCALE == null) {
+            String nameLanguage = Traductor.getLanguageEquals(System.getProperty("user.language"), Main.class);
+            if (nameLanguage != null) {
+                LOCALE = new Locale(nameLanguage);
+            } else {
+                LOCALE = new Locale("en");
+            }
         }
         TRADUCCIONES_GENERALES = ResourceBundle.getBundle("main.resources.traductions.UIResources", LOCALE);
-
-        /*
-        final Session session = getSession();
-        try {
-            System.out.println("querying all the managed entities...");
-            final Map metadataMap = session.getSessionFactory().getAllClassMetadata();
-            for (Object key : metadataMap.keySet()) {
-                final ClassMetadata classMetadata = (ClassMetadata) metadataMap.get(key);
-                final String entityName = classMetadata.getEntityName();
-                final Query query = session.createQuery("from " + entityName);
-                System.out.println("executing: " + query.getQueryString());
-                for (Object o : query.list()) {
-                    System.out.println("  " + o);
-                }
-            }
-        } finally {
-            session.close();
-        }
-*/
+        //IDIOMA FIN
         launch(args);
     }
 

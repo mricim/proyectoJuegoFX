@@ -2,7 +2,6 @@ package main.java.utils.propietiesAndPreferences;
 
 import java.io.*;
 import java.util.Properties;
-import java.util.stream.Stream;
 
 import static main.java.Main.*;
 
@@ -12,8 +11,8 @@ public class PropertiesApp {
     public static void createPropieties() throws IOException {
         //boolean exist=true;
         System.out.println("PATH var: "+PATH);
-        System.out.println("PropFileName:"+ propFileName);
-        filePropieties=new File(propFileName);
+        System.out.println("PropFileName:"+ propFile);
+        filePropieties=new File(propFile);
         if (filePropieties.exists()){
             filePropieties.delete();
         }
@@ -31,7 +30,7 @@ public class PropertiesApp {
             prop.setProperty("fileList", FILELIST);
 
             // save a properties file
-            prop.store(outputStream, "ericcasanova.m@gmail.com");
+            prop.store(outputStream, "Owner: ericcasanova.m@gmail.com");
         } catch (IOException io) {
             io.printStackTrace();
         }

@@ -9,6 +9,7 @@ import main.java.jugadores.Clan;
 import main.java.jugadores.Jugador;
 import main.java.Main;
 import main.java.juego.mapas.ciudad.Ciudad;
+import main.java.utils.propietiesAndPreferences.PreferencesApp;
 
 import java.io.IOException;
 import java.util.Locale;
@@ -17,7 +18,7 @@ import java.util.ResourceBundle;
 import java.util.TreeMap;
 
 public class PrimaryStageControler {
-    public static Locale LOCALE;
+    public static Locale LOCALE = null;
     public static ResourceBundle TRADUCCIONES_GENERALES;
     public static ResourceBundle TRADUCCIONES_THEMA;
     //
@@ -140,6 +141,7 @@ public class PrimaryStageControler {
             LOCALE = locale;
             TRADUCCIONES_GENERALES = ResourceBundle.getBundle(TRADUCCIONES_GENERALES.getBaseBundleName(), LOCALE);
         }
+        PreferencesApp.writeFilePrefereces();
         loader.setResources(TRADUCCIONES_GENERALES);
 
         Parent root = loader.load();

@@ -18,6 +18,7 @@ import main.java.juego.mapas.ciudad.CiudadController;
 import main.java.juego.mapas.ciudad.EdificiosPreCargados;
 import main.java.jugadores.iniciarSession.IniciarSessionController;
 import main.java.temas.Temas;
+import main.java.utils.propietiesAndPreferences.PreferencesApp;
 import main.java.utils.traductor.Traductor;
 
 import java.net.URL;
@@ -64,7 +65,7 @@ public class PantallaInicialController extends PrimaryStageControler implements 
         try {
             String localeString=imageName.substring(1 + imageName.lastIndexOf("/"));
             Locale locale=new Locale(localeString);
-            Locale.setDefault( locale);
+            Locale.setDefault(locale);
             System.setProperty("user.language",localeString);
             reloadLanguage(null, stagePrimaryStageController, PantallaInicialController.getPathToFXML(PantallaInicialController.class), false, locale);
         } catch (Exception e) {
@@ -127,9 +128,8 @@ public class PantallaInicialController extends PrimaryStageControler implements 
 
         TRADUCCIONES_THEMA = ResourceBundle.getBundle("main.resources.traductions.temas." + NAME_TEMA_PATH + ".UIResources", TRADUCCIONES_GENERALES.getLocale());
         for (Temas temas : Temas.listaDeTemas) {
-            System.out.println(temas.getName()+" "+NAME_TEMA);
             if (temas.getName().equals(NAME_TEMA)){
-                System.out.println("DDDDDDCCCCCCCCCCCFFFFFFFFFFFFFFF");
+                System.out.println("Tema seleccionado: "+temas.getName()+" & "+NAME_TEMA);
                 elTemaSeleccionado=temas;
                 break;
             }
