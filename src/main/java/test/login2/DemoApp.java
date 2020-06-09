@@ -1,5 +1,5 @@
 package main.java.test.login2;
-
+/*
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
@@ -38,6 +38,7 @@ public class DemoApp extends Application {
     /*
      * This is where the magic happens...
      */
+/*
     public static void main(String[] args) throws AuthorizationException, URISyntaxException  {
         launch(args);
     }
@@ -57,6 +58,7 @@ public class DemoApp extends Application {
      * @throws URISyntaxException
      * @throws MalformedURLException
      */
+/*
     public URI getAuthorizationEndpointUri() throws URISyntaxException, MalformedURLException {
 
         URIBuilder builder = new URIBuilder();
@@ -84,6 +86,7 @@ public class DemoApp extends Application {
      * @throws URISyntaxException
      * @throws AuthorizationException
      */
+/*
     public String requestAuthCode() throws MalformedURLException, URISyntaxException, AuthorizationException {
 
         // Generate the auth endpoint URI to request the auth code
@@ -120,6 +123,7 @@ public class DemoApp extends Application {
      * @throws URISyntaxException
      * @throws IOException
      */
+/*
     public String getTokenForCode(String code) throws URISyntaxException, IOException {
 
         // The token request URL
@@ -169,6 +173,7 @@ public class DemoApp extends Application {
      * @param json
      * @return
      */
+/*
     public static String prettyPrintJson(String json) {
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         JsonParser jp = new JsonParser();
@@ -181,6 +186,7 @@ public class DemoApp extends Application {
      * Loads our config info from the app.properties file
      * @throws IOException
      */
+/*
     public void loadProperties() throws IOException {
         InputStream inputStream = getClass().getClassLoader().getResourceAsStream("app.properties");
         Properties appProps = new Properties();
@@ -201,6 +207,7 @@ public class DemoApp extends Application {
      * 4) Displays the token
      * @param primaryStage
      */
+/*
     @Override
     public void start(Stage primaryStage) {
 
@@ -240,3 +247,4 @@ public class DemoApp extends Application {
     }
 
 }
+*/

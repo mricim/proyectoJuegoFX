@@ -62,7 +62,11 @@ public class PantallaInicialController extends PrimaryStageControler implements 
 
     private void seleccionarIdioma(String imageName) {
         try {
-            reloadLanguage(null, stagePrimaryStageController, PantallaInicialController.getPathToFXML(PantallaInicialController.class), false, new Locale(imageName.substring(1 + imageName.lastIndexOf("/"))));
+            String localeString=imageName.substring(1 + imageName.lastIndexOf("/"));
+            Locale locale=new Locale(localeString);
+            Locale.setDefault( locale);
+            System.setProperty("user.language",localeString);
+            reloadLanguage(null, stagePrimaryStageController, PantallaInicialController.getPathToFXML(PantallaInicialController.class), false, locale);
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -31,7 +31,7 @@ public class Main extends Application {
     //    String project = path.getFileName();
     //CONFIGS
     public static final String NAME = "Armegis";
-    public static final String VERSION = "0.-11.1.4.20200417.0";
+    public static final String VERSION = "0.-12.0.4.20200608.0";
     public static final String HOST = "http://armegis.tk/";
     public static final String PROJECT = "downloads/";
     public static final String FILELIST = "list.xml";
@@ -106,7 +106,6 @@ public class Main extends Application {
         } else {
             Temas.PATH_USE = pathImagesInternal;
         }
-
 
         String nameLanguage = Traductor.getLanguageEquals(System.getProperty("user.language"), Main.class);
         if (nameLanguage != null) {

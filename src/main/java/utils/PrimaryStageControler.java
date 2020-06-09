@@ -1,6 +1,5 @@
 package main.java.utils;
 
-import com.google.api.client.util.ArrayMap;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -15,6 +14,7 @@ import java.io.IOException;
 import java.util.Locale;
 import java.util.Map;
 import java.util.ResourceBundle;
+import java.util.TreeMap;
 
 public class PrimaryStageControler {
     public static Locale LOCALE;
@@ -160,8 +160,8 @@ public class PrimaryStageControler {
         }
     }
 
-    private static Map<String, String> listControllersFXML = new ArrayMap<>();
-    private static Map<String, String> listControllersa = new ArrayMap<>();
+    private static Map<String, String> listControllersFXML = new TreeMap<>();
+    private static Map<String, String> listControllersa = new TreeMap<>();
 
     //PARA EL RESTO
     //RETURN RUTES
