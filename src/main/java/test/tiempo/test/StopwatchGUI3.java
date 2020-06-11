@@ -1,4 +1,4 @@
-package main.java.test.tiempo;
+package main.java.test.tiempo.test;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;

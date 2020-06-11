@@ -1,4 +1,4 @@
-package main.java.test.tiempo;
+package main.java.test.tiempo.test;
 
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -16,8 +16,7 @@ import java.util.Date;
 
 import static main.java.test.TestTiempo.ZONE_GTM;
 
-public class Reloj extends Application {
-    public static final int CADA_X_MIN=5;
+public class RejozOriginal extends Application {
     // we are allowed to create UI objects on non-UI thread
     private final Text txtTime = new Text();
 
@@ -33,7 +32,7 @@ public class Reloj extends Application {
         while (!enough) {
             try {
                 // running "long" operation not on UI thread
-                Thread.sleep(1000);
+                Thread.sleep(100);
             } catch (InterruptedException ex) {
             }
             //final String time = dt.format(new Date());
@@ -42,15 +41,8 @@ public class Reloj extends Application {
                 //txtTime.setText(time);
                 txtTime.setText(LocalDateTime.now(ZONE_UTC).toString());
 
-                int preMin_MenosUno=CADA_X_MIN-1;
 
-                int minutos = preMin_MenosUno-(LocalDateTime.now(ZONE_UTC).getMinute()%CADA_X_MIN) ;
-                int segundos = 59-LocalDateTime.now(ZONE_UTC).getSecond();
-                System.out.println(minutos + " " + segundos);
-                if (minutos == preMin_MenosUno&&segundos==59) {
-                    System.out.println("XXX "+LocalDateTime.now(ZONE_UTC).toString());
-                }
-                //System.out.println(changeZone(LocalDateTime.now(ZONE_UTC)).toString());
+               System.out.println(changeZone(LocalDateTime.now(ZONE_UTC)).toString());
             });
         }
     });
