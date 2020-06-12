@@ -11,19 +11,30 @@ import main.java.Inicio.PantallaInicialController;
 import main.java.utils.PrimaryStageControler;
 
 import javax.crypto.Cipher;
-import javax.crypto.NoSuchPaddingException;
+import javax.crypto.KeyGenerator;
+import javax.crypto.SecretKey;
+import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.IvParameterSpec;
+import javax.crypto.spec.PBEKeySpec;
 import javax.crypto.spec.SecretKeySpec;
-import java.awt.*;
+import java.io.UnsupportedEncodingException;
 import java.net.URL;
+import java.security.Key;
+import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.security.spec.AlgorithmParameterSpec;
+import java.security.spec.KeySpec;
 import java.util.Base64;
 import java.util.ResourceBundle;
 
 
 public class IniciarSessionController extends PrimaryStageControler implements Initializable {
     public static final String RUTE_FXML = "jugadores/iniciarSession/iniciarSession.fxml";
-    static private String texto="password";
+    static private String key = "password";
+
+
+    private static String secretKey = "boooooooooom!!!!";
+    private static String salt = "password";
 
     @FXML
     private TextField user;
@@ -31,11 +42,15 @@ public class IniciarSessionController extends PrimaryStageControler implements I
     private PasswordField password;
 
 
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         try {
-            System.out.println(openssl_encrypt(texto,"ericcasanova.m@gmail.com","00000000"));
+            System.out.println("XXXXXXXX");
+            System.out.println(encrypt("ericcasanova.m@gmail.com"));
+            System.out.println("XXXXXXXX");
+            System.out.println(encrypt("ericcasanova.m@gmail.com", key));
+            System.out.println("XXXXXXXX");
+            System.out.println(openssl_encrypt("ericcasanova.m@gmail.com", key, "aaaaaaaaaaaaaaaa"));
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -50,9 +65,6 @@ public class IniciarSessionController extends PrimaryStageControler implements I
         PantallaInicialController.emailJugadorTemp = "unemail@gmail.com";
         stage.close();
     }
-
-
-
 
 
     private static String openssl_encrypt(String data, String strKey, String strIv) throws Exception {
@@ -85,4 +97,63 @@ public class IniciarSessionController extends PrimaryStageControler implements I
 
     }
 */
+
+    public static String encrypt(String strToEncrypt, String secret) {
+        try {
+            byte[] iv = "aaaaaaaaaaaaaaaa".getBytes();
+            IvParameterSpec ivspec = new IvParameterSpec(iv);
+
+            SecretKeyFactory factory = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA256");
+            KeySpec spec = new PBEKeySpec(secretKey.toCharArray(), salt.getBytes(), 65536, 256);
+            SecretKey tmp = factory.generateSecret(spec);
+            SecretKeySpec secretKey = new SecretKeySpec(tmp.getEncoded(), "AES");
+
+            Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
+            cipher.init(Cipher.ENCRYPT_MODE, secretKey, ivspec);
+            return Base64.getEncoder().encodeToString(cipher.doFinal(strToEncrypt.getBytes("UTF-8")));
+        } catch (Exception e) {
+            System.out.println("Error while encrypting: " + e.toString());
+        }
+        return null;
+    }
+
+
+
+
+    private static final String ENCRYPTION_KEY = "password";
+    private static final String ENCRYPTION_IV = "aaaaaaaaaaaaaaaa";
+    public static String encrypt(String src) {
+        try {
+            Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
+            cipher.init(Cipher.ENCRYPT_MODE, makeKey(), makeIv());
+            //return Base64.en(cipher.doFinal(src.getBytes()));
+            //return Base64.encodeBytes(cipher.doFinal(src.getBytes()));
+            return null;
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    static AlgorithmParameterSpec makeIv() {
+        try {
+            return new IvParameterSpec(ENCRYPTION_IV.getBytes("UTF-8"));
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    static Key makeKey() {
+        try {
+            MessageDigest md = MessageDigest.getInstance("SHA-256");
+            byte[] key = md.digest(ENCRYPTION_KEY.getBytes("UTF-8"));
+            return new SecretKeySpec(key, "AES");
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
 }

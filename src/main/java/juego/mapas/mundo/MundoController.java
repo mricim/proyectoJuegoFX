@@ -76,7 +76,7 @@ public class MundoController extends MapasController implements Initializable {
     final static Character letter_Clan = 'Z';
 
     final static String letter_random = "$r";
-    final static String letter_hover = "@h";
+    final static String letter_hover = "@H";
     private static Integer fila = 0;
     private static Integer columna = 0;
 
