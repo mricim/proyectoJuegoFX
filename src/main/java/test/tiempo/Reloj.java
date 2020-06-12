@@ -49,6 +49,9 @@ public class Reloj extends Application {
                 System.out.println(minutos + " " + segundos);
                 if (minutos == preMin_MenosUno&&segundos==59) {
                     System.out.println("XXX "+LocalDateTime.now(ZONE_UTC).toString());
+                    //throw new Exception("ERROR");
+                    //break;
+                    //timer.interrupt();
                 }
                 //System.out.println(changeZone(LocalDateTime.now(ZONE_UTC)).toString());
             });

@@ -33,7 +33,7 @@ public class Main extends Application {
     //    String project = path.getFileName();
     //CONFIGS
     public static final String NAME = "Armegis";
-    public static final String VERSION = "0.-12.0.4.20200608.0";
+    public static final String VERSION = "0.-10.0.4.20200608.0";
     public static final String HOST = "http://armegis.tk/";
     public static final String PROJECT = "downloads/";
     public static final String FILELIST = "list.xml";
@@ -41,6 +41,39 @@ public class Main extends Application {
     public static final String RUTEINTERNAL = System.getProperty("user.dir") + "/src/main/";
     public static String pathImagesInternal = RUTEINTERNAL + "resources/images/";
 
+
+    public static void main(String[] args) throws IOException {
+        System.out.println(RUTEINTERNAL);
+        System.out.println();
+        System.out.println("Executing Main.java");
+        listaIdiomasPath.add("Català$##$flags/cat");
+        listaIdiomasPath.add("Castellano$##$flags/es");
+        listaIdiomasPath.add("English$##$flags/en");
+        if (new File(pathImagesExternal).exists()) {
+            Temas.PATH_USE = pathImagesExternal;
+        } else {
+            Temas.PATH_USE = pathImagesInternal;
+        }
+        //FIN INICIO
+        if (PreferencesApp.createFilePrefereces()) {
+            try {
+                PreferencesApp.readFilePrefereces();
+            } catch (NullPointerException ignore) {
+            }
+        }
+        //ANTES DE IDIOMA
+        if (LOCALE == null) {
+            String nameLanguage = Traductor.getLanguageEquals(System.getProperty("user.language"), Main.class);
+            if (nameLanguage != null) {
+                LOCALE = new Locale(nameLanguage);
+            } else {
+                LOCALE = new Locale("en");
+            }
+        }
+        TRADUCCIONES_GENERALES = ResourceBundle.getBundle("main.resources.traductions.UIResources", LOCALE);
+        //IDIOMA FIN
+        launch(args);
+    }
 
     @Override
     public void start(Stage primaryStage) throws IOException {
@@ -77,36 +110,6 @@ public class Main extends Application {
         primaryStage.setScene(scene);
         //primaryStage.setMaximized(true);//Pone el Stage en maximizado
         primaryStage.show();
-    }
-
-    public static void main(String[] args) throws IOException {
-        System.out.println(RUTEINTERNAL);
-        System.out.println();
-        System.out.println("Executing Main.java");
-        listaIdiomasPath.add("Català$##$flags/cat");
-        listaIdiomasPath.add("Castellano$##$flags/es");
-        listaIdiomasPath.add("English$##$flags/en");
-        if (new File(pathImagesExternal).exists()) {
-            Temas.PATH_USE = pathImagesExternal;
-        } else {
-            Temas.PATH_USE = pathImagesInternal;
-        }
-        //FIN INICIO
-        if (PreferencesApp.createFilePrefereces()) {
-            PreferencesApp.readFilePrefereces();
-        }
-        //ANTES DE IDIOMA
-        if (LOCALE == null) {
-            String nameLanguage = Traductor.getLanguageEquals(System.getProperty("user.language"), Main.class);
-            if (nameLanguage != null) {
-                LOCALE = new Locale(nameLanguage);
-            } else {
-                LOCALE = new Locale("en");
-            }
-        }
-        TRADUCCIONES_GENERALES = ResourceBundle.getBundle("main.resources.traductions.UIResources", LOCALE);
-        //IDIOMA FIN
-        launch(args);
     }
 
 
