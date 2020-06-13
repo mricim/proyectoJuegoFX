@@ -49,8 +49,8 @@ public class PantallaInicialController extends PrimaryStageControler implements 
 //
         seleccionarMundo.getItems().addAll(arrayListTemas);
 
-        sesioniniciada = true;//TODO BORRAR
-        idJugadorTemp = 1;//TODO BORRAR
+        //sesioniniciada = true;//TODO BORRAR
+        //idJugadorTemp = 1;//TODO BORRAR
     }
 
     private void seleccionarIdioma(String imageName) {
