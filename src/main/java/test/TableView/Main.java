@@ -113,7 +113,7 @@ public class Main extends Application {
                             //setStyle(null);
                         } else {
                             //recuperar el recurso
-                            DatosPersona recurso = (DatosPersona) item.getDatosDePersona();
+                            DatosPersona recurso = item.getDatosDePersona();
                             //create objects
                             ImageView imageview = new ImageView();
                             imageview.setFitHeight(50);

@@ -3,8 +3,8 @@ package main.java.test.testLucha;
 import static main.java.test.testLucha.MainLucha1.tipoSoldadosTreeMap;
 
 public class TipoSoldados {
-    private int id;
-    private String nombre;
+    private final int id;
+    private final String nombre;
 
     public TipoSoldados(int id, String nombre) {
         this.id = id;

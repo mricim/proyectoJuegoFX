@@ -24,9 +24,9 @@ public class Jugador {
     public Map<String, Ciudad> listaCiudadesPropias = new TreeMap<>();
 
     private static int lastId=1;
-    private int id;
-    private SimpleStringProperty nombre;
-    private Map<Integer, Recursos> recursosJugador =new TreeMap<>();
+    private final int id;
+    private final SimpleStringProperty nombre;
+    private final Map<Integer, Recursos> recursosJugador =new TreeMap<>();
     public Ciudad cargarCiudadPrincipal = null;
 
     public Jugador( String nombre, ArrayList<Recursos> recursosJugador) {

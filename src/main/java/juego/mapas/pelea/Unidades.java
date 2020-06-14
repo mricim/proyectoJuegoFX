@@ -6,9 +6,9 @@ import main.java.utils.Posicion;
 
 public class Unidades extends Posicion implements Cloneable {
     private static int lastId = 1;
-    private int id;
+    private final int id;
     private int cantidad;
-    private UnidadesPreCargadas unidadesPreCargadas;
+    private final UnidadesPreCargadas unidadesPreCargadas;
     int municion;
 
 

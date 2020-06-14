@@ -4,8 +4,8 @@ import static main.java.test.testLucha.MainLucha1.tipoSoldadosTreeMap;
 
 public class SoldadosXX {
     private static int lastId=0;
-    private int id;
-    private int TipoSoldado;
+    private final int id;
+    private final int TipoSoldado;
     private int cantidad;
 
     public SoldadosXX(int TipoSoldado, int cantidad) {

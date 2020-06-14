@@ -26,10 +26,7 @@ public class Time {
 
     public static boolean isPositive(LocalDateTime initialDate, LocalDateTime endDate) {
         long i = SECONDS.between(initialDate, endDate);
-        if (i > 0) {
-            return true;
-        }
-        return false;
+        return i > 0;
     }
 
     public static String getChronomether(LocalDateTime toDateTime) {

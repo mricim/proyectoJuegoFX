@@ -4,8 +4,8 @@ package main.java.test.testLucha;
 import static main.java.test.testLucha.MainLucha2.*;
 
 public class Posicion extends main.java.utils.Posicion {
-    private SoldadosXX soldadosXX;
-    private int ejercito;
+    private final SoldadosXX soldadosXX;
+    private final int ejercito;
 
     public Posicion(int y, int x, int ejercito, int cantidad, SoldadosXX soldadosXX) {
         super(y, x);

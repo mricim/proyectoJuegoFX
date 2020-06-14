@@ -18,7 +18,7 @@ import javafx.stage.Stage;
 
 public class TableViewSample extends Application {
 
-    private TableView<Person> table = new TableView<Person>();
+    private final TableView<Person> table = new TableView<Person>();
     private final ObservableList<Person> data =
             FXCollections.observableArrayList(
                     new Person("Jacob", "Smith", "jacob.smith@example.com"),

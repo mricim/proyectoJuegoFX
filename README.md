@@ -1,3 +1,5 @@
+#Armegis
+
 ### Introducción
 Es un  videojuego de estrategia en tiempo real  que dispondrá de 2 temas distintos, uno de ellos ambientado en la época medieval y otro que estará basado en el cuerpo humano (este último pendiente de los diseñadores). Cada tema cambia por completo la ambientación del videojuego, con el tema medieval nos adentramos en guerras navales y construcción de civilizaciones y ciudades, y la conquista de nuevos horizontes. Mientras que con el cuerpo humano tendremos que aprovechar cada recurso de nuestro cuerpo para lanzar ataques contra los peligrosos virus que pueden atacarnos en el mundo que nos rodea.
 
@@ -22,4 +24,9 @@ Tendrás que pensar bien en que quieres gastar tus recursos, y como quieres expa
 
 
 #### Enlace de descarga
-http://armegis.tk/downloads/index.html
+[http://armegis.tk](http://armegis.tk/downloads/index.html)
+
+##### Autores
+[@mricim](https://github.com/mricim) (owner)
+
+[@iErKy](https://github.com/iErKy)

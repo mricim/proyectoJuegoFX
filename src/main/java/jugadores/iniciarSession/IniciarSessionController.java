@@ -3,6 +3,7 @@ package main.java.jugadores.iniciarSession;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.control.Alert;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
@@ -12,7 +13,11 @@ import main.java.mysql.JDBC;
 import main.java.mysql.PersonSQL;
 import main.java.utils.Encriptacio;
 import main.java.utils.PrimaryStageControler;
+import main.java.utils.tagsFX.CustomAlert;
 
+import java.awt.*;
+import java.io.IOException;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -49,8 +54,6 @@ public class IniciarSessionController extends PrimaryStageControler implements I
 //        System.out.println(encripteuser.getEmailEncripted());
 //        System.out.println("FFFFFFFFFFFF");
         try {
-
-
             if (checkPass(encripteuser.getEmail(), passwordField.getText(), encripteuser.getName(), encripteuser.getPassword())) {
                 System.out.println(email);
                 //
@@ -59,16 +62,25 @@ public class IniciarSessionController extends PrimaryStageControler implements I
                 PantallaInicialController.emailJugadorTemp = encripteuser.getEmail();
             }
         } catch (NullPointerException ignore) {
-
+            CustomAlert alert = new CustomAlert(Alert.AlertType.WARNING);
+            alert.setTitle(TRADUCCIONES_GENERALES.getString("warning.dialog"));
+            alert.setHeaderText(TRADUCCIONES_GENERALES.getString("bad.login"));
+            alert.setContentText(TRADUCCIONES_GENERALES.getString("login.incorrect"));
+            alert.showAndWait();
         }
         stage.close();
     }
 
-    private boolean checkPass(String email, String textField, String name, String db) {
+    private boolean checkPass(String email, String password, String name, String db) {
 
-        if ((Encriptacio.sha256(email + textField + name) + email.length()).equals(db)) {
-            return true;
+        return (Encriptacio.sha256(email + password + name) + email.length()).equals(db);
+    }
+
+    public void openBrowser(MouseEvent mouseEvent) {
+        try {
+            Desktop.getDesktop().browse(new URL("http://www.armegis.tk").toURI());
+        } catch (IOException | URISyntaxException e) {
+            e.printStackTrace();
         }
-        return false;
     }
 }

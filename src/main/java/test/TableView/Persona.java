@@ -14,8 +14,8 @@ public class Persona {
     public static final ObservableList<Persona> data = FXCollections.observableArrayList();
     private static Integer lastId = 0;
 
-    private SimpleIntegerProperty id;
-    private SimpleObjectProperty<DatosPersona> datosDePersona;
+    private final SimpleIntegerProperty id;
+    private final SimpleObjectProperty<DatosPersona> datosDePersona;
 
     public Persona(DatosPersona datosPersona) {
         id = new SimpleIntegerProperty(lastId++);

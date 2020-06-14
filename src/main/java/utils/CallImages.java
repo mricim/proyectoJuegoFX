@@ -10,7 +10,7 @@ import static main.java.jugadores.Jugador.ERRORIMAGE;
 import static main.java.temas.Temas.*;
 
 public class CallImages {
-    private static Map<String, Image> listImage = new HashMap<>();
+    private static final Map<String, Image> listImage = new HashMap<>();
 
     private CallImages(boolean genericOrTemaF, String rute, String name, int width, int height) {
         String ruteName = rute + name;

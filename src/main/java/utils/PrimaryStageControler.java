@@ -162,8 +162,8 @@ public class PrimaryStageControler {
         }
     }
 
-    private static Map<String, String> listControllersFXML = new TreeMap<>();
-    private static Map<String, String> listControllersa = new TreeMap<>();
+    private static final Map<String, String> listControllersFXML = new TreeMap<>();
+    private static final Map<String, String> listControllersa = new TreeMap<>();
 
     //PARA EL RESTO
     //RETURN RUTES
@@ -173,7 +173,7 @@ public class PrimaryStageControler {
             return listControllersFXML.get(eseName);
         } else {
             String nameTemp = eseName.replace("Controller", "");
-            char c[] = nameTemp.substring(nameTemp.lastIndexOf(".") + 1).toCharArray();
+            char[] c = nameTemp.substring(nameTemp.lastIndexOf(".") + 1).toCharArray();
             c[0] = Character.toLowerCase(c[0]);
             String name = ese.getResource("").getPath() + new String(c) + ".fxml";
             String main = Main.class.getResource("").getPath();

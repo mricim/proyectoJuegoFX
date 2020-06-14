@@ -98,10 +98,10 @@ abstract public class MapasController extends PrimaryStageControler {
         }
     }
 
-    protected static void rellenador(BorderPane borderPane, List<VBox> vBoxList,int tamaño) {
+    protected static void rellenador(BorderPane borderPane, List<VBox> vBoxList,int tamano) {
         VBox vBox = new VBox();
-        vBox.setMinWidth(tamaño);
-        vBox.setMaxWidth(tamaño);
+        vBox.setMinWidth(tamano);
+        vBox.setMaxWidth(tamano);
         for (VBox box : vBoxList) {
             vBox.getChildren().add(box);
             Separator separator = new Separator();

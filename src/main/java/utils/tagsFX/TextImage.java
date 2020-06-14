@@ -3,10 +3,10 @@ package main.java.utils.tagsFX;
 import javafx.scene.image.Image;
 
 public class TextImage {
-    private String string;
-    private Image image;
-    private int width;
-    private int height;
+    private final String string;
+    private final Image image;
+    private final int width;
+    private final int height;
 
     public TextImage(String string, Image image) {
         this.string = string;

@@ -16,14 +16,14 @@ public class Clan {
     public static ObservableList<Clan> clanArrayList = FXCollections.observableArrayList();
     public static Map<Jugador, Clan> jugadoresQueEstanEnUnClan = new HashMap<>();
 
-    private int id;
-    private Map<Integer, Jugador> jugadoresDelClan = new HashMap<>();
-    private Map<String, Ciudad> ciudadesDelClan = new TreeMap<>();
-    private HashSet<Batallon> batallonesDelClan = new HashSet<>();
-    private SimpleStringProperty name;
+    private final int id;
+    private final Map<Integer, Jugador> jugadoresDelClan = new HashMap<>();
+    private final Map<String, Ciudad> ciudadesDelClan = new TreeMap<>();
+    private final HashSet<Batallon> batallonesDelClan = new HashSet<>();
+    private final SimpleStringProperty name;
     private Jugador creador;
     private SimpleStringProperty contrasenya = null;
-    private SimpleIntegerProperty coste;
+    private final SimpleIntegerProperty coste;
 
     public Clan(String name, int coste) {
         this.id = lastId++;

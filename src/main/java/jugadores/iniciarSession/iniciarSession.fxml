@@ -1,13 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<!--
-prefHeight="${screen.visualBounds.height}" prefWidth="${screen.visualBounds.width}"
-
-     <fx:define>
-        <Screen fx:factory="getPrimary" fx:id="screen"/>
-    </fx:define>
- -->
-
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
@@ -20,6 +12,11 @@ prefHeight="${screen.visualBounds.height}" prefWidth="${screen.visualBounds.widt
                   <TextField fx:id="emailField" promptText="%usuario" />
                   <PasswordField fx:id="passwordField" promptText="%password" />
                   <Button mnemonicParsing="false" onMouseClicked="#iniciarSession" text="%iniciarSession" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="5.0">
+               <children>
+                  <Button mnemonicParsing="false" onMouseClicked="#openBrowser" text="%registrarse" />
                </children>
             </HBox>
          </children>

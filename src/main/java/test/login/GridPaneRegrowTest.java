@@ -19,7 +19,7 @@ import static main.java.Inicio.PantallaInicialController.elTemaSeleccionado;
 
 public class GridPaneRegrowTest extends Application {
 
-    private static String RUTE = "mapas/mundo/";
+    private static final String RUTE = "mapas/mundo/";
 
     public static void main(String[] args) {
         launch(args);

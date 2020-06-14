@@ -26,11 +26,11 @@ public class Comercio {
      * La lista de comercios creados.
      */
 private static int lastId=0;
-    private SimpleIntegerProperty id;
+    private final SimpleIntegerProperty id;
 
-    private SimpleObjectProperty<Recursos> queSeOfrece;
-    private SimpleObjectProperty<Recursos> queSePide;
-    private Jugador jugador;
+    private final SimpleObjectProperty<Recursos> queSeOfrece;
+    private final SimpleObjectProperty<Recursos> queSePide;
+    private final Jugador jugador;
     private LocalDateTime horaPublicacion;
     private LocalDateTime horafin;
 

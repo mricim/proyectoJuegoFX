@@ -23,14 +23,14 @@ public class RecursosPrecargados implements ImageGetter, Comparable<RecursosPrec
     //felicidad=6;
     //investigacion=7
     private Integer idDB;
-    private int id;
-    private String name;
+    private final int id;
+    private final String name;
 
-    private boolean menuCiudad;//?
-    private boolean menuMundo;//?
-    private boolean menupelea;//?
+    private final boolean menuCiudad;//?
+    private final boolean menuMundo;//?
+    private final boolean menupelea;//?
 
-    private boolean seConsumeEnEdificios;//?
+    private final boolean seConsumeEnEdificios;//?
 
     public RecursosPrecargados(int id, String name,boolean menuCiudad,boolean menuMundo,boolean menupelea,boolean seConsumeEnEdificios) {
         this.id = id;

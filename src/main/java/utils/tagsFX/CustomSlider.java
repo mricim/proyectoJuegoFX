@@ -11,7 +11,7 @@ public class CustomSlider extends Slider {
         if (max < 1) {
             counterX = 1;
         } else if (max < 11) {
-            counterX = (int) max;
+            counterX = max;
             //this.
         } else if (max < 26) {
             counterX = 10;

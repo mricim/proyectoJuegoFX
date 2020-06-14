@@ -3,14 +3,14 @@ package main.java.mysql;
 import main.java.utils.Encriptacio;
 
 public class PersonSQL {
-    private int id;
-    private String name;
-    private String nameEncripted;
-    private String email;
-    private String emailEncripted;
-    private String password;
-    private String date_register;
-    private String last_conexion;
+    private final int id;
+    private final String name;
+    private final String nameEncripted;
+    private final String email;
+    private final String emailEncripted;
+    private final String password;
+    private final String date_register;
+    private final String last_conexion;
 
     public PersonSQL(int id, String nameEncripted, String emailEncripted, String password, String date_register, String last_conexion) {
         this.id = id;

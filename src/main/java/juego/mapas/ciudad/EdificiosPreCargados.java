@@ -29,16 +29,16 @@ import static main.java.Inicio.PantallaInicialController.elTemaSeleccionado;
  */
 public class EdificiosPreCargados implements ImageGetter {
     private Integer idDb;
-    private int id;
-    private int tipo;
-    private String nombre;
-    private String descripcion;
-    private boolean destruible;
-    private boolean construible;
-    private int maximoEdificiosDelMismoTipo;
+    private final int id;
+    private final int tipo;
+    private final String nombre;
+    private final String descripcion;
+    private final boolean destruible;
+    private final boolean construible;
+    private final int maximoEdificiosDelMismoTipo;
     //Mejorables
-    private int nivel;
-    private int nivelCastilloNecesario;
+    private final int nivel;
+    private final int nivelCastilloNecesario;
 
     //RECURSOS - CONSTRUIR
     private Map<Integer, Recursos> recursosBuild = null;
@@ -49,9 +49,9 @@ public class EdificiosPreCargados implements ImageGetter {
     //RECURSOS -ALMACEN
     private Map<Integer, Recursos> recursosAlmacen = null;
 
-    private static String RUTEIMAGES = "mapas/city/";
-    private String imagePath;
-    private String imageClicablePath;
+    private static final String RUTEIMAGES = "mapas/city/";
+    private final String imagePath;
+    private final String imageClicablePath;
 
 
     /**

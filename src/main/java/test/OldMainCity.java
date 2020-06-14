@@ -20,7 +20,7 @@ public class OldMainCity extends Application {
             try {
                 Object controller = type.newInstance();
                 if (controller instanceof PrimaryStageControler) {
-                    ((PrimaryStageControler) controller).setPrimaryStage(primaryStage);
+                    PrimaryStageControler.setPrimaryStage(primaryStage);
                 }
                 return controller;
             } catch (Exception e) {

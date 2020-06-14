@@ -14,7 +14,7 @@ import static main.java.Inicio.PantallaInicialController.elTemaSeleccionado;
 
 public class Batallon extends Posicion {
     private static int lastIdBatallon = 1;
-    private Map<Integer, Unidades> SoldadoHashMap = new HashMap<>();
+    private final Map<Integer, Unidades> SoldadoHashMap = new HashMap<>();
     private int idBatallon;
     private String nombre;
     private Ciudad ciudadVolver;

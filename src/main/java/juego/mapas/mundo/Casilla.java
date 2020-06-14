@@ -4,8 +4,8 @@ import javafx.scene.image.Image;
 
 
 public class Casilla {
-    private int id;//GUARDAR
-    private TiposDeCasillas tiposDeCasillas;
+    private final int id;//GUARDAR
+    private final TiposDeCasillas tiposDeCasillas;
 
 
     public Casilla(TiposDeCasillas tiposDeCasillas) {

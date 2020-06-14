@@ -5,12 +5,12 @@ import javafx.scene.image.Image;
 import main.java.utils.ImageGetter;
 
 public class TiposDeCasillas implements ImageGetter {
-    private int id;
-    private String nombre;
+    private final int id;
+    private final String nombre;
 
     static String RUTEIMAGES = "mapas/city/";
-    private String imagePath;
-    private String imageClicablePath;
+    private final String imagePath;
+    private final String imageClicablePath;
 
     public TiposDeCasillas(int id, String nombre) {
         this.id = id;

@@ -13,10 +13,10 @@ import java.util.Base64;
 public class Encriptacio {
 
 
-    private static String CIPHER_NAME = "AES/CBC/PKCS5PADDING";
-    private static int CIPHER_KEY_LEN = 16; //128 bits
+    private static final String CIPHER_NAME = "AES/CBC/PKCS5PADDING";
+    private static final int CIPHER_KEY_LEN = 16; //128 bits
     private static String KEY =  "0123456789abcdef";
-    private static String initV =  "aaaaaaaaaaaaaaaa";
+    private static final String initV =  "aaaaaaaaaaaaaaaa";
 
     /**
      * Encrypt data using AES Cipher (CBC) with 128 bit key
@@ -41,8 +41,8 @@ public class Encriptacio {
             }
 
 
-            IvParameterSpec initVector = new IvParameterSpec(iv.getBytes("UTF-8"));
-            SecretKeySpec skeySpec = new SecretKeySpec(key.getBytes("UTF-8"), "AES");
+            IvParameterSpec initVector = new IvParameterSpec(iv.getBytes(StandardCharsets.UTF_8));
+            SecretKeySpec skeySpec = new SecretKeySpec(key.getBytes(StandardCharsets.UTF_8), "AES");
 
             Cipher cipher = Cipher.getInstance(CIPHER_NAME);
             cipher.init(Cipher.ENCRYPT_MODE, skeySpec, initVector);
@@ -50,7 +50,7 @@ public class Encriptacio {
             byte[] encryptedData = cipher.doFinal((data.getBytes()));
 
             String base64_EncryptedData = Base64.getEncoder().encodeToString(encryptedData);
-            String base64_IV = Base64.getEncoder().encodeToString(iv.getBytes("UTF-8"));
+            String base64_IV = Base64.getEncoder().encodeToString(iv.getBytes(StandardCharsets.UTF_8));
 
             return base64_EncryptedData + ":" + base64_IV;
 
@@ -73,8 +73,8 @@ public class Encriptacio {
             }
 
 
-            IvParameterSpec initVector = new IvParameterSpec(initV.getBytes("UTF-8"));
-            SecretKeySpec skeySpec = new SecretKeySpec(KEY.getBytes("UTF-8"), "AES");
+            IvParameterSpec initVector = new IvParameterSpec(initV.getBytes(StandardCharsets.UTF_8));
+            SecretKeySpec skeySpec = new SecretKeySpec(KEY.getBytes(StandardCharsets.UTF_8), "AES");
 
             Cipher cipher = Cipher.getInstance(CIPHER_NAME);
             cipher.init(Cipher.ENCRYPT_MODE, skeySpec, initVector);
@@ -82,7 +82,7 @@ public class Encriptacio {
             byte[] encryptedData = cipher.doFinal((data.getBytes()));
 
             String base64_EncryptedData = Base64.getEncoder().encodeToString(encryptedData);
-            String base64_IV = Base64.getEncoder().encodeToString(initV.getBytes("UTF-8"));
+            String base64_IV = Base64.getEncoder().encodeToString(initV.getBytes(StandardCharsets.UTF_8));
 
             return base64_EncryptedData + ":" + base64_IV;
 
@@ -105,7 +105,7 @@ public class Encriptacio {
             String[] parts = data.split(":");
 
             IvParameterSpec iv = new IvParameterSpec(Base64.getDecoder().decode(parts[1]));
-            SecretKeySpec skeySpec = new SecretKeySpec(key.getBytes("UTF-8"), "AES");
+            SecretKeySpec skeySpec = new SecretKeySpec(key.getBytes(StandardCharsets.UTF_8), "AES");
 
             Cipher cipher = Cipher.getInstance(CIPHER_NAME);
             cipher.init(Cipher.DECRYPT_MODE, skeySpec, iv);
@@ -125,7 +125,7 @@ public class Encriptacio {
             String[] parts = data.split(":");
 
             IvParameterSpec iv = new IvParameterSpec(Base64.getDecoder().decode(parts[1]));
-            SecretKeySpec skeySpec = new SecretKeySpec(KEY.getBytes("UTF-8"), "AES");
+            SecretKeySpec skeySpec = new SecretKeySpec(KEY.getBytes(StandardCharsets.UTF_8), "AES");
 
             Cipher cipher = Cipher.getInstance(CIPHER_NAME);
             cipher.init(Cipher.DECRYPT_MODE, skeySpec, iv);
@@ -148,10 +148,10 @@ public class Encriptacio {
         System.out.println(encrypt(KEY, initV, "monicasegarra3@gmail.com"));
         System.out.println(decrypt(KEY, encrypt(KEY, initV, "monicasegarra3@gmail.com")));
 
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
+        System.out.println();
+        System.out.println();
+        System.out.println();
+        System.out.println();
         String a= "ericcasanova.m@gmail.com"+"12345"+"juanito";
         String salida=sha256(a);
         System.out.println("FFFFFFFFFFF"+ salida);
@@ -163,7 +163,7 @@ public class Encriptacio {
     public static String sha256(String base) {
         try{
             MessageDigest digest = MessageDigest.getInstance("SHA-256");
-            byte[] hash = digest.digest(base.getBytes("UTF-8"));
+            byte[] hash = digest.digest(base.getBytes(StandardCharsets.UTF_8));
             StringBuffer hexString = new StringBuffer();
 
             for (int i = 0; i < hash.length; i++) {

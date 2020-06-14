@@ -18,12 +18,12 @@ import static main.java.jugadores.Jugador.*;
 
 public class Ciudad extends Posicion {
     private static int lastId = 1;
-    private Map<String, Edificio> listaPosicionesEdificios = new TreeMap<>();
+    private final Map<String, Edificio> listaPosicionesEdificios = new TreeMap<>();
     private int idCiudad;
     private String nameCity;
     private Map<Integer, Recursos> recursosTreeMap = new TreeMap<>();//TODO COMPROBAR QUE NO PUEDE PASAR DEL LIMITE DE CAPACIDAD DE LA CIUDAD
     private int nivelCiudad;
-    private Map<Integer, Unidades> listSoldadosCity = new TreeMap<>();
+    private final Map<Integer, Unidades> listSoldadosCity = new TreeMap<>();
 
     public Ciudad(Jugador jugador, String nameCity, int fila, int columna, int nivelCiudad, ArrayList<Recursos> recursosDeLaCity) {
         super(fila, columna);

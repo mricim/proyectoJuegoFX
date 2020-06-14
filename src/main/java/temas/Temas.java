@@ -22,8 +22,8 @@ public class Temas  implements Serializable {
     public static String pathImagesExternal = System.getProperty("user.dir").replace("ProyectoJuegoFX", "") + "/res/images/";
 
 
-    private static String pathImagesTemaInternal = pathImagesInternal + "temas/";
-    private static String pathImagesTemaExternal = pathImagesExternal + "temas/";
+    private static final String pathImagesTemaInternal = pathImagesInternal + "temas/";
+    private static final String pathImagesTemaExternal = pathImagesExternal + "temas/";
     public static List<String> arrayListTemas = obtainListaTemas();//Justo antes de obtainListaTemas()
 
     private static List<String> obtainListaTemas() {

@@ -12,17 +12,17 @@ import static main.java.Inicio.PantallaInicialController.elTemaSeleccionado;
 
 public class UnidadesPreCargadas implements ImageGetter {
 
-    private int idType;
-    private String nombre;
-    private int maxMunicion;
+    private final int idType;
+    private final String nombre;
+    private final int maxMunicion;
 
     static String RUTEIMAGES = "mapas/pelea/unidades/";
     static String RUTEICON = "icons/soldados/";
-    private String imagePath;
-    private List<Recursos> costes;
-    private String imageClicablePath;
-    private String imageIconPath;
-    private int tipoLucha;
+    private final String imagePath;
+    private final List<Recursos> costes;
+    private final String imageClicablePath;
+    private final String imageIconPath;
+    private final int tipoLucha;
 
     public UnidadesPreCargadas(int idType, String nombre, int maxMunicion, List<Recursos>costes, int tipoLucha) {
         this.idType = idType;

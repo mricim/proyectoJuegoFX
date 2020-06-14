@@ -7,8 +7,8 @@ import java.util.TreeMap;
 public class MainLucha1 {
     public static Map<Integer, TipoSoldados> tipoSoldadosTreeMap = new TreeMap();
 
-    private static ArrayList<SoldadosXX> listaSoldados = new ArrayList<>();
-    private static ArrayList<SoldadosXX> listaSoldadosXX2 = new ArrayList<>();
+    private static final ArrayList<SoldadosXX> listaSoldados = new ArrayList<>();
+    private static final ArrayList<SoldadosXX> listaSoldadosXX2 = new ArrayList<>();
 
 
     public static void main(String[] args) {

@@ -3,7 +3,7 @@ package main.java.test;
 import java.io.*;
 
 public class CallOtherJava {
-    public static void main(String args[]) {
+    public static void main(String[] args) {
         Process theProcess = null;
         BufferedReader inStream = null;
 

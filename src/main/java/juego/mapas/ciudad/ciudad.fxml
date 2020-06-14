@@ -2,7 +2,6 @@
 
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 
 <!--
@@ -17,32 +16,9 @@ prefHeight="${screen.visualBounds.height}" prefWidth="${screen.visualBounds.widt
     <top>
         <GridPane fx:id="toolbarGridPane" alignment="TOP_CENTER">
             <children>
-                <MenuBar GridPane.columnIndex="0" GridPane.rowIndex="0">
-                    <menus>
-                        <Menu mnemonicParsing="false" text="Game">
-                            <items>
-                                <MenuItem mnemonicParsing="false" text="New Game                F1" />
-                                <MenuItem mnemonicParsing="false" text="Exit                            F2" />
-                            </items>
-                        </Menu>
-
-                        <Menu mnemonicParsing="false" text="File">
-                            <items>
-                                <MenuItem mnemonicParsing="false" text="Close" />
-                            </items>
-                        </Menu>
-                        <Menu mnemonicParsing="false" text="Edit">
-                            <items>
-                                <MenuItem mnemonicParsing="false" text="Delete" />
-                            </items>
-                        </Menu>
-                        <Menu mnemonicParsing="false" text="Help">
-                            <items>
-                                <MenuItem mnemonicParsing="false" text="About" />
-                            </items>
-                        </Menu>
-                    </menus>
-                </MenuBar>
+                <HBox GridPane.columnIndex="0" GridPane.rowIndex="0">
+                    <Label text="Clock"/>
+                </HBox>
 
                 <FlowPane fx:id="flowPaneRecuros" alignment="CENTER" hgap="40.0" GridPane.columnIndex="1" GridPane.rowIndex="0">
 
@@ -59,9 +35,9 @@ prefHeight="${screen.visualBounds.height}" prefWidth="${screen.visualBounds.widt
                 </HBox>
             </children>
             <columnConstraints>
-                <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" minWidth="100" percentWidth="20" prefWidth="100" />
-                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="400" percentWidth="70" prefWidth="100" />
-                <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" minWidth="100" percentWidth="10" prefWidth="100" />
+                <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" minWidth="100" percentWidth="5" prefWidth="50" />
+                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="400" percentWidth="80" prefWidth="100" />
+                <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" minWidth="100" percentWidth="15" prefWidth="100" />
             </columnConstraints>
             <rowConstraints>
                 <RowConstraints minHeight="10" prefHeight="30" vgrow="SOMETIMES" />

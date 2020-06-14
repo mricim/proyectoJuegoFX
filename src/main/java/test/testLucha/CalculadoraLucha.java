@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class CalculadoraLucha {
-    private static ArrayList<ArrayList> table = new ArrayList<>();
+    private static final ArrayList<ArrayList> table = new ArrayList<>();
 
     public CalculadoraLucha() {
         ArrayList<Double> colum1 = new ArrayList<>();

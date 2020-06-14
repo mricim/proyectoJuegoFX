@@ -4,13 +4,14 @@ import javax.crypto.Cipher;
 import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
 
+import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 
 public class Encriptacio {
 
 
-    private static String CIPHER_NAME = "AES/CBC/PKCS5PADDING";
-    private static int CIPHER_KEY_LEN = 16; //128 bits
+    private static final String CIPHER_NAME = "AES/CBC/PKCS5PADDING";
+    private static final int CIPHER_KEY_LEN = 16; //128 bits
 
     /**
      * Encrypt data using AES Cipher (CBC) with 128 bit key
@@ -35,8 +36,8 @@ public class Encriptacio {
             }
 
 
-            IvParameterSpec initVector = new IvParameterSpec(iv.getBytes("UTF-8"));
-            SecretKeySpec skeySpec = new SecretKeySpec(key.getBytes("UTF-8"), "AES");
+            IvParameterSpec initVector = new IvParameterSpec(iv.getBytes(StandardCharsets.UTF_8));
+            SecretKeySpec skeySpec = new SecretKeySpec(key.getBytes(StandardCharsets.UTF_8), "AES");
 
             Cipher cipher = Cipher.getInstance(Encriptacio.CIPHER_NAME);
             cipher.init(Cipher.ENCRYPT_MODE, skeySpec, initVector);
@@ -44,7 +45,7 @@ public class Encriptacio {
             byte[] encryptedData = cipher.doFinal((data.getBytes()));
 
             String base64_EncryptedData = Base64.getEncoder().encodeToString(encryptedData);
-            String base64_IV = Base64.getEncoder().encodeToString(iv.getBytes("UTF-8"));
+            String base64_IV = Base64.getEncoder().encodeToString(iv.getBytes(StandardCharsets.UTF_8));
 
             return base64_EncryptedData + ":" + base64_IV;
 
@@ -69,7 +70,7 @@ public class Encriptacio {
             String[] parts = data.split(":");
 
             IvParameterSpec iv = new IvParameterSpec(Base64.getDecoder().decode(parts[1]));
-            SecretKeySpec skeySpec = new SecretKeySpec(key.getBytes("UTF-8"), "AES");
+            SecretKeySpec skeySpec = new SecretKeySpec(key.getBytes(StandardCharsets.UTF_8), "AES");
 
             Cipher cipher = Cipher.getInstance(Encriptacio.CIPHER_NAME);
             cipher.init(Cipher.DECRYPT_MODE, skeySpec, iv);

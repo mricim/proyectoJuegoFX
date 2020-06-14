@@ -20,7 +20,7 @@ public class Recursos {
     //felicidad=6;
     //investigacion=7
     private Integer idDB;
-    private RecursosPrecargados recursosPrecargados;
+    private final RecursosPrecargados recursosPrecargados;
     private int cantidad;
 
     public Recursos(int idRecursosPrecargados, int cantidad) {

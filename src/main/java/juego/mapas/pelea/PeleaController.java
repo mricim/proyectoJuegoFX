@@ -17,7 +17,7 @@ import java.util.ResourceBundle;
 
 
 public class PeleaController extends MapasController implements Initializable {
-    private static String RUTE = "../../../resources/mapas/city/";
+    private static final String RUTE = "../../../resources/mapas/city/";
     static Jugador jugador;
     static boolean basura = true;
 

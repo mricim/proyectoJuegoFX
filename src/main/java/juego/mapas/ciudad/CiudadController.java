@@ -244,12 +244,7 @@ public class CiudadController extends MapasController implements Initializable {
                     printEdificioRecursos(vBoxChildren, edificioPuesto, borderPane, flowPaneRecuros);//Ponemos las barras de los selectores o lo que cuesta manterner el edificio
                 }
             } else {//EDIFICIO A CONSTRUIR
-                if (construir_Update_Dowgrade_Destruir < 3) {
-                    printEdificioRecursos(vBoxChildren, edificioPosiblesConstrucciones, construir_Update_Dowgrade_Destruir, true);
-                } else {
-                    printEdificioRecursos(vBoxChildren, edificioPosiblesConstrucciones, construir_Update_Dowgrade_Destruir, false);
-
-                }
+                printEdificioRecursos(vBoxChildren, edificioPosiblesConstrucciones, construir_Update_Dowgrade_Destruir, construir_Update_Dowgrade_Destruir < 3);
             }
 
             //VBox.setMargin(flowPane, new Insets(0, 15, 0, 15));
@@ -658,11 +653,7 @@ public class CiudadController extends MapasController implements Initializable {
                         hBox2.getChildren().clear();
                         Clan comercio = getTableView().getItems().get(getIndex());
 
-                        if (getCiudadPrimaryStageController().getRecursosTreeMap().get(0).getCantidad() <= Clan.costeBaseUnirse) {
-                            btn.setDisable(true);
-                        } else {
-                            btn.setDisable(false);
-                        }
+                        btn.setDisable(getCiudadPrimaryStageController().getRecursosTreeMap().get(0).getCantidad() <= Clan.costeBaseUnirse);
                         if (comercio.equals(getClanPrimaryStageController())) {
                             btn.setDisable(true);
                             btn.setText("-"+comercio.getCoste());

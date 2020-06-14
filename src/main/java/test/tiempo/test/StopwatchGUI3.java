@@ -20,22 +20,22 @@ public class StopwatchGUI3 extends JFrame {
     private static final long serialVersionUID = 3545053785228009472L;
 
     // GUI Components
-    private JPanel panel;
-    private JLabel timeLabel;
+    private final JPanel panel;
+    private final JLabel timeLabel;
 
-    private JPanel buttonPanel;
-    private JButton startButton;
-    private JButton resetButton;
-    private JButton stopButton;
+    private final JPanel buttonPanel;
+    private final JButton startButton;
+    private final JButton resetButton;
+    private final JButton stopButton;
 
     // Properties of Program.
     private byte centiseconds = 0;
     private byte seconds = 30;
     private short minutes = 0;
 
-    private DecimalFormat timeFormatter;
+    private final DecimalFormat timeFormatter;
 
-    private Timer timer;
+    private final Timer timer;
 
     public StopwatchGUI3() {
         panel = new JPanel();

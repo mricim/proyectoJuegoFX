@@ -4,9 +4,6 @@ import main.java.Main;
 
 public class ThisJar {
     public static boolean checkJar(){
-        if (Main.class.getResource("Main.class").toString().split(":")[0].equals("file")){
-            return false;
-        }
-        return true;
+        return !Main.class.getResource("Main.class").toString().split(":")[0].equals("file");
     }
 }
