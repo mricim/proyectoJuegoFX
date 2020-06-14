@@ -48,20 +48,25 @@ public class IniciarSessionController extends PrimaryStageControler implements I
 //        System.out.println(encripteuser.getEmail());
 //        System.out.println(encripteuser.getEmailEncripted());
 //        System.out.println("FFFFFFFFFFFF");
+        try {
 
-        if (checkPass(encripteuser.getEmail() , passwordField.getText() , encripteuser.getName(), encripteuser.getPassword())) {
-            System.out.println(email);
-            //
-            PantallaInicialController.idJugadorTemp = encripteuser.getId();
-            PantallaInicialController.nameJugadorTemp = encripteuser.getName();
-            PantallaInicialController.emailJugadorTemp = encripteuser.getEmail();
+
+            if (checkPass(encripteuser.getEmail(), passwordField.getText(), encripteuser.getName(), encripteuser.getPassword())) {
+                System.out.println(email);
+                //
+                PantallaInicialController.idJugadorTemp = encripteuser.getId();
+                PantallaInicialController.nameJugadorTemp = encripteuser.getName();
+                PantallaInicialController.emailJugadorTemp = encripteuser.getEmail();
+            }
+        } catch (NullPointerException ignore) {
+
         }
         stage.close();
     }
 
-    private boolean checkPass(String email,String textField,String name, String db) {
+    private boolean checkPass(String email, String textField, String name, String db) {
 
-        if ((Encriptacio.sha256(email+textField+name)+email.length()).equals(db)) {
+        if ((Encriptacio.sha256(email + textField + name) + email.length()).equals(db)) {
             return true;
         }
         return false;

@@ -88,7 +88,7 @@ public class Jugador {
             batallon3.setSoldadoHashMap(soldados6);
         } else if (id == 2) {
             Ciudad ciudad1=new Ciudad(this, "ciudad E 3 1-6", 1, 6, 1, paraCity1);
-            Ciudad ciudad2=new Ciudad(this, "ciudad E 4 2-7", 2, 7, 1, paraCity1);
+            Ciudad ciudad2=new Ciudad(this, "ciudad E 4 2-8", 2, 8, 1, paraCity1);
             Ciudad ciudad3=new Ciudad(this, "ciudad E 5 3-8", 3, 8, 1, paraCity1);
             Ciudad ciudad4=new Ciudad(this, "ciudad E 6 8-3", 8, 3, 1, paraCity2);
 
@@ -104,7 +104,7 @@ public class Jugador {
             batallon2.setSoldadoHashMap(soldados3);
             batallon2.setSoldadoHashMap(soldados4);
 
-            Batallon batallon3 = new Batallon("Batallon E 5 2-7", 2, 7, 400, this,ciudad3);
+            Batallon batallon3 = new Batallon("Batallon E 5 2-8", 2, 8, 400, this,ciudad3);
             Unidades soldados5 = new Unidades(elTemaSeleccionado.listaSoldadosPreCargada.get(1), 100, 5, 0, 0);
             Unidades soldados6 = new Unidades(elTemaSeleccionado.listaSoldadosPreCargada.get(2), 100, 0, 0, 0);
             batallon3.setSoldadoHashMap(soldados5);

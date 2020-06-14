@@ -945,8 +945,8 @@ public class CiudadController extends MapasController implements Initializable {
         int maximoQueSePuedePedir2 = getCiudadPrimaryStageController().getRecursosTreeMap().get(Integer.valueOf(combo2.getValue().getString())).getCantidad();
         hBoxAddToTableViewChildren2.add(combo2);
 
-        CustomTextField textField2 = new CustomTextField("0", true, maximoQueSePuedePedir2);
-        CustomSlider slider2 = new CustomSlider(0, maximoQueSePuedePedir2, 0);
+        CustomTextField textField2 = new CustomTextField("0", true, maximoQueSePuedePedir2+1000);
+        CustomSlider slider2 = new CustomSlider(0, maximoQueSePuedePedir2+1000, 0);
         slider2.setmargin(25, 0, 0, 0);
         slider2.valueProperty().addListener(new ChangeListener<Number>() {
             @Override

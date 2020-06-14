@@ -33,7 +33,7 @@ public class Main extends Application {
     //    String project = path.getFileName();
     //CONFIGS
     public static final String NAME = "Armegis";
-    public static final String VERSION = "0.-10.0.4.20200608.0";
+    public static final String VERSION = "0.-10.0.4.20200614.0";
     public static final String HOST = "http://armegis.tk/";
     public static final String PROJECT = "downloads/";
     public static final String FILELIST = "list.xml";
