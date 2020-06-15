@@ -83,7 +83,7 @@ public class Temas  implements Serializable {
     public Map<Integer, UnidadesPreCargadas> listaSoldadosPreCargada = new TreeMap();
     public Map<Integer, RecursosPrecargados> listaRecursosPreCargada = new TreeMap();
 
-    public  Map<Integer, Jugador> listaTodosLosJugadores = new TreeMap<>();
+    public  Map<Long, Jugador> listaTodosLosJugadores = new TreeMap<>();
     public  Map<String, ArrayList<Batallon>> listaPosicionesBatallones = new TreeMap<>();
     public  Map<String, Ciudad> listaCiudades = new TreeMap<>();
 
@@ -146,12 +146,12 @@ public class Temas  implements Serializable {
     }
     @OneToMany(cascade = CascadeType.ALL,targetEntity = Jugador.class)
     @JoinColumn(name="tema_jugador_fk")
-    public  Map<Integer, Jugador> getListaTodosLosJugadores() {
+    public  Map<Long, Jugador> getListaTodosLosJugadores() {
         return listaTodosLosJugadores;
     }
 
 
-    public  void setListaTodosLosJugadores(Map<Integer, Jugador> listaTodosLosJugadores) {
+    public  void setListaTodosLosJugadores(Map<Long, Jugador> listaTodosLosJugadores) {
         this.listaTodosLosJugadores = listaTodosLosJugadores;
     }
 

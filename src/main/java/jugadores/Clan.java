@@ -17,7 +17,7 @@ public class Clan {
     public static Map<Jugador, Clan> jugadoresQueEstanEnUnClan = new HashMap<>();
 
     private final int id;
-    private final Map<Integer, Jugador> jugadoresDelClan = new HashMap<>();
+    private final Map<Long, Jugador> jugadoresDelClan = new HashMap<>();
     private final Map<String, Ciudad> ciudadesDelClan = new TreeMap<>();
     private final HashSet<Batallon> batallonesDelClan = new HashSet<>();
     private final SimpleStringProperty name;
@@ -37,7 +37,7 @@ public class Clan {
         return id;
     }
 
-    public Map<Integer, Jugador> getJugadoresDelClan() {
+    public Map<Long, Jugador> getJugadoresDelClan() {
         return jugadoresDelClan;
     }
 
@@ -89,7 +89,7 @@ public class Clan {
         this.contrasenya = new SimpleStringProperty(contrasenya);
     }
 
-    public void addJugadorClan(int jugadorId) {
+    public void addJugadorClan(long jugadorId) {
         addJugadorClan(Jugador.returnJugador(jugadorId));
     }
 

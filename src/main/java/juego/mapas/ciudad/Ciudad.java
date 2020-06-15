@@ -54,30 +54,23 @@ public class Ciudad extends Posicion {
 
         //todo Solicitar a la bd la tabla de posiciones y edificios que tiene el usuario
         try {
-            if (idCiudad == 2) {
-                new Edificio(elTemaSeleccionado.listaEdificiosPreCargados.get(0 + "_" + 0), 8, 8, this);//parcela
-                new Edificio(elTemaSeleccionado.listaEdificiosPreCargados.get(2 + "_" + 1), 1, 12, this);
-                new Edificio(elTemaSeleccionado.listaEdificiosPreCargados.get(0 + "_" + 0), 6, 8, this);//parcela
-                new Edificio(elTemaSeleccionado.listaEdificiosPreCargados.get(1 + "_" + 0), 8, 15, this);
-            } else if (idCiudad == 1) {
-                new Edificio(elTemaSeleccionado.listaEdificiosPreCargados.get(1 + "_" + 1), 8, 7, this);
-                new Edificio(elTemaSeleccionado.listaEdificiosPreCargados.get(2 + "_" + 0), 1, 12, this);
-            }
-            new Edificio(elTemaSeleccionado.listaEdificiosPreCargados.get(10 + "_" + 0), 10, 4, this);
-            new Edificio(elTemaSeleccionado.listaEdificiosPreCargados.get(11 + "_" + 0), 8, 12, this);
-            new Edificio(elTemaSeleccionado.listaEdificiosPreCargados.get(0 + "_" + 0), 5, 7, this);
-            new Edificio(elTemaSeleccionado.listaEdificiosPreCargados.get(10 + "_" + 0), 7, 13, this);//todos tendrian "parcela"
-            new Edificio(elTemaSeleccionado.listaEdificiosPreCargados.get(11 + "_" + 0), 12, 2, this);//todos tendrian "parcela"
-            new Edificio(elTemaSeleccionado.listaEdificiosPreCargados.get(12 + "_" + 1), 5, 18, this);//todos tendrian "parcela"
+            new Edificio(elTemaSeleccionado.listaEdificiosPreCargados.get(1 + "_" + 0), 8, 7, this);
+            new Edificio(elTemaSeleccionado.listaEdificiosPreCargados.get(2 + "_" + 0), 5, 8, this);
+            new Edificio(elTemaSeleccionado.listaEdificiosPreCargados.get(18 + "_" + 0), 15, 10, this);
 
-            new Edificio(elTemaSeleccionado.listaEdificiosPreCargados.get(13 + "_" + 0), 7, 15, this);//todos tendrian "parcela"
-            new Edificio(elTemaSeleccionado.listaEdificiosPreCargados.get(14 + "_" + 0), 7, 16, this);//todos tendrian "parcela"
-            new Edificio(elTemaSeleccionado.listaEdificiosPreCargados.get(15 + "_" + 0), 7, 17, this);//todos tendrian "parcela"
-            new Edificio(elTemaSeleccionado.listaEdificiosPreCargados.get(16 + "_" + 0), 12, 17, this);//todos tendrian "parcela"
-            new Edificio(elTemaSeleccionado.listaEdificiosPreCargados.get(17 + "_" + 0), 13, 5, this);//todos tendrian "parcela"
-            new Edificio(elTemaSeleccionado.listaEdificiosPreCargados.get(18 + "_" + 0), 14, 10, this);//todos tendrian "parcela"
-            new Edificio(elTemaSeleccionado.listaEdificiosPreCargados.get(19 + "_" + 0), 3, 7, this);//todos tendrian "parcela"
-            new Edificio(elTemaSeleccionado.listaEdificiosPreCargados.get(20 + "_" + 0), 4, 8, this);//todos tendrian "parcela"
+            new Edificio(elTemaSeleccionado.listaEdificiosPreCargados.get(0 + "_" + 0), 6, 8, this);//parcela
+            new Edificio(elTemaSeleccionado.listaEdificiosPreCargados.get(0 + "_" + 0), 5, 18, this);//parcela
+            new Edificio(elTemaSeleccionado.listaEdificiosPreCargados.get(0 + "_" + 0), 7, 15, this);//parcela
+            new Edificio(elTemaSeleccionado.listaEdificiosPreCargados.get(0 + "_" + 0), 7, 17, this);//parcela
+            new Edificio(elTemaSeleccionado.listaEdificiosPreCargados.get(0 + "_" + 0), 8, 13, this);//parcela
+            new Edificio(elTemaSeleccionado.listaEdificiosPreCargados.get(0 + "_" + 0), 9, 13, this);//parcela
+            new Edificio(elTemaSeleccionado.listaEdificiosPreCargados.get(0 + "_" + 0), 10, 4, this);//parcela
+            new Edificio(elTemaSeleccionado.listaEdificiosPreCargados.get(0 + "_" + 0), 12, 2, this);//parcela
+            new Edificio(elTemaSeleccionado.listaEdificiosPreCargados.get(0 + "_" + 0), 9, 25, this);//parcela
+            new Edificio(elTemaSeleccionado.listaEdificiosPreCargados.get(0 + "_" + 0), 13, 5, this);//parcela
+            new Edificio(elTemaSeleccionado.listaEdificiosPreCargados.get(0 + "_" + 0), 11, 24, this);//parcela
+            new Edificio(elTemaSeleccionado.listaEdificiosPreCargados.get(0 + "_" + 0), 13, 22, this);//parcela
+
         } catch (Exception e) {
             System.err.println("Error: Ciudad (Edificio no creado)\n");
             e.printStackTrace();

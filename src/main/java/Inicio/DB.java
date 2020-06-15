@@ -163,7 +163,7 @@ public class DB {
         recursosAlmacen_Almacen1.put(poblacionPre.getId(), new Recursos(poblacionPre, 100));
         recursosAlmacen_Almacen1.put(felicidadPre.getId(), new Recursos(felicidadPre, 100));
         recursosAlmacen_Almacen1.put(puntosInvestigacion.getId(), new Recursos(puntosInvestigacion, 100));
-        new EdificiosPreCargados(10, 0, true, true, 0, -1, 0, TRADUCCIONES_THEMA.getString("edificio.name.almacen"), TRADUCCIONES_THEMA.getString("edificio.descripcion.almacen"), recursosBuild_Almacen1, null, null, recursosAlmacen_Almacen1);
+        new EdificiosPreCargados(10, 0, true, true, 3, -1, 0, TRADUCCIONES_THEMA.getString("edificio.name.almacen"), TRADUCCIONES_THEMA.getString("edificio.descripcion.almacen"), recursosBuild_Almacen1, null, null, recursosAlmacen_Almacen1);
 
         Map<Integer, Recursos> recursosBuild_Almacen2 = new TreeMap<>();
         recursosBuild_Almacen2.put(oroPre.getId(), new Recursos(oroPre, 5));
@@ -181,7 +181,7 @@ public class DB {
         recursosAlmacen_Almacen2.put(poblacionPre.getId(), new Recursos(poblacionPre, 500));
         recursosAlmacen_Almacen2.put(felicidadPre.getId(), new Recursos(felicidadPre, 500));
         recursosAlmacen_Almacen2.put(puntosInvestigacion.getId(), new Recursos(puntosInvestigacion, 500));
-        new EdificiosPreCargados(10, 1, true, true, 0, 0, 0, TRADUCCIONES_THEMA.getString("edificio.name.almacen"), TRADUCCIONES_THEMA.getString("edificio.descripcion.almacen"), recursosBuild_Almacen2, null, null, recursosAlmacen_Almacen2);
+        new EdificiosPreCargados(10, 1, true, true, 3, 0, 0, TRADUCCIONES_THEMA.getString("edificio.name.almacen"), TRADUCCIONES_THEMA.getString("edificio.descripcion.almacen"), recursosBuild_Almacen2, null, null, recursosAlmacen_Almacen2);
 
         Map<Integer, Recursos> recursosBuild_Almacen3 = new TreeMap<>();
         recursosBuild_Almacen3.put(oroPre.getId(), new Recursos(oroPre, 5));
@@ -199,7 +199,7 @@ public class DB {
         recursosAlmacen_Almacen3.put(poblacionPre.getId(), new Recursos(poblacionPre, 1300));
         recursosAlmacen_Almacen3.put(felicidadPre.getId(), new Recursos(felicidadPre, 1300));
         recursosAlmacen_Almacen3.put(puntosInvestigacion.getId(), new Recursos(puntosInvestigacion, 1300));
-        new EdificiosPreCargados(10, 2, true, true, 0, 1, 0, TRADUCCIONES_THEMA.getString("edificio.name.almacen"), TRADUCCIONES_THEMA.getString("edificio.descripcion.almacen"), recursosBuild_Almacen3, null, null, recursosAlmacen_Almacen3);
+        new EdificiosPreCargados(10, 2, true, true, 3, 1, 0, TRADUCCIONES_THEMA.getString("edificio.name.almacen"), TRADUCCIONES_THEMA.getString("edificio.descripcion.almacen"), recursosBuild_Almacen3, null, null, recursosAlmacen_Almacen3);
         //
         //
         //
@@ -209,7 +209,7 @@ public class DB {
         recursosBuild_Palacio1.put(piedraPre.getId(), new Recursos(piedraPre, 200));
         recursosBuild_Palacio1.put(hierroPre.getId(), new Recursos(hierroPre, 5));
         recursosBuild_Palacio1.put(poblacionPre.getId(), new Recursos(poblacionPre, 1));
-        new EdificiosPreCargados(11, 0, true, true, 0, 1, 1, TRADUCCIONES_THEMA.getString("edificio.name.palacio"), TRADUCCIONES_THEMA.getString("edificio.descripcion.palacio"), recursosBuild_Palacio1, null, null, null);
+        new EdificiosPreCargados(11, 0, true, true, 1, 0, 1, TRADUCCIONES_THEMA.getString("edificio.name.palacio"), TRADUCCIONES_THEMA.getString("edificio.descripcion.palacio"), recursosBuild_Palacio1, null, null, null);
 
         Map<Integer, Recursos> recursosBuild_Palacio2 = new TreeMap<>();
         recursosBuild_Palacio2.put(oroPre.getId(), new Recursos(oroPre, 5));
@@ -217,7 +217,7 @@ public class DB {
         recursosBuild_Palacio2.put(piedraPre.getId(), new Recursos(piedraPre, 20));
         recursosBuild_Palacio2.put(hierroPre.getId(), new Recursos(hierroPre, 5));
         recursosBuild_Palacio2.put(poblacionPre.getId(), new Recursos(poblacionPre, 1));
-        new EdificiosPreCargados(11, 1, true, true, 0, 2, 1, TRADUCCIONES_THEMA.getString("edificio.name.palacio"), TRADUCCIONES_THEMA.getString("edificio.descripcion.palacio"), recursosBuild_Palacio2, null, null, null);
+        new EdificiosPreCargados(11, 1, true, true, 1, 2, 1, TRADUCCIONES_THEMA.getString("edificio.name.palacio"), TRADUCCIONES_THEMA.getString("edificio.descripcion.palacio"), recursosBuild_Palacio2, null, null, null);
 
         Map<Integer, Recursos> recursosBuild_Palacio3 = new TreeMap<>();
         recursosBuild_Palacio3.put(oroPre.getId(), new Recursos(oroPre, 5));
@@ -225,7 +225,7 @@ public class DB {
         recursosBuild_Palacio3.put(piedraPre.getId(), new Recursos(piedraPre, 20));
         recursosBuild_Palacio3.put(hierroPre.getId(), new Recursos(hierroPre, 5));
         recursosBuild_Palacio3.put(poblacionPre.getId(), new Recursos(poblacionPre, 1));
-        new EdificiosPreCargados(11, 2, true, true, 0, 2, 1, TRADUCCIONES_THEMA.getString("edificio.name.palacio"), TRADUCCIONES_THEMA.getString("edificio.descripcion.palacio"), recursosBuild_Palacio3, null, null, null);
+        new EdificiosPreCargados(11, 2, true, true, 1, 2, 1, TRADUCCIONES_THEMA.getString("edificio.name.palacio"), TRADUCCIONES_THEMA.getString("edificio.descripcion.palacio"), recursosBuild_Palacio3, null, null, null);
         progresBar.setProgress(20);
         //
         //
@@ -244,7 +244,7 @@ public class DB {
         recursosCosteXtime_coste_CCientifico1.add(new Recursos(poblacionPre, 10));
         Map<RecursosPrecargados, ArrayList<Recursos>> recursosCosteXtime_produce_CCientifico1 = new TreeMap<>();
         recursosCosteXtime_produce_CCientifico1.put(puntosInvestigacion, recursosCosteXtime_coste_CCientifico1);
-        new EdificiosPreCargados(12, 0, true, true, 0, 0, 0, TRADUCCIONES_THEMA.getString("edificio.name.centroCientifico"), TRADUCCIONES_THEMA.getString("edificio.descripcion.centroCientifico"), recursosBuild_CCientifico1, recursosProductores_CCientifico1, recursosCosteXtime_produce_CCientifico1, null);
+        new EdificiosPreCargados(12, 0, true, true, 1, 0, 0, TRADUCCIONES_THEMA.getString("edificio.name.centroCientifico"), TRADUCCIONES_THEMA.getString("edificio.descripcion.centroCientifico"), recursosBuild_CCientifico1, recursosProductores_CCientifico1, recursosCosteXtime_produce_CCientifico1, null);
 
         Map<Integer, Recursos> recursosBuild_CCientifico2 = new TreeMap<>();
         recursosBuild_CCientifico2.put(oroPre.getId(), new Recursos(oroPre, 5));
@@ -260,7 +260,7 @@ public class DB {
         recursosCosteXtime_coste_CCientifico2.add(new Recursos(poblacionPre, 10));
         Map<RecursosPrecargados, ArrayList<Recursos>> recursosCosteXtime_produce_CCientifico2 = new TreeMap<>();
         recursosCosteXtime_produce_CCientifico2.put(puntosInvestigacion, recursosCosteXtime_coste_CCientifico2);
-        new EdificiosPreCargados(12, 1, true, true, 0, 0, 0, TRADUCCIONES_THEMA.getString("edificio.name.centroCientifico"), TRADUCCIONES_THEMA.getString("edificio.descripcion.centroCientifico"), recursosBuild_CCientifico2, recursosProductores_CCientifico2, recursosCosteXtime_produce_CCientifico2, null);
+        new EdificiosPreCargados(12, 1, true, true, 1, 0, 0, TRADUCCIONES_THEMA.getString("edificio.name.centroCientifico"), TRADUCCIONES_THEMA.getString("edificio.descripcion.centroCientifico"), recursosBuild_CCientifico2, recursosProductores_CCientifico2, recursosCosteXtime_produce_CCientifico2, null);
 
 
         Map<Integer, Recursos> recursosBuild_CCientifico3 = new TreeMap<>();
@@ -277,7 +277,7 @@ public class DB {
         recursosCosteXtime_coste_CCientifico3.add(new Recursos(poblacionPre, 15));
         Map<RecursosPrecargados, ArrayList<Recursos>> recursosCosteXtime_produce_CCientifico3 = new TreeMap<>();
         recursosCosteXtime_produce_CCientifico3.put(puntosInvestigacion, recursosCosteXtime_coste_CCientifico3);
-        new EdificiosPreCargados(12, 2, true, true, 0, 0, 0, TRADUCCIONES_THEMA.getString("edificio.name.centroCientifico"), TRADUCCIONES_THEMA.getString("edificio.descripcion.centroCientifico"), recursosBuild_CCientifico3, recursosProductores_CCientifico3, recursosCosteXtime_produce_CCientifico3, null);
+        new EdificiosPreCargados(12, 2, true, true, 1, 0, 0, TRADUCCIONES_THEMA.getString("edificio.name.centroCientifico"), TRADUCCIONES_THEMA.getString("edificio.descripcion.centroCientifico"), recursosBuild_CCientifico3, recursosProductores_CCientifico3, recursosCosteXtime_produce_CCientifico3, null);
         //
         //
         //
@@ -295,7 +295,7 @@ public class DB {
         recursosCosteXtime_coste_Cantera1.add(new Recursos(poblacionPre, 10));
         Map<RecursosPrecargados, ArrayList<Recursos>> recursosCosteXtime_produce_Cantera1 = new TreeMap<>();
         recursosCosteXtime_produce_Cantera1.put(piedraPre, recursosCosteXtime_coste_Cantera1);
-        new EdificiosPreCargados(13, 0, true, true, 0, 0, 0, TRADUCCIONES_THEMA.getString("edificio.name.cantera"), TRADUCCIONES_THEMA.getString("edificio.descripcion.cantera"), recursosBuild_Cantera1, recursosProductores_Cantera1, recursosCosteXtime_produce_Cantera1, null);
+        new EdificiosPreCargados(13, 0, true, true, 1, 0, 0, TRADUCCIONES_THEMA.getString("edificio.name.cantera"), TRADUCCIONES_THEMA.getString("edificio.descripcion.cantera"), recursosBuild_Cantera1, recursosProductores_Cantera1, recursosCosteXtime_produce_Cantera1, null);
 
         Map<Integer, Recursos> recursosBuild_Cantera2 = new TreeMap<>();
         recursosBuild_Cantera2.put(oroPre.getId(), new Recursos(oroPre, 5));
@@ -311,7 +311,7 @@ public class DB {
         recursosCosteXtime_coste_Cantera2.add(new Recursos(poblacionPre, 20));
         Map<RecursosPrecargados, ArrayList<Recursos>> recursosCosteXtime_produce_Cantera2 = new TreeMap<>();
         recursosCosteXtime_produce_Cantera2.put(piedraPre, recursosCosteXtime_coste_Cantera2);
-        new EdificiosPreCargados(13, 1, true, true, 0, 0, 0, TRADUCCIONES_THEMA.getString("edificio.name.cantera"), TRADUCCIONES_THEMA.getString("edificio.descripcion.cantera"), recursosBuild_Cantera2, recursosProductores_Cantera2, recursosCosteXtime_produce_Cantera2, null);
+        new EdificiosPreCargados(13, 1, true, true, 2, 1, 0, TRADUCCIONES_THEMA.getString("edificio.name.cantera"), TRADUCCIONES_THEMA.getString("edificio.descripcion.cantera"), recursosBuild_Cantera2, recursosProductores_Cantera2, recursosCosteXtime_produce_Cantera2, null);
 
         Map<Integer, Recursos> recursosBuild_Cantera3 = new TreeMap<>();
         recursosBuild_Cantera3.put(oroPre.getId(), new Recursos(oroPre, 5));
@@ -327,7 +327,7 @@ public class DB {
         recursosCosteXtime_coste_Cantera3.add(new Recursos(poblacionPre, 20));
         Map<RecursosPrecargados, ArrayList<Recursos>> recursosCosteXtime_produce_Cantera3 = new TreeMap<>();
         recursosCosteXtime_produce_Cantera3.put(piedraPre, recursosCosteXtime_coste_Cantera3);
-        new EdificiosPreCargados(13, 2, true, true, 0, 0, 0, TRADUCCIONES_THEMA.getString("edificio.name.cantera"), TRADUCCIONES_THEMA.getString("edificio.descripcion.cantera"), recursosBuild_Cantera3, recursosProductores_Cantera3, recursosCosteXtime_produce_Cantera3, null);
+        new EdificiosPreCargados(13, 2, true, true, 3, 2, 0, TRADUCCIONES_THEMA.getString("edificio.name.cantera"), TRADUCCIONES_THEMA.getString("edificio.descripcion.cantera"), recursosBuild_Cantera3, recursosProductores_Cantera3, recursosCosteXtime_produce_Cantera3, null);
         //
         //
         //
@@ -345,7 +345,7 @@ public class DB {
         recursosCosteXtime_coste_Aserradero1.add(new Recursos(poblacionPre, 20));
         Map<RecursosPrecargados, ArrayList<Recursos>> recursosCosteXtime_produce_Aserradero1 = new TreeMap<>();
         recursosCosteXtime_produce_Aserradero1.put(maderaPre, recursosCosteXtime_coste_Aserradero1);
-        new EdificiosPreCargados(14, 0, true, true, 0, 0, 0, TRADUCCIONES_THEMA.getString("edificio.name.aserradero"), TRADUCCIONES_THEMA.getString("edificio.descripcion.aserradero"), recursosBuild_Aserradero1, recursosProductores_Aserradero1, recursosCosteXtime_produce_Aserradero1, null);
+        new EdificiosPreCargados(14, 0, true, true, 1, 0, 0, TRADUCCIONES_THEMA.getString("edificio.name.aserradero"), TRADUCCIONES_THEMA.getString("edificio.descripcion.aserradero"), recursosBuild_Aserradero1, recursosProductores_Aserradero1, recursosCosteXtime_produce_Aserradero1, null);
 
         Map<Integer, Recursos> recursosBuild_Aserradero2 = new TreeMap<>();
         recursosBuild_Aserradero2.put(oroPre.getId(), new Recursos(oroPre, 5));
@@ -361,7 +361,7 @@ public class DB {
         recursosCosteXtime_coste_Aserradero2.add(new Recursos(poblacionPre, 20));
         Map<RecursosPrecargados, ArrayList<Recursos>> recursosCosteXtime_produce_Aserradero2 = new TreeMap<>();
         recursosCosteXtime_produce_Aserradero2.put(maderaPre, recursosCosteXtime_coste_Aserradero2);
-        new EdificiosPreCargados(14, 1, true, true, 0, 0, 0, TRADUCCIONES_THEMA.getString("edificio.name.aserradero"), TRADUCCIONES_THEMA.getString("edificio.descripcion.aserradero"), recursosBuild_Aserradero2, recursosProductores_Aserradero2, recursosCosteXtime_produce_Aserradero2, null);
+        new EdificiosPreCargados(14, 1, true, true, 2, 1, 0, TRADUCCIONES_THEMA.getString("edificio.name.aserradero"), TRADUCCIONES_THEMA.getString("edificio.descripcion.aserradero"), recursosBuild_Aserradero2, recursosProductores_Aserradero2, recursosCosteXtime_produce_Aserradero2, null);
 
         Map<Integer, Recursos> recursosBuild_Aserradero3 = new TreeMap<>();
         recursosBuild_Aserradero3.put(oroPre.getId(), new Recursos(oroPre, 5));
@@ -377,7 +377,7 @@ public class DB {
         recursosCosteXtime_coste_Aserradero3.add(new Recursos(poblacionPre, 20));
         Map<RecursosPrecargados, ArrayList<Recursos>> recursosCosteXtime_produce_Aserradero3 = new TreeMap<>();
         recursosCosteXtime_produce_Aserradero3.put(maderaPre, recursosCosteXtime_coste_Aserradero3);
-        new EdificiosPreCargados(14, 2, true, true, 0, 0, 0, TRADUCCIONES_THEMA.getString("edificio.name.aserradero"), TRADUCCIONES_THEMA.getString("edificio.descripcion.aserradero"), recursosBuild_Aserradero3, recursosProductores_Aserradero3, recursosCosteXtime_produce_Aserradero3, null);
+        new EdificiosPreCargados(14, 2, true, true, 3, 1, 0, TRADUCCIONES_THEMA.getString("edificio.name.aserradero"), TRADUCCIONES_THEMA.getString("edificio.descripcion.aserradero"), recursosBuild_Aserradero3, recursosProductores_Aserradero3, recursosCosteXtime_produce_Aserradero3, null);
         //
         //
         //
@@ -395,7 +395,7 @@ public class DB {
         recursosCosteXtime_coste_Fundicion1.add(new Recursos(poblacionPre, 20));
         Map<RecursosPrecargados, ArrayList<Recursos>> recursosCosteXtime_produce_Fundicion1 = new TreeMap<>();
         recursosCosteXtime_produce_Fundicion1.put(hierroPre, recursosCosteXtime_coste_Fundicion1);
-        new EdificiosPreCargados(15, 0, true, true, 0, 0, 0, TRADUCCIONES_THEMA.getString("edificio.name.fundicion"), TRADUCCIONES_THEMA.getString("edificio.descripcion.fundicion"), recursosBuild_Fundicion1, recursosProductores_Fundicion1, recursosCosteXtime_produce_Fundicion1, null);
+        new EdificiosPreCargados(15, 0, true, true, 1, 0, 0, TRADUCCIONES_THEMA.getString("edificio.name.fundicion"), TRADUCCIONES_THEMA.getString("edificio.descripcion.fundicion"), recursosBuild_Fundicion1, recursosProductores_Fundicion1, recursosCosteXtime_produce_Fundicion1, null);
 
         Map<Integer, Recursos> recursosBuild_Fundicion2 = new TreeMap<>();
         recursosBuild_Fundicion2.put(oroPre.getId(), new Recursos(oroPre, 5));
@@ -411,7 +411,7 @@ public class DB {
         recursosCosteXtime_coste_Fundicion2.add(new Recursos(poblacionPre, 20));
         Map<RecursosPrecargados, ArrayList<Recursos>> recursosCosteXtime_produce_Fundicion2 = new TreeMap<>();
         recursosCosteXtime_produce_Fundicion2.put(hierroPre, recursosCosteXtime_coste_Fundicion2);
-        new EdificiosPreCargados(15, 1, true, true, 0, 0, 0, TRADUCCIONES_THEMA.getString("edificio.name.fundicion"), TRADUCCIONES_THEMA.getString("edificio.descripcion.fundicion"), recursosBuild_Fundicion2, recursosProductores_Fundicion2, recursosCosteXtime_produce_Fundicion2, null);
+        new EdificiosPreCargados(15, 1, true, true, 1, 0, 0, TRADUCCIONES_THEMA.getString("edificio.name.fundicion"), TRADUCCIONES_THEMA.getString("edificio.descripcion.fundicion"), recursosBuild_Fundicion2, recursosProductores_Fundicion2, recursosCosteXtime_produce_Fundicion2, null);
 
         Map<Integer, Recursos> recursosBuild_Fundicion3 = new TreeMap<>();
         recursosBuild_Fundicion3.put(oroPre.getId(), new Recursos(oroPre, 5));
@@ -427,7 +427,7 @@ public class DB {
         recursosCosteXtime_coste_Fundicion3.add(new Recursos(poblacionPre, 20));
         Map<RecursosPrecargados, ArrayList<Recursos>> recursosCosteXtime_produce_Fundicion3 = new TreeMap<>();
         recursosCosteXtime_produce_Fundicion3.put(hierroPre, recursosCosteXtime_coste_Fundicion3);
-        new EdificiosPreCargados(15, 2, true, true, 0, 0, 0, TRADUCCIONES_THEMA.getString("edificio.name.fundicion"), TRADUCCIONES_THEMA.getString("edificio.descripcion.fundicion"), recursosBuild_Fundicion3, recursosProductores_Fundicion3, recursosCosteXtime_produce_Fundicion3, null);
+        new EdificiosPreCargados(15, 2, true, true, 1, 0, 0, TRADUCCIONES_THEMA.getString("edificio.name.fundicion"), TRADUCCIONES_THEMA.getString("edificio.descripcion.fundicion"), recursosBuild_Fundicion3, recursosProductores_Fundicion3, recursosCosteXtime_produce_Fundicion3, null);
         //
         //
         //
@@ -446,7 +446,7 @@ public class DB {
         recursosCosteXtime_coste_Granja1.add(new Recursos(poblacionPre, 20));
         Map<RecursosPrecargados, ArrayList<Recursos>> recursosCosteXtime_Granja1 = new TreeMap<>();
         recursosCosteXtime_Granja1.put(comidaPre, recursosCosteXtime_coste_Granja1);
-        new EdificiosPreCargados(16, 0, true, true, 0, 0, 0, TRADUCCIONES_THEMA.getString("edificio.name.granja"), TRADUCCIONES_THEMA.getString("edificio.descripcion.granja"), recursosBuild_Granja1, recursosProductores_Granja1, recursosCosteXtime_Granja1, null);
+        new EdificiosPreCargados(16, 0, true, true, 1, 0, 0, TRADUCCIONES_THEMA.getString("edificio.name.granja"), TRADUCCIONES_THEMA.getString("edificio.descripcion.granja"), recursosBuild_Granja1, recursosProductores_Granja1, recursosCosteXtime_Granja1, null);
 
         Map<Integer, Recursos> recursosBuild_Granja2 = new TreeMap<>();
         recursosBuild_Granja2.put(oroPre.getId(), new Recursos(oroPre, 5));
@@ -463,7 +463,7 @@ public class DB {
         recursosCosteXtime_coste_Granja2.add(new Recursos(poblacionPre, 20));
         Map<RecursosPrecargados, ArrayList<Recursos>> recursosCosteXtime_Granja2 = new TreeMap<>();
         recursosCosteXtime_Granja2.put(comidaPre, recursosCosteXtime_coste_Granja2);
-        new EdificiosPreCargados(16, 1, true, true, 0, 0, 0, TRADUCCIONES_THEMA.getString("edificio.name.granja"), TRADUCCIONES_THEMA.getString("edificio.descripcion.granja"), recursosBuild_Granja2, recursosProductores_Granja2, recursosCosteXtime_Granja2, null);
+        new EdificiosPreCargados(16, 1, true, true, 1, 0, 0, TRADUCCIONES_THEMA.getString("edificio.name.granja"), TRADUCCIONES_THEMA.getString("edificio.descripcion.granja"), recursosBuild_Granja2, recursosProductores_Granja2, recursosCosteXtime_Granja2, null);
 
         Map<Integer, Recursos> recursosBuild_Granja3 = new TreeMap<>();
         recursosBuild_Granja3.put(oroPre.getId(), new Recursos(oroPre, 5));
@@ -480,7 +480,7 @@ public class DB {
         recursosCosteXtime_coste_Granja3.add(new Recursos(poblacionPre, 20));
         Map<RecursosPrecargados, ArrayList<Recursos>> recursosCosteXtime_Granja3 = new TreeMap<>();
         recursosCosteXtime_Granja3.put(comidaPre, recursosCosteXtime_coste_Granja3);
-        new EdificiosPreCargados(16, 2, true, true, 0, 0, 0, TRADUCCIONES_THEMA.getString("edificio.name.granja"), TRADUCCIONES_THEMA.getString("edificio.descripcion.granja"), recursosBuild_Granja3, recursosProductores_Granja3, recursosCosteXtime_Granja3, null);
+        new EdificiosPreCargados(16, 2, true, true, 1, 0, 0, TRADUCCIONES_THEMA.getString("edificio.name.granja"), TRADUCCIONES_THEMA.getString("edificio.descripcion.granja"), recursosBuild_Granja3, recursosProductores_Granja3, recursosCosteXtime_Granja3, null);
         //
         //
         //
@@ -501,7 +501,7 @@ public class DB {
         recursosCosteXtime_coste_Taberna1.add(new Recursos(comidaPre, 15));
         Map<RecursosPrecargados, ArrayList<Recursos>> recursosCosteX_productor_Taberna1 = new TreeMap<>();
         recursosCosteX_productor_Taberna1.put(felicidadPre, recursosCosteXtime_coste_Taberna1);
-        new EdificiosPreCargados(17, 0, true, true, 0, 0, 0, TRADUCCIONES_THEMA.getString("edificio.name.taberna"), TRADUCCIONES_THEMA.getString("edificio.descripcion.taberna"), recursosBuild_Taberna1, recursosProductores_Taberna1, recursosCosteX_productor_Taberna1, null);
+        new EdificiosPreCargados(17, 0, true, true, 1, 0, 0, TRADUCCIONES_THEMA.getString("edificio.name.taberna"), TRADUCCIONES_THEMA.getString("edificio.descripcion.taberna"), recursosBuild_Taberna1, recursosProductores_Taberna1, recursosCosteX_productor_Taberna1, null);
 
         Map<Integer, Recursos> recursosBuild_Taberna2 = new TreeMap<>();
         recursosBuild_Taberna2.put(oroPre.getId(), new Recursos(oroPre, 5));
@@ -520,7 +520,7 @@ public class DB {
         recursosCosteXtime_coste_Taberna2.add(new Recursos(comidaPre, 15));
         Map<RecursosPrecargados, ArrayList<Recursos>> recursosCosteX_productor_Taberna2 = new TreeMap<>();
         recursosCosteX_productor_Taberna2.put(felicidadPre, recursosCosteXtime_coste_Taberna2);
-        new EdificiosPreCargados(17, 1, true, true, 0, 0, 0, TRADUCCIONES_THEMA.getString("edificio.name.taberna"), TRADUCCIONES_THEMA.getString("edificio.descripcion.taberna"), recursosBuild_Taberna2, recursosProductores_Taberna2, recursosCosteX_productor_Taberna2, null);
+        new EdificiosPreCargados(17, 1, true, true, 1, 0, 0, TRADUCCIONES_THEMA.getString("edificio.name.taberna"), TRADUCCIONES_THEMA.getString("edificio.descripcion.taberna"), recursosBuild_Taberna2, recursosProductores_Taberna2, recursosCosteX_productor_Taberna2, null);
 
         Map<Integer, Recursos> recursosBuild_Taberna3 = new TreeMap<>();
         recursosBuild_Taberna3.put(oroPre.getId(), new Recursos(oroPre, 5));
@@ -539,7 +539,7 @@ public class DB {
         recursosCosteXtime_coste_Taberna3.add(new Recursos(comidaPre, 15));
         Map<RecursosPrecargados, ArrayList<Recursos>> recursosCosteX_productor_Taberna3 = new TreeMap<>();
         recursosCosteX_productor_Taberna3.put(felicidadPre, recursosCosteXtime_coste_Taberna3);
-        new EdificiosPreCargados(17, 2, true, true, 0, 0, 0, TRADUCCIONES_THEMA.getString("edificio.name.taberna"), TRADUCCIONES_THEMA.getString("edificio.descripcion.taberna"), recursosBuild_Taberna3, recursosProductores_Taberna3, recursosCosteX_productor_Taberna3, null);
+        new EdificiosPreCargados(17, 2, true, true, 1, 0, 0, TRADUCCIONES_THEMA.getString("edificio.name.taberna"), TRADUCCIONES_THEMA.getString("edificio.descripcion.taberna"), recursosBuild_Taberna3, recursosProductores_Taberna3, recursosCosteX_productor_Taberna3, null);
         progresBar.setProgress(30);
         //
         //
@@ -550,7 +550,7 @@ public class DB {
         recursosBuild_Puerto1.put(piedraPre.getId(), new Recursos(piedraPre, 20));
         recursosBuild_Puerto1.put(hierroPre.getId(), new Recursos(hierroPre, 5));
         recursosBuild_Puerto1.put(poblacionPre.getId(), new Recursos(poblacionPre, 1));
-        new EdificiosPreCargados(18, 0, false, false, 0, 0, 4, TRADUCCIONES_THEMA.getString("edificio.name.puerto"), TRADUCCIONES_THEMA.getString("edificio.descripcion.puerto"), recursosBuild_Puerto1, null, null, null);
+        new EdificiosPreCargados(18, 0, false, false, 1, 0, 4, TRADUCCIONES_THEMA.getString("edificio.name.puerto"), TRADUCCIONES_THEMA.getString("edificio.descripcion.puerto"), recursosBuild_Puerto1, null, null, null);
 
         Map<Integer, Recursos> recursosBuild_Puerto2 = new TreeMap<>();
         recursosBuild_Puerto2.put(oroPre.getId(), new Recursos(oroPre, 5));
@@ -558,7 +558,7 @@ public class DB {
         recursosBuild_Puerto2.put(piedraPre.getId(), new Recursos(piedraPre, 20));
         recursosBuild_Puerto2.put(hierroPre.getId(), new Recursos(hierroPre, 5));
         recursosBuild_Puerto2.put(poblacionPre.getId(), new Recursos(poblacionPre, 1));
-        new EdificiosPreCargados(18, 1, true, true, 0, 0, 4, TRADUCCIONES_THEMA.getString("edificio.name.puerto"), TRADUCCIONES_THEMA.getString("edificio.descripcion.puerto"), recursosBuild_Puerto2, null, null, null);
+        new EdificiosPreCargados(18, 1, true, true, 1, 0, 4, TRADUCCIONES_THEMA.getString("edificio.name.puerto"), TRADUCCIONES_THEMA.getString("edificio.descripcion.puerto"), recursosBuild_Puerto2, null, null, null);
 
         Map<Integer, Recursos> recursosBuild_Puerto3 = new TreeMap<>();
         recursosBuild_Puerto3.put(oroPre.getId(), new Recursos(oroPre, 5));
@@ -566,7 +566,7 @@ public class DB {
         recursosBuild_Puerto3.put(piedraPre.getId(), new Recursos(piedraPre, 20));
         recursosBuild_Puerto3.put(hierroPre.getId(), new Recursos(hierroPre, 5));
         recursosBuild_Puerto3.put(poblacionPre.getId(), new Recursos(poblacionPre, 1));
-        new EdificiosPreCargados(18, 2, true, true, 0, 0, 4, TRADUCCIONES_THEMA.getString("edificio.name.puerto"), TRADUCCIONES_THEMA.getString("edificio.descripcion.puerto"), recursosBuild_Puerto3, null, null, null);
+        new EdificiosPreCargados(18, 2, true, true, 1, 0, 4, TRADUCCIONES_THEMA.getString("edificio.name.puerto"), TRADUCCIONES_THEMA.getString("edificio.descripcion.puerto"), recursosBuild_Puerto3, null, null, null);
         //
         //
         //
@@ -576,7 +576,7 @@ public class DB {
         recursosBuild_Cuartel1.put(piedraPre.getId(), new Recursos(piedraPre, 20));
         recursosBuild_Cuartel1.put(hierroPre.getId(), new Recursos(hierroPre, 5));
         recursosBuild_Cuartel1.put(poblacionPre.getId(), new Recursos(poblacionPre, 1));
-        new EdificiosPreCargados(19, 0, true, true, 0, 0, 2, TRADUCCIONES_THEMA.getString("edificio.name.cuartel"), TRADUCCIONES_THEMA.getString("edificio.descripcion.cuartel"), recursosBuild_Cuartel1, null, null, null);
+        new EdificiosPreCargados(19, 0, true, true, 1, 0, 2, TRADUCCIONES_THEMA.getString("edificio.name.cuartel"), TRADUCCIONES_THEMA.getString("edificio.descripcion.cuartel"), recursosBuild_Cuartel1, null, null, null);
 
         Map<Integer, Recursos> recursosBuild_Cuartel2 = new TreeMap<>();
         recursosBuild_Cuartel2.put(oroPre.getId(), new Recursos(oroPre, 5));
@@ -584,7 +584,7 @@ public class DB {
         recursosBuild_Cuartel2.put(piedraPre.getId(), new Recursos(piedraPre, 20));
         recursosBuild_Cuartel2.put(hierroPre.getId(), new Recursos(hierroPre, 5));
         recursosBuild_Cuartel2.put(poblacionPre.getId(), new Recursos(poblacionPre, 1));
-        new EdificiosPreCargados(19, 1, true, true, 0, 0, 2, TRADUCCIONES_THEMA.getString("edificio.name.cuartel"), TRADUCCIONES_THEMA.getString("edificio.descripcion.cuartel"), recursosBuild_Cuartel2, null, null, null);
+        new EdificiosPreCargados(19, 1, true, true, 1, 0, 2, TRADUCCIONES_THEMA.getString("edificio.name.cuartel"), TRADUCCIONES_THEMA.getString("edificio.descripcion.cuartel"), recursosBuild_Cuartel2, null, null, null);
 
         Map<Integer, Recursos> recursosBuild_Cuartel3 = new TreeMap<>();
         recursosBuild_Cuartel3.put(oroPre.getId(), new Recursos(oroPre, 5));
@@ -592,7 +592,7 @@ public class DB {
         recursosBuild_Cuartel3.put(piedraPre.getId(), new Recursos(piedraPre, 20));
         recursosBuild_Cuartel3.put(hierroPre.getId(), new Recursos(hierroPre, 5));
         recursosBuild_Cuartel3.put(poblacionPre.getId(), new Recursos(poblacionPre, 1));
-        new EdificiosPreCargados(19, 2, true, true, 0, 0, 2, TRADUCCIONES_THEMA.getString("edificio.name.cuartel"), TRADUCCIONES_THEMA.getString("edificio.descripcion.cuartel"), recursosBuild_Cuartel3, null, null, null);
+        new EdificiosPreCargados(19, 2, true, true, 1, 0, 2, TRADUCCIONES_THEMA.getString("edificio.name.cuartel"), TRADUCCIONES_THEMA.getString("edificio.descripcion.cuartel"), recursosBuild_Cuartel3, null, null, null);
         //
         //
         //
@@ -602,7 +602,7 @@ public class DB {
         recursosBuild_Asedio1.put(piedraPre.getId(), new Recursos(piedraPre, 2000));
         recursosBuild_Asedio1.put(hierroPre.getId(), new Recursos(hierroPre, 5));
         recursosBuild_Asedio1.put(poblacionPre.getId(), new Recursos(poblacionPre, 1));
-        new EdificiosPreCargados(20, 0, true, true, 0, 0, 3, TRADUCCIONES_THEMA.getString("edificio.name.tallerArmasAsedio"), TRADUCCIONES_THEMA.getString("edificio.descripcion.tallerArmasDeAsedio"), recursosBuild_Asedio1, null, null, null);
+        new EdificiosPreCargados(20, 0, true, true, 1, 0, 3, TRADUCCIONES_THEMA.getString("edificio.name.tallerArmasAsedio"), TRADUCCIONES_THEMA.getString("edificio.descripcion.tallerArmasDeAsedio"), recursosBuild_Asedio1, null, null, null);
 
         Map<Integer, Recursos> recursosBuild_Asedio2 = new TreeMap<>();
         recursosBuild_Asedio2.put(oroPre.getId(), new Recursos(oroPre, 5));
@@ -610,7 +610,7 @@ public class DB {
         recursosBuild_Asedio2.put(piedraPre.getId(), new Recursos(piedraPre, 2500));
         recursosBuild_Asedio2.put(hierroPre.getId(), new Recursos(hierroPre, 5));
         recursosBuild_Asedio2.put(poblacionPre.getId(), new Recursos(poblacionPre, 1));
-        new EdificiosPreCargados(20, 1, true, true, 0, 0, 3, TRADUCCIONES_THEMA.getString("edificio.name.tallerArmasAsedio"), TRADUCCIONES_THEMA.getString("edificio.descripcion.tallerArmasDeAsedio"), recursosBuild_Asedio2, null, null, null);
+        new EdificiosPreCargados(20, 1, true, true, 1, 0, 3, TRADUCCIONES_THEMA.getString("edificio.name.tallerArmasAsedio"), TRADUCCIONES_THEMA.getString("edificio.descripcion.tallerArmasDeAsedio"), recursosBuild_Asedio2, null, null, null);
 
         Map<Integer, Recursos> recursosBuild_Asedio3 = new TreeMap<>();
         recursosBuild_Asedio3.put(oroPre.getId(), new Recursos(oroPre, 5));
@@ -618,7 +618,7 @@ public class DB {
         recursosBuild_Asedio3.put(piedraPre.getId(), new Recursos(piedraPre, 3000));
         recursosBuild_Asedio3.put(hierroPre.getId(), new Recursos(hierroPre, 5));
         recursosBuild_Asedio3.put(poblacionPre.getId(), new Recursos(poblacionPre, 1));
-        new EdificiosPreCargados(20, 2, true, true, 0, 0, 3, TRADUCCIONES_THEMA.getString("edificio.name.tallerArmasAsedio"), TRADUCCIONES_THEMA.getString("edificio.descripcion.tallerArmasDeAsedio"), recursosBuild_Asedio3, null, null, null);
+        new EdificiosPreCargados(20, 2, true, true, 1, 0, 3, TRADUCCIONES_THEMA.getString("edificio.name.tallerArmasAsedio"), TRADUCCIONES_THEMA.getString("edificio.descripcion.tallerArmasDeAsedio"), recursosBuild_Asedio3, null, null, null);
 
         //
         //
@@ -676,23 +676,23 @@ public class DB {
         clan2.setContrasenya("1234");
         ArrayList<Recursos> jugador1ListaRecuros = new ArrayList<>();
         jugador1ListaRecuros.add(new Recursos(puntosInvestigacion, 5));
-        Jugador jugador = new Jugador("pepito", jugador1ListaRecuros);
+        Jugador jugador = new Jugador(0l,"pepito", jugador1ListaRecuros);
         setJugadorPrimaryStageController(jugador);
         setClanPrimaryStageController(clan);
         progresBar.setProgress(60);
         ArrayList<Recursos> jugador2ListaRecuros = new ArrayList<>();
         jugador2ListaRecuros.add(new Recursos(puntosInvestigacion, 25));
-        Jugador jugador2 = new Jugador("juan", jugador2ListaRecuros);
+        Jugador jugador2 = new Jugador(1l,"juan", jugador2ListaRecuros);
         ArrayList<Recursos> jugador3ListaRecuros = new ArrayList<>();
         jugador3ListaRecuros.add(new Recursos(puntosInvestigacion, 80));
-        Jugador jugador3 = new Jugador("pedro", jugador3ListaRecuros);
-        Jugador jugador4 = new Jugador("julito", jugador3ListaRecuros);
+        Jugador jugador3 = new Jugador(2l,"pedro", jugador3ListaRecuros);
+        Jugador jugador4 = new Jugador(3l,"julito", jugador3ListaRecuros);
         clan2.setCreador(jugador4);
         clan2.addJugadorClan(jugador4);
         progresBar.setProgress(70);
         clan.addJugadorClan(jugador);
         clan.setCreador(jugador);
-        clan.addJugadorClan(3);
+        clan.addJugadorClan(jugador3);
 
 
         elTemaSeleccionado.espias.put(1, 10);
@@ -730,7 +730,7 @@ public class DB {
         Thread thread = new Thread() {
             public void run() {
                 try {
-                    Thread.sleep(20000);
+                    Thread.sleep(25000);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -745,14 +745,14 @@ public class DB {
         Thread thread2 = new Thread() {
             public void run() {
                 try {
-                    Thread.sleep(30000);
+                    Thread.sleep(40000);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
                 System.out.println("CLAN");
                 clan.removeJugadorClan(3);
                 try {
-                    Thread.sleep(20000);
+                    Thread.sleep(40000);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -1233,15 +1233,15 @@ public class DB {
         Clan clan2 = new Clan("Los peores", 10);
         clan2.setContrasenya("1234");
         ArrayList<Recursos> jugador1ListaRecuros = new ArrayList<>();
-        Jugador jugador = new Jugador("pepito", jugador1ListaRecuros);
+        Jugador jugador = new Jugador(0l,"pepito", jugador1ListaRecuros);
         setJugadorPrimaryStageController(jugador);
         setClanPrimaryStageController(clan);
         progresBar.setProgress(60);
         ArrayList<Recursos> jugador2ListaRecuros = new ArrayList<>();
-        Jugador jugador2 = new Jugador("juan", jugador2ListaRecuros);
+        Jugador jugador2 = new Jugador(1l,"juan", jugador2ListaRecuros);
         ArrayList<Recursos> jugador3ListaRecuros = new ArrayList<>();
-        Jugador jugador3 = new Jugador("pedro", jugador3ListaRecuros);
-        Jugador jugador4 = new Jugador("julito", jugador3ListaRecuros);
+        Jugador jugador3 = new Jugador(2l,"pedro", jugador3ListaRecuros);
+        Jugador jugador4 = new Jugador(3l,"julito", jugador3ListaRecuros);
         clan2.setCreador(jugador4);
         clan2.addJugadorClan(jugador4);
         progresBar.setProgress(70);
