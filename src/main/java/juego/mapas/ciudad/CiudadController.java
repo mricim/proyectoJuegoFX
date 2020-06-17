@@ -219,7 +219,7 @@ public class CiudadController extends MapasController implements Initializable {
         imageViewPropio.setPreserveRatio(true);
         childrenVBox.add(imageViewPropio);
         if (edificioPosiblesConstrucciones.getId() != 0) {
-            Label nivelEdificioPropio = new Label(TRADUCCIONES_THEMA.getString("ciudad.nivelEdificio") +" "+edificioPosiblesConstrucciones.getNivel());
+            Label nivelEdificioPropio = new Label(TRADUCCIONES_THEMA.getString("ciudad.nivelEdificio") + " " + edificioPosiblesConstrucciones.getNivel());
             nivelEdificioPropio.setTextAlignment(CENTER);
             nivelEdificioPropio.setAlignment(Pos.CENTER);
             nivelEdificioPropio.setWrapText(true);
@@ -251,7 +251,7 @@ public class CiudadController extends MapasController implements Initializable {
             childrenVBox.add(vBox);
             if (construir_Update_Dowgrade_Destruir != 0) {
                 if (construir_Update_Dowgrade_Destruir == 4) {//Si es el edificio que tenemos en el mapa
-                    Label label = new Label(TRADUCCIONES_THEMA.getString("ciudad.seDevolvera.Parte1") +" "+ PORCENTAGE_A_DEVOLVER + TRADUCCIONES_THEMA.getString("ciudad.seDevolvera.Parte2"));
+                    Label label = new Label(TRADUCCIONES_THEMA.getString("ciudad.seDevolvera.Parte1") + " " + PORCENTAGE_A_DEVOLVER + TRADUCCIONES_THEMA.getString("ciudad.seDevolvera.Parte2"));
                     label.setWrapText(true);
                     label.setAlignment(Pos.CENTER);
                     childrenVBox.add(label);
@@ -637,9 +637,12 @@ public class CiudadController extends MapasController implements Initializable {
                             }
                         } catch (NullPointerException ignore) {
                             unirseClan(clanesTableView, getCiudadPrimaryStageController().getRecursosTreeMap().get(0), unirseAunClan, (unirseAunClan.getCoste() + Clan.costeBaseUnirse));
-                            for (Ciudad value : unirseAunClan.getCreador().listaCiudadesPropias.values()) {
-                                value.getRecursosTreeMap().get(0).addCantidad(unirseAunClan.getCoste());
-                                break;
+                            try {
+                                for (Ciudad value : unirseAunClan.getCreador().listaCiudadesPropias.values()) {
+                                    value.getRecursosTreeMap().get(0).addCantidad(unirseAunClan.getCoste());
+                                    break;
+                                }
+                            } catch (NullPointerException ignore2) {
                             }
                             reload(CiudadController.class);
                         }
@@ -656,11 +659,11 @@ public class CiudadController extends MapasController implements Initializable {
                         btn.setDisable(getCiudadPrimaryStageController().getRecursosTreeMap().get(0).getCantidad() <= Clan.costeBaseUnirse);
                         if (comercio.equals(getClanPrimaryStageController())) {
                             btn.setDisable(true);
-                            btn.setText("-"+comercio.getCoste());
+                            btn.setText("-" + comercio.getCoste());
                         } else {
-                            btn.setText("-"+(comercio.getCoste() + Clan.costeBaseUnirse));
+                            btn.setText("-" + (comercio.getCoste() + Clan.costeBaseUnirse));
                         }
-                        btn.setGraphic(new CustomImageView(elTemaSeleccionado.listaRecursosPreCargada.get(0).getImage(),20,20));
+                        btn.setGraphic(new CustomImageView(elTemaSeleccionado.listaRecursosPreCargada.get(0).getImage(), 20, 20));
                         hBox2.getChildren().add(btn);
 
                     }
@@ -699,7 +702,7 @@ public class CiudadController extends MapasController implements Initializable {
         clan.addJugadorClan(getJugadorPrimaryStageController());
         setClanPrimaryStageController(clan);
         recursos.removeCantidad(costeEnOro);
-        CustomAlert customAlert = new CustomAlert(Alert.AlertType.INFORMATION, TRADUCCIONES_THEMA.getString("clan.alert.seUnioAunClan")+" \""+clan.getNameString()+"\"");
+        CustomAlert customAlert = new CustomAlert(Alert.AlertType.INFORMATION, TRADUCCIONES_THEMA.getString("clan.alert.seUnioAunClan") + " \"" + clan.getNameString() + "\"");
         customAlert.showAndWait();
     }
 
@@ -722,7 +725,7 @@ public class CiudadController extends MapasController implements Initializable {
         separator2.setVisible(false);
         childrenVBox.add(separator2);
 
-        Label nombreEdificioPropio = new Label(TRADUCCIONES_THEMA.getString("clan.tableView.miembros.label")+" "+getClanPrimaryStageController().getNameString());
+        Label nombreEdificioPropio = new Label(TRADUCCIONES_THEMA.getString("clan.tableView.miembros.label") + " " + getClanPrimaryStageController().getNameString());
         nombreEdificioPropio.setTextAlignment(CENTER);
         nombreEdificioPropio.setAlignment(Pos.CENTER);
         nombreEdificioPropio.setWrapText(true);
@@ -748,7 +751,7 @@ public class CiudadController extends MapasController implements Initializable {
         jugadorClanName.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Jugador, String>, ObservableValue<String>>() {
             @Override
             public ObservableValue<String> call(TableColumn.CellDataFeatures<Jugador, String> param) {
-                return param.getValue().getNombre();
+                return param.getValue().nombreProperty();
             }
         });
         //columna
@@ -936,8 +939,8 @@ public class CiudadController extends MapasController implements Initializable {
         int maximoQueSePuedePedir2 = getCiudadPrimaryStageController().getRecursosTreeMap().get(Integer.valueOf(combo2.getValue().getString())).getCantidad();
         hBoxAddToTableViewChildren2.add(combo2);
 
-        CustomTextField textField2 = new CustomTextField("0", true, maximoQueSePuedePedir2+1000);
-        CustomSlider slider2 = new CustomSlider(0, maximoQueSePuedePedir2+1000, 0);
+        CustomTextField textField2 = new CustomTextField("0", true, maximoQueSePuedePedir2 + 1000);
+        CustomSlider slider2 = new CustomSlider(0, maximoQueSePuedePedir2 + 1000, 0);
         slider2.setmargin(25, 0, 0, 0);
         slider2.valueProperty().addListener(new ChangeListener<Number>() {
             @Override

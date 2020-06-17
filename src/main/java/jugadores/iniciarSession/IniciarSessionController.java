@@ -39,13 +39,13 @@ public class IniciarSessionController extends PrimaryStageControler implements I
     }
 
 
-    public void iniciarSession(MouseEvent mouseEvent) {
+    public void dataToIniciarSession(MouseEvent mouseEvent) {
         Node source = (Node) mouseEvent.getSource();
         Stage stage = (Stage) source.getScene().getWindow();
         //
         String email = emailField.getText();
         String encriptedMail = Encriptacio.encrypt(email);
-        PersonSQL encripteuser = JDBC.emailToUser(encriptedMail);
+        PersonSQL personSQL = JDBC.emailToUser(encriptedMail);
 //        System.out.println("FFFFFFFFFFFF");
 //        System.out.println(encripteuser.getId());
 //        System.out.println(encripteuser.getName());
@@ -53,25 +53,11 @@ public class IniciarSessionController extends PrimaryStageControler implements I
 //        System.out.println(encripteuser.getEmail());
 //        System.out.println(encripteuser.getEmailEncripted());
 //        System.out.println("FFFFFFFFFFFF");
-        try {
-            if (checkPass(encripteuser.getEmail(), passwordField.getText(), encripteuser.getName(), encripteuser.getPassword())) {
-                System.out.println(email);
-                //
-                PantallaInicialController.idJugadorTemp = encripteuser.getId();
-                PantallaInicialController.nameJugadorTemp = encripteuser.getName();
-                PantallaInicialController.emailJugadorTemp = encripteuser.getEmail();
-            }
-        } catch (NullPointerException ignore) {
-            CustomAlert alert = new CustomAlert(Alert.AlertType.WARNING);
-            alert.setTitle(TRADUCCIONES_GENERALES.getString("warning.dialog"));
-            alert.setHeaderText(TRADUCCIONES_GENERALES.getString("bad.login"));
-            alert.setContentText(TRADUCCIONES_GENERALES.getString("login.incorrect"));
-            alert.showAndWait();
-        }
+        PantallaInicialController.iniciarSession(personSQL,passwordField.getText());
         stage.close();
     }
 
-    private boolean checkPass(String email, String password, String name, String db) {
+    public static boolean checkPass(String email, String password, String name, String db) {
 
         return (Encriptacio.sha256(email + password + name) + email.length()).equals(db);
     }
@@ -81,6 +67,11 @@ public class IniciarSessionController extends PrimaryStageControler implements I
             Desktop.getDesktop().browse(new URL("http://www.armegis.tk").toURI());
         } catch (IOException | URISyntaxException e) {
             e.printStackTrace();
+            CustomAlert alert = new CustomAlert(Alert.AlertType.WARNING);
+            alert.setTitle(TRADUCCIONES_GENERALES.getString("warning.dialog"));
+            alert.setHeaderText("Error");
+            alert.setContentText("This button has had a problem. Go to armegis.tk");
+            alert.showAndWait();
         }
     }
 }

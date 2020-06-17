@@ -1,13 +1,13 @@
 package main.java.utils.propietiesAndPreferences;
 
+import main.java.Inicio.PantallaInicialController;
 import main.java.Main;
+import main.java.mysql.PersonSQL;
 import main.java.utils.PrimaryStageControler;
 
 import java.io.*;
-import java.util.Date;
 import java.util.Locale;
 import java.util.Properties;
-import java.util.prefs.BackingStoreException;
 import java.util.prefs.Preferences;
 
 import static main.java.Main.*;
@@ -43,7 +43,16 @@ public class PreferencesApp {
         prop.load(inputStream);
 
         LOCALE = new Locale(prop.getProperty("language"));
-/*
+        try {
+            String name=prop.getProperty("nameEncripted").replaceAll("\\=","=").replaceAll("\\:",":");
+            String email=prop.getProperty("emailEncripted").replaceAll("\\=","=").replaceAll("\\:",":");
+            String data_register=prop.getProperty("date_register").replaceAll("\\=","=").replaceAll("\\:",":");
+            PersonSQL personSQL = new PersonSQL(Long.parseLong(prop.getProperty("id")), name, email, prop.getProperty("password"), data_register);
+            System.out.println("readFilePrefereces() XX");
+            PantallaInicialController.iniciarSession(personSQL);
+            PrimaryStageControler.personSQL=personSQL;
+        }catch (Exception ignore){}
+        /*
         // get the property value and print it out
         name = prop.getProperty("name");
         versionOld = prop.getProperty("version");
@@ -61,11 +70,19 @@ public class PreferencesApp {
         inputStream.close();
 
     }
-    public static void writeFilePrefereces() {
+    public static void writeFilePrefereces(PersonSQL personSQL) {
         try (OutputStream outputStream = new FileOutputStream(filePreferences)) {
             Properties prop = new Properties();
             // set key and value
             prop.setProperty("language", PrimaryStageControler.LOCALE.getLanguage());
+            System.out.println("LOGIN");
+            if (personSQL!=null) {
+                prop.setProperty("id", String.valueOf(personSQL.getId()));
+                prop.setProperty("nameEncripted", personSQL.getNameEncripted());
+                prop.setProperty("emailEncripted", personSQL.getEmailEncripted());
+                prop.setProperty("password", personSQL.getPassword());
+                prop.setProperty("date_register", personSQL.getDate_register());
+            }
             /*
             prop.setProperty("name", NAME);
             prop.setProperty("version", VERSION);

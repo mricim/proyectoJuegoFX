@@ -32,6 +32,12 @@ public class Clan {
         clanArrayList.add(this);
     }
 
+    public Clan() {
+        this.id = 0;
+        this.name = new SimpleStringProperty("");
+        this.coste = new SimpleIntegerProperty(0);
+    }
+
 
     public int getId() {
         return id;

@@ -3,6 +3,8 @@ package main.java.jugadores;
 import com.sun.istack.Nullable;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.scene.image.Image;
+import main.java.Inicio.PantallaInicialController;
+import main.java.mysql.PersonSQL;
 import main.java.temas.Temas;
 import main.java.utils.CallImages;
 import main.java.juego.mapas.Recursos;
@@ -19,20 +21,31 @@ import static main.java.Inicio.PantallaInicialController.elTemaSeleccionado;
 @Entity
 @Table(name = "Jugador", schema = "proyecto")
 public class Jugador {
-    public static final Image ERRORIMAGE = CallImages.getImageNoTema("", "error");//TODO LLEVAR ESTO LO MAS ALTO POSIBLE
+    public static final Image ERRORIMAGE = CallImages.getImageNoTema("", "error");//LLEVAR ESTO LO MAS ALTO POSIBLE
 
     public Map<Integer, Batallon> listaBatallonesPropios = new TreeMap<>();
     public Map<String, Ciudad> listaCiudadesPropias = new TreeMap<>();
 
-    private static Long lastId = 0l;
     private final Long id;
     private final SimpleStringProperty nombre;
+    private final SimpleStringProperty email;
+    private final SimpleStringProperty password;
+    private final SimpleStringProperty date_register;
+    private final PersonSQL personSQL;
     private final Map<Integer, Recursos> recursosJugador = new TreeMap<>();
     public Ciudad cargarCiudadPrincipal = null;
 
-    public Jugador(long id, String nombre, ArrayList<Recursos> recursosJugador) {
-        this.id = id;
-        this.nombre = new SimpleStringProperty(nombre);
+
+    public Jugador(PersonSQL personSQLx) {
+        this.id = personSQLx.getId();
+        this.nombre = new SimpleStringProperty(personSQLx.getName());
+        this.email = new SimpleStringProperty(personSQLx.getEmail());
+        this.password = new SimpleStringProperty(personSQLx.getPassword());
+        this.date_register = new SimpleStringProperty(personSQLx.getDate_register());
+        this.personSQL = personSQLx;
+
+        ArrayList<Recursos> recursosJugador = new ArrayList<>();//BD
+        recursosJugador.add(new Recursos(PantallaInicialController.elTemaSeleccionado.listaRecursosPreCargada.get(7), 5));//BD
         for (Recursos recursos : recursosJugador) {
             this.recursosJugador.put(recursos.getId(), recursos);
         }
@@ -157,12 +170,37 @@ public class Jugador {
         return id;
     }
 
-    public SimpleStringProperty getNombre() {
+    public String getNombreString() {
+        return nombre.get();
+    }
+
+    public SimpleStringProperty nombreProperty() {
         return nombre;
     }
 
-    public String getNombreString() {
-        return nombre.getValue();
+    public String getEmail() {
+        return email.get();
+    }
+
+
+    public String getPassword() {
+        return password.get();
+    }
+
+    public SimpleStringProperty passwordProperty() {
+        return password;
+    }
+
+    public String getDate_register() {
+        return date_register.get();
+    }
+
+    public SimpleStringProperty date_registerProperty() {
+        return date_register;
+    }
+
+    public SimpleStringProperty emailProperty() {
+        return email;
     }
 
     public Map<Integer, Recursos> getRecursosJugador() {
@@ -172,10 +210,4 @@ public class Jugador {
     public static Jugador returnJugador(long jugadorId) {
         return elTemaSeleccionado.listaTodosLosJugadores.get(jugadorId);
     }
-/*
-    public static void addBatallon(Batallon batallon) {//TODO QUEDA HACER ESTO PARA LOS BATALLONES IGUAL QUE ESTA EN CIUDAD
-        //return //Jugador.listaTodosLosJugadores.get(jugadorId);
-    }
-
- */
 }

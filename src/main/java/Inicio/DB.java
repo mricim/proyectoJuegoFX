@@ -1,5 +1,6 @@
 package main.java.Inicio;
 
+import javafx.concurrent.Task;
 import javafx.scene.control.ProgressBar;
 import main.java.juego.comercio.Comercio;
 import main.java.juego.mapas.Recursos;
@@ -8,7 +9,9 @@ import main.java.juego.mapas.ciudad.EdificiosPreCargados;
 import main.java.juego.mapas.pelea.UnidadesPreCargadas;
 import main.java.jugadores.Clan;
 import main.java.jugadores.Jugador;
+import main.java.mysql.PersonSQL;
 import main.java.temas.Temas;
+import main.java.utils.PrimaryStageControler;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,17 +22,17 @@ import static main.java.Inicio.PantallaInicialController.elTemaSeleccionado;
 import static main.java.utils.PrimaryStageControler.*;
 
 public class DB {
-    //TODO Esto estaria en la DB
+    //Esto estaria en la DB
 
-    public static void callbdAccordingTema(ProgressBar progresBar, Temas elTemaSeleccionado) {
+    public static void callbdAccordingTema(Temas elTemaSeleccionado) {
         if (elTemaSeleccionado.getName().equals("Demo")) {
-            callbdDemo(progresBar);
+            callbdDemo();
         } else {
-            callbdCuerpoHumano(progresBar);
+            callbdCuerpoHumano();
         }
     }
 
-    static void callbdDemo(ProgressBar progresBar) {
+    static void callbdDemo() {
 
         RecursosPrecargados oroPre = new RecursosPrecargados(0, TRADUCCIONES_THEMA.getString("recurso.oro"), true, true, false, true);
         RecursosPrecargados maderaPre = new RecursosPrecargados(1, TRADUCCIONES_THEMA.getString("recurso.madera"), true, true, false, true);
@@ -40,7 +43,7 @@ public class DB {
         RecursosPrecargados felicidadPre = new RecursosPrecargados(6, TRADUCCIONES_THEMA.getString("recurso.felicidad"), true, false, true, true);
         RecursosPrecargados puntosInvestigacion = new RecursosPrecargados(7, TRADUCCIONES_THEMA.getString("recurso.investigacion"), false, true, false, true);
         RecursosPrecargados municionPre = new RecursosPrecargados(8, TRADUCCIONES_THEMA.getString("recurso.municion"), true, true, true, true);
-        progresBar.setProgress(15);
+        //15, 100);
         //TODO MENUS ESPECIALES
         //-1=noDanNiGeneranNada
         //0=EdificioNormal
@@ -226,7 +229,7 @@ public class DB {
         recursosBuild_Palacio3.put(hierroPre.getId(), new Recursos(hierroPre, 5));
         recursosBuild_Palacio3.put(poblacionPre.getId(), new Recursos(poblacionPre, 1));
         new EdificiosPreCargados(11, 2, true, true, 1, 2, 1, TRADUCCIONES_THEMA.getString("edificio.name.palacio"), TRADUCCIONES_THEMA.getString("edificio.descripcion.palacio"), recursosBuild_Palacio3, null, null, null);
-        progresBar.setProgress(20);
+        //20, 100);
         //
         //
         //
@@ -540,7 +543,7 @@ public class DB {
         Map<RecursosPrecargados, ArrayList<Recursos>> recursosCosteX_productor_Taberna3 = new TreeMap<>();
         recursosCosteX_productor_Taberna3.put(felicidadPre, recursosCosteXtime_coste_Taberna3);
         new EdificiosPreCargados(17, 2, true, true, 1, 0, 0, TRADUCCIONES_THEMA.getString("edificio.name.taberna"), TRADUCCIONES_THEMA.getString("edificio.descripcion.taberna"), recursosBuild_Taberna3, recursosProductores_Taberna3, recursosCosteX_productor_Taberna3, null);
-        progresBar.setProgress(30);
+        //30, 100);
         //
         //
         //
@@ -622,7 +625,7 @@ public class DB {
 
         //
         //
-        progresBar.setProgress(40);
+        //40, 100);
         //
         //
 
@@ -669,29 +672,21 @@ public class DB {
         //
         //
         //
-        progresBar.setProgress(50);
-        //TODO En pantalla
+        //50, 100);
+        //
         Clan clan = new Clan("Los mejores", 10);
         Clan clan2 = new Clan("Los peores", 10);
         clan2.setContrasenya("1234");
-        ArrayList<Recursos> jugador1ListaRecuros = new ArrayList<>();
-        jugador1ListaRecuros.add(new Recursos(puntosInvestigacion, 5));
-        Jugador jugador = new Jugador(0l,"pepito", jugador1ListaRecuros);
+        Jugador jugador = new Jugador(new PersonSQL(0l, "pepe", "juan", "dfh", "fgh", false));
         setJugadorPrimaryStageController(jugador);
-        setClanPrimaryStageController(clan);
-        progresBar.setProgress(60);
-        ArrayList<Recursos> jugador2ListaRecuros = new ArrayList<>();
-        jugador2ListaRecuros.add(new Recursos(puntosInvestigacion, 25));
-        Jugador jugador2 = new Jugador(1l,"juan", jugador2ListaRecuros);
-        ArrayList<Recursos> jugador3ListaRecuros = new ArrayList<>();
-        jugador3ListaRecuros.add(new Recursos(puntosInvestigacion, 80));
-        Jugador jugador3 = new Jugador(2l,"pedro", jugador3ListaRecuros);
-        Jugador jugador4 = new Jugador(3l,"julito", jugador3ListaRecuros);
+        //setClanPrimaryStageController(clan);
+        //60, 100);
+        Jugador jugador2 = new Jugador(new PersonSQL(1l, "juan", "jugador2ListaRecuros", "asd", "asd", false));
+        Jugador jugador3 = new Jugador(new PersonSQL(2l, "pedro", "jugador3ListaRecuros", "asd", "asd", false));
+        Jugador jugador4 = new Jugador(new PersonSQL(3l, "julito", "jugador3ListaRecuros", "asd", "asd", false));
         clan2.setCreador(jugador4);
         clan2.addJugadorClan(jugador4);
-        progresBar.setProgress(70);
-        clan.addJugadorClan(jugador);
-        clan.setCreador(jugador);
+        //70, 100);
         clan.addJugadorClan(jugador3);
 
 
@@ -699,7 +694,7 @@ public class DB {
         elTemaSeleccionado.espias.put(2, 25);
         elTemaSeleccionado.espias.put(5, 50);
         elTemaSeleccionado.espias.put(10, 80);
-        progresBar.setProgress(80);
+        //80, 100);
 
         //TODO TEST
         Comercio comercio0 = new Comercio(new Recursos(oroPre, 5), new Recursos(maderaPre, 300), jugador);
@@ -761,11 +756,9 @@ public class DB {
             }
         };
         thread2.start();
-
-
     }
 
-    static void callbdCuerpoHumano(ProgressBar progresBar) {
+    static void callbdCuerpoHumano() {
         RecursosPrecargados oxigenoPre = new RecursosPrecargados(0, TRADUCCIONES_THEMA.getString("recurso.oro"), true, true, false, true);
         RecursosPrecargados CarbonoPre = new RecursosPrecargados(1, TRADUCCIONES_THEMA.getString("recurso.madera"), true, true, false, true);
         RecursosPrecargados hidrogenoPre = new RecursosPrecargados(2, TRADUCCIONES_THEMA.getString("recurso.piedra"), true, true, false, true);
@@ -773,7 +766,7 @@ public class DB {
         RecursosPrecargados fosforoPre = new RecursosPrecargados(4, TRADUCCIONES_THEMA.getString("recurso.hierro"), true, true, false, true);
         RecursosPrecargados calcioPre = new RecursosPrecargados(5, TRADUCCIONES_THEMA.getString("recurso.poblacion"), true, false, false, false);
         RecursosPrecargados PotasioPre = new RecursosPrecargados(6, TRADUCCIONES_THEMA.getString("recurso.felicidad"), true, false, true, true);
-        progresBar.setProgress(15);
+        //15,100);
         //TODO MENUS ESPECIALES
         //-1=noDanNiGeneranNada
         //0=EdificioNormal
@@ -907,7 +900,7 @@ public class DB {
         recursosBuildPalacio3.put(fosforoPre.getId(), new Recursos(fosforoPre, 5));
         recursosBuildPalacio3.put(calcioPre.getId(), new Recursos(calcioPre, 1));
         new EdificiosPreCargados(11, 2, true, true, 0, 2, 1, TRADUCCIONES_THEMA.getString("edificio.name.almacen"), TRADUCCIONES_THEMA.getString("edificio.descripcion.palacio"), recursosBuildPalacio3, null, null, null);
-        progresBar.setProgress(20);
+        //20, 100);
         //
         //
         //
@@ -1115,7 +1108,7 @@ public class DB {
         Map<RecursosPrecargados, ArrayList<Recursos>> recursosCosteX_productor_Taberna3 = new TreeMap<>();
         recursosCosteX_productor_Taberna3.put(PotasioPre, recursosCosteXtime_coste_Taberna3);
         new EdificiosPreCargados(17, 2, true, true, 0, 0, 0, TRADUCCIONES_THEMA.getString("edificio.name.taberna"), TRADUCCIONES_THEMA.getString("edificio.descripcion.taberna"), recursosBuild_Taberna3, null, recursosCosteX_productor_Taberna3, null);
-        progresBar.setProgress(30);
+        //30, 100);
         //
         //
         //
@@ -1177,7 +1170,7 @@ public class DB {
 
         //
         //
-        progresBar.setProgress(40);
+        //40, 100);
         //
         //
 
@@ -1227,26 +1220,23 @@ public class DB {
         //
         //
         //
-        progresBar.setProgress(50);
+        //50, 100);
         //TODO En pantalla
         Clan clan = new Clan("Los mejores", 10);
         Clan clan2 = new Clan("Los peores", 10);
         clan2.setContrasenya("1234");
-        ArrayList<Recursos> jugador1ListaRecuros = new ArrayList<>();
-        Jugador jugador = new Jugador(0l,"pepito", jugador1ListaRecuros);
+        Jugador jugador = new Jugador(new PersonSQL(0l, "pepito", "jugador1ListaRecuros", "asd", "asd", false));
         setJugadorPrimaryStageController(jugador);
         setClanPrimaryStageController(clan);
-        progresBar.setProgress(60);
-        ArrayList<Recursos> jugador2ListaRecuros = new ArrayList<>();
-        Jugador jugador2 = new Jugador(1l,"juan", jugador2ListaRecuros);
-        ArrayList<Recursos> jugador3ListaRecuros = new ArrayList<>();
-        Jugador jugador3 = new Jugador(2l,"pedro", jugador3ListaRecuros);
-        Jugador jugador4 = new Jugador(3l,"julito", jugador3ListaRecuros);
+        //60, 100);
+        Jugador jugador2 = new Jugador(new PersonSQL(1l, "juan", "jugador2ListaRecuros", "asd", "asd", false));
+        Jugador jugador3 = new Jugador(new PersonSQL(2l, "pedro", "jugador3ListaRecuros", "asd", "asd", false));
+        Jugador jugador4 = new Jugador(new PersonSQL(3l, "julito", "jugador3ListaRecuros", "asd", "asd", false));
         clan2.setCreador(jugador4);
         clan2.addJugadorClan(jugador4);
-        progresBar.setProgress(70);
-        clan.addJugadorClan(jugador);
-        clan.setCreador(jugador);
+        //70, 100);
+        //clan.addJugadorClan(jugador);
+        //clan.setCreador(jugador);
         clan.addJugadorClan(3);
 
 
@@ -1254,7 +1244,7 @@ public class DB {
         elTemaSeleccionado.espias.put(2, 25);
         elTemaSeleccionado.espias.put(5, 50);
         elTemaSeleccionado.espias.put(10, 80);
-        progresBar.setProgress(80);
+        //80, 100);
 
         //TODO TEST
         Comercio comercio0 = new Comercio(new Recursos(oxigenoPre, 5), new Recursos(CarbonoPre, 300), jugador);
@@ -1317,4 +1307,5 @@ public class DB {
         };
         thread2.start();
     }
+
 }

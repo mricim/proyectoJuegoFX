@@ -140,7 +140,7 @@ public class Encriptacio {
         }
         return null;
     }
-
+/*
     public static void main(String[] args) throws NoSuchAlgorithmException {
         System.out.println(encrypt(KEY, initV, "ericcasanova.m@gmail.com"));
         System.out.println(decrypt(KEY, encrypt(KEY, initV, "ericcasanova.m@gmail.com")));
@@ -159,7 +159,7 @@ public class Encriptacio {
         System.out.println(b);
         System.out.println("XX");
     }
-
+*/
     public static String sha256(String base) {
         try{
             MessageDigest digest = MessageDigest.getInstance("SHA-256");

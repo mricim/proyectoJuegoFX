@@ -34,7 +34,6 @@ prefHeight="${screen.visualBounds.height}" prefWidth="${screen.visualBounds.widt
                <children>
                   <VBox fx:id="aCambiar" alignment="CENTER" minHeight="200.0" minWidth="200.0">
                      <children>
-                        <Button fx:id="loadSesion" mnemonicParsing="false" onMouseClicked="#iniciarSession" text="%iniciarSession" />
                      </children>
                   </VBox>
                   <Separator orientation="VERTICAL" prefHeight="200.0">

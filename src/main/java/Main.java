@@ -5,8 +5,10 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 import main.java.Inicio.PantallaInicialController;
 import main.java.temas.Temas;
+import main.java.utils.PrimaryStageControler;
 import main.java.utils.os.Os;
 import main.java.utils.propietiesAndPreferences.PreferencesApp;
 import main.java.utils.traductor.Traductor;
@@ -58,8 +60,8 @@ public class Main extends Application {
         if (PreferencesApp.createFilePrefereces()) {
             try {
                 PreferencesApp.readFilePrefereces();
-            } catch (NullPointerException ignore) {
-            }
+
+            }catch (Exception ignore){}
         }
         //ANTES DE IDIOMA
         if (LOCALE == null) {
@@ -109,7 +111,13 @@ public class Main extends Application {
         //scene.getStylesheets().add("main.resources/style/styles.css");
         primaryStage.setScene(scene);
         //primaryStage.setMaximized(true);//Pone el Stage en maximizado
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         primaryStage.show();
+        primaryStage.getScene().getWindow().addEventFilter(WindowEvent.WINDOW_CLOSE_REQUEST, PrimaryStageControler::closeWindowEvent);
     }
 
 

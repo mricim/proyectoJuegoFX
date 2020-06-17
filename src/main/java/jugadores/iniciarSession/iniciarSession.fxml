@@ -11,7 +11,7 @@
                <children>
                   <TextField fx:id="emailField" promptText="%usuario" />
                   <PasswordField fx:id="passwordField" promptText="%password" />
-                  <Button mnemonicParsing="false" onMouseClicked="#iniciarSession" text="%iniciarSession" />
+                  <Button mnemonicParsing="false" onMouseClicked="#dataToIniciarSession" text="%iniciarSession" />
                </children>
             </HBox>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="5.0">

@@ -144,6 +144,9 @@ public class MundoController extends MapasController implements Initializable {
                     ciudadToGrid = elTemaSeleccionado.listaCiudades.get(position);
                     if (ciudadToGrid != null) {
                         stringBuilder.append(letter_guionBajo).append(letter_city);
+
+
+
                         if (getJugadorPrimaryStageController().listaCiudadesPropias.containsKey(position)) {
                             stringBuilder.append(letter_esNuestro);
                         } else if (getClanPrimaryStageController().getCiudadesDelClan().get(position) != null) {

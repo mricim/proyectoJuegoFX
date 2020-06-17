@@ -1,14 +1,19 @@
 package main.java.utils;
 
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.scene.control.ProgressBar;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 import main.java.jugadores.Clan;
 import main.java.jugadores.Jugador;
 import main.java.Main;
 import main.java.juego.mapas.ciudad.Ciudad;
+import main.java.mysql.PersonSQL;
 import main.java.utils.propietiesAndPreferences.PreferencesApp;
 
 import java.io.IOException;
@@ -26,7 +31,7 @@ public class PrimaryStageControler {
     public static String NAME_TEMA;
     public static String NAME_TEMA_PATH;
     //VARIABLES PREDEFINIDAS
-    private static Clan clanPrimaryStageController;
+    private static Clan clanPrimaryStageController=new Clan();
 
     public static Clan getClanPrimaryStageController() {
         return clanPrimaryStageController;
@@ -37,6 +42,7 @@ public class PrimaryStageControler {
     }
 
     private static Jugador jugadorPrimaryStageController;
+    public static PersonSQL personSQL = null;
 
     public static Jugador getJugadorPrimaryStageController() {
         return jugadorPrimaryStageController;
@@ -141,7 +147,7 @@ public class PrimaryStageControler {
             LOCALE = locale;
             TRADUCCIONES_GENERALES = ResourceBundle.getBundle(TRADUCCIONES_GENERALES.getBaseBundleName(), LOCALE);
         }
-        PreferencesApp.writeFilePrefereces();
+        PreferencesApp.writeFilePrefereces(PrimaryStageControler.personSQL);
         loader.setResources(TRADUCCIONES_GENERALES);
 
         Parent root = loader.load();
@@ -196,7 +202,20 @@ public class PrimaryStageControler {
             return salida;
         }
     }
-    //FIN RETURN RUTES
 
+    private void labelSetText(Label label, String text) {
+        Platform.runLater(new Runnable() {//in case you call from other thread
+            @Override
+            public void run() {
+                label.setText(text);
+            }
+        });
+    }
+    //FIN RETURN RUTES
+    public static void closeWindowEvent(WindowEvent event) {
+        //https://stackoverflow.com/questions/26619566/javafx-stage-close-handler
+        System.out.println("Window close request ...");
+        System.exit(0);
+    }
 
 }
