@@ -1186,7 +1186,7 @@ public class CiudadController extends MapasController implements Initializable {
                             }
                         } else {
                             btn.setText(TRADUCCIONES_THEMA.getString("ciudad.comercio.button.borrar"));
-                            btn.setStyle("-fx-border-color:red; -fx-border-width: 2px;-fx-text-fill:red;-fx-border-radius: 2pt;-fx-background-radius: 2pt;");
+                            btn.setStyle("-fx-border-color:red; -fx-border-width: 2px;-fx-text-background-color:red;-fx-border-radius: 2pt;-fx-background-radius: 2pt;");
                         }
                         hBox.getChildren().add(btn);
 

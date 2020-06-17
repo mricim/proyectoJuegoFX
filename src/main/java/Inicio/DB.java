@@ -758,6 +758,21 @@ public class DB {
     }
 
     static void callbdCuerpoHumano() {
+        RecursosPrecargados oroPre = new RecursosPrecargados(0, TRADUCCIONES_THEMA.getString("recurso.oro"), true, true, false, true);
+        RecursosPrecargados maderaPre = new RecursosPrecargados(1, TRADUCCIONES_THEMA.getString("recurso.madera"), true, true, false, true);
+        RecursosPrecargados piedraPre = new RecursosPrecargados(2, TRADUCCIONES_THEMA.getString("recurso.piedra"), true, true, false, true);
+        RecursosPrecargados comidaPre = new RecursosPrecargados(3, TRADUCCIONES_THEMA.getString("recurso.comida"), true, true, false, true);
+        RecursosPrecargados hierroPre = new RecursosPrecargados(4, TRADUCCIONES_THEMA.getString("recurso.hierro"), true, true, false, true);
+        RecursosPrecargados poblacionPre = new RecursosPrecargados(5, TRADUCCIONES_THEMA.getString("recurso.poblacion"), true, false, false, false);
+        RecursosPrecargados felicidadPre = new RecursosPrecargados(6, TRADUCCIONES_THEMA.getString("recurso.felicidad"), true, false, true, true);
+        RecursosPrecargados puntosInvestigacion = new RecursosPrecargados(7, TRADUCCIONES_THEMA.getString("recurso.investigacion"), false, true, false, true);
+        RecursosPrecargados municionPre = new RecursosPrecargados(8, TRADUCCIONES_THEMA.getString("recurso.municion"), true, true, true, true);
+
+
+
+
+
+
         RecursosPrecargados oxigenoPre = new RecursosPrecargados(0, TRADUCCIONES_THEMA.getString("recurso.oro"), true, true, false, true);
         RecursosPrecargados CarbonoPre = new RecursosPrecargados(1, TRADUCCIONES_THEMA.getString("recurso.madera"), true, true, false, true);
         RecursosPrecargados hidrogenoPre = new RecursosPrecargados(2, TRADUCCIONES_THEMA.getString("recurso.piedra"), true, true, false, true);
@@ -873,6 +888,62 @@ public class DB {
         //
         //
         //
+        Map<Integer, Recursos> recursosBuild_Almacen1 = new TreeMap<>();
+        recursosBuild_Almacen1.put(oroPre.getId(), new Recursos(oroPre, 5));
+        recursosBuild_Almacen1.put(maderaPre.getId(), new Recursos(maderaPre, 150));
+        recursosBuild_Almacen1.put(piedraPre.getId(), new Recursos(piedraPre, 200));
+        recursosBuild_Almacen1.put(hierroPre.getId(), new Recursos(hierroPre, 5));
+        recursosBuild_Almacen1.put(poblacionPre.getId(), new Recursos(poblacionPre, 1));
+        //
+        Map<Integer, Recursos> recursosAlmacen_Almacen1 = new TreeMap<>();
+        recursosAlmacen_Almacen1.put(oroPre.getId(), new Recursos(oroPre, 100));
+        recursosAlmacen_Almacen1.put(maderaPre.getId(), new Recursos(maderaPre, 100));
+        recursosAlmacen_Almacen1.put(piedraPre.getId(), new Recursos(piedraPre, 100));
+        recursosAlmacen_Almacen1.put(comidaPre.getId(), new Recursos(comidaPre, 100));
+        recursosAlmacen_Almacen1.put(hierroPre.getId(), new Recursos(hierroPre, 100));
+        recursosAlmacen_Almacen1.put(poblacionPre.getId(), new Recursos(poblacionPre, 100));
+        recursosAlmacen_Almacen1.put(felicidadPre.getId(), new Recursos(felicidadPre, 100));
+        recursosAlmacen_Almacen1.put(puntosInvestigacion.getId(), new Recursos(puntosInvestigacion, 100));
+        new EdificiosPreCargados(10, 0, true, true, 3, -1, 0, TRADUCCIONES_THEMA.getString("edificio.name.almacen"), TRADUCCIONES_THEMA.getString("edificio.descripcion.almacen"), recursosBuild_Almacen1, null, null, recursosAlmacen_Almacen1);
+
+        Map<Integer, Recursos> recursosBuild_Almacen2 = new TreeMap<>();
+        recursosBuild_Almacen2.put(oroPre.getId(), new Recursos(oroPre, 5));
+        recursosBuild_Almacen2.put(maderaPre.getId(), new Recursos(maderaPre, 300));
+        recursosBuild_Almacen2.put(piedraPre.getId(), new Recursos(piedraPre, 600));
+        recursosBuild_Almacen2.put(hierroPre.getId(), new Recursos(hierroPre, 5));
+        recursosBuild_Almacen2.put(poblacionPre.getId(), new Recursos(poblacionPre, 1));
+        //
+        Map<Integer, Recursos> recursosAlmacen_Almacen2 = new TreeMap<>();
+        recursosAlmacen_Almacen2.put(oroPre.getId(), new Recursos(oroPre, 500));
+        recursosAlmacen_Almacen2.put(maderaPre.getId(), new Recursos(maderaPre, 500));
+        recursosAlmacen_Almacen2.put(piedraPre.getId(), new Recursos(piedraPre, 500));
+        recursosAlmacen_Almacen2.put(comidaPre.getId(), new Recursos(comidaPre, 500));
+        recursosAlmacen_Almacen2.put(hierroPre.getId(), new Recursos(hierroPre, 500));
+        recursosAlmacen_Almacen2.put(poblacionPre.getId(), new Recursos(poblacionPre, 500));
+        recursosAlmacen_Almacen2.put(felicidadPre.getId(), new Recursos(felicidadPre, 500));
+        recursosAlmacen_Almacen2.put(puntosInvestigacion.getId(), new Recursos(puntosInvestigacion, 500));
+        new EdificiosPreCargados(10, 1, true, true, 3, 0, 0, TRADUCCIONES_THEMA.getString("edificio.name.almacen"), TRADUCCIONES_THEMA.getString("edificio.descripcion.almacen"), recursosBuild_Almacen2, null, null, recursosAlmacen_Almacen2);
+
+        Map<Integer, Recursos> recursosBuild_Almacen3 = new TreeMap<>();
+        recursosBuild_Almacen3.put(oroPre.getId(), new Recursos(oroPre, 5));
+        recursosBuild_Almacen3.put(maderaPre.getId(), new Recursos(maderaPre, 600));
+        recursosBuild_Almacen3.put(piedraPre.getId(), new Recursos(piedraPre, 800));
+        recursosBuild_Almacen3.put(hierroPre.getId(), new Recursos(hierroPre, 5));
+        recursosBuild_Almacen3.put(poblacionPre.getId(), new Recursos(poblacionPre, 1));
+        //
+        Map<Integer, Recursos> recursosAlmacen_Almacen3 = new TreeMap<>();
+        recursosAlmacen_Almacen3.put(oroPre.getId(), new Recursos(oroPre, 1300));
+        recursosAlmacen_Almacen3.put(maderaPre.getId(), new Recursos(maderaPre, 1300));
+        recursosAlmacen_Almacen3.put(piedraPre.getId(), new Recursos(piedraPre, 1300));
+        recursosAlmacen_Almacen3.put(comidaPre.getId(), new Recursos(comidaPre, 1300));
+        recursosAlmacen_Almacen3.put(hierroPre.getId(), new Recursos(hierroPre, 1300));
+        recursosAlmacen_Almacen3.put(poblacionPre.getId(), new Recursos(poblacionPre, 1300));
+        recursosAlmacen_Almacen3.put(felicidadPre.getId(), new Recursos(felicidadPre, 1300));
+        recursosAlmacen_Almacen3.put(puntosInvestigacion.getId(), new Recursos(puntosInvestigacion, 1300));
+        new EdificiosPreCargados(10, 2, true, true, 3, 1, 0, TRADUCCIONES_THEMA.getString("edificio.name.almacen"), TRADUCCIONES_THEMA.getString("edificio.descripcion.almacen"), recursosBuild_Almacen3, null, null, recursosAlmacen_Almacen3);
+        //
+        //
+        //
         Map<Integer, Recursos> recursosBuildPalacio1 = new TreeMap<>();
         recursosBuildPalacio1.put(oxigenoPre.getId(), new Recursos(oxigenoPre, 5));
         recursosBuildPalacio1.put(CarbonoPre.getId(), new Recursos(CarbonoPre, 15));
@@ -880,7 +951,7 @@ public class DB {
         recursosBuildPalacio1.put(nitrogenoPre.getId(), new Recursos(nitrogenoPre, 5));
         recursosBuildPalacio1.put(fosforoPre.getId(), new Recursos(fosforoPre, 5));
         recursosBuildPalacio1.put(calcioPre.getId(), new Recursos(calcioPre, 1));
-        new EdificiosPreCargados(11, 0, true, true, 0, 1, 1, TRADUCCIONES_THEMA.getString("edificio.name.palacio"), TRADUCCIONES_THEMA.getString("edificio.descripcion.palacio"), recursosBuildPalacio1, null, null, null);
+        new EdificiosPreCargados(11, 0, true, true, 1, 1, 1, TRADUCCIONES_THEMA.getString("edificio.name.palacio"), TRADUCCIONES_THEMA.getString("edificio.descripcion.palacio"), recursosBuildPalacio1, null, null, null);
 
         Map<Integer, Recursos> recursosBuildPalacio2 = new TreeMap<>();
         recursosBuildPalacio2.put(oxigenoPre.getId(), new Recursos(oxigenoPre, 5));
@@ -889,7 +960,7 @@ public class DB {
         recursosBuildPalacio2.put(nitrogenoPre.getId(), new Recursos(nitrogenoPre, 5));
         recursosBuildPalacio2.put(fosforoPre.getId(), new Recursos(fosforoPre, 5));
         recursosBuildPalacio2.put(calcioPre.getId(), new Recursos(calcioPre, 1));
-        new EdificiosPreCargados(11, 1, true, true, 0, 2, 1, TRADUCCIONES_THEMA.getString("edificio.name.almacen"), TRADUCCIONES_THEMA.getString("edificio.descripcion.palacio"), recursosBuildPalacio2, null, null, null);
+        new EdificiosPreCargados(11, 1, true, true, 1, 2, 1, TRADUCCIONES_THEMA.getString("edificio.name.palacio"), TRADUCCIONES_THEMA.getString("edificio.descripcion.palacio"), recursosBuildPalacio2, null, null, null);
 
         Map<Integer, Recursos> recursosBuildPalacio3 = new TreeMap<>();
         recursosBuildPalacio3.put(oxigenoPre.getId(), new Recursos(oxigenoPre, 5));
@@ -898,7 +969,7 @@ public class DB {
         recursosBuildPalacio3.put(nitrogenoPre.getId(), new Recursos(nitrogenoPre, 5));
         recursosBuildPalacio3.put(fosforoPre.getId(), new Recursos(fosforoPre, 5));
         recursosBuildPalacio3.put(calcioPre.getId(), new Recursos(calcioPre, 1));
-        new EdificiosPreCargados(11, 2, true, true, 0, 2, 1, TRADUCCIONES_THEMA.getString("edificio.name.almacen"), TRADUCCIONES_THEMA.getString("edificio.descripcion.palacio"), recursosBuildPalacio3, null, null, null);
+        new EdificiosPreCargados(11, 2, true, true, 1, 2, 1, TRADUCCIONES_THEMA.getString("edificio.name.palacio"), TRADUCCIONES_THEMA.getString("edificio.descripcion.palacio"), recursosBuildPalacio3, null, null, null);
         //20, 100);
         //
         //
@@ -915,7 +986,7 @@ public class DB {
         recursosCosteXtime_coste_CCientifico1.add(new Recursos(calcioPre, 20));
         Map<RecursosPrecargados, ArrayList<Recursos>> recursosCosteXtime_produce_CCientifico1 = new TreeMap<>();
         recursosCosteXtime_produce_CCientifico1.put(hidrogenoPre, recursosCosteXtime_coste_CCientifico1);
-        new EdificiosPreCargados(12, 0, true, true, 0, 0, 0, TRADUCCIONES_THEMA.getString("edificio.name.centroCientifico"), TRADUCCIONES_THEMA.getString("edificio.descripcion.centroCientifico"), recursosBuild_CCientifico1, null, recursosCosteXtime_produce_CCientifico1, null);
+        new EdificiosPreCargados(12, 0, true, true, 1, 0, 0, TRADUCCIONES_THEMA.getString("edificio.name.centroCientifico"), TRADUCCIONES_THEMA.getString("edificio.descripcion.centroCientifico"), recursosBuild_CCientifico1, null, recursosCosteXtime_produce_CCientifico1, null);
 
         Map<Integer, Recursos> recursosBuild_CCientifico2 = new TreeMap<>();
         recursosBuild_CCientifico2.put(oxigenoPre.getId(), new Recursos(oxigenoPre, 5));
@@ -929,7 +1000,7 @@ public class DB {
         recursosCosteXtime_coste_CCientifico2.add(new Recursos(calcioPre, 20));
         Map<RecursosPrecargados, ArrayList<Recursos>> recursosCosteXtime_produce_CCientifico2 = new TreeMap<>();
         recursosCosteXtime_produce_CCientifico2.put(hidrogenoPre, recursosCosteXtime_coste_CCientifico2);
-        new EdificiosPreCargados(12, 1, true, true, 0, 0, 0, TRADUCCIONES_THEMA.getString("edificio.name.centroCientifico"), TRADUCCIONES_THEMA.getString("edificio.descripcion.centroCientifico"), recursosBuild_CCientifico2, null, recursosCosteXtime_produce_CCientifico2, null);
+        new EdificiosPreCargados(12, 1, true, true, 1, 0, 0, TRADUCCIONES_THEMA.getString("edificio.name.centroCientifico"), TRADUCCIONES_THEMA.getString("edificio.descripcion.centroCientifico"), recursosBuild_CCientifico2, null, recursosCosteXtime_produce_CCientifico2, null);
 
 
         Map<Integer, Recursos> recursosBuild_CCientifico3 = new TreeMap<>();
@@ -948,6 +1019,9 @@ public class DB {
         //
         //
         //
+
+
+
         Map<Integer, Recursos> recursosBuild_Cantera1 = new TreeMap<>();
         recursosBuild_Cantera1.put(oxigenoPre.getId(), new Recursos(oxigenoPre, 5));
         recursosBuild_Cantera1.put(CarbonoPre.getId(), new Recursos(CarbonoPre, 15));
@@ -956,9 +1030,14 @@ public class DB {
         recursosBuild_Cantera1.put(fosforoPre.getId(), new Recursos(fosforoPre, 5));
         recursosBuild_Cantera1.put(calcioPre.getId(), new Recursos(calcioPre, 1));
         //
+        Map<Integer, Recursos> recursosProductores_Cantera1 = new TreeMap<>();
+        recursosProductores_Cantera1.put(maderaPre.getId(), new Recursos(maderaPre, 10));
+        //
         ArrayList<Recursos> recursosCosteXtime_coste_Cantera1 = new ArrayList<>();
         recursosCosteXtime_coste_Cantera1.add(new Recursos(calcioPre, 20));
+        recursosCosteXtime_coste_Cantera1.add(new Recursos(poblacionPre, 20));
         Map<RecursosPrecargados, ArrayList<Recursos>> recursosCosteXtime_produce_Cantera1 = new TreeMap<>();
+        recursosCosteXtime_produce_Cantera1.put(maderaPre, recursosCosteXtime_coste_Cantera1);
         recursosCosteXtime_produce_Cantera1.put(hidrogenoPre, recursosCosteXtime_coste_Cantera1);
         //
         Map<Integer, Recursos> recursosAlmacen_Cantera1 = new TreeMap<>();
@@ -969,7 +1048,7 @@ public class DB {
         recursosAlmacen_Cantera1.put(fosforoPre.getId(), new Recursos(fosforoPre, 100));
         recursosAlmacen_Cantera1.put(calcioPre.getId(), new Recursos(calcioPre, 100));
         recursosAlmacen_Cantera1.put(PotasioPre.getId(), new Recursos(PotasioPre, 100));
-        new EdificiosPreCargados(13, 0, true, true, 0, 0, 0, TRADUCCIONES_THEMA.getString("edificio.name.cantera"), TRADUCCIONES_THEMA.getString("edificio.descripcion.cantera"), recursosBuild_Cantera1, null, recursosCosteXtime_produce_Cantera1, recursosAlmacen_Cantera1);
+        new EdificiosPreCargados(13, 0, true, true, 1, 0, 0, TRADUCCIONES_THEMA.getString("edificio.name.cantera"), TRADUCCIONES_THEMA.getString("edificio.descripcion.cantera"), recursosBuild_Cantera1, recursosProductores_Cantera1, recursosCosteXtime_produce_Cantera1, recursosAlmacen_Cantera1);
 
         Map<Integer, Recursos> recursosBuild_Cantera2 = new TreeMap<>();
         recursosBuild_Cantera2.put(oxigenoPre.getId(), new Recursos(oxigenoPre, 5));
@@ -979,9 +1058,14 @@ public class DB {
         recursosBuild_Cantera2.put(fosforoPre.getId(), new Recursos(fosforoPre, 5));
         recursosBuild_Cantera2.put(calcioPre.getId(), new Recursos(calcioPre, 1));
         //
+        Map<Integer, Recursos> recursosProductores_Cantera2 = new TreeMap<>();
+        recursosProductores_Cantera2.put(maderaPre.getId(), new Recursos(maderaPre, 10));
+        //
         ArrayList<Recursos> recursosCosteXtime_coste_Cantera2 = new ArrayList<>();
         recursosCosteXtime_coste_Cantera2.add(new Recursos(calcioPre, 20));
+        recursosCosteXtime_coste_Cantera2.add(new Recursos(poblacionPre, 20));
         Map<RecursosPrecargados, ArrayList<Recursos>> recursosCosteXtime_produce_Cantera2 = new TreeMap<>();
+        recursosCosteXtime_produce_Cantera2.put(maderaPre, recursosCosteXtime_coste_Cantera1);
         recursosCosteXtime_produce_Cantera2.put(hidrogenoPre, recursosCosteXtime_coste_Cantera2);
         //
         Map<Integer, Recursos> recursosAlmacen_Cantera2 = new TreeMap<>();
@@ -992,7 +1076,7 @@ public class DB {
         recursosAlmacen_Cantera2.put(fosforoPre.getId(), new Recursos(fosforoPre, 100));
         recursosAlmacen_Cantera2.put(calcioPre.getId(), new Recursos(calcioPre, 100));
         recursosAlmacen_Cantera2.put(PotasioPre.getId(), new Recursos(PotasioPre, 100));
-        new EdificiosPreCargados(13, 1, true, true, 0, 0, 0, TRADUCCIONES_THEMA.getString("edificio.name.cantera"), TRADUCCIONES_THEMA.getString("edificio.descripcion.cantera"), recursosBuild_Cantera2, null, recursosCosteXtime_produce_Cantera2, recursosAlmacen_Cantera2);
+        new EdificiosPreCargados(13, 1, true, true, 1, 0, 0, TRADUCCIONES_THEMA.getString("edificio.name.cantera"), TRADUCCIONES_THEMA.getString("edificio.descripcion.cantera"), recursosBuild_Cantera2, recursosProductores_Cantera2, recursosCosteXtime_produce_Cantera2, recursosAlmacen_Cantera2);
 
         Map<Integer, Recursos> recursosBuild_Cantera3 = new TreeMap<>();
         recursosBuild_Cantera3.put(oxigenoPre.getId(), new Recursos(oxigenoPre, 5));
@@ -1002,9 +1086,14 @@ public class DB {
         recursosBuild_Cantera3.put(fosforoPre.getId(), new Recursos(fosforoPre, 5));
         recursosBuild_Cantera3.put(calcioPre.getId(), new Recursos(calcioPre, 1));
         //
+        Map<Integer, Recursos> recursosProductores_Cantera3 = new TreeMap<>();
+        recursosProductores_Cantera3.put(maderaPre.getId(), new Recursos(maderaPre, 10));
+        //
         ArrayList<Recursos> recursosCosteXtime_coste_Cantera3 = new ArrayList<>();
         recursosCosteXtime_coste_Cantera3.add(new Recursos(calcioPre, 20));
+        recursosCosteXtime_coste_Cantera3.add(new Recursos(poblacionPre, 20));
         Map<RecursosPrecargados, ArrayList<Recursos>> recursosCosteXtime_produce_Cantera3 = new TreeMap<>();
+        recursosCosteXtime_produce_Cantera3.put(maderaPre, recursosCosteXtime_coste_Cantera1);
         recursosCosteXtime_produce_Cantera3.put(hidrogenoPre, recursosCosteXtime_coste_Cantera3);
         //
         Map<Integer, Recursos> recursosAlmacen_Cantera3 = new TreeMap<>();
@@ -1015,7 +1104,57 @@ public class DB {
         recursosAlmacen_Cantera3.put(fosforoPre.getId(), new Recursos(fosforoPre, 100));
         recursosAlmacen_Cantera3.put(calcioPre.getId(), new Recursos(calcioPre, 100));
         recursosAlmacen_Cantera3.put(PotasioPre.getId(), new Recursos(PotasioPre, 100));
-        new EdificiosPreCargados(13, 2, true, true, 0, 0, 0, TRADUCCIONES_THEMA.getString("edificio.name.cantera"), TRADUCCIONES_THEMA.getString("edificio.descripcion.cantera"), recursosBuild_Cantera3, null, recursosCosteXtime_produce_Cantera3, recursosAlmacen_Cantera3);
+        new EdificiosPreCargados(13, 2, true, true, 1, 0, 0, TRADUCCIONES_THEMA.getString("edificio.name.cantera"), TRADUCCIONES_THEMA.getString("edificio.descripcion.cantera"), recursosBuild_Cantera3, recursosProductores_Cantera3, recursosCosteXtime_produce_Cantera3, recursosAlmacen_Cantera3);
+        //
+        //
+        //
+        Map<Integer, Recursos> recursosBuild_Fundicion1 = new TreeMap<>();
+        recursosBuild_Fundicion1.put(oroPre.getId(), new Recursos(oroPre, 5));
+        recursosBuild_Fundicion1.put(maderaPre.getId(), new Recursos(maderaPre, 15));
+        recursosBuild_Fundicion1.put(piedraPre.getId(), new Recursos(piedraPre, 20));
+        recursosBuild_Fundicion1.put(hierroPre.getId(), new Recursos(hierroPre, 5));
+        recursosBuild_Fundicion1.put(poblacionPre.getId(), new Recursos(poblacionPre, 1));
+        //
+        Map<Integer, Recursos> recursosProductores_Fundicion1 = new TreeMap<>();
+        recursosProductores_Fundicion1.put(hierroPre.getId(), new Recursos(hierroPre, 10));
+        //
+        ArrayList<Recursos> recursosCosteXtime_coste_Fundicion1 = new ArrayList<>();
+        recursosCosteXtime_coste_Fundicion1.add(new Recursos(poblacionPre, 20));
+        Map<RecursosPrecargados, ArrayList<Recursos>> recursosCosteXtime_produce_Fundicion1 = new TreeMap<>();
+        recursosCosteXtime_produce_Fundicion1.put(hierroPre, recursosCosteXtime_coste_Fundicion1);
+        new EdificiosPreCargados(15, 0, true, true, 1, 0, 0, TRADUCCIONES_THEMA.getString("edificio.name.fundicion"), TRADUCCIONES_THEMA.getString("edificio.descripcion.fundicion"), recursosBuild_Fundicion1, recursosProductores_Fundicion1, recursosCosteXtime_produce_Fundicion1, null);
+
+        Map<Integer, Recursos> recursosBuild_Fundicion2 = new TreeMap<>();
+        recursosBuild_Fundicion2.put(oroPre.getId(), new Recursos(oroPre, 5));
+        recursosBuild_Fundicion2.put(maderaPre.getId(), new Recursos(maderaPre, 15));
+        recursosBuild_Fundicion2.put(piedraPre.getId(), new Recursos(piedraPre, 20));
+        recursosBuild_Fundicion2.put(hierroPre.getId(), new Recursos(hierroPre, 5));
+        recursosBuild_Fundicion2.put(poblacionPre.getId(), new Recursos(poblacionPre, 1));
+        //
+        Map<Integer, Recursos> recursosProductores_Fundicion2 = new TreeMap<>();
+        recursosProductores_Fundicion2.put(hierroPre.getId(), new Recursos(hierroPre, 10));
+        //
+        ArrayList<Recursos> recursosCosteXtime_coste_Fundicion2 = new ArrayList<>();
+        recursosCosteXtime_coste_Fundicion2.add(new Recursos(poblacionPre, 20));
+        Map<RecursosPrecargados, ArrayList<Recursos>> recursosCosteXtime_produce_Fundicion2 = new TreeMap<>();
+        recursosCosteXtime_produce_Fundicion2.put(hierroPre, recursosCosteXtime_coste_Fundicion2);
+        new EdificiosPreCargados(15, 1, true, true, 1, 0, 0, TRADUCCIONES_THEMA.getString("edificio.name.fundicion"), TRADUCCIONES_THEMA.getString("edificio.descripcion.fundicion"), recursosBuild_Fundicion2, recursosProductores_Fundicion2, recursosCosteXtime_produce_Fundicion2, null);
+
+        Map<Integer, Recursos> recursosBuild_Fundicion3 = new TreeMap<>();
+        recursosBuild_Fundicion3.put(oroPre.getId(), new Recursos(oroPre, 5));
+        recursosBuild_Fundicion3.put(maderaPre.getId(), new Recursos(maderaPre, 15));
+        recursosBuild_Fundicion3.put(piedraPre.getId(), new Recursos(piedraPre, 20));
+        recursosBuild_Fundicion3.put(hierroPre.getId(), new Recursos(hierroPre, 5));
+        recursosBuild_Fundicion3.put(poblacionPre.getId(), new Recursos(poblacionPre, 1));
+        //
+        Map<Integer, Recursos> recursosProductores_Fundicion3 = new TreeMap<>();
+        recursosProductores_Fundicion3.put(hierroPre.getId(), new Recursos(hierroPre, 10));
+        //
+        ArrayList<Recursos> recursosCosteXtime_coste_Fundicion3 = new ArrayList<>();
+        recursosCosteXtime_coste_Fundicion3.add(new Recursos(poblacionPre, 20));
+        Map<RecursosPrecargados, ArrayList<Recursos>> recursosCosteXtime_produce_Fundicion3 = new TreeMap<>();
+        recursosCosteXtime_produce_Fundicion3.put(hierroPre, recursosCosteXtime_coste_Fundicion3);
+        new EdificiosPreCargados(15, 2, true, true, 1, 0, 0, TRADUCCIONES_THEMA.getString("edificio.name.fundicion"), TRADUCCIONES_THEMA.getString("edificio.descripcion.fundicion"), recursosBuild_Fundicion3, recursosProductores_Fundicion3, recursosCosteXtime_produce_Fundicion3, null);
         //
         //
         //
@@ -1031,7 +1170,7 @@ public class DB {
         recursosCosteXtime_coste_Granja1.add(new Recursos(calcioPre, 20));
         Map<RecursosPrecargados, ArrayList<Recursos>> recursosCosteXtime_Granja1 = new TreeMap<>();
         recursosCosteXtime_Granja1.put(nitrogenoPre, recursosCosteXtime_coste_Granja1);
-        new EdificiosPreCargados(16, 0, true, true, 0, 0, 0, TRADUCCIONES_THEMA.getString("edificio.name.granja"), TRADUCCIONES_THEMA.getString("edificio.descripcion.granja"), recursosBuild_Granja1, null, recursosCosteXtime_Granja1, null);
+        new EdificiosPreCargados(16, 0, true, true, 1, 0, 0, TRADUCCIONES_THEMA.getString("edificio.name.granja"), TRADUCCIONES_THEMA.getString("edificio.descripcion.granja"), recursosBuild_Granja1, null, recursosCosteXtime_Granja1, null);
 
         Map<Integer, Recursos> recursosBuild_Granja2 = new TreeMap<>();
         recursosBuild_Granja2.put(oxigenoPre.getId(), new Recursos(oxigenoPre, 5));
@@ -1045,7 +1184,7 @@ public class DB {
         recursosCosteXtime_coste_Granja2.add(new Recursos(calcioPre, 20));
         Map<RecursosPrecargados, ArrayList<Recursos>> recursosCosteXtime_Granja2 = new TreeMap<>();
         recursosCosteXtime_Granja2.put(nitrogenoPre, recursosCosteXtime_coste_Granja2);
-        new EdificiosPreCargados(16, 1, true, true, 0, 0, 0, TRADUCCIONES_THEMA.getString("edificio.name.granja"), TRADUCCIONES_THEMA.getString("edificio.descripcion.granja"), recursosBuild_Granja2, null, recursosCosteXtime_Granja2, null);
+        new EdificiosPreCargados(16, 1, true, true, 1, 0, 0, TRADUCCIONES_THEMA.getString("edificio.name.granja"), TRADUCCIONES_THEMA.getString("edificio.descripcion.granja"), recursosBuild_Granja2, null, recursosCosteXtime_Granja2, null);
 
         Map<Integer, Recursos> recursosBuild_Granja3 = new TreeMap<>();
         recursosBuild_Granja3.put(oxigenoPre.getId(), new Recursos(oxigenoPre, 5));
@@ -1059,7 +1198,7 @@ public class DB {
         recursosCosteXtime_coste_Granja3.add(new Recursos(calcioPre, 20));
         Map<RecursosPrecargados, ArrayList<Recursos>> recursosCosteXtime_Granja3 = new TreeMap<>();
         recursosCosteXtime_Granja3.put(nitrogenoPre, recursosCosteXtime_coste_Granja3);
-        new EdificiosPreCargados(16, 2, true, true, 0, 0, 0, TRADUCCIONES_THEMA.getString("edificio.name.granja"), TRADUCCIONES_THEMA.getString("edificio.descripcion.granja"), recursosBuild_Granja3, null, recursosCosteXtime_Granja3, null);
+        new EdificiosPreCargados(16, 2, true, true, 1, 0, 0, TRADUCCIONES_THEMA.getString("edificio.name.granja"), TRADUCCIONES_THEMA.getString("edificio.descripcion.granja"), recursosBuild_Granja3, null, recursosCosteXtime_Granja3, null);
         //
         //
         //
@@ -1076,7 +1215,7 @@ public class DB {
         recursosCosteXtime_coste_Taberna1.add(new Recursos(nitrogenoPre, 15));
         Map<RecursosPrecargados, ArrayList<Recursos>> recursosCosteX_productor_Taberna1 = new TreeMap<>();
         recursosCosteX_productor_Taberna1.put(PotasioPre, recursosCosteXtime_coste_Taberna1);
-        new EdificiosPreCargados(17, 0, true, true, 0, 0, 0, TRADUCCIONES_THEMA.getString("edificio.name.taberna"), TRADUCCIONES_THEMA.getString("edificio.descripcion.taberna"), recursosBuild_Taberna1, null, recursosCosteX_productor_Taberna1, null);
+        new EdificiosPreCargados(17, 0, true, true, 1, 0, 0, TRADUCCIONES_THEMA.getString("edificio.name.taberna"), TRADUCCIONES_THEMA.getString("edificio.descripcion.taberna"), recursosBuild_Taberna1, null, recursosCosteX_productor_Taberna1, null);
 
         Map<Integer, Recursos> recursosBuild_Taberna2 = new TreeMap<>();
         recursosBuild_Taberna2.put(oxigenoPre.getId(), new Recursos(oxigenoPre, 5));
@@ -1091,7 +1230,7 @@ public class DB {
         recursosCosteXtime_coste_Taberna2.add(new Recursos(nitrogenoPre, 15));
         Map<RecursosPrecargados, ArrayList<Recursos>> recursosCosteX_productor_Taberna2 = new TreeMap<>();
         recursosCosteX_productor_Taberna2.put(PotasioPre, recursosCosteXtime_coste_Taberna2);
-        new EdificiosPreCargados(17, 1, true, true, 0, 0, 0, TRADUCCIONES_THEMA.getString("edificio.name.taberna"), TRADUCCIONES_THEMA.getString("edificio.descripcion.taberna"), recursosBuild_Taberna2, null, recursosCosteX_productor_Taberna2, null);
+        new EdificiosPreCargados(17, 1, true, true, 1, 0, 0, TRADUCCIONES_THEMA.getString("edificio.name.taberna"), TRADUCCIONES_THEMA.getString("edificio.descripcion.taberna"), recursosBuild_Taberna2, null, recursosCosteX_productor_Taberna2, null);
 
         Map<Integer, Recursos> recursosBuild_Taberna3 = new TreeMap<>();
         recursosBuild_Taberna3.put(oxigenoPre.getId(), new Recursos(oxigenoPre, 5));
@@ -1106,7 +1245,7 @@ public class DB {
         recursosCosteXtime_coste_Taberna3.add(new Recursos(nitrogenoPre, 15));
         Map<RecursosPrecargados, ArrayList<Recursos>> recursosCosteX_productor_Taberna3 = new TreeMap<>();
         recursosCosteX_productor_Taberna3.put(PotasioPre, recursosCosteXtime_coste_Taberna3);
-        new EdificiosPreCargados(17, 2, true, true, 0, 0, 0, TRADUCCIONES_THEMA.getString("edificio.name.taberna"), TRADUCCIONES_THEMA.getString("edificio.descripcion.taberna"), recursosBuild_Taberna3, null, recursosCosteX_productor_Taberna3, null);
+        new EdificiosPreCargados(17, 2, true, true, 1, 0, 0, TRADUCCIONES_THEMA.getString("edificio.name.taberna"), TRADUCCIONES_THEMA.getString("edificio.descripcion.taberna"), recursosBuild_Taberna3, null, recursosCosteX_productor_Taberna3, null);
         //30, 100);
         //
         //
@@ -1118,7 +1257,7 @@ public class DB {
         recursosBuild_Puerto1.put(nitrogenoPre.getId(), new Recursos(nitrogenoPre, 5));
         recursosBuild_Puerto1.put(fosforoPre.getId(), new Recursos(fosforoPre, 5));
         recursosBuild_Puerto1.put(calcioPre.getId(), new Recursos(calcioPre, 1));
-        new EdificiosPreCargados(18, 0, false, false, 0, 0, 4, TRADUCCIONES_THEMA.getString("edificio.name.puerto"), TRADUCCIONES_THEMA.getString("edificio.descripcion.puerto"), recursosBuild_Puerto1, null, null, null);
+        new EdificiosPreCargados(18, 0, false, false, 1, 0, 4, TRADUCCIONES_THEMA.getString("edificio.name.puerto"), TRADUCCIONES_THEMA.getString("edificio.descripcion.puerto"), recursosBuild_Puerto1, null, null, null);
 
         Map<Integer, Recursos> recursosBuild_Puerto2 = new TreeMap<>();
         recursosBuild_Puerto2.put(oxigenoPre.getId(), new Recursos(oxigenoPre, 5));
@@ -1127,7 +1266,7 @@ public class DB {
         recursosBuild_Puerto2.put(nitrogenoPre.getId(), new Recursos(nitrogenoPre, 5));
         recursosBuild_Puerto2.put(fosforoPre.getId(), new Recursos(fosforoPre, 5));
         recursosBuild_Puerto2.put(calcioPre.getId(), new Recursos(calcioPre, 1));
-        new EdificiosPreCargados(18, 1, true, true, 0, 0, 4, TRADUCCIONES_THEMA.getString("edificio.name.puerto"), TRADUCCIONES_THEMA.getString("edificio.descripcion.puerto"), recursosBuild_Puerto2, null, null, null);
+        new EdificiosPreCargados(18, 1, true, true, 1, 0, 4, TRADUCCIONES_THEMA.getString("edificio.name.puerto"), TRADUCCIONES_THEMA.getString("edificio.descripcion.puerto"), recursosBuild_Puerto2, null, null, null);
 
         Map<Integer, Recursos> recursosBuild_Puerto3 = new TreeMap<>();
         recursosBuild_Puerto3.put(oxigenoPre.getId(), new Recursos(oxigenoPre, 5));
@@ -1136,7 +1275,7 @@ public class DB {
         recursosBuild_Puerto3.put(nitrogenoPre.getId(), new Recursos(nitrogenoPre, 5));
         recursosBuild_Puerto3.put(fosforoPre.getId(), new Recursos(fosforoPre, 5));
         recursosBuild_Puerto3.put(calcioPre.getId(), new Recursos(calcioPre, 1));
-        new EdificiosPreCargados(18, 2, true, true, 0, 0, 4, TRADUCCIONES_THEMA.getString("edificio.name.puerto"), TRADUCCIONES_THEMA.getString("edificio.descripcion.puerto"), recursosBuild_Puerto3, null, null, null);
+        new EdificiosPreCargados(18, 2, true, true, 1, 0, 4, TRADUCCIONES_THEMA.getString("edificio.name.puerto"), TRADUCCIONES_THEMA.getString("edificio.descripcion.puerto"), recursosBuild_Puerto3, null, null, null);
         //
         //
         //
@@ -1147,7 +1286,7 @@ public class DB {
         recursosBuild_Cuartel1.put(nitrogenoPre.getId(), new Recursos(nitrogenoPre, 5));
         recursosBuild_Cuartel1.put(fosforoPre.getId(), new Recursos(fosforoPre, 5));
         recursosBuild_Cuartel1.put(calcioPre.getId(), new Recursos(calcioPre, 1));
-        new EdificiosPreCargados(19, 0, true, true, 0, 0, 2, TRADUCCIONES_THEMA.getString("edificio.name.cuartel"), TRADUCCIONES_THEMA.getString("edificio.descripcion.cuartel"), recursosBuild_Cuartel1, null, null, null);
+        new EdificiosPreCargados(19, 0, true, true, 1, 0, 2, TRADUCCIONES_THEMA.getString("edificio.name.cuartel"), TRADUCCIONES_THEMA.getString("edificio.descripcion.cuartel"), recursosBuild_Cuartel1, null, null, null);
 
         Map<Integer, Recursos> recursosBuild_Cuartel2 = new TreeMap<>();
         recursosBuild_Cuartel2.put(oxigenoPre.getId(), new Recursos(oxigenoPre, 5));
@@ -1156,7 +1295,7 @@ public class DB {
         recursosBuild_Cuartel2.put(nitrogenoPre.getId(), new Recursos(nitrogenoPre, 5));
         recursosBuild_Cuartel2.put(fosforoPre.getId(), new Recursos(fosforoPre, 5));
         recursosBuild_Cuartel2.put(calcioPre.getId(), new Recursos(calcioPre, 1));
-        new EdificiosPreCargados(19, 1, true, true, 0, 0, 2, TRADUCCIONES_THEMA.getString("edificio.name.cuartel"), TRADUCCIONES_THEMA.getString("edificio.descripcion.cuartel"), recursosBuild_Cuartel2, null, null, null);
+        new EdificiosPreCargados(19, 1, true, true, 1, 0, 2, TRADUCCIONES_THEMA.getString("edificio.name.cuartel"), TRADUCCIONES_THEMA.getString("edificio.descripcion.cuartel"), recursosBuild_Cuartel2, null, null, null);
 
         Map<Integer, Recursos> recursosBuild_Cuartel3 = new TreeMap<>();
         recursosBuild_Cuartel3.put(oxigenoPre.getId(), new Recursos(oxigenoPre, 5));
@@ -1165,8 +1304,7 @@ public class DB {
         recursosBuild_Cuartel3.put(nitrogenoPre.getId(), new Recursos(nitrogenoPre, 5));
         recursosBuild_Cuartel3.put(fosforoPre.getId(), new Recursos(fosforoPre, 5));
         recursosBuild_Cuartel3.put(calcioPre.getId(), new Recursos(calcioPre, 1));
-        new EdificiosPreCargados(19, 2, true, true, 0, 0, 2, TRADUCCIONES_THEMA.getString("edificio.name.cuartel"), TRADUCCIONES_THEMA.getString("edificio.descripcion.cuartel"), recursosBuild_Cuartel3, null, null, null);
-
+        new EdificiosPreCargados(19, 2, true, true, 1, 0, 2, TRADUCCIONES_THEMA.getString("edificio.name.cuartel"), TRADUCCIONES_THEMA.getString("edificio.descripcion.cuartel"), recursosBuild_Cuartel3, null, null, null);
         //
         //
         //40, 100);
@@ -1180,7 +1318,7 @@ public class DB {
         recursosList0.add(new Recursos(nitrogenoPre, 0));
         recursosList0.add(new Recursos(fosforoPre, 3));
         recursosList0.add(new Recursos(PotasioPre, 1));
-        new UnidadesPreCargadas(0, TRADUCCIONES_THEMA.getString("unidades.soldados.espadachines"), 0, recursosList0, 0);
+        new UnidadesPreCargadas(1, TRADUCCIONES_THEMA.getString("unidades.soldados.espadachines"), 0, recursosList0, 0);
         List<Recursos> recursosList1 = new ArrayList<>();
         recursosList1.add(new Recursos(oxigenoPre, 0));
         recursosList1.add(new Recursos(CarbonoPre, 5));
@@ -1188,7 +1326,7 @@ public class DB {
         recursosList1.add(new Recursos(nitrogenoPre, 0));
         recursosList1.add(new Recursos(fosforoPre, 3));
         recursosList1.add(new Recursos(PotasioPre, 1));
-        new UnidadesPreCargadas(1, TRADUCCIONES_THEMA.getString("unidades.soldados.lanceros"), 0, recursosList1, 0);
+        new UnidadesPreCargadas(2, TRADUCCIONES_THEMA.getString("unidades.soldados.lanceros"), 0, recursosList1, 0);
         List<Recursos> recursosList2 = new ArrayList<>();
         recursosList2.add(new Recursos(oxigenoPre, 0));
         recursosList2.add(new Recursos(CarbonoPre, 5));
@@ -1196,23 +1334,7 @@ public class DB {
         recursosList2.add(new Recursos(nitrogenoPre, 0));
         recursosList2.add(new Recursos(fosforoPre, 3));
         recursosList2.add(new Recursos(PotasioPre, 1));
-        new UnidadesPreCargadas(2, TRADUCCIONES_THEMA.getString("unidades.soldados.arqueros"), 100, recursosList2, 0);
-        List<Recursos> recursosList3 = new ArrayList<>();
-        recursosList3.add(new Recursos(oxigenoPre, 3));
-        recursosList3.add(new Recursos(CarbonoPre, 6));
-        recursosList3.add(new Recursos(hidrogenoPre, 65));
-        recursosList3.add(new Recursos(nitrogenoPre, 7));
-        recursosList3.add(new Recursos(fosforoPre, 8));
-        recursosList3.add(new Recursos(PotasioPre, 3));
-        new UnidadesPreCargadas(3, TRADUCCIONES_THEMA.getString("unidades.soldados.caballeros"), 50, recursosList3, 0);
-        List<Recursos> recursosList4 = new ArrayList<>();
-        recursosList4.add(new Recursos(oxigenoPre, 3));
-        recursosList4.add(new Recursos(CarbonoPre, 6));
-        recursosList4.add(new Recursos(hidrogenoPre, 65));
-        recursosList4.add(new Recursos(nitrogenoPre, 7));
-        recursosList4.add(new Recursos(fosforoPre, 8));
-        recursosList4.add(new Recursos(PotasioPre, 3));
-        new UnidadesPreCargadas(4, TRADUCCIONES_THEMA.getString("unidades.asedio.catapultas"), 50, recursosList4, 5);
+        new UnidadesPreCargadas(3, TRADUCCIONES_THEMA.getString("unidades.soldados.arqueros"), 100, recursosList2, 0);
 
 
         //
