@@ -26,7 +26,7 @@ prefHeight="${screen.visualBounds.height}" prefWidth="${screen.visualBounds.widt
                     </opaqueInsets>
                 </FlowPane>
                 <HBox GridPane.columnIndex="2" GridPane.rowIndex="0" spacing="5">
-                    <Button text="Volver" onMouseClicked="#toMundo"/>
+                    <Button text="%button.volver" onMouseClicked="#toMundo"/>
                     <SplitMenuButton fx:id="selectorCiudad" mnemonicParsing="false" text="SplitMenuButton">
                         <items>
                         </items>

@@ -11,12 +11,14 @@ import main.java.juego.mapas.Recursos;
 import main.java.juego.mapas.pelea.*;
 import main.java.juego.mapas.ciudad.EdificiosPreCargados;
 import main.java.juego.mapas.ciudad.Ciudad;
+import main.java.utils.PrimaryStageControler;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import java.util.*;
 
 import static main.java.Inicio.PantallaInicialController.elTemaSeleccionado;
+import static main.java.utils.PrimaryStageControler.NAME_TEMA_PATH;
 
 @Entity
 @Table(name = "Jugador", schema = "proyecto")
@@ -31,7 +33,6 @@ public class Jugador {
     private final SimpleStringProperty email;
     private final SimpleStringProperty password;
     private final SimpleStringProperty date_register;
-    private final PersonSQL personSQL;
     private final Map<Integer, Recursos> recursosJugador = new TreeMap<>();
     public Ciudad cargarCiudadPrincipal = null;
 
@@ -42,14 +43,16 @@ public class Jugador {
         this.email = new SimpleStringProperty(personSQLx.getEmail());
         this.password = new SimpleStringProperty(personSQLx.getPassword());
         this.date_register = new SimpleStringProperty(personSQLx.getDate_register());
-        this.personSQL = personSQLx;
 
         ArrayList<Recursos> recursosJugador = new ArrayList<>();//BD
-        recursosJugador.add(new Recursos(PantallaInicialController.elTemaSeleccionado.listaRecursosPreCargada.get(7), 5));//BD
+        if (NAME_TEMA_PATH.equals("cuerpoHumano")){
+            recursosJugador.add(new Recursos(PantallaInicialController.elTemaSeleccionado.listaRecursosPreCargada.get(5), 5));//BD
+        }else {
+            recursosJugador.add(new Recursos(PantallaInicialController.elTemaSeleccionado.listaRecursosPreCargada.get(7), 5));//BD
+        }
         for (Recursos recursos : recursosJugador) {
             this.recursosJugador.put(recursos.getId(), recursos);
         }
-
 
 //TODO LEER DESDE LA BD
         ArrayList<Recursos> paraCity1 = new ArrayList<>();

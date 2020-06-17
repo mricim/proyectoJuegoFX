@@ -9,7 +9,9 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import main.java.juego.mapas.ciudad.CiudadController;
+import main.java.juego.mapas.ciudad.contenidoCiudad.Edificio;
 import main.java.juego.mapas.mundo.MundoController;
 import main.java.juego.mapas.pelea.PeleaController;
 import main.java.utils.PrimaryStageControler;
@@ -66,11 +68,25 @@ abstract public class MapasController extends PrimaryStageControler {
                 estaEnesteMenu=true;
             }
             if (estaEnesteMenu){
-                Label label = new Label(String.valueOf(recursos.getCantidad()));
+                int almacenado = 0;
+                for (Edificio edificio : getCiudadPrimaryStageController().getListaPosicionesEdificios().values()) {
+                    try {
+                        almacenado += edificio.getEdificiosPreCargado().getRecursosAlmacen().get(recursos.getId()).getCantidad();
+                    } catch (NullPointerException ignore) {
+                    }
+                }
+                int cantidad=recursos.getCantidad();
+                Label label = new Label(String.valueOf(cantidad));
+                if (cantidad>almacenado){
+                    label.setTextFill(Color.RED);
+                }else {
+                    label.setTextFill(Color.GREEN);
+                }
+                Label label2 = new Label(String.valueOf(almacenado));
                 ImageView imageView = new ImageView(recursos.getImage());
                 imageView.setFitWidth(30);
                 imageView.setFitHeight(30);
-                HBox hBox = new HBox(imageView, label);
+                HBox hBox = new HBox(imageView, label,new Label("/"),label2);
                 hBox.setId(String.valueOf(recursos.getId()));
                 hBox.setAlignment(Pos.CENTER);
                 hBox.setPrefHeight(20.0);

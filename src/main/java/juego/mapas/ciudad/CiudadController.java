@@ -1132,14 +1132,38 @@ public class CiudadController extends MapasController implements Initializable {
                 {
                     btn.setOnAction((ActionEvent event) -> {
                         Comercio data = getTableView().getItems().get(getIndex());
-                        Map<Integer, Recursos> a = getCiudadPrimaryStageController().getRecursosTreeMap();
-                        Recursos b = data.getQueSePide();
-                        Recursos c = data.getQueSeOfrece();
+                        Map<Integer, Recursos> recursosTreeMap = getCiudadPrimaryStageController().getRecursosTreeMap();
+                        Recursos queSePide = data.getQueSePide();
+                        Recursos loQueTeDan = data.getQueSeOfrece();
+
                         if (data.getJugador().getId() == getJugadorPrimaryStageController().getId()) {//borrar
-                            a.get(c.getId()).addCantidad(c.getCantidad());
+
+                            recursosTreeMap.get(loQueTeDan.getId()).addCantidad(loQueTeDan.getCantidad());
+
                         } else {//comprar
-                            a.get(c.getId()).removeCantidad(c.getCantidad());
-                            a.get(b.getId()).addCantidad(b.getCantidad());
+                            //TODO PROBLEMON
+                            int almacenado = 0;
+                            int loQueTeDanId = loQueTeDan.getId();
+                            for (Edificio edificio : getCiudadPrimaryStageController().getListaPosicionesEdificios().values()) {
+                                try {
+                                    almacenado += edificio.getEdificiosPreCargado().getRecursosAlmacen().get(loQueTeDanId).getCantidad();
+                                } catch (NullPointerException ignore) {
+                                }
+                            }
+                            Recursos recursosDeLaCiudad = recursosTreeMap.get(loQueTeDanId);
+                            int restado = almacenado - recursosDeLaCiudad.getCantidad();
+                            int aSumar = loQueTeDan.getCantidad();
+                            //System.out.println("R" + restado + " S" + aSumar);
+                            if (restado > aSumar) {
+                                recursosDeLaCiudad.addCantidad(aSumar);
+                            } else {
+                                if (restado > 0) {
+                                    recursosDeLaCiudad.addCantidad(restado);
+                                }
+                            }
+                            //recursosTreeMap.get(loQueTeDan.getId()).addCantidad(loQueTeDan.getCantidad());
+                            //TODO PROBLEMON
+                            recursosTreeMap.get(queSePide.getId()).removeCantidad(queSePide.getCantidad());
                         }
                         Comercio.data.remove(data);
                         recursosMenu(flowPaneRecuros, CiudadController.class);

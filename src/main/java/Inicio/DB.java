@@ -1223,9 +1223,7 @@ public class DB {
         Clan clan = new Clan("Los mejores", 10);
         Clan clan2 = new Clan("Los peores", 10);
         clan2.setContrasenya("1234");
-        System.out.println("XXXXXXXXXXXXXXXX 1");
-        Jugador jugador = new Jugador(new PersonSQL(0l, "pepe", "juan", "dfh", "fgh", false));
-        System.out.println("XXXXXXXXXXXXXXXX 2");
+        Jugador jugador = new Jugador(new PersonSQL(0l, "pepe", "jugador1ListaRecuros", "asd", "asd", false));
         //60, 100);
         Jugador jugador2 = new Jugador(new PersonSQL(1l, "juan", "jugador2ListaRecuros", "asd", "asd", false));
         Jugador jugador3 = new Jugador(new PersonSQL(2l, "pedro", "jugador3ListaRecuros", "asd", "asd", false));
@@ -1302,7 +1300,7 @@ public class DB {
             }
         };
         thread2.start();
-        System.out.println("XXXXXXXXXXXXXX");
+
     }
 
 }
