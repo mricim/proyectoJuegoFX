@@ -48,7 +48,6 @@ public class PreferencesApp {
             String email=prop.getProperty("emailEncripted").replaceAll("\\=","=").replaceAll("\\:",":");
             String data_register=prop.getProperty("date_register").replaceAll("\\=","=").replaceAll("\\:",":");
             PersonSQL personSQL = new PersonSQL(Long.parseLong(prop.getProperty("id")), name, email, prop.getProperty("password"), data_register);
-            System.out.println("readFilePrefereces() XX");
             PantallaInicialController.iniciarSession(personSQL);
             PrimaryStageControler.personSQL=personSQL;
         }catch (Exception ignore){}

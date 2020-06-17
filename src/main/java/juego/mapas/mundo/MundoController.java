@@ -146,7 +146,6 @@ public class MundoController extends MapasController implements Initializable {
                         stringBuilder.append(letter_guionBajo).append(letter_city);
 
 
-
                         if (getJugadorPrimaryStageController().listaCiudadesPropias.containsKey(position)) {
                             stringBuilder.append(letter_esNuestro);
                         } else if (getClanPrimaryStageController().getCiudadesDelClan().get(position) != null) {
@@ -294,17 +293,25 @@ public class MundoController extends MapasController implements Initializable {
             vBoxList.add(cajaCiudadMundo(ciudad, imageName));
             controllerParaVerSiestaVacio = true;
         } else if (newCiudad && pasoPorClicas) {
-            vBoxList.add(cajaNewCity(imageView, imageName));
+            if (!(fila % 5 == 2 & columna % 5 == 2)) {//para PATHfinder
+            System.out.println(fila % 5 + " " + columna % 5);
+            vBoxList.add(cajaNewCity(imageView));
             controllerParaVerSiestaVacio = true;
+            }
         } else if (primeraCiudad) {
             VBox vBox = new VBox();
+            vBox.setPrefWidth(tamanoBaseMenu);
+            vBox.setMaxWidth(tamanoBaseMenu);
+            vBox.setAlignment(TOP_CENTER);
+            vBox.setBackground(new Background(new BackgroundFill(Color.ANTIQUEWHITE, CornerRadii.EMPTY, Insets.EMPTY)));
+            vBox.setSpacing(10);
             Label label = new Label(TRADUCCIONES_THEMA.getString("mundo.FundarNuevaCiudad"));
-            vBox.getChildren().add(label);
+            vBox.getChildren().addAll(new CustomSeparator((int) (tamanoBaseMenu * 0.8), true, 5),label,new CustomSeparator((int) (tamanoBaseMenu * 0.8), true, 5));
             vBoxList.add(vBox);
             controllerParaVerSiestaVacio = true;
         }
         if (batallones != null) {
-            vBoxList.add(cajaBatallon(batallones, imageView, imageName));
+            vBoxList.add(cajaBatallon(batallones));
             controllerParaVerSiestaVacio = true;
         }
         if (controllerParaVerSiestaVacio) {
@@ -425,7 +432,7 @@ public class MundoController extends MapasController implements Initializable {
         fillerBase2.setMinWidth(5);
         HBox.setHgrow(fillerBase, Priority.ALWAYS);
         HBox.setHgrow(fillerBase2, Priority.ALWAYS);
-        HBox hBoxBase = new HBox(new Label(TRADUCCIONES_THEMA.getString("mundo.ciudades.espia.resultados")), fillerBase,  new Label("(min)"), fillerBase2,new Label("(max)"));
+        HBox hBoxBase = new HBox(new Label(TRADUCCIONES_THEMA.getString("mundo.ciudades.espia.resultados")), fillerBase, new Label("(min)"), fillerBase2, new Label("(max)"));
         hBoxBase.setAlignment(Pos.CENTER);
         a.add(hBoxBase);
         //
@@ -446,14 +453,14 @@ public class MundoController extends MapasController implements Initializable {
             filler2.setMinWidth(5);
             HBox.setHgrow(filler, Priority.ALWAYS);
             HBox.setHgrow(filler2, Priority.ALWAYS);
-            HBox hBox = new HBox(imageView, filler,  minimo, filler2,maximo);
+            HBox hBox = new HBox(imageView, filler, minimo, filler2, maximo);
             hBox.setAlignment(Pos.CENTER);
             a.add(hBox);
         }
 
     }
 
-    private VBox cajaBatallon(ArrayList<Batallon> listaBatallones, ImageView imageView, String imageName) {
+    private VBox cajaBatallon(ArrayList<Batallon> listaBatallones) {
         //BLOQUE
         VBox vBoxBloquePropio = new VBox();
         vBoxBloquePropio.setPrefWidth(300);
@@ -806,20 +813,25 @@ public class MundoController extends MapasController implements Initializable {
         return false;
     }
 
-    private VBox cajaNewCity(ImageView imageView, String imageName) {
+    private VBox cajaNewCity(ImageView imageView) {
         //BLOQUE
         VBox vBoxBloquePropio = new VBox();
         vBoxBloquePropio.setPrefWidth(tamanoBaseMenu);
         vBoxBloquePropio.setMaxWidth(tamanoBaseMenu);
         vBoxBloquePropio.setAlignment(TOP_CENTER);
+        vBoxBloquePropio.setBackground(new Background(new BackgroundFill(Color.ANTIQUEWHITE, CornerRadii.EMPTY, Insets.EMPTY)));
+        vBoxBloquePropio.setSpacing(10);
 
         ObservableList<Node> childrenVBox = vBoxBloquePropio.getChildren();
 
-        BackgroundFill backgroundFill = null;
         String[] asd = imageView.getId().split("-");
         int fila = Integer.parseInt(asd[0]);
         int columna = Integer.parseInt(asd[1]);
+        System.out.println(fila + " " + columna);
+
+
         Button botonNuevaCity = new Button(MessageFormat.format(TRADUCCIONES_THEMA.getString("mundo.fundarNuevaCiudad") + " ", imageView.getId()));
+        botonNuevaCity.setPadding(new Insets(10));
         botonNuevaCity.setTextAlignment(CENTER);
         botonNuevaCity.setAlignment(Pos.CENTER);
         botonNuevaCity.setOnMouseClicked(e -> {
@@ -842,11 +854,11 @@ public class MundoController extends MapasController implements Initializable {
             }
             reload(MundoController.class);
         });
-        childrenVBox.add(botonNuevaCity);
-
-        vBoxBloquePropio.setBackground(new Background(backgroundFill));
-
         childrenVBox.add(new CustomSeparator((int) (tamanoBaseMenu * 0.8), true, 5));
+        childrenVBox.add(botonNuevaCity);
+        childrenVBox.add(new CustomSeparator((int) (tamanoBaseMenu * 0.8), true, 5));
+
+
 
         //FIN BLOQUE
         return vBoxBloquePropio;

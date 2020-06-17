@@ -678,8 +678,6 @@ public class DB {
         Clan clan2 = new Clan("Los peores", 10);
         clan2.setContrasenya("1234");
         Jugador jugador = new Jugador(new PersonSQL(0l, "pepe", "juan", "dfh", "fgh", false));
-        setJugadorPrimaryStageController(jugador);
-        //setClanPrimaryStageController(clan);
         //60, 100);
         Jugador jugador2 = new Jugador(new PersonSQL(1l, "juan", "jugador2ListaRecuros", "asd", "asd", false));
         Jugador jugador3 = new Jugador(new PersonSQL(2l, "pedro", "jugador3ListaRecuros", "asd", "asd", false));
@@ -687,6 +685,7 @@ public class DB {
         clan2.setCreador(jugador4);
         clan2.addJugadorClan(jugador4);
         //70, 100);
+        clan.setCreador(jugador3);
         clan.addJugadorClan(jugador3);
 
 
@@ -1221,13 +1220,12 @@ public class DB {
         //
         //
         //50, 100);
-        //TODO En pantalla
         Clan clan = new Clan("Los mejores", 10);
         Clan clan2 = new Clan("Los peores", 10);
         clan2.setContrasenya("1234");
-        Jugador jugador = new Jugador(new PersonSQL(0l, "pepito", "jugador1ListaRecuros", "asd", "asd", false));
-        setJugadorPrimaryStageController(jugador);
-        setClanPrimaryStageController(clan);
+        System.out.println("XXXXXXXXXXXXXXXX 1");
+        Jugador jugador = new Jugador(new PersonSQL(0l, "pepe", "juan", "dfh", "fgh", false));
+        System.out.println("XXXXXXXXXXXXXXXX 2");
         //60, 100);
         Jugador jugador2 = new Jugador(new PersonSQL(1l, "juan", "jugador2ListaRecuros", "asd", "asd", false));
         Jugador jugador3 = new Jugador(new PersonSQL(2l, "pedro", "jugador3ListaRecuros", "asd", "asd", false));
@@ -1235,10 +1233,8 @@ public class DB {
         clan2.setCreador(jugador4);
         clan2.addJugadorClan(jugador4);
         //70, 100);
-        //clan.addJugadorClan(jugador);
-        //clan.setCreador(jugador);
-        clan.addJugadorClan(3);
-
+        clan.setCreador(jugador3);
+        clan.addJugadorClan(jugador3);
 
         elTemaSeleccionado.espias.put(1, 10);
         elTemaSeleccionado.espias.put(2, 25);
@@ -1306,6 +1302,7 @@ public class DB {
             }
         };
         thread2.start();
+        System.out.println("XXXXXXXXXXXXXX");
     }
 
 }

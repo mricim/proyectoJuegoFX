@@ -64,13 +64,14 @@ public class IniciarSessionController extends PrimaryStageControler implements I
 
     public void openBrowser(MouseEvent mouseEvent) {
         try {
-            Desktop.getDesktop().browse(new URL("http://www.armegis.tk").toURI());
+            System.out.println();
+            Desktop.getDesktop().browse(new URL(TRADUCCIONES_GENERALES.getString("url")).toURI());
         } catch (IOException | URISyntaxException e) {
             e.printStackTrace();
             CustomAlert alert = new CustomAlert(Alert.AlertType.WARNING);
             alert.setTitle(TRADUCCIONES_GENERALES.getString("warning.dialog"));
             alert.setHeaderText("Error");
-            alert.setContentText("This button has had a problem. Go to armegis.tk");
+            alert.setContentText("This button has had a problem. Go to "+TRADUCCIONES_GENERALES.getString("url"));
             alert.showAndWait();
         }
     }

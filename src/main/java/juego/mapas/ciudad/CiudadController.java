@@ -760,9 +760,9 @@ public class CiudadController extends MapasController implements Initializable {
         jugadorClanCiudades.setStyle("-fx-alignment: CENTER;");
         jugadorClanCiudades.setCellFactory(param -> {
             Label labeJugador = new Label();
-            TableCell<Jugador, Integer> cell = new TableCell<Jugador, Integer>() {
+            TableCell<Jugador, Long> cell = new TableCell<Jugador, Long>() {
                 @Override
-                protected void updateItem(Integer item, boolean empty) {
+                protected void updateItem(Long item, boolean empty) {
                     super.updateItem(item, empty);
                     if (item != null && !empty) {
                         Jugador comercio = getTableView().getItems().get(getIndex());

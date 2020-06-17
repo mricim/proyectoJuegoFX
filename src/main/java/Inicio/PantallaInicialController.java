@@ -13,6 +13,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import main.java.juego.MapasController;
 import main.java.juego.mapas.mundo.MundoController;
+import main.java.jugadores.Jugador;
 import main.java.mysql.PersonSQL;
 import main.java.utils.PrimaryStageControler;
 import main.java.juego.mapas.ciudad.CiudadController;
@@ -48,7 +49,6 @@ public class PantallaInicialController extends PrimaryStageControler implements 
     }
 
     public static void iniciarSession(PersonSQL personSQLm, String passwordField) {
-        System.out.println("iniciarSession()");
         if (personSQLm != null) {
             try {
                 String password;
@@ -57,7 +57,6 @@ public class PantallaInicialController extends PrimaryStageControler implements 
                 } else {
                     password = passwordField;
                 }
-                System.out.println(IniciarSessionController.checkPass(personSQLm.getEmail(), password, personSQLm.getName(), personSQLm.getPassword()));
                 if (IniciarSessionController.checkPass(personSQLm.getEmail(), password, personSQLm.getName(), personSQLm.getPassword())) {
                     personSQL = personSQLm;
                     if (passwordField != null) {
@@ -137,6 +136,7 @@ public class PantallaInicialController extends PrimaryStageControler implements 
             button.setOnMouseClicked(f -> {
                 iniciarSession();
             });
+            aCambiar.getChildren().clear();
             aCambiar.getChildren().add(button);
         }
 
@@ -210,6 +210,7 @@ public class PantallaInicialController extends PrimaryStageControler implements 
                     }
                 }
                 DB.callbdAccordingTema(elTemaSeleccionado);//call DB
+                setJugadorPrimaryStageController(new Jugador(personSQL));
                 updateProgress(100, 100);
                 if (getJugadorPrimaryStageController().listaCiudadesPropias.size() == 0) {//NUEVO EN EL JUEGO
                     MapasController.newCiudad = true;
