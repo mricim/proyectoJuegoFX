@@ -28,10 +28,13 @@ public class CallImages {
                 File filea = new File(ruteUse + "." + format);
                 if (!filea.exists()) {
                     throw new Exception("nove");
+                } else {
+                    image = new Image(filea.toURI().toString(), width, height, true, true);
+                    System.out.println("CallImages() else - " + file.toURI().toString());
                 }
-                System.out.println("CallImages() else - " + file.toURI().toString());
+            } else {
+                image = new Image(file.toURI().toString(), width, height, true, true);
             }
-            image = new Image(file.toURI().toString(), width, height, true, true);
             listImage.put(ruteName, image);
         } catch (Exception e) {
             listImage.put(ruteName, ERRORIMAGE);
