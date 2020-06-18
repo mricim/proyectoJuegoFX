@@ -291,6 +291,7 @@ public class MundoController extends MapasController implements Initializable {
             vBoxList.add(cajaCiudadMundo(ciudad, imageName));
             controllerParaVerSiestaVacio = true;
         } else if (newCiudad && pasoPorClicas) {
+            try{
             String[] a = imageName.split(String.valueOf(letter_guion));
             int filax = Integer.parseInt(a[0].substring(a[0].length() - 1));
             int columnax = Integer.parseInt(a[1].substring(0, 1));
@@ -304,8 +305,11 @@ public class MundoController extends MapasController implements Initializable {
                 alert.setHeaderText("Error");
                 alert.setContentText(TRADUCCIONES_THEMA.getString("isla.centro.no"));
                 alert.showAndWait();
-            }
+            }}catch (NumberFormatException | NullPointerException e){}
         } else if (primeraCiudad) {
+            Platform.runLater(() -> {
+                getStagePrimaryStageController().setMaximized(true);
+            });
             VBox vBox = new VBox();
             vBox.setPrefWidth(tamanoBaseMenu);
             vBox.setMaxWidth(tamanoBaseMenu);

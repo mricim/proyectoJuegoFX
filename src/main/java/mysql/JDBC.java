@@ -74,7 +74,6 @@ public class JDBC {
         return conex("SELECT id, name, email, password, date_register, last_conexion FROM users WHERE email = '"+email+"'");
 
     }
-
     public static PersonSQL conex(String sql) {
         Connection conn = null;
         Statement stmt = null;

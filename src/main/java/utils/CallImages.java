@@ -22,23 +22,16 @@ public class CallImages {
             ruteUse = PATH_USE + rute + name;
         }
         try {
-            try {
-                File file = new File(ruteUse + ".png");
-                if (!file.exists()) {
-                    throw new Exception("nove");
-                }
-                image = new Image(file.toURI().toString(), width, height, true, true);
-                //System.out.println(ruteUse + ".png");
-
-            } catch (Exception e) {
+            File file = new File(ruteUse + ".png");
+            if (!file.exists()) {
                 String format = searchFiles(PATH_TEMA_USE + rute, name);
-                File file = new File(ruteUse + "." + format);
-                if (!file.exists()) {
+                File filea = new File(ruteUse + "." + format);
+                if (!filea.exists()) {
                     throw new Exception("nove");
                 }
-                image = new Image(file.toURI().toString(), width, height, true, true);
-                System.out.println("catch - " + file.toURI().toString());
+                System.out.println("CallImages() else - " + file.toURI().toString());
             }
+            image = new Image(file.toURI().toString(), width, height, true, true);
             listImage.put(ruteName, image);
         } catch (Exception e) {
             listImage.put(ruteName, ERRORIMAGE);

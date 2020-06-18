@@ -212,6 +212,7 @@ public class PantallaInicialController extends PrimaryStageControler implements 
                 DB.callbdAccordingTema(elTemaSeleccionado);//call DB
                 setJugadorPrimaryStageController(new Jugador(personSQL));
                 updateProgress(100, 100);
+                //getStagePrimaryStageController().setMaximized(true);
                 if (getJugadorPrimaryStageController().listaCiudadesPropias.size() == 0) {//NUEVO EN EL JUEGO
                     MapasController.newCiudad = true;
                     MapasController.primeraCiudad = true;

@@ -780,9 +780,9 @@ public class CiudadController extends MapasController implements Initializable {
         jugadorClanBatallones.setStyle("-fx-alignment: CENTER;");
         jugadorClanBatallones.setCellFactory(param -> {
             Label labelBatallon = new Label();
-            TableCell<Jugador, Integer> cell = new TableCell<Jugador, Integer>() {
+            TableCell<Jugador, Long> cell = new TableCell<Jugador, Long>() {
                 @Override
-                protected void updateItem(Integer item, boolean empty) {
+                protected void updateItem(Long item, boolean empty) {
                     super.updateItem(item, empty);
                     if (item != null && !empty) {
                         Jugador comercio = getTableView().getItems().get(getIndex());
@@ -801,17 +801,19 @@ public class CiudadController extends MapasController implements Initializable {
             HBox hBox2 = new HBox();
             hBox2.setAlignment(Pos.CENTER);
             Button btn = new Button();
-            TableCell<Jugador, Integer> cell = new TableCell<Jugador, Integer>() {
+            TableCell<Jugador, Long> cell = new TableCell<Jugador, Long>() {
                 {
                     btn.setOnAction((ActionEvent event) -> {
-                        Jugador unirseAunClan = getTableView().getItems().get(getIndex());
-                        getClanPrimaryStageController().removeJugadorClan(unirseAunClan);
-                        jugadorDelClanTableView.refresh();
+
+                            Jugador unirseAunClan = getTableView().getItems().get(getIndex());
+                            getClanPrimaryStageController().removeJugadorClan(unirseAunClan);
+                            reload(this.getClass());
+                            jugadorDelClanTableView.refresh();
                     });
                 }
 
                 @Override
-                protected void updateItem(Integer item, boolean empty) {
+                protected void updateItem(Long item, boolean empty) {
                     super.updateItem(item, empty);
                     if (item != null && !empty) {
                         hBox2.getChildren().clear();
@@ -1024,7 +1026,7 @@ public class CiudadController extends MapasController implements Initializable {
                         if (clan != null) {
                             Label label2 = new Label();
                             label1.setText(item.getNombreString());
-                            label2.setText("(" + clan.getName() + " )");
+                            label2.setText("(" + clan.getNameString() + " )");
                             vBox.getChildren().addAll(label1, label2);
                             if (clan == Clan.jugadoresQueEstanEnUnClan.get(getJugadorPrimaryStageController())) {
                                 setBackground(new Background(new BackgroundFill(Color.GREEN, CornerRadii.EMPTY, Insets.EMPTY)));
@@ -1141,7 +1143,6 @@ public class CiudadController extends MapasController implements Initializable {
                             recursosTreeMap.get(loQueTeDan.getId()).addCantidad(loQueTeDan.getCantidad());
 
                         } else {//comprar
-                            //TODO PROBLEMON
                             int almacenado = 0;
                             int loQueTeDanId = loQueTeDan.getId();
                             for (Edificio edificio : getCiudadPrimaryStageController().getListaPosicionesEdificios().values()) {
@@ -1162,7 +1163,6 @@ public class CiudadController extends MapasController implements Initializable {
                                 }
                             }
                             //recursosTreeMap.get(loQueTeDan.getId()).addCantidad(loQueTeDan.getCantidad());
-                            //TODO PROBLEMON
                             recursosTreeMap.get(queSePide.getId()).removeCantidad(queSePide.getCantidad());
                         }
                         Comercio.data.remove(data);
