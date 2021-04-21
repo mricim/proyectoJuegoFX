@@ -8,7 +8,7 @@
         <property name="hibernate.dialect">org.hibernate.dialect.MySQL8Dialect</property>
 
         <!--        DATABASE DATA-->
-        <property name="connection.url">jdbc:mysql://armegis.tk:3306/proyecto?serverTimezone=UTC</property>
+        <property name="connection.url">jdbc:mysql://armegis.mricim.tk:3306/proyecto?serverTimezone=UTC</property>
         <property name="connection.driver_class">com.mysql.cj.jdbc.Driver</property>
         <property name="connection.username">user</property>
         <property name="connection.password">user12345!Ab</property>

@@ -1,7 +1,7 @@
 # Armegis
 
 ### Introducción
-Es un  videojuego de estrategia en tiempo real  que dispondrá de 2 temas distintos, uno de ellos ambientado en la época medieval y otro que estará basado en el cuerpo humano (este último pendiente de los diseñadores). Cada tema cambia por completo la ambientación del videojuego, con el tema medieval nos adentramos en guerras navales y construcción de civilizaciones y ciudades, y la conquista de nuevos horizontes. Mientras que con el cuerpo humano tendremos que aprovechar cada recurso de nuestro cuerpo para lanzar ataques contra los peligrosos virus que pueden atacarnos en el mundo que nos rodea.
+Es un videojuego de estrategia en tiempo real que dispondrá de 2 temas distintos, uno de ellos ambientado en la época medieval y otro que estará basado en el cuerpo humano (este último pendiente de los diseñadores). Cada tema cambia por completo la ambientación del videojuego, con el tema medieval nos adentramos en guerras navales y construcción de civilizaciones y ciudades, y la conquista de nuevos horizontes. Mientras que con el cuerpo humano tendremos que aprovechar cada recurso de nuestro cuerpo para lanzar ataques contra los peligrosos virus que pueden atacarnos en el mundo que nos rodea.
 
 ### Jugabilidad
 Inicialmente tendremos que empezar eligiendo una ciudad dentro del extenso mundo que tendremos disponible para tal propósito, a medida que el juego avance podremos expandir nuestro imperio y construir nuevas ciudades, además de ello podremos competir contra otros jugadores.
@@ -27,13 +27,13 @@ Tendrás que pensar bien en que quieres gastar tus recursos, y como quieres expa
 
 
 #### Game web
-[http://armegis.tk/](http://armegis.tk/)
+[https://armegis.mricim.tk/](https://armegis.mricim.tk/)
 
 #### Enlace de descarga
+[https://armegis.mricim.tk/download/](https://armegis.mricim.tk/downloads/index.html)
 
-[http://armegis.tk/download/](http://armegis.tk/downloads/index.html)
+#### Github
+[https://github.com/mricim/proyectoJuegoFX](https://github.com/mricim/proyectoJuegoFX)
 
-##### Autores
-[@mricim](https://github.com/mricim) (owner)
-
-[@iErKy](https://github.com/iErKy)
+##### Autor
+[GitHub](https://github.com/mricim) -  [WEB](https://mricim.tk)

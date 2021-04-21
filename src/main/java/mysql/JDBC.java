@@ -5,7 +5,7 @@ import java.sql.*;
 public class JDBC {
     // JDBC driver name and database URL
     static final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
-    static final String DB_URL = "jdbc:mysql://armegis.tk:3306/armegis?serverTimezone=UTC";
+    static final String DB_URL = "jdbc:mysql://armegis.mricim.tk:3306/armegis?serverTimezone=UTC";
 
     //  Database credentials
     static final String USER = "user";

@@ -16,10 +16,10 @@ import java.util.*;
 
 import static main.java.Main.pathImagesInternal;
 
-public class Temas  implements Serializable {
+public class Temas implements Serializable {
     public static List<Temas> listaDeTemas = new ArrayList<>();
     private static boolean filesIsExternal;
-    public static String pathImagesExternal = System.getProperty("user.dir").replace("ProyectoJuegoFX", "") + "/res/images/";
+    public static String pathImagesExternal = System.getProperty("user.dir").replace("ProyectoJuegoFX", "") + File.separator + "res" + File.separator + "images" + File.separator;
 
 
     private static final String pathImagesTemaInternal = pathImagesInternal + "temas/";
@@ -42,9 +42,7 @@ public class Temas  implements Serializable {
         }
 
         int x = Objects.requireNonNull(f).length;
-        for (
-                int i = 0;
-                i < x; i++) {
+        for (int i = 0; i < x; i++) {
             String str = f[i].getName().replaceAll("[0-9]", "").replaceAll("(.)([A-Z])", "$1 $2");
             listaTemas.add((str.substring(0, 1).toUpperCase() + str.substring(1)));
         }
@@ -73,7 +71,7 @@ public class Temas  implements Serializable {
     //
 
     //ESPIAS
-    public Map<Integer, Integer>espias = new HashMap<>();
+    public Map<Integer, Integer> espias = new HashMap<>();
     //FIN ESPIAS
 
     private String name;
@@ -83,9 +81,9 @@ public class Temas  implements Serializable {
     public Map<Integer, UnidadesPreCargadas> listaSoldadosPreCargada = new TreeMap();
     public Map<Integer, RecursosPrecargados> listaRecursosPreCargada = new TreeMap();
 
-    public  Map<Long, Jugador> listaTodosLosJugadores = new TreeMap<>();
-    public  Map<String, ArrayList<Batallon>> listaPosicionesBatallones = new TreeMap<>();
-    public  Map<String, Ciudad> listaCiudades = new TreeMap<>();
+    public Map<Long, Jugador> listaTodosLosJugadores = new TreeMap<>();
+    public Map<String, ArrayList<Batallon>> listaPosicionesBatallones = new TreeMap<>();
+    public Map<String, Ciudad> listaCiudades = new TreeMap<>();
 
     public Temas() {
     }
@@ -97,7 +95,7 @@ public class Temas  implements Serializable {
     }
 
     @Basic
-    @Column(name = "nombreTema",unique = true,nullable = true)
+    @Column(name = "nombreTema", unique = true, nullable = true)
     public String getName() {
         return name;
     }
@@ -105,6 +103,7 @@ public class Temas  implements Serializable {
     public void setName(String name) {
         this.name = name;
     }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "tema_id", unique = true, nullable = false)
@@ -116,8 +115,8 @@ public class Temas  implements Serializable {
         this.id = id;
     }
 
-    @OneToMany(cascade = CascadeType.ALL,targetEntity = EdificiosPreCargados.class)
-    @JoinColumn(name="tema_edificio_precargado_fk")
+    @OneToMany(cascade = CascadeType.ALL, targetEntity = EdificiosPreCargados.class)
+    @JoinColumn(name = "tema_edificio_precargado_fk")
     public Map<String, EdificiosPreCargados> getListaEdificiosPreCargados() {
         return listaEdificiosPreCargados;
     }
@@ -126,8 +125,8 @@ public class Temas  implements Serializable {
         this.listaEdificiosPreCargados = listaEdificiosPreCargados;
     }
 
-    @OneToMany(cascade = CascadeType.ALL,targetEntity = UnidadesPreCargadas.class)
-    @JoinColumn(name="tema_unidades_precargado_fk")
+    @OneToMany(cascade = CascadeType.ALL, targetEntity = UnidadesPreCargadas.class)
+    @JoinColumn(name = "tema_unidades_precargado_fk")
     public Map<Integer, UnidadesPreCargadas> getListaSoldadosPreCargada() {
         return listaSoldadosPreCargada;
     }
@@ -135,8 +134,9 @@ public class Temas  implements Serializable {
     public void setListaSoldadosPreCargada(Map<Integer, UnidadesPreCargadas> listaSoldadosPreCargada) {
         this.listaSoldadosPreCargada = listaSoldadosPreCargada;
     }
-    @OneToMany(cascade = CascadeType.ALL,targetEntity = RecursosPrecargados.class)
-    @JoinColumn(name="tema_recursos_precargado_fk")
+
+    @OneToMany(cascade = CascadeType.ALL, targetEntity = RecursosPrecargados.class)
+    @JoinColumn(name = "tema_recursos_precargado_fk")
     public Map<Integer, RecursosPrecargados> getListaRecursosPreCargada() {
         return listaRecursosPreCargada;
     }
@@ -144,34 +144,35 @@ public class Temas  implements Serializable {
     public void setListaRecursosPreCargada(Map<Integer, RecursosPrecargados> listaRecursosPreCargada) {
         this.listaRecursosPreCargada = listaRecursosPreCargada;
     }
-    @OneToMany(cascade = CascadeType.ALL,targetEntity = Jugador.class)
-    @JoinColumn(name="tema_jugador_fk")
-    public  Map<Long, Jugador> getListaTodosLosJugadores() {
+
+    @OneToMany(cascade = CascadeType.ALL, targetEntity = Jugador.class)
+    @JoinColumn(name = "tema_jugador_fk")
+    public Map<Long, Jugador> getListaTodosLosJugadores() {
         return listaTodosLosJugadores;
     }
 
 
-    public  void setListaTodosLosJugadores(Map<Long, Jugador> listaTodosLosJugadores) {
+    public void setListaTodosLosJugadores(Map<Long, Jugador> listaTodosLosJugadores) {
         this.listaTodosLosJugadores = listaTodosLosJugadores;
     }
 
-    @OneToMany(cascade = CascadeType.ALL,targetEntity = Batallon.class)
-    @JoinColumn(name="tema_batallon_fk")
+    @OneToMany(cascade = CascadeType.ALL, targetEntity = Batallon.class)
+    @JoinColumn(name = "tema_batallon_fk")
     public Map<String, ArrayList<Batallon>> getListaPosicionesBatallones() {
         return listaPosicionesBatallones;
     }
 
-    public  void setListaPosicionesBatallones(Map<String, ArrayList<Batallon>> listaPosicionesBatallones) {
+    public void setListaPosicionesBatallones(Map<String, ArrayList<Batallon>> listaPosicionesBatallones) {
         this.listaPosicionesBatallones = listaPosicionesBatallones;
     }
 
-    @OneToMany(cascade = CascadeType.ALL,targetEntity = Ciudad.class)
-    @JoinColumn(name="tema_ciudad_fk")
-    public  Map<String, Ciudad> getListaCiudades() {
+    @OneToMany(cascade = CascadeType.ALL, targetEntity = Ciudad.class)
+    @JoinColumn(name = "tema_ciudad_fk")
+    public Map<String, Ciudad> getListaCiudades() {
         return listaCiudades;
     }
 
-    public  void setListaCiudades(Map<String, Ciudad> listaCiudades) {
+    public void setListaCiudades(Map<String, Ciudad> listaCiudades) {
         this.listaCiudades = listaCiudades;
     }
 

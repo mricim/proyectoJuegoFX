@@ -20,6 +20,7 @@ import java.util.Locale;
 import java.util.ResourceBundle;
 
 import static main.java.temas.Temas.pathImagesExternal;
+import static main.java.temas.Temas.ruteUse;
 import static main.java.utils.PrimaryStageControler.*;
 import static main.java.utils.traductor.Traductor.listaIdiomasPath;
 
@@ -35,8 +36,8 @@ public class Main extends Application {
     //    String project = path.getFileName();
     //CONFIGS
     public static final String NAME = "Armegis";
-    public static final String VERSION = "0.0.1.4.20200615.1";
-    public static final String HOST = "http://armegis.tk/";
+    public static final String VERSION = "0.1.0.0.20210420.0";
+    public static final String HOST = "https://armegis.mricim.tk/";
     public static final String PROJECT = "downloads/";
     public static final String FILELIST = "list.xml";
     //INTERNAS
