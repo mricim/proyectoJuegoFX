@@ -1,7 +1,5 @@
 package main.java.Inicio;
 
-import javafx.concurrent.Task;
-import javafx.scene.control.ProgressBar;
 import main.java.juego.comercio.Comercio;
 import main.java.juego.mapas.Recursos;
 import main.java.juego.mapas.RecursosPrecargados;
@@ -9,9 +7,8 @@ import main.java.juego.mapas.ciudad.EdificiosPreCargados;
 import main.java.juego.mapas.pelea.UnidadesPreCargadas;
 import main.java.jugadores.Clan;
 import main.java.jugadores.Jugador;
-import main.java.mysql.PersonSQL;
+import main.java.dataBase.PersonSQL;
 import main.java.temas.Temas;
-import main.java.utils.PrimaryStageControler;
 
 import java.util.ArrayList;
 import java.util.List;

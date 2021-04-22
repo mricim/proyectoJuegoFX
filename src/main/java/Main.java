@@ -7,6 +7,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import main.java.Inicio.PantallaInicialController;
+import main.java.dataBase.Mariadb;
 import main.java.temas.Temas;
 import main.java.utils.PrimaryStageControler;
 import main.java.utils.os.Os;
@@ -20,7 +21,6 @@ import java.util.Locale;
 import java.util.ResourceBundle;
 
 import static main.java.temas.Temas.pathImagesExternal;
-import static main.java.temas.Temas.ruteUse;
 import static main.java.utils.PrimaryStageControler.*;
 import static main.java.utils.traductor.Traductor.listaIdiomasPath;
 
@@ -46,6 +46,7 @@ public class Main extends Application {
 
 
     public static void main(String[] args) throws IOException {
+        //Mariadb.conection();
         System.out.println(RUTEINTERNAL);
         System.out.println();
         System.out.println("Executing Main.java");
@@ -77,6 +78,7 @@ public class Main extends Application {
         //IDIOMA FIN
         launch(args);
     }
+
 
     @Override
     public void start(Stage primaryStage) throws IOException {

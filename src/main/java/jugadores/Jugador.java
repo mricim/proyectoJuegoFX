@@ -1,17 +1,13 @@
 package main.java.jugadores;
 
-import com.sun.istack.Nullable;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.scene.image.Image;
 import main.java.Inicio.PantallaInicialController;
-import main.java.mysql.PersonSQL;
-import main.java.temas.Temas;
+import main.java.dataBase.PersonSQL;
 import main.java.utils.CallImages;
 import main.java.juego.mapas.Recursos;
 import main.java.juego.mapas.pelea.*;
-import main.java.juego.mapas.ciudad.EdificiosPreCargados;
 import main.java.juego.mapas.ciudad.Ciudad;
-import main.java.utils.PrimaryStageControler;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;

@@ -9,8 +9,9 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import main.java.Inicio.PantallaInicialController;
-import main.java.mysql.JDBC;
-import main.java.mysql.PersonSQL;
+import main.java.dataBase.Mariadb;
+import main.java.dataBase.Mysql;
+import main.java.dataBase.PersonSQL;
 import main.java.utils.Encriptacio;
 import main.java.utils.PrimaryStageControler;
 import main.java.utils.tagsFX.CustomAlert;
@@ -45,7 +46,7 @@ public class IniciarSessionController extends PrimaryStageControler implements I
         //
         String email = emailField.getText();
         String encriptedMail = Encriptacio.encrypt(email);
-        PersonSQL personSQL = JDBC.emailToUser(encriptedMail);
+        PersonSQL personSQL = Mariadb.emailToUser(encriptedMail);
 //        System.out.println("FFFFFFFFFFFF");
 //        System.out.println(encripteuser.getId());
 //        System.out.println(encripteuser.getName());

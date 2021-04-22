@@ -1,6 +1,5 @@
 package main.java.Inicio;
 
-import javafx.application.Platform;
 import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -14,7 +13,7 @@ import javafx.scene.text.Text;
 import main.java.juego.MapasController;
 import main.java.juego.mapas.mundo.MundoController;
 import main.java.jugadores.Jugador;
-import main.java.mysql.PersonSQL;
+import main.java.dataBase.PersonSQL;
 import main.java.utils.PrimaryStageControler;
 import main.java.juego.mapas.ciudad.CiudadController;
 import main.java.jugadores.iniciarSession.IniciarSessionController;

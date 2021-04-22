@@ -2,7 +2,7 @@ package main.java.utils.propietiesAndPreferences;
 
 import main.java.Inicio.PantallaInicialController;
 import main.java.Main;
-import main.java.mysql.PersonSQL;
+import main.java.dataBase.PersonSQL;
 import main.java.utils.PrimaryStageControler;
 
 import java.io.*;

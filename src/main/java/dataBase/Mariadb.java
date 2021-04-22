@@ -1,11 +1,12 @@
-package main.java.mysql;
+package main.java.dataBase;
 
 import java.sql.*;
 
-public class JDBC {
+public class Mariadb {
     // JDBC driver name and database URL
-    static final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
-    static final String DB_URL = "jdbc:mysql://armegis.mricim.tk:3306/armegis?serverTimezone=UTC";
+
+    static final String JDBC_DRIVER = "org.mariadb.jdbc.Driver";
+    static final String DB_URL = "jdbc:mariadb://armegis.mricim.tk/armegis";
 
     //  Database credentials
     static final String USER = "user";
@@ -24,30 +25,20 @@ public class JDBC {
             System.out.println("Connected database successfully...");
 
             //STEP 4: Execute a query
-            System.out.println("Creating statement...");
+            System.out.println("Creating table in given database...");
             stmt = conn.createStatement();
 
-            String sql = "SELECT id, name, email, password, date_register, last_conexion FROM users";
-            ResultSet rs = stmt.executeQuery(sql);
-            //STEP 5: Extract data from result set
-            while (rs.next()) {
-                //Retrieve by column name
-                int id = rs.getInt("id");
-                String name = rs.getString("name");
-                String email = rs.getString("email");
-                String password = rs.getString("password");
-                String date_register = rs.getString("date_register");
-                String last_conexion = rs.getString("last_conexion");
-
-                //Display values
-                System.out.print("ID: " + id);
-                System.out.print(", Age: " + name);
-                System.out.print(", email: " + email);
-                System.out.print(", First: " + password);
-                System.out.println(", Last: " + date_register);
-                System.out.println(", Last: " + last_conexion);
-            }
-            rs.close();
+            String sql = "CREATE TABLE IF NOT EXISTS users "
+                    + "(id INTEGER not NULL AUTO_INCREMENT, "
+                    + " name VARCHAR(255), "
+                    + " email VARCHAR(255), "
+                    + " password VARCHAR(255), "
+                    + " date_register TIMESTAMP, "
+                    + " last_conexion TIMESTAMP, "
+                    + " PRIMARY KEY ( id ))";
+            stmt.executeUpdate("DROP TABLE users");
+            stmt.executeUpdate(sql);
+            System.out.println("Created table in given database...");
         } catch (SQLException se) {
             //Handle errors for JDBC
             se.printStackTrace();
@@ -57,22 +48,25 @@ public class JDBC {
         } finally {
             //finally block used to close resources
             try {
-                if (stmt != null)
+                if (stmt != null) {
                     conn.close();
+                }
             } catch (SQLException se) {
             }// do nothing
             try {
-                if (conn != null)
+                if (conn != null) {
                     conn.close();
+                }
             } catch (SQLException se) {
                 se.printStackTrace();
             }//end finally try
         }//end try
+        System.out.println("Goodbye!");
     }//end main
+
 
     public static PersonSQL emailToUser(String email) {
         return conex("SELECT id, name, email, password, date_register, last_conexion FROM users WHERE email = '"+email+"'");
-
     }
     public static PersonSQL conex(String sql) {
         Connection conn = null;
@@ -117,4 +111,4 @@ public class JDBC {
         }//end try
         return null;
     }
-}//end JDBCExample
+}

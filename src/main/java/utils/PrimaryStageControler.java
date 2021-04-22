@@ -2,20 +2,17 @@ package main.java.utils;
 
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Rectangle2D;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
-import javafx.scene.control.ProgressBar;
 import javafx.stage.Modality;
-import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import main.java.jugadores.Clan;
 import main.java.jugadores.Jugador;
 import main.java.Main;
 import main.java.juego.mapas.ciudad.Ciudad;
-import main.java.mysql.PersonSQL;
+import main.java.dataBase.PersonSQL;
 import main.java.utils.propietiesAndPreferences.PreferencesApp;
 
 import java.io.IOException;
